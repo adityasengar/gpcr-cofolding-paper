@@ -6,6 +6,14 @@ Newest first. Every session **ends** by running `./session_end.sh "summary"`, an
 Git records what changed; this file records *why*, and what the next session should
 not redo. Two machines, never concurrent — so this is a relay baton, not a merge.
 
+## 2026-09-08 21:01  ·  test-laptop
+
+Relay test from a simulated second machine
+
+- corpus drift categories: 1
+- data: not on this machine (excluded from the repo): rows_enriched_v3_7.csv
+- TODO for next session: (edit me before committing)
+
 ## 2026-09-08 20:56  ·  MacBook-Pro-3
 
 Set up the shared remote. The two-machine relay is now live.
