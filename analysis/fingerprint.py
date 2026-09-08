@@ -16,6 +16,15 @@ INPUTS = ["data/predictions.csv", "data/conditions.csv", "data/receptors.csv",
           "rows_enriched_v3_7.csv"]
 STAMP = os.path.join(ROOT, ".datafingerprint")
 
+def _excluded(rel):
+    """True if git deliberately excludes this path (so absence is by design)."""
+    import subprocess
+    try:
+        return subprocess.run(["git", "-C", ROOT, "check-ignore", "-q", rel],
+                              capture_output=True).returncode == 0
+    except Exception:
+        return False
+
 def fp():
     out = {}
     for rel in INPUTS:
@@ -40,17 +49,33 @@ def main():
         if not os.path.exists(STAMP):
             print("no baseline; run --stamp"); return 1
         old = json.load(open(STAMP))
-        diff = [k for k in set(old) | set(cur) if old.get(k) != cur.get(k)]
-        if not diff:
-            print("data unchanged — RESULTS.md verdicts still apply"); return 0
-        print("DATA CHANGED. Every RESULTS.md verdict is stale until re-derived:")
-        for k in sorted(diff):
+        changed, absent = [], []
+        for k in sorted(set(old) | set(cur)):
             o, c = old.get(k, {}), cur.get(k, {})
+            if o == c:
+                continue
+            # A file excluded from the repo is absent by design on a second machine.
+            # Reporting that as "changed" trains the reader to ignore this warning.
+            if c.get("missing") and not o.get("missing") and _excluded(k):
+                absent.append(k)
+            else:
+                changed.append((k, o, c))
+        for k in absent:
+            print(f"  not on this machine (excluded from the repo): {k}")
+        if not changed:
+            if absent:
+                print("verdicts still apply for everything present here.")
+            else:
+                print("data unchanged - RESULTS.md verdicts still apply")
+            return 0
+        print("DATA CHANGED. Every RESULTS.md verdict is stale until re-derived:")
+        for k, o, c in changed:
             print(f"  {k}: {o.get('lines','-')} -> {c.get('lines','-')} lines, "
                   f"{o.get('sha256','-')} -> {c.get('sha256','-')}")
         print("\nRe-run:  python3 analysis/q.py " + " ".join(sorted(
             n for n in ["scope","ladder","receptor_counts","aa2ar","coverage"])))
         return 1
+
     for k, v in sorted(cur.items()):
         print(f"  {k:<28} {v.get('sha256','MISSING')}  {v.get('lines','-')} lines")
     return 0
