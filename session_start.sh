@@ -63,4 +63,8 @@ else
   echo "  paper_tex/ not cloned on this machine"
 fi
 echo
+echo "--- TeX environment ---"
+[ -x tex/check_tex.sh ] && ./tex/check_tex.sh 2>&1 | sed 's/^/  /' || echo "  tex/check_tex.sh not present"
+
+echo
 echo "Read CLAUDE.md next. Then wait."
