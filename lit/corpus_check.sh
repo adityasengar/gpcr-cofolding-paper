@@ -21,8 +21,14 @@ report() { # label, file_a, file_b
     fail=1
   fi
 }
-report "PDF with no extraction"            "$t/pdf"   "$t/note"
-report "note with no PDF"                  "$t/note"  "$t/pdf"
+# PDFs are excluded from the shared repo, so on a second machine every note looks
+# orphaned. Reporting 66 phantom problems trains the reader to ignore this check.
+if [ -s "$t/pdf" ]; then
+  report "PDF with no extraction"          "$t/pdf"   "$t/note"
+  report "note with no PDF"                "$t/note"  "$t/pdf"
+else
+  echo "  (lit/pdfs/ not on this machine — PDF checks skipped, notes only)"
+fi
 report "note missing from INDEX"           "$t/note"  "$t/index"
 report "INDEX block with no note"          "$t/index" "$t/note"
 report "note missing from refs.bib"        "$t/note"  "$t/bib"
