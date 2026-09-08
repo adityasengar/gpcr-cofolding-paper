@@ -30,3 +30,6 @@ paper_tex/
 **/.DS_Store
 *.pyc
 __pycache__/
+
+# per-machine identity; never shared
+.machine

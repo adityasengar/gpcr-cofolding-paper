@@ -10,8 +10,12 @@ echo "=============================================================="
 
 if [ -d .git ]; then
   echo
-  echo "--- pulling ---"
-  git pull --ff-only 2>&1 | sed 's/^/  /'
+  if git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1; then
+    echo "--- pulling ---"
+    git pull --ff-only 2>&1 | sed 's/^/  /'
+  else
+    echo "--- no remote configured yet; this machine is the only copy ---"
+  fi
   LAST=$(git log --format='%H %s' -n 200 | grep -m1 "session-end($ME)" | cut -d' ' -f1)
   echo
   if [ -n "$LAST" ]; then

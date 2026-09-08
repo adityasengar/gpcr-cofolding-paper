@@ -146,10 +146,23 @@ citing a stale bibliography with nothing complaining. `session_start.sh` should
 regenerate and diff it; until it does, run `python3 analysis/sync_bib.py` by hand after
 any pull that touched `lit/refs.bib`.
 
-### Not yet done
+### Setting up the second machine
 
-`git init` and a private remote. Until then `session_start.sh` degrades gracefully and
-just prints the handoff notes and integrity checks.
+```bash
+git clone https://github.com/adityasengar/gpcr-cofolding-paper.git paper
+cd paper
+echo "<a-name-for-that-laptop>" > .machine     # NOT committed; per-machine
+git clone https://git@git.overleaf.com/6aa05386f57a5fee700a37ff paper_tex
+./session_start.sh
+```
+
+The Overleaf project is a **separate** clone — `paper_tex/` is gitignored here on
+purpose, because nesting git repos causes submodule grief. Overleaf syncs the LaTeX;
+this repo syncs everything else.
+
+That machine will **not** have `lit/pdfs/`, `lit/source/`, `rows_enriched_v3_7.csv` or
+the pdftotext caches. `session_start.sh` prints which are missing. It *will* have all
+66 extractions in `lit/notes/`.
 
 ## Open, and owned by you
 
