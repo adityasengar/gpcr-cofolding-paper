@@ -1,0 +1,37 @@
+{
+ "data/backbones.csv": {
+  "bytes": 1234,
+  "lines": 6,
+  "sha256": "52f11c495459fb24"
+ },
+ "data/conditions.csv": {
+  "bytes": 107737,
+  "lines": 1279,
+  "sha256": "35478ef5cfcd5117"
+ },
+ "data/coverage_matrix.csv": {
+  "bytes": 16397,
+  "lines": 92,
+  "sha256": "a0ecfd557dc6de50"
+ },
+ "data/experiments.jsonl": {
+  "bytes": 60557,
+  "lines": 63,
+  "sha256": "dbf4a299b7ed92a5"
+ },
+ "data/predictions.csv": {
+  "bytes": 7218514,
+  "lines": 17569,
+  "sha256": "f281aeafe8be67fe"
+ },
+ "data/receptors.csv": {
+  "bytes": 21097,
+  "lines": 158,
+  "sha256": "76dc79fa1e11860e"
+ },
+ "rows_enriched_v3_7.csv": {
+  "bytes": 20328965,
+  "lines": 17569,
+  "sha256": "e04f914e2097d477"
+ }
+}

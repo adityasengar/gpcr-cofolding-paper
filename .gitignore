@@ -1,0 +1,32 @@
+# Heavy and reconstructible — never travels between machines.
+# NOTE: comments must be on their own line; git does not strip trailing comments.
+
+# 452M, re-downloadable from the DOIs in lit/refs.bib
+lit/pdfs/
+# 458M, the original download folder (hard links to the same PDFs)
+lit/source/
+# regenerable with pdftotext / tesseract
+lit/validate/txt/
+lit/validate/txt2/
+lit/validate/pages/
+lit/ocr/
+# 19M HPC export, not authored here
+rows_enriched_v3_7.csv
+# 7M, large but the primary local data table — keep? see SESSIONS.md decision
+# data/predictions.csv
+
+# paper_tex is its own git repo with the Overleaf remote. Clone it separately.
+paper_tex/
+
+# build + local noise
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pdf
+!GPCR_progress_summary.pdf
+.DS_Store
+**/.DS_Store
+*.pyc
+__pycache__/

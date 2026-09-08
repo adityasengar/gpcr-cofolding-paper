@@ -1,0 +1,740 @@
+{
+ "abramson2024af3": {
+  "paper_quotes": 174,
+  "verified": 164,
+  "unverified": 10,
+  "skipped_note_prose": 10,
+  "examples": [
+   "distinctive ribbon-like appearance that AF2 produces in disordered regions.",
+   "RoseTTAFold2NA for nucleic acid predictions\" (p5); \"No system was publicly available at time of",
+   "feeding the input embedder (Fig. 1d, p2), and",
+   "methods30,31.\" (ref. 29 = RoseTTAFold All-Atom, Krishna *et al.*, *Science* 2024.)"
+  ]
+ },
+ "bryant2024cfold": {
+  "paper_quotes": 99,
+  "verified": 93,
+  "unverified": 6,
+  "skipped_note_prose": 17,
+  "examples": [
+   "(p.10). Manual visual inspection is used as a *filter* on the dataset, not as the success metric:",
+   "Note that having a TM-score above 0.5 is generally considered as having similar folds and this analysis is therefore very refined (a TM-score above 0.8 is highl",
+   "only inside two reference titles (ref. 5, del Alamo et al.,",
+   "We also do not find that confidence metrics (plDDT) can be used to select for known conformations as suggested by others in contradiction to previous claims. We"
+  ]
+ },
+ "bugrova2026representation": {
+  "paper_quotes": 57,
+  "verified": 54,
+  "unverified": 3,
+  "skipped_note_prose": 1,
+  "examples": [
+   ". With n = 500 per side, a two-sample KS test would reject at KS \u2248 0.086, which would make almost every cell in Figs 3B and 4B formally",
+   "in the paper is about AlphaFold 3, not about this work:",
+   "of its own work, and it explicitly situates itself alongside prior probes (refs 10\u201314, p2;"
+  ]
+ },
+ "chai2024chai1": {
+  "paper_quotes": 17,
+  "verified": 13,
+  "unverified": 4,
+  "skipped_note_prose": 0,
+  "examples": [
+   "0.23 and stricter cutoffs \u2265 0.49 and \u2265 0.8 (Figure S2, p14); C\u03b1-LDDT at 15 \u00c5 inclusion radius;",
+   "axis** \u2014 RMSD < 2 \u00c5, DockQ > 0.23 and C\u03b1-LDDT are not the same quantity and are only comparable by being 0\u2013100. The left panel's series are exclusive (each meth",
+   "is really the x-axis there) while the right panel's series are shared; the two halves therefore encode method differently. C\u03b1-LDDT is a continuous mean shown as",
+   "claims (p6). The caption also contains a self-contradiction about homology filtering:"
+  ]
+ },
+ "chakravarty2026statespace": {
+  "paper_quotes": 116,
+  "verified": 107,
+  "unverified": 9,
+  "skipped_note_prose": 1,
+  "examples": [
+   "the field agrees a single structure is insufficient",
+   "outperformed AFSample2 [79], AF-cluster [76], and SPEACH-AF [80]\u2026 and was subsequently applied to large-scale prediction of fold-switching proteins in the E. co",
+   "Among AlphaFold2-based approaches, CF-random [77] outperformed AFSample2 [79], AF-cluster [76], and SPEACH-AF [80] in predicting domain reorientations, local co",
+   "AlphaFold3 predictions often remain nearly unchanged despite extensive sequence perturbations, suggesting a form of nonphysical robustness that fails to capture"
+  ]
+ },
+ "chen2026medchem": {
+  "paper_quotes": 41,
+  "verified": 38,
+  "unverified": 3,
+  "skipped_note_prose": 24,
+  "examples": [
+   ". Here the models did sample near the allosteric sites and failed the binding *mode* (",
+   "is not operationalised anywhere in the paper. Thresholds that *are* stated (2 \u00c5, 1.5 \u00c5, 70%) are given without justification beyond",
+   "appear in this paper only inside cited reference titles and in the phrases"
+  ]
+ },
+ "chib2025gpcrstates": {
+  "paper_quotes": 8,
+  "verified": 7,
+  "unverified": 1,
+  "skipped_note_prose": 3,
+  "examples": [
+   "75 unique receptors or 75 deposited structures?** p6 uses"
+  ]
+ },
+ "chitsazi2025gpcrdock4": {
+  "paper_quotes": 18,
+  "verified": 11,
+  "unverified": 7,
+  "skipped_note_prose": 8,
+  "examples": [
+   "is being judged with no scale \u2014 supplies the experimental-error floor against which",
+   "success depends on the assessors' oracle ranking; the field's practical question,",
+   "text is placed in the PDB column for GPR139 and NMUR2** where no structure existed \u2014 correct, but visually reads as a missing measurement rather than an impossi",
+   "present, but applied after the prediction was sealed"
+  ]
+ },
+ "feldman2026alphainterp": {
+  "paper_quotes": 17,
+  "verified": 13,
+  "unverified": 4,
+  "skipped_note_prose": 4,
+  "examples": [
+   "sits awkwardly against the p19 claim that MSA inclusion",
+   ") | Broken extraction / degenerate representations; confirms",
+   "; the Methods for phylogenetic subsampling (p37) say",
+   "did AF3 produce the right state at a metamorphic site?"
+  ]
+ },
+ "ferguson2026deorphann": {
+  "paper_quotes": 29,
+  "verified": 25,
+  "unverified": 4,
+  "skipped_note_prose": 1,
+  "examples": [
+   "No state predicate is applied to either arm. So",
+   "Random forests are explicitly untuned: p14,",
+   "a trimmed TM-bundle template of any state helps.",
+   "receptors with deposited structures vs without"
+  ]
+ },
+ "georgiou2025heterogeneity": {
+  "paper_quotes": 84,
+  "verified": 59,
+  "unverified": 25,
+  "skipped_note_prose": 91,
+  "examples": [
+   "predictions, no new structures, no new simulations and no new experiments. Every",
+   "W6.48 (C6.47\u2212W6.48\u2212P6.50)** | agonist-engaged vs not | W6.48 *",
+   "and ionic lock, NPxxY, PIF, CWxP/toggle switch, the Na\u207a pocket, the YY-lock, the",
+   "intermediate found only by minute-timescale metadynamics, defined by the R5.66\u2212E6.30"
+  ]
+ },
+ "gilson2025casp16": {
+  "paper_quotes": 16,
+  "verified": 12,
+  "unverified": 4,
+  "skipped_note_prose": 3,
+  "examples": [
+   "Uptake was poor and the data were partly unusable, p6:",
+   "column is dominated by autotaxin (189/229), which the footnote states \u2014",
+   ". The authors return to this in the Discussion, p14:",
+   "applied by the assessor after the predictions were sealed."
+  ]
+ },
+ "heo2022multistate": {
+  "paper_quotes": 6,
+  "verified": 4,
+  "unverified": 2,
+  "skipped_note_prose": 0,
+  "examples": [
+   "template-based modeling using MODELLER with the identical structure templates and the sequence alignments used for the AF2 predictions",
+   "using such curated template databases was not sufficient to make meaningful changes."
+  ]
+ },
+ "hilger2020gcgr": {
+  "paper_quotes": 65,
+  "verified": 53,
+  "unverified": 12,
+  "skipped_note_prose": 65,
+  "examples": [
+   "Each dot represents data from individual independent experiments",
+   "which papers say class B differs from class A",
+   "tick sits left of a gap before the \u221212 decade \u2014 so the basal point is not on the log scale with the rest. Normalising to",
+   "B.K.K. is a cofounder of and consultant for ConfometRx. J.M.M. and L.G. are employees of Zealand Pharma. M.F.P. is a former employee of Zealand Pharma."
+  ]
+ },
+ "jedryszek2026probing": {
+  "paper_quotes": 62,
+  "verified": 57,
+  "unverified": 5,
+  "skipped_note_prose": 2,
+  "examples": [
+   "(GitHub) \u2014 footnoted on p.1 and referenced on p.9 but external. Also external: the",
+   "applying auto-interpretability to the same trunk SAEs, cited in prose with no reference number and no data shown (p.5):",
+   ", adjudicated by whether the paired CI excludes zero and the z-score against a 19-direction matched-norm random null clears the null. The z thresholds are never",
+   "(p.3), and the strand steering effect sits on it. Note separately that the same F1 numbers are *depressed* rather than saturated when scored against sparse labe"
+  ]
+ },
+ "jung2026boltzperturb": {
+  "paper_quotes": 72,
+  "verified": 68,
+  "unverified": 4,
+  "skipped_note_prose": 4,
+  "examples": [
+   "how far does the paper's own evidence carry its own claim",
+   "\u2014 the model's own quantity, not the reference. p9:",
+   "runs.\" \u2014 p15, \u00a7B.4 (in the true-coordinate injection experiment specifically)",
+   ", never maps a variance threshold to a denoising step, and never states how many runs are behind each point or error bar. The y-axis carries no units. The recov"
+  ]
+ },
+ "junker2026peptidedesign": {
+  "paper_quotes": 48,
+  "verified": 45,
+  "unverified": 3,
+  "skipped_note_prose": 2,
+  "examples": [
+   "k of n predictions were high-confidence-and-wrong",
+   ", identical to Figs 3/5/7 where it means DockQ-to-crystal \u2014 a reader comparing axes across figures will conflate two different quantities); the caption's cross-",
+   "50-residue protein boundary is defined at p3 and p5 but no count is attached to it"
+  ]
+ },
+ "kalakoti2025afsample2": {
+  "paper_quotes": 98,
+  "verified": 89,
+  "unverified": 9,
+  "skipped_note_prose": 17,
+  "examples": [
+   ". They cannot both describe the numbers plotted. The headline",
+   "as a high-confidence model far in TM from the top-ranked one (p7) \u2014 and even that names the state only as",
+   "four box panels showing four metrics under the same faceting are one row with a compound measure",
+   "TM-score calculated using TM-align was used as the evaluation metric\u2026 TM-score was calculated using a fixed d0 = 3.5\u00c5 to avoid the problem of long proteins achi"
+  ]
+ },
+ "kalakoti2026afsample3": {
+  "paper_quotes": 79,
+  "verified": 70,
+  "unverified": 9,
+  "skipped_note_prose": 6,
+  "examples": [
+   "cut (p7). No justification is given for TM > 0.8 as a quality bar, and it is numerically the same value as the dataset's inter-state exclusion criterion (p2). E",
+   "four box panels showing four metrics under the same faceting are one row with a compound measure",
+   "Targets with fill ratio > 0.27 (median), n=114",
+   "(p3); fill-ratio > 0.27 (the dataset median, Fig S2 p12) as the"
+  ]
+ },
+ "khaleq2026hyaline": {
+  "paper_quotes": 92,
+  "verified": 84,
+  "unverified": 8,
+  "skipped_note_prose": 6,
+  "examples": [
+   "with no tick values; t-SNE inter-cluster distances are not interpretable yet the caption reads separation as evidence (",
+   "appear to be re-labelled class strata rather than genuine transducer groups. Caption claims",
+   "where they occur inside a quote. No other alteration.",
+   "rather than forced into a generative reading."
+  ]
+ },
+ "kim2026mac1": {
+  "paper_quotes": 38,
+  "verified": 34,
+  "unverified": 4,
+  "skipped_note_prose": 1,
+  "examples": [
+   "Successful ligand pose recovery with all methods",
+   "co-folding does not recover the conformational change",
+   "is printed TWICE and panel b) is missing entirely.** The caption and the p9 text both describe a panel b (",
+   "Predict the dataset mean pIC\u2085\u2080 for every compound"
+  ]
+ },
+ "krishna2024rfaa": {
+  "paper_quotes": 23,
+  "verified": 22,
+  "unverified": 1,
+  "skipped_note_prose": 3,
+  "examples": [
+   "(p8); a known coordination geometry is given for heme \u2014"
+  ]
+ },
+ "ku2026promise": {
+  "paper_quotes": 15,
+  "verified": 15,
+  "unverified": 0,
+  "skipped_note_prose": 0,
+  "examples": []
+ },
+ "lam2026metadiffusion": {
+  "paper_quotes": 18,
+  "verified": 12,
+  "unverified": 6,
+  "skipped_note_prose": 2,
+  "examples": [
+   "is garbled \u2014 the arms are unbiased vs steered, and the ordering of",
+   "The hinge is known to exist because of the crystal structure: p3,",
+   ", n = 16 each), three levels on SiaP (Fig 3c, p19:",
+   "plot the method against its own reproducibility ceiling"
+  ]
+ },
+ "lazou2026cryptic": {
+  "paper_quotes": 53,
+  "verified": 43,
+  "unverified": 10,
+  "skipped_note_prose": 10,
+  "examples": [
+   ", p2), and the training-set membership of the answer is acknowledged:",
+   "(p3). This is a state-classification rule selected because the default rule did not return the expected answer, and it is applied to the AF3 models as well as t",
+   "(p8). (4) The ligand supplied to AF3 is the cognate cryptic-site ligand read off the holo structure, by PDB chemical-component ID and SMILES (Tables 1 and 3;",
+   "\u2014 the residues on which every RMSD and every state call is computed \u2014 is inherited from CryptoSite for those proteins and hand-defined by the authors for the re"
+  ]
+ },
+ "lee2025seqassoc": {
+  "paper_quotes": 18,
+  "verified": 14,
+  "unverified": 4,
+  "skipped_note_prose": 4,
+  "examples": [
+   "\u2014 precisely the group the authors say is most likely to be wrong (",
+   "step | Axis tick labels are present but tiny and the residue range is not stated in the caption; the decision rule that turns this map into a",
+   "the number of good quality structures produced by SPEACH-AF (by MolProbity score) was reported because the total number of structures generated by SPEACH-AF was",
+   "), from the comparator papers' own repositories (p10:"
+  ]
+ },
+ "lee2026confornets": {
+  "paper_quotes": 29,
+  "verified": 20,
+  "unverified": 9,
+  "skipped_note_prose": 3,
+  "examples": [
+   "simply generating 2\u00d7 more OF3p samples does not [change the conformational distribution]",
+   "different kind of claim from any sampling-only method.",
+   "L_transfer = MSE(Align(X\u0302_\u03c6), X_ref)**\". The control handle *is* an oracle structure. This is not",
+   "the training label is a deposited structure of the target state"
+  ]
+ },
+ "lee2026foldswitch": {
+  "paper_quotes": 132,
+  "verified": 125,
+  "unverified": 7,
+  "skipped_note_prose": 1,
+  "examples": [
+   "accepted manuscript of a peer-reviewed article",
+   "(p. 12), which is the most explicitly *directed* handle in the document; and single-sequence + 0-recycle forcing (p. 6). Its verdict:",
+   "CFold simply cannot fold these proteins at all",
+   "TM-score to autoinhibited / active / open / closed"
+  ]
+ },
+ "lewis2025bioemu": {
+  "paper_quotes": 17,
+  "verified": 16,
+  "unverified": 1,
+  "skipped_note_prose": 1,
+  "examples": [
+   "(p30), and where the two references disagree in sequence"
+  ]
+ },
+ "li2026embedding": {
+  "paper_quotes": 10,
+  "verified": 7,
+  "unverified": 3,
+  "skipped_note_prose": 10,
+  "examples": [
+   "tested a prediction in the lab (NMR, cryo-EM, an assay)",
+   "claim omits the same-model baseline. Each panel uses its own y-range and none starts at a shared origin (CC mask starts near 0.05, RMSD near 1), so cross-panel ",
+   "at the foot of p1.** No journal, no conference, no"
+  ]
+ },
+ "liu2026ensembletests": {
+  "paper_quotes": 23,
+  "verified": 18,
+  "unverified": 5,
+  "skipped_note_prose": 1,
+  "examples": [
+   "in d | BioKinema's auxiliary distributions were never recorded, leaving a hole labelled",
+   "rail below the axes for AlphaFlow, P2DFlow, BioEmu, Str2Str | The four unordered models are placed on a rail *outside* the plotting plane with no vertical posit",
+   "The evaluation replicate is always held out from calibration: p20,",
+   "metric scored relative to a destroyed-signal control"
+  ]
+ },
+ "lu2026twostages": {
+  "paper_quotes": 46,
+  "verified": 41,
+  "unverified": 5,
+  "skipped_note_prose": 23,
+  "examples": [
+   ", p6); and the control conditions state their expected signs in advance (",
+   "is stronger than what was tested; what was tested is",
+   ", p3); the charge intervention is constructed to reproduce a known biophysical effect (",
+   "The detailed \u00a74.1 flow analysis narrows further:"
+  ]
+ },
+ "masters2025physics": {
+  "paper_quotes": 122,
+  "verified": 121,
+  "unverified": 1,
+  "skipped_note_prose": 3,
+  "examples": [
+   ", p.5) and to define the bound state in the simulations ("
+  ]
+ },
+ "matic2023gpcrome": {
+  "paper_quotes": 61,
+  "verified": 54,
+  "unverified": 7,
+  "skipped_note_prose": 3,
+  "examples": [
+   "on p.4, p.5 and in the Fig. 5 caption (p.8) but",
+   "appear in the paper only in three unrelated places: the introduction's background statement",
+   "in the p.5 results sentence and in the Discussion (p.10). K308^6.30^ is",
+   "(p.14). Positive and negative design states are literally these two PDB entries:"
+  ]
+ },
+ "mattsson2026leakage": {
+  "paper_quotes": 12,
+  "verified": 12,
+  "unverified": 0,
+  "skipped_note_prose": 8,
+  "examples": []
+ },
+ "miglionico2026atlas": {
+  "paper_quotes": 35,
+  "verified": 32,
+  "unverified": 3,
+  "skipped_note_prose": 21,
+  "examples": [
+   ") and per-residue pLDDT are all used as discriminators of positive vs negative coupling, and each is validated against experimental coupling labels with a repor",
+   "(p4), and per-receptor calls are made from renders:",
+   "We used the common coupling map from GproteinDb to establish a ground truth for GPCR-G protein interactions"
+  ]
+ },
+ "migliorini2026pairsae": {
+  "paper_quotes": 6,
+  "verified": 4,
+  "unverified": 2,
+  "skipped_note_prose": 1,
+  "examples": [
+   "Is there a held-out or post-cutoff set at all?",
+   "does not appear in the paper. There is no notion of"
+  ]
+ },
+ "mitjavila2026afsample2t": {
+  "paper_quotes": 105,
+  "verified": 90,
+  "unverified": 15,
+  "skipped_note_prose": 9,
+  "examples": [
+   "Active models were generated by including the G protein \u03b1, \u03b2, and \u03b3 subunit sequences alongside the GPCR sequence in the AF2-Multimer input. Inactive models wer",
+   "RMSD-to-reference for the secondary structural check + a continuous ligand-ranking coordinate for the primary evaluation, and no state predicate at all",
+   "Docking to sets of AF2-based models has already been applied in prospective virtual screens against TAAR1, but the general application of this approach may requ",
+   "the endpoint is ligand enrichment in a docking screen"
+  ]
+ },
+ "obendorf2026statespecific": {
+  "paper_quotes": 62,
+  "verified": 55,
+  "unverified": 7,
+  "skipped_note_prose": 0,
+  "examples": [
+   "(p12). No numeric threshold, no rule, no justification is given for any of these calls:",
+   "For GPCRs, active and inactive state structures were retrieved from the PDB as mmCIF files, based on their state annotations in the GPCRdb (https://gpcrdb.org/)",
+   "(p15); a single pooled trend line across four backbones and seven systems, so system and backbone effects are pooled away; confidence is tested against ligand R",
+   "assertion beyond deposition recency. The one leakage check that is made is by deposition date and hedged:"
+  ]
+ },
+ "paajanen2026activation": {
+  "paper_quotes": 109,
+  "verified": 99,
+  "unverified": 10,
+  "skipped_note_prose": 9,
+  "examples": [
+   "and flagged it; the slot should be renamed to something like",
+   "(gears) \u2192 a numeric index value (2.6449) and a state call (",
+   "using the Uniprot protein ID included in the answer, we re-retrieved the generic numbering of each protein from GPCRdb \u2026 a pairwise alignment of the structure a",
+   "structures are adjudicated by visual comparison against 3P0G:"
+  ]
+ },
+ "pandyszekeres2024gproteindb": {
+  "paper_quotes": 69,
+  "verified": 63,
+  "unverified": 6,
+  "skipped_note_prose": 4,
+  "examples": [
+   "must point at the GPCRdb paper of the correct year, not at this one; a citation for",
+   "modelled complexes at interactome scale are usable",
+   "do not appear in connection with any model. The only occurrence of",
+   "removed (p.3), so those receptors have no orthosteric site in the model at all. Do not write"
+  ]
+ },
+ "parikh2026allosteric": {
+  "paper_quotes": 86,
+  "verified": 63,
+  "unverified": 23,
+  "skipped_note_prose": 19,
+  "examples": [
+   ", p34); no seed, subsample depth, template, partner, nanobody or state-annotated input is used to steer toward a state. DynamicBind is the one architecture with",
+   "figure, p18\u201319); S5\u2013S8 (residue-level conformational and mutational frustration profiles for the orthosteric and allosteric representative panels, p26, p28). Th",
+   "shell (p25) is likewise not measured on the figure. Header typo,",
+   "\u2014 three names for one stratum on one figure. Panel B's DynamicBind orthosteric bar reads \u2248 0.6 \u00c5 against a caption range of"
+  ]
+ },
+ "passaro2025boltz2": {
+  "paper_quotes": 15,
+  "verified": 8,
+  "unverified": 7,
+  "skipped_note_prose": 9,
+  "examples": [
+   "rule. Recommend the definition be relaxed to",
+   "claim \u2014 with the per-assay spread (0.732 to 0.056 in the validation set, 0.165\u20130.634 in private assays) visible only in Figs 12/14; the middle panel is labelled",
+   "claim's denominator shifts.** p1 abstract says",
+   "SI present but the paper self-declares incomplete"
+  ]
+ },
+ "protenix2025": {
+  "paper_quotes": 45,
+  "verified": 40,
+  "unverified": 5,
+  "skipped_note_prose": 6,
+  "examples": [
+   "We search MSAs using MMSEQS2 [25] and ColabFold [7] MSA pipeline, and use MSAs from the Uniref100 [26] database for pairing (species are identified with taxonom",
+   "with AlphaFold2 [2] and OpenFold [10] (See details in Table 3 and Appendix A.1).",
+   "In contrast to AF3, which trains two separate models with different data cutoffs (September 30, 2019, for Posebusters, and September 30, 2021, for other dataset",
+   "\u2014 p3\u20134 (sentence begins on p3, completes on p4)."
+  ]
+ },
+ "protenix2026v2": {
+  "paper_quotes": 17,
+  "verified": 11,
+  "unverified": 6,
+  "skipped_note_prose": 2,
+  "examples": [
+   "appears only in the abstract's opening clause (",
+   "group shows only a few short stubs, and the reader cannot distinguish",
+   "\u2014 no selection rule is stated, and the diversity claim (",
+   ". It gives no date for [8] or [33]. Anyone needing"
+  ]
+ },
+ "purnomo2026cafe": {
+  "paper_quotes": 119,
+  "verified": 102,
+  "unverified": 17,
+  "skipped_note_prose": 14,
+  "examples": [
+   "(p3), and the hypothesis is stated before any result \u2014",
+   "What this paper is.** A co-folding *method* paper, not a benchmark. It makes one",
+   "an extra chain), validated by alchemical ABFE rather than by experiment.",
+   "appears in the abstract, the title of \u00a73.1, and eight times in the text, yet nothing in the design separates training-set structures from non-training-set ones."
+  ]
+ },
+ "roehrig2026docking": {
+  "paper_quotes": 10,
+  "verified": 8,
+  "unverified": 2,
+  "skipped_note_prose": 0,
+  "examples": [
+   "which papers ran a docking baseline against co-folding",
+   ", p4), and the sampling improvements are deferred ("
+  ]
+ },
+ "schafer2025confounds": {
+  "paper_quotes": 7,
+  "verified": 7,
+  "unverified": 0,
+  "skipped_note_prose": 0,
+  "examples": []
+ },
+ "singh2026moredata": {
+  "paper_quotes": 67,
+  "verified": 63,
+  "unverified": 4,
+  "skipped_note_prose": 15,
+  "examples": [
+   "labelled as established (solid) / promising (dashed) / untapped (dotted).",
+   ">5 crystal structures of a known scaffold already passes the point of diminishing returns; only a few structures are needed to pose 70% of candidate ligands wit",
+   "verdict is read against the ZIKV structure. The",
+   "performance requires many structures of the target itself"
+  ]
+ },
+ "skrinjar2026generalization": {
+  "paper_quotes": 8,
+  "verified": 6,
+  "unverified": 2,
+  "skipped_note_prose": 1,
+  "examples": [
+   "Evaluating generalization in protein\u2013ligand cofolding methods",
+   ", five authors). The paper has since been published as **"
+  ]
+ },
+ "stein2022speachaf": {
+  "paper_quotes": 38,
+  "verified": 37,
+  "unverified": 1,
+  "skipped_note_prose": 2,
+  "examples": [
+   "the metric is bounded and an arm approaches the bound"
+  ]
+ },
+ "sun2026kinconfbench": {
+  "paper_quotes": 13,
+  "verified": 11,
+  "unverified": 2,
+  "skipped_note_prose": 2,
+  "examples": [
+   "after the failures were known. The selection rule for the single",
+   "prediction out of 20 per model is not stated, so this could be the top-1-by-pLDDT structure or a hand-picked one. No RMSD, no label listing for the three predic"
+  ]
+ },
+ "suzuki2026conforflux": {
+  "paper_quotes": 88,
+  "verified": 81,
+  "unverified": 7,
+  "skipped_note_prose": 6,
+  "examples": [
+   "papers that tested whether confidence discriminates",
+   "papers that used confidence as a discriminator",
+   "never appears in the paper outside a reference title (grep over the full text). Table 5",
+   "Success improves monotonically with particle count across M \u2208 [3, 7], with diminishing returns; M =5 saves \u223c30% compute relative to M =7 at a cost of 0.3 \u00c5 alt-"
+  ]
+ },
+ "suzuki2026pairscaling": {
+  "paper_quotes": 69,
+  "verified": 64,
+  "unverified": 5,
+  "skipped_note_prose": 2,
+  "examples": [
+   "Biasing Conformational Sampling in AlphaFold 3 and Boltz-2 via Pair Representation Scaling",
+   "series. The exact grid is therefore \u00b1{0.15, 0.30, 0.45, 0.60, 0.75}; the phrase",
+   ", with no held-out or tuning split described anywhere in Methods; the stated selection criteria are",
+   "best \u03b2 picked per target by agreement with a known structure"
+  ]
+ },
+ "swapna2025memorization": {
+  "paper_quotes": 29,
+  "verified": 28,
+  "unverified": 1,
+  "skipped_note_prose": 0,
+  "examples": [
+   "the template is generated de novo by another network"
+  ]
+ },
+ "tang2026steeraf": {
+  "paper_quotes": 17,
+  "verified": 13,
+  "unverified": 4,
+  "skipped_note_prose": 3,
+  "examples": [
+   "best-of-N per target, aggregated over targets",
+   "steered away from the model's own default, with no target-state handle",
+   "gradient-based hallucination / inverse optimization on the input embedding",
+   "hyperparameters or sweep ranges tuned on the evaluation set"
+  ]
+ },
+ "tejero2024opsin": {
+  "paper_quotes": 42,
+  "verified": 39,
+  "unverified": 3,
+  "skipped_note_prose": 4,
+  "examples": [
+   "heterotrimer is cross-species reconstituted** \u2014 p10, Methods,",
+   "but the drawn glyph is a box-and-whisker, so the stated statistic and the plotted statistic do not match.** Methods state incubations of",
+   "human G\u03b1i1 with residues 337\u2013354 replaced by jumping-spider G\u03b1q1"
+  ]
+ },
+ "tran2026nanogs": {
+  "paper_quotes": 46,
+  "verified": 40,
+  "unverified": 6,
+  "skipped_note_prose": 6,
+  "examples": [
+   "intrinsic activity below the solubility limit",
+   "this rigour axis does not exist for this paper",
+   "anti-memorization control (unstapled, staple-shifted and no-peptide arms) is recorded",
+   "any stapled 15-mer helix of this composition would do"
+  ]
+ },
+ "vo2026fiducials": {
+  "paper_quotes": 94,
+  "verified": 74,
+  "unverified": 20,
+  "skipped_note_prose": 7,
+  "examples": [
+   "reason. The one thing in it that a state-prediction corpus needs \u2014 an",
+   "supplies experimental ground truth against which predictors can be scored",
+   "reproduced with restored Greek this is stated inline. No other alteration.",
+   "(p6). Ranking appears to be by the model's own confidence rather than by agreement with the reference, but this is never stated. Nor is it stated how many predi"
+  ]
+ },
+ "wallner2023afsample": {
+  "paper_quotes": 10,
+  "verified": 9,
+  "unverified": 1,
+  "skipped_note_prose": 0,
+  "examples": [
+   "). A 150 dpi render of p3 confirms the true text is **"
+  ]
+ },
+ "waymentsteele2024cluster": {
+  "paper_quotes": 106,
+  "verified": 100,
+  "unverified": 6,
+  "skipped_note_prose": 0,
+  "examples": [
+   "per state are the subset already filtered to be near the reference, then ranked by plDDT. Same construction in Fig. 5d:",
+   "models are pre-filtered by that reference, there is no held-out or post-cutoff arm and no training-set discussion for any validation target, plDDT is used as th",
+   "(p14). The rationale for the balance point is likewise argued from the known KaiB outcome:",
+   "appears only in reference titles and in a molecular-biology sense ("
+  ]
+ },
+ "waymentsteele2025reply": {
+  "paper_quotes": 17,
+  "verified": 14,
+  "unverified": 3,
+  "skipped_note_prose": 1,
+  "examples": [
+   "(p8), and, on the preprint version of the comment,",
+   "(p8). It points to alternatives without endorsing one:",
+   "(p11) appears to mean Figure 1c,d of this preprint, with the"
+  ]
+ },
+ "wohlwend2024boltz1": {
+  "paper_quotes": 86,
+  "verified": 83,
+  "unverified": 3,
+  "skipped_note_prose": 19,
+  "examples": [
+   "with the citation missing; p16 says results are reported",
+   "; only at p17, sixteen pages later, is it admitted these are",
+   "Triangle Attention, Forward Runtime (RTX 3090, float32)"
+  ]
+ },
+ "yang2025statespecific": {
+  "paper_quotes": 86,
+  "verified": 78,
+  "unverified": 8,
+  "skipped_note_prose": 2,
+  "examples": [
+   ". Both this paper and a hypothetical peptide-driven method answer",
+   "can the method be instructed which state to produce",
+   "is never operationalised. Same for the GHSR dWF filter:",
+   "state in the screening evaluation is asserted a priori rather than measured:"
+  ]
+ },
+ "ye2026multistatebias": {
+  "paper_quotes": 91,
+  "verified": 80,
+  "unverified": 11,
+  "skipped_note_prose": 0,
+  "examples": [
+   "(p.12) while the rendered legend and the text (p.13,",
+   "do not occur in the text (full-text search, pp.1\u201319). The partner is always the complete heterotrimer:",
+   "(SecA apo, AlphaFold3, p.10). Not stated for the other model \u00d7 condition arms; scatter density in Figs 1B, 2B, 3B, 4B is consistent with tens per arm but the nu",
+   ") show purple, and the text calls the apo series"
+  ]
+ },
+ "zhang2026generalization": {
+  "paper_quotes": 18,
+  "verified": 14,
+  "unverified": 4,
+  "skipped_note_prose": 2,
+  "examples": [
+   "the test set is just too dissimilar to training",
+   ", and this paper's claim is the slightly weaker",
+   "Peptide- and protein-ligand entries are explicitly excluded (p4:",
+   "the receptor is in the wrong (inactive) state"
+  ]
+ }
+}

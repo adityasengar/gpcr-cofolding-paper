@@ -1,0 +1,2 @@
+shell-init: error retrieving current directory: getcwd: cannot access parent directories: Operation not permitted
+/bin/bash: /Users/aditya/Documents/tools/Novartis_projects/paper/lit/run_batch.sh: Operation not permitted

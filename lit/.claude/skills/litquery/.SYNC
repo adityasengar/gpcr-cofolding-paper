@@ -1,0 +1,3 @@
+This SKILL.md is a byte-identical copy of ../../../../.claude/skills/litquery/SKILL.md
+so the skill is discovered whether a session starts in paper/ or in paper/lit/.
+Edit one, then run:  cmp -s A B || cp A B

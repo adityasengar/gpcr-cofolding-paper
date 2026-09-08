@@ -1,0 +1,124 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{parskip}
+\setlength{\parskip}{0.5em}
+\pagestyle{empty}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.9em}{0.3em}
+\titleformat{\section}{\bfseries\large}{}{0pt}{}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries What structure-prediction models have learned about GPCR activation}\\[3pt]
+{\small Aditya Sengar \quad$\cdot$\quad Progress summary}
+\end{center}
+
+\section*{What I am doing}
+
+I am testing what modern co-folding models have actually learned about G-protein-coupled receptor
+activation. The analysis covers around forty receptors for which reliable active and inactive
+reference structures exist, predicted by five models: Boltz-2, OpenFold-3, Protenix, Chai-1 and
+AlphaFold2-multimer.
+
+The approach is to give each receptor a different binding partner and ask what the model does with
+it. The partners span a deliberate range: the receptor's own cognate G protein, a scrambled or
+truncated version of that protein, a designed synthetic peptide, a drug-like ligand, or no partner
+at all. Each resulting structure is scored on the two established structural hallmarks of
+activation, namely the outward displacement of transmembrane
+helix 6 and the NPxxY microswitch on helix 7, and classified as active or inactive against that receptor's own crystal references.
+By comparing across partners we can separate a model that understands receptor activation from one
+that has simply learned to associate a G-protein-shaped object with an active-looking structure.
+
+\section*{Results}
+
+\textbf{The activation score checks out against experiment.} Everything that follows depends on the
+score being meaningful, so that was established first. The active/inactive call uses only the helix 6
+measurement, which leaves the NPxxY microswitch as a completely independent test of whether the call
+is right. It mostly passes: 83 per cent of structures labelled active have an NPxxY distance within
+1.5~\AA\ of that receptor's own active crystal. Two separate structural measurements agree with each
+other and with the experimental structures, neither having been tuned to match the other, so the
+classification is capturing something real rather than reflecting one arbitrary cutoff.
+
+\textbf{Where the two measurements disagree is a finding in itself.} In 12 per cent of active calls
+the NPxxY distance is in fact closer to the inactive crystal than the active one, meaning helix 6 has
+swung outward while the microswitch stayed shut. This is not scattered noise. It affects 54 per cent
+of active calls for dopamine D2, 43 per cent for EDNRB and 37 per cent for HRH3, but only 9 per cent
+for the $\beta_2$-adrenergic receptor and none at all for a dozen others. Since activation is
+understood as a coordinated motion of both elements, a model producing one half without the other is
+worth reporting on its own. In practical terms the helix 6 measurement overstates activation for a
+specific group of receptors, and any claim about those receptors needs the second measurement
+reported alongside it.
+
+\textbf{Partner presence drives activation.} The baseline effect is large and consistent. With its
+cognate G protein present, a receptor is predicted in the active state 94 per cent of the time;
+with no partner at all, 12 per cent. When the comparison is restricted to conditions where several
+models were run on the same receptors, all four give essentially the same answer: between 93 and
+95 per cent active with the cognate partner, and between 5 and 22 per cent without it. The effect
+is therefore robust and not specific to any one implementation.
+
+\textbf{But identity matters less than expected, and position matters more.} The obvious follow-up
+is whether the model is reading the partner's sequence or merely its shape. This was tested with
+designed peptides built on an inert poly-alanine backbone. A bare poly-alanine peptide never
+activates the receptor (0 of 259 predictions). The same peptide carrying three substituted residues
+still fails when those residues sit at arbitrary positions (4 per cent, n\,=\,257). But place the
+identical three residues at positions 15, 19 and 21 and the receptor is driven active in 75 per cent
+of predictions (n\,=\,525). Amino-acid composition is held constant throughout; only position
+changes. The model has learned a specific positional signature rather than a general preference for
+peptide bulk or hydrophobicity.
+
+\textbf{Different models have learned different rules.} This positional signature is not a shared
+property of co-folding models. Given exactly the same position-matched peptides, Boltz-2 produces an
+active receptor 85 per cent of the time (n\,=\,465) while Protenix does so in none of its runs
+(n\,=\,60). More broadly, across 156 conditions run on more than one model, the rank correlation
+between models ranges only from 0.50 to 0.78, with OpenFold-3 and Protenix
+agreeing most closely and Boltz-2 and Chai-1 least. A finding established on one model cannot be assumed to transfer to
+another. AlphaFold2-multimer is included in the corpus but is not decisive at this stage: its runs
+cover only ligand-bound conditions and it is never paired with a G protein, so it cannot yet
+contribute to these comparisons.
+
+\textbf{There is a sharp length threshold.} Truncating the partner peptide gives a clean
+dose-response. Fragments of 5 and 10 residues essentially never activate (0 and 2 per cent), 15
+residues activates a third of the time, and 20 and 25 residues activate almost always (83 and 100
+per cent). The threshold is receptor-specific: the $\beta_2$-adrenergic receptor crosses between 15
+and 20 residues, dopamine D2 crosses between 10 and 15, and serotonin 5-HT2A does not cross at any
+length tested. Within each individual receptor the relationship is monotonic; what differs between
+receptors is where the step falls. This suggests the partner contributes through two separable
+routes: a short peptide must carry the correct residues in the correct places, whereas a longer
+one appears to supply enough signal through its size and fold alone.
+
+\textbf{How far this generalises is the main open question.} The ability to distinguish a genuine
+partner from a decoy is confined to a minority of receptors. Counting only those with verified
+crystal references, the $\beta_2$-adrenergic receptor separates its cognate G protein from decoy
+helices almost perfectly (100 versus 4 per cent). At the other extreme FSHR and the M2 muscarinic
+receptor barely separate them at all (100 versus 100, and 100 versus 95 per cent), treating almost
+any helical peptide as sufficient. CXCR4, EDNRB and PD2R2 sit in between, at differences of 37 to
+50 percentage points. The clean, interpretable behaviour that makes $\beta_2$ so informative is
+therefore not typical of the wider panel, and this bounds how far the positional result can
+currently be pushed.
+
+\section*{Limitations and next steps}
+
+These findings come from a corpus that was assembled incrementally rather than from a single
+designed experiment, and the conditions are not evenly crossed, since some models were run on many
+partner types and others on very few. Several of the results rest on one receptor or a small number
+of them, most notably the ligand comparisons and the cleanest positional effects.
+
+There is also a data-provenance gap worth closing. About a fifth of the active/inactive labels
+belong to receptors that carry no reference structure in the shipped threshold table, so those calls
+cannot be reproduced from the data as it stands; every one of them is uniformly a single class,
+which is what one would expect from a labelling shortcut rather than a measurement. Those receptors
+are excluded from the figures quoted above, and the references behind them need to be recovered
+before the affected runs can be used.
+
+A substantially larger and fully crossed set of runs will therefore be needed to validate all of
+this: every model against every partner condition, across a broader receptor panel, with matched
+replicate counts throughout. In particular the agonist-versus-antagonist comparison needs extending
+well beyond the single receptor currently available, and the positional-code and length-threshold
+results need independent replication on receptors outside the small permissive-versus-discriminating
+set identified so far. Until that is done these should be treated as strong, internally consistent
+observations rather than settled conclusions.
+
+\end{document}

@@ -1,0 +1,645 @@
+{
+ "abramson2024af3": {
+  "checked": 184,
+  "verified": 171,
+  "unverified": 13,
+  "examples": [
+   "axis** \u2014 % r.m.s.d. < 2 \u00c5, interface LDDT, LDDT and % DockQ > 0.23 are plotted at the same scale, so bar heights are not comparable across sub-panels ",
+   "Does the metric itself floor or ceiling in any arm they report?",
+   "Using only one diffusion sample per model seed \u2026 does not change the results significantly"
+  ]
+ },
+ "bryant2024cfold": {
+  "checked": 116,
+  "verified": 86,
+  "unverified": 30,
+  "examples": [
+   "we set the number of clusters used in the sampling for the predictions to vary between [16, 32, 64, 128, 256, 512, 1024, 5120]. We take 13 samples per",
+   "bucket reported over all samples (30%) | that every sample lands on one of the two known states | p.3 |<br>| Two independent sampling strategies (drop",
+   "In contrast to previous attempts to predict alternative conformations, we ensure that our structure prediction network (Cfold) does not see any struct"
+  ]
+ },
+ "bugrova2026representation": {
+  "checked": 58,
+  "verified": 51,
+  "unverified": 7,
+  "examples": [
+   "this version posted February 18, 2026 ... (which was not certified by peer review)",
+   "(pp. 8\u201310) with **no stated KS cutoff, no significance test and no p-value anywhere**. There is also no distance cutoff defining",
+   "we chose methylamine and acetic acid as two of the simplest titratable probes ... undoubtedly present in the training sets of co-folding tools."
+  ]
+ },
+ "chai2024chai1": {
+  "checked": 17,
+  "verified": 13,
+  "unverified": 4,
+  "examples": [
+   "axis** \u2014 RMSD < 2 \u00c5, DockQ > 0.23 and C\u03b1-LDDT are not the same quantity and are only comparable by being 0\u2013100. The left panel's series are exclusive ",
+   "is really the x-axis there) while the right panel's series are shared; the two halves therefore encode method differently. C\u03b1-LDDT is a continuous mea",
+   "0.23 and stricter cutoffs \u2265 0.49 and \u2265 0.8 (Figure S2, p14); C\u03b1-LDDT at 15 \u00c5 inclusion radius;"
+  ]
+ },
+ "chakravarty2026statespace": {
+  "checked": 117,
+  "verified": 111,
+  "unverified": 6,
+  "examples": [
+   "distinguish metastable conformations from transient or artifactual states.",
+   "the field agrees a single structure is insufficient",
+   "a more substantial advance, combining AlphaFold Database predictions, molecular dynamics trajectories, and experimental stability measurements to gene"
+  ]
+ },
+ "chen2026medchem": {
+  "checked": 65,
+  "verified": 46,
+  "unverified": 19,
+  "examples": [
+   "** (p10) requires counting PDE4D, a phosphodiesterase, as a kinase; the true protein-kinase count in entries 7\u201323 is 14. <br>9. **The success count fo",
+   "with no journal, no DOI and no preprint identifier (p51), so the six new structures cannot be independently checked. <br>13. **Tags I needed but could",
+   "appear in this paper only inside cited reference titles and in the phrases"
+  ]
+ },
+ "chib2025gpcrstates": {
+  "checked": 11,
+  "verified": 7,
+  "unverified": 4,
+  "examples": [
+   "but all four annotated clusters are individual **receptors**, and all four are Class A, so the figure does not show what it is captioned as showing; t",
+   "If more than two are compared head to head, tag `multi-backbone`",
+   "| **the two colourbars use different, non-overlapping ranges** (AF2 tops out near where AF3 begins), so the same colour means a different deformation "
+  ]
+ },
+ "chitsazi2025gpcrdock4": {
+  "checked": 26,
+  "verified": 15,
+  "unverified": 11,
+  "examples": [
+   "(%), log axis 0\u201310 with a literal 0 tick \\| mark: violin with overlaid points (sina) \\| n: 1 point per model; 150 / 155 / 128 / 119 / 115 models with ",
+   "server implementation \u2026 accessed Nov 13, 2024",
+   ". p13 states the rule and its one exception:"
+  ]
+ },
+ "feldman2026alphainterp": {
+  "checked": 21,
+  "verified": 15,
+  "unverified": 6,
+  "examples": [
+   "did AF3 produce the right state at a metamorphic site?",
+   "; the Methods for phylogenetic subsampling (p37) say",
+   "marker \\| measure: cumulative variance explained (%) \\| mark: line \\| n: 400 proteins behind the PCA; per-mark n/a` | 1 | y-axis starts at ~20%, not 0"
+  ]
+ },
+ "ferguson2026deorphann": {
+  "checked": 30,
+  "verified": 26,
+  "unverified": 4,
+  "examples": [
+   "receptors with deposited structures vs without",
+   "No state predicate is applied to either arm. So",
+   "a trimmed TM-bundle template of any state helps."
+  ]
+ },
+ "georgiou2025heterogeneity": {
+  "checked": 175,
+  "verified": 113,
+  "unverified": 62,
+  "examples": [
+   "`structural_priors_used`** (which becomes the evidence-base inventory).",
+   "Even with the glucagon agonist present, the GCGR-\u03b2arr1 complex assumes a conformation of GPCR more like the inactive state than the active one possibl",
+   "`state_metric`** (which becomes the state-criteria reference table) and"
+  ]
+ },
+ "gilson2025casp16": {
+  "checked": 19,
+  "verified": 13,
+  "unverified": 6,
+  "examples": [
+   "column is dominated by autotaxin (189/229), which the footnote states \u2014",
+   "split on `mark` or `measure`, never on `facet` alone",
+   "applied by the assessor after the predictions were sealed."
+  ]
+ },
+ "heo2022multistate": {
+  "checked": 6,
+  "verified": 4,
+  "unverified": 2,
+  "examples": [
+   "using such curated template databases was not sufficient to make meaningful changes.",
+   "template-based modeling using MODELLER with the identical structure templates and the sequence alignments used for the AF2 predictions"
+  ]
+ },
+ "hilger2020gcgr": {
+  "checked": 130,
+  "verified": 92,
+  "unverified": 38,
+  "examples": [
+   "Another obstacle for kink formation is found in TM3, where the side chain of L242<sup>3.47</sup> **would prevent inward movement of the PxxG motif**.",
+   "P356<sup>6.47</sup> rotates away by approximately 90\u00b0",
+   "As a result of the 90\u00b0 rotation of TM6 at P356<sup>6.47</sup>, the N terminus of TM6 moves away from TM5, maintaining the 90\u00b0 rotation"
+  ]
+ },
+ "jedryszek2026probing": {
+  "checked": 64,
+  "verified": 55,
+  "unverified": 9,
+  "examples": [
+   ", p.9). Ablation is reported on n=24 (Fig. S13, p.15). **A total structure count is NOT REPORTED**;",
+   "Evaluation uses a fixed 486-protein set with three overlapping label sources: sparse SwissProt annotations (99 proteins) ... dense DSSP labels ... and",
+   "does not appear. What does exist is a **probe-level** held-out design, which is a different thing: grouped five-fold cross-validation with proteins as"
+  ]
+ },
+ "jung2026boltzperturb": {
+  "checked": 76,
+  "verified": 67,
+  "unverified": 9,
+  "examples": [
+   "Our coordinate injection experiments reframed the core challenge from a model accuracy problem",
+   ", ~12 levels, var1.0 \u2192 var45) \\| series: run type (4: default Boltz vanilla, true-coordinate injected (TC), min ligand RMSD from default, min ligand R",
+   "the overall mean confidence scores are similar across experiments and methods ... perturbation methods achieve higher success rates at comparable conf"
+  ]
+ },
+ "junker2026peptidedesign": {
+  "checked": 50,
+  "verified": 47,
+  "unverified": 3,
+  "examples": [
+   ", identical to Figs 3/5/7 where it means DockQ-to-crystal \u2014 a reader comparing axes across figures will conflate two different quantities); the captio",
+   "50-residue protein boundary is defined at p3 and p5 but no count is attached to it",
+   "k of n predictions were high-confidence-and-wrong"
+  ]
+ },
+ "kalakoti2025afsample2": {
+  "checked": 115,
+  "verified": 87,
+  "unverified": 28,
+  "examples": [
+   "(p7) is quoted here as MAE, following the figure. <br>5. **Pearson vs Spearman for the RMSF/\u0394C\u03b1 correlation.** The Fig 6 panel titles read",
+   "while every sequence is retained at full depth, and it is state-agnostic. `latent-steering` is explicitly excluded (",
+   "(p10), with the cluster circled by hand in Fig 9b/9f. No count appears in the text, the caption or the figure. <br>8. **No AF2 training cutoff is stat"
+  ]
+ },
+ "kalakoti2026afsample3": {
+  "checked": 85,
+  "verified": 69,
+  "unverified": 16,
+  "examples": [
+   "Unless otherwise stated, all reported results for AFsample2 and AFsample3 use 20% and 40% randomization, respectively.",
+   "(p3); fill-ratio > 0.27 (the dataset median, Fig S2 p12) as the",
+   "alternate state (p1, p2, p4); \u0394TMscore \u2265 0.05 for the improvement:deterioration ratios (p3); \u0394TM > 0.1 in the abstract for the same 67/8 numbers (p1) "
+  ]
+ },
+ "khaleq2026hyaline": {
+  "checked": 98,
+  "verified": 83,
+  "unverified": 15,
+  "examples": [
+   "appear to be re-labelled class strata rather than genuine transducer groups. Caption claims",
+   "). The caption misdescribes the ESM3 ablation as",
+   "where they occur inside a quote. No other alteration."
+  ]
+ },
+ "kim2026mac1": {
+  "checked": 39,
+  "verified": 34,
+  "unverified": 5,
+  "examples": [
+   "Successful ligand pose recovery with all methods",
+   "is printed TWICE and panel b) is missing entirely.** The caption and the p9 text both describe a panel b (",
+   "; r = \u22120.297 AF3, r = \u22120.387 Boltz-2, no correlation for DOCK) and the two printed blocks are byte-identical duplicates of panel a. So three cited cor"
+  ]
+ },
+ "krishna2024rfaa": {
+  "checked": 26,
+  "verified": 24,
+  "unverified": 2,
+  "examples": [
+   "(p8); a known coordination geometry is given for heme \u2014",
+   "a held-out set of ligand-binding proteins in the PDB"
+  ]
+ },
+ "ku2026promise": {
+  "checked": 15,
+  "verified": 15,
+  "unverified": 0,
+  "examples": []
+ },
+ "lam2026metadiffusion": {
+  "checked": 20,
+  "verified": 12,
+  "unverified": 8,
+  "examples": [
+   "is garbled \u2014 the arms are unbiased vs steered, and the ordering of",
+   "plot the method against its own reproducibility ceiling",
+   ", n = 16 each), three levels on SiaP (Fig 3c, p19:"
+  ]
+ },
+ "lazou2026cryptic": {
+  "checked": 63,
+  "verified": 41,
+  "unverified": 22,
+  "examples": [
+   "labels within the ensemble are assigned against the X-ray position (p3), and the three clash-analysis systems are selected post hoc \u2014 Fig 4C is",
+   ", p5). **Route 3 \u2014 cluster labels from known states: NONE FOUND**; no clustering is performed (Analysis of conformations, p9). **Route 4 \u2014 criteria tu",
+   "(p9); AF3 input is sequence + ligand SMILES only (protocol described pp8\u20139). **Route 2 \u2014 state annotations from a curated database driving templates o"
+  ]
+ },
+ "lee2025seqassoc": {
+  "checked": 22,
+  "verified": 17,
+  "unverified": 5,
+  "examples": [
+   "), from the comparator papers' own repositories (p10:",
+   "\u2014 precisely the group the authors say is most likely to be wrong (",
+   "the number of good quality structures produced by SPEACH-AF (by MolProbity score) was reported because the total number of structures generated by SPE"
+  ]
+ },
+ "lee2026confornets": {
+  "checked": 32,
+  "verified": 19,
+  "unverified": 13,
+  "examples": [
+   "Fig. 6 (p8) confirms 19 named kinase bars plus an",
+   "pair representation, trunk embedding, distogram head, conditioning embedding",
+   "the training label is a deposited structure of the target state"
+  ]
+ },
+ "lee2026foldswitch": {
+  "checked": 133,
+  "verified": 124,
+  "unverified": 9,
+  "examples": [
+   "TM-score to autoinhibited / active / open / closed",
+   "success defined post hoc by RMSD/TM to a structure they had",
+   "CFold simply cannot fold these proteins at all"
+  ]
+ },
+ "lewis2025bioemu": {
+  "checked": 18,
+  "verified": 16,
+  "unverified": 2,
+  "examples": [
+   "(p30), and where the two references disagree in sequence",
+   "column | The per-protein numeric values exist only as plotted points \u2014 the SI carries no table for them (see `si_in_scope`); the"
+  ]
+ },
+ "li2026embedding": {
+  "checked": 20,
+  "verified": 14,
+  "unverified": 6,
+  "examples": [
+   "tested a prediction in the lab (NMR, cryo-EM, an assay)",
+   "at the foot of p1.** No journal, no conference, no",
+   ") | **y-axis carries no numeric scale and no tick values**, so the amplitude of DPS's oscillation relative to the total reward range cannot be read. *"
+  ]
+ },
+ "liu2026ensembletests": {
+  "checked": 24,
+  "verified": 19,
+  "unverified": 5,
+  "examples": [
+   "rail below the axes for AlphaFlow, P2DFlow, BioEmu, Str2Str | The four unordered models are placed on a rail *outside* the plotting plane with no vert",
+   "metric scored relative to a destroyed-signal control",
+   "in d | BioKinema's auxiliary distributions were never recorded, leaving a hole labelled"
+  ]
+ },
+ "lu2026twostages": {
+  "checked": 69,
+  "verified": 56,
+  "unverified": 13,
+  "examples": [
+   "(p26, App M).** Neither is flagged as a correction. 3. **How the steering strengths \u03b1 = 3\u03c3 (charge) and \u03b1 = 20\u03c3 (distance) and the window sizes 15/15/",
+   "After sequence patching at block 0, z rapidly becomes donor-like within the first \u224810 blocks, then changes only gradually (Fig. 4a). Blocking seq2pair",
+   "is stronger than what was tested; what was tested is"
+  ]
+ },
+ "masters2025physics": {
+  "checked": 125,
+  "verified": 119,
+  "unverified": 6,
+  "examples": [
+   ", p.5) and to define the bound state in the simulations (",
+   "(v3, \u00a7F) keys on two slots that only exist in the PLOT form. Figs. 4 and 5 each mix a SCHEMATIC column with a RENDER grid \u2014 clearly two rows, by form.",
+   ") says split. I split, and said so in `panels`. Suggested fix: extend the rule to"
+  ]
+ },
+ "matic2023gpcrome": {
+  "checked": 64,
+  "verified": 53,
+  "unverified": 11,
+  "examples": [
+   "(p.14). Positive and negative design states are literally these two PDB entries:",
+   "even without templates ... almost comparable performances",
+   "on p.4, p.5 and in the Fig. 5 caption (p.8) but"
+  ]
+ },
+ "mattsson2026leakage": {
+  "checked": 20,
+  "verified": 19,
+  "unverified": 1,
+  "examples": [
+   "The use of recently deposited data is not in itself sufficient; newer assays often report on compounds and targets that were already extensively chara"
+  ]
+ },
+ "miglionico2026atlas": {
+  "checked": 56,
+  "verified": 41,
+  "unverified": 15,
+  "examples": [
+   "Specifically for GPCRs, **ligand-receptor docking through AF is still an open problem**, due to the large variability not yet fully explored in experi",
+   "Another important biochemical information missing from the current model is the representation of the complexity of GPCR post-translational modificati",
+   ", threshold imported from ref 30, stated on p4; a second binary at coupling score > 4 (p23) and, on one arm, > 1 (p8). Visual: the plausibility call o"
+  ]
+ },
+ "migliorini2026pairsae": {
+  "checked": 7,
+  "verified": 5,
+  "unverified": 2,
+  "examples": [
+   "Is there a held-out or post-cutoff set at all?",
+   "does not appear in the paper. There is no notion of"
+  ]
+ },
+ "mitjavila2026afsample2t": {
+  "checked": 114,
+  "verified": 91,
+  "unverified": 23,
+  "examples": [
+   "RMSD-to-reference for the secondary structural check + a continuous ligand-ranking coordinate for the primary evaluation, and no state predicate at al",
+   "Partial charge distributions were adjusted to increase the polarity of specific residues, thereby enhancing electrostatic interactions with ligands. M",
+   "is it the *location* of the window or merely its size?"
+  ]
+ },
+ "obendorf2026statespecific": {
+  "checked": 62,
+  "verified": 53,
+  "unverified": 9,
+  "examples": [
+   "(p21). Note the paper's own prose sometimes calls this",
+   "). The biased MSAs are state-substituted alignments, not depth reductions:",
+   "(p15); a single pooled trend line across four backbones and seven systems, so system and backbone effects are pooled away; confidence is tested agains"
+  ]
+ },
+ "paajanen2026activation": {
+  "checked": 118,
+  "verified": 99,
+  "unverified": 19,
+  "examples": [
+   ", which has no legal value for a figure that overlays one *experimental* structure on another with no prediction anywhere (Fig. 3, p.7). I wrote",
+   "The outward movement of TM6 is the most important indicator of GPCR activation \u2026 This feature is a common denominator in structural data and is also r",
+   "structures are adjudicated by visual comparison against 3P0G:"
+  ]
+ },
+ "pandyszekeres2024gproteindb": {
+  "checked": 72,
+  "verified": 63,
+  "unverified": 9,
+  "examples": [
+   "never appears in the model-building Methods, but the paper does not affirm ligand-free construction. The strongest positive evidence available is indi",
+   "are pharmacological (constitutive activity, agonist-induced activity, activation rate, Adhesion-receptor self-activation, p.1, p.3, p.4, p.8). Every q",
+   "in the whole body text is a reference to the field's selectivity debate \u2014"
+  ]
+ },
+ "parikh2026allosteric": {
+  "checked": 105,
+  "verified": 60,
+  "unverified": 45,
+  "examples": [
+   "Cell Reports Physical Science 2026, DOI 10.1016/j.xcrp.2026.103448 \u2014 see",
+   "no model or setting ever sampled the allosteric site",
+   "Five state-of-the-art architectures were benchmarked following protocols adapted from PoseBusters. All models received identical inputs \u2026 For each com"
+  ]
+ },
+ "passaro2025boltz2": {
+  "checked": 24,
+  "verified": 12,
+  "unverified": 12,
+  "examples": [
+   "curve and three vertical guides (1 min / 1 hour / 1 day) | **Y axis broken** \u2014 `//` break glyphs top and bottom of the y axis, so 0.0 and 0.8 are not ",
+   "claim's denominator shifts.** p1 abstract says",
+   ">0.55 on 3 out of 8 assays, but limited performance on the other 5"
+  ]
+ },
+ "protenix2025": {
+  "checked": 51,
+  "verified": 41,
+  "unverified": 10,
+  "examples": [
+   "The original form in Line 9 does not align with Line 11\u2026 which follows an Euler method for solving ODEs. The correction ensures mathematical consisten",
+   "In contrast to AF3, which trains two separate models with different data cutoffs (September 30, 2019, for Posebusters, and September 30, 2021, for oth",
+   "We believe this is a typo because the per-sample weighting of the diffusion loss\u2026 is carefully designed in a principled way by the authors of EDM [29]"
+  ]
+ },
+ "protenix2026v2": {
+  "checked": 19,
+  "verified": 13,
+  "unverified": 6,
+  "examples": [
+   "no state-based tuning is possible in a paper with no states",
+   "for VEGF-A, while p6 says the ranking study used",
+   "appears only in the abstract's opening clause ("
+  ]
+ },
+ "purnomo2026cafe": {
+  "checked": 133,
+  "verified": 100,
+  "unverified": 33,
+  "examples": [
+   "adopts. Section C is filled against binding-site placement, honestly labelled as",
+   "in the parent-ligand list (p4). 5V7I is the plausible reading. <br>7. **PTP1B parent-ligand list is internally short**:",
+   "cohorts are the same molecules under two labels:"
+  ]
+ },
+ "roehrig2026docking": {
+  "checked": 10,
+  "verified": 8,
+  "unverified": 2,
+  "examples": [
+   ", p4), and the sampling improvements are deferred (",
+   "which papers ran a docking baseline against co-folding"
+  ]
+ },
+ "schafer2025confounds": {
+  "checked": 7,
+  "verified": 7,
+  "unverified": 0,
+  "examples": []
+ },
+ "singh2026moredata": {
+  "checked": 82,
+  "verified": 69,
+  "unverified": 13,
+  "examples": [
+   "the authors provide a clean benchmarking split that demonstrates where the PLINDER set provides useful training data or otherwise\u2026 only a few metrics ",
+   "performance requires many structures of the target itself",
+   "only a fraction of the structures in the PDB (<20%) are protein-ligand structures\u2026 Many of these structures may be duplicated complexes, non-drug-like"
+  ]
+ },
+ "skrinjar2026generalization": {
+  "checked": 9,
+  "verified": 6,
+  "unverified": 3,
+  "examples": [
+   ", which is a typo \u2014 F appears twice and H is never named | One AF3 model out of 25 is shown per cell with the selection rule unstated \u2014 `1 of 25 (sele",
+   ", five authors). The paper has since been published as **",
+   "Evaluating generalization in protein\u2013ligand cofolding methods"
+  ]
+ },
+ "stein2022speachaf": {
+  "checked": 40,
+  "verified": 34,
+  "unverified": 6,
+  "examples": [
+   "the metric is bounded and an arm approaches the bound",
+   "split on `mark` or `measure`, never on `facet` alone",
+   "(p9) and another (SERT) yields conformations that move"
+  ]
+ },
+ "sun2026kinconfbench": {
+  "checked": 15,
+  "verified": 11,
+  "unverified": 4,
+  "examples": [
+   "n < ~10 **or** the held-out set overlaps training",
+   "after the failures were known. The selection rule for the single",
+   "prediction out of 20 per model is not stated, so this could be the top-1-by-pLDDT structure or a hand-picked one. No RMSD, no label listing for the th"
+  ]
+ },
+ "suzuki2026conforflux": {
+  "checked": 94,
+  "verified": 87,
+  "unverified": 7,
+  "examples": [
+   "this version posted May 17, 2026 ... (which was not certified by peer review)",
+   "Re-running ConforFlux on DAT with the default \u03c3 \u2208 {0.5, 1.0, 1.5, 2.0, 2.5} \u00c5 configuration ... yields zero confidently-inward predictions and 90 boun",
+   "as one entry, so by family this is two run backbones plus one trained ensemble generator. Flagged for the user to flip if the intent of the tag is"
+  ]
+ },
+ "suzuki2026pairscaling": {
+  "checked": 71,
+  "verified": 63,
+  "unverified": 8,
+  "examples": [
+   "Biasing Conformational Sampling in **AlphaFold 3 and** Boltz-2 via Pair Representation Scaling",
+   "Biasing Conformational Sampling in AlphaFold 3 and Boltz-2 via Pair Representation Scaling",
+   "series. The exact grid is therefore \u00b1{0.15, 0.30, 0.45, 0.60, 0.75}; the phrase"
+  ]
+ },
+ "swapna2025memorization": {
+  "checked": 29,
+  "verified": 26,
+  "unverified": 3,
+  "examples": [
+   "the template is generated de novo by another network",
+   "towards predicting only the inward-open state. \u2026 For the next 5 systems listed in S1 Table,",
+   "default multiple sequence alignments (MSAs), recycle of 12, and random dropouts"
+  ]
+ },
+ "tang2026steeraf": {
+  "checked": 20,
+  "verified": 13,
+  "unverified": 7,
+  "examples": [
+   "; the text says the sweep was run on OC23_TP16 + fold-switch (53 systems) \u2014 **the two disagree** (see unresolved)` | 12 (3 \u00d7 4 grid) | **both axes tru",
+   "hyperparameters or sweep ranges tuned on the evaluation set",
+   "steered away from the model's own default, with no target-state handle"
+  ]
+ },
+ "tejero2024opsin": {
+  "checked": 46,
+  "verified": 41,
+  "unverified": 5,
+  "examples": [
+   "This density may be attributed to one or two ordered water molecule(s) ... however further experimental evidence is required",
+   "heterotrimer is cross-species reconstituted** \u2014 p10, Methods,",
+   "but the drawn glyph is a box-and-whisker, so the stated statistic and the plotted statistic do not match.** Methods state incubations of"
+  ]
+ },
+ "tran2026nanogs": {
+  "checked": 52,
+  "verified": 40,
+  "unverified": 12,
+  "examples": [
+   "are `NOT APPLICABLE` here; each carries one line of why. The wet-lab analogue of the",
+   "any stapled 15-mer helix of this composition would do",
+   "Several schema fields written for co-folding papers (`backbones`, `templates`,"
+  ]
+ },
+ "vo2026fiducials": {
+  "checked": 101,
+  "verified": 70,
+  "unverified": 31,
+  "examples": [
+   "Metrics like AF2 local-distance difference test (pLDDT) score were also found to be less reliable in our assessment on a panel of well-characterized f",
+   "experimental test of whether co-folding models capture ligand-induced GPCR",
+   "the top scoring ~10/15 models... all 15 models were tightly converged"
+  ]
+ },
+ "wallner2023afsample": {
+  "checked": 10,
+  "verified": 9,
+  "unverified": 1,
+  "examples": [
+   "). A 150 dpi render of p3 confirms the true text is **"
+  ]
+ },
+ "waymentsteele2024cluster": {
+  "checked": 106,
+  "verified": 98,
+  "unverified": 8,
+  "examples": [
+   ", p14); 329 clusters in the MSA-Transformer comparison (",
+   "per state are the subset already filtered to be near the reference, then ranked by plDDT. Same construction in Fig. 5d:",
+   "(p14). The rationale for the balance point is likewise argued from the known KaiB outcome:"
+  ]
+ },
+ "waymentsteele2025reply": {
+  "checked": 18,
+  "verified": 14,
+  "unverified": 4,
+  "examples": [
+   "; a legend block prints the summary counts (RfaH 9/10 and 1/10; Mad2 3/3) | **13 of 81 clusters are plotted, selected by having already returned one s",
+   "(p11) appears to mean Figure 1c,d of this preprint, with the",
+   "(p8). It points to alternatives without endorsing one:"
+  ]
+ },
+ "wohlwend2024boltz1": {
+  "checked": 105,
+  "verified": 99,
+  "unverified": 6,
+  "examples": [
+   "; only at p17, sixteen pages later, is it admitted these are",
+   "Triangle Attention, Forward Runtime (RTX 3090, float32)",
+   "\u2014 the cover showcase | structure render | `RENDER \\| facet: target (2: PDB 8SVA, PDB 8IG1) \\| views: 1 \\| overlay: NOT REPORTED predictions on 1 refer"
+  ]
+ },
+ "yang2025statespecific": {
+  "checked": 88,
+  "verified": 73,
+  "unverified": 15,
+  "examples": [
+   "The workflow begins with the generation of a diverse pool of candidate peptides using a peptide design module (Figure 1a). A state-specified folding m",
+   "state in the screening evaluation is asserted a priori rather than measured:",
+   "Propedia v1.0 database and GPCRdb (data released before June 30, 2021)"
+  ]
+ },
+ "ye2026multistatebias": {
+  "checked": 91,
+  "verified": 78,
+  "unverified": 13,
+  "examples": [
+   "we systematically evaluate AlphaFold3, Boltz-2, Chai-1, and BioEmu across four well-characterized proteins with distinct experimentally resolved confo",
+   "(p.12) while the rendered legend and the text (p.13,",
+   "(SecA apo, AlphaFold3, p.10). Not stated for the other model \u00d7 condition arms; scatter density in Figs 1B, 2B, 3B, 4B is consistent with tens per arm "
+  ]
+ },
+ "zhang2026generalization": {
+  "checked": 20,
+  "verified": 13,
+  "unverified": 7,
+  "examples": [
+   "claim | bar (100% stacked) | `PLOT \\| facet: none (1) \\| vary: protein\u2013ligand ipTM bin (4: 0.4\u20130.6, 0.6\u20130.8, 0.8\u20130.95, > 0.95) \\| series: ligand RMSD ",
+   "the receptor is in the wrong (inactive) state",
+   "the test set is just too dissimilar to training"
+  ]
+ }
+}
