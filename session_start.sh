@@ -36,7 +36,7 @@ fi
 
 echo
 echo "--- handoff notes: last 2 entries of SESSIONS.md ---"
-awk '/^## /{n++} n<=2' SESSIONS.md 2>/dev/null | head -40 | sed 's/^/  /'
+awk '/^## /{n++} n>=1 && n<=2' SESSIONS.md 2>/dev/null | head -34 | sed 's/^/  /'
 
 echo
 echo "--- corpus integrity ---"
