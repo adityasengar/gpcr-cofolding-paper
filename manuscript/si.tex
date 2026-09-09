@@ -1,0 +1,142 @@
+% Supplementary Information. Built by manuscript/build.sh alongside main.tex.
+% Panels: figures/block_a/panels/s*.py   Tables: analysis/block_a/make_tables.py
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\graphicspath{{../figures/out/}}
+\usepackage{booktabs}
+\usepackage{authblk}
+\usepackage[hidelinks]{hyperref}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\title{Supplementary Information\\
+\large A 21-residue G$\alpha$ $\alpha$5 C-terminal peptide co-input drives GPCR
+co-folding models into the active state}
+\author[1]{Aditya Sengar}
+\affil[1]{Novartis Biomedical Research}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+
+\section{Scope of this document}
+
+Every panel and table here states the exact row filter applied and the $n$ after
+filtering. The exclusion flags in the shipped data are five independent sets
+with different causes and different scopes; they are never applied as a union.
+Applying the union would remove 5{,}093 of 9{,}490 rows (54\%) and would change
+every distribution shown in the main text. The default filter throughout is
+E1+E2, which removes 29 rows (0.31\%).
+
+Discrepancies between the internal claim sheet and the shipped data are recorded
+in full in \texttt{analysis/block\_a/DISCREPANCY\_REPORT.md}; the ones that
+change a reported number are noted in the relevant caption below.
+
+\clearpage
+\section{Supplementary figures}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s1_exclusions.pdf}
+\caption{\textbf{The exclusion sets, and why they are not one filter.}
+Coverage of each flag, and every headline statistic under every exclusion
+combination as a percentage shift from baseline. No sign flip occurs anywhere and
+no statistic moves by more than 0.5\%. This panel is about the filters, not about
+the values: what is plotted is stability, not magnitude.
+\textit{Filter:} the sweep is the filter; each cell states its own set.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s2_reference_audit.pdf}
+\caption{\textbf{Reference-set audit.} Method, resolution, deposition date and
+construct engineering across the reference entries, with entries whose
+engineering falls inside a predicate window marked. Three metadata columns
+(\texttt{engineered\_mutation\_count}, \texttt{engineered\_mutation\_positions},
+\texttt{construct\_contradicted\_by\_rcsb}) are entirely empty in the shipped
+archive; the panel states this rather than drawing a zero, which would read as a
+measured absence.
+\textit{Filter:} references as shipped; $n = 167$ entries.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s3_bootstrap_comparison.pdf}
+\caption{\textbf{Cluster versus receptor bootstrap.} The cluster bootstrap over
+26 paralog clusters is authoritative; the receptor bootstrap is shown here only.
+The cluster interval is equal to or wider on every headline statistic, by a
+factor of up to 2.2 --- not the $\sim$1.1$\times$ previously assumed. Eleven of
+the 26 clusters are singletons, so the paralogy correction acts on 15
+multi-member clusters.
+\textit{Filter:} E1+E2; 1{,}000 resamples, seed 20260909.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s4_per_receptor.pdf}
+\caption{\textbf{Per-receptor results.} Apo and cognate medians on both axes for
+every receptor and backbone, with the receptors that carry no active reference
+marked rather than omitted.
+\textit{Filter:} E1+E2; $n = 48$ receptors $\times$ 4 backbones.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s5_inclusion_sets.pdf}
+\caption{\textbf{Amplitude under all three inclusion sets.} Slopes on both axes
+for \texttt{baseline}, \texttt{class\_a\_only} and \texttt{class\_a\_no\_holds},
+with zero and unity marked. Protenix2 on NPxxY excludes zero in all three, so
+that result is not an artefact of the restriction choice. On NPxxY,
+\texttt{baseline} and \texttt{class\_a\_only} are identical.
+\textit{Filter:} per-axis E3 as labelled; $n$ per fit on the panel.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s6_predicate_calibration.pdf}
+\caption{\textbf{Predicate calibration.} Distance from the active reference for
+predicate-active predictions. Two of 4{,}256 testable rows lie beyond 3~\AA.
+Note the denominator: of 4{,}866 predicate-active rows, 610 carry no active
+reference and cannot be tested at all; they are shown separately rather than
+counted as successes.
+\textit{Filter:} E1+E2; $n = 4{,}256$ testable of 4{,}866 predicate-active.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s7_clusters_holdout.pdf}
+\caption{\textbf{Paralog clusters and date-stratified holdout.} Cluster
+composition and holdout membership. The cluster map as shipped resolves to 29
+clusters with 16 singletons (55\%), against the 26 and 42\% used for the
+bootstrap convention; the panel draws what the file contains and says so. The
+extended holdout stratum is underpowered and is descriptive only.
+\textit{Filter:} cluster map as shipped; $n = 48$ receptors.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s8_aa2ar_case.pdf}
+\caption{\textbf{AA2AR case study.} Anchor pLDDT and geometry across arms and
+backbones for a single receptor, with the specific row shown in the structural
+companion marked. \textbf{This row is a high-confidence \emph{apo} prediction
+sitting within 1~\AA{} of the inactive reference} --- that is, a confident and
+\emph{correct} prediction, not a high-confidence failure. It is included as a
+supporting observation for the confidence result, not as a counterexample.
+\textit{Filter:} AA2AR only; $n$ per cell on the panel.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s9_fold_integrity.pdf}
+\caption{\textbf{Fold integrity.} TM6 helicity pass rates, drawn as per-cell
+distributions rather than as bars, with one axis per receptor class so that a
+percentage is never shown against a denominator from a different class.
+\textit{Filter:} E1+E2; $n = 9{,}461$ rows. Overall pass rate 96.3\%.}
+\end{figure}
+
+\clearpage
+\section{Supplementary tables}
+
+\input{tables/S-T1_reference_set}
+\input{tables/S-T2_per_receptor}
+\input{tables/S-T3_denominators}
+
+\end{document}

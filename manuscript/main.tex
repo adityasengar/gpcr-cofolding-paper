@@ -34,6 +34,10 @@
 
 % --- floats, tables, links ---------------------------------------------
 \usepackage{graphicx}
+% Panels live in figures/out/, which is gitignored because it is regenerable:
+% run figures/block_a/panels/*.py. build.sh names any that are missing.
+\graphicspath{{../figures/out/}}
+\usepackage{booktabs}
 \usepackage{booktabs}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage[numbers,sort&compress]{natbib}
@@ -69,6 +73,20 @@ for the claims it must compress and \texttt{draft/OUTLINE.md} for the gate.}
 \end{abstract}
 
 \input{sections/intro}
+\input{sections/results}
+\input{sections/methods}
+
+\clearpage
+\section*{Figures}
+\input{sections/figures}
+
+\clearpage
+\section*{Tables}
+\input{tables/T1_panel_composition}
+\input{tables/T2_headline_by_backbone}
+\input{tables/T3_amplitude_fits}
+\input{tables/T4_confidence}
+\input{tables/T5_exclusion_sweep}
 
 \bibliographystyle{unsrtnat}
 \bibliography{refs}

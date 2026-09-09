@@ -1,0 +1,141 @@
+% Block A Methods. Working draft: analysis/block_a/METHODS_DRAFT.md
+% [PI] marks a decision recorded in analysis/block_a/DISCREPANCY_REPORT.md.
+
+\section*{Methods}
+
+\subsection*{Panel}
+
+Predictions were run for 48 G-protein-coupled receptors --- 40 Class~A, 4
+Class~B and 4 Class~F --- under two input conditions and on four co-folding
+backbones, giving 380 receptor $\times$ backbone $\times$ arm cells and 9{,}490
+scored predictions. Cells hold a median of 25 predictions (minimum 20; the
+Boltz-2 cognate arm is short 10 rows, a documented gap).
+
+Each receptor is paired with deposited active- and inactive-state reference
+structures. The reference set comprises \textbf{[PI: 98 empirical / 89 as
+previously stated]} unique Protein Data Bank entries across the panel --- 44 in
+an active-role and 54 in an inactive-role assignment --- drawn from a total
+reference collection of 167 entries. The three denominators are reconciled in
+Table~S3. This denominator must be stated wherever the reference set is
+enumerated, because the panel (48), the panel-PDB set (98) and the full
+collection (167) are all defensible counts of different things.
+
+\subsection*{Conformational predicates}
+
+Two intrinsic geometric measurements are computed on each predicted structure
+alone. Neither is a comparison to a reference.
+
+\texttt{d\_npxxy\_oh} is the hydroxyl--hydroxyl distance between Tyr5.58 and
+Tyr7.53. On activation Tyr7.53 of the NPxxY motif rotates into the receptor core
+and packs against Tyr5.58 in an arrangement that is usually water-mediated. A
+prediction is called active on this axis below 9.080~\AA.
+
+\texttt{d\_gpcrdb\_tm6\_tilt\_246\_637\_ca} is a C$\alpha$--C$\alpha$ distance
+capturing outward displacement of the cytoplasmic end of TM6, the canonical
+activation signature. A prediction is called active above 14.932~\AA.
+
+A prediction is called active only when both fire. Thresholds are carried as
+row-level columns and were read from the data rather than reimplemented. Both
+were derived from 80 tier-1 crystallographic reference rows by a midpoint
+objective, and from no prediction. \textbf{Self-classification accuracy on that
+set is a derivation-set figure, not a held-out one}, and is reported as such.
+The models do not place water molecules; results are described as consistent
+with the water-bridged arrangement, never as the bridge forming.
+
+\subsection*{Prediction protocol}
+
+Four co-folding models were used: Boltz-2, Chai-1, OpenFold3 and Protenix2. Each
+received either the receptor sequence alone (apo arm) or the receptor sequence
+together with its cognate G$\alpha$ subunit (cognate arm). Templates were
+disabled on all backbones, multiple sequence alignments were pinned, and no
+reference structure was supplied to any model at any point. Twenty-five seeds
+were run per condition.
+
+The apo arm is a computational reference condition, not a physical state --- no
+ligand, no membrane, and no basal-activity equivalent. Real receptors show
+constitutive activity that varies widely between receptors, and the apo arm
+should not be equated with a physiological inactive state.
+
+OpenFold3 seeds were generated as $5 \times 5$ outer/inner after a seeding fix,
+so OF3 rows are less independent than the other backbones'. This qualifies any
+cross-backbone comparison of correlation magnitudes. Scoring used a single
+frozen scorer (version 0.1.0, commit \texttt{04243c45}) recorded per row.
+
+\subsection*{Uncertainty}
+
+The cluster bootstrap is authoritative: 1{,}000 resamples over 26 paralog
+clusters, seed 20260909. A receptor-level bootstrap is reported as secondary, in
+supplementary tables only. The cluster interval is equal to or wider than the
+receptor interval on every headline statistic, by a factor of up to 2.2.
+
+Eleven of the 26 clusters are singletons (42\%), so the paralogy correction acts
+on only 15 multi-member clusters. All confidence intervals quoted in the main
+text and in Tables~2--4 are cluster intervals.
+
+\subsection*{Exclusions}
+
+Five exclusion sets were pre-specified by cause and applied before results were
+inspected. They are not a quality filter and are not applied as a union.
+
+E1 (25 rows) removes one cell whose mean pLDDT falls below 50. E2 (4 rows)
+removes model-side atom clashes with \texttt{d\_npxxy\_oh} below 2.4~\AA. These
+two together remove 29 rows (0.31\%) and are applied everywhere.
+
+E3 (4{,}890 rows) flags receptors whose reference fails its own predicate on a
+given axis. \textbf{It is applied per axis} --- \texttt{excl\_E3\_npxxy}
+(4{,}690 rows, 24 receptors) or \texttt{excl\_E3\_tilt} (2{,}000 rows, 10
+receptors) --- and only where a reference value serves as a denominator or a
+regression predictor. It merges two distinct causes: references that genuinely
+fail the predicate, and receptors for which the axis is not measurable at all
+(EDNRB, for example, carries Leu at 7.53, so an NPxxY hydroxyl distance is
+undefined). The E3 union is never applied, and E3 is irrelevant to raw
+distributions, predicate firing rates and confidence correlations, which never
+touch a reference separation.
+
+E4 (1{,}495 rows) restricts to Class~A; Class~B and~F are reported separately as
+instrument scope. E5 (500 rows) marks agonist-only actives and is shown as a
+sensitivity contrast, never applied silently.
+
+Every headline statistic was recomputed under every exclusion combination
+(Table~5). No sign flip occurs anywhere and no statistic moves by more than
+0.5\% from baseline.
+
+\subsection*{Confidence aggregation}
+
+Three aggregations of pLDDT were computed: the whole-complex mean, the mean over
+the six state-defining anchor residues 3.50, 3.51, 5.58, 6.30, 6.34 and 7.53,
+and the minimum over those anchors. Correlations are computed over approximately
+1{,}600 rows and 32 receptors per backbone.
+
+\textbf{The anchor-restricted mean was designated the primary aggregation post
+hoc, after all three had been computed.} All three are reported in Table~4. The
+disclosure, not the designation, is what the result rests on.
+
+\subsection*{Data-layer verification}
+
+Both predicate axes were independently recomputed against non-scorer
+implementations and agree bit-exactly (Pearson $r = 1.000000$). The predicate
+booleans were recomputed from the raw axis values rather than trusted, and cell
+counts were reconciled against the run manifest. Fold integrity was checked
+independently: the TM6 helicity anchor holds on 96.3\% of rows.
+
+\subsection*{Known data-layer issues}
+
+Four rows carry sub-covalent hydroxyl--hydroxyl distances, which are model-side
+clashes rather than measurements, and are excluded as E2. One 25-row cell passed
+every assertion in the verification suite because the suite has no pLDDT floor,
+and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082,
+which changes the call for one borderline row.
+
+\subsection*{Reference-set limitations}
+
+The construct annotation carried with the reference set contradicts the RCSB
+record on approximately 40\% of evaluable entries; the denominator for that rate
+is \textbf{[PI: 162 empirical / 127 as previously stated]}. Several references
+carry fusion partners or engineered residues inside the predicate windows, which
+is recorded per entry in Table~S1. Nine references deviate from their expected
+predicate call; five of the nine are unclassified as to cause, with the
+remainder split between expected biology, curation error, a measurement
+artifact, and one entry that could be either. Several entries annotated active
+were solved with agonist bound but no transducer and do not form the NPxxY
+network, which the predicate reports correctly.

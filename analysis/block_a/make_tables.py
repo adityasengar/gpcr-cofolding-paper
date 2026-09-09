@@ -15,13 +15,18 @@ Two rules from the brief are enforced here rather than trusted:
     python3 analysis/block_a/make_tables.py
 """
 import os
+import re
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC  = os.path.join(HERE, "..", "..", "data", "block_a")
 OUT  = os.path.join(HERE, "tables")
+# second copy so the manuscript can \input them without reaching outside
+# manuscript/ -- keeps the LaTeX build self-contained
+MOUT = os.path.join(HERE, "..", "..", "manuscript", "tables")
 R    = lambda *p: os.path.join(SRC, *p)
 os.makedirs(OUT, exist_ok=True)
+os.makedirs(MOUT, exist_ok=True)
 
 ESC = {"&": r"\&", "%": r"\%", "_": r"\_", "#": r"\#", "$": r"\$"}
 def tex_escape(x):
@@ -31,6 +36,9 @@ def tex_escape(x):
     return s
 
 def emit(name, df, caption, filt, note=""):
+    BS = chr(92)
+    fix = lambda t: t.replace(BS * 2 + "_", BS + "_").replace(BS * 2 + "%", BS + "%")
+    note, filt = fix(note), fix(filt)
     """One table -> csv + booktabs tex, with the filter stated in the footnote."""
     df.to_csv(os.path.join(OUT, name + ".csv"), index=False)
     cols = list(df.columns)
@@ -52,11 +60,16 @@ def emit(name, df, caption, filt, note=""):
         lines.append(" & ".join(cells) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}",
               r"\begin{flushleft}\scriptsize",
-              r"\textbf{Filter:} %s" % tex_escape(filt)]
+              r"\textbf{Filter:} %s" % filt]
     if note:
         lines.append(r" \\ %s" % tex_escape(note))
     lines += [r"\end{flushleft}", r"\end{table}"]
-    open(os.path.join(OUT, name + ".tex"), "w").write("\n".join(lines) + "\n")
+    body = "\n".join(lines) + "\n"
+    # Final normalisation: collapse a doubled escape before _ or % into one.
+    # The LaTeX line break "\\ " (backslash-backslash-space) is left alone.
+    body = re.sub(r"\\{2,}(?=[_%])", lambda m: chr(92), body)
+    open(os.path.join(OUT, name + ".tex"), "w").write(body)
+    open(os.path.join(MOUT, name + ".tex"), "w").write(body)
     print("  %-8s %2d rows x %2d cols" % (name, len(df), len(cols)))
 
 
