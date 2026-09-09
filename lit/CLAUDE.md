@@ -19,17 +19,16 @@ finding — that failure is invisible on the page and is caught by a reviewer in
 ```
 lit/
   SCHEMA.md         field definitions + the fixed 60-tag vocabulary   (load always)
-  INDEX.md          71 blocks, one per paper, lossy by design         (load always)
+  INDEX.md          78 blocks, one per paper, lossy by design         (load always)
   STATUS.md         landed vs planned experiments                     (load for anything draft-facing)
   GAPS.md           358 unresolved items — what the corpus can't answer
   notes/<key>.md    full extraction, verbatim quotes with pages       (open one at a time)
   pdfs/<key>.pdf    source PDF, filename = citekey                    (open only when the note is too coarse)
-  refs.bib          78 entries (71 held + 4 never obtained + 3 bibliography-only).
-                    Updated 2026-09-08: five of the eight steering entries were
-                    obtained and extracted; every entry's metadata was verified
-                    against Crossref, arXiv, PMLR or OpenReview that day.
-                    Still citable for venue and identifier ONLY (no note, no PDF):
-                    ingraham2023chroma, aureli2026epath, kohlhoff2014gpcr.
+  refs.bib          78 entries, **all 78 extracted**. No bibliography-only entries
+                    remain: the last three were supplied by the user on 2026-09-09.
+                    All 78 entries' metadata verified 2026-09-08/09 against
+                    Crossref, arXiv, PMLR, OpenReview or OpenAlex. Every entry now has
+                    a note. Four have no PDF - see below.
   MANIFEST.csv      citekey, DOI, pages, sha256, fulltext
   validate/         quote and page verifiers + cached text
   source/           the original download folder, kept for provenance
@@ -101,6 +100,23 @@ Never load the whole `notes/` directory.
   January 2021". The other cutoffs are corroborated by independent third-party notes:
   AF3 2021-09-30 (PoseBusters model 2019-09-30), Boltz-1 2021-09-30, Boltz-2
   2023-06-01 for structures with **no date cutoff on affinity data**, Protenix 2021-09-30.
+- **Four notes have NO PDF and therefore NO page numbers.** `yu2026domainmotion`,
+  `aureli2026epath`, `kohlhoff2014gpcr` and `ingraham2023chroma` were extracted on
+  2026-09-09 from publisher HTML or Europe PMC full-text XML, because every scripted
+  route to their PDFs is bot-walled. Their locators are **section names**, not pages:
+  cite as `[yu2026domainmotion, Discussion]`. Every claim quote in them was machine-
+  verified against the retrieved text, so they are searchable and checkable; they are
+  simply not page-addressable. `kohlhoff2014gpcr` was read as the **NIH author
+  manuscript**, not the published typesetting, and **has a 2015 corrigendum that was not
+  retrieved** — check it before citing. `ingraham2023chroma` is worse: it is marked
+  `schema_version: v3-partial` because its Results, Methods and all figures were never
+  read. **Do not use that note for a novelty, priority or figure-design argument.**
+
+- **`yu2026domainmotion` is a threats-table paper and is not yet in `../CLAIMS.md`.**
+  It shows, on 82 enzymes at 500 models per condition, that a ligand *known not to bind*
+  induces nearly the same domain motion as the native trigger, and that pLDDT does not
+  reliably separate them. Any decoy-arm interpretation has to meet it.
+
 - **The five notes added 2026-09-08 are v3 but partial on figures.**
   `richman2025conformix`, `singhal2025fksteering`, `wu2023tds`, `kim2023refining` and
   `ekstromkelvinius2024discriminator` carry every schema field, and every claim quote in
@@ -111,22 +127,33 @@ Never load the whole `notes/` directory.
   fixed vocabulary has no value for a non-biomolecular paper and SCHEMA v3 forbids
   inventing one. **A `non-biomolecular` tag is the outstanding vocabulary decision.**
 
-- **24 of 71 papers carry a reuse restriction** flagged on their `figs:` line — 15 ND,
+- **Two open vocabulary decisions, both blocking clean reverse lookup.** (1) A
+  `non-biomolecular` system tag: `singhal2025fksteering`, `kim2023refining` and
+  `ekstromkelvinius2024discriminator` carry **no system tag at all**, because the fixed
+  list has no honest value for a paper about images, text or 2-D molecular graphs.
+  (2) The `af-cluster` tag now has a genuine collision: it means MSA clustering
+  everywhere except `kohlhoff2014gpcr`, where it marks a Markov state model. Either
+  rename it or add `markov-state-model`.
+
+- **24 of 78 papers carry a reuse restriction** flagged on their `figs:` line — 15 ND,
   3 all-rights-reserved, 6 with no licence statement at all. ND forbids redrawing, not
   just copying. Check before adapting any panel.
 
 ## Open — these are the user's calls, not an agent's
 
 - `why_it_matters` in `MANIFEST.csv` and `stance` in `INDEX.md` are unfilled/provisional.
-- Seven papers have a verified bibliography entry but no note and no PDF, so they are
-  citable for venue and identifier only. Four were never obtained and all four are
-  paywalled: `chiesa2025templatebias` (JCIM 65(12):6298-6309), `bret2025boltz2docking`
-  (JCIM 66(3):1511-1521), `nittinger2025cofolding` (AILSCI 8:100136, gold OA but the
-  publisher blocks scripted download), `yu2026domainmotion` (PNAS 123(10):e2530709123).
-  Three more are the steering/MD entries that could not be fetched: `ingraham2023chroma`
-  (Nature 623(7989):1070-1078), `aureli2026epath` (JPC Lett 17(10):2974-2983),
-  `kohlhoff2014gpcr` (Nature Chem 6(1):15-21). All seven need institutional access; the
-  metadata is verified, only the full text is missing.
+- **`bret2025boltz2docking` was read from the HAL author version**, not the published
+  ACS typesetting, so its locators are author-version PDF pages and do **not** match
+  JCIM 66(3):1511-1521. Convert before citing. `chiesa2025templatebias` and
+  `nittinger2025cofolding` are published versions and their page numbers are real.
+
+- **`chiesa2025templatebias` narrows the manuscript's novelty claim and the intro is
+  written against it.** It supplies a G protein as a co-input to a co-folding model and
+  then measures the receptor's activation state - both halves, on 63 post-cutoff class A
+  pairs. Nothing else in the corpus does both. Our remaining distinctions are the 21-mer
+  peptide versus the whole Ga, an operationalised predicate versus RMSD to the deposited
+  answer, the decoy and shuffled arms, and the AF3-lineage backbones. Read that note
+  before writing any novelty sentence.
 - `STATUS.md` says Block A is 48 receptors; other notes reference a 46-receptor panel
   and 40 reference pairs. Unreconciled, and not resolvable from the corpus.
 - The five v2 notes need a real re-pass, not a patch: the three missing fields require

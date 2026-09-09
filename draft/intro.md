@@ -12,8 +12,9 @@
 > enough to survive a change in the story. No `[R-*]` ledger id appears anywhere, and no sentence
 > depends on a `STATUS.md` planned block (D1, D2, D3, T1.5).
 >
-> Written against `lit/SCHEMA.md` v3, `lit/INDEX.md` at **71 papers**, and `lit/refs.bib` at 78
-> entries with all metadata verified the same day.
+> Written against `lit/SCHEMA.md` v3 and `lit/INDEX.md` at **78 papers ,  the whole bibliography,
+> fully extracted.** Four of the 78 notes carry section locators rather than page numbers because
+> no PDF could be obtained, and they are cited here in that form.
 
 ---
 
@@ -48,6 +49,18 @@ C-terminal segment, which "must be inserted into the receptor's cytoplasmic clef
 the GPCR" [georgiou2025heterogeneity p.4]. A receptor's state is set by what is bound at the
 intracellular face at least as much as by what is bound in the pocket.
 
+Physical simulation says the same thing in the language of free energy, and adds a detail that
+matters for what follows. Activation is a transition "that span[s] multiple scales, from local
+rearrangements of side chains and hydration sites to large-scale reorganizations of the
+transmembrane helices" [aureli2026epath, Introduction], and it can now be characterised as a
+continuous free-energy landscape for apo class A receptors, using the conserved PIF, DRY, NPxxY and
+YY microswitch motifs as quantitative descriptors rather than as a call by eye
+[aureli2026epath, Methods]. Those landscapes are not flat. Two milliseconds of aggregate dynamics
+on the beta2-adrenergic receptor, aggregated into a Markov state model, show the agonist condition
+reaching active-state conformations while "inverse agonist and apo simulations do not sample active
+state conformations along all structural metrics" [kohlhoff2014gpcr, Results]. In a physical
+ensemble, the apo receptor largely does not get there on its own.
+
 Structure prediction has meanwhile become accurate enough to be used as a working instrument in
 receptor pharmacology, and it represents none of this. Co-folding models of the AlphaFold 3 lineage
 return one structure per input, a limitation their authors state plainly: such models "typically
@@ -69,7 +82,15 @@ geometric quality scores do not predict which [sun2026kinconfbench]. On SLC tran
 deposited state is returned whatever the sampling intervention, to the point that "the ESM-AF2
 protocols described here fail to generate the alternative conformational state when one
 conformational state was available in the PDB at the time of AF2 training"
-[swapna2025memorization p.11].
+[swapna2025memorization p.11]. The most quantitative statement of the effect comes from enzymes.
+Across 82 enzymes with a known open-closed domain motion, 500 AlphaFold 3 models per condition and
+no templates, whether the model returns the open or the closed form is governed by how many apo and
+holo structures of that enzyme sit in the PDB rather than by whether the triggering ligand is
+supplied: adding the ligand moves the closed fraction by 9.1 to 17.5 percentage points, against a
+40.3-point gap between the enzymes whose databank entries are mostly apo and those whose entries are
+mostly holo [yu2026domainmotion, Discussion]. The authors' own summary is that "results may depend
+more on the number of structures available for training than on the presence of a ligand in the
+calculation" [yu2026domainmotion, Significance], and the same behaviour reproduces in AlphaFold 2.
 
 For receptors the collapse has a direction, and it runs against the state that matters most for
 agonist pharmacology. Sequence-only AF2 and AF3 models agree best with inactive references and
@@ -127,7 +148,10 @@ particle steering that requires no differentiable objective [singhal2025fksteeri
 discriminator guidance in both the continuous [kim2023refining] and the discrete
 [ekstromkelvinius2024discriminator] settings. None of those four papers contains a conformational
 experiment and two contain no biomolecule at all, so they establish the mechanism rather than any
-structural result. Applied to structure models, the same machinery takes several forms.
+structural result. Conditioning a protein diffusion model on a classifier is itself not new: Chroma
+samples proteins under external constraints including "semantic specification from classifiers"
+[ingraham2023chroma, Discussion], though it designs new proteins rather than selecting among
+conformations of an existing one. Applied to structure models, the same machinery takes several forms.
 Interventions have been placed on the coordinates during denoising, by adding the gradient of a
 differentiable collective variable to the sampler update [lam2026metadiffusion], or by running
 particles under a bias away from the model's own default prediction and reweighting them
@@ -153,17 +177,27 @@ pocket while ligand-free runs return the closed one [lazou2026cryptic]; co-foldi
 blocker restores discovery of allosteric and cryptic sites that the orthosteric pocket otherwise
 overwrites [purnomo2026cafe]; and across four multi-state proteins, including beta2AR,
 "small-molecule ligands have weak or inconsistent effects, while large protein partners drive clear
-conformational switching between states" [ye2026multistatebias p.2]. Running alongside all of this
+conformational switching between states" [ye2026multistatebias p.2]. The obvious objection to all of
+these is that the co-input may be acting as an occupant rather than as itself, and one study has
+tested it directly: across the same 82 enzymes, ligands known not to bind induce nearly the same
+domain motion as the native trigger, and although they are placed with lower confidence, that
+confidence is "generally not sufficient for discriminating between binder and nonbinder ligands"
+[yu2026domainmotion, Significance]. Any claim that a co-input sets a state therefore has to
+separate the co-input's identity from its mere presence, and has to do so with a control arm rather
+than an argument. Running alongside all of this
 is a growing measurement literature: multi-state benchmarks [ku2026promise, sun2026kinconfbench],
 receptor-specific evaluations [chib2025gpcrstates, zhang2026generalization,
-obendorf2026statespecific], and explicit proposals for the evidential bar that a multi-state claim
-should have to clear [chakravarty2026statespace, liu2026ensembletests].
+obendorf2026statespecific], site-type comparisons holding the target fixed and varying only
+whether the ligand is orthosteric or allosteric [nittinger2025cofolding], and explicit proposals
+for the evidential bar that a multi-state claim should have to clear [chakravarty2026statespace,
+liu2026ensembletests].
 
 Surveying this work by what it does rather than by what it studies exposes a consistent shape.
-Prospectivity is close to absent. Of the 71 papers surveyed here, exactly two report an unqualified
-prospective result, and neither is of the relevant kind: one is a wet-lab peptide study that
-generates no structures [tran2026nanogs], the other a blind CASP submission that defines no
-conformational state at all [wallner2023afsample]. Where a method does direct the state, the
+Prospectivity is close to absent. Of the 78 papers surveyed here, exactly three report an
+unqualified prospective result, and none is of the relevant kind: a wet-lab peptide study that
+generates no structures [tran2026nanogs], a blind CASP submission that defines no conformational
+state at all [wallner2023afsample], and a de novo design campaign that generates new proteins rather
+than alternative states of an existing one [ingraham2023chroma]. Where a method does direct the state, the
 direction is usually obtained from a structure of the answer. Cfold's recovery rate is a best-of-N
 selected by TM-score against the held-out structure, and the paper demonstrates that no
 confidence-based substitute exists [bryant2024cfold p.5]. ConforNets achieves transferable state
@@ -178,7 +212,7 @@ additional input information, such as experimentally measured pairwise distances
 reported rows are selected as the closest sample to one [richman2025conformix p.6].
 
 Where a directional handle exists at all, it is usually the operator's rather than the biology's.
-Fifteen of the 71 papers carry one. Restricting to prediction pipelines applied to receptors, the
+Nineteen of the 78 papers carry one. Restricting to prediction pipelines applied to receptors, the
 state is supplied by the operator in every case: as a state-annotated template [heo2022multistate],
 as a pinned active-state template [ferguson2026deorphann], as a declared state label routed through
 state-matched templates [yang2025statespecific], or as a learned transform supervised by a
@@ -188,25 +222,51 @@ richman2025conformix]; or the demonstration rests on four targets with no memori
 [ye2026multistatebias]; or the quantity measured is binding-site geometry for docking rather than
 the receptor's activation state [mitjavila2026afsample2t].
 
-The nearest near-miss is worth stating precisely, because it is close. A GPCR-specialised
-co-folding model conditioned on activation state ranks designed peptides into agonists and
-antagonists, with nanomolar hits assayed, and its authors identify state control as exactly what
-prior peptide-design methods lack, writing that "these methods do not allow for precise control
-over the GPCR's functional state (e.g., active or inactive)" [yang2025statespecific p.2]. What
-separates that work from the question asked here is the direction of the dependency. The state is
-declared before any peptide is scored, and the authors are explicit that this is the operating
-mode: "HF-Multistate, when specifying the GPCR state, can partially capture functional shifts in
-peptide design" [yang2025statespecific p.10]. The peptide there is the designed output. No
-experiment in that work varies a peptide sequence with the state conditioning held fixed and
-reports the resulting receptor conformation.
+Two near-misses need stating precisely, because both are close and the gap has to be defined
+against them rather than around them.
 
-Where the co-input is a G protein and the scale is large, the receptor's state is not measured at
-all. Interface contact fingerprints have been extended to 825 modelled receptor and G protein
-complexes with no activation criterion defined anywhere in the work [matic2023gpcrome]; the entire
-GPCRome has been co-folded against all Galpha subunits with the receptor's state assumed from the
-presence of the partner and no activation predicate applied [miglionico2026atlas]; and 5,595
-AF2-Multimer complexes have been released gated purely on self-confidence, with no activation state
-assigned to any model [pandyszekeres2024gproteindb]. This is not a small oversight in a corner of
+The first supplies the partner and measures the receptor, which is the combination this work is
+built on. Comparing six AlphaFold protocols on 63 class A receptor-Gs pairs released after the
+models' training cutoffs, explicitly co-folding the receptor with its G protein reproduces the
+intracellular rearrangement of activation better than operator-supplied active-state templates
+with alignment masking or subsampling do, with "TM5, TM6, and TM7 present[ing] three distinct
+groups, with the models explicitly modeling G-protein binding outperforming the others"
+[chiesa2025templatebias p.6302]. The advantage is not simply a training-set artefact: 94 of the
+145 benchmark structures involve a receptor with no template and no presence in either model's
+training set, and six receptor families are absent from both, which leads the authors to conclude
+that the gain "should not be attributed only to a more recent and active-state biased training
+set, but rather to its ability in modeling allosteric effects during the cofolding process"
+[chiesa2025templatebias p.6305]. Any claim that a biological co-input has not previously been
+shown to drive a receptor's predicted activation state is therefore false, and four narrower
+distinctions are what remain. The co-input there is the whole Ga subunit or heterotrimer rather
+than the isolated C-terminal segment, so the contribution of the a5 contact is never separated
+from the rest of the interface. The state is scored as RMSD to the deposited active structure of
+that same complex, so the procedure cannot be run on a receptor whose active state is unsolved.
+There is no decoy or scrambled-partner arm, so occupancy and identity are not distinguished. And
+no AlphaFold 3-lineage model is evaluated, a limitation the authors state themselves
+[chiesa2025templatebias p.6299].
+
+The second near-miss approaches from the peptide side. A GPCR-specialised co-folding model
+conditioned on activation state ranks designed peptides into agonists and antagonists, with
+nanomolar hits assayed, and its authors identify state control as exactly what prior
+peptide-design methods lack, writing that "these methods do not allow for precise control over the
+GPCR's functional state (e.g., active or inactive)" [yang2025statespecific p.2]. What separates
+that work from the question asked here is the direction of the dependency. The state is declared
+before any peptide is scored, and the authors are explicit that this is the operating mode:
+"HF-Multistate, when specifying the GPCR state, can partially capture functional shifts in peptide
+design" [yang2025statespecific p.10]. The peptide there is the designed output. No experiment in
+that work varies a peptide sequence with the state conditioning held fixed and reports the
+resulting receptor conformation.
+
+That verification, however, does not scale. In the *largest* GPCR and G protein co-folding studies
+the receptor's state is not measured at all. Interface contact fingerprints have been extended to
+825 modelled receptor and G protein complexes with no activation criterion defined anywhere in the
+work [matic2023gpcrome]; the entire GPCRome has been co-folded against all Galpha subunits with the
+receptor's state assumed from the presence of the partner and no activation predicate applied
+[miglionico2026atlas]; and 5,595 AF2-Multimer complexes have been released gated purely on
+self-confidence, with no activation state assigned to any model [pandyszekeres2024gproteindb]. The
+one study that does verify covers 63 pairs [chiesa2025templatebias], two orders of magnitude fewer
+than the resources that downstream work actually consumes. This is not a small oversight in a corner of
 the field, because these are the resources that downstream work treats as sources of active-state
 structures. The instrument needed to close the loop already exists: a learned classifier separates
 active from inactive deposited GPCR structures with near-perfect discrimination, and its authors
@@ -230,10 +290,14 @@ protein-induced conformational changes are predicted less well than ligand-induc
 directly in the Discussion.
 
 The last column separates two questions that are usually merged, and it is where the receptor
-literature is weakest. Forty-one of the 71 papers have some held-out or post-cutoff set in their
+literature is weakest. Forty-four of the 78 papers have some held-out or post-cutoff set in their
 design; far fewer run that set as an analysed control arm, and among the papers that actually
 address GPCR conformational state the control is absent, unpowered or unmatched
-[chib2025gpcrstates, ye2026multistatebias, obendorf2026statespecific, yang2025statespecific]. Even
+[chib2025gpcrstates, ye2026multistatebias, obendorf2026statespecific, yang2025statespecific]. The
+contrast with what a properly controlled design looks like is stark: the enzyme study above
+stratifies its 82 targets by the composition of the training set itself, runs a non-binding-ligand
+arm against the native trigger, and replicates the whole result in a second architecture
+[yu2026domainmotion, Results]. Even
 the cleanest inference-time result concedes the point, noting that its evaluated proteins "were
 likely present in the Boltz training set" [richman2025conformix p.6]. The omission is consequential
 rather than pedantic. Co-folding's advantage over physics-based methods is concentrated near the
@@ -241,14 +305,22 @@ training distribution and largely disappears in the least-similar stratum
 [skrinjar2026generalization, roehrig2026docking]; splitting on sequence identity does not by itself
 stop benchmark leakage [mattsson2026leakage]; and predicted ligand placement can survive a pocket
 being mutated until it cannot bind, which shows retrieval rather than physics driving the result
-[masters2025physics]. A conformational claim carrying no matched control arm is therefore not yet
-distinguishable from a lookup.
+[masters2025physics]. That last failure extends beyond the structural head: on 943
+virtual-screening hits across ten mostly-receptor targets, Boltz-2's separation of active from
+inactive compounds "remains insensitive to key binding site mutations and even in some cases to
+target exchange" [bret2025boltz2docking, Abstract]. A conformational claim carrying no matched
+control arm is therefore not yet distinguishable from a lookup, and a control arm is only
+persuasive if the quantity it perturbs is one the model demonstrably reads.
 
-Taken together, this corpus contains no study in which a biological co-input, rather than an
-operator-declared label or a reference structure, is what sets a receptor's predicted
-conformational state, and in which the resulting state is then verified against an operationalised
-predicate rather than assumed from the presence of the partner. That is the gap this work
-addresses.
+Taken together, the gap is narrower than a survey of this literature first suggests, and it is
+sharper for being narrow. A biological co-input has been shown to set a receptor's predicted
+conformational state, and that state has been verified, but only with the whole transducer
+supplied and only by measuring distance to the deposited answer. What the corpus does not contain
+is a study in which the co-input is reduced to the minimal contact that carries activation, in
+which its contribution is separated from mere occupancy of the cleft by a graded series of decoy
+and sequence-scrambled controls, and in which the resulting state is called by a predicate fixed
+in advance rather than by proximity to a structure that must already exist. That is the gap this
+work addresses.
 
 ---
 
@@ -294,26 +366,32 @@ confidence made across backbones on a single receptor.
 ## Citation check
 
 Every citekey used above, confirmed present in `../lit/refs.bib` and with a note file in
-`../lit/notes/`. Checked mechanically, 2026-09-08.
+`../lit/notes/`. Checked mechanically, 2026-09-09.
 
-abramson2024af3 - bryant2024cfold - chakravarty2026statespace - chib2025gpcrstates -
+abramson2024af3 - aureli2026epath - bret2025boltz2docking - bryant2024cfold -
+chakravarty2026statespace - chib2025gpcrstates - chiesa2025templatebias -
 ekstromkelvinius2024discriminator - feldman2026alphainterp - ferguson2026deorphann -
-georgiou2025heterogeneity - heo2022multistate - hilger2020gcgr - jedryszek2026probing -
-jung2026boltzperturb - junker2026peptidedesign - kalakoti2025afsample2 - kalakoti2026afsample3 -
-khaleq2026hyaline - kim2023refining - ku2026promise - lam2026metadiffusion - lazou2026cryptic -
-lee2025seqassoc - lee2026confornets - lewis2025bioemu - li2026embedding - liu2026ensembletests -
+georgiou2025heterogeneity - heo2022multistate - hilger2020gcgr - ingraham2023chroma -
+jedryszek2026probing - jung2026boltzperturb - junker2026peptidedesign -
+kalakoti2025afsample2 - kalakoti2026afsample3 - khaleq2026hyaline - kim2023refining -
+kohlhoff2014gpcr - ku2026promise - lam2026metadiffusion - lazou2026cryptic - lee2025seqassoc
+- lee2026confornets - lewis2025bioemu - li2026embedding - liu2026ensembletests -
 lu2026twostages - masters2025physics - matic2023gpcrome - mattsson2026leakage -
-miglionico2026atlas - mitjavila2026afsample2t - obendorf2026statespecific -
-paajanen2026activation - pandyszekeres2024gproteindb - passaro2025boltz2 - purnomo2026cafe -
-richman2025conformix - roehrig2026docking - schafer2025confounds - singhal2025fksteering -
-skrinjar2026generalization - stein2022speachaf - sun2026kinconfbench - suzuki2026conforflux -
-suzuki2026pairscaling - swapna2025memorization - tang2026steeraf - tran2026nanogs -
-wallner2023afsample - waymentsteele2024cluster - waymentsteele2025reply - wohlwend2024boltz1 -
-wu2023tds - yang2025statespecific - ye2026multistatebias - zhang2026generalization
+miglionico2026atlas - mitjavila2026afsample2t - nittinger2025cofolding -
+obendorf2026statespecific - paajanen2026activation - pandyszekeres2024gproteindb -
+passaro2025boltz2 - purnomo2026cafe - richman2025conformix - roehrig2026docking -
+schafer2025confounds - singhal2025fksteering - skrinjar2026generalization -
+stein2022speachaf - sun2026kinconfbench - suzuki2026conforflux - suzuki2026pairscaling -
+swapna2025memorization - tang2026steeraf - tran2026nanogs - wallner2023afsample -
+waymentsteele2024cluster - waymentsteele2025reply - wohlwend2024boltz1 - wu2023tds -
+yang2025statespecific - ye2026multistatebias - yu2026domainmotion - zhang2026generalization
 
-Deliberately not cited, because each has a verified bibliography entry but no note and no PDF and
-is therefore citable for venue and identifier only: chiesa2025templatebias, bret2025boltz2docking,
-nittinger2025cofolding, yu2026domainmotion, ingraham2023chroma, aureli2026epath, kohlhoff2014gpcr.
+63 citekeys, every one verified present in `../lit/refs.bib` and `../lit/notes/`.
+Four carry SECTION locators rather than page numbers because no PDF exists for them:
+yu2026domainmotion, aureli2026epath, kohlhoff2014gpcr and ingraham2023chroma. The last is a
+partial extraction and is cited only for its abstract-level conditioning claim.
+bret2025boltz2docking was read from the author version, so its page numbers must be converted
+to the published JCIM 66(3):1511-1521 range before submission.
 
-**Note on Greek letters.** Written out (alpha5, beta2AR, Galpha) so the file survives round-tripping
-through plain-text tooling. Restore the symbols when this goes into LaTeX.
+The corpus is now fully extracted: all 78 bibliography entries have a note. Nothing in
+`refs.bib` is citable for venue and identifier only any more.

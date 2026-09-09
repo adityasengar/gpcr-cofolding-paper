@@ -122,7 +122,7 @@ The shared repo is ~21 MB. `.gitignore` excludes the heavy, reconstructible thin
 | `rows_enriched_v3_7.csv` (19M) | HPC export, not authored here | `dataquery` falls back to `data/*.csv`; the provenance columns are unavailable |
 | `lit/validate/txt*`, `ocr/` | regenerable with `pdftotext` | quote re-verification cannot run |
 
-`lit/notes/` (6.0 MB) **does** travel, so the 75 extractions with their verbatim quotes
+`lit/notes/` (6.1 MB) **does** travel, so the 78 extractions with their verbatim quotes
 and page numbers are available on both machines. That is the layer most queries need.
 
 `overleaf/` is its own git repo with the Overleaf remote and is **excluded** from this
@@ -203,15 +203,16 @@ this repo syncs everything else.
 
 That machine will **not** have `lit/pdfs/`, `lit/source/`, `rows_enriched_v3_7.csv` or
 the pdftotext caches. `session_start.sh` prints which are missing. It *will* have all
-75 extractions in `lit/notes/`. Note that four of those 75 have **no PDF on any machine**
+78 extractions in `lit/notes/`. Note that four of those 78 have **no PDF on any machine**
 and carry section locators rather than page numbers; see `lit/CLAUDE.md`.
 
 ## Open, and owned by you
 
 - Define the Block A denominator, then re-run `python3 analysis/q.py receptor_counts`.
-- `lit/`: `why_it_matters` in `MANIFEST.csv`, provisional `stance` in `INDEX.md`, three
-  papers with no full text, six notes still on schema v2, four notes with no page numbers,
-  one partial note (`ingraham2023chroma`), and two open vocabulary decisions
-  (`non-biomolecular`, and the `af-cluster` collision). See `lit/CLAUDE.md`.
+- `lit/`: **the bibliography is fully extracted, 78 of 78.** Remaining: `why_it_matters`
+  in `MANIFEST.csv`, provisional `stance` in `INDEX.md`, six notes still on schema v2,
+  four notes with no page numbers, one partial note (`ingraham2023chroma`), and two open
+  vocabulary decisions (`non-biomolecular`, and the `af-cluster` collision).
+  See `lit/CLAUDE.md`.
 - **`CLAIMS.md` threats table needs `yu2026domainmotion` added** — nonbinder ligands
   reproduce the conformational change in 82 enzymes, which directly exposes the decoy arm.

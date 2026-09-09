@@ -32,12 +32,14 @@ structure cannot express it.**
 **C4. Where directional state control exists, the state is supplied by the operator,
 not induced by a biological co-input.**
 - evidence: `[heo2022multistate]` state-annotated templates + MSA deletion; `[yang2025statespecific]` operator declares the state and the peptide is the designed *output*; `[ferguson2026deorphann]` pinned active templates; `[lee2026confornets]` transfer label is itself a deposited structure
-- status: **ready** — this is the sentence that protects our novelty
+- **QUALIFIED 2026-09-09 and no longer true as written.** `[chiesa2025templatebias]` supplies the G protein as a co-input to AlphaFold-Multimer on 63 post-cutoff class A pairs and measures the receptor's activation state, finding that the partner beats operator-supplied active templates on TM5/TM6/TM7 (p6302, p6305). The claim must be narrowed to the four distinctions that survive: (i) whole Gα or heterotrimer, not a 21-residue α5-CT peptide, so the α5 contact is never isolated; (ii) state scored by RMSD to the deposited active reference of that same complex, not by a predicate applicable to an unsolved receptor; (iii) no decoy or scrambled-partner arm, so occupancy and identity are not separated; (iv) AF2/AFM only, no AF3-lineage backbone (they say so, p6299).
+- status: **needs rewriting** — the old sentence would be caught immediately by these authors
 
 **C5. The largest GPCR + G-protein co-folding studies supply the partner and never
 verify receptor state.**
 - evidence: `[matic2023gpcrome]` 825 ligand-free models, no activation criterion; `[miglionico2026atlas]` whole GPCRome, "no state criterion"; `[pandyszekeres2024gproteindb]` 5,595 released complexes, no state assigned
-- status: **ready** — derived mechanically from the INDEX metric column
+- **QUALIFIED 2026-09-09.** The word that has to carry the claim is now **largest**. `[chiesa2025templatebias]` supplies the partner *and* verifies state, at 63 pairs — two orders of magnitude smaller than the resources above, but it is a genuine exception and the sentence must name it rather than imply none exists.
+- status: **ready with the qualification above**
 
 ## The result — what we claim
 
@@ -67,8 +69,10 @@ verify receptor state.**
 | the isolated peptide does **not** stabilise the active state without agonist | `[tran2026nanogs p8]` wet-lab, verbatim | ours is a *prediction-model* input, not a solution-phase equilibrium. State this explicitly; do not let it read as contradiction. |
 | agonist alone nearly suffices at β2AR | `[vo2026fiducials p8]` | see C7 |
 | partner-induced changes are predicted **worse** than ligand-induced | `[ku2026promise]` (their term is "protein-induced") | our result runs against this; engage it rather than omitting it |
+| **a ligand known NOT to bind reproduces the conformational change** | `[yu2026domainmotion, Significance/Discussion]` — 82 enzymes, 500 AF3 models per condition, no templates | **the sharpest published challenge to our decoy arm.** They show the training-set prior (40.3 pp between apo- and holo-dominated enzymes) is 3–4× the ligand effect (9.1–17.5 pp), and that ligand pLDDT is "generally not sufficient for discriminating between binder and nonbinder ligands". Our decoy and shuffled arms are exactly the control they call for, so this is answerable — but the answer must be quantitative and must cite them by name. Added 2026-09-09. |
 | co-folding wins only near training distribution | `[skrinjar2026generalization]`, `[roehrig2026docking]` | needs our anti-memorization arm — Block C claims it survives; verify when data lands |
 | sequence-identity splits do not stop leakage | `[mattsson2026leakage]` | directly exposes our generalisation framing |
+| **Boltz-2's output can be insensitive to target shuffling and to binding-site mutations that abolish binding** | `[bret2025boltz2docking]` — 943 screening hits, 10 mostly-GPCR targets | adjacent to our **shuffled arm** on one of our four backbones. Different quantity (affinity head, not geometry) and different shuffle direction, so not a refutation — but the response must be that we read receptor geometry, not an internal score. Sits with `[masters2025physics]`. Added 2026-09-09. |
 
 ---
 

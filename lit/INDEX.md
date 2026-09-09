@@ -1,6 +1,7 @@
 # INDEX.md — the paper_af3 literature corpus, one block per paper
 
-71 papers, all extracted against `SCHEMA.md` v3. Full extractions live in
+**78 papers — the whole bibliography is now extracted.** All against `SCHEMA.md` v3, except
+`ingraham2023chroma`, which is `v3-partial`. Full extractions live in
 `notes/<citekey>.md`; PDFs in `pdfs/<citekey>.pdf`; bibliography in `refs.bib`.
 
 **How to read a block.** `claim` is what the paper establishes, not what it is about.
@@ -25,6 +26,15 @@ oracle: routes 1,4,5,6,7 — date-filtered templates, checkpoint tuned on eval s
 figs: 31 panel-group rows
 tags: general-protein cofolding templates-on single-state ensemble binary-predicate continuous-metric visual-metric saturating-metric design-level-oracle anti-memorization multi-backbone peer-reviewed background precedent comparator-numbers
 stance: background + precedent — supplies the baseline; authors concede single-state collapse themselves
+
+### aureli2026epath — 2026, J. Phys. Chem. Lett. 17(10):2974-2983, peer-reviewed (CC-BY)
+claim: A Euclidean path collective variable ("EPATH") makes class A GPCR activation free energies computable without hand-picking intermediate structures; applied to apo ADRB1 and apo MOR.
+system/method: GPCR class A, 2 apo receptors (ADRB1, MOR) | MD + enhanced sampling (OneOPES, path CV, microswitch restraints) | NOT APPLICABLE - no predictor run
+states: continuum + two-state | metric: continuous only - path progress plus PIF/DRY/NPxxY/YY descriptors, NO threshold anywhere | prospective: partial (ADRB1 reproduction, MOR new)
+oracle: routes 1-7 largely NOT APPLICABLE (no prediction pipeline); route 4 in kind (CV refinement), route 7 design-level
+figs: Fig 1 schematic + free-energy surfaces; CC-BY, redrawing permitted. NO PDF HELD - section locators only
+tags: gpcr md enhanced-sampling continuum two-state continuous-metric directed-state apo-sampling design-level-oracle peer-reviewed background precedent comparator-numbers
+stance: background + precedent - the corpus's only free-energy account of class A activation, and its only apo-receptor landscape with nothing bound
 
 ### bryant2024cfold — 2024, Nature Communications 15:7328 (peer-reviewed)
 claim: Retrained AF2 with undirected sampling recovers held-out alternative conformations for 52% of targets, but only as best-of-100 with no selection rule.
@@ -71,6 +81,15 @@ figs: 36 panel-group rows
 tags: kinase transporter general-protein cofolding benchmark-only ensemble single-state continuous-metric binary-predicate visual-metric saturating-metric design-level-oracle prospective anti-memorization unpowered confidence-as-discriminator experimental-validation ligand-driven orthosteric allosteric-site cryptic-pocket preprint precedent contrast negative-result comparator-numbers
 stance: precedent on findings + contrast on rigour — no matched pre-cutoff control arm
 
+### chiesa2025templatebias — 2025, J. Chem. Inf. Model. 65(12):6298-6309, peer-reviewed
+claim: Co-folding the receptor WITH its G protein reproduces the active-state intracellular rearrangement better than operator-supplied active-state templates, and the advantage survives on receptors absent from templates and training.
+system/method: GPCR class A, human receptors + human Gas; 63 unique pairs / 145 structures / 55 receptors / 31 families | benchmark-only over 6 protocols spanning template-state-bias, MSA-state-filter and co-folding | AF2 + AlphaFold-Multimer. NO AF3-lineage backbone
+states: two-state + single-state | metric: RMSD-to-reference per TM domain (TM6 singled out) + DockQ + per-residue binding-site RMSD < 2 A; NO operationalised activation predicate | prospective: partial (benchmark = structures released after 01 Jan 2023, vs AF2 May 2018 / AFM Oct 2021 cutoffs)
+oracle: routes 1,2 present in the two template arms and ABSENT in the AFM-Ga arm - that contrast is the paper; route 5 definitional, route 7 design-level but quantified (94/145 structures have no template and are not in training)
+figs: 7 figures; DockQ saturates (107 medium / 34 acceptable / 2 high). ACS, all rights reserved
+tags: gpcr cofolding benchmark-only template-state-bias msa-state-filter msa-subsample templates-on state-annotated-input two-state single-state rmsd-only continuous-metric binary-predicate saturating-metric oracle-leak design-level-oracle prospective anti-memorization multi-backbone directed-state partner-driven ligand-driven orthosteric allosteric-site peer-reviewed precedent contrast comparator-numbers
+stance: **precedent + contrast - THE nearest near-miss on our axis.** It supplies a biological co-input (the G protein) AND measures receptor state, which nothing else in the corpus does. Our remaining distinctions: 21-mer peptide vs whole Ga, predicate vs RMSD-to-answer, decoy/shuffled arms, AF3-lineage backbones. Read the note before writing any novelty sentence.
+
 ### chib2025gpcrstates — 2025, arXiv preprint (q-bio.QM)
 claim: Sequence-only AF2 and AF3 GPCR models agree best with inactive references and worsen with activity level; AF3 worse than AF2.
 system/method: GPCR (75 receptors, classes A/B1/C/F) | benchmark-only | AF2 (AFDB models), AF3 server
@@ -79,6 +98,15 @@ oracle: routes 5,6,7 — post-hoc deviation-to-reference scoring; targets picked
 figs: 6 panel-group rows
 tags: gpcr benchmark-only single-state rmsd-only continuous-metric saturating-metric design-level-oracle no-anti-memorization apo-sampling preprint precedent contrast negative-result comparator-numbers
 stance: precedent on findings + contrast on rigour — inactive-bias evidence; no anti-memorization arm
+
+### bret2025boltz2docking — 2026, J. Chem. Inf. Model. 66(3):1511-1521, peer-reviewed
+claim: Boltz-2 discriminates true from false virtual-screening hits far better than any docking scoring function, yet its binary classification is insensitive to binding-site mutations that abolish binding and sometimes to exchanging the target entirely.
+system/method: 10 targets, mostly GPCRs (CASR, CNR1, CNR2, DRD3, DRD4, MTR1A, SGMR2, ADRA2B) + ROCK1 kinase + SC6A4 transporter; 943 screening hits with in vitro data | benchmark-only, adversarial | Boltz-2 (structure + affinity heads) vs conventional scoring functions
+states: NOT APPLICABLE - receptor conformation never assessed | metric: ROC AUC and dROC AUC (wild type minus mutant) | prospective: no
+oracle: routes 1,2,3,4,6 none found or not reported - no structure is supplied as input; route 5 (labels held) and route 7 design-level
+figs: not enumerated; ROC/dROC panels and SI Figs S1-S6. **Read from the HAL author version - pagination differs from the published article**
+tags: gpcr kinase transporter cofolding benchmark-only single-state binary-predicate continuous-metric design-level-oracle anti-memorization ligand-driven orthosteric peer-reviewed threat precedent negative-result comparator-numbers
+stance: **threat** + precedent - target shuffling and binding-site mutation sometimes fail to change Boltz-2's output, on one of our four backbones. Adjacent to our shuffled arm; the answer is that we measure geometry, not an internal score. Sits alongside masters2025physics.
 
 ### chitsazi2025gpcrdock4 — 2025, bioRxiv preprint
 claim: In a genuinely blind GPCR-ligand assessment, AF2-Multimer peptide co-folding drove all successes; small-molecule poses still lag 2010 results.
@@ -151,6 +179,15 @@ figs: 20 panel-group rows; no-reuse licence (Science 2020, all rights reserved)
 tags: gpcr experimental md single-state continuous-metric visual-metric ligand-driven partner-driven nanobody apo-sampling orthosteric peer-reviewed precedent background comparator-numbers
 stance: precedent on findings + background on method — agonist occupancy is not the active state
 
+### ingraham2023chroma — 2023, Nature 623(7989):1070-1078, peer-reviewed (CC-BY)
+claim: A programmable protein diffusion model samples novel structures and sequences and is steerable at sampling time by constraints including classifier and natural-language conditioning; 310 designs assayed.
+system/method: general protein, de novo design (NOT conformational states) | generative diffusion + Bayesian conditioning | Chroma only; no co-folding comparison
+states: NOT APPLICABLE - designs new proteins, never two states of one sequence | metric: backbone RMSD ~1.0 A to 2 solved designs | prospective: yes (310 characterised, no down-selection)
+oracle: routes 1,2,3,5,6 NOT APPLICABLE; route 4 NOT EXTRACTED; route 7 mild and disclosed
+figs: NOT EXTRACTED. **PARTIAL NOTE (schema_version v3-partial): Results and Methods never read, no PDF held.** Do not use for novelty or figure queries
+tags: general-protein directed-state prospective experimental-validation peer-reviewed background
+stance: background - the 2023 precedent that a protein diffusion model can be classifier-conditioned at sampling time; no receptor, no state, no co-folding
+
 ### jedryszek2026probing — 2026, preprint (arXiv)
 claim: geometric concepts are linearly decodable in Boltz-1's trunk yet steering them barely moves output — decodability does not imply causal use.
 system/method: general protein (486-protein evaluation set) | other — interpretability probes + sparse-autoencoder latent steering | Boltz-1
@@ -222,6 +259,15 @@ oracle: routes 4,5,6,7 — thresholds tuned on eval set, RMSD-to-crystal success
 figs: 30 panel-group rows
 tags: general-protein gpcr cofolding benchmark-only multi-backbone single-state rmsd-only binary-predicate prospective anti-memorization design-level-oracle confidence-as-discriminator orthosteric ligand-driven preprint comparator-numbers precedent contrast
 stance: precedent on findings + contrast on scope — strict temporal holdout; honest conformational null
+
+### kohlhoff2014gpcr — 2014, Nature Chemistry 6(1):15-21, peer-reviewed (corrigendum Nat Chem 7:759, 2015)
+claim: Two milliseconds of cloud-run beta2AR dynamics, aggregated by Markov state models, resolve activation pathways; agonist samples active-state conformations while inverse agonist and apo do not.
+system/method: GPCR class A (beta2AR), 3 ligand conditions incl. apo | MD + Markov state models + Transition Path Theory | NOT APPLICABLE - no predictor run
+states: ensemble + continuum | metric: continuous, four structural criteria simultaneously, no threshold | prospective: partial
+oracle: routes 1-7 largely NOT APPLICABLE; route 7 design-level (beta2AR chosen for known endpoints and canonical ligands)
+figs: Fig 1b-d only resolvable; SI to S22 not held. NO PDF HELD - read as NIH author manuscript, section locators only
+tags: gpcr md enhanced-sampling af-cluster ensemble continuum continuous-metric ligand-driven apo-sampling orthosteric design-level-oracle peer-reviewed background precedent comparator-numbers
+stance: background + precedent - canonical MD evidence for activation intermediates; NOTE its apo arm does NOT reach the active state, which must be reconciled with any apo prediction result
 
 ### krishna2024rfaa — 2024 (PDF is the 2023 bioRxiv preprint), Science
 claim: one three-track all-atom network predicts protein/nucleic-acid/ligand/metal assemblies in a single pass and, fine-tuned, designs experimentally validated ligand binders.
@@ -373,6 +419,15 @@ oracle: routes 1,4,5,7 — docking sites transferred from holo references, opera
 figs: 10 panel-group rows
 tags: gpcr msa-subsample two-state ensemble rmsd-only continuous-metric saturating-metric oracle-leak design-level-oracle no-anti-memorization unpowered directed-state partner-driven apo-sampling orthosteric peer-reviewed precedent contrast comparator-numbers
 stance: precedent + contrast — closest spatially-targeted MSA masking precedent; operating point tuned on evaluation set
+
+### nittinger2025cofolding — 2025, Artificial Intelligence in the Life Sciences 8:100136, peer-reviewed (CC BY-NC-ND)
+claim: On a deliberately balanced set of matched orthosteric and allosteric ligands, co-folding places orthosteric ligands well and allosteric ones poorly, across three independent backbones.
+system/method: general protein, 17 proteins with 40 ligands (20 orthosteric, 20 allosteric) | benchmark-only | NeuralPLexer, RoseTTAFold All-Atom, Boltz-1/1x. AF3 discussed, not run
+states: single-state, ligand poses only - receptor conformation never assessed | metric: ligand-pose RMSD to reference + site identification | prospective: no
+oracle: route 5 definitional, route 7 design-level; routes 1-4 and 6 NOT REPORTED (templates and MSA handling never described)
+figs: NOT ENUMERATED. ND licence - redrawing forbidden
+tags: general-protein kinase cofolding benchmark-only multi-backbone single-state rmsd-only binary-predicate design-level-oracle no-anti-memorization ligand-driven orthosteric allosteric-site allosteric-failure peer-reviewed precedent contrast negative-result
+stance: precedent + contrast - the cleanest matched orthosteric-vs-allosteric design in the corpus (same proteins, same models, only the site type varies). No GPCR, no conformational axis. Note is thin: cite for the design, not for a number.
 
 ### obendorf2026statespecific — 2026, bioRxiv preprint
 claim: Ligand placement is accurate but decoupled from global conformational state; state-annotated templates and state-filtered MSAs fail to enforce a state.
@@ -641,6 +696,15 @@ oracle: routes 5,7 — post hoc RMSD scoring to held references, input condition
 figs: 11 panel-group rows; ND licence
 tags: gpcr transporter general-protein benchmark-only cofolding af-cluster msa-subsample ensemble single-state rmsd-only continuous-metric saturating-metric oracle-leak no-anti-memorization multi-backbone directed-state partner-driven ligand-driven apo-sampling orthosteric preprint precedent contrast negative-result comparator-numbers
 stance: precedent + contrast — closest partner-drives-state result; four targets, no memorization control
+
+### yu2026domainmotion — 2026, PNAS 123(10):e2530709123, peer-reviewed (CC BY-NC-ND)
+claim: AF3's open-vs-closed enzyme prediction is governed by the PDB apo:holo ratio, not by the ligand; nonbinder ligands induce nearly the same domain motion, and pLDDT cannot separate them.
+system/method: general protein, 82 enzymes from DynDom, stratified by apo:holo ratio | benchmark-only, adversarial | AF3 primary, AF2 replication arm
+states: ensemble + two-state (500 models per protein per condition, 100 seeds, NO templates) | metric: RMSD-to-reference in a 2D apo/holo coordinate, fixed domain aligned, nearest-reference rule, NO threshold; TM-score replication in SI | prospective: no
+oracle: route 5 only (evaluation-side) + route 7 design-level. Routes 1,2,3,4,6 ALL CLEAN - no templates, defaults, uniform budget, full distributions not best-of-N
+figs: 5 figures; Fig 5 is the non-binder arm and the best decoy-arm figure design in the corpus. ND licence, redrawing forbidden. NO PDF HELD - section locators only
+tags: general-protein cofolding benchmark-only ensemble two-state rmsd-only continuous-metric no-template-no-msa design-level-oracle anti-memorization multi-backbone ligand-driven directed-state confidence-as-discriminator seed-only peer-reviewed threat precedent negative-result comparator-numbers
+stance: **threat** + precedent - training-set prior (40.3%) is 3-4x the ligand effect (9.1-17.5%), and a NONBINDER ligand reproduces the conformational change. Directly exposes any decoy-arm interpretation. Belongs in the CLAIMS.md threats table.
 
 ### zhang2026generalization — 2026, npj Drug Discovery 3:30
 claim: Boltz predicts GPCR backbones accurately (1.44 Å) but ligand poses poorly (5.95 Å); supplying the G protein does not fix poses.

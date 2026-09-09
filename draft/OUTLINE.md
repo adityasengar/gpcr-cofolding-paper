@@ -51,21 +51,25 @@ intermediate census → the confidence finding.
 
 ## Discussion
 - must engage, not omit: `tran2026nanogs`, `vo2026fiducials`, `ku2026promise`,
-  `mattsson2026leakage`, `skrinjar2026generalization`. See the threats table in
-  `../CLAIMS.md`.
+  `mattsson2026leakage`, `skrinjar2026generalization`, and **`yu2026domainmotion`**, which
+  shows a non-binding ligand reproducing the conformational change across 82 enzymes and
+  is the sharpest published challenge to a decoy-arm interpretation. See the threats table
+  in `../CLAIMS.md`.
 - gate: needs Results.
 
 ## Figures → `../figures/`
 Design by analogy through `litquery` (match on `data_shape`, not subject matter).
-**Check `reuse` before adapting any panel** — 24 of 71 corpus papers carry a
+**Check `reuse` before adapting any panel** — 24 of 78 corpus papers carry a
 restriction: 15 ND, 3 all-rights-reserved, 6 with no licence statement. ND forbids
 redrawing, not merely copying.
 
 ## References
-`lit/refs.bib`, **78 entries**, all metadata verified 2026-09-08. **Seven have no note and
-no PDF and must not be cited for any claim about their content** (venue and identifier
-only): `chiesa2025templatebias`, `bret2025boltz2docking`, `nittinger2025cofolding`,
-`yu2026domainmotion`, `ingraham2023chroma`, `aureli2026epath`, `kohlhoff2014gpcr`.
+`lit/refs.bib`, **78 entries, all 78 extracted** and all metadata verified 2026-09-08/09.
+**Four have notes but no page numbers** and must be cited with section locators:
+`yu2026domainmotion`, `aureli2026epath`, `kohlhoff2014gpcr`, `ingraham2023chroma` — and
+the last of those is a partial extraction that must not carry a novelty or figure claim.
+**`bret2025boltz2docking` was read from the author version**, so its page numbers need
+converting to the published JCIM 66(3):1511-1521 range before submission.
 
 ---
 
