@@ -1,6 +1,6 @@
 # INDEX.md — the paper_af3 literature corpus, one block per paper
 
-**78 papers — the whole bibliography is now extracted.** All against `SCHEMA.md` v3, except
+**79 papers extracted** (83 bibliography entries; 4 bibliography-only). All against `SCHEMA.md` v3, except
 `ingraham2023chroma`, which is `v3-partial`. Full extractions live in
 `notes/<citekey>.md`; PDFs in `pdfs/<citekey>.pdf`; bibliography in `refs.bib`.
 
@@ -35,6 +35,16 @@ oracle: routes 1-7 largely NOT APPLICABLE (no prediction pipeline); route 4 in k
 figs: Fig 1 schematic + free-energy surfaces; CC-BY, redrawing permitted. NO PDF HELD - section locators only
 tags: gpcr md enhanced-sampling continuum two-state continuous-metric directed-state apo-sampling design-level-oracle peer-reviewed background precedent comparator-numbers
 stance: background + precedent - the corpus's only free-energy account of class A activation, and its only apo-receptor landscape with nothing bound
+
+### bondar2017preassembly — 2017, J. Biol. Chem. 292(23):9690-9698, peer-reviewed (CC-BY)
+claim: Two-photon polarization microscopy finds NO pre-assembly between Gi1 and four unstimulated receptors; the one apparent interaction (CB1R) is basal coupling to a spontaneously active receptor, abolished by inverse agonist or an inactivating mutation.
+system/method: GPCR - alpha2A-AR, GABA-B, CB1R, D2R vs Gi1, in HEK293 | experimental, two-photon polarization microscopy (single fluorescent label) | NOT APPLICABLE - no predictor
+states: NOT APPLICABLE - equilibrium interrogated | metric: continuous linear dichroism, log2(rmax/rmax0), no threshold; significance by t test / ANOVA | prospective: yes
+oracle: routes 1-7 NOT APPLICABLE - no prediction, no held reference, nothing scored against a deposited answer
+binding_order: **the paper's subject.** Sets collision coupling against pre-assembly and rejects pre-assembly for Gi1; supplies the pre-assembly vs BASAL COUPLING distinction the rest of the corpus collapses. Bounds any endogenous pre-assembled fraction at <~3% of receptors
+figs: 5, all LD summaries and 2PPM images, no structure render. Fig 4 draws a NULL in the same grammar as the positive panels - worth copying
+tags: gpcr experimental pre-coupled prospective peer-reviewed contrast background negative-result comparator-numbers
+stance: contrast + background - the corpus's only argument AGAINST inactive-state pre-assembly. Read against georgiou2025heterogeneity (pre-coupled I1) and paajanen2026activation (ligand-first). Concedes Gq may differ.
 
 ### bryant2024cfold — 2024, Nature Communications 15:7328 (peer-reviewed)
 claim: Retrained AF2 with undirected sampling recovers held-out alternative conformations for 52% of targets, but only as best-of-100 with no selection rule.
@@ -87,7 +97,7 @@ system/method: GPCR class A, human receptors + human Gas; 63 unique pairs / 145 
 states: two-state + single-state | metric: RMSD-to-reference per TM domain (TM6 singled out) + DockQ + per-residue binding-site RMSD < 2 A; NO operationalised activation predicate | prospective: partial (benchmark = structures released after 01 Jan 2023, vs AF2 May 2018 / AFM Oct 2021 cutoffs)
 oracle: routes 1,2 present in the two template arms and ABSENT in the AFM-Ga arm - that contrast is the paper; route 5 definitional, route 7 design-level but quantified (94/145 structures have no template and are not in training)
 figs: 7 figures; DockQ saturates (107 medium / 34 acceptable / 2 high). ACS, all rights reserved
-tags: gpcr cofolding benchmark-only template-state-bias msa-state-filter msa-subsample templates-on state-annotated-input two-state single-state rmsd-only continuous-metric binary-predicate saturating-metric oracle-leak design-level-oracle prospective anti-memorization multi-backbone directed-state partner-driven ligand-driven orthosteric allosteric-site peer-reviewed precedent contrast comparator-numbers
+tags: gpcr cofolding benchmark-only template-state-bias msa-state-filter msa-subsample templates-on state-annotated-input two-state single-state rmsd-only continuous-metric binary-predicate saturating-metric oracle-leak design-level-oracle prospective anti-memorization multi-backbone directed-state partner-driven ligand-driven orthosteric allosteric-site peer-reviewed precedent contrast comparator-numbers coinput-confounded order-agnostic
 stance: **precedent + contrast - THE nearest near-miss on our axis.** It supplies a biological co-input (the G protein) AND measures receptor state, which nothing else in the corpus does. Our remaining distinctions: 21-mer peptide vs whole Ga, predicate vs RMSD-to-answer, decoy/shuffled arms, AF3-lineage backbones. Read the note before writing any novelty sentence.
 
 ### chib2025gpcrstates — 2025, arXiv preprint (q-bio.QM)
@@ -150,7 +160,7 @@ system/method: GPCR class A (4 receptors in depth) | narrative literature review
 states: NOT APPLICABLE (review); asserts multistate ensemble/continuum, S1/S2/I1/I2/A per TM6 and TM7 | metric: NOT APPLICABLE; collates others' structural and NMR state criteria | prospective: NOT APPLICABLE
 oracle: NOT APPLICABLE — no pipeline, no prediction, no scored outcome; all seven routes inapplicable
 figs: 6 panel-group rows
-tags: gpcr experimental ensemble continuum ligand-driven partner-driven g-protein-mimetic nanobody orthosteric allosteric-site peer-reviewed background comparator-numbers
+tags: gpcr experimental ensemble continuum ligand-driven partner-driven g-protein-mimetic nanobody orthosteric allosteric-site peer-reviewed background comparator-numbers pre-coupled
 stance: background — authoritative reference for state definitions and state-calling criteria
 ### gilson2025casp16 — 2025 (issued 2026), Proteins: Structure, Function, and Bioinformatics (Wiley), peer-reviewed
 claim: best blind pose predictions were template-based; a non-blind AF3 baseline beat every blind entry; affinity stayed modest and structure-independent.
@@ -444,7 +454,7 @@ system/method: GPCR class A | clustering + other (unsupervised PCA over deposite
 states: NOT APPLICABLE — nothing generated; 1351 deposited structures partitioned two-state by 1-D GMM | metric: continuous G_CA coordinate + binary GMM cut at −1.72 ± 0.44 | prospective: partial
 oracle: routes 2,4,6,7 — PC1 chosen because it separates labelled classes; anomalies adjudicated by eye
 figs: 16 panel-group rows; no-reuse licence (all rights reserved, stricter than ND)
-tags: gpcr experimental state-annotated-input two-state continuous-metric binary-predicate visual-metric oracle-leak design-level-oracle prospective anti-memorization orthosteric preprint precedent contrast comparator-numbers
+tags: gpcr experimental state-annotated-input two-state continuous-metric binary-predicate visual-metric oracle-leak design-level-oracle prospective anti-memorization orthosteric preprint precedent contrast comparator-numbers conformational-selection induced-fit
 stance: precedent + contrast — transducer-not-agonist evidence; index selected against the labels
 
 ### pandyszekeres2024gproteindb — 2024, Nucleic Acids Research (Database issue)
@@ -694,7 +704,7 @@ system/method: GPCR, transporter, general protein (β2AR, PfMATE, LAO, SecA) | b
 states: ensemble per condition (20-50 samples) collapsing to one dominant basin | metric: Cα RMSD to paired references, diagonal side is the call; SecA distance/angle | prospective: no
 oracle: routes 5,7 — post hoc RMSD scoring to held references, input conditions chosen with expected state declared
 figs: 11 panel-group rows; ND licence
-tags: gpcr transporter general-protein benchmark-only cofolding af-cluster msa-subsample ensemble single-state rmsd-only continuous-metric saturating-metric oracle-leak no-anti-memorization multi-backbone directed-state partner-driven ligand-driven apo-sampling orthosteric preprint precedent contrast negative-result comparator-numbers
+tags: gpcr transporter general-protein benchmark-only cofolding af-cluster msa-subsample ensemble single-state rmsd-only continuous-metric saturating-metric oracle-leak no-anti-memorization multi-backbone directed-state partner-driven ligand-driven apo-sampling orthosteric preprint precedent contrast negative-result comparator-numbers coinput-confounded order-agnostic
 stance: precedent + contrast — closest partner-drives-state result; four targets, no memorization control (n=4 could not have powered one). **Every partner arm supplies agonist AND heterotrimer together, so the partner's independent contribution is never isolated, and no reduced or scrambled partner is run** — that is the control our design supplies and theirs does not. See controls_run.
 
 ### yu2026domainmotion — 2026, PNAS 123(10):e2530709123, peer-reviewed (CC BY-NC-ND)
@@ -712,5 +722,5 @@ system/method: GPCR (253 post-cutoff ligand-bound human receptors) | benchmark-o
 states: ensemble of 5 diffusion samples, collapsed to top-1 | metric: Cα and ligand RMSD to reference, every claim binarised at 2.5 Å | prospective: no
 oracle: routes 5,6,7 — prediction step clean, but pose triage, docking boxes and best-model reporting are oracle-informed
 figs: 7 panel-group rows
-tags: gpcr cofolding benchmark-only md ensemble single-state rmsd-only saturating-metric oracle-leak design-level-oracle anti-memorization confidence-as-discriminator partner-driven orthosteric allosteric-site allosteric-failure peer-reviewed precedent threat negative-result comparator-numbers
+tags: gpcr cofolding benchmark-only md ensemble single-state rmsd-only saturating-metric oracle-leak design-level-oracle anti-memorization confidence-as-discriminator partner-driven orthosteric allosteric-site allosteric-failure peer-reviewed precedent threat negative-result comparator-numbers coinput-confounded order-agnostic
 stance: precedent + threat — independent partner result; threatens the confidence-score claim

@@ -51,6 +51,44 @@ reaching active-state conformations while ``inverse agonist and apo simulations 
 state conformations along all structural metrics'' \citep[Results]{kohlhoff2014gpcr}. In a physical
 ensemble, the apo receptor largely does not get there on its own.
 
+Nor is there a single order in which the two inputs arrive, and the distinction matters for what a
+prediction can be asked to represent. One route is agonist-first: an analysis of the deposited
+class~A structures concludes that activation is ``mainly regulated by conformational selection at
+the ligand level and complemented by the induced fit mechanism at the transducer level''
+\citep[p.~3]{paajanen2026activation}, with ``ligand binding\ldots{} the first event in a stimulated
+activation sequence'' and the outward movement of TM6 treated as ``a prerequisite for G protein
+binding'' \citep[pp.~3, 6]{paajanen2026activation}. Kinetic measurements at GCGR describe the same
+ordering as two steps rather than one, where agonist binding ``promotes the initial formation of the
+receptor--G protein complex and subsequent full engagement of the G protein at a slower time scale''
+\citep[p.~1]{hilger2020gcgr}. The other route inverts it. Receptor and G protein can associate
+before agonist arrives, and the resulting pre-coupled complex is not the fully active state but an
+activation intermediate: the I1$^{\mathrm{TM6}}$ conformation ``corresponds to the complex
+GPCR$-$G'', is more stable with GDP bound than without, and is separated from the nucleotide-free
+ternary complex by nucleotide state rather than by agonist, with GDP removal shifting the
+equilibrium onward \citep[pp.~10--12, 19]{georgiou2025heterogeneity}.
+
+Whether that second route reflects a genuinely inactive receptor is contested, and the distinction
+matters. Pre-assembly, in which a G protein is bound to a receptor that has not been activated, is
+not the same as basal coupling, in which the G protein engages a receptor that has spontaneously
+adopted an active conformation. Inactive-state pre-assembly has been reported for Gq-coupled receptors and, earlier, for several
+receptors in living cells, on resonance-energy-transfer evidence. Applying two-photon polarization
+microscopy, which
+needs only a single fluorescent label and therefore avoids the controls that complicate resonance
+energy transfer, Bondar and Lazar found no pre-assembly between Gi1 and four receptors; the one
+apparent interaction, at CB1R, disappeared when basal activity was removed with an inverse agonist
+or an inactivating mutation, and they bound any residual pre-assembled fraction at endogenous
+expression to below roughly 3\% of receptor molecules \citep{bondar2017preassembly}. Whether a
+receptor and transducer associate before activation is therefore unsettled, and may differ by G
+protein family.
+
+Co-folding models have no representation of either sequence. Every component is supplied at once,
+so a predicted complex is order-agnostic by construction and cannot adjudicate between the routes,
+still less between pre-assembly and basal coupling. That is a real limit on what any prediction
+result can claim about mechanism, and it cuts both ways: a co-folding experiment cannot settle the
+question, but neither is it obliged to commit to an answer. Supplying a receptor with a transducer
+element and no agonist is best understood as a controlled input condition rather than as a model of
+any particular physiological intermediate.
+
 Structure prediction has meanwhile become accurate enough to be used as a working instrument in
 receptor pharmacology, with co-folding models reproducing GPCR backbones to within about 1.4 \AA{} even
 where their ligand poses remain poor \citep{zhang2026generalization}, and it represents none of this. Co-folding models of the AlphaFold 3 lineage
@@ -265,6 +303,29 @@ propose the missing experiment themselves, that ``By applying HYALINE to AlphaFo
 models, researchers can obtain rapid, quantitative estimates of whether the predicted structure
 represents an active, inactive, or intermediate conformation'' \citep[p.~11]{khaleq2026hyaline}. No such
 experiment is reported there or anywhere else in this corpus.
+
+Underlying all of this is a measurement problem that the field has not settled. Of the 31 papers
+surveyed here that concern receptors, 13 either call the activation state from a structural overlay
+by eye or define no state criterion at all, and the second group includes some of the largest
+modelling efforts: 825 receptor--G protein complexes with no activation criterion defined anywhere
+in the work \citep{matic2023gpcrome}, and 5{,}595 released complexes with no state assigned to any
+model \citep{pandyszekeres2024gproteindb}. Among the studies that do quantify the transition, no
+common admission rule has emerged. Reported TM6 displacements are anchored on different residues
+and span an order of magnitude, from roughly 18\,\AA{} at the cytoplasmic end of TM6 in class B
+GCGR \citep[p.~3]{hilger2020gcgr}, to about 14\,\AA{} for full activation of
+$\beta_2$AR \citep[p.~13]{ye2026multistatebias}, to a combined TM6--TM7 shift of about
+2\,\AA{} in a bistable opsin \citep{tejero2024opsin}. Each is a measurement of an observed
+difference between two solved structures rather than a threshold that could be applied to an
+unseen one.
+
+Some of that heterogeneity is principled rather than careless, and it constrains what a better
+criterion can look like. Activation is not a switch: class A receptors are described as
+interconverting among active, inactive and intermediate-active conformations on a rheostat
+\citep[p.~6]{georgiou2025heterogeneity}, so a single hard cut-off imposed on a continuum can
+destroy the signal it is meant to detect. A usable state criterion therefore has to be fixed before
+the data are seen, reported with its threshold, and checked against a second, independent readout
+so that its disagreement rate is known rather than assumed. No study in this corpus reports such a
+rate.
 
 The benchmarks that might otherwise have settled the question exclude receptor activation by
 construction, and they now do so three times over by three different mechanisms. ProMiSE states it

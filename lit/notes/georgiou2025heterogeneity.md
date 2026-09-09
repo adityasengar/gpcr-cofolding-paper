@@ -97,6 +97,10 @@
 
 - **prospective**: **NOT APPLICABLE — a review is retrospective by construction.** It makes no forward prediction that could later be checked. The closest thing to a forward statement is a research agenda (p.23, items (a)–(c)) and a call for work on Gβγ (p.11) and on GRK-coupled conformations (p.26); neither is a testable prediction with a stated expected outcome.
 
+- **coinput_composition**: **New in v3.1. NOT APPLICABLE** — a review; it collates other groups' conditions rather than supplying any.
+
+- **binding_order**: **New in v3.1. ADDRESSED, and it is the corpus's only source for the pre-coupled route.** The review records an activation intermediate that *is* the pre-coupled complex: I1^TM6 *"corresponds to the complex GPCR−G"*, more stable with GDP present than without, with pre-assembled β2AR-Gs^empty and β2AR-Gs^GDP both showing low-to-intermediate FRET consistent with I1^TM6 (Fig 4, **p.10**; β2AR **p.19**). The nucleotide state is what separates the routes: swapping G^GDP, G^empty and +GTP *"separates pre-coupled (I1) from nucleotide-free ternary (A); GDP removal shifts equilibrium to A^TM6/A^TM7"* (pp.11−12, 14). So a receptor and G protein can be associated *before* agonist, sitting in an intermediate, with agonist and nucleotide release driving the transition on. Tags `pre-coupled`. Read alongside `paajanen2026activation`, which argues the ligand-first route from deposited structures.
+
 - **state_metric**: **NOT APPLICABLE as an *applied* metric — the review measures nothing.** But it **reports, collates and reconciles the criteria other people use**, and that is the reason to hold this note. Full table below. Two kinds of criterion are present and the review keeps them distinct: **structural predicates** (distances, angles, contacts, motif rotamers, read off deposited structures) and **spectroscopic predicates** (chemical-shift regions, FRET efficiency, DEER distance distributions, quenching), which are the only ones that can see the transient states.
 
   ### C.1 — Structural criteria for calling a Class A state (the reference table)

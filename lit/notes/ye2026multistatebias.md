@@ -108,6 +108,15 @@
 
   **How to cite this paper's strength honestly.** The controls that *were* run are good ones and they establish the direction of the effect across four architectures and two MSA-manipulation baselines. What they do not establish is that the partner is acting as itself rather than as an occupant, or that the effect survives outside four hand-picked targets whose state ratios were known in advance.
 
+- **coinput_composition**: **New in v3.1. CONFOUNDED — the paper's headline cannot be attributed to the partner alone.**
+  - apo arm: receptor only.
+  - ligand arm: receptor + one small molecule (arginine for LAO, ATP for SecA, agonist for β2AR).
+  - partner arm, β2AR: receptor + **agonist AND heterotrimeric Gαβγ supplied together**, with a further arm adding GTP. There is no agonist-free partner condition and no partial or truncated partner anywhere in the paper (p.18).
+  - partner arm, SecA: receptor + SecYEG + ADP together.
+  **Consequence.** The finding that "large protein partners drive clear conformational switching" (p.2) is measured against an apo or agonist-only baseline, never against a partner-alone condition, so the partner's independent contribution is not isolated. Tag `coinput-confounded`.
+
+- **binding_order**: **ORDER-AGNOSTIC by construction, and NOT ADDRESSED as a question.** Every co-input is supplied simultaneously to a co-folding model, which has no representation of binding sequence, so nothing here can distinguish agonist-first from pre-coupled routes. The paper does not raise the question.
+
 - **confidence_as_discriminator**: **Reported alongside results and read as commentary, but never used as the state call and never validated — and the authors explicitly disclaim the practice.**
   - Reported: LAO Boltz-2 holo "high model confidence (pTM 0.929–0.952)" vs apo "markedly lower confidence (pTM 0.729–0.856, Table S4)" (p.8); SecA "Model confidence was generally lower under SecYEG+ADP conditions (pLDDT 72–81) compared to apo predictions (pLDDT 76–86, Table S4), consistent with the increased structural complexity of the multiprotein complex" (p.12).
   - Disclaimed: "Confidence metrics such as pLDDT and PAE are useful for local geometry and uncertainty, but they are not reliable selectors of biologically or physically meaningful alternative states." (p.15)

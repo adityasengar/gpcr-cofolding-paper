@@ -60,6 +60,8 @@ These are the axes the paper's novelty claim is measured against. Be strict here
 | `state_metric` | binary predicate / continuous coordinate / RMSD-to-reference / visual only. **May be dual, joined by ` + `** — a paper that scores placement by RMSD and calls the state by eye is doing both, and forcing one loses the half that is the rigour defect. Record exact thresholds and their justification, or `NOT REPORTED` where a threshold is used but never stated. |
 | `metric_saturation` | Does the metric itself floor or ceiling in any arm they report? **Numeric saturation only.** Axis breaks and truncations are a *figure* defect and belong in `hides`, not here — v2 left this undefined and three extractors recorded the same axis break twice. Cross-reference the figure row rather than duplicating. |
 | `directional_control` | Can the method be *instructed* which state to produce, or does it only sample? Name the handle (partner, ligand, nanobody, peptide, state-annotated template, state-filtered MSA, seed, subsample depth). |
+| `coinput_composition` | **New in v3.1, and required for every paper that supplies anything alongside the receptor.** List *every* molecule handed to the model or added to the system in each arm, and then answer the attribution question explicitly: **can the paper separate the contribution of one co-input from another, or were they supplied together?** Write it as one line per arm, e.g. `arm 2: receptor + agonist + Ga-b-g (together, never separated)`. This field exists because the same confound was found independently in three of the strongest partner papers in the corpus and none of them flags it: `ye2026multistatebias` and `zhang2026generalization` both supply agonist and transducer in a single condition and have no partner-alone arm, and `chiesa2025templatebias` has no decoy or scrambled-partner arm. `directional_control` records *that* there is a handle; this field records **what else was in the tube at the same time**, which is what decides whether a causal claim survives. Where a paper truly varies one co-input at a time, say so — that is the rare and citable case. |
+| `binding_order` | **New in v3.1.** Which mechanistic route to the ternary complex the paper assumes, tests or supports, and with what evidence. GPCR activation is not a single sequence: agonist may bind first and the transducer engage a receptor already shifted toward active (**conformational selection at the ligand level, induced fit at the transducer level**), or receptor and G protein may be **pre-coupled** before agonist arrives, with the complex sitting in an activation intermediate until agonist and nucleotide release drive it on. Most papers in this corpus never state which they assume, and that silence is itself the answer — write `NOT ADDRESSED` rather than inferring one. For prediction papers, note additionally that co-folding has **no notion of order at all**: everything is supplied simultaneously, so any predicted complex is order-agnostic by construction and cannot adjudicate between the routes. Say that explicitly where it applies, because it bounds what a prediction result can claim about mechanism. |
 | `anti_memorization_design` | Is there a held-out or post-cutoff set at all? Give n and how the cutoff was defined. `NONE` if absent. |
 | `anti_memorization_control` | Was a control **arm actually run and analysed**, as opposed to a held-out set merely existing? `NONE RUN` is a distinct and common answer. Mark `UNPOWERED` if n < ~10 or the held-out set overlaps training. These two fields were one field in v1, which made "they had recent structures but never used them as a control" unrecordable. |
 | `controls_run` | **New in v3.** A short table of every control arm the paper actually ran, with what each rules out: columns `control` \| `what it rules out` \| `page`. For prediction papers this is decoys, shuffles, apo arms, scrambled partners. For wet-lab papers it is unstapled peptide, scrambled sequence, no-peptide, off-target receptor. v2 had nowhere to put these and an extractor smuggled a twelve-row control table into `stated_limits`; that table was the most reusable content in the note. |
@@ -254,7 +256,22 @@ declared before the result was read. Weaker than `oracle-leak`; keep them distin
 lab (NMR, cryo-EM, an assay) — rare, and a strong distinguishing feature.
 
 **Control:** `directed-state` `partner-driven` `ligand-driven` `peptide-driven`
-`g-protein-mimetic` `nanobody` `apo-sampling` `seed-only`
+`g-protein-mimetic` `nanobody` `apo-sampling` `seed-only` `coinput-confounded`
+
+`coinput-confounded` is new in v3.1 and marks a paper that supplies two or more co-inputs
+together in the same arm and never separates them, so no single co-input can be credited with
+the effect. It is a rigour marker, not a control handle, but it lives here because it is a
+property of how the handle was used.
+
+**Mechanism (new in v3.1):** `conformational-selection` `induced-fit` `pre-coupled`
+`order-agnostic`
+
+These mark the route to the ternary complex a paper assumes or supports. `pre-coupled` is for
+receptor–G protein complexes that form before agonist. `order-agnostic` is the honest tag for
+every co-folding prediction paper: all co-inputs are supplied at once, so the method has no
+notion of binding order and cannot adjudicate between the routes. Use `order-agnostic` freely;
+use the other three only where the paper presents evidence, not merely a citation to someone
+else's model.
 
 **Site:** `orthosteric` `allosteric-site` `cryptic-pocket` `allosteric-failure`
 
@@ -357,3 +374,37 @@ observations were held back unless the gap was plainly structural.
     Every one was requested by an extractor who correctly declined to invent it.
 17. **`kinase` scoped to protein kinases**, after an extractor flagged that tagging
     adenylate kinase would false-positive every kinase-conformation query.
+
+
+---
+
+## Changelog: v3 → v3.1
+
+Two fields and five tags, added 2026-09-09. Unlike the v2 → v3 revision, this one was **not**
+forced by extractor failure — it was forced by a pattern that only became visible once the
+corpus was complete and could be read down by column.
+
+1. **`coinput_composition` added.** Reading `directional_control` down all 78 notes shows *that*
+   a paper has a handle but not *what else was supplied at the same time*. Three of the strongest
+   partner-driven GPCR papers turn out to bundle agonist and transducer into one condition
+   (`ye2026multistatebias`, `zhang2026generalization`) or to omit a decoy arm entirely
+   (`chiesa2025templatebias`), and in each case the omission had to be rediscovered by reading
+   the methods rather than by querying the index. That is exactly the failure the schema exists
+   to prevent.
+
+2. **`binding_order` added.** GPCR activation admits at least two routes to the ternary complex,
+   and the corpus contains evidence for both: conformational selection at the ligand level with
+   induced fit at the transducer level (`paajanen2026activation`), and a pre-coupled
+   receptor–G protein complex that precedes agonist (`georgiou2025heterogeneity`). Nothing in
+   the schema recorded which route a paper assumed, and for prediction papers the answer is
+   structural rather than incidental: co-folding supplies everything at once and therefore
+   cannot speak to order at all.
+
+3. **Five tags added:** `coinput-confounded`, and the mechanism set
+   `conformational-selection` / `induced-fit` / `pre-coupled` / `order-agnostic`.
+
+**Population status, stated honestly.** The two new fields are **not yet populated across the
+corpus**. `coinput_composition` applies to the 21 prediction papers that supply a co-input;
+`binding_order` applies to all 78 but will be `NOT ADDRESSED` or `order-agnostic` for most.
+Until that pass is run, a reverse lookup on either field is incomplete and must not be used to
+support a "no paper does X" claim.

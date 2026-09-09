@@ -307,6 +307,14 @@ per-series number lives in Table S1, Table S2 and Figs. S1–S6, none of which a
   not tested as a handle); no seed control, no MSA-depth control, no template bias, no nanobody
   or mimetic, no apo arm. Nothing in the paper can be *instructed* which receptor state to
   produce beyond adding the partner.
+- **coinput_composition**: **New in v3.1. CONFOUNDED, and more tightly than it first appears.**
+  - baseline arm: receptor + **native small-molecule ligand, always present and never varied** — 228 of the 253 ligands are agonists (p.2).
+  - G-protein arm: receptor + the same ligand + cognate G-protein sequence, 201 paired complexes (p.2).
+  - **There is no apo arm at all**, and the ligand is an input rather than a handle.
+  **Consequence.** The reported 1.01 → 0.75 Å median TM Cα improvement is the *marginal* effect of adding the transducer to a receptor that already has its agonist bound. It is not a partner-versus-nothing comparison, and it cannot be read as the partner driving activation from rest. Tag `coinput-confounded`.
+
+- **binding_order**: **ORDER-AGNOSTIC by construction.** All inputs supplied at once to Boltz; no sequence is represented. The paper does, however, motivate its partner arm with an order-flavoured hypothesis (p.2: co-folding "tend[s] to predict inactive receptor structures, while most of our dataset comprises agonists"), i.e. it treats the missing transducer as the reason the agonist alone did not produce an active receptor. That is a mechanistic reading the method itself cannot test.
+
 - **anti_memorization_design**: **YES, and it is the paper's design centrepiece — a
   family-level, date-based holdout, n = 253.** Cutoff definition, p4 verbatim: "We enumerated all
   human GPCR structures in GPCRdb41 that were initially released in the RCSB Protein Data Bank
