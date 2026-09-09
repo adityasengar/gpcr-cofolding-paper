@@ -11,7 +11,7 @@ not track state correctness.
 |---|---|---|---|---|
 | prior work | `litquery` | `lit/SCHEMA.md`, `lit/INDEX.md`, `lit/notes/` | nothing | **built** |
 | results | `dataquery` | `data/`, `rows_enriched_v3_7.csv`, `analysis/q.py` | `RESULTS.md` | **built** |
-| drafting | *(not built)* | `CLAIMS.md`, `lit/notes/`, `RESULTS.md` **only** | `draft/` | outline ready |
+| drafting | *(no skill yet)* | `CLAIMS.md`, `lit/notes/`, `RESULTS.md` **only** | `manuscript/`, `draft/` | outline ready; builds |
 | figures | *(not built)* | `data/`, `analysis/` | `figures/` | pending |
 | submission | *(not built)* | `draft/`, `lit/refs.bib` | — | pending |
 
@@ -39,6 +39,8 @@ STATUS.md        landed vs planned blocks — CLAIMS, not evidence
 CLAIMS.md        the argument spine — DURABLE, survives a data refresh
 RESULTS.md       the ledger: one entry per citable number — PERISHABLE, snapshot only
 draft/OUTLINE.md manuscript skeleton, per-section gates and citation rules
+manuscript/      the LaTeX (canonical) + build.sh
+tex/             pinned TeX environment + check_tex.sh
 analysis/q.py    the queries behind the ledger — `python3 analysis/q.py --list`
 analysis/fingerprint.py  --check before citing; --stamp after a refresh
 data/            predictions.csv (17,568) · conditions · receptors · backbones · coverage
@@ -109,42 +111,64 @@ The shared repo is ~21 MB. `.gitignore` excludes the heavy, reconstructible thin
 | `rows_enriched_v3_7.csv` (19M) | HPC export, not authored here | `dataquery` falls back to `data/*.csv`; the provenance columns are unavailable |
 | `lit/validate/txt*`, `ocr/` | regenerable with `pdftotext` | quote re-verification cannot run |
 
-`lit/notes/` (4.8 MB) **does** travel, so the 66 extractions with their verbatim quotes
+`lit/notes/` (5.9 MB) **does** travel, so the 71 extractions with their verbatim quotes
 and page numbers are available on both machines. That is the layer most queries need.
 
 `paper_tex/` is its own git repo with the Overleaf remote and is **excluded** from this
 one — clone it separately on each machine. Overleaf is the sync channel for LaTeX;
 this repo is the sync channel for everything else.
 
-### Roles, and who owns which file
+### Who does what — corrected 2026-09-09
 
-The two sessions do **different work**, and that is what makes the relay safe. The
-rule is one owner per file. The non-owner may read anything, but proposes changes as a
-note in `SESSIONS.md` rather than editing — that is how "they never update together"
-stops depending on luck.
+Earlier versions of this file had these roles backwards. This is the real layout.
 
-| file / tree | owner | the other side |
+| | **this laptop** | **the other laptop** |
 |---|---|---|
-| `paper_tex/**` (LaTeX, sections, figures in situ) | **drafting** | read only |
-| `draft/**` | **drafting** | read only |
-| `CLAIMS.md` — the argument | **drafting** | proposes evidence-status flips in SESSIONS.md |
-| `lit/**` — corpus, notes, INDEX, SCHEMA, refs.bib | **corpus/data** | read only; request extractions in SESSIONS.md |
-| `analysis/**`, `RESULTS.md`, `data/**`, `STATUS.md` | **corpus/data** | read only; cite `[R-*]` ids |
-| `CLAUDE.md`, `lit/CLAUDE.md`, the skills | **corpus/data** | proposes in SESSIONS.md |
-| `SESSIONS.md` | **both**, append-only at the top | never rewrite an old entry |
+| role | authors the manuscript; runs several sessions in different folders | holds the scripts and data; can also compile the LaTeX |
+| writes | `manuscript/**`, `CLAIMS.md`, `draft/**`, `lit/**` | `data/**`, `analysis/**`, `RESULTS.md`, `STATUS.md` |
+| reads | everything | everything |
+| authors LaTeX? | **yes** | no — compiles and checks only |
 
-**This makes the two-pass rule physical.** The design has always said retrieval and
-drafting must not share a session, because a session that does both writes the
-paragraph first and then finds support for it. With separate machines and separate
-owners, that is no longer a promise an agent has to keep — it is enforced by which
-files each one can write.
+**Data lives on the other laptop.** What is in `data/` here is a copy. When the two
+disagree, that machine wins.
 
-**The one thing that can still silently drift:** `paper_tex/refs.bib` is generated from
-`lit/refs.bib` by `analysis/sync_bib.py`, but they travel on *different* channels —
-Overleaf for the first, this repo for the second. The drafting machine can therefore be
-citing a stale bibliography with nothing complaining. `session_start.sh` should
-regenerate and diff it; until it does, run `python3 analysis/sync_bib.py` by hand after
-any pull that touched `lit/refs.bib`.
+### Two different sharing problems — do not confuse them
+
+**Across the two laptops.** They never run at once. Git handles it: `./session_start.sh`
+to pull and see what changed since this machine last signed off, `./session_end.sh` to
+record why. Working and tested.
+
+**Several sessions on THIS laptop, in different folders.** Git gives **no protection
+here** — they share one working tree. If two sessions edit the same file the last write
+silently wins; `git add -A` in one can commit another's half-finished edit. There is no
+conflict and no warning, because these sessions never become separate commits.
+
+The rule: **only one session writes at a time.** The others read. `./session_start.sh`
+runs `.session-guard.sh`, which warns when another session claimed the tree recently and
+reports uncommitted work already present. It is advisory — it cannot stop anything.
+
+If you genuinely need two writing at once, give each its own `git worktree` (separate
+directory, separate branch, one repository) and merge afterwards. Do not skip that and
+hope.
+
+### The manuscript
+
+`manuscript/` in this repo is **canonical**. Build on either laptop with the same
+command:
+
+```bash
+./manuscript/build.sh          # compile; reports bibitems and undefined citations
+./manuscript/build.sh clean
+```
+
+`manuscript/refs.bib` is generated from `lit/refs.bib` by `analysis/sync_bib.py` — never
+hand-edit it. Unread papers are emitted with their `@` stripped so citing one fails
+loudly; `build.sh` names the offending key.
+
+**Overleaf is an export target, not a workspace.** `./publish_overleaf.sh` copies
+`manuscript/` into the `paper_tex/` clone and pushes, so you can share a read-only link.
+Edits made in the Overleaf web editor do **not** come back — they will be overwritten on
+the next publish.
 
 ### Setting up the second machine
 
@@ -162,10 +186,11 @@ this repo syncs everything else.
 
 That machine will **not** have `lit/pdfs/`, `lit/source/`, `rows_enriched_v3_7.csv` or
 the pdftotext caches. `session_start.sh` prints which are missing. It *will* have all
-66 extractions in `lit/notes/`.
+71 extractions in `lit/notes/`.
 
 ## Open, and owned by you
 
 - Define the Block A denominator, then re-run `python3 analysis/q.py receptor_counts`.
-- `lit/`: `why_it_matters` in `MANIFEST.csv`, provisional `stance` in `INDEX.md`, four
-  papers never obtained, five notes still on schema v2.
+- `lit/`: `why_it_matters` in `MANIFEST.csv`, provisional `stance` in `INDEX.md`, seven
+  papers with no full text, six notes still on schema v2, and one open vocabulary
+  decision (a `non-biomolecular` system tag). See `lit/CLAUDE.md`.

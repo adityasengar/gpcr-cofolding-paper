@@ -1,6 +1,6 @@
 # INDEX.md — the paper_af3 literature corpus, one block per paper
 
-66 papers, all extracted against `SCHEMA.md` v3. Full extractions live in
+71 papers, all extracted against `SCHEMA.md` v3. Full extractions live in
 `notes/<citekey>.md`; PDFs in `pdfs/<citekey>.pdf`; bibliography in `refs.bib`.
 
 **How to read a block.** `claim` is what the paper establishes, not what it is about.
@@ -88,6 +88,15 @@ oracle: routes 5,6 by design (post-hoc RMSD); route 7 only in retrospective asse
 figs: 11 panel-group rows; ND licence
 tags: gpcr benchmark-only cofolding multi-backbone state-annotated-input single-state continuous-metric saturating-metric prospective anti-memorization unpowered confidence-as-discriminator peptide-driven apo-sampling orthosteric preprint precedent background comparator-numbers
 stance: precedent + background — the corpus's only blind, prospective GPCR-ligand assessment
+
+### ekstromkelvinius2024discriminator — 2024, AISTATS (PMLR 238:3403-3411), peer-reviewed
+claim: Discriminator guidance transfers to discrete autoregressive diffusion; an optimal discriminator gives exact sampling, and SMC variants handle a suboptimal one.
+system/method: 2-D molecular graphs, QM9 + MOSES (NOT protein, NOT 3-D) | inference-time discriminator guidance + SMC | ARDM; DiGress comparator
+states: NOT APPLICABLE — generates graphs, no conformation | metric: NOT APPLICABLE for state (validity/uniqueness/novelty/FCD) | prospective: NOT APPLICABLE
+oracle: routes 1,2,3,5,6,7 NOT APPLICABLE — no target structure; route 4 present, discriminator LR tuned on a validation set
+figs: 1 figure + 8 tables (unusually figure-poor; nothing reusable for figure design)
+tags: enhanced-sampling anti-memorization peer-reviewed background
+stance: background — definitional source for discriminator guidance in DISCRETE diffusion; no system tag exists for a non-biomolecular paper, see note
 
 ### feldman2026alphainterp — 2026, bioRxiv preprint
 claim: AF3's pair track, not the single track, is the causal geometric substrate; distances, contacts and confidence decode linearly from it.
@@ -195,6 +204,15 @@ oracle: routes 1,2 by construction, 4 partial, 6,7 present — GPCRdb labels sup
 figs: 15 panel-group rows; ND licence
 tags: gpcr binary-predicate saturating-metric anti-memorization design-level-oracle preprint precedent contrast comparator-numbers
 stance: precedent + contrast — operational state predicate, but no family-level holdout
+
+### kim2023refining — 2023, ICML, peer-reviewed
+claim: A discriminator trained after the score network is frozen corrects the pre-trained score at sampling time and improves precision and recall together.
+system/method: images only — CIFAR-10, CelebA, FFHQ, ImageNet 256 (NO protein anywhere) | inference-time score correction | EDM, LSGM, ADM, DiT-XL/2
+states: NOT APPLICABLE | metric: NOT APPLICABLE for state (FID/sFID/IS/precision/recall) | prospective: NOT APPLICABLE
+oracle: routes 1,2,3,5,6,7 NOT APPLICABLE; route 4 present — guidance weight, noise range and discriminator epoch swept on benchmark FID
+figs: 51 figures, 10 tables; Fig 11 (loss contribution by noise scale, p8) is the one panel worth a second look
+tags: peer-reviewed background
+stance: background — definitional source for discriminator guidance in CONTINUOUS score-based diffusion; the discriminator separates real from generated, not one class from another
 
 ### kim2026mac1 — 2026, bioRxiv preprint
 claim: co-folding places ligands accurately on 557 never-deposited Mac1 structures without memorisation, yet reproduces none of the receptor's conformational changes.
@@ -427,6 +445,15 @@ figs: 14 panel-group rows
 tags: kinase general-protein cofolding md ensemble single-state binary-predicate continuous-metric saturating-metric oracle-leak design-level-oracle no-anti-memorization unpowered confidence-as-discriminator ligand-driven orthosteric allosteric-site cryptic-pocket allosteric-failure preprint precedent contrast negative-result comparator-numbers
 stance: precedent + contrast — closest published inference-time steering by co-folded competitor; rigour caveats
 
+### richman2025conformix — 2025, NeurIPS 2025, peer-reviewed (arXiv:2512.03312)
+claim: Twisted SMC applied at inference time to a frozen Boltz-1 recovers deposited alternative conformations that default sampling never reaches, with no reference structure and no retraining.
+system/method: general protein — domain motion (38), transporters (15), cryptic pockets (31), fold switching (15); NO GPCR, NO kinase | inference-time enhanced sampling (twisted SMC + guidance potentials + MBAR) | Boltz-1 primary, BioEmu second implementation
+states: ensemble + continuum | metric: RMSD-to-reference + TM/fill-ratio + binary coverage (matching threshold NOT REPORTED) | prospective: no
+oracle: routes 5,6,7 present — coverage scored to deposited references, best/worst-matched rows both oracle-selected; route 1 genuinely NONE FOUND, which is the paper's contribution; route 4 not determined
+figs: 5 main + 11 supplementary panel groups; Table 1 best-matched row is at ceiling for 2 of 4 datasets including the unguided baseline
+tags: general-protein transporter fold-switching cryptic-pocket cofolding enhanced-sampling md-emulator msa-subsample af-cluster ensemble continuum rmsd-only continuous-metric binary-predicate saturating-metric design-level-oracle oracle-leak no-anti-memorization multi-backbone directed-state confidence-as-discriminator peer-reviewed precedent contrast comparator-numbers
+stance: precedent + contrast — cleanest route-1 answer in the corpus; but no receptor, no biological co-input, and an explicit admission that targets were "likely present in the Boltz training set" (p6)
+
 ### roehrig2026docking — 2026, bioRxiv preprint
 claim: Co-folding beats docking only for training-similar complexes; physics-based docking wins in the low-similarity regime, with the receptor and site given.
 system/method: general protein-ligand complexes (post-cutoff PDB, RNP/RNP-F) | benchmark-only + physics-based docking | AlphaFold 3 only, predictions imported from RNP
@@ -453,6 +480,15 @@ oracle: NOT APPLICABLE — no pipeline; route 7 weakly, viral families chosen by
 figs: 7 panel-group rows; licence NOT REPORTED (treat as all rights reserved)
 tags: general-protein experimental continuous-metric visual-metric saturating-metric prospective anti-memorization unpowered design-level-oracle peer-reviewed background contrast negative-result comparator-numbers
 stance: background + contrast — canonical data-bottleneck framing; sets rigour demands our claims must meet
+
+### singhal2025fksteering — 2025, ICML 2025 (poster), peer-reviewed (arXiv:2501.06848)
+claim: Feynman-Kac interacting-particle steering redirects a frozen diffusion model with any reward at inference time, letting a 0.8B model beat a 2.6B fine-tuned one on prompt fidelity.
+system/method: images and text ONLY — no protein, no structure, no molecule is generated or evaluated | inference-time particle steering (reward as particle weight, gradient-free) | Stable Diffusion family + discrete text diffusion
+states: NOT APPLICABLE | metric: NOT APPLICABLE for state (GenEval/ImageReward/HPS/perplexity/toxicity) | prospective: NOT APPLICABLE
+oracle: routes 1,2,3,5,6,7 NOT APPLICABLE — no target structure; route-4 analogue present (potentials and schedules compared on the reporting benchmarks)
+figs: 9 figures + 11 tables; Fig 5 (p15) correlates intermediate-state reward with final-state reward, the direct analogue of a readability-vs-noise curve
+tags: peer-reviewed background
+stance: background ONLY — cite for the mechanism's existence and provenance. It is routinely cited as steering precedent for structure models; that citation is correct about the algorithm and false about the evidence.
 
 ### skrinjar2026generalization — 2026 (preprint posted 2025), bioRxiv preprint
 claim: Co-folding accuracy rises monotonically with training-set similarity: 8-25% success in the least-similar stratum versus 81-89% in the most-similar; ranking near random.
@@ -578,6 +614,15 @@ oracle: route 4 (hyperparameters swept on test set) and route 6 (oracle-of-5 rep
 figs: 7 panel-group rows
 tags: general-protein cofolding single-state continuous-metric binary-predicate saturating-metric anti-memorization multi-backbone preprint background precedent comparator-numbers
 stance: background + precedent — origin document and definitional source for a backbone we use
+
+### wu2023tds — 2023, NeurIPS 2023, peer-reviewed (arXiv:2306.17775)
+claim: Twisted sequential Monte Carlo gives practical, asymptotically exact conditional sampling from an unconditional diffusion model, including on Riemannian protein backbones.
+system/method: Gaussian simulation + ImageNet + protein motif-scaffolding (de novo design, NOT conformational state) | inference-time conditional sampling via SMC twisting | image diffusion; Riemannian protein backbone diffusion. NO co-folding model
+states: NOT APPLICABLE for conformational state — scaffolds a fixed motif, never two states of one sequence | metric: designability/success-rate predicate (threshold NOT EXTRACTED) | prospective: no
+oracle: route 4 present — particles, twist scale and motif rotations swept against benchmark success rate; route 7 design-level; route 5 NONE FOUND (success is self-consistency, not RMSD to a held answer)
+figs: 3 figures + 1 table; Fig 3a is a single test case (5IUS)
+tags: general-protein enhanced-sampling no-anti-memorization oracle-leak design-level-oracle peer-reviewed background
+stance: background — algorithmic ancestor of richman2025conformix and the only SMC-family paper here with any protein arm; that arm designs backbones, it does not sample states
 
 ### yang2025statespecific — 2025, J. Chem. Inf. Model. 65:11425
 claim: State-matched templates let a fine-tuned co-folding model rank designed peptides into agonists or antagonists; nanomolar hits assayed.

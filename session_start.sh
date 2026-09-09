@@ -63,6 +63,10 @@ else
   echo "  paper_tex/ not cloned on this machine"
 fi
 echo
+echo "--- other sessions on this laptop ---"
+[ -x .session-guard.sh ] && ./.session-guard.sh || true
+
+echo
 echo "--- TeX environment ---"
 [ -x tex/check_tex.sh ] && ./tex/check_tex.sh 2>&1 | sed 's/^/  /' || echo "  tex/check_tex.sh not present"
 

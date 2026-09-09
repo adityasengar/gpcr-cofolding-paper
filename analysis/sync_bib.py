@@ -14,7 +14,7 @@ import re, os, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "lit", "refs.bib")
-DST = os.path.join(ROOT, "paper_tex", "refs.bib")
+DST = os.path.join(ROOT, "manuscript", "refs.bib")
 NOTES = os.path.join(ROOT, "lit", "notes")
 
 def main():
@@ -45,6 +45,10 @@ def main():
                 for ln in t.strip().splitlines():
                     s = ln.lstrip()
                     fh.write("%% " + (s[1:] if s.startswith("@") else ln) + "\n")
+    # keep the Overleaf export copy in step, when that clone exists
+    ol = os.path.join(ROOT, "paper_tex", "refs.bib")
+    if os.path.isdir(os.path.dirname(ol)):
+        import shutil; shutil.copyfile(DST, ol)
     print(f"wrote {DST}")
     print(f"  citable   : {len(ok)}")
     print(f"  commented : {len(blocked)}  ({', '.join(k for k, _ in blocked)})")

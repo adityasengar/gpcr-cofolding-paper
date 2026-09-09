@@ -18,7 +18,10 @@ Structure, per `../lit/PROMPTS.md` Prompt 2:
 2. **What has been tried** — grouped by approach, not one paper per sentence. Template
    biasing, MSA manipulation, latent steering, benchmarks. Every group cites citekeys.
 3. **The gap** — C3, C4, C5. Built by reading down the `oracle_leakage`, `prospective`,
-   `states_generated` and `anti_memorization` columns of `lit/INDEX.md`. **Name the
+   `states_generated`, `anti_memorization_design` and `anti_memorization_control` columns
+   of `lit/INDEX.md`. SCHEMA v3 split the last field in two and the split is the useful
+   part: "a held-out set existed but no control arm was run" is a distinct and common
+   answer, and it is the sharpest material the gap paragraph has. **Name the
    nearest near-miss explicitly** — a gap paragraph that names none is not credible.
    The near-miss is `yang2025statespecific`.
 4. **What we do** — landed blocks only.
@@ -54,14 +57,15 @@ intermediate census → the confidence finding.
 
 ## Figures → `../figures/`
 Design by analogy through `litquery` (match on `data_shape`, not subject matter).
-**Check `reuse` before adapting any panel** — 24 of 66 corpus papers carry a
+**Check `reuse` before adapting any panel** — 24 of 71 corpus papers carry a
 restriction: 15 ND, 3 all-rights-reserved, 6 with no licence statement. ND forbids
 redrawing, not merely copying.
 
 ## References
-`lit/refs.bib`, 70 entries. Four have no note and no PDF and must not be cited:
-`chiesa2025templatebias`, `bret2025boltz2docking`, `nittinger2025cofolding`,
-`yu2026domainmotion`.
+`lit/refs.bib`, **78 entries**, all metadata verified 2026-09-08. **Seven have no note and
+no PDF and must not be cited for any claim about their content** (venue and identifier
+only): `chiesa2025templatebias`, `bret2025boltz2docking`, `nittinger2025cofolding`,
+`yu2026domainmotion`, `ingraham2023chroma`, `aureli2026epath`, `kohlhoff2014gpcr`.
 
 ---
 

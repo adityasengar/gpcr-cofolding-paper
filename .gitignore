@@ -33,3 +33,6 @@ __pycache__/
 
 # per-machine identity; never shared
 .machine
+
+# advisory lock for same-laptop sessions; per-machine, never shared
+.session-lock
