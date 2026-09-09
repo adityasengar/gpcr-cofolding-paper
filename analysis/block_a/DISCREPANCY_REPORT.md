@@ -31,6 +31,10 @@ Convention throughout: **the data wins, the discrepancy is stated, not smoothed*
 | **D8** | `headline_by_backbone.csv` | low — new | `matches_claim_sheet` is `True` on all four rows but the fraction disagrees |
 | **D9** | **Methods §7.1, C-6** | **high — new** | **reference-set denominator is 98 empirically, not the 89 the Methods requires stating** |
 | **D10** | **BA-1b spec** | medium — new | `deviation_class` has five levels, not the three the panel spec assumes |
+| **D18** | `11_structures/agonist_only_vs_ternary/` | **CRITICAL — new** | **8FZQ.cif is CFTR, not an opioid receptor complex** |
+| **D19** | Methods, templates and MSAs | **high — new** | no row-level record of either; MSA pinning is asserted on no evidence |
+| **D20** | two more `ALIGNMENT.md` files | medium — new | ACM1 and DRD2 anchors wrong, same failure as D13 |
+| **D21** | ADRB2 ΔNPxxY | medium — new | −6.581 is against the median inactive reference, not 2RH1 |
 | **D11** | brief §8.1 vs §6 | low — new | "fraction in T2 only" cannot hold: §6 requires it in T5 and S-T2 too |
 | **D12** | `11_structures/confidently_wrong/` | **CRITICAL — new** | **the shipped structure is not confidently wrong; it is confidently RIGHT** |
 | **D13** | `ALIGNMENT.md` files | **high — new** | anchor residues and measured values do not match the shipped data |
@@ -456,6 +460,82 @@ It did, however, surface a real and smaller anomaly: **Protenix cognate ships
 0.871 where both the pooled rate and the per-receptor mean are 0.890.** That one
 value differs from both candidate definitions and is unexplained. Flagged for the
 PI rather than resolved here.
+
+---
+
+## D18 — NEW, CRITICAL: a shipped structure is the wrong protein entirely
+
+`11_structures/agonist_only_vs_ternary/8FZQ.cif` is not an opioid-receptor
+complex. Its own `_struct.title` reads:
+
+> 'Dehosphorylated, ATP-bound human cystic fibrosis transmembrane conductance
+> regulator (CFTR)'
+
+One chain, ~1,152 C$\alpha$, ATP and Mg bound. It is CFTR — an ABC transporter,
+not a GPCR.
+
+The directory it sits in is meant to hold the agonist-only versus ternary
+contrast, which is the most on-thesis structural comparison in the entire drop:
+it is the visual form of Beat 1's finding that agonist-bound structures without a
+transducer do not form the NPxxY network. **That render cannot be built.** The
+companion file 6PT2 is correct but has nothing to contrast against.
+
+Every other CIF in the drop was checked against its own title and is what it
+claims to be.
+
+**Action**: request the correct δOR ternary structure. Until then the
+agonist-only comparison exists only as a sentence, not as a figure.
+
+---
+
+## D19 — NEW: templates-off and MSA-pinning have no row-level evidence
+
+`block_a_rows.csv` has **no column recording template usage or MSA
+configuration** — not one, across 55 columns.
+
+For templates, the claim sheet is candid about this. SC-9's own qualifier reads:
+*"no row-level echo (evidence class b + c + d, not a); `_status.json.runtime_config`
+echo landed post-Block-A."* The claim rests on launcher static analysis,
+source-code defaults and a propagation test — good evidence, but not per-row
+provenance.
+
+For MSAs there is no claim at all. **No surviving claim asserts MSA pinning**,
+and nothing in the drop records it. My Methods draft asserted "multiple sequence
+alignments were pinned" as fact. That was unsupported and is now corrected to
+state what is actually evidenced and what is not.
+
+This matters because templates-off is load-bearing: an active-state template
+would be oracle route 1, and the whole design depends on its absence.
+
+---
+
+## D20 — NEW: two further ALIGNMENT.md files name wrong anchors
+
+Same failure class as D13, found by recomputing every anchor against the tidy
+values before drawing it:
+
+- **ACM1**: NPxxY anchors are Y208/Y418, not the Y213 the file gives; the tilt
+  anchors are L67/L367, which the file does not name at all.
+- **DRD2**: Y209/Y426, not the Y208/Y399 in `success_case/ALIGNMENT.md`.
+
+Four of the drop's ALIGNMENT files are now known to be wrong. **Treat all of them
+as unreliable** and recompute anchors from coordinates against the tidy
+distances. `figures/block_a/cifread.py:verify_anchor` does this and refuses to
+return a distance that does not reproduce the shipped value.
+
+---
+
+## D21 — NEW: ADRB2's ΔNPxxY is against a different reference than assumed
+
+The shipped ADRB2 ΔNPxxY of $-6.581$ Å is computed against the **median**
+inactive reference (3NYA), not against 2RH1. The pairwise 4LDE$-$2RH1 value is
+$-6.660$ Å. Printing $-6.581$ on a 4LDE/2RH1 render would attach a number to a
+pair it was not measured on.
+
+Related, and a practical trap: **4LDE carries a $+1000$ auth-numbering offset**,
+and 2RH1's T4L fusion occupies residues 1002–1161. A single selection string
+across both objects will align the receptor onto the lysozyme. Write the two
+selections separately.
 
 ---
 

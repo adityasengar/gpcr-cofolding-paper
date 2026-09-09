@@ -1,63 +1,65 @@
-% Main-text figure panels. Sources: figures/block_a/panels/*.py
+% Main-text figures. Sources: figures/block_a/panels/*.py and render_struct.py
 % Provenance per panel: figures/block_a/FIGURE_PROVENANCE.md
-% Every caption states its filter and its n, per the Block A brief.
+% Order follows the Nature Communications norm: a pipeline schematic at Figure 1,
+% the headline result at Figure 2. Every caption states its filter and its n.
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba1_reference_landscape.pdf}
-\caption{\textbf{The instrument and its calibration.}
-Both predicates scored on the deposited reference structures, where the answer is
-already known. \textbf{a}, NPxxY hydroxyl distance against TM6 tilt, coloured by
-annotated state, with both thresholds drawn. \textbf{b}, the same faceted by
-receptor class: Class~A separates, Class~B and~F do not, which is the
-justification for restricting quantitative claims to Class~A. \textbf{c},
-per-receptor reference separation on both axes, sorted --- this pre-loads the
-restriction-of-range argument that pays off in Fig.~4. Deviating entries are
-labelled with their receptor and marked by deviation class; five of the nine
-deviations are unclassified as to cause and carry a neutral marker rather than
-being folded into a named class.
-\textit{Filter:} references as shipped; $n = 167$ unique entries (98 on the
-48-receptor panel).}
+\includegraphics[width=\textwidth]{f1_workflow.pdf}
+\caption{\textbf{The instrument, the panel, and what was run.}
+\textbf{a}, the two intrinsic measurements and their thresholds, with the atom
+pair for each named once for the whole paper: TM6 tilt as a C$\alpha$--C$\alpha$
+distance between positions 2$\times$46 and 6$\times$37, called active above
+14.932~\AA; and the NPxxY hydroxyl--hydroxyl distance between Tyr5.58 and
+Tyr7.53, called active below 9.080~\AA. A prediction is called active only when
+both fire. \textbf{b}, 167 deposited reference entries of known state scored on
+those axes. \textbf{c}, the prediction protocol: 48 receptors $\times$ 2 arms
+$\times$ 4 backbones $\times$ 25 seeds, no reference structure supplied.
+\textbf{d}, disposition of all 9{,}490 scored rows.
+\textit{Filter:} none at the panel level; per-panel $n$ is printed in the figure.}
 \end{figure}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba2_arm_shift.pdf}
-\caption{\textbf{Partner-conditioned activation across four backbones.}
-\textbf{a}, distributions of both axes by arm and backbone, with the threshold
-overlaid; the full distribution is shown rather than a summary. \textbf{b},
-per-receptor slopegraph from apo to cognate, faceted by backbone and coloured by
-whether the receptor crosses the threshold. \textbf{c}, headline TM6 tilt shift
-with cluster-bootstrap intervals and zero marked. \textbf{d}, two-instrument
-agreement, drawn as a per-cell distribution rather than as bars.
-\textit{Filter:} E1+E2 only, $n = 9{,}461$ of 9{,}490 rows (99.7\%). Intervals
-are cluster bootstraps over 26 paralog clusters.}
+\includegraphics[width=\textwidth]{ba7_switch_not_dial.pdf}
+\caption{\textbf{The partner acts as a switch, not a dial.}
+\textbf{a}, the fraction of seeds the predicate calls active, per receptor
+$\times$ backbone cell. The distribution is bimodal at both ends:
+\textbf{111 of 160 apo cells never fire on any of 25 seeds, and 108 of 159
+cognate cells fire on all 25.} \textbf{b}, the same cells paired, apo against
+cognate, with the identity line labelled; 120 of 159 move up, 37 are unchanged
+and 2 move down, both named. \textbf{c}, the full receptor $\times$ backbone
+grid for each arm on a shared colour scale, receptors ordered by mean change.
+Absent cells are drawn grey and crossed, not as zero.
+\textit{Filter:} E1+E2, then Class~A only --- 7{,}966 of 9{,}490 rows, forming
+319 cells and 159 receptor $\times$ backbone pairs with both arms.}
 \end{figure}
-
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{ba4_amplitude.pdf}
 \caption{\textbf{Receptor-specific activation amplitude is not reproduced.}
-\textbf{a}, predicted shift against reference separation on the NPxxY axis, four
-small multiples, fitted line with interval and \textbf{the unity line drawn on
-every panel}. \textbf{b}, slopes on both axes with zero and unity both marked;
-filled circles exclude zero, open circles include it. Protenix2 on NPxxY excludes
-zero and is drawn as such. \textbf{c}, restriction of range: the tilt predictor's
-SD of 1.17~\AA{} beside NPxxY's 5.22~\AA. \textbf{d}, attenuation sensitivity,
-with unstable regions shaded --- 44 of 84 swept points are unstable on tilt
-against 0 of 84 on NPxxY, which is why no corrected tilt slope is reported.
-\textit{Filter:} \texttt{class\_a\_only}; per-axis E3; $n = 28$ receptors
-(NPxxY), 32 (tilt).}
+\textbf{a}, predicted shift against reference separation on the NPxxY axis,
+with the fitted line, its cluster-bootstrap band, and \textbf{the unity line ---
+the slope a model reproducing amplitude would show --- drawn on every panel}.
+\textbf{b}, slopes on both axes under three inclusion sets, with zero and unity
+both marked; filled circles exclude zero, open circles include it. Protenix2 on
+NPxxY excludes zero at a slope of 0.26, roughly a quarter of unity.
+\textbf{c}, restriction of range: the tilt predictor's SD of 1.17~\AA{} beside
+NPxxY's 5.22~\AA. \textbf{d}, attenuation sensitivity with unstable regions
+shaded --- 44 of 84 swept points are unstable on tilt against 0 of 84 on NPxxY,
+which is why no corrected tilt slope is reported.
+\textit{Filter:} \texttt{class\_a\_only} with per-axis E3; $n = 28$ receptors
+(NPxxY) and 32 (tilt).}
 \end{figure}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{ba5_confidence.pdf}
 \caption{\textbf{Confidence is informative only at the state-defining residues.}
 \textbf{a}, all four backbones on all three pLDDT aggregations, with the primary
-aggregation marked distinctly and zero marked. \textbf{b}, the before-and-after
-for OpenFold3, which strengthens from $-0.26$ to $-0.63$, and Protenix2, whose
-apparent overconfidence at whole-complex grain collapses to null at anchor grain.
-\textbf{c}, per-receptor correlation distributions. \textbf{d}, the AA2AR case
-across backbones and arms.
+aggregation marked and zero marked. \textbf{b}, the same relationship at two
+grains for OpenFold3, which strengthens from $-0.26$ to $-0.63$, and for
+Protenix2, whose apparent overconfidence at whole-complex grain collapses to
+null at anchor grain. \textbf{c}, per-receptor correlation distributions.
+\textbf{d}, the AA2AR case across backbones and arms.
 \textit{Filter:} Class-A restricted; $n \approx 1{,}600$ rows and 32 receptors
 per backbone. The anchor-restricted aggregation was designated primary
-\emph{post hoc}, after all three had been computed; all three are shown.}
+\emph{post hoc}, after all three had been computed; all three are reported.}
 \end{figure}

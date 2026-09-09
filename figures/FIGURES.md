@@ -117,10 +117,15 @@ data    02_references/{reference_predicates,reference_metadata,
         reference_separation}.csv; 11_structures/instrument_schematic/
         (no [R-*] ids: Block A ships its own tidy tables, not RESULTS.md)
 build   python3 block_a/panels/ba1_reference_landscape.py
-        + the render_struct.py command in block_a/FIGURE_PROVENANCE.md
-status  ready — but the caption must say 3SN6 is NOT the ADRB2 panel active
-        reference (4LDE is), and the tilt anchors are L75/L275, not the
-        L124/F282 that instrument_schematic/ALIGNMENT.md names
+        python3 block_a/panels/hero_renders.py ba1a   (panel a, both views)
+status  ready — BA-1a was REBUILT on 2026-09-09. It is now 4LDE (ADRB2's
+        panel ACTIVE reference) over 2RH1 (its inactive one) on TWO views, a
+        side view and a cytoplasmic view, with all four measured values
+        sourced from reference_predicates.csv: 4LDE 17.5625 / 4.8131, 2RH1
+        11.9283 / 11.4727. The earlier version was 3SN6 over 2RH1 with no
+        numbers drawn; 3SN6 is not in the reference set at all, so no number
+        on it could be sourced from a tidy file. Tilt anchors are L75/L275,
+        not the L124/F282 instrument_schematic/ALIGNMENT.md names
 ```
 
 ### BA-2 — the main effect
@@ -207,6 +212,148 @@ data    01_rows/, 02_references/, 03_aggregates/, 04_amplitude/,
 build   python3 block_a/panels/s{1..9}_*.py
 status  ready
 ```
+
+### F1 — the workflow (Figure 1)
+```
+claim   none directly — it establishes the instrument and the population every
+        later figure depends on. Venue norm: Figure 1 is a pipeline schematic
+        in 4 of 4 of the corpus's Nature Communications papers, and this figure
+        set had no schematic at all
+shows   a the two predicates and the ATOM PAIRS they are measured between,
+        named once for the whole paper, with both thresholds; b the 167
+        deposited references scored on those two axes, 69 with both axes and
+        98 rugged; c the design, 48 receptors x 2 arms x 4 backbones x 25
+        seeds = 384 nominal cells, 380 run, 9,490 rows of a nominal 9,600, and
+        what is and is not recorded about how they were run; d where the 9,490
+        rows go — E1 25, E2 4, 9,461 scored, Class A 7,966 / B 795 / F 700,
+        predicate active 4,863 / inactive 4,598
+data    01_rows/block_a_rows.csv (all 9,490, unfiltered — the figure is about
+        where they go); 02_references/reference_predicates.csv (all 168, 167
+        with a tilt value)
+build   python3 block_a/panels/f1_workflow.py
+status  ready — it must imply NOTHING about magnitude, and it carries no arrow
+        that is labelled with anything. Panel c says templates-off is SC-9's
+        claim from launcher static analysis and a propagation test with NO
+        row-level echo, and that no MSA setting appears in the drop at all;
+        neither may be upgraded to a plain assertion
+```
+
+### GA-1 — the graphical abstract: one co-input, one state change
+```
+claim   C6, C7 — SC-1, in one frame
+shows   a receptor predicted alone sits below both predicate thresholds; the
+        same models given the cognate Ga cross both at once; and the effect is
+        panel-wide, not anecdotal. Three renders, each carrying its own two
+        measured distances IN FRAME, over two data panels that hold the
+        population the renders were drawn from
+data    a  AA2AR/boltz/apo row 567 (n=25 in cell, 100th pctile on plddt_mean)
+        b,c DRD2/of3/cognate row 8285 (n=25 in cell, 50th pctile on
+           rmsd_to_active_ref), c against 7JVR
+        d  01_rows/block_a_rows.csv, core (E1+E2), Class A, both axes
+           measurable, n = 7,166 of 7,966; 69 Class A references overlaid;
+           800 rows with no NPxxY value drawn as a rug, not dropped
+        e  per-cell active fraction over 25 seeds, 159 paired Class A cells
+build   python3 block_a/panels/hero_renders.py   (all renders)
+        python3 block_a/panels/ga1_hero.py       (the composite)
+status  ready — the caption MUST say (i) a and b are DIFFERENT RECEPTORS,
+        because the archive ships one prediction per case, (ii) state is
+        reached but per-receptor amplitude is NOT reproduced (BA-4), and
+        (iii) Block A's cognate arm supplies the FULL cognate Ga, not the
+        21-residue alpha5-CT fragment. No fraction_of_way_to_active anywhere.
+```
+
+### BA-6 — the predicate plane, for the predictions
+```
+claim   C6, C7 — the two-axis form of SC-1
+shows   the predicate is a rule over two coordinates, and the co-input moves
+        the panel across BOTH at once. apo and cognate as two clouds on the
+        same plane the 69 Class A references anchor; the same axis limits and
+        the same colour rule on every facet; the quadrant census underneath,
+        which is where the two axes are shown to agree
+data    01_rows/block_a_rows.csv, core (E1+E2) + Class A. n = 7,166 rows with
+        both axes (3,592 apo / 3,574 cognate), 800 with no NPxxY drawn as a
+        rug. 02_references/reference_predicates.csv, 69 Class A references
+        with both axes (30 active / 39 inactive). Thresholds 9.082 / 14.932
+build   python3 block_a/panels/ba6_state_plane.py
+status  ready — BA-1b is the reference-only version of this plane; BA-6 is the
+        prediction version and the two must keep the same axes and thresholds.
+        Quadrant census apo 2,611 neither / 318 NPxxY-only / 86 tilt-only /
+        577 both; cognate 157 / 23 / 232 / 3,162
+```
+
+### BA-7 — a switch, not a dial
+```
+claim   C6, C7 — the seed-level form. Also bounds C8's seed-variance story
+shows   within a receptor x backbone cell the 25 seeds almost always agree:
+        111 of 160 apo cells never fire the predicate and 108 of 159 cognate
+        cells fire on every seed. The co-input flips a switch rather than
+        turning a dial, and the graded minority (39 apo / 24 cognate cells) is
+        drawn rather than averaged away
+data    01_rows/block_a_rows.csv, core (E1+E2) + Class A. 319 cells, 314 of
+        them 25 seeds, 4 at 24 and 1 at 20; 159 receptor x backbone pairs with
+        both arms. 120 cells up, 37 unchanged, 2 down (LPAR1/OF3 0.88->0.80,
+        LT4R1/OF3 0.04->0.00)
+build   python3 block_a/panels/ba7_switch_not_dial.py
+status  ready — histogram over a fixed seed budget on a SHARED vertical scale
+        with n stated (the corpus's one clean version of this panel is
+        sun2026kinconfbench 2C). Never a bar with an SEM over a bimodal cell
+        distribution: purnomo2026cafe 2A does that against its own thesis
+```
+
+### BA-8 — the alpha5 in the intracellular cavity
+```
+claim   C6 — the structural companion to BA-6, and it may not appear without it
+shows   the cognate Ga alpha5 C-terminal helix seated in the DRD2 intracellular
+        cavity, with the four state-defining anchors labelled and the two
+        predicate distances drawn. The anchor identities are the point: the
+        predicate is a rule over these four atoms and nothing else
+data    DRD2/of3/cognate row 8285. Anchors L76 (2x46) / L375 (6x37) CA and
+        Y209 (5.58) / Y426 (7.53) OH, each VERIFIED by reproducing the row's
+        stored d_gpcrdb_tm6_tilt_246_637_ca = 17.2766 A and d_npxxy_oh =
+        3.9883 A from the CIF to 1e-3 A
+build   python3 block_a/panels/hero_renders.py ba8
+        python3 block_a/panels/ba8_alpha5.py
+status  ready — the render is panel a and the cell it came from is panels b and
+        c of the SAME figure, all 25 seeds on both predicate axes with row 8285
+        ringed, so the render cannot be separated from its population. BA-6 is
+        the panel-wide version
+```
+
+### S10 — what E1 removes
+```
+claim   none — it is the picture behind S1a's E1 = 25 rows
+shows   the broken ACM1/cognate/Protenix cell beside the healthy
+        ACM1/cognate/Chai comparator, one camera, same grey, the measured
+        distance printed under each. The A1-A6 scorer gates carry no pLDDT
+        floor (C-12), so these rows pass every identity check and are removed
+        by E1 alone
+data    row 967 (median plddt_mean in its 25-row cell, 38.38, tilt 21.547,
+        NPxxY-OH 26.632) and row 948 (highest plddt_mean in its 25-row cell,
+        69.23, tilt 17.166, NPxxY-OH 4.016)
+build   python3 block_a/panels/hero_renders.py s10
+        python3 block_a/panels/s10_broken_cell.py
+status  ready — panel c is the quantitative half and is in the same figure:
+        both cells' pLDDT distributions with the E1 rule drawn and both
+        rendered rows ringed. All 25 E1 rows carry passed=True (C-12)
+```
+
+
+## Figure order, decided
+
+```
+Fig 1   F1    the workflow — the predicate, its atom pairs, the references,
+              the design, and where every row goes
+Fig 2   BA-7  a switch, not a dial
+Fig 3   BA-4  amplitude — the negative result
+Fig 4   BA-5  confidence does not track state
+GA-1          the graphical abstract, outside the numbering
+```
+
+BA-7 is deliberately NOT Figure 1. A bimodality claim placed before the
+predicate is established invites a reader to doubt the predicate rather than
+accept the bimodality, and it only reframes the amplitude null as a property of
+the mechanism if the instrument is already credible. BA-2, BA-3, BA-6 and BA-8
+follow the four numbered figures or move to supplementary as space allows.
 
 ## Corpus figures
 

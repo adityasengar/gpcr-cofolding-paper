@@ -768,3 +768,212 @@ def grouped_strip(ax, df, outer, inner, value, outer_order=None,
             pos += 1.0
         pos += gap
     return counts
+
+
+def _smooth2d(h, sigma_bins):
+    """Separable Gaussian blur of a 2-D histogram, in bins. No scipy."""
+    if sigma_bins <= 0:
+        return h
+    r = max(1, int(3 * sigma_bins))
+    x = np.arange(-r, r + 1, dtype=float)
+    k = np.exp(-0.5 * (x / float(sigma_bins)) ** 2)
+    k /= k.sum()
+    out = np.apply_along_axis(lambda m: np.convolve(m, k, mode="same"), 0, h)
+    out = np.apply_along_axis(lambda m: np.convolve(m, k, mode="same"), 1, out)
+    return out
+
+
+def density_plane(ax, df, xcol, ycol, group, colours=None, order=None,
+                  xthr=None, ythr=None, xlim=None, ylim=None, bins=90,
+                  sigma=2.2, levels=(0.12, 0.40, 0.75), point_alpha=0.10,
+                  point_size=1.1, rug=True, rug_label="no NPxxY axis",
+                  xlabel="", ylabel="", refs=None, ref_style=None,
+                  marks=None, legend=True):
+    """
+    `predicate_plane` for a population too large to draw as open circles.
+
+    The reference-set plane has 168 points and a scatter is the right mark.
+    The prediction plane has ~7,000 per arm, where a scatter is a solid blob
+    and every honest reading of it is impossible. So each group is drawn twice:
+    every observation as a near-transparent dot, so nothing is summarised away,
+    and a contour of its own smoothed 2-D density on top, so the shape is
+    legible. The two together are the only form in which "all of it is drawn"
+    and "you can see it" are both true.
+
+    Four corpus defects this exists to prevent, all recorded on this exact
+    plot type across four independent papers:
+
+      - per-facet axis ranges. `xlim`/`ylim` are arguments and the caller is
+        expected to pass ONE pair for every facet. A plane whose facets have
+        different limits cannot be compared by eye, which is the comparison
+        the figure exists for.
+      - per-facet colour scales. The group colour is categorical and fixed by
+        `colours`; there is no continuous scale to clip. A 0-100 confidence
+        colour clipped at 50-90 erases exactly the tails a confidence claim
+        needs.
+      - density contours from groups of very different n compared as if they
+        were comparable. Each group's n is returned AND put in the legend;
+        contours are on each group's own normalised density, so the caller
+        must check the ns are comparable before reading shape differences.
+      - items only one axis can measure, dropped silently. Rows with no y are
+        drawn as a rug against their x with their own n, as in
+        `predicate_plane`.
+
+    `refs`   optional DataFrame of anchor structures, drawn as open marks on
+             the same axes: {'x','y','group'} columns plus `ref_style`
+             {group: (marker, colour, label)}. This is the panel's calibration
+             - where structures of known state actually sit.
+    `marks`  optional list of (x, y, text) drawn as a ringed, labelled point,
+             for rows shown as a render elsewhere in the same figure. Binding
+             the render to its own point is the fix for the corpus's dominant
+             render defect: a picture whose supporting number lives in another
+             figure.
+    """
+    counts = {}
+    have_y = df[ycol].notna()
+    main, missing = df[have_y], df[~have_y]
+
+    if xlim is None:
+        xlim = (np.nanmin(df[xcol]), np.nanmax(df[xcol]))
+    if ylim is None:
+        ylim = (np.nanmin(df[ycol]), np.nanmax(df[ycol]))
+
+    if xthr is not None:
+        ax.axvline(xthr, color=fs.GREY, lw=0.6, ls=(0, (2.5, 2)), zorder=1)
+    if ythr is not None:
+        ax.axhline(ythr, color=fs.GREY, lw=0.6, ls=(0, (2.5, 2)), zorder=1)
+
+    groups = list(order) if order else sorted(main[group].dropna().unique())
+    xe = np.linspace(xlim[0], xlim[1], bins + 1)
+    ye = np.linspace(ylim[0], ylim[1], bins + 1)
+    xc = 0.5 * (xe[:-1] + xe[1:])
+    yc = 0.5 * (ye[:-1] + ye[1:])
+
+    for i, g in enumerate(groups):
+        sub = main[main[group] == g]
+        c = _series_colour(g, i, colours)
+        counts[g] = len(sub)
+        if not len(sub):
+            continue
+        ax.scatter(sub[xcol], sub[ycol], s=point_size, color=c,
+                   alpha=point_alpha, linewidths=0, zorder=2, rasterized=True)
+        h, _, _ = np.histogram2d(sub[xcol], sub[ycol], bins=[xe, ye])
+        h = _smooth2d(h, sigma)
+        if h.max() > 0:
+            ax.contour(xc, yc, (h / h.max()).T, levels=sorted(levels),
+                       colors=[c], linewidths=(0.5, 0.8, 1.1)[:len(levels)],
+                       zorder=4)
+        ax.plot([], [], color=c, lw=1.1, label="%s (n=%s)"
+                % (g, "{:,}".format(len(sub))))
+
+    if rug and len(missing):
+        pad = (ylim[1] - ylim[0]) * 0.055
+        ry = ylim[0] - pad * 0.55
+        for i, g in enumerate(groups):
+            sub = missing[missing[group] == g]
+            if not len(sub):
+                continue
+            ax.scatter(sub[xcol], np.full(len(sub), ry), marker="|", s=14,
+                       linewidths=0.4, color=_series_colour(g, i, colours),
+                       alpha=0.5, zorder=2, rasterized=True)
+        ax.set_ylim(ylim[0] - pad, ylim[1])
+        ax.text(0.995, 0.004, "%s (n=%s, drawn as a rug)"
+                % (rug_label, "{:,}".format(len(missing))),
+                transform=ax.transAxes, ha="right", va="bottom",
+                fontsize=4.5, color=fs.GREY, zorder=10,
+                bbox=dict(boxstyle="square,pad=0.15", fc="white", ec="none",
+                          alpha=0.88))
+        counts["_rug"] = len(missing)
+    else:
+        ax.set_ylim(*ylim)
+    ax.set_xlim(*xlim)
+
+    if refs is not None and len(refs):
+        style = ref_style or {}
+        for g, sub in refs.groupby("group"):
+            mk, col, lab = style.get(g, ("o", fs.BLACK, str(g)))
+            ax.scatter(sub["x"], sub["y"], marker=mk, s=17, facecolors="none",
+                       edgecolors=col, linewidths=0.7, zorder=6,
+                       label="%s (n=%d)" % (lab, len(sub)))
+            counts["ref:" + str(g)] = len(sub)
+
+    for m in (marks or []):
+        mx, my, txt = m
+        ax.scatter([mx], [my], s=52, facecolors="none", edgecolors=fs.BLACK,
+                   linewidths=1.0, zorder=8)
+        ax.annotate(txt, (mx, my), xytext=(6, 6), textcoords="offset points",
+                    fontsize=6, fontweight="bold", zorder=9,
+                    bbox=dict(boxstyle="round,pad=0.14", fc="white",
+                              ec="none", alpha=0.8))
+
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    if legend:
+        ax.legend(loc="best", fontsize=5, handlelength=1.2, borderpad=0.2,
+                  labelspacing=0.25)
+    counts["_plotted"] = len(main)
+    return counts
+
+
+def bounded_fraction_hist(ax, df, group, value, n_col=None, bins=None,
+                          colours=None, order=None, labels=None,
+                          xlabel="", ylabel="cells", share_max=None,
+                          annotate_ends=True):
+    """
+    The distribution of a per-cell success FRACTION over a fixed sample budget.
+
+    The measure is bounded at 0 and 1 and, when a condition acts as a switch
+    rather than a dial, it piles up at both ends. A mean with an error bar over
+    that is the corpus's most self-defeating recorded panel: one paper drew
+    bar + SEM over per-fragment rates whose 0/10-or-10/10 bimodality was its
+    own stated thesis, and the distribution survived only in supplementary.
+
+    So: a count histogram with the two closed end bins drawn separately from
+    the interior, every group on ONE shared vertical scale (`share_max`), and
+    the n of cells printed per group. `n_col` is the per-cell sample budget;
+    if the budget is not constant the range is printed, because a fraction of
+    25 seeds and a fraction of 3 are not the same measurement.
+    """
+    groups = list(order) if order else sorted(df[group].dropna().unique())
+    if bins is None:
+        # Bins aligned to the sample budget, so one bar is one achievable
+        # value of the fraction and the two end bars are EXACTLY "never" and
+        # "always" rather than "within a tenth of it". A histogram of a
+        # k-of-N fraction on arbitrary bins reports an end count that is not
+        # the count anyone quotes.
+        budget = int(round(df[n_col].median())) if n_col else 10
+        bins = (np.arange(budget + 2) - 0.5) / float(budget)
+    width = (bins[1] - bins[0]) / (len(groups) + 0.6)
+    out = {}
+    for i, g in enumerate(groups):
+        sub = df[df[group] == g]
+        c = _series_colour(g, i, colours)
+        h, _ = np.histogram(np.clip(sub[value], 0, 1), bins=bins)
+        centres = 0.5 * (bins[:-1] + bins[1:]) + (i - (len(groups) - 1) / 2.0) * width
+        ax.bar(centres, h, width=width * 0.92, color=c, linewidth=0,
+               alpha=0.9, zorder=3,
+               label="%s (%d cells)" % ((labels or {}).get(g, g), len(sub)))
+        n0 = int((sub[value] <= 0).sum())
+        n1 = int((sub[value] >= 1).sum())
+        out[g] = dict(n=len(sub), at_zero=n0, at_one=n1,
+                      interior=len(sub) - n0 - n1)
+        if annotate_ends:
+            for xv, nv in ((centres[0], h[0]), (centres[-1], h[-1])):
+                if nv:
+                    ax.text(xv, nv, str(int(nv)), ha="center", va="bottom",
+                            fontsize=5, color=c, zorder=6,
+                            bbox=dict(boxstyle="square,pad=0.08", fc="white",
+                                      ec="none", alpha=0.85))
+    if share_max:
+        ax.set_ylim(0, share_max)
+    if n_col is not None:
+        lo, hi = int(df[n_col].min()), int(df[n_col].max())
+        ax.text(0.5, 0.015, ("%d samples per cell" % lo) if lo == hi
+                else ("%d-%d samples per cell; one bar = one achievable "
+                      "count out of %d" % (lo, hi, hi)),
+                transform=ax.transAxes, ha="center", va="bottom", fontsize=5,
+                color=fs.GREY)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_xlim(bins[0] - width * 1.6, bins[-1] + width * 1.6)
+    return out

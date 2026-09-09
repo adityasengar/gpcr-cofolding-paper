@@ -1,0 +1,12 @@
+{
+  "figure": "ba1a_instrument_cyto",
+  "structure": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/connector_orthogonality/4LDE.cif",
+  "reference": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/instrument_schematic/2RH1.cif",
+  "align_on": "chain A and polymer and name CA and resi 1029-1342",
+  "align_ref_on": "chain A and polymer and name CA and resi 29-342",
+  "prediction_id": null,
+  "selected_from": 2,
+  "selection_rule": "Reference structures, not predictions: ADRB2's two PANEL references from 02_references/reference_predicates.csv - 4LDE (active, blue, the receptor's actual panel active reference) over 2RH1 (inactive, grey). selected_from 2 because ADRB2 has one active and three inactive panel references (2RH1, 3NYA, 6PS2) and 2RH1 is the one 11_structures ships. This REPLACES the earlier 3SN6-over-2RH1 version: 3SN6 is not in the reference set at all (DISCREPANCY_REPORT D13), so no number drawn on it could be sourced from a tidy file. Every value printed here reproduces reference_predicates.csv exactly from the deposited coordinates: 4LDE tilt 17.5625 A / NPxxY-OH 4.8131 A, 2RH1 tilt 11.9283 A / NPxxY-OH 11.4727 A. Superposed on receptor CA only - 4LDE chain A 1029-1342 (the entry carries a +1000 auth-numbering offset) against 2RH1 chain A 29-342 - excluding 2RH1's T4 lysozyme (1002-1161), 4LDE's Nb6B9 nanobody (chain B) and both ligands from the superposition atoms. Cameras derived by camera.side_view and camera.cytoplasmic_view, not by eye. Anchors are L75 (2x46) / L275 (6x37) CA and Y219 (5.58) / Y326 (7.53) OH; instrument_schematic/ALIGNMENT.md names L124/F282 for the tilt anchors, which measure 9.03 A on 2RH1 and are not what the scorer used.",
+  "pml": "/Users/aditya/Documents/tools/Novartis_projects/paper/figures/block_a/scenes/ba1a_instrument_cyto.pml",
+  "generated": "2026-09-09T21:51:55"
+}

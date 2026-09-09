@@ -1,0 +1,12 @@
+{
+  "figure": "hero_a_apo_alone",
+  "structure": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/confidently_wrong/AA2AR__apo__boltz__seed748489558__row567.cif",
+  "reference": null,
+  "align_on": null,
+  "align_ref_on": null,
+  "prediction_id": "567",
+  "selected_from": 25,
+  "selection_rule": "AA2AR x Boltz-2 x apo cell, n=25 rows: the row with the HIGHEST plddt_mean in the cell (73.93; cell median 72.04), i.e. the 100th percentile on confidence. 11_structures/SELECTION.md states a different rule ('top-quintile RMSD-to-active, highest pLDDT within') which selects row 552, not the shipped 567; highest-pLDDT-in-cell is what 567 actually satisfies. The directory name 'confidently_wrong' is WRONG and is not repeated anywhere: this row is 0.948 A from the INACTIVE reference and the predicate calls it inactive, which is where an apo prediction belongs (DISCREPANCY_REPORT D12). Camera from camera.side_view, a rule over the coordinates, not chosen by eye. Anchors verified against the row's own stored d_gpcrdb_tm6_tilt_246_637_ca = 11.7347 A (L48 2x46 CA - L235 6x37 CA) and d_npxxy_oh = 9.6079 A (Y197 5.58 OH - Y288 7.53 OH); confidently_wrong/ALIGNMENT.md names L88 and Y213 for two of those four and is wrong (D13). Quantitative panel: BA-6, which marks this row.",
+  "pml": "/Users/aditya/Documents/tools/Novartis_projects/paper/figures/block_a/scenes/hero_a_apo_alone.pml",
+  "generated": "2026-09-09T21:52:09"
+}

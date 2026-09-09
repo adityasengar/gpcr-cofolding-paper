@@ -45,6 +45,32 @@ change a reported number are noted in the relevant caption below.
 \subsection{How the instrument and the panel were built}
 
 \begin{figure}[htbp]\centering
+\includegraphics[width=0.49\textwidth]{ba1a_instrument_side.png}
+\includegraphics[width=0.49\textwidth]{ba1a_instrument_cyto.png}
+\caption{\textbf{What the two measurements measure.}
+The active reference (4LDE) superposed on the inactive reference (2RH1) for
+ADRB2, viewed along the membrane normal (left) and from the cytoplasm (right).
+The invariant bundle is grey; only the elements carrying the measurement are
+coloured. Both distances are annotated with their values and the atom pair each
+was measured between, and every value is reproduced from the coordinates and
+checked against \texttt{reference\_predicates.csv} before drawing.
+\textit{Filter:} two deposited structures; no prediction rows.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{ba1_reference_landscape.pdf}
+\caption{\textbf{The reference set scored in full.}
+All 167 deposited reference entries on both predicate axes, coloured by
+annotated state, with both thresholds drawn; faceted by receptor class, and with
+per-receptor separation on each axis. Class~A separates on both axes; Classes~B
+and~F do not, which is the justification for restricting quantitative claims to
+Class~A. Deviating entries are labelled with their receptor and marked by
+deviation class; five of the nine deviations are unclassified as to cause and
+carry a neutral marker.
+\textit{Filter:} references as shipped; $n = 167$ entries, 98 on the panel.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{s2_reference_audit.pdf}
 \caption{\textbf{Reference-set audit.} Method, resolution, deposition date and
 construct engineering across the reference entries, with entries whose
@@ -94,6 +120,16 @@ multi-member clusters.
 \subsection{Robustness to analysis choices}
 
 \begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s10_broken_cell.pdf}
+\caption{\textbf{What exclusion E1 removes.}
+The one cell whose mean pLDDT falls below 50, beside a healthy comparator under
+a single camera rule, with the pLDDT distribution and the E1 threshold drawn.
+All 25 rows in this cell carry \texttt{passed = True}: the verification suite has
+no pLDDT floor, which is why the cell survived every assertion.
+\textit{Filter:} the E1 cell ($n = 25$ rows) and its comparator.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{s1_exclusions.pdf}
 \caption{\textbf{The exclusion sets, and why they are not one filter.}
 Coverage of each flag, and every headline statistic under every exclusion
@@ -113,6 +149,36 @@ that result is not an artefact of the restriction choice. On NPxxY,
 \end{figure}
 
 \subsection{Extended results}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{ba2_arm_shift.pdf}
+\caption{\textbf{The main effect, by magnitude rather than by call.}
+Distributions of both axes by arm and backbone with the threshold overlaid;
+per-receptor slopegraphs from apo to cognate; headline shift with
+cluster-bootstrap intervals and zero marked; and two-instrument agreement drawn
+as a per-cell distribution.
+\textit{Filter:} E1+E2 only, $n = 9{,}461$ of 9{,}490 rows.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{ba6_state_plane.pdf}
+\caption{\textbf{Predictions on the predicate plane.}
+Apo and cognate arms as separated populations on the two measurement axes, with
+identical limits across all four backbone facets and a quadrant census. Apo:
+2{,}611 firing neither predicate, 577 firing both. Cognate: 157 and 3{,}162.
+\textit{Filter:} E1+E2, Class~A.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{ba8_alpha5.pdf}
+\caption{\textbf{The supplied $\alpha$5 C-terminus in the intracellular cavity.}
+The receptor drawn as a surface rather than a cartoon, so the cavity is visible;
+only the 21-mer supplied to the model is drawn, not the full G$\alpha$. Beside
+it, the whole 25-seed cell on both axes with the rendered row ringed, so the
+render can be located within the population it came from.
+\textit{Filter:} one receptor $\times$ backbone $\times$ arm cell, $n = 25$
+seeds; the rendered row and its selection rule are stated on the panel.}
+\end{figure}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{ba3_connector.pdf}

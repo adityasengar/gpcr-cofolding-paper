@@ -1,0 +1,12 @@
+{
+  "figure": "hero_b_cognate",
+  "structure": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/success_case/DRD2__cognate__of3__seed849213874__row8285.cif",
+  "reference": null,
+  "align_on": null,
+  "align_ref_on": null,
+  "prediction_id": "8285",
+  "selected_from": 25,
+  "selection_rule": "DRD2 x OpenFold-3 x cognate cell, n=25 rows: the row with the MEDIAN rmsd_to_active_ref in the cell (1.218 A; rank 13 of 25, 50th percentile). Cell range 1.020-1.507 A and the predicate calls all 25 rows active, so this is a typical row of its cell and not a best case. Camera from camera.side_view on exactly the rule used for GA-1a. Anchors verified against the row's own stored d_gpcrdb_tm6_tilt_246_637_ca = 17.2766 A (L76 2x46 CA - L375 6x37 CA) and d_npxxy_oh = 3.9883 A (Y209 5.58 OH - Y426 7.53 OH). Block A's cognate arm supplies the FULL cognate Ga subunit (chain B, 354 residues); only its alpha5 C-terminal 21 residues (334-354) are drawn, because the heterotrimer is not what the panel is about. Quantitative panel: BA-6, which marks this row.",
+  "pml": "/Users/aditya/Documents/tools/Novartis_projects/paper/figures/block_a/scenes/hero_b_cognate.pml",
+  "generated": "2026-09-09T21:52:12"
+}

@@ -1,0 +1,12 @@
+{
+  "figure": "s10b_healthy_cell",
+  "structure": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/broken_cell/ACM1__cognate__chai__seed966761149__row948__HEALTHY.cif",
+  "reference": null,
+  "align_on": null,
+  "align_ref_on": null,
+  "prediction_id": "s10b",
+  "selected_from": 25,
+  "selection_rule": "ACM1 x Chai-1 x cognate cell, n=25 rows: the row with the HIGHEST plddt_mean in the cell (69.23, 100th percentile) - the comparator named in broken_cell/ALIGNMENT.md. Anchors verified against the row's own stored tilt 17.1660 A and NPxxY-OH 4.0160 A, same atom pairs as S10a. Same receptor, same arm, same camera rule and same colour rule as S10a; only the backbone differs. Quantitative panel: S1a.",
+  "pml": "/Users/aditya/Documents/tools/Novartis_projects/paper/figures/block_a/scenes/s10b_healthy_cell.pml",
+  "generated": "2026-09-09T21:53:47"
+}

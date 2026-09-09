@@ -37,7 +37,10 @@ rather than the value, and the panel says so.
 
 ## BA-1 — the instrument and its calibration
 
-### BA-1a `out/ba1a_instrument_schematic.png`
+### BA-1a `out/ba1a_instrument_schematic.png` — **SUPERSEDED 2026-09-09**
+> Replaced by `ba1a_instrument_{side,cyto}.png` (4LDE over 2RH1, two views,
+> all four values drawn). See the entry at the end of this file. The record
+> below is kept because the superposition and anchor notes still hold.
 - **source** `data/block_a/11_structures/instrument_schematic/{3SN6,2RH1}.cif`
 - **filter** none — reference structures, not predictions. `selected_from = 1`:
   the pair is fixed by `11_structures/SELECTION.md`, not chosen from candidates.
@@ -351,3 +354,283 @@ All in `figures/`, all with a docstring naming the defect they prevent.
 | `figpanels.count_dots` | `label_gap` | the count label sat on top of its own dot |
 | `figstyle` | `BACKBONE_*`, `ARM_*`, `DEVIATION_*` fixed encodings | a colour must mean the same thing in every panel of the paper |
 | `render_struct.py` | `--align-ref-on` | 3SN6 calls the receptor chain R and 2RH1 calls it chain A; one selection string for both objects silently aligns on whatever it matches |
+
+---
+
+# Added 2026-09-09 — the workflow figure, the graphical abstract, and the
+# renders rebuilt on the subject/context convention
+
+## The render conventions used from here on
+
+Taken from what the corpus does when its panels are viewed rather than from
+what its captions say. Every render below obeys all six.
+
+1. **Grey is "not the subject", not "reference".** The invariant bundle is grey
+   and thin; the element carrying the claim is opaque, thick and coloured.
+   Colouring by which file a thing came from — grey reference, coloured
+   prediction — is not a convention this field has, and it encodes provenance
+   where the reader needs mechanism.
+2. **Colour by predicate call.** TM6 is vermillion where the predicate fires
+   and blue where it does not, on predictions and on references alike, and the
+   reference marks in BA-6, GA-1 and F1b use the same two colours. The ARM
+   (grey apo / green cognate) is a different variable and keeps its own pair.
+3. **Transparency de-emphasises and is never applied to the subject.**
+4. **Representation carries emphasis too**: TM6 is a thick tube against thin
+   cartoon.
+5. **The partner is the contacting fragment only.** The α5 C-terminal 21
+   residues (Gα 334–354; ACM1 339–359) are drawn and the rest of the supplied
+   Gα is not. Block A's cognate arm supplies the FULL cognate Gα subunit — 354
+   residues, chain B — and every caption says so. Drawing the whole subunit
+   would put the reader's attention on an object the figure is not about;
+   silently drawing 21 residues without saying what was supplied would be
+   worse.
+6. **No residue labels on the render.** Per-residue detail goes in the strip
+   below the panel, where it cannot collide with the cartoon. Only the measured
+   distances are annotated, and each carries its value AND its atom pair.
+
+**Every camera is derived, not chosen.** `figures/block_a/camera.py` builds the
+18-number PyMOL view from the coordinates: the bundle axis from the first
+principal component of the receptor Cα cloud, signed extracellular-up from the
+mean of the first ten modelled Cα against the two intracellular tilt anchors,
+and the tilt axis placed horizontal. `cytoplasmic_view` is the same derivation
+rotated to look up the bundle from inside the cell. Two things were wrong on
+the first attempt and are recorded because they are invisible in code and
+obvious in the picture: PyMOL's rotation block is **column-major** (row-major
+gives a plausible but wrong oblique camera), and the view's distance must be
+divided by tan(fov/2) or the molecule is cropped to a few helices.
+
+**Every anchor is verified before it is drawn.** `figures/block_a/cifread.py`
+`verify_anchor` refuses to return a distance that does not reproduce the value
+stored for that row in the tidy data, to a 2e-3 Å tolerance. Nothing below
+draws a residue number that has not passed it.
+
+---
+
+## F1 — the workflow `out/f1_workflow.{pdf,png}` — `f1_workflow.py`
+
+- **source** `01_rows/block_a_rows.csv` (all 9,490 rows, unfiltered: the figure
+  is about where they go) and `02_references/reference_predicates.csv` (all
+  168; 167 carry a tilt value and are drawn).
+- **a** the two rules with their atom pairs and thresholds. Worked pairs, each
+  verified from coordinates: ADRB2 L75/L275 + Y219/Y326 · AA2AR L48/L235 +
+  Y197/Y288 · DRD2 L76/L375 + Y209/Y426 · ACM1 L67/L367 + Y208/Y418.
+- **b** 167 references, **69 with both axes** (30 active, 39 inactive) and
+  **98 with no NPxxY-OH value**, drawn as a rug rather than dropped.
+- **c** 48 receptors (40 A / 4 B / 4 F) × 2 arms × 4 backbones × 25 seeds =
+  **384 nominal cells, 380 run**; the 4 absent are FZD4 cognate on all four
+  backbones. **9,490 rows of a nominal 9,600**; 378 cells carry 25 seeds and
+  2 carry 20.
+- **c states what is NOT recorded.** Templates-off is SC-9's claim from
+  launcher static analysis, source defaults and a 5/5 propagation test, with
+  **no row-level echo** — evidence class b+c+d, not a — and **no MSA setting
+  appears anywhere in the drop**. The panel says both. No reference structure
+  is supplied to any prediction; references enter only at scoring.
+- **d** 9,490 → E1 25 · E2 4 → 9,461 scored → Class A 7,966 / B 795 / F 700 →
+  predicate active 4,863 / inactive 4,598. Class A firing rate: apo 14.5%,
+  cognate 79.6%.
+- **carries no magnitude claim and no labelled arrow**, by construction.
+
+## GA-1 — the graphical abstract `out/ga1_hero.{pdf,png}` — `ga1_hero.py`
+
+Three renders over two data panels. Renders built first by `hero_renders.py`.
+
+- **a `out/hero_a_apo_alone.png`** — AA2AR × Boltz-2 × apo, **n = 25 in cell**,
+  the **highest-`plddt_mean` row (73.93; cell median 72.04), 100th percentile**.
+  This is row 567 out of `11_structures/confidently_wrong/`, and **the
+  directory name is not repeated anywhere**: 567 is 0.948 Å from AA2AR's
+  INACTIVE reference and the predicate calls it inactive, which is correct for
+  an apo prediction (D12). `SELECTION.md`'s stated rule selects row 552, not
+  567. Drawn: tilt **11.7347 Å** (L48 2×46 Cα – L235 6×37 Cα) and NPxxY-OH
+  **9.6079 Å** (Y197 5.58 OH – Y288 7.53 OH), both verified from the CIF;
+  `confidently_wrong/ALIGNMENT.md` names L88 and Y213 and is wrong (D13).
+- **b `out/hero_b_cognate.png`** — DRD2 × OpenFold-3 × cognate, **n = 25**, the
+  **median `rmsd_to_active_ref` row (1.218 Å; rank 13 of 25, 50th
+  percentile)**; cell range 1.020–1.507 Å and all 25 rows are called active.
+  Drawn: tilt **17.2766 Å** (L76 – L375) and NPxxY-OH **3.9883 Å** (Y209 –
+  Y426), both verified.
+- **c `out/hero_c_over_reference.png`** — the same row 8285 superposed on
+  **7JVR**, DRD2's deposited ACTIVE panel reference, on receptor Cα 34–441 only
+  (prediction chain A against 7JVR chain R), excluding 7JVR's Gi heterotrimer,
+  scFv16 and bromocriptine from the superposition atoms. 7JVR's own axes
+  reproduce exactly at the same pairs: **17.5860 Å** and **4.2522 Å**.
+  Cytoplasmic view — the second of the two canonical GPCR views.
+- **d** the population a and b were drawn from: `core` (E1+E2) + Class A,
+  **7,966 rows**, of which **7,166 have both axes** (apo 3,592 / cognate
+  3,574) and **800 have no NPxxY-OH value and are rugged**. 69 Class A
+  references overlaid. **Both rendered rows are ringed on it**, which is what
+  stops the render and its supporting number drifting apart.
+- **e** per-cell active fraction, apo against cognate, **159 paired Class A
+  cells**, 25 seeds each: **120 up, 37 unchanged, 2 down**.
+- **the caption must say a and b are DIFFERENT RECEPTORS** — the archive ships
+  one prediction per case — and the panel says so itself.
+- **what it may not say**: it shows the state that is REACHED. It is not
+  evidence of amplitude reproduction (BA-4, negative on 3 of 4 backbones), and
+  panel c says so on the panel. There is **no arrow anywhere in the figure**.
+- `fraction_of_way_to_active` appears nowhere.
+
+## BA-6 — the predicate plane for the predictions
+`out/ba6_state_plane.{pdf,png}` — `ba6_state_plane.py`
+
+- **source** `01_rows/block_a_rows.csv`; `02_references/reference_predicates.csv`
+- **filter** `core` (E1+E2) then **Class A**. **n = 7,966**, of which 7,166
+  have both axes and 800 are rugged. E3 is NOT applied: the thresholds are
+  panel constants, not per-receptor references, so no reference value is a
+  denominator or a predictor anywhere in this figure.
+- **a** pooled plane. Every observation drawn at α=0.10 plus a contour of its
+  own smoothed 2-D density, because a scatter of 7,166 points is a blob and a
+  contour alone hides the tails. The two arms are within 0.5% of the same n, so
+  the contours are comparable; the generator returns both ns and prints them.
+- **b** four backbone facets on **identical limits and one colour rule**. Four
+  independent corpus papers draw this exact plot type with per-facet axis
+  ranges, and two more clip a 0–100 confidence colour at 50–90; the generator
+  takes `xlim`/`ylim` as arguments for that reason.
+- **c** quadrant census, both arms, of the 7,166 with both axes:
+  apo **2,611 neither / 318 NPxxY-only / 86 tilt-only / 577 both**;
+  cognate **157 / 23 / 232 / 3,162**. This is where the two axes are shown to
+  move together rather than one carrying the result.
+- **the active corner is drawn as a box whose edges ARE the two thresholds**,
+  with their values printed. The corpus's best version of this panel draws
+  state boxes whose coordinates are never given.
+
+## BA-7 — a switch, not a dial
+`out/ba7_switch_not_dial.{pdf,png}` — `ba7_switch_not_dial.py`
+
+- **source** `01_rows/block_a_rows.csv`
+- **filter** `core` (E1+E2) then Class A. **319 cells**, 314 at 25 seeds, 4 at
+  24, 1 at 20; **159 receptor × backbone pairs with both arms**.
+- **a** **111 of 160 apo cells never fire on any seed; 108 of 159 cognate cells
+  fire on every seed.** Interior: 39 apo, 24 cognate. Bins are aligned to the
+  seed budget so one bar is one achievable count out of 25 and the two end bars
+  are exactly "never" and "always"; both arms share one vertical scale.
+  Not a bar with an SEM: one corpus paper drew exactly that over per-fragment
+  rates whose bimodality was its own stated thesis.
+- **b** **120 up, 37 unchanged, 2 down.** The two that go down are named on the
+  panel: LPAR1/OF3 0.88 → 0.80 and LT4R1/OF3 0.04 → 0.00. The identity line is
+  labelled in words, because 13 corpus papers draw a diagonal and every one of
+  them uses it as a state-call boundary.
+- **c** the per-cell matrix, both arms, 40 Class A receptors × 4 backbones,
+  **one shared colour scale**. The single absent cell (ACM1 × Protenix cognate,
+  E1) is grey **and crossed**: on a sequential map zero is nearly white, so
+  "white for missing" would make absent and zero identical.
+- **supports** C6/C7 at seed grain, and bounds what seed variance can be
+  blamed for.
+
+## BA-8 — the α5 in the cavity `out/ba8_alpha5.{pdf,png}` — `ba8_alpha5.py`
+
+- **a** `out/ba8_alpha5_cavity.png`, DRD2 × OpenFold-3 × cognate row 8285, the
+  **median-RMSD row of its 25-row cell (50th percentile)**. Receptor drawn as a
+  semi-transparent **surface**, not a cartoon, because the subject is a cavity.
+  Only Gα 334–354 drawn. One contact is drawn: **R132 (3.50) to the backbone O
+  of C351, 3.16 Å, measured on this model** — not taken from a published
+  complex, so the 3SN6-vs-6E67 disagreement about which α5 residue contacts
+  R3.50 is not inherited.
+- **b, c** the same cell on both predicate axes, all 25 seeds, thresholds
+  drawn, row 8285 ringed. Tilt median 17.343 Å (range 16.81–17.78); NPxxY-OH
+  median 4.161 Å (range 3.83–7.97). All 25 rows are called active.
+- the render and its population are in **one figure**, so the render cannot be
+  reproduced without them.
+
+## S10 — what E1 removes `out/s10_broken_cell.{pdf,png}` — `s10_broken_cell.py`
+
+- **a** ACM1 × Protenix × cognate row 967 — the **median `plddt_mean` row
+  (38.38, rank 13 of 25)** of a cell in which **every one of the 25 rows is
+  E1**. Tilt **21.5470 Å**, NPxxY-OH **26.6320 Å**, both verified; the tilt
+  axis would have fired on it.
+- **b** ACM1 × Chai-1 × cognate row 948 — the **highest-`plddt_mean` row
+  (69.23, 100th percentile)** of its cell, the comparator named in
+  `broken_cell/ALIGNMENT.md`. Tilt 17.1660 Å, NPxxY-OH 4.0160 Å, same atom
+  pairs, same camera rule, same colour rule.
+- **c** both cells' pLDDT distributions with the E1 rule drawn (cell MEAN < 50;
+  the cell means are 38.66 and 68.83) and both rendered rows ringed.
+  **E1 fires on 25 rows corpus-wide and they are this one cell.**
+  **`passed` is True on all 25** — verified in the script — because the A1–A6
+  gates carry no pLDDT floor (C-12).
+
+## BA-1a — REBUILT `out/ba1a_instrument_{side,cyto}.png`
+
+The earlier version (3SN6 over 2RH1, one view, no numbers drawn) is superseded.
+
+- **why** it drew both predicate axes as dashed lines with **no value on
+  either**, which is the field's characteristic failure on precisely this
+  claim; and it could not be fixed as it stood, because **3SN6 is not in the
+  reference set at all**, so no number drawn on it could be sourced from a tidy
+  file.
+- **now** **4LDE** (ADRB2's panel ACTIVE reference) over **2RH1** (its
+  inactive one), **two views** — a side view and a cytoplasmic view, the
+  canonical GPCR pair — with all four values sourced from
+  `reference_predicates.csv` and reproduced from the coordinates:
+  **4LDE tilt 17.5625 Å / NPxxY-OH 4.8131 Å; 2RH1 11.9283 Å / 11.4727 Å.**
+- **superposition** receptor Cα only: 4LDE chain A **1029–1342** against 2RH1
+  chain A **29–342**, excluding 2RH1's T4 lysozyme (1002–1161), 4LDE's Nb6B9
+  nanobody (chain B) and both ligands. **4LDE carries a +1000 auth-numbering
+  offset**, so its L75/L275 and Y219/Y326 are residues 1075/1275 and 1219/1326;
+  2RH1's T4L occupies 1002–1161, which overlaps that range numerically, so the
+  two selections must be written separately — one string for both objects would
+  align the receptor onto the lysozyme.
+- **the caption must say which is which**: 4LDE active, TM6 vermillion; 2RH1
+  inactive, TM6 blue; both bundles grey.
+- **do not quote a Δ of −6.581 Å for this pair.** That value is ADRB2's
+  NPxxY separation against the **median** of its three inactive references
+  (3NYA, 11.394 Å). The pairwise 4LDE − 2RH1 difference is **−6.660 Å**.
+
+---
+
+## New discrepancies found while building these, not in DISCREPANCY_REPORT.md
+
+The figures session cannot edit `analysis/`, so they are recorded here for the
+orchestrator to carry across.
+
+- **`11_structures/agonist_only_vs_ternary/8FZQ.cif` is not δOR–Gi. It is
+  CFTR.** Its own `_struct.title` reads *"Dehosphorylated, ATP-bound human
+  cystic fibrosis transmembrane conductance regulator (CFTR)"*: one chain,
+  1,152 Cα, ATP and Mg bound, no receptor and no G protein. `ALIGNMENT.md`
+  describes it as "8FZQ (δOR–Gi complex)" and `SELECTION.md` lists the pair as
+  a "canonical agonist-only vs ternary contrast". **The agonist-only vs ternary
+  render cannot be built from this directory.** 6PT2 is correct (δ-opioid with
+  peptide agonist KGCHM07, BRIL fusion, no transducer) and its shipped
+  `d_npxxy_oh_ref` of 16.7487 Å is the E5 rationale, but it has no partner to
+  contrast against. Every other CIF in `11_structures/` was checked against its
+  own title and is what it claims to be.
+- **`broken_cell/ALIGNMENT.md` names the wrong NPxxY anchor for ACM1.** It
+  gives Y5.58 ≈ Y213; the pair that reproduces both rows' stored
+  `d_npxxy_oh` exactly is **Y208/Y418**. Tilt is **L67/L367**, which the file
+  does not name at all. Same failure mode as D13 in two more files.
+- **`success_case/ALIGNMENT.md` names the wrong NPxxY anchors for DRD2.** It
+  gives Y5.58 ≈ Y208 and Y7.53 ≈ Y399; the pair reproducing row 8285's stored
+  3.9883 Å and 7JVR's stored 4.252152 Å is **Y209/Y426**. D13 again.
+- **5G53 chain A does not reproduce AA2AR's shipped reference values exactly.**
+  L48/L235 measures 18.124 Å against a shipped `d_tilt_ref` of 18.0974, and
+  Y197/Y288 measures 3.7158 Å against 3.7052. 5G53 has two copies of the
+  receptor (chains A and B); the shipped value is presumably the other copy or
+  a mean. No figure annotates a 5G53 number, so nothing depends on it, but a
+  future panel that wants one must say which chain.
+
+## Structural renders that CANNOT be built from this drop
+
+Recorded so nobody re-derives the gap.
+
+- **A small multiple of the same view across the four backbones.** It needs
+  four prediction CIFs of one receptor × arm. The drop ships **two** that share
+  a receptor and an arm (ACM1 cognate, Chai-1 and Protenix) and no others, so
+  the grid would be 2 of 4 cells with the other two silently absent — the
+  `pandyszekeres2024gproteindb` defect exactly. S10 uses that pair for what it
+  can support instead.
+- **An apo → cognate contrast on ONE receptor.** The drop ships one apo
+  prediction (AA2AR) and one cognate prediction (DRD2, plus the two ACM1
+  cognate rows), and no receptor has both. GA-1a and GA-1b are therefore
+  different receptors and the figure says so.
+- **An inactive-reference overlay for the apo render.** AA2AR's inactive
+  references (5MZP, 5NM4) are not in `11_structures/`; only 5G53, its active
+  one, is. Row 567's 0.948 Å distance to the inactive reference is therefore
+  stated as a number and not drawn.
+
+## Toolkit changes made for these panels
+
+| where | what | why |
+|---|---|---|
+| `figpanels.density_plane` | every observation at low alpha PLUS a contour of its own smoothed 2-D density; `xlim`/`ylim` are arguments; optional reference anchors and ringed marks | a scatter of 7,166 points is a blob and a contour alone hides the tails; per-facet axis ranges and per-facet colour scales are recorded on this plot type in four independent corpus papers; the ringed marks are what bind a render to its own point |
+| `figpanels.bounded_fraction_hist` | count histogram of a k-of-N fraction, bins aligned to the sample budget, both end bins exact, one shared vertical scale | a mean and an SEM over a U-shaped per-cell rate erases the result; arbitrary bins report an end count that is not the count anyone quotes |
+| `figpanels._smooth2d` | separable Gaussian blur of a 2-D histogram | scipy is not importable in this environment (`libmkl_core` missing) |
+| `block_a/camera.py` | PyMOL view derived from the coordinates: bundle axis, extracellular-up sign, tilt axis horizontal, and a distance that actually frames the molecule | a camera chosen by mouse cannot be checked; two of the corpus's render defects are camera defects in disguise |
+| `block_a/cifread.py` | minimal mmCIF reader plus `verify_anchor`, which REFUSES a distance that does not reproduce the tidy value | Biopython rejects the prediction CIFs (no `_atom_site.occupancy`); three shipped ALIGNMENT.md files name residues that do not reproduce, and each corroborates the others |
+| `block_a/panels/hero_renders.py` | one driver for every render: verifies, derives the camera, calls `render_struct.py`, carries the selection rule | the rule, the anchors and the camera are then in one auditable place per panel |

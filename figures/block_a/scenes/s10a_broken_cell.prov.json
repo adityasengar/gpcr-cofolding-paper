@@ -1,0 +1,12 @@
+{
+  "figure": "s10a_broken_cell",
+  "structure": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/broken_cell/ACM1__cognate__protenix__seed1340440218__row967__BROKEN.cif",
+  "reference": null,
+  "align_on": null,
+  "align_ref_on": null,
+  "prediction_id": "s10a",
+  "selected_from": 25,
+  "selection_rule": "ACM1 x Protenix x cognate cell, n=25 rows, every one of them with a cell mean plddt_mean below 50 and therefore the whole of E1: the row with the MEDIAN plddt_mean in the cell (38.38, rank 13 of 25, 50th percentile). Anchors verified against the row's own stored tilt 21.5470 A (L67 2x46 CA - L367 6x37 CA) and NPxxY-OH 26.6320 A (Y208 5.58 OH - Y418 7.53 OH). This row passes every A1-A6 scorer gate (passed=True): the gates carry no pLDDT floor, which is caveat C-12, and E1 exists to remove it. Quantitative panel: S1a.",
+  "pml": "/Users/aditya/Documents/tools/Novartis_projects/paper/figures/block_a/scenes/s10a_broken_cell.pml",
+  "generated": "2026-09-09T21:53:44"
+}
