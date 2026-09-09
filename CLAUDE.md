@@ -131,13 +131,20 @@ this repo is the sync channel for everything else.
 
 ### Who does what
 
+**Ownership belongs to a session working in a folder, not to a machine.** The lit agent
+owns `lit/**` because it is the session running there — not because of which laptop it
+sits on. A machine is just where a session happens to run, and the same folder could be
+worked by a session on either one. Keep the two ideas apart: *who owns a folder* and
+*which laptop the files are on* answer different questions.
+
 Each laptop runs **one orchestrator** plus one or more working agents. The orchestrator
 is the only session on its machine that touches git.
 
 | | **laptop: MacBook-Pro-3** | **laptop: laptop2** |
 |---|---|---|
 | orchestrator | yes — owns git here | yes — owns git there |
-| working agents | lit agent (`lit/**`, `draft/**`) | data agent (`data/**`, `analysis/**`, `RESULTS.md`, `STATUS.md`) |
+| sessions running there | orchestrator (`paper/`) · lit agent (`paper/lit/`, also writes `draft/**`) | orchestrator (`paper/`) · data agent |
+| folders those sessions own | `lit/**`, `draft/**`, `manuscript/**` | `data/**`, `analysis/**`, `RESULTS.md`, `STATUS.md` |
 | authors the manuscript | **yes** (`manuscript/**`) | no — compiles and checks |
 | holds the bulk data | no — small imports only | yes; real corpus is 1 TB+, here and on the HPC |
 
