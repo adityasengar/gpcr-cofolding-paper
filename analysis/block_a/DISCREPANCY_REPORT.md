@@ -8,8 +8,8 @@ python3 analysis/block_a/verify_claims.py          # 34 checks, exits 1 on any m
 ```
 
 **Result: 19 of 34 checks reproduce, 15 mismatch.** Four mismatches were already
-named in the brief (§4.1–4.4); **four further ones are new and are flagged here
-for the first time**. Nothing in the shipped data is wrong — in every case the
+named in the brief (§4.1–4.4); **six further ones are new and are flagged here
+for the first time** (D5–D10). Nothing in the shipped data is wrong — in every case the
 tidy files are self-consistent and it is the claim sheet that has drifted.
 
 Convention throughout: **the data wins, the discrepancy is stated, not smoothed**
@@ -29,6 +29,9 @@ Convention throughout: **the data wins, the discrepancy is stated, not smoothed*
 | **D6** | **SC-2** | **medium — new** | **fractions differ, denominator is 40 not 38–39, range is 88–95% not 89–95%** |
 | **D7** | **SC-6** | low — new | heading says 0.02%; the true rate is 0.041% and SC-6's own body says 0.04% |
 | **D8** | `headline_by_backbone.csv` | low — new | `matches_claim_sheet` is `True` on all four rows but the fraction disagrees |
+| **D9** | **Methods §7.1, C-6** | **high — new** | **reference-set denominator is 98 empirically, not the 89 the Methods requires stating** |
+| **D10** | **BA-1b spec** | medium — new | `deviation_class` has five levels, not the three the panel spec assumes |
+| **D11** | brief §8.1 vs §6 | low — new | "fraction in T2 only" cannot hold: §6 requires it in T5 and S-T2 too |
 
 ---
 
@@ -225,6 +228,100 @@ heading number is wrong, by a factor of two.
 all four rows, and the brief §2 describes this as verified. It is true for the
 median shifts but **false for the fraction**, which differs by up to 0.019 (D6).
 Do not use that column as evidence that a number is safe to quote.
+
+---
+
+## D9 — NEW: the reference-set denominator the Methods must state does not match the data
+
+Brief §7.1 requires Methods to state *"89 unique reference PDBs (40 active, 48
+inactive, 1 sealed-active-only)"*. Caveat C-6 gives a ready-made manuscript
+sentence asserting *"89 unique … 41 unique active-state references … 48 unique
+inactive-state"*.
+
+**The shipped `02_references/denominator_populations.csv` disagrees, and says so
+in its own `used_for` column:**
+
+| population | count | the file's own note |
+|---|---:|---|
+| `panel_unique_pdbs` | **98** | "C-6 (manuscript claim: 89; empirical: 98)" |
+| `panel_unique_pdbs_active` | **44** | "C-6 (manuscript: 41)" |
+| `panel_unique_pdbs_inactive` | **54** | "C-6 (manuscript: 48)" |
+| `reference_set_total` | 167 | T4 total denominator (agrees) |
+| `evaluable_audit_set` | **162** | "T4 contradiction rate denominator (manuscript: 127; empirical: 162)" |
+
+`reference_metadata.csv` independently confirms it: `is_panel == True` on exactly
+**98** PDBs, and `reference_predicates.csv` splits those 98 as 45 active-role /
+54 inactive-role rows.
+
+Note also that the brief says **40** active while C-6 says **41** — the two
+disagree with each other before either is compared to the data.
+
+**Severity is high** because §7.1 makes stating this denominator a Methods
+requirement, and three different numbers (89 claimed / 98 empirical / 167 total)
+are in circulation for it. The 127 → 162 gap likewise changes the denominator of
+the "construct annotation contradicts RCSB on 40% of evaluable PDBs" statement
+in §7.9.
+
+**Panel/table**: S-T3 must reproduce `denominator_populations.csv` verbatim,
+including the `used_for` column, so the reconciliation is visible rather than
+asserted.
+
+**Recommended wording**: state the empirical 98 (44 active-role / 54
+inactive-role across the 48-receptor panel), give 167 as the full reference set,
+and cite C-6 as the record of the earlier 89. Do not repeat 89 without the
+correction — it is contradicted by the archive shipped to support it.
+
+---
+
+## D10 — NEW: `deviation_class` has five levels, not three
+
+Brief §5, BA-1b: label every `deviation=True` point and **shape it by
+`deviation_class`**, described as `{expected_biology, curation_error,
+measurement_artifact}`.
+
+`reference_predicates.csv` carries **five** distinct values across the 9
+deviations:
+
+| deviation_class | n |
+|---|---:|
+| `unclassified` | **5** |
+| `measurement_artifact` | 1 |
+| `curation_error` | 1 |
+| `expected_biology` | 1 |
+| `curation_error_or_expected_biology` | 1 |
+
+A three-shape encoding drops or mislabels **two thirds** of the points the panel
+exists to show. On the 48-receptor panel subset there are 7 deviations, 3 of them
+unclassified.
+
+**Panel must show**: all five levels, `unclassified` with its own neutral marker
+rather than folded into a named class, and the compound label kept whole rather
+than resolved to one half. The caption should say that 5 of 9 deviations are
+unclassified — that is a fact about the reference set, and the encoding must not
+hide it.
+
+---
+
+## D11 — NEW: the brief's own rules conflict on where the fraction may appear
+
+§8.1 is categorical: *"Keep the fraction in Table 2, not in a figure … The
+fraction goes in T2 only."* But §6 requires **T5** to sweep *"every statistic
+under every combination"* — and `exclusion_sweep.csv` carries the fraction as one
+of its metrics — and requires **S-T2** to be the per-receptor dump, and
+`receptor_summary.csv` carries `fraction_of_way_to_active` as a column.
+
+The two requirements cannot both be met literally.
+
+**Resolved as follows**, and flagged rather than silently chosen: the column is
+kept in all three tables, because dropping it would break the robustness
+demonstration that §3 says is *"what makes the exclusions defensible rather than
+convenient"*. The two supplementary footnotes now state that it appears there as
+a data and robustness record, not as a headline, and that the headline reading
+and its mean-versus-covariance caveat belong to T2 alone.
+
+The rule's actual purpose — that no reader takes 0.88–0.95 as "reproduces the
+active structure" — is preserved. **The no-figure-panel and no-abstract halves of
+§8.1 are absolute and are being obeyed without exception.**
 
 ---
 
