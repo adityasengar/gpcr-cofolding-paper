@@ -1,5 +1,12 @@
 # CLAUDE.md — orchestrator for the α5-CT conformational-control manuscript
 
+> **This file is owned by the ORCHESTRATOR session (the one running in `paper/`).**
+> If you are the lit agent, the drafting agent, or the data agent: **do not edit this
+> file**, not even to refresh a number. Propose the change in `SESSIONS.md` instead.
+> Corpus counts here are allowed to lag; `lit/corpus_check.sh` is the live source of
+> truth for them. A brief that several agents rewrite is a brief nobody can trust.
+> Each agent has its own file: `lit/CLAUDE.md` for the corpus, this one for the whole.
+
 This folder produces one paper. The claim it defends: for GPCRs, a 21-residue Gα α5
 C-terminal peptide supplied as a **co-input** drives Boltz-2 / OpenFold3 / Protenix /
 Chai-1 into the **active** state; the agonist alone does not; and model confidence does
@@ -67,12 +74,16 @@ compares the data against `.datafingerprint` and tells you whether `RESULTS.md` 
 applies. If it reports a change, every verdict is stale until re-derived — do not
 paper over it.
 
-The current export is a **partial** one: 17,568 predictions against ~41,500 described
-in `STATUS.md`, all paths pointing at `/hpc/scratch/sengaad1/`, and 39% of rows with no
-`classified_state`. Several `STATUS.md` numbers do not reproduce against it. That is
-recorded in `RESULTS.md` and is expected to change — it is **not** a finding about the
-experiments, and should not be treated as one. Do not spend effort analysing this
-snapshot further; the paper-shaped work below is what is worth doing now.
+**`data/` here is a deliberate small import, not a mirror.** The real corpus is 1 TB+
+and lives on the other laptop and the HPC. Only what a specific claim needs gets pulled
+in. So a number that does not reproduce locally is **unverified here**, which is the
+expected steady state, not a defect and not a finding about the experiments.
+
+What is imported now: 17,568 predictions, against ~41,500 described in `STATUS.md`, with
+39% of rows carrying no `classified_state`. `RESULTS.md` records claim by claim which
+figures survive against it. Do not analyse this slice further for its own sake — when a
+draft sentence needs a number that is not here, request the specific import in
+`SESSIONS.md` rather than working around the gap.
 
 ## What is ready to write today, refresh or no refresh
 
