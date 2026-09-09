@@ -32,6 +32,14 @@
   - *Experimentally*: a population shift of β2AR along the inactive ↔ active-like axis, read out as a continuous spectral change (bimane). No discrete states are produced; a conformational **equilibrium** is displaced (p.5: *"Shifting the equilibrium toward the active state by addition of increasing isoproterenol (ISO) agonist concentrations causes TM6 to rotate and move outward"*).
   - *Computationally*: an **ensemble** from 20 × 2 μs unbiased replicates plus multiple-walker metadynamics, from which **one** dominant bound pose is reported — the *"β2AR-peptide 4 complex"* (p.9). The authors place this pose as a **third, intermediate** state, distinct from both crystal binding modes: *"we speculate that the peptidomimetics capable of stabilizing an active-like β2AR conformation in vitro, stabilize an otherwise transient, intermediate, active-like conformational state preceding that of the β2AR-Gs(empty)"* (p.10).
 
+- **structural_priors_used**: **New in v3. Extensive, disclosed, and committing no methodological sin — this field exists precisely for a case like this one.** The peptide was designed from deposited structures of the answer, which for a wet-lab design paper is a legitimate starting point rather than leakage. Four distinct priors:
+  1. **Two deposited β2AR–GαsCT complexes, used to pick the staple position.** Verbatim, p.1: *"By rational design, integrating the information of two crystal structures showing different binding modes of Gαs CT with β2 AR, an appropriate staple position was identified."* Named on p.3 (Fig 1 caption): **PDB 3SN6** (β2AR–Gs empty) and **PDB 6E67** (β2AR-T4L-GsCT-CC). The two structures disagree about which residue contacts R131^3.50 — Y391 in 3SN6, E392 in 6E67 — and the design exploits that disagreement rather than resolving it (p.5: *"In the two crystal structures, it is evident that either Y391 or E392 can interact with R131"*).
+  2. **Helical geometry of GαsCT15 taken from those same complexes**, to set staple positions computationally (p.3: *"To mimic the helical conformation of Gαs CT15 in the crystal structures ... we sought to identify the optimal positions for stapling by computational methods."*).
+  3. **Prior MD of the solved complexes**, used to rank α5 C-terminal interactions by stability (p.3), and prior published MD showing Gs(GDP) binding an extended interface of the activated receptor (p.2).
+  4. **Prior GαCT peptide literature as the design precedent** (p.2): *"Proteinogenic peptides derived from the α5 C-terminus of G proteins (GαCT) were initially reported by Hamm and coworkers as GPCR modulators binding to the intracellular receptor crevice to stabilize an active-like receptor conformation and prevent G protein coupling"*, and more recent (i, i+4)-stapled peptides from Ballet and coworkers active at β2AR and D1R (p.2).
+
+  **Why this matters to us.** Our own co-input is the same 21-residue region these authors staple, and the structural basis they draw on is the same pair of complexes. Anything we say about the α5 C-terminus as a handle inherits the **6E67 register ambiguity** recorded above: the two deposited structures place different peptide residues against R131^3.50. That is a real caveat on any claim that a particular α5 contact is *the* one that matters.
+
 - **oracle_leakage**: **NOT APPLICABLE as a rigour defect** — there is no prediction whose success could be scored against a withheld structure, and no learned model whose training set could contain the answer. **But the design is openly and deliberately built on deposited structures of the target's active state**, and for corpus purposes that route should be visible, so it is enumerated here as *design-time structural knowledge*, not as leakage:
   1. Both binding modes used to choose the staple position come from solved β2AR–GαsCT complexes (p.2): *"By rational design, integrating the information of two crystal structures showing different binding modes of GαsCT with β2AR, an appropriate staple position was identified"* (Abstract, p.1).
   2. Staple ranking used MD trajectories of those same solved complexes (p.3): *"we ranked the interactions of the α5 C-terminus according to their stability in context of the receptor, obtained from previously performed MD simulations of these structures [33]"*.
@@ -59,6 +67,23 @@
 - **anti_memorization_design**: **NOT APPLICABLE.** There is no trained model, no training cut-off, and nothing that could be memorised. No held-out set exists or could exist. (See `stated_limits` for the wet-lab control arms that play the analogous role.)
 
 - **anti_memorization_control**: **NOT APPLICABLE**, same reason. The wet-lab analogue — negative-control peptides actually synthesised and run — **was** done and is recorded under `stated_limits`; note that a **scrambled-sequence peptide control was NOT run** (see `unresolved`).
+
+- **controls_run**: **New in v3, and this is the most reusable content in the note.** The v2 pass had nowhere to put these and recorded them inside `stated_limits`, which is exactly the smuggling the v3 changelog was written to stop. Every arm below was actually run and analysed.
+
+| control | what it rules out | page |
+|---|---|---|
+| **Linear (unstapled) GαsCT15, 20 μM + 10 μM ISO** | that the native α5 C-terminal sequence alone is sufficient. Verbatim p.5: *"Unlike the linear Gαs CT15 peptide, which at 20 μM did not potentiate the response of 10 μM ISO toward an active conformational state, the stapled peptide 1 potentiated the ISO response"*; restated p.6 | p.5, p.6 |
+| **Unstapled linear counterpart of the best peptide (9)** | that the effect survives without the macrocycle in the optimised series. p.8: *"The potentiation was also lost in the unstapled linear counterpart to peptide 9"* | p.8, Figs S1 and 3 |
+| **Peptide alone, no agonist** (peptides 2, 4 and Nb80) | **that a G-protein-mimetic peptide can stabilise the active state by itself.** p.8: *"In absence of agonist, both peptides 2 and 4, as well as Nb80 showed only minor responses in the bimane assay suggesting they were unable to stabilize an active receptor conformation alone"* | p.8, Fig 4A–C |
+| **Nb80 as a positive-control surrogate** | that the assay cannot detect a genuine active-state stabiliser. p.6: Nb80 *"can potentiate a submaximal ISO response (10 μM), whereas it has minimal endogenous effect when tested alone at 1 μM"* | p.6 |
+| **Staple position moved (I383-Q390 → I382-R389)** | that any staple anywhere works | p.4, p.7 |
+| **Substitution variants that failed** (peptide 5, Y391dmPhe) | that every designed substitution helps | p.6, Fig S1 |
+| **Off-target receptor counter-screens: β1AR and D1R** | that the peptides are indiscriminate across Gs-coupled receptors. p.8: *"While peptides 2 and 4 were also potent at the β1 AR they were less efficient for inhibition of D1 R-induced cAMP formation"* | p.8, Fig S4, Table S10 |
+| **Whole-cell cAMP on cultured HEK293** | that the membrane-preparation result implies cell activity. p.8: peptides 2 and 4 *"did not show any effect on ISO-induced cAMP formation on cultured HEK293 cells expressing the β2 AR ... indicating that the peptides do not readily cross the cell membrane"* | p.8, Fig S3 |
+| **ABSENT — scrambled-sequence peptide** | sequence identity versus mere occupancy of the crevice. Every negative control is *structural* (unstapled, staple moved, substitution removed); none scrambles the sequence while preserving length and charge | — |
+| **ABSENT — Gi- and Gq-coupled receptor selectivity**, and the authors say so | coupling-class selectivity. p.8: *"Although of high importance to inform on selectivity of the peptides toward Gs -coupled receptors over Gi - and Gq -coupled receptors, it was not possible to develop membrane-based assays for Gi - and Gq -coupled receptors."* | p.8 |
+
+  **The absent scrambled control is the one that matters to us.** Our own decoy and sequence-shuffled arms are exactly the control this paper could not run, which makes the two designs complementary rather than redundant, and is worth stating in the Discussion.
 
 - **confidence_as_discriminator**: **NOT APPLICABLE.** No pLDDT/pTM/ipTM or any model-confidence score exists in this work. The nearest analogue is the metadynamics free-energy surface used to argue the reported pose is a low-energy state (p.9: *"To confirm this binding pose of peptide 4 as its lowest energy binding mode, we used metadynamics enhanced sampling"*), and it is used for pose ranking, not for a correctness claim; it is not externally validated against any reference.
 
@@ -200,6 +225,8 @@
 
 - **comparable_to_ours**: **NONE, with one hedged exception.** No number in this paper sits beside a prediction metric — there is no RMSD, no TM-score, no success rate, no per-target sampling count of predicted structures. The single hedged comparator is **conceptual, not numerical**: if we make a claim about a peptide/partner being able to drive a receptor to an active state, this paper is the experimental anchor for the *direction* of that effect and, importantly, for its *conditionality* (agonist required). Use it as a citation, not as a table row.
 
+- **si_in_scope**: **New in v3. SI NOT HELD, and it is material — every quantitative pharmacology number in this paper lives there.** Specifically: **Table S8** (cAMP inhibition, the correlation with bimane potentiation), **Table S9** (bimane repeats; the main text gives no numerical λmax anywhere), **Table S10** and **Figure S4** (the β1AR and D1R counter-screens), **Figure S1** (the failed Y391dmPhe variant and the unstapled counterpart of peptide 9), **Figure S3** (whole-cell cAMP). The main text carries the argument; the SI carries the evidence. Any number quoted from this paper must come from the SI, which the corpus does not hold.
+
 ## F. Figures
 
 License note applies to all rows: **CC BY-NC** — *"This is an open access article under the terms of the Creative Commons Attribution-NonCommercial License, which permits use, distribution and reproduction in any medium, provided the original work is properly cited and is not used for commercial purposes."* (p.1). **No ND clause**, so redrawing and modification are permitted for non-commercial use.
@@ -225,9 +252,9 @@ License note applies to all rows: **CC BY-NC** — *"This is an open access arti
 
 ## G. Provenance
 
-- **extracted_on**: 2026-09-07
-- **extractor**: claude subagent
-- **schema_version**: `v2`
+- **extracted_on**: 2026-09-07; **re-passed to schema v3 on 2026-09-09**
+- **extractor**: claude subagent (v2 pass); Claude Opus 5, session `012o2XWtza3uVnp772dQHctU` (v3 re-pass)
+- **schema_version**: `v3` — re-passed 2026-09-09 against the PDF, not patched. The three fields v2 lacked (`structural_priors_used`, `controls_run`, `si_in_scope`) were extracted fresh from the paper, and two tags the v2 extractor correctly declined to invent (`g-protein-mimetic`, `experimental`) now exist in the vocabulary and are applied. **The A–E content of the original pass was checked and stands**; nothing in it needed correcting.
 - **confidence**: **medium-high.** The text extracted cleanly and the argument is unambiguous. Two things reduce it: (1) **all quantitative pharmacology — λmax shifts, EC50, Emax — is in Supporting Information Tables S8–S10 that are not in this 13-page PDF**, so `metrics_reported` carries mostly design parameters and qualitative directions rather than the paper's actual potency numbers; (2) all figure panel structures were verified by rendering pages 3, 6, 7, 9 and 10 at 110 dpi, and Table 1 at 130 dpi, so the panel counts and axis descriptions are read off the images, not inferred from captions.
 - **unresolved**:
   1. **Caption/text contradiction on the staple move.** Figure 3's caption (p.7) says *"moving the staple position from I383-Q390 to I382-R389 resulted in an inactive peptide (peptide 8)"*, but the body text (p.7) says peptide 8 is *"an analog of peptide 2 in which the stapling position is shifted by one position toward residues I383 and Q390"*, and Table 1 (p.5) confirms peptide 2 is stapled at 382/389 while peptide 8 is stapled at 383/390. **The caption states the direction backwards.** The body text and table agree with each other, so the caption is the error, but this should be flagged if the sentence is ever quoted.
@@ -236,17 +263,17 @@ License note applies to all rows: **CC BY-NC** — *"This is an open access arti
   4. **Quantified bimane readouts** (λmax values, shift magnitudes, n per experiment) are entirely in Table S9; the main text never gives a single numerical λmax.
   5. **Why the R380Y peptides (6, 7) are better at D1R than at β2AR** is explicitly unexplained by the authors (p.8).
   6. **Whether peptide 4 has any intrinsic (agonist-free) activity below 50 μM cannot be determined** — the solubility ceiling and the negative result are confounded (p.9).
-  7. **Tags needed but unavailable in the v2 fixed vocabulary** — recorded, not invented (see report):
-     - No tag for **an experimental / wet-lab paper with no structure prediction at all** (something like `experimental` or `no-prediction`). Every current Method tag is a prediction method; this paper has none of them, so its Method row is empty except `md` and `enhanced-sampling`, which describe only a supporting analysis and over-represent the computational content.
+  7. **RESOLVED 2026-09-09 by the v3 re-pass, kept for the record.** The v2 extractor listed tags they needed and correctly refused to invent. Two now exist and are applied: **`g-protein-mimetic`** (this paper is why the tag was added, and it now fires on two papers rather than one review) and **`experimental`**. Three are still genuinely absent from the vocabulary and remain open decisions for the user:
+     - ~~No tag for an experimental / wet-lab paper with no structure prediction at all~~ **— `experimental` added in v3 and now applied.** (Original note: every current Method tag was a prediction method; this paper has none of them, so its Method row is empty except `md` and `enhanced-sampling`, which describe only a supporting analysis and over-represent the computational content.
      - No tag for **stapled peptide / macrocycle chemistry** (e.g. `stapled-peptide`) — `peptide-driven` covers the *control handle*, not the chemistry class.
-     - No tag for **G-protein mimetic / G-protein surrogate** as a compound class, which is the paper's actual subject and the thing a future query would search for.
+     - ~~No tag for G-protein mimetic / G-protein surrogate as a compound class~~ **— `g-protein-mimetic` added in v3 and now applied.** This was the most manuscript-relevant reverse lookup in the corpus and it previously returned a single review.
      - No tag for **agonist-dependence / conditional state stabilisation**, which is the most citable single fact in the paper.
      - `no-anti-memorization` was **deliberately not applied**: the tag would be technically true but semantically false, since there is no model that could memorise anything. The vocabulary has no way to say "this rigour axis does not exist for this paper".
 - **why_it_matters**:
 
 ## Tags
 
-`gpcr` `md` `enhanced-sampling` `two-state` `continuous-metric` `saturating-metric` `prospective` `directed-state` `peptide-driven` `ligand-driven` `nanobody` `allosteric-site` `peer-reviewed` `precedent` `background`
+`gpcr` `experimental` `md` `enhanced-sampling` `two-state` `continuous-metric` `saturating-metric` `prospective` `directed-state` `peptide-driven` `ligand-driven` `g-protein-mimetic` `nanobody` `allosteric-site` `peer-reviewed` `precedent` `background`
 
 Tag justifications where non-obvious:
 - **`md` + `enhanced-sampling`**: all-atom MD (20 × 2 μs) plus well-tempered multiple-walker metadynamics (pp.8–9). These describe a supporting analysis, not the paper's method class — the paper's method class has no tag (see `unresolved` 7).

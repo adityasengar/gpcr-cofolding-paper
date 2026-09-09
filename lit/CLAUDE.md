@@ -77,16 +77,19 @@ Never load the whole `notes/` directory.
   was a text-extraction artifact — OCR on the one scanned paper (`hilger2020gcgr`),
   `ﬁ` ligatures, inserted spaces, or dropped superscript reference numerals. **No
   fabricated quote was found anywhere in the corpus.**
-- **Six notes are still on schema v2** and lack `structural_priors_used`,
+- **Four notes are still on schema v2** and lack `structural_priors_used`,
   `controls_run` and `si_in_scope` entirely: `obendorf2026statespecific`,
-  `suzuki2026pairscaling`, `tran2026nanogs`, `waymentsteele2024cluster`,
-  `ye2026multistatebias`. Their A–E content is sound; those three fields are absent,
-  not empty. `tran2026nanogs` records its structural priors inside `oracle_leakage`.
-- **`g-protein-mimetic` fires on one paper only** (`georgiou2025heterogeneity`, a
-  review), because the tag was added in v3 and `tran2026nanogs` — the stapled Gαs α5
-  peptide paper, the closest wet-lab analogue of our co-input — predates it. The most
-  manuscript-relevant reverse lookup in the vocabulary does not work yet. `atpase`
-  fires on zero papers.
+  `suzuki2026pairscaling`, `waymentsteele2024cluster`, `ye2026multistatebias`. Their
+  A–E content is sound; those three fields are absent, not empty.
+  **`tran2026nanogs` was re-passed to v3 on 2026-09-09** — re-read against the PDF, not
+  patched. Its A–E content was checked and stands; the three missing fields were
+  extracted fresh and all eleven added quotes machine-verified. Its `controls_run` table
+  is the most reusable content in the note, and it records two *absent* controls: no
+  scrambled-sequence peptide, and no Gi/Gq selectivity assay (the authors say why).
+- **`g-protein-mimetic` now fires on two papers**, `georgiou2025heterogeneity` (a
+  review) and `tran2026nanogs`, which gained the tag in its 2026-09-09 v3 re-pass. That
+  reverse lookup — the most manuscript-relevant one in the vocabulary — works now.
+  `tran2026nanogs` also gained `experimental`. `atpase` still fires on zero papers.
 - **The `oracle-leak` tag is narrower than the `oracle:` line.** Six papers name
   oracle routes but carry neither oracle tag, each declining it deliberately and with
   reasoning. Build the gap argument by reading down the `oracle:` lines, not by

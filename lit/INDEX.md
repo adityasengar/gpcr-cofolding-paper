@@ -620,9 +620,9 @@ stance: precedent + background — clean experimental active-state GPCR-G protei
 claim: A stapled Gαs α5 peptide stabilises active-like β2AR and blocks cAMP, but only with orthosteric agonist present.
 system/method: GPCR (β2AR; β1AR, D1R counter-screens) | other — stapled-peptide design + MD/metadynamics | n/a
 states: two (inactive vs active-like equilibrium shift) + MD ensemble | metric: bimane λmax shift, no threshold; cAMP Emax/EC50 | prospective: yes
-oracle: NOT APPLICABLE as leakage; design built entirely on deposited β2AR-GαsCT structures and their prior MD
+oracle: NOT APPLICABLE as leakage; design built on deposited β2AR-GαsCT structures (PDB 3SN6 and 6E67, which disagree on the R131 contact) and their prior MD - now recorded under structural_priors_used
 figs: 16 panel-group rows
-tags: gpcr md enhanced-sampling two-state continuous-metric saturating-metric prospective directed-state peptide-driven ligand-driven nanobody allosteric-site peer-reviewed precedent background
+tags: gpcr experimental md enhanced-sampling two-state continuous-metric saturating-metric prospective directed-state peptide-driven ligand-driven g-protein-mimetic nanobody allosteric-site peer-reviewed precedent background
 stance: precedent + background — wet-lab proof a peptide handle alone is insufficient
 
 ### vo2026fiducials — 2026, bioRxiv preprint
