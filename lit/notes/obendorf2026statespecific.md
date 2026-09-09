@@ -29,6 +29,14 @@ Schema v2 extraction. Every field present; `NOT REPORTED` where the paper does n
 
 - **states_generated**: one state per prediction; two-state coverage only across conditions, never within a run. Five diffusion samples per condition from a single seed (p21) constitute the only within-condition sampling; the paper reports a single displayed model per condition (Fig 4A, p14). No ensemble or continuum is produced or claimed.
 
+- **structural_priors_used**: **New in v3. Heavy, deliberate, and the paper's own subject — this field exists because of this paper.**
+  1. **Every one of the seven systems was chosen from a recently solved deposited structure**, named on p4: kinases LRRK2 + type II RN277 (**9DMI**), PI3K H1047R + type III Zovegalisib in a cryptic pocket (**8TSD**), ALK2 + type I RK783 (**9L04**), ALK2 + AMPPNP (**6UNQ**); GPCRs 5-HT2A + pimavanserin (**8ZMG**, inactive), adenosine A2A + CGS21680 (**8UGW**, active), and δ-opioid with a G-protein-biased agonist (p9).
+  2. **State annotations from two curated databases drive the biasing**, p4: *"Controlled template and MSA biasing strategies, informed by state annotations from KLIFS and GPCRdb, were applied throughout."* (Superscript reference numerals 7 and 6 sit inline after "KLIFS" and "GPCRdb" in the PDF text layer and are omitted here.) Protocol at p20: GPCR active and inactive structures *"were retrieved from the PDB as mmCIF files, based on their state annotations in the GPCRdb"*.
+  3. **Custom templates are derived from those state-filtered alignments**, p21: *"Custom templates were chosen by using the PDB structure files of the top four hits in each individual state-specific MSAs."* The template set is therefore a function of the state label, not an independent input.
+  4. **The biasing is deliberately generic rather than hand-tuned**, and the authors say why, p16: *"Because these methods are primarily intended for applications with limited prior structural knowledge, we adopted a general, database-driven biasing strategy based on state annotations from GPCRdb"*; p19: *"custom templates were selected automatically based on the MSAs generated from the state annotated databases, and no additional criteria were applied beyond this sequence and state information."* That restraint is a genuine methodological strength and should be credited when this paper is cited.
+
+  **One internal tension worth carrying.** The design claim at p4 is that the benchmark spans *"distinct functional states absent from all model training sets, enabling prospective rather than retrospective evaluation."* But p15 concedes that one system was not absent: Boltz-2's best result came *"for which a closely related ligand was present in the training data (ALK2 with AMPPNP in PDB 6UNQ)."* The prospectivity claim holds for six of seven systems, not all seven, and anyone quoting the p4 sentence should quote the p15 one beside it.
+
 - **oracle_leakage**: **PRESENT — six distinct routes.**
 
   1. **State annotations from curated databases drive the MSAs (GPCRdb, KLIFS).**
@@ -80,6 +88,25 @@ Schema v2 extraction. Every field present; `NOT REPORTED` where the paper does n
 - **anti_memorization_design**: **Partial, informal, undefined cutoff.** The benchmark is asserted to be post-training: "We curated a benchmark of kinases and Class A GPCRs spanning distinct functional states absent from all model training sets" (p4), and "For kinases, we selected structures that were recently solved" (p4). n = 6 systems intended as unseen (9DMI, 8TSD, 9L04, 8ZMG, 8UGW, 8Y45; p24) plus 1 deliberately-seen system (6UNQ, 2019). **No cutoff date is stated for any of the four models**, no per-model cutoff table, and no evidence is given for the "absent from all model training sets" assertion beyond deposition recency. The one leakage check that is made is by deposition date and hedged: "Based on its deposition date, 2019, this structure was likely present in all model training datasets." (p7)
 
 - **anti_memorization_control**: **Effectively NONE RUN — UNPOWERED.** The seen system (ALK2–AMPPNP, 6UNQ) is included and commented on twice (p7, p15), but no seen-vs-unseen contrast is analysed: there is no arm, no grouped comparison, no statistic. The only mention of its performance is descriptive and confounded — "in two conditions Boltz-2 with base settings yielded the most accurate structure (for ALK2-ATP and Adenosie A2A Receptor). This included the ATP example, for which a closely related ligand was present in the training data (ALK2 with AMPPNP in PDB 6UNQ)." (p15) — which hints at memorization without testing it. n = 1 seen vs 6 unseen; both far below any powered comparison. Mark `UNPOWERED`.
+
+- **controls_run**: **New in v3. The condition grid is the paper's real contribution, and v2 had nowhere to put it.**
+
+| control | what it rules out | page |
+|---|---|---|
+| **Base settings** (each model's own MSA and template pipeline, unmodified) | that the biased arms are being compared against a strawman; it is the reference every other arm is read against | pp15, 21–22 |
+| **State-specific (biased) MSA**, built from GPCRdb/KLIFS state annotations | that a state-filtered alignment is enough on its own | pp16, 20 |
+| **Custom state-annotated templates**, top four hits per state-specific MSA | that state-annotated templates are enough on their own | p21 |
+| **No MSA** (explicitly disabled, p22: *"The no MSA models were produced by explicitly disabling MSA usage, setting the MSA input to ”empty”."* — the original uses two closing typographic quotes around *empty*, reproduced here) | that the models are not simply reading the alignment | p22 |
+| **No templates** | the symmetric question for templates | p22 |
+| **No MSA + no templates** | that anything survives with both removed — it does not; backbone RMSD exceeds 17 Å (p12) | pp7, 12, 22 |
+| **Four independent backbones** (AF3, Boltz-2, Chai-1, RF3) | that a result is one implementation's artefact | throughout |
+| **Confidence validated against accuracy**, not merely reported | that pLDDT can be assumed informative. Protein pLDDT r = +0.04 against pose accuracy, ligand pLDDT r = −0.46 | p15 |
+| **Both inhibitor-induced and nucleotide-bound kinase states** (6UNQ added *"to probe nucleotide recognition beyond inhibitor-induced states"*) | that the kinase result is specific to inhibitor chemistry | p4 |
+| **ABSENT — seen-versus-unseen contrast** | memorization. 6UNQ is identified as seen and commented on twice, but no arm, grouped comparison or statistic tests it. n = 1 seen vs 6 unseen; unpowered even if run | pp7, 15 |
+| **ABSENT — any state-recovery rate** | anything quantitative about state. State calls are made visually from renders, so the paper's central negative has no number attached to it | p14 |
+| **ABSENT — replicate seeds or error bars** | sampling noise. Five diffusion samples from a single seed per condition, one pLDDT-selected model reported, n = 7 systems, no CIs on any panel | p21 |
+
+  **Note the asymmetry between the grid and the conclusion.** The condition grid is genuinely well constructed and is the reason this paper is worth citing. The state conclusion drawn from it is not measured, only seen. Cite the grid; quote the conclusion as the authors' reading rather than as a rate.
 
 - **confidence_as_discriminator**: **Yes, used, and — unusually — explicitly validated and partly refuted.** Used as a selection rule: Fig 4A shows "the lowest Protein pLDDt cofolding predictions" (p14) and per-residue profiles came "from the highest-mean-protein-pLDDT prediction of each method" (p24) — the two statements conflict; see `unresolved`. Validated against pose accuracy: "protein pLDDT showed no association with pose accuracy (Pearson r = +0.04, Figure 4B), whereas ligand pLDDT correlated moderately (r = -0.46, Figure 4C) indicating that local ligand confidence, but not overall fold quality, is informative for co-folding predictions" (p15). Critically, the validation is against **ligand pose accuracy only, never against state correctness** — the section is titled "Model confidence metrics do not report state fidelity" (p15) but no panel tests confidence against a state marker. RF3 excluded: "This analysis could not be performed for RF3, as the ligand pLDDT value in its outputs is fixed at 1.0" (p15).
 
@@ -151,6 +178,8 @@ Schema v2 extraction. Every field present; `NOT REPORTED` where the paper does n
 
 - **comparable_to_ours**: Comparable quantities, with caveats — (i) ligand RMSD to a held reference for orthosteric kinase and GPCR complexes, per backbone and per input condition (0.42–1.40 Å band, pp5, 7); (ii) protein backbone RMSD per condition, including the >17 Å collapse with no MSA and no templates (p12); (iii) pLDDT-vs-accuracy correlations (+0.04 protein, −0.46 ligand, p15); (iv) per-backbone reliability ranking across four cofolding models (pp15–16). **Hedges that must travel with any such comparison**: their RMSDs are for one pLDDT-selected model per condition, not a distribution; single seed; n = 7 systems with no error bars, no CIs and no per-system n on any panel; GPCR backbone RMSD is core-only, excluding the very loops the paper's state claim rests on; and their state calls are visual, so no state-recovery *rate* exists to compare against. Whether these sit beside our numbers is `NONE` until our metric definitions are matched against theirs.
 
+- **si_in_scope**: **New in v3. SI NOT HELD, but for once that costs little.** The Supporting Information listing at p24 contains only *"S1 Per-Residue pLDDT of Cofolding Kinase Predictions"* and *"S2 Per-Residue pLDDT of Cofolding GPCR Predictions"* — per-residue confidence profiles, referenced once at p18 to justify trimming flexible peripheral regions from the analysis. **Every RMSD, correlation and per-condition result quoted in this note is in the main text.** The one thing the SI would settle is which peripheral residues were omitted and on what basis, which matters because the GPCR backbone RMSD is core-only and excludes the loops the state claim rests on.
+
 ## F. Figures
 
 | fig_no | page | gist | plot_type | data_shape | panels | hides | reuse |
@@ -168,9 +197,9 @@ Supplementary figures S1 and S2 (per-residue pLDDT for kinase and GPCR predictio
 
 ## G. Provenance
 
-- **extracted_on**: 2026-09-07
+- **extracted_on**: 2026-09-07; **re-passed to schema v3 on 2026-09-09**
 - **extractor**: claude subagent
-- **schema_version**: v2
+- **schema_version**: `v3` — re-passed 2026-09-09 against the PDF, not patched. **This was the pilot paper whose v2 extraction forced the v3 schema revision**, so it should not have been the last note still on v2. The three missing fields were extracted fresh and every added quote machine-verified; the A–E content of the v2 pass was checked and stands.
 - **confidence**: **medium-high.** Text extraction was clean and the Methods are unusually explicit about the biasing pipeline, so B, C and D are solid. Lower confidence on E's `n_predictions` (the paper never states a total or whether all diffusion samples enter the analysis) and on the Fig 4A condition counts for Chai-1 (7) and RF3 (3), which were counted off the rendered x-axis rather than stated in the text. Fig 4A was the only page rendered; all other figure rows are from captions plus body text, which carried the panel structure adequately since Figs 1–3 are structure renders.
 - **unresolved**:
   1. **pLDDT selection direction contradicts itself.** Fig 4A caption says the plotted models are "the lowest Protein pLDDt cofolding predictions" (p14) while the Methods say "Per-residue pLDDT profiles were generated from the highest-mean-protein-pLDDT prediction of each method" (p24). One of the two is a typo; which one determines whether Fig 4A shows the best or the worst of each condition's five samples. Not resolvable from the text.

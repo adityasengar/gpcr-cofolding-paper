@@ -22,6 +22,12 @@
 
 - **states_generated**: ensemble (500 models per target for Boltz-sample), evaluated as two states. Both discrete and continuous responses are reported: "For adenylate kinase (P69441), the ensemble shifts smoothly with β, tracing a continuum between the two conformations. In contrast, the ADP/ATP translocase (G2QNH0) and EF-Tu (P0CE48) exhibit a more discrete, mode-switching response" (p5).
 
+- **structural_priors_used**: **New in v3. Two kinds, and the paper's central claim is about the second.**
+  1. **Design-time, in the benchmark.** OC23 and TP16 are inherited wholesale from the AFsample2 benchmark, *"datasets from the AFsample2 benchmark [10] that provide paired reference structures for distinct conformational states such as open/closed or outward/inward-facing forms."* (p3); TP16 is re-cut at construct level to 20 sequences after excluding the very long SPF1 (p3). MS15 is curated by the authors against a pairwise TM-score ≤ 0.85 criterion. Every target therefore has both states deposited before a single prediction is made, and the worked example is scored against PDB **3TEE** and **3VJP** (p2). No deposited structure enters the pipeline.
+  2. **Inside the model, and this is the argument.** The paper's causal story is that β-scaling exposes structural knowledge Boltz-2 already holds, rather than amplifying coevolutionary signal. Verbatim, p1: *"our analysis of sequence-only inference reveals that the method does not rely solely on coevolutionary signals but actively unlocks the structural priors internalized by the model to recover alternative states even without MSA information."* Restated at p5: *"internal scaling does not merely randomize the output, but effectively leverages the model's internalized structural priors to recover alternative conformations even without explicit coevolutionary signals."*
+
+  **Why the two interact badly.** The mechanism the authors propose is memorised structural priors, and the benchmark contains no memorisation control (see `anti_memorization_control`). The paper's explanation and its largest methodological gap are therefore the same fact seen from two sides, which is worth saying plainly whenever it is cited.
+
 - **oracle_leakage**: **PRESENT — six routes, none of which is "best β picked per target by agreement with a known structure".** Enumerated separately below. Protocol pages: p9 (β sweep and datasets), p10 (baselines, MSA source), p11–p12 (metrics and selection).
 
   **R1 — β sweep range chosen empirically on the same benchmarks used for evaluation (the field flagged in the task).**
@@ -77,6 +83,23 @@
 - **anti_memorization_design**: **NONE.** No held-out set, no post-cutoff set, no training-cutoff date for Boltz-2 stated anywhere, no PDB-release-date filter on the benchmark targets. MS15 was curated from the PDB with no recency criterion — the stated selection rule is only "distinct conformational states (pairwise TM-score ≤ 0.85)" (p4) and "experimental structures for the alternative states were taken from the RCSB Protein Data Bank (PDB)" (p9). OC23/TP16 are inherited wholesale from AFsample2 (p9). Some MS15 references are recent depositions (8Y5Y/8Y5Z, 8J7X/8J7W, 7AAR, 6N3I; Table 2 p10) but the paper never identifies them as such or uses them as a recency stratum.
 
 - **anti_memorization_control**: **NONE RUN.** The one ablation that touches memorization is the sequence-only (no-MSA) arm, and it is run in the *opposite* direction — as evidence that memorized priors are doing useful work, not as a control against them: "our findings suggest that Boltz-2 has internalized a rich set of structural priors from the PDB training distribution" (p8); "18 targets (31% of the combined dataset) improved by at least 0.05, whereas only a single target (1.7%) worsened by the same margin" (p5). No arm stratifies results by deposition date, training-set membership, or sequence novelty. The gap is load-bearing here because the paper's own causal story (R6) is memorization.
+
+- **controls_run**: **New in v3. A well-populated baseline grid, plus one ablation that is doing double duty.**
+
+| control | what it rules out | page |
+|---|---|---|
+| **Vanilla (standard) Boltz-2 inference** | that the gain is not real; it is the reference for every reported number. Dual-state coverage 43% vanilla → 78% with β-scaling | pp2–3 |
+| **MSA subsampling** | that depth reduction already achieves it | pp3, 10 |
+| **MSA random masking** | that column masking already achieves it | pp3, 10 |
+| **MSA clustering** | that AF-Cluster-style clustering already achieves it — the closest baseline, reaching 70% against 78% | pp3, 10 |
+| **Sequence-only (no-MSA) arm** | that the effect is coevolutionary rather than internal. 18 of 58 targets (31%) improved by ≥ 0.05, one (1.7%) worsened | pp5, 8 |
+| **Selection-strategy comparison against an oracle upper bound and a random baseline** | that the confidence-based selector is doing nothing. p8: *"Strategies include Oracle as the theoretical upper bound, Random as the baseline, Per-β selection which chooses one model per step, and Sign-based selection which selects only the top model per sign direction."* Sign-based reaches AUC 0.58 against an oracle 0.60 and random 0.47 | pp6–8 |
+| **A reported failure case** | over-claiming. p5: for MAD2 (Q13257) *"the method did not recover the alternative state, indicating that internal scaling has limitations in retrieving alternative conformations for certain targets where the dominant state is strongly favored"* | p5 |
+| **ABSENT — any memorization control** | the paper's own proposed mechanism. No temporal split, no training-set stratification, no sequence-novelty stratum, despite several MS15 references being recent depositions | pp9–10 |
+| **ABSENT — a held-out split for the β sweep** | that β's range was not tuned on the same benchmarks that report the result | p9 |
+| **ABSENT — a semantic direction for β** | that the sign means anything transferable. The authors say so, p6: *"we do not observe a consistent mapping between the sign of β and a particular conformational state across datasets."* So the handle steers breadth and separates directions, but it cannot be told *which* state to produce | p6 |
+
+  **The last row is the one that matters to us.** This is the corpus's cleanest architecture-internal steering result, and its own authors record that the control it provides is undirected: β separates the sampling space into two regimes without either regime corresponding to a nameable conformational state. Any comparison we draw against it should be on that axis, not on coverage numbers.
 
 - **confidence_as_discriminator**: **Yes, and partially validated — but validated for ranking, not for judging conformational correctness.** "Given the monomeric nature of the targets, we used the mean pLDDT score as the ranking metric." (p12); ipTM/pTM are not used (monomers). Validation is via success curves against an oracle upper bound and a random baseline: "despite being restricted to just two candidates, sign-based selection achieved an AUC of 0.58 on MS15, closely tracking the oracle upper bound of 0.60 and significantly outperforming the random baseline of 0.47 (Fig. 6B)" (p7). What is NOT validated: that pLDDT distinguishes state 1 from state 2, or that a high-pLDDT model is in the correct basin — pLDDT is only used to pick the single best model *within* each β-sign pool, after the sign has already defined the split. The "significantly" at p7 is not backed by a named test or p-value for the AUC comparison.
 
@@ -171,6 +194,8 @@
   - **Their vanilla-Boltz-2 baselines (43 / 25 / 33% dual-state coverage)** — probably the most useful row for us, as a published no-intervention floor on OC23 / TP16 / MS15 with a stated budget.
   - Not comparable: anything RMSD-based (they report TM-score only, US-align), and anything on GPCRs or kinase activation loops (no such targets here).
 
+- **si_in_scope**: **New in v3. Everything is in the main text — unusually, and to the paper's credit.** No appendix, supplementary information or supplementary table is referenced anywhere in the body; the β sweep and dataset definitions (p9), the baselines and MSA source (p10), the metrics and selection strategies (pp11–12) and the MS15 target table (Table 2, p10) are all in the 15-page main document. **`SI NOT HELD` does not apply here**, and no number quoted from this paper depends on material the corpus lacks. This is the only note in the corpus that can say that without qualification.
+
 ## F. Figures
 
 | fig_no | page | gist | plot_type | data_shape | panels | hides | reuse |
@@ -196,9 +221,9 @@
 
 ## G. Provenance
 
-- **extracted_on**: 2026-09-07
+- **extracted_on**: 2026-09-07 — **re-passed to schema v3 on 2026-09-09**
 - **extractor**: claude subagent
-- **schema_version**: v2
+- **schema_version**: `v3` — re-passed 2026-09-09 against the PDF, not patched. The three v2-missing fields were extracted fresh and every added quote machine-verified; the A–E content of the v2 pass was checked and stands. **`latent-steering` was added at the same time**, correcting a long-standing corpus defect: this is a pair-representation intervention and the paper calls itself *"a strategy for systematic latent space steering in Boltz-2"* (p2), yet the tag was absent, so every reverse lookup for internal-tensor steering missed it.
 - **confidence**: **medium-high.** The text layer is clean and every quote above is verbatim from `pdftotext -layout`. Lower confidence on three things: (i) figure panel counts and axis ranges were read from 110-dpi page renders (pages 2, 4, 5, 6, 7, 8), so panel counts are reliable but small legend digits are not — the OC23/TP16 AUC values and the AF3 Server coverage bars in the metrics table are flagged as figure-read; (ii) the combined n = 58 is arithmetic from p5 percentages, never printed; (iii) the ~50-models-per-β figure behind Fig. 6A cells is implied by Table 3, not stated.
 - **unresolved**:
   1. **Tag needed but absent from the v2 vocabulary.** The paper's primary method is an inference-time intervention on an internal latent tensor — not an MSA manipulation, not a template bias, not seeds, not stochastic dropout. Nothing in the Method or Control tag lists covers it. A tag such as `latent-steering` (or `internal-representation-perturbation`) is required for this paper to be findable by its actual contribution. Not invented; recorded here per instruction. `cofolding` was tagged only because the backbone is an AF3-class co-folding model, which is a weaker and possibly misleading match.
@@ -213,4 +238,4 @@
 
 ## Tags
 
-`general-protein` `transporter` `cofolding` `msa-subsample` `af-cluster` `two-state` `ensemble` `continuous-metric` `binary-predicate` `saturating-metric` `oracle-leak` `no-anti-memorization` `confidence-as-discriminator` `preprint` `precedent` `contrast` `comparator-numbers`
+`general-protein` `transporter` `cofolding` `latent-steering` `msa-subsample` `af-cluster` `two-state` `ensemble` `continuous-metric` `binary-predicate` `saturating-metric` `oracle-leak` `no-anti-memorization` `confidence-as-discriminator` `preprint` `precedent` `contrast` `comparator-numbers`

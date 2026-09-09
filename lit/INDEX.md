@@ -587,7 +587,7 @@ system/method: general protein + transporters (OC23, TP16, MS15; 58 targets) | o
 states: ensemble (500 models/target) + two | metric: continuous TM-score to both references, best-minimum TM, fill ratio + binary predicate (TM >= 0.8 both states, threshold unjustified) | prospective: partial (beta applied blind; pLDDT-only selector arm)
 oracle: R1-R6 — beta range tuned on the evaluation benchmarks, best-of-500 vs held references, explicit oracle-selector arm disclosed
 figs: 18 panel-group rows
-tags: general-protein transporter cofolding msa-subsample af-cluster two-state ensemble continuous-metric binary-predicate saturating-metric oracle-leak no-anti-memorization confidence-as-discriminator preprint precedent contrast comparator-numbers
+tags: general-protein transporter cofolding latent-steering msa-subsample af-cluster two-state ensemble continuous-metric binary-predicate saturating-metric oracle-leak no-anti-memorization confidence-as-discriminator preprint precedent contrast comparator-numbers
 stance: precedent + contrast — direct architecture-internal steering precedent; no tuning split, no memorization control
 
 ### swapna2025memorization — 2025, PLOS Computational Biology 21(10):e1013590 (peer-reviewed)
@@ -695,7 +695,7 @@ states: ensemble per condition (20-50 samples) collapsing to one dominant basin 
 oracle: routes 5,7 — post hoc RMSD scoring to held references, input conditions chosen with expected state declared
 figs: 11 panel-group rows; ND licence
 tags: gpcr transporter general-protein benchmark-only cofolding af-cluster msa-subsample ensemble single-state rmsd-only continuous-metric saturating-metric oracle-leak no-anti-memorization multi-backbone directed-state partner-driven ligand-driven apo-sampling orthosteric preprint precedent contrast negative-result comparator-numbers
-stance: precedent + contrast — closest partner-drives-state result; four targets, no memorization control
+stance: precedent + contrast — closest partner-drives-state result; four targets, no memorization control (n=4 could not have powered one). **Every partner arm supplies agonist AND heterotrimer together, so the partner's independent contribution is never isolated, and no reduced or scrambled partner is run** — that is the control our design supplies and theirs does not. See controls_run.
 
 ### yu2026domainmotion — 2026, PNAS 123(10):e2530709123, peer-reviewed (CC BY-NC-ND)
 claim: AF3's open-vs-closed enzyme prediction is governed by the PDB apo:holo ratio, not by the ligand; nonbinder ligands induce nearly the same domain motion, and pLDDT cannot separate them.

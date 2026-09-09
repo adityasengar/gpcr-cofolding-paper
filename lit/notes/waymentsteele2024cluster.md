@@ -38,6 +38,12 @@ p5 = 836, p6 = 837, p7 = 838, p8 = 839.
 
 - **states_generated**: **ensemble, interpreted as two.** Per target the method emits one model per MSA cluster, i.e. a distribution: "we found that the AF2 predictions from our MSA clusters comprised a distribution of structures, with the highest-scored regions of the distribution corresponding to the ground and FS state" (p3). What is reported and claimed, however, is two discrete states per target (Figs 1e, 4b,d, 5c–e). The distribution is explicitly **not** a Boltzmann ensemble — see `stated_limits`. For the three oligomeric fold-switchers only one state was produced: "AF-Cluster was unable to predict the oligomeric state for selecase, lymphotactin and CLIC1." (p5)
 
+- **structural_priors_used**: **New in v3. Present at target-selection time, and notably absent from the pipeline itself.**
+  1. **KaiB's two deposited conformations define the whole demonstration**: ground state **2QKE** and fold-switched state **5JYT** (p2, Fig 1). Every KaiB success is scored against one of these two.
+  2. **The 628-protein screening set is drawn from a database of MSAs paired with crystal structures**, p5: *"we selected 628 proteins 48–150 amino acids in length from a database of MSAs associated with crystal structures"*, filtered at p10 from an original 9,846 by length (52–150) and alignment depth (>1,000 sequences). So a deposited structure exists for every screened family, though it is not supplied to the model.
+  3. **The clustering hyperparameter is tuned on the sequences, not on the answer.** p3: *"We selected DBSCAN to perform clustering because we found that it offered an automated route to optimizing clustering a priori"*, with the epsilon sweep run on a 25% subsample for the 628-family scan (p9). This is a genuine methodological strength: the parameter is set from MSA geometry, not from structural outcome.
+  4. **Nothing structural enters the input.** The pipeline is MSA-only; no template, no reference coordinate, no state annotation is supplied at inference. That is what separates this paper from the template-biasing family and is the reason its prospective KaiB result is worth as much as it is.
+
 - **oracle_leakage**: **Routes enumerated separately below. Two are PRESENT and load-bearing (scoring/selection); the input-side routes are NONE FOUND.**
 
   **Route 1 — cluster labels derived from known states: NONE FOUND.**
@@ -109,6 +115,22 @@ p5 = 836, p6 = 837, p7 = 838, p8 = 839.
   3. A **negative control target** (not an anti-memorization control): "As a control, AF-Cluster models of ubiquitin, a protein that is well characterized to have no alternative states, returns only models with high confidence and low r.m.s.d. to the crystal structure PDB 1UBQ." (p6), n = 1.
 
 - **anti_memorization_control**: **NONE RUN as a prediction-accuracy control arm. UNPOWERED.** No arm compares performance on pre- vs post-cutoff structures; there is no cutoff and no such split. The DALI search in item 2 above *was* actually run and analysed — 1,822 hits for the known state and 1,245 for the alternative state, 1,055 after CD-HIT, of which "A total of 479 of these were hits for both the known and alternative state, with 368 exclusively for the known and 208 exclusively for the alternative state" (p11), with the conclusion "7 of 9 DALI hits with lower alternate state RMSD contained an alpha-helix positioned in similar same way as in the Mpt53 alternate state" and "One structure (3EMX) also contained an N-terminus beta-strand positioned similarly to the alternate state" (p20) — but this is a *structural-novelty* check on one predicted state for **one target (n = 1)**, not a control on prediction accuracy, and it is not run for KaiB, RfaH, MAD2 or the G<sub>A</sub>/G<sub>B</sub> set. Mark **UNPOWERED**.
+
+- **controls_run**: **New in v3. An unusually complete set for a 2024 method paper, and the reason this work survived its own rebuttal.**
+
+| control | what it rules out | page |
+|---|---|---|
+| **Ubiquitin negative control** | that AF-Cluster invents alternative states for proteins that have none. p6: *"As a control, AF-Cluster models of ubiquitin, a protein that is well characterized to have no alternative states, returns only models with high confidence and low r"* | pp6–7 |
+| **Uniform MSA subsampling at depth 10, 500 samples** | that plain depth reduction achieves the same thing. p3: *"for uniformly subsampled MSAs of size 10, 1 out of 500 samples was within 3 Å of the ground state, with lower confidence than the MSA cluster samples"* — 1/500, at lower confidence, against clustering's result | p3, Extended Data |
+| **MSA Transformer cross-check** | that the signal is an AF2 artefact. The same sequence subset predicts the fold-switched state in *"both AF2 and the unsupervised learning method MSA Transformer"* | p3 |
+| **DBSCAN epsilon sweep** | that the cluster count is an arbitrary parameter choice; the sweep produces a peak that fixes it | p14, Extended Data |
+| **Phylogenetic tree of 487 KaiB variants, all predicted** | that the result is one sequence's accident | p3 |
+| **PROSPECTIVE NMR validation of a predicted variant** | that the prediction is retrospective curve-fitting. A KaiB variant predicted to sit in the fold-switched state was expressed and solved: p3 *"Using nuclear magnetic resonance (NMR) spectroscopy, we could indeed verify our AF-Cluster prediction"*; p4, the secondary-structure propensity from TALOS-N *"fully agrees with the FS state predicted by AF-Cluster"* | pp3–4 |
+| **SEC–MALS monomer check on the NMR sample** | that the NMR state is an oligomerisation artefact | p4, Extended Data |
+| **628-family blind screen** | that the method only works on the systems it was developed on | pp5, 7, 10 |
+| **ABSENT — any post-cutoff or held-out split** | training-set memorisation. Every target has a deposited structure; nothing tests whether AF2 had seen it. This is what `schafer2025confounds` later attacked and what `waymentsteele2025reply` answered with column shuffling, and neither exchange is in this paper | — |
+
+  **The prospective NMR arm is what makes this paper different from every other MSA-manipulation entry in the corpus.** When citing the family, cite this one for the fact that the approach produced a testable prediction that was then tested, and cite `schafer2025confounds` and `waymentsteele2025reply` for the argument about mechanism.
 
 - **confidence_as_discriminator**: **Yes, centrally — and validated only in the weak sense of "near-native models score higher than background", while explicitly disclaimed in the sense that matters.**
   - Used as the discriminator: "Importantly, we show that, using our method, AF-Cluster, both states are sampled and scored with high confidence by AF2's learned predicted local distance difference test (plDDT) measure." (p3). plDDT ranks the displayed models (Fig. 1e, p2; Fig. 5d, p7), selects screen candidates jointly with RMSD (Fig. 5b, p7), and defines correctness in the G<sub>A</sub>/G<sub>B</sub> benchmark ("the highest-pLDDT model from AF-Cluster correctly predicted the most stable folds for 10 out of 12", p7).
@@ -239,6 +261,8 @@ p5 = 836, p6 = 837, p7 = 838, p8 = 839.
 
 - **comparable_to_ours**: **NONE directly** — this paper reports no per-state success rate over a target set, no TM-score/lDDT-to-reference distribution over a benchmark, and no per-system table; its comparators are one-off counts on individual proteins. Hedged candidates: (i) the uniform-subsampling arm (1/500 and 0/500 at 3 Å) is the closest thing to a baseline sampling-efficiency number, but it is a single target and a binary threshold, not an accuracy distribution; (ii) the G<sub>A</sub>/G<sub>B</sub> 10/12 vs 8/12 is a genuine head-to-head fraction but n = 12 on an engineered 56-residue system; (iii) the RfaH plDDT deltas (84.2 / 73.9 vs 68.6) are usable if and only if the comparison is explicitly framed as confidence, not accuracy — the paper itself disclaims plDDT as a state/stability discriminator (p6).
 
+- **si_in_scope**: **New in v3. SI NOT HELD, and for a Nature paper of this shape that is a real limit.** The Extended Data figures carry the uniform-subsampling comparison, the DBSCAN epsilon sweep, the MSA Transformer cross-check, the SEC–MALS monomer check and the NMR spectra; **Supplementary Dataset 1** holds the 487-variant KaiB phylogeny. The main text carries the argument and the headline numbers, but almost every *control* listed above is evidenced in Extended Data rather than in the main figures. Any claim in our manuscript that this paper's controls are strong rests on material the corpus does not hold.
+
 ## F. Figures
 
 One row per panel group. License applies to every row: see `reuse` note at the end of the table.
@@ -299,9 +323,9 @@ One row per panel group. License applies to every row: see `reuse` note at the e
 
 ## G. Provenance
 
-- **extracted_on**: 2026-09-07
+- **extracted_on**: 2026-09-07 — **re-passed to schema v3 on 2026-09-09**
 - **extractor**: claude subagent
-- **schema_version**: v2
+- **schema_version**: `v3` — re-passed 2026-09-09 against the PDF, not patched. The three v2-missing fields were extracted fresh and every added quote machine-verified; the A–E content of the v2 pass was checked and stands.
 - **confidence**: **high** for the main text, Methods, and all figure captions; **medium** for panel-level detail on the image-only Extended Data pages (pp16–23), where axis ranges and sub-panel counts were read from captions plus one rendered page (p23) rather than from extractable text; **low** for anything the Supplementary Discussion carries, which is not in this PDF (see `unresolved`).
 - **unresolved**:
   1. **Supplementary material is absent from this PDF.** The Supplementary Discussion is cited twice for load-bearing negative results — the single-sequence-mode KaiB<sub>TV-4</sub> prediction and the dropout/seed/model-index tests (p6) — and Supplementary Tables 1–2 and Supplementary Dataset 1 are cited (pp9, 11). None could be read. Those two negative results are recorded from the main-text sentences only.

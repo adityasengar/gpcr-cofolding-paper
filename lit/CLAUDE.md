@@ -77,10 +77,22 @@ Never load the whole `notes/` directory.
   was a text-extraction artifact — OCR on the one scanned paper (`hilger2020gcgr`),
   `ﬁ` ligatures, inserted spaces, or dropped superscript reference numerals. **No
   fabricated quote was found anywhere in the corpus.**
-- **Four notes are still on schema v2** and lack `structural_priors_used`,
-  `controls_run` and `si_in_scope` entirely: `obendorf2026statespecific`,
-  `suzuki2026pairscaling`, `waymentsteele2024cluster`, `ye2026multistatebias`. Their
-  A–E content is sound; those three fields are absent, not empty.
+- **The schema-v2 backlog is closed. All 78 notes are v3** and all 78 carry
+  `structural_priors_used`, `controls_run` and `si_in_scope`. The five that were v2 were
+  re-passed on 2026-09-09 by re-reading each PDF, not by patching: `tran2026nanogs`,
+  `ye2026multistatebias`, `obendorf2026statespecific`, `waymentsteele2024cluster`,
+  `suzuki2026pairscaling`. In every case the A–E content of the original pass was checked
+  and stands; nothing in it needed correcting. Every added quote was machine-verified
+  against the PDF text, and the handful that failed were run down and were all
+  extraction artifacts (inline superscript reference numerals, hyphens lost at line
+  breaks), each annotated in place. The one exception to full v3 is
+  `ingraham2023chroma`, which is `v3-partial` for a different reason: its Results and
+  Methods were never retrieved.
+
+  Two corpus defects were fixed as part of that work. **`suzuki2026pairscaling` gained
+  `latent-steering`**, which it had always lacked despite being a pair-representation
+  intervention whose own abstract calls it *"systematic latent space steering"*; that
+  reverse lookup now returns 10 papers instead of 9.
   **`tran2026nanogs` was re-passed to v3 on 2026-09-09** — re-read against the PDF, not
   patched. Its A–E content was checked and stands; the three missing fields were
   extracted fresh and all eleven added quotes machine-verified. Its `controls_run` table
