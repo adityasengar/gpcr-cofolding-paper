@@ -41,3 +41,7 @@ __pycache__/
 
 # advisory lock for same-laptop sessions; per-machine, never shared
 .session-lock
+
+# figures: the scripts are durable, their output is not
+figures/out/
+figures/structures/

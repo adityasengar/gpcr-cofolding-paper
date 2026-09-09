@@ -19,7 +19,7 @@ not track state correctness.
 | prior work | `litquery` | `lit/SCHEMA.md`, `lit/INDEX.md`, `lit/notes/` | nothing | **built** |
 | results | `dataquery` | `data/`, `rows_enriched_v3_7.csv`, `analysis/q.py` | `RESULTS.md` | **built** |
 | drafting | *(no skill yet)* | `CLAIMS.md`, `lit/notes/`, `RESULTS.md` **only** | `manuscript/`, `draft/` | outline ready; builds |
-| figures | *(not built)* | `data/`, `analysis/` | `figures/` | pending |
+| figures | *(no skill)* | `data/`, `lit/notes/` figure tables | `figures/` | **toolkit built**; panels pending data |
 | submission | *(not built)* | `draft/`, `lit/refs.bib` | — | pending |
 
 ## The rule that makes this work
@@ -49,6 +49,9 @@ draft/OUTLINE.md manuscript skeleton, per-section gates and citation rules
 manuscript/      the LaTeX (canonical) + build.sh
 tex/             pinned TeX environment + check_tex.sh
 analysis/q.py    the queries behind the ledger — `python3 analysis/q.py --list`
+figures/         the figure toolkit — house style, panel generators, PyMOL
+                 renders. Read figures/README.md; `out/` and `structures/`
+                 are generated and not in git
 analysis/fingerprint.py  --check before citing; --stamp after a refresh
 data/            predictions.csv (17,568) · conditions · receptors · backbones · coverage
 rows_enriched_v3_7.csv   19M, 68 cols, full per-prediction provenance
@@ -188,9 +191,10 @@ the next publish.
 
 - Define the Block A denominator, then re-run `python3 analysis/q.py receptor_counts`.
 - `lit/`: **the bibliography is fully extracted, 78 of 78.** Remaining: `why_it_matters`
-  in `MANIFEST.csv`, provisional `stance` in `INDEX.md`, six notes still on schema v2,
-  four notes with no page numbers, one partial note (`ingraham2023chroma`), and two open
-  vocabulary decisions (`non-biomolecular`, and the `af-cluster` collision).
+  in `MANIFEST.csv`, provisional `stance` in `INDEX.md`, four notes with no page
+  numbers, one partial note (`ingraham2023chroma`), and two open vocabulary decisions
+  (`non-biomolecular`, and the `af-cluster` collision). **The schema-v2 backlog closed
+  on 2026-09-09 — all 78 notes are v3.**
   See `lit/CLAUDE.md`.
 - **`CLAIMS.md` threats table needs `yu2026domainmotion` added** — nonbinder ligands
   reproduce the conformational change in 82 enzymes, which directly exposes the decoy arm.
