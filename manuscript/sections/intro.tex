@@ -1,0 +1,350 @@
+% GENERATED from draft/intro.md by analysis/md2tex.py — review before trusting.
+% Verified: every \citep key below resolves in manuscript/refs.bib.
+
+---
+
+The pharmacology of a G protein-coupled receptor is defined by its conformational state rather
+than by its fold. Two ligands that bind the same pocket of the same receptor can produce opposite
+physiology, and the difference is carried not by the backbone the receptor adopts on average but
+by which cytoplasmic conformation it populates and for how long. That conformational description
+has become steadily less binary as the experimental methods have improved. A recent survey of
+class A receptors sets out the modern picture directly, describing receptors that occupy "three
+different conformational states (active, inactive, intermediate-active) that can be interconverted
+for the activation/inactivation process according to a multistate, rheostat-like model, instead of
+a binary (on/off) switch model" \citep[p.~6]{georgiou2025heterogeneity}, with conformational heterogeneity
+present even within what is conventionally called the inactive ensemble
+\citep[p.~9]{georgiou2025heterogeneity}. The same conclusion emerges from the structural databank when it
+is analysed without supervision. Projecting the deposited class A structures onto a single learned
+activation coordinate shows that apo and agonist-bound receptors are each bimodal, populating both
+inactive and active conformations, while transducer-bound structures fall almost entirely on the
+active side \citep{paajanen2026activation}.
+
+Which input sets that state is therefore a substantive biological question rather than a modelling
+convention, and the answer is not simply the ligand. Occupancy of the orthosteric pocket and
+occupancy of the active state are distinct variables whose coupling varies from receptor to
+receptor, strongly in A2AR and weakly in beta1AR, beta2AR and the mu-opioid receptor
+\citep[p.~8]{georgiou2025heterogeneity}. In class B GCGR the two decouple almost entirely: "agonist binding
+alone is insufficient to promote TM6 opening", and the outward movement of TM6 appears only once
+Gs engages \citep[p.~1]{hilger2020gcgr}. Read across the databank the same asymmetry holds, with "agonist
+binding shifts this conformational ensemble towards the active state but does not fully stabilize
+it. Instead, a stable active state is only established upon G protein binding, which locks the
+receptor in its active conformation" \citep[p.~1]{paajanen2026activation}. The contact that carries this is
+specific rather than diffuse. It is the alpha5 helix of Galpha, and in particular its distal
+C-terminal segment, which "must be inserted into the receptor's cytoplasmic cleft to couple with
+the GPCR" \citep[p.~4]{georgiou2025heterogeneity}. A receptor's state is set by what is bound at the
+intracellular face at least as much as by what is bound in the pocket.
+
+Physical simulation says the same thing in the language of free energy, and adds a detail that
+matters for what follows. Activation is a transition "that span[s] multiple scales, from local
+rearrangements of side chains and hydration sites to large-scale reorganizations of the
+transmembrane helices" \citep[Introduction]{aureli2026epath}, and it can now be characterised as a
+continuous free-energy landscape for apo class A receptors, using the conserved PIF, DRY, NPxxY and
+YY microswitch motifs as quantitative descriptors rather than as a call by eye
+\citep[Methods]{aureli2026epath}. Those landscapes are not flat. Two milliseconds of aggregate dynamics
+on the beta2-adrenergic receptor, aggregated into a Markov state model, show the agonist condition
+reaching active-state conformations while "inverse agonist and apo simulations do not sample active
+state conformations along all structural metrics" \citep[Results]{kohlhoff2014gpcr}. In a physical
+ensemble, the apo receptor largely does not get there on its own.
+
+Structure prediction has meanwhile become accurate enough to be used as a working instrument in
+receptor pharmacology, and it represents none of this. Co-folding models of the AlphaFold 3 lineage
+return one structure per input, a limitation their authors state plainly: such models "typically
+predict static structures as seen in the PDB, not the dynamical behaviour of biomolecular systems
+in solution", and "this limitation persists for AF3, in which multiple random seeds for either the
+diffusion head or the overall network do not produce an approximation of the solution ensemble"
+\citep[p.~6]{abramson2024af3}. The failure is not merely one of breadth. On the paired apo and ligand-bound
+forms of cereblon, "AF3 exclusively predicts the closed state for both holo and apo systems"
+\citep[p.~6]{abramson2024af3}, which is to say the model returns whichever state dominates its training
+data regardless of what the input specifies. Independent work has since established that this is
+the general behaviour rather than an anecdote. On a PDB-wide, mechanism-stratified benchmark, four
+co-folding models and one ensemble emulator recover all known intrinsic states in only about 8 to
+29\% of sequence clusters, and the bottleneck is traced to the structure module rather than to any
+loss of diversity in the pair representation \citep{ku2026promise}. Across four multi-state proteins the
+models "default to a dominant state represented in the PDB", and the bias survives every
+architecture tested \citep[p.~2]{ye2026multistatebias}. On human protein kinases, state accuracy plateaus
+near 65 to 75\%, ensembles are bimodally all-correct or all-incorrect across samples, and the usual
+geometric quality scores do not predict which \citep{sun2026kinconfbench}. On SLC transporters the
+deposited state is returned whatever the sampling intervention, to the point that "the ESM-AF2
+protocols described here fail to generate the alternative conformational state when one
+conformational state was available in the PDB at the time of AF2 training"
+\citep[p.~11]{swapna2025memorization}. The most quantitative statement of the effect comes from enzymes.
+Across 82 enzymes with a known open-closed domain motion, 500 AlphaFold 3 models per condition and
+no templates, whether the model returns the open or the closed form is governed by how many apo and
+holo structures of that enzyme sit in the PDB rather than by whether the triggering ligand is
+supplied: adding the ligand moves the closed fraction by 9.1 to 17.5 percentage points, against a
+40.3-point gap between the enzymes whose databank entries are mostly apo and those whose entries are
+mostly holo \citep[Discussion]{yu2026domainmotion}. The authors' own summary is that "results may depend
+more on the number of structures available for training than on the presence of a ligand in the
+calculation" \citep[Significance]{yu2026domainmotion}, and the same behaviour reproduces in AlphaFold 2.
+
+For receptors the collapse has a direction, and it runs against the state that matters most for
+agonist pharmacology. Sequence-only AF2 and AF3 models agree best with inactive references and
+agree progressively less well as the reference becomes more active \citep{chib2025gpcrstates}; the
+earlier statement of the same phenomenon is that AF2 "only predicts one state and is biased toward
+either the active or inactive conformation depending on the GPCR class" \citep[p.~1]{heo2022multistate}.
+Nor is this a problem that could be solved by generating many structures and selecting among them,
+because the models' own confidence does not track conformational correctness. Cfold reports "no
+clear relationship between the plDDT and known conformations from the PDB suggesting that
+confidence metrics can't be used to select for certain conformations" \citep[p.~5]{bryant2024cfold}; the
+multi-state survey concludes that pLDDT and PAE "are not reliable selectors of biologically or
+physically meaningful alternative states" \citep[p.~15]{ye2026multistatebias}; and on GPCR peptide
+complexes specifically, PAE over-estimates confidence precisely where the peptide has been placed
+incorrectly, so confidence-first filtering cannot separate correct from incorrect placement
+\citep{junker2026peptidedesign}. Sampling harder and ranking by confidence is therefore not a route to a
+chosen state, and this constrains everything that follows: any method claiming a state must supply
+a state criterion independent of the model that produced the structure.
+
+Attempts to recover more than one state divide cleanly by where they intervene, and the oldest
+family intervenes on the input. The simplest version samples harder without steering at all, either
+by injecting dropout at inference and generating thousands of models per target
+\citep{wallner2023afsample}, or by retraining a predictor on a conformationally split databank and
+drawing on the order of a hundred samples per target, which recovers a held-out conformation for
+52\% of targets but only as a best-of-N result with no rule for picking the right sample
+\citep{bryant2024cfold}. The alignment has been manipulated in most of the ways available: clustered by
+edit distance so that different subsets favour different conformations \citep{waymentsteele2024cluster},
+a mechanism subsequently challenged as no better than random shallow subsampling
+\citep{schafer2025confounds} and then defended with column-shuffling controls \citep{waymentsteele2025reply};
+subsampled below the depth at which coevolutionary signal survives \citep{lee2025seqassoc}; edited by
+in-silico alanine mutagenesis of alignment columns \citep{stein2022speachaf}; and masked at a tuned
+column fraction \citep{kalakoti2025afsample2,kalakoti2026afsample3}, including masking restricted to the
+neighbourhood of the orthosteric pocket in class A receptors \citep{mitjavila2026afsample2t}. Tested head
+to head against the same targets, however, "MSA-level manipulation alone, whether through
+evolutionary clustering or random subsampling, is largely insufficient to overcome the systematic
+conformational bias observed across the deep learning tools evaluated in this study"
+\citep[pp.~16--17]{ye2026multistatebias}.
+
+The other input-side family supplies the answer rather than perturbing the question.
+State-annotated GPCRdb templates combined with deletion of the alignment allow an operator to
+obtain either activation state at near-experimental accuracy \citep{heo2022multistate}, and that route
+has since been used to pin active-state templates for ranking peptide agonists and deorphanising
+receptors \citep{ferguson2026deorphann}, and to condition a fine-tuned co-folding model on a declared
+state for peptide design \citep{yang2025statespecific}. Its limits are documented by the people who use
+it. Templates alone do not move a prediction when a deep alignment is present, because "using such
+curated template databases was not sufficient to make meaningful changes" \citep[p.~3]{heo2022multistate};
+in transporters a correct alternative-state template is flipped back to the memorised state
+\citep{swapna2025memorization}; and on a panel spanning kinases and class A receptors both handles
+together fall short, where "attempts to guide predictions through MSA editing or templating proved
+to be insufficient, especially for the active-state conformation" \citep[p.~18]{obendorf2026statespecific}.
+
+A newer family leaves the inputs untouched and intervenes inside the generative process. Its
+machinery comes from the diffusion literature rather than from structural biology: twisted
+sequential Monte Carlo for asymptotically exact conditional sampling \citep{wu2023tds}, reward-weighted
+particle steering that requires no differentiable objective \citep{singhal2025fksteering}, and
+discriminator guidance in both the continuous \citep{kim2023refining} and the discrete
+\citep{ekstromkelvinius2024discriminator} settings. None of those four papers contains a conformational
+experiment and two contain no biomolecule at all, so they establish the mechanism rather than any
+structural result. Conditioning a protein diffusion model on a classifier is itself not new: Chroma
+samples proteins under external constraints including "semantic specification from classifiers"
+\citep[Discussion]{ingraham2023chroma}, though it designs new proteins rather than selecting among
+conformations of an existing one. Applied to structure models, the same machinery takes several forms.
+Interventions have been placed on the coordinates during denoising, by adding the gradient of a
+differentiable collective variable to the sampler update \citep{lam2026metadiffusion}, or by running
+particles under a bias away from the model's own default prediction and reweighting them
+\citep{richman2025conformix}. Others act on the trunk representation, by perturbing the conditioning
+tensors \citep{jung2026boltzperturb}, scaling the pair representation with a single scalar
+\citep{suzuki2026pairscaling}, applying a mutual repulsion between parallel samples
+\citep{suzuki2026conforflux}, or learning an affine transform of the pair representation
+\citep{lee2026confornets}. Others still act on the conditioning embedding by gradient ascent
+\citep{li2026embedding}, or on the alignment feature through a gradient taken back through the model's
+own distogram \citep{tang2026steeraf}. Mechanistic work supports the choice of site, identifying the pair
+track rather than the single track as the causal geometric substrate \citep{feldman2026alphainterp} and
+showing that trunk representations are steerable across model families \citep{lu2026twostages}, with the
+caveat that a concept being linearly decodable does not establish that the model uses it causally
+\citep{jedryszek2026probing}. Sampling and steering machinery of this general kind now ships in
+production co-folding code \citep{wohlwend2024boltz1,passaro2025boltz2}. A parallel strategy abandons
+the predictor altogether and trains a generative emulator on molecular dynamics, which produces
+quantitative equilibrium ensembles but was trained on soluble single chains rather than on membrane
+proteins \citep{lewis2025bioemu}.
+
+A smaller and, for the present purpose, more relevant body of work uses a biological co-input as
+the handle. Supplying the cognate ligand of a cryptic site shifts AF3 ensembles onto the open
+pocket while ligand-free runs return the closed one \citep{lazou2026cryptic}; co-folding a competitive
+blocker restores discovery of allosteric and cryptic sites that the orthosteric pocket otherwise
+overwrites \citep{purnomo2026cafe}; and across four multi-state proteins, including beta2AR,
+"small-molecule ligands have weak or inconsistent effects, while large protein partners drive clear
+conformational switching between states" \citep[p.~2]{ye2026multistatebias}. The obvious objection to all of
+these is that the co-input may be acting as an occupant rather than as itself, and one study has
+tested it directly: across the same 82 enzymes, ligands known not to bind induce nearly the same
+domain motion as the native trigger, and although they are placed with lower confidence, that
+confidence is "generally not sufficient for discriminating between binder and nonbinder ligands"
+\citep[Significance]{yu2026domainmotion}. Any claim that a co-input sets a state therefore has to
+separate the co-input's identity from its mere presence, and has to do so with a control arm rather
+than an argument. Running alongside all of this
+is a growing measurement literature: multi-state benchmarks \citep{ku2026promise,sun2026kinconfbench},
+receptor-specific evaluations \citep{chib2025gpcrstates,zhang2026generalization,obendorf2026statespecific}, site-type comparisons holding the target fixed and varying only
+whether the ligand is orthosteric or allosteric \citep{nittinger2025cofolding}, and explicit proposals
+for the evidential bar that a multi-state claim should have to clear \citep{chakravarty2026statespace,liu2026ensembletests}.
+
+Surveying this work by what it does rather than by what it studies exposes a consistent shape.
+Prospectivity is close to absent. Of the 78 papers surveyed here, exactly three report an
+unqualified prospective result, and none is of the relevant kind: a wet-lab peptide study that
+generates no structures \citep{tran2026nanogs}, a blind CASP submission that defines no conformational
+state at all \citep{wallner2023afsample}, and a de novo design campaign that generates new proteins rather
+than alternative states of an existing one \citep{ingraham2023chroma}. Where a method does direct the state, the
+direction is usually obtained from a structure of the answer. Cfold's recovery rate is a best-of-N
+selected by TM-score against the held-out structure, and the paper demonstrates that no
+confidence-based substitute exists \citep[p.~5]{bryant2024cfold}. ConforNets achieves transferable state
+control, but the supervision signal for its transfer task is itself a deposited target structure
+\citep{lee2026confornets}, so it cannot be pointed at a receptor whose target state has never been
+solved. Trunk-scaling and repulsion strengths are swept on the same benchmarks that report the
+results \citep{suzuki2026pairscaling,suzuki2026conforflux}. The cleanest exception is ConforMix, which
+biases away from the model's own default prediction and so needs no reference structure at all, on
+the explicit claim that prior conditional sampling on biomolecular diffusion models "has required
+additional input information, such as experimentally measured pairwise distances"
+\citep[p.~2]{richman2025conformix}. Even there, coverage is scored against deposited references and both
+reported rows are selected as the closest sample to one \citep[p.~6]{richman2025conformix}.
+
+Where a directional handle exists at all, it is usually the operator's rather than the biology's.
+Nineteen of the 78 papers carry one. Restricting to prediction pipelines applied to receptors, the
+state is supplied by the operator in every case: as a state-annotated template \citep{heo2022multistate},
+as a pinned active-state template \citep{ferguson2026deorphann}, as a declared state label routed through
+state-matched templates \citep{yang2025statespecific}, or as a learned transform supervised by a
+reference structure \citep{lee2026confornets}. Where the handle is instead a biological co-input, one of
+three things is true. The system is not a receptor \citep{lazou2026cryptic,purnomo2026cafe,richman2025conformix}; or the demonstration rests on four targets with no memorization control
+\citep{ye2026multistatebias}; or the quantity measured is binding-site geometry for docking rather than
+the receptor's activation state \citep{mitjavila2026afsample2t}.
+
+Two near-misses need stating precisely, because both are close and the gap has to be defined
+against them rather than around them.
+
+The first supplies the partner and measures the receptor, which is the combination this work is
+built on. Comparing six AlphaFold protocols on 63 class A receptor-Gs pairs released after the
+models' training cutoffs, explicitly co-folding the receptor with its G protein reproduces the
+intracellular rearrangement of activation better than operator-supplied active-state templates
+with alignment masking or subsampling do, with "TM5, TM6, and TM7 present[ing] three distinct
+groups, with the models explicitly modeling G-protein binding outperforming the others"
+\citep[p.~6302]{chiesa2025templatebias}. The advantage is not simply a training-set artefact: 94 of the
+145 benchmark structures involve a receptor with no template and no presence in either model's
+training set, and six receptor families are absent from both, which leads the authors to conclude
+that the gain "should not be attributed only to a more recent and active-state biased training
+set, but rather to its ability in modeling allosteric effects during the cofolding process"
+\citep[p.~6305]{chiesa2025templatebias}. Any claim that a biological co-input has not previously been
+shown to drive a receptor's predicted activation state is therefore false, and four narrower
+distinctions are what remain. The co-input there is the whole Ga subunit or heterotrimer rather
+than the isolated C-terminal segment, so the contribution of the a5 contact is never separated
+from the rest of the interface. The state is scored as RMSD to the deposited active structure of
+that same complex, so the procedure cannot be run on a receptor whose active state is unsolved.
+There is no decoy or scrambled-partner arm, so occupancy and identity are not distinguished. And
+no AlphaFold 3-lineage model is evaluated, a limitation the authors state themselves
+\citep[p.~6299]{chiesa2025templatebias}.
+
+The second near-miss approaches from the peptide side. A GPCR-specialised co-folding model
+conditioned on activation state ranks designed peptides into agonists and antagonists, with
+nanomolar hits assayed, and its authors identify state control as exactly what prior
+peptide-design methods lack, writing that "these methods do not allow for precise control over the
+GPCR's functional state (e.g., active or inactive)" \citep[p.~2]{yang2025statespecific}. What separates
+that work from the question asked here is the direction of the dependency. The state is declared
+before any peptide is scored, and the authors are explicit that this is the operating mode:
+"HF-Multistate, when specifying the GPCR state, can partially capture functional shifts in peptide
+design" \citep[p.~10]{yang2025statespecific}. The peptide there is the designed output. No experiment in
+that work varies a peptide sequence with the state conditioning held fixed and reports the
+resulting receptor conformation.
+
+That verification, however, does not scale. In the \emph{largest} GPCR and G protein co-folding studies
+the receptor's state is not measured at all. Interface contact fingerprints have been extended to
+825 modelled receptor and G protein complexes with no activation criterion defined anywhere in the
+work \citep{matic2023gpcrome}; the entire GPCRome has been co-folded against all Galpha subunits with the
+receptor's state assumed from the presence of the partner and no activation predicate applied
+\citep{miglionico2026atlas}; and 5,595 AF2-Multimer complexes have been released gated purely on
+self-confidence, with no activation state assigned to any model \citep{pandyszekeres2024gproteindb}. The
+one study that does verify covers 63 pairs \citep{chiesa2025templatebias}, two orders of magnitude fewer
+than the resources that downstream work actually consumes. This is not a small oversight in a corner of
+the field, because these are the resources that downstream work treats as sources of active-state
+structures. The instrument needed to close the loop already exists: a learned classifier separates
+active from inactive deposited GPCR structures with near-perfect discrimination, and its authors
+propose the missing experiment themselves, that "By applying HYALINE to AlphaFold 3-generated GPCR
+models, researchers can obtain rapid, quantitative estimates of whether the predicted structure
+represents an active, inactive, or intermediate conformation" \citep[p.~11]{khaleq2026hyaline}. No such
+experiment is reported there or anywhere else in this corpus.
+
+The benchmarks that might otherwise have settled the question exclude receptor activation by
+construction, and they now do so three times over by three different mechanisms. ProMiSE states it
+in its own Limitations: "Our pair-extraction criterion, TM-score < 0.8, is also stringent and
+preferentially captures large conformational changes. Consequently, localized but biologically
+important motions, such as GPCR TM6 displacement or transporter pocket rearrangements, may be
+excluded" \citep[p.~9]{ku2026promise}. The same TM-score 0.8 rule defines the structural clusters of the
+Cfold benchmark \citep[p.~7]{bryant2024cfold} and is inherited without comment by work built on it
+\citep{kalakoti2026afsample3}. The strongest inference-time sampling result to date arrives at the same
+place by a third route, importing its four evaluation sets wholesale from earlier benchmark papers,
+none of which contains a receptor \citep{richman2025conformix}. ProMiSE additionally reports that
+protein-induced conformational changes are predicted less well than ligand-induced ones
+\citep{ku2026promise}, a result that runs opposite to the axis examined here and that is addressed
+directly in the Discussion.
+
+The last column separates two questions that are usually merged, and it is where the receptor
+literature is weakest. Forty-four of the 78 papers have some held-out or post-cutoff set in their
+design; far fewer run that set as an analysed control arm, and among the papers that actually
+address GPCR conformational state the control is absent, unpowered or unmatched
+\citep{chib2025gpcrstates,ye2026multistatebias,obendorf2026statespecific,yang2025statespecific}. The
+contrast with what a properly controlled design looks like is stark: the enzyme study above
+stratifies its 82 targets by the composition of the training set itself, runs a non-binding-ligand
+arm against the native trigger, and replicates the whole result in a second architecture
+\citep[Results]{yu2026domainmotion}. Even
+the cleanest inference-time result concedes the point, noting that its evaluated proteins "were
+likely present in the Boltz training set" \citep[p.~6]{richman2025conformix}. The omission is consequential
+rather than pedantic. Co-folding's advantage over physics-based methods is concentrated near the
+training distribution and largely disappears in the least-similar stratum
+\citep{skrinjar2026generalization,roehrig2026docking}; splitting on sequence identity does not by itself
+stop benchmark leakage \citep{mattsson2026leakage}; and predicted ligand placement can survive a pocket
+being mutated until it cannot bind, which shows retrieval rather than physics driving the result
+\citep{masters2025physics}. That last failure extends beyond the structural head: on 943
+virtual-screening hits across ten mostly-receptor targets, Boltz-2's separation of active from
+inactive compounds "remains insensitive to key binding site mutations and even in some cases to
+target exchange" \citep[Abstract]{bret2025boltz2docking}. A conformational claim carrying no matched
+control arm is therefore not yet distinguishable from a lookup, and a control arm is only
+persuasive if the quantity it perturbs is one the model demonstrably reads.
+
+Taken together, the gap is narrower than a survey of this literature first suggests, and it is
+sharper for being narrow. A biological co-input has been shown to set a receptor's predicted
+conformational state, and that state has been verified, but only with the whole transducer
+supplied and only by measuring distance to the deposited answer. What the corpus does not contain
+is a study in which the co-input is reduced to the minimal contact that carries activation, in
+which its contribution is separated from mere occupancy of the cleft by a graded series of decoy
+and sequence-scrambled controls, and in which the resulting state is called by a predicate fixed
+in advance rather than by proximity to a structure that must already exist. That is the gap this
+work addresses.
+
+---
+
+\section{What we do}
+
+\begin{quote}
+\textbf{PROVISIONAL STUB.} Landed blocks only, no numbers, and expected to be rewritten once the data
+export is complete. See \texttt{../STATUS.md} for what has landed and what has not.
+\end{quote}
+
+We treat the Galpha alpha5 C-terminal peptide as a co-input to a frozen co-folding model and ask
+what the receptor does in response, holding the model weights, the alignment and the template
+settings unchanged and varying only what is supplied alongside the receptor sequence. Predictions
+are run across a panel of class A receptors on four independent co-folding backbones, and the
+receptor's conformational state is called by a predicate defined in advance rather than by eye.
+Three arms have landed. The first compares apo receptors against receptors given their cognate
+partner. The second places apo, decoy, sequence-shuffled and cognate co-inputs on a common scale,
+which lets the effect be decomposed into a contribution from occupancy of the cytoplasmic cleft, a
+contribution from the alpha5 C-terminal sequence itself, and a contribution from that sequence
+belonging to the correct Galpha family. The third asks whether the orthosteric pocket, as distinct
+from the cytoplasmic face, separates by ligand class. Alongside these we report a census of
+intermediate conformations produced under partner variation, and an observation about model
+confidence made across backbones on a single receptor.
+
+\section{Contributions}
+
+\begin{quote}
+\textbf{PROVISIONAL STUB.} Four candidate contributions, each written so that it can be falsified.
+The wording will change with the final result set; the framing is intended to survive it.
+\end{quote}
+
+1. A biological co-input, supplied the way a user of these models would supply it, moves the
+   predicted conformational state of a receptor. Falsified if the state distribution under the
+   cognate co-input is indistinguishable from the apo distribution.
+2. The effect is attributable to the co-input rather than to steric occupancy alone, because the
+   decoy and sequence-shuffled arms sit between the two extremes. Falsified if a decoy of matched
+   size reproduces the cognate effect.
+3. The state is verified rather than assumed, by a predicate defined in advance and reported with
+   its threshold, applied identically to every arm and cross-checked against a second instrument.
+   Falsified if the two instruments disagree on the ordering of the arms.
+4. Model confidence does not track conformational correctness on this axis, so it cannot be used to
+   select a state. Falsified if confidence separates correct from incorrect state calls at matched
+   partner composition.
+
+---

@@ -1,4 +1,6 @@
 \documentclass{article}
+\usepackage[T1]{fontenc}   % renders accented author names (Söding, Šali, Pándy-Szekeres)
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[hidelinks]{hyperref}
@@ -11,36 +13,7 @@
 
 \maketitle
 
-\section{Introduction}
-
-Placeholder.
-
-\section{Conformational state in structure prediction: a short review}
-
-\emph{Test section, written to check that the Overleaf repository, the bibliography and the
-citation pipeline work end to end. Content is deliberately minimal.}
-
-Deep learning models for biomolecular structure prediction return a single conformation per
-sequence, and the authors of AlphaFold3 acknowledge that their model collapses onto one basin
-rather than representing a distribution \citep{abramson2024af3}. Benchmarks built to test this
-directly find that recovery of all known states is rare, and place the limitation in the
-structure module's decoding rather than in the representation that feeds it
-\citep{ku2026promise}.
-
-Attempts to recover additional states divide by where they intervene. Earlier approaches
-manipulate the input alignment, either by clustering it so that different subsets favour
-different conformations \citep{waymentsteele2024cluster}, or by supplying state-annotated
-templates so that an operator selects the target state directly \citep{heo2022multistate}. More
-recent work intervenes inside the model at inference time, either by biasing coordinates during
-denoising \citep{lam2026metadiffusion} or by perturbing the trunk representation that conditions
-the diffusion module \citep{suzuki2026conforflux, lee2026confornets}. Sampling machinery of this
-kind now ships in production co-folding code \citep{passaro2025boltz2}.
-
-Two problems recur. Success is usually scored against a deposited reference structure, which makes
-the reported rates best-of-$N$ statistics rather than predictions. And model confidence does not
-discriminate a correct conformational state from an incorrect one, so it cannot be used to select
-among samples; learned state classifiers have been proposed instead, although they have not yet
-been applied to predicted structures \citep{khaleq2026hyaline}.
+\input{sections/intro}
 
 \bibliographystyle{unsrtnat}
 \bibliography{refs}
