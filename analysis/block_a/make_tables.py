@@ -103,8 +103,11 @@ emit("T2_headline_by_backbone", t2,
      "Headline result by backbone. Median TM6 tilt shift (cognate minus apo), "
      "fraction of the way to the active reference, and predicate firing rates.",
      "baseline panel; E1+E2 applied",
-     "All intervals are CLUSTER bootstrap over 26 paralog clusters, 1000 "
-     "resamples (authoritative; receptor bootstrap is in S-T2). "
+     "n = %d rows over %d receptors and %d backbones; receptor counts per "
+     "statistic are in the table (they differ by metric). All intervals are "
+     "CLUSTER bootstrap over 26 paralog clusters, 1000 resamples "
+     "(authoritative; receptor bootstrap is in S-T2). "
+     % (len(keep), keep.receptor.nunique(), keep.backbone.nunique()) +
      "The fraction is a mean over receptors and is NOT a statement about "
      "amplitude -- see T3.")
 
@@ -118,6 +121,9 @@ emit("T3_amplitude_fits", t3,
      "all four backbones on both axes under three inclusion sets.",
      "per-axis E3 applied (excl\\_E3\\_npxxy / excl\\_E3\\_tilt); E4 for the "
      "class\\_a sets; E1+E2 throughout",
+     "n = 24 fits (4 backbones x 2 axes x 3 inclusion sets). "
+     "Receptors per fit: 28 (npxxy) and 32 (tilt) under "
+     "class\\_a\\_only, 23 and 27 under class\\_a\\_no\\_holds. "
      "No slope approaches unity. Protenix/NPxxY does not cross zero in ANY "
      "inclusion set (D1). Tilt sd\\_predictor is 1.17 vs 5.22 for NPxxY -- "
      "the tilt axis cannot resolve amplitude (D3).")
