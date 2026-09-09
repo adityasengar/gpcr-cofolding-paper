@@ -51,17 +51,14 @@ echo "--- local-only assets (absent on a fresh clone) ---"
 printf "  lit/pdfs/   %s\n" "$([ -d lit/pdfs ] && echo "$(ls lit/pdfs/*.pdf 2>/dev/null|wc -l|tr -d ' ') PDFs" || echo 'ABSENT — notes only, cannot open a PDF here')"
 printf "  rows_enriched_v3_7.csv  %s\n" "$([ -f rows_enriched_v3_7.csv ] && echo present || echo 'ABSENT')"
 echo
-echo "--- bibliography drift (lit/refs.bib -> paper_tex/refs.bib) ---"
-if [ -f paper_tex/refs.bib ]; then
-  python3 analysis/sync_bib.py >/tmp/_bib.log 2>&1
-  if [ -d paper_tex/.git ] && ! git -C paper_tex diff --quiet -- refs.bib 2>/dev/null; then
-    echo "  !! paper_tex/refs.bib is STALE — regenerated, commit and push it to Overleaf"
-  else
-    echo "  in sync"
-  fi
-else
-  echo "  paper_tex/ not cloned on this machine"
+echo "--- manuscript bibliography ---"
+python3 analysis/sync_bib.py >/tmp/_bib.log 2>&1 && \
+  echo "  manuscript/refs.bib regenerated from lit/refs.bib ($(grep -c '^@' manuscript/refs.bib) citable)" || \
+  echo "  !! sync_bib.py failed; see /tmp/_bib.log"
+if [ -d paper_tex/.git ] && ! git -C paper_tex diff --quiet 2>/dev/null; then
+  echo "  Overleaf copy is behind — run ./publish_overleaf.sh when you want to share"
 fi
+
 echo
 echo "--- other sessions on this laptop ---"
 [ -x .session-guard.sh ] && ./.session-guard.sh || true
