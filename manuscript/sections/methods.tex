@@ -43,11 +43,28 @@ set is a derivation-set figure, not a held-out one}, and is reported as such.
 The thresholds are derived from geometry rather than fitted to a classifier, but
 the 80 rows carry state annotations, and the provenance of those annotations
 bounds how independent the instrument is: an instrument calibrated on a given
-labelling cannot then adjudicate that labelling. \textbf{[PI: state the source
-of the state annotations on the 80 tier-1 rows.]} This matters because the
-construct annotation shipped with the same reference set contradicts the RCSB
-record on roughly 40\% of evaluable entries, so the labelling is not assumed
-reliable elsewhere in this work.
+labelling cannot then adjudicate that labelling.
+
+This is not a hypothetical concern. Curated activation-state labels are not
+purely geometric --- they are assigned from ``GPCRdb annotations, structural
+criteria, and ligand binding status'' \citep[p.~12]{khaleq2026hyaline} --- and
+an unsupervised geometric index over 1{,}351 class~A structures recovers
+entries ``whose state of activity was originally interpreted incorrectly''
+\citep[p.~3]{paajanen2026activation}. The same work notes that many models
+predate substantial active-state coverage, so ``it is also not certain that the
+active states of the structures used in developing the models were correctly
+identified'' (p.~3).
+
+Our predicate follows the geometric pattern rather than the label-inheriting
+one: it reads C$\alpha$ and hydroxyl positions at Ballesteros--Weinstein
+positions 3.50, 5.58, 6.34 and 7.53, using generic \emph{numbering} and not
+curated \emph{labels}. The residual exposure is the selection of the 80 tier-1
+rows themselves. \textbf{[PI: were those rows selected by crystallographic tier,
+with labels checked only afterwards, or selected by curated label?]} The first
+leaves the instrument independent of the annotation; the second does not, and
+would need saying. The same reference set's construct annotation contradicts the
+RCSB record on roughly 40\% of evaluable entries, so its labelling is not
+assumed reliable elsewhere in this work.
 The models do not place water molecules; results are described as consistent
 with the water-bridged arrangement, never as the bridge forming.
 
