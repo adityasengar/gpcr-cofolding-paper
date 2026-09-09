@@ -245,7 +245,10 @@ def main():
     p.add_argument("--dpi", type=int, default=600)
     p.add_argument("--extra", help="raw pml appended before the camera")
     p.add_argument("--out", required=True, help="output stem")
-    p.add_argument("--outdir", default=os.path.join(HERE, "out"))
+    p.add_argument("--outdir", default=os.path.join(HERE, "out"),
+                   help="where the image goes (perishable)")
+    p.add_argument("--scenedir", default=os.path.join(HERE, "scenes"),
+                   help="where the .pml and .prov.json go (durable, in git)")
     # provenance, and it is not optional
     p.add_argument("--selected-from", type=int, required=True,
                    help="how many candidates this one was chosen out of")
@@ -256,8 +259,9 @@ def main():
     args = p.parse_args()
 
     os.makedirs(args.outdir, exist_ok=True)
-    stem = os.path.join(args.outdir, args.out)
-    args.png = stem + ".png"
+    os.makedirs(args.scenedir, exist_ok=True)
+    args.png = os.path.join(args.outdir, args.out + ".png")
+    stem = os.path.join(args.scenedir, args.out)
     pml_path = stem + ".pml"
     with open(pml_path, "w") as fh:
         fh.write(build(args))

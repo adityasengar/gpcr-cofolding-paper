@@ -15,7 +15,7 @@ Every path below is written `$LIT/...`. Set it once per session so the skill wor
 whether you started in the project root or inside the corpus folder:
 
 ```bash
-LIT=$( [ -f INDEX.md ] && echo . || echo lit ); echo "corpus root: $LIT"
+LIT=$( [ -f INDEX.md ] && echo . || { [ -d lit ] && echo lit || echo ../lit; } ); echo "corpus root: $LIT"
 ```
 
 If neither resolves, you are not in this project — say so rather than guessing.

@@ -19,7 +19,7 @@ not track state correctness.
 | prior work | `litquery` | `lit/SCHEMA.md`, `lit/INDEX.md`, `lit/notes/` | nothing | **built** |
 | results | `dataquery` | `data/`, `rows_enriched_v3_7.csv`, `analysis/q.py` | `RESULTS.md` | **built** |
 | drafting | *(no skill yet)* | `CLAIMS.md`, `lit/notes/`, `RESULTS.md` **only** | `manuscript/`, `draft/` | outline ready; builds |
-| figures | *(no skill)* | `data/`, `lit/notes/` figure tables | `figures/` | **toolkit built**; panels pending data |
+| figures | `figbuild` | `data/`, `CLAIMS.md`, `lit/notes/` | `figures/`, `FIGURES.md` | **built**; panels pending data |
 | submission | *(not built)* | `draft/`, `lit/refs.bib` | — | pending |
 
 ## The rule that makes this work
@@ -124,23 +124,38 @@ via `./publish_overleaf.sh`. `manuscript/` is canonical.
 
 ### Who does what
 
-Two working sessions on this one laptop. **Content versus machinery** is the split.
+Three working sessions on this one laptop. **Content versus machinery** is the split,
+with figures as their own seat because a figure is simultaneously a claim and an
+artefact.
 
-| | **lit agent** (runs in `paper/lit/`) | **orchestrator** (runs in `paper/`) |
-|---|---|---|
-| owns | the corpus and the words | how the paper is built |
-| writes | `lit/**`, `manuscript/sections/*.tex`, `CLAIMS.md` | `manuscript/main.tex`, `analysis/**`, `tex/**`, this file |
-| git | **never** | all of it |
+| | **lit** (`paper/lit/`) | **figures** (`paper/figures/`) | **orchestrator** (`paper/`) |
+|---|---|---|---|
+| owns | the corpus and the words | every figure, and its caption | how the paper is built |
+| writes | `lit/**`, `sections/intro.tex`, `CLAIMS.md` | `figures/**`, `sections/figures.tex` | `main.tex`, `analysis/**`, `tex/**`, this file |
+| skill | `litquery` | `figbuild` + `litquery` | `dataquery` |
+| git | **never** | **never** | all of it |
 
-Rule of thumb: **what the paper says → lit agent. How the paper is built → orchestrator.**
+Rule of thumb: **what the paper says → lit. What a figure shows → figures. How the
+paper is built → orchestrator.**
 
-Aditya routes between them; there is no automation. Worked examples:
+Captions belong to the figures session, not to lit. A caption's load-bearing content
+is n, the selection rule, the threshold and the provenance — the `.prov.json`
+material — and the corpus is blunt about what happens when whoever writes it does not
+hold that.
 
-- *"Is this claim in the intro supported?"* → lit agent (it has `litquery` and the notes).
+Aditya routes between them; there is no automation. The sessions do not message each
+other, so nothing may depend on one knowing what another said: `figures/FIGURES.md`
+and `SESSIONS.md` carry state across, and both outlive any session.
+
+Worked examples:
+
+- *"Is this claim in the intro supported?"* → lit (it has the notes).
+- *"Plot the α5-CT arm" / "the render looks wrong"* → figures.
+- *"What figure should I make for this data?"* → figures; it has `litquery` for
+  design-by-analogy and does not need to route through lit.
 - *"Change the margins / spacing / fonts"* → orchestrator (`main.tex` is the container).
-- *"Add or remove a paper"* → lit agent extracts and updates `lit/**`; then the
+- *"Add or remove a paper"* → lit extracts and updates `lit/**`; then the
   orchestrator regenerates `manuscript/refs.bib` and commits.
-- *"Rewrite the gap paragraph"* → lit agent, editing `sections/intro.tex` directly.
 - Build broken, PDF won't compile, anything git → orchestrator.
 
 ### The rule that keeps this safe
