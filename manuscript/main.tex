@@ -1,17 +1,72 @@
-\documentclass{article}
-\usepackage[T1]{fontenc}   % renders accented author names (Söding, Šali, Pándy-Szekeres)
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx} % Required for inserting images
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage[hidelinks]{hyperref}
+% =====================================================================
+% main.tex — the manuscript container.
+%
+% OWNED BY THE ORCHESTRATOR. Section CONTENT lives in sections/*.tex and is
+% written by the section's author; this file is the container and house style.
+%
+% Submission format follows Nature Communications guidance: single column,
+% double spaced, continuous line numbers, numbered citations.
+% Build:  ./manuscript/build.sh
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
 
-\title{gpcr\_benchmark}
-\author{adityasengariitd}
-\date{September 2026}
+% --- encoding and fonts -------------------------------------------------
+\usepackage[T1]{fontenc}      % renders accented author names (Söding, Šali, Pándy-Szekeres)
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}         % Times text and maths — the journal house look
+% NOTE: helvet/courier omitted deliberately — BasicTeX ships the .sty but not the
+% URW font metrics (phvr8t), so loading them breaks the build on a clean machine.
+\usepackage{microtype}        % subtle spacing; makes justified text much cleaner
+
+% --- page geometry ------------------------------------------------------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\doublespacing                % submission format; comment out to read comfortably
+\usepackage[modulo]{lineno}   % reviewers cite line numbers
+\linenumbers
+
+% --- headings -----------------------------------------------------------
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.6em}{0.6em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.4em}
+
+% --- floats, tables, links ---------------------------------------------
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks,breaklinks=true]{hyperref}
+
+% --- running head -------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[R]{\footnotesize\itshape Conformational-state control in co-folding models}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- title block --------------------------------------------------------
+\usepackage{authblk}
+\renewcommand\Affilfont{\small}
+\setlength{\affilsep}{0.6em}
+
+\title{\bfseries A G\texorpdfstring{$\alpha$}{alpha} \texorpdfstring{$\alpha$}{alpha}5
+  C-terminal peptide co-input drives GPCR co-folding models into the active state}
+
+\author[1]{Aditya Sengar}
+\affil[1]{Novartis Biomedical Research}
+\date{\today}
 
 \begin{document}
-
 \maketitle
+\thispagestyle{fancy}
+
+\begin{abstract}
+\noindent
+\textit{Abstract to be written once the Results are landed. See \texttt{CLAIMS.md}
+for the claims it must compress and \texttt{draft/OUTLINE.md} for the gate.}
+\end{abstract}
 
 \input{sections/intro}
 

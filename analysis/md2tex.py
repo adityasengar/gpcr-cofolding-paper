@@ -34,9 +34,11 @@ def convert(md):
         m = re.match(r"^(#{1,4})\s+(.*)$", s)
         if m:
             lvl, txt = len(m.group(1)), m.group(2).strip()
-            cmd = {1: None, 2: "section", 3: "subsection", 4: "subsubsection"}[lvl]
-            out.append("" if cmd is None else "\\%s{%s}" % (cmd, txt))
+            cmd = {1: "section", 2: "subsection", 3: "subsubsection", 4: "paragraph"}[lvl]
+            out.append("\\%s{%s}" % (cmd, txt))
             continue
+        if re.fullmatch(r"(-{3,}|\*{3,}|_{3,})", s.strip()):
+            continue                      # markdown horizontal rule: no LaTeX equivalent
         if s.startswith("- "):
             out.append(r"\item " + s[2:]); continue
         out.append(s)
