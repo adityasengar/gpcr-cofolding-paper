@@ -1,0 +1,5 @@
+pdb_id,receptor,state,p550_f644_ca_distance,note
+# n=77 per-reference P5.50-F6.44 CA distances are NOT stored per-PDB in the release archive.
+# Aggregate reference distribution: active_median=10.48 A, inactive_median=11.99 A, delta=-1.51 A (n=77).
+# Source: structures/block_a/p2_scale_up/RESULTS.md; _analyze.py hardcodes REF_ACTIVE_MEDIAN/REF_INACTIVE_MEDIAN.
+# Reconstruct by measuring d(P5.50 CA - F6.44 CA) on 77 Class A active+inactive reference CIFs in panel/refs/pdb/.

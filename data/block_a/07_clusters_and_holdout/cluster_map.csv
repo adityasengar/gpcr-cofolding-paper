@@ -1,0 +1,49 @@
+receptor,cluster_id,cluster_name,cluster_size
+5HT1B,5HT,5-HT (5HT1B/2A/2C/5A),3
+5HT2C,5HT,5-HT (5HT1B/2A/2C/5A),3
+5HT5A,5HT,5-HT (5HT1B/2A/2C/5A),3
+AA1R,SINGLETON_AA1R,singleton (AA1R),1
+AA2AR,ADA_adenosine,Adenosine (AA2AR),1
+ACM1,ACM,Muscarinic ACM (ACM1/4),2
+ACM2,SINGLETON_ACM2,singleton (ACM2),1
+ACM4,ACM,Muscarinic ACM (ACM1/4),2
+ADA2A,ADA_a2a,α2A-adrenergic (ADA2A),1
+ADRB1,ADR,β-adrenergic (ADRB1/2),2
+ADRB2,ADR,β-adrenergic (ADRB1/2),2
+AGTR1,SINGLETON_AGTR1,singleton (AGTR1),1
+APJ,SINGLETON_APJ,singleton (APJ),1
+B1B1U5,SINGLETON_B1B1U5,singleton (B1B1U5),1
+CCKAR,SINGLETON_CCKAR,singleton (CCKAR),1
+CCR5,SINGLETON_CCR5,singleton (CCR5),1
+CNR1,CNR,Cannabinoid (CNR1/2),2
+CNR2,CNR,Cannabinoid (CNR1/2),2
+CRHR1,CLASS_B,Class B secretin,4
+CXCR2,CXCR,Chemokine CXCR (CXCR2/4),2
+CXCR4,CXCR,Chemokine CXCR (CXCR2/4),2
+DRD2,DRD,Dopamine (DRD2/3),2
+DRD3,DRD,Dopamine (DRD2/3),2
+EDNRA,EDN,Endothelin (EDNRA/B),2
+EDNRB,EDN,Endothelin (EDNRA/B),2
+FSHR,GLYCOPROTEIN,Glycoprotein (FSHR/LSHR),2
+FZD4,FZD,Class F Frizzled/Smoothened,4
+FZD6,FZD,Class F Frizzled/Smoothened,4
+FZD7,FZD,Class F Frizzled/Smoothened,4
+GCGR,CLASS_B,Class B secretin,4
+GHSR,SINGLETON_GHSR,singleton (GHSR),1
+GLP1R,CLASS_B,Class B secretin,4
+GRPR,SINGLETON_GRPR,singleton (GRPR),1
+HRH1,HRH,Histamine (HRH1/3),2
+HRH3,HRH,Histamine (HRH1/3),2
+LPAR1,SINGLETON_LPAR1,singleton (LPAR1),1
+LSHR,GLYCOPROTEIN,Glycoprotein (FSHR/LSHR),2
+LT4R1,SINGLETON_LT4R1,singleton (LT4R1),1
+MCHR1,SINGLETON_MCHR1,singleton (MCHR1),1
+NPY1R,NPY,NPY (NPY1R/NPY2R),2
+NPY2R,NPY,NPY (NPY1R/NPY2R),2
+OPRD,opioid,Opioid (OPRD/K/M/X),3
+OPRK,opioid,Opioid (OPRD/K/M/X),3
+OPRX,opioid,Opioid (OPRD/K/M/X),3
+OPSD,OPSIN,Opsin (OPSD/OPN4),1
+OX2R,SINGLETON_OX2R,singleton (OX2R),1
+PTH1R,CLASS_B,Class B secretin,4
+SMO,FZD,Class F Frizzled/Smoothened,4

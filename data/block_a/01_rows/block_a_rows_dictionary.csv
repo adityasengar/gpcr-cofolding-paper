@@ -1,0 +1,55 @@
+column,dtype,units,allowed_values,nan_convention,source
+row_id,int,,0..9489,never null,derived (row index)
+receptor,str,,48 slugs (5HT1B..VIPR1),never null,rows.csv:receptor_slug
+input_state_claim,str,,active/inactive/apo/agonist/antagonist,never null,rows.csv:input_state_claim
+uniprot,str,,GPCRdb slug (uniprot-based),empty,rows.csv:gpcrdb_slug
+input_path,str,,HPC path to CIF,never null,rows.csv:input_path
+input_sha256,str,hex,64-char sha,never null,rows.csv:input_sha256
+backbone,str,,boltz/chai/of3/protenix,never null,derived from input_path
+arm,str,,apo/cognate,never null,derived from input_path
+seed_outer,int,,launcher seed,never null,rows.csv:seed_used
+seed_inner,int,,seed from input_path /seed_(\d+)/ (same as seed_outer in this corpus),never null,derived from input_path
+cell_id,str,,receptor_arm_backbone,never null,derived
+gpcr_class,str,,A/B/F,never null,rows.csv:receptor_class
+d_npxxy_oh,float,Å,positive,NaN,rows.csv:d_npxxy_y558_y753_oh
+d_gpcrdb_tm6_tilt_246_637_ca,float,Å,positive,NaN,rows.csv same col
+tm6_kink_angle,float,deg,90..180,NaN,rows.csv:angle_class_b_tm6_kink_639_650_654_deg (Class B populated)
+delta_to_active,float,Å,signed,NaN,rows.csv:delta_to_active
+delta_to_inactive,float,Å,signed,NaN,rows.csv:delta_to_inactive
+rmsd_to_active_ref,float,Å,positive,NaN,rows.rmsd.csv:rmsd_to_active_ref
+rmsd_to_inactive_ref,float,Å,positive,NaN,rows.rmsd.csv:rmsd_to_inactive_ref
+npxxy_active,bool,,True/False,False on NaN axis,derived: d_npxxy_oh < threshold_npxxy_used
+tilt_active,bool,,True/False,False on NaN axis,derived: d_gpcrdb_tm6_tilt > threshold_tilt_used
+active,bool,,True/False,never null,derived class-conditional: A=npxxy AND tilt; B=kink<159.95 AND tilt; F=tilt only
+threshold_npxxy_used,float,Å,panel threshold (9.082),NaN,rows.csv:threshold_npxxy_oh_active_lt
+threshold_tilt_used,float,Å,panel threshold (14.932),NaN,rows.csv:threshold_gpcrdb_tm6_tilt_active_gt
+threshold_kink_used,float,deg,159.95 for Class B,empty on non-B,derived
+plddt_mean,float,0-100,positive,NaN,rows.csv:plddt_mean
+plddt_at_anchors,float,0-100,positive,NaN,rows.csv:plddt_at_anchors (== anchor_mean)
+min_plddt_at_anchor,float,0-100,positive,NaN,rows.csv:min_plddt_at_anchor
+n_interface_contacts_ga_receptor,float,count,nonneg int,NaN on apo,rows.csv same col
+d_ga_alpha5_r350_ca,float,Å,positive,NaN on apo,rows.csv same col
+plddt_ga_alpha5,float,0-100,positive,NaN on apo,rows.csv same col
+engaged,bool,,True/False on cognate; empty on apo,empty on apo,derived: n_contacts>30
+tm6_helicity_6_30_6_50,float,fraction,0-1,NaN when pos_6_30 missing,rows.fold_integrity.csv same col
+tm6_helicity_pass,bool,,True/False,False on NaN,derived: tm6_helicity >= 0.80
+excl_E1,bool,,broken cell (ACM1-cognate-Protenix),never null,derived: cell mean plddt_mean < 50
+excl_E2,bool,,atom clash (d_npxxy_oh < 2.4),never null,derived
+excl_E3,bool,,row receptor has ref failing P1a on class-primary axis,never null,derived: excl_E3_tilt OR excl_E3_npxxy
+excl_E3_tilt,bool,,tilt-axis reference failure,never null,derived from reference_set.csv
+excl_E3_npxxy,bool,,NPxxY-axis reference failure,never null,derived from reference_set.csv
+excl_E4,bool,,row is Class B or F,never null,derived
+excl_E5,bool,,"agonist-only active (OPRD, CNR1, FZD4)",never null,derived
+excl_any,bool,,any of E1..E5,never null,derived
+excl_reason,str,,comma-sep list of firing exclusions,empty when none,derived
+ref_pdb_sha_active,str,hex,,empty,rows.csv same col
+ref_pdb_sha_inactive,str,hex,,empty,rows.csv same col
+passed,bool,,scorer A1..A6 all pass,never null,rows.csv:passed
+A1_amino_acid_identity,str,,empty on pass; error name on fail,empty on pass by design,rows.csv:A1_amino_acid_identity
+A2_fasta_completeness,str,,empty on pass,empty on pass,rows.csv:A2_fasta_completeness
+A3_wrong_chain,str,,empty on pass,empty on pass,rows.csv:A3_wrong_chain
+A4_reference_class_match,str,,empty on pass,empty on pass,rows.csv:A4_reference_class_match
+A5_species_match,str,,empty on pass,empty on pass,rows.csv:A5_species_match
+A6_receptor_identity,str,,empty on pass,empty on pass,rows.csv:A6_receptor_identity
+scorer_git_sha,str,,"git sha or ""no-git""",never null,rows.csv:scorer_git_sha
+scorer_version,str,,,never null,rows.csv:scorer_version

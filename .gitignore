@@ -45,3 +45,8 @@ __pycache__/
 # figures: the scripts are durable, their output is not
 figures/out/
 figures/structures/
+
+# Block A data drop: tabular data is committed (every number must trace to a
+# shipped file); coordinates and the original zip are not, per lit/pdfs precedent
+block_a_figure_data.zip
+data/block_a/11_structures/

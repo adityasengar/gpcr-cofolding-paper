@@ -1,0 +1,6 @@
+name,rule,cause,affected_row_count,affected_receptors
+E1,row is in a cell with mean plddt_mean < 50,broken cell (ACM1-cognate-Protenix),25,ACM1
+E2,d_npxxy_oh < 2.4,model-side atom clashes (NPxxY-OH too close),4,"AA2AR,CNR2,FSHR"
+E3,row's receptor's reference on class-primary axis fails P1a predicate,reference-side P1a failure,4890,"5HT2C,ACM1,ADA2A,ADRB1,APJ,B1B1U5,CCKAR,CRHR1,DRD3,EDNRA,EDNRB,FSHR,FZD4,FZD6,FZD7,GCGR,GLP1R,GRPR,HRH3,LSHR,MCHR1,OPRD,OX2R,PTH1R,SMO"
+E4,receptor is Class B or Class F,instrument scope limitation,1495,"CRHR1,FZD4,FZD6,FZD7,GCGR,GLP1R,PTH1R,SMO"
+E5,"receptor is agonist-only active (OPRD, CNR1, FZD4)",agonist-only actives fail NPxxY by construction,500,"CNR1,FZD4,OPRD"

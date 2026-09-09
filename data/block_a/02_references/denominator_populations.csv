@@ -1,0 +1,6 @@
+population,definition,count,used_for
+panel_unique_pdbs,48-receptor Block A panel PDBs (unique across active+inactive roles),98,C-6 (manuscript claim: 89; empirical: 98)
+panel_unique_pdbs_active,unique active-role PDBs on 48-receptor panel,44,C-6 (manuscript: 41)
+panel_unique_pdbs_inactive,unique inactive-role PDBs on 48-receptor panel,54,C-6 (manuscript: 48)
+reference_set_total,all unique PDBs in panel/refs/reference_set.csv incl off-panel,167,T4 total denominator (manuscript: 167)
+evaluable_audit_set,PDBs with cached RCSB entry.json in working repo (for T4 contradiction audit),162,T4 contradiction rate denominator (manuscript: 127; empirical: 162)
