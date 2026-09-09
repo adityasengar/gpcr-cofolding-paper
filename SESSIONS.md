@@ -6,6 +6,34 @@ Newest first. Every session **ends** by running `./session_end.sh "summary"`, an
 Git records what changed; this file records *why*, and what the next session should
 not redo. Two machines, never concurrent — so this is a relay baton, not a merge.
 
+## 2026-09-09 07:50  ·  MacBook-Pro-3 (orchestrator)
+
+Restructured for the corrected machine roles. Also made, and recorded, the exact mistake
+the new guard exists to prevent.
+
+- **Roles were inverted in the docs and are now fixed.** This laptop authors the
+  manuscript and runs several sessions; the other laptop holds scripts/data and can
+  compile. `data/` here is a copy; that machine wins on conflict.
+- **`manuscript/` is now canonical**, in this repo, built by `./manuscript/build.sh`
+  on either laptop. Overleaf demoted to an export target via `./publish_overleaf.sh`.
+  This removes the two-remote bibliography drift entirely.
+- **TeX pinned**: BasicTeX/TeX Live 2025, 355 packages, `tex/tex-packages.txt`.
+  `latexmk` is missing on both machines and should be installed on both.
+
+- **MISTAKE, for the record.** Commit `7e03642` is titled "Correct the machine roles;
+  move LaTeX into the repo" but it also swept up another session's uncommitted work:
+  5 new extractions (fksteering, conformix, tds, refining, discriminator) and
+  `draft/intro.md`, a 319-line introduction citing 52 papers. Nothing was lost or
+  corrupted, but that work is filed under a misleading message, so `git log` will not
+  show when the intro or those extractions actually landed.
+  Cause: `git add -A` while another session had work in progress. `.session-guard.sh`
+  had already warned "18 uncommitted changes ... possibly another session's work" and
+  it was ignored.
+  **Rule from now on: on this laptop, stage explicit paths, never `git add -A`.**
+
+- TODO next: install latexmk on both machines; set up the other laptop; decide whether
+  `data/` should live here at all now that the other machine is canonical for it.
+
 ## 2026-09-08 21:01  ·  test-laptop
 
 Relay test from a simulated second machine

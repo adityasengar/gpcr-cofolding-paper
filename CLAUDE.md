@@ -143,7 +143,13 @@ here** — they share one working tree. If two sessions edit the same file the l
 silently wins; `git add -A` in one can commit another's half-finished edit. There is no
 conflict and no warning, because these sessions never become separate commits.
 
-The rule: **only one session writes at a time.** The others read. `./session_start.sh`
+The rule: **only one session writes at a time**, and **never `git add -A` on this
+laptop** — stage the explicit paths you changed. This is not theoretical: commit
+`7e03642` swallowed another session's five extractions and a 319-line intro draft, and
+filed them under a message about LaTeX. Nothing was lost, but the history now lies about
+when that work happened.
+
+The others read. `./session_start.sh`
 runs `.session-guard.sh`, which warns when another session claimed the tree recently and
 reports uncommitted work already present. It is advisory — it cannot stop anything.
 

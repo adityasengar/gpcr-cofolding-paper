@@ -16,5 +16,11 @@ if [ -f "$LOCK" ]; then
 fi
 printf '%s\n%s\n' "$WHO" "$(date +%s)" > "$LOCK"
 UNC=$(git status --porcelain 2>/dev/null | wc -l | tr -d ' ')
-[ "$UNC" -gt 0 ] && echo "  note: $UNC uncommitted change(s) already in this tree — possibly another session's work in progress"
+if [ "$UNC" -gt 0 ]; then
+  echo "  !! $UNC uncommitted change(s) already in this tree, possibly another session's"
+  echo "     work in progress. DO NOT run 'git add -A' — stage explicit paths only:"
+  echo "       git add <the files you actually changed> && git commit"
+  echo "     This has already gone wrong once: commit 7e03642 swallowed another"
+  echo "     session's 5 extractions and a 319-line intro draft."
+fi
 exit 0
