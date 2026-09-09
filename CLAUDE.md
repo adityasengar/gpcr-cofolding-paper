@@ -75,8 +75,8 @@ applies. If it reports a change, every verdict is stale until re-derived — do 
 paper over it.
 
 **`data/` here is a deliberate small import, not a mirror.** The real corpus is 1 TB+
-and lives on the other laptop and the HPC. Only what a specific claim needs gets pulled
-in. So a number that does not reproduce locally is **unverified here**, which is the
+and lives on the HPC and Aditya's other machine; it is brought over by ad-hoc import,
+one claim's worth at a time. So a number that does not reproduce locally is **unverified here**, which is the
 expected steady state, not a defect and not a finding about the experiments.
 
 What is imported now: 17,568 predictions, against ~41,500 described in `STATUS.md`, with
@@ -96,91 +96,74 @@ draft sentence needs a number that is not here, request the specific import in
   not depend on our numbers at all.
 - Results, Discussion and Abstract are gated on the export. See `draft/OUTLINE.md`.
 
-## Working across two machines
+## How work is organised
 
-Two Claude sessions, two laptops, **never concurrent**. This is a relay, not a merge.
+One laptop. A second was set up on 2026-09-09 and abandoned as more complexity than it
+was worth; data from the other machine now arrives by ad-hoc import instead.
 
-**Start every session with `./session_start.sh`.** It pulls, then shows: the commits
-since *this machine* last signed off, the files they touched, the last two handoff
-notes, corpus integrity, data freshness, and which heavy assets are missing locally.
+`./session_start.sh` at the start of a session (pulls, then checks corpus integrity, TeX
+against the pin, the bibliography, and whether another session has work in flight).
+`./verify.sh` runs the full self-check. `./session_end.sh "summary"` writes a handoff
+note into `SESSIONS.md` before committing.
 
-**End every session with `./session_end.sh "what I did"`**, then commit and push. The
-commit message must contain `session-end(<machine>)` — `session_start.sh` finds it to
-compute "since my last visit". Set the machine name in `.machine` (defaults to hostname).
+`SESSIONS.md` is the log: git records *what* changed, `SESSIONS.md` records *why* and
+what the next session should not redo. Note that `test-laptop` in that file is **not a
+real machine** — it was a throwaway clone used to test the sync machinery.
 
-`SESSIONS.md` is the handoff log, newest first. Git records *what* changed; SESSIONS.md
-records *why*, and what the next session should not redo.
+### What is deliberately not in git
 
-### What travels, and what does not
+`lit/pdfs/` (452 MB), `lit/source/` (458 MB), `rows_enriched_v3_7.csv` (19 MB) and the
+`pdftotext` caches are excluded to keep the repo small. They live on this laptop only,
+so a fresh clone elsewhere has the 78 extractions in `lit/notes/` but no PDFs.
 
-The shared repo is ~21 MB. `.gitignore` excludes the heavy, reconstructible things:
-
-| stays local | why | consequence on the other machine |
-|---|---|---|
-| `lit/pdfs/` (452M) | re-downloadable from the DOIs in `refs.bib` | `litquery`'s "open the PDF when the note is too coarse" step **cannot run**. Say "the PDF is not on this machine" — never answer from memory instead. |
-| `lit/source/` (458M) | hard links to the same PDFs | provenance only |
-| `rows_enriched_v3_7.csv` (19M) | HPC export, not authored here | `dataquery` falls back to `data/*.csv`; the provenance columns are unavailable |
-| `lit/validate/txt*`, `ocr/` | regenerable with `pdftotext` | quote re-verification cannot run |
-
-`lit/notes/` (6.1 MB) **does** travel, so the 78 extractions with their verbatim quotes
-and page numbers are available on both machines. That is the layer most queries need.
-
-`overleaf/` is its own git repo with the Overleaf remote and is **excluded** from this
-one — clone it separately on each machine. Overleaf is the sync channel for LaTeX;
-this repo is the sync channel for everything else.
+`overleaf/` is a separate clone of the Overleaf project, used only as an export target
+via `./publish_overleaf.sh`. `manuscript/` is canonical.
 
 ### Who does what
 
-**Ownership belongs to a session working in a folder, not to a machine.** The lit agent
-owns `lit/**` because it is the session running there — not because of which laptop it
-sits on. A machine is just where a session happens to run, and the same folder could be
-worked by a session on either one. Keep the two ideas apart: *who owns a folder* and
-*which laptop the files are on* answer different questions.
+Two working sessions on this one laptop. **Content versus machinery** is the split.
 
-Each laptop runs **one orchestrator** plus one or more working agents. The orchestrator
-is the only session on its machine that touches git.
-
-| | **laptop: MacBook-Pro-3** | **laptop: laptop2** |
+| | **lit agent** (runs in `paper/lit/`) | **orchestrator** (runs in `paper/`) |
 |---|---|---|
-| orchestrator | yes — owns git here | yes — owns git there |
-| sessions running there | orchestrator (`paper/`) · lit agent (`paper/lit/`, also writes `draft/**`) | orchestrator (`paper/`) · data agent |
-| folders those sessions own | `lit/**`, `draft/**`, `manuscript/**` | `data/**`, `analysis/**`, `RESULTS.md`, `STATUS.md` |
-| authors the manuscript | **yes** (`manuscript/**`) | no — compiles and checks |
-| holds the bulk data | no — small imports only | yes; real corpus is 1 TB+, here and on the HPC |
+| owns | the corpus and the words | how the paper is built |
+| writes | `lit/**`, `manuscript/sections/*.tex`, `CLAIMS.md` | `manuscript/main.tex`, `analysis/**`, `tex/**`, this file |
+| git | **never** | all of it |
 
-Which machine you are on is in `.machine` (gitignored, per-machine).
+Rule of thumb: **what the paper says → lit agent. How the paper is built → orchestrator.**
 
-### The one rule that keeps this safe
+Aditya routes between them; there is no automation. Worked examples:
 
-**Only the orchestrator runs git — pull, commit, push. Working agents edit files and
-nothing else.**
+- *"Is this claim in the intro supported?"* → lit agent (it has `litquery` and the notes).
+- *"Change the margins / spacing / fonts"* → orchestrator (`main.tex` is the container).
+- *"Add or remove a paper"* → lit agent extracts and updates `lit/**`; then the
+  orchestrator regenerates `manuscript/refs.bib` and commits.
+- *"Rewrite the gap paragraph"* → lit agent, editing `sections/intro.tex` directly.
+- Build broken, PDF won't compile, anything git → orchestrator.
 
-The hazard is not multiple committers; it is *concurrent staging*. Several sessions on
-one laptop share a single working tree, so if one runs `git add -A` while another is
-mid-edit, it commits half-finished work under a misleading message, with no conflict and
-no warning. That has already happened once here: commit `7e03642` swallowed the lit
-agent's five extractions and a 319-line intro draft.
+### The rule that keeps this safe
 
-Routing every git operation through one session per machine removes the concurrency
-rather than asking every agent to stage carefully and hoping.
+**Only the orchestrator runs git. The lit agent edits files and nothing else.**
 
-Consequences:
+Both sessions share one working tree, so git gives no isolation: if one runs
+`git add -A` while the other is mid-edit, it commits half-finished work under a
+misleading message, with no conflict and no warning. That has already happened —
+commit `7e03642` swallowed the lit agent's five extractions and a 319-line intro draft.
 
-- A working agent that finishes tells the **user**, who tells that machine's
-  orchestrator. That handoff is the whole protocol — without it the orchestrator either
-  commits mid-edit or lets two agents' work merge into one commit describing neither.
-- **Commit per agent, not per batch**, so history says who did what.
-- Even the orchestrator stages **explicit paths**, never `git add -A`.
+So: **even the orchestrator stages explicit paths, never `git add -A`.** And Aditya
+tells the orchestrator when the lit agent has finished; without that signal it either
+commits mid-edit or lets two pieces of work merge into one commit describing neither.
 
-### Across the two laptops
+### Two-pass discipline — where it actually stands
 
-They never run at the same time. Each orchestrator starts with `./session_start.sh`
-(pulls, then shows what changed since *this* machine last signed off) and ends with
-`./session_end.sh "summary"` followed by commit **and push**. Committing without pushing
-strands the other machine.
+The design principle was that the session which retrieves evidence must not be the one
+that writes prose, because it will write first and find support afterwards. **That
+separation has collapsed**: the lit agent both owns the corpus and wrote the
+introduction. The current split is about *context* — one session cannot comfortably hold
+the schema, the index, 78 extractions, the build system and the git history — not about
+evidential integrity.
 
-Both orchestrators may edit this file. That is safe only because the machines never run
-concurrently — if that ever stops being true, this file needs a single owner again.
+Restore it with a third, prose-only session when Results land and numbers start entering
+sentences. It is not worth it for an introduction that is purely literature.
 
 ### The manuscript
 
@@ -200,25 +183,6 @@ loudly; `build.sh` names the offending key.
 `manuscript/` into the `overleaf/` clone and pushes, so you can share a read-only link.
 Edits made in the Overleaf web editor do **not** come back — they will be overwritten on
 the next publish.
-
-### Setting up the second machine
-
-```bash
-git clone https://github.com/adityasengar/gpcr-cofolding-paper.git paper
-cd paper
-echo "<a-name-for-that-laptop>" > .machine     # NOT committed; per-machine
-git clone https://git@git.overleaf.com/6aa05386f57a5fee700a37ff overleaf
-./session_start.sh
-```
-
-The Overleaf project is a **separate** clone — `overleaf/` is gitignored here on
-purpose, because nesting git repos causes submodule grief. Overleaf syncs the LaTeX;
-this repo syncs everything else.
-
-That machine will **not** have `lit/pdfs/`, `lit/source/`, `rows_enriched_v3_7.csv` or
-the pdftotext caches. `session_start.sh` prints which are missing. It *will* have all
-78 extractions in `lit/notes/`. Note that four of those 78 have **no PDF on any machine**
-and carry section locators rather than page numbers; see `lit/CLAUDE.md`.
 
 ## Open, and owned by you
 

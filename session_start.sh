@@ -16,14 +16,14 @@ if [ -d .git ]; then
   else
     echo "--- no remote configured yet; this machine is the only copy ---"
   fi
-  LAST=$(git log --format='%H %s' -n 200 | grep -m1 "session-end($ME)" | cut -d' ' -f1)
+  LAST=$(git log --format='%H %s' -n 200 | grep -m1 "session-end(" | cut -d' ' -f1)
   echo
   if [ -n "$LAST" ]; then
     N=$(git rev-list --count "$LAST"..HEAD)
-    echo "--- $N commits since $ME last signed off ---"
+    echo "--- $N commits since the last sign-off ---"
     git log --format='  %ad %an: %s' --date=short "$LAST"..HEAD | head -30
   else
-    echo "--- no previous sign-off from $ME; showing last 15 commits ---"
+    echo "--- no sign-off recorded yet; showing last 15 commits ---"
     git log --format='  %ad %an: %s' --date=short -15
   fi
   echo
@@ -47,8 +47,8 @@ echo "--- data freshness ---"
 python3 analysis/fingerprint.py --check 2>&1 | sed 's/^/  /'
 
 echo
-echo "--- local-only assets (absent on a fresh clone) ---"
-printf "  lit/pdfs/   %s\n" "$([ -d lit/pdfs ] && echo "$(ls lit/pdfs/*.pdf 2>/dev/null|wc -l|tr -d ' ') PDFs" || echo 'ABSENT — notes only, cannot open a PDF here')"
+echo "--- assets kept out of git (this laptop only) ---"
+printf "  lit/pdfs/   %s\n" "$([ -d lit/pdfs ] && echo "$(ls lit/pdfs/*.pdf 2>/dev/null|wc -l|tr -d ' ') PDFs" || echo 'ABSENT — notes only; say so rather than guessing')"
 printf "  rows_enriched_v3_7.csv  %s\n" "$([ -f rows_enriched_v3_7.csv ] && echo present || echo 'ABSENT')"
 echo
 echo "--- manuscript bibliography ---"

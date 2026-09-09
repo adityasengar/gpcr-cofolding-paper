@@ -4,7 +4,12 @@ Newest first. Every session **ends** by running `./session_end.sh "summary"`, an
 **starts** by running `./session_start.sh`.
 
 Git records what changed; this file records *why*, and what the next session should
-not redo. Two machines, never concurrent — so this is a relay baton, not a merge.
+not redo.
+
+**`test-laptop` below is not a real machine.** It was a throwaway clone used on
+2026-09-08 to test the sync machinery. A second laptop was set up on 2026-09-09 and
+abandoned the same day as more complexity than it was worth; entries mentioning two
+machines describe a setup that no longer exists.
 
 ## 2026-09-09 07:50  ·  MacBook-Pro-3 (orchestrator)
 
