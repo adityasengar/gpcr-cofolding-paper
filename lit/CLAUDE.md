@@ -42,6 +42,16 @@ download names, as **hard links** — same inodes, no duplicated disk. Do not "c
 up" one side expecting to reclaim space, and do not delete `pdfs/` names.
 `source/extra` holds two PDFs that were **never extracted** and are not in the corpus.
 
+## Render conventions
+
+`RENDER_CONVENTIONS.md` records how this literature actually draws a partner-induced
+conformational change — which structure is grey, whether the partner is shown, hue versus
+lightness for multiple states, and where the measured magnitude goes. It was built by
+**viewing** panels, because the figure tables in `notes/` record `data_shape` and `hides` but
+never recorded colour. Read it before designing any structural figure; the single most useful
+finding is that grey marks the invariant scaffold rather than the reference, and that the partner
+is dropped or reduced to its contacting fragment whenever the receptor is the subject.
+
 ## How to query
 
 Use the `litquery` skill. It resolves the corpus root itself and works whether the
