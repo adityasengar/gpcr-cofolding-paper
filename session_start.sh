@@ -52,11 +52,18 @@ printf "  lit/pdfs/   %s\n" "$([ -d lit/pdfs ] && echo "$(ls lit/pdfs/*.pdf 2>/d
 printf "  rows_enriched_v3_7.csv  %s\n" "$([ -f rows_enriched_v3_7.csv ] && echo present || echo 'ABSENT')"
 echo
 echo "--- manuscript bibliography ---"
-python3 analysis/sync_bib.py >/tmp/_bib.log 2>&1 && \
-  echo "  manuscript/refs.bib regenerated from lit/refs.bib ($(grep -c '^@' manuscript/refs.bib) citable)" || \
-  echo "  !! sync_bib.py failed; see /tmp/_bib.log"
+TMPB=$(mktemp)
+cp manuscript/refs.bib "$TMPB" 2>/dev/null
+python3 analysis/sync_bib.py >/tmp/_bib.log 2>&1
+if cmp -s "$TMPB" manuscript/refs.bib; then
+  echo "  manuscript/refs.bib in sync ($(grep -c '^@' manuscript/refs.bib) citable)"
+else
+  echo "  manuscript/refs.bib REGENERATED — lit/ has moved. Commit it:"
+  echo "     git add manuscript/refs.bib && git commit -m 'refs: resync from lit'"
+fi
+rm -f "$TMPB"
 if [ -d overleaf/.git ] && ! git -C overleaf diff --quiet 2>/dev/null; then
-  echo "  Overleaf copy is behind — run ./publish_overleaf.sh when you want to share"
+  echo "  Overleaf copy is behind — ./publish_overleaf.sh when you want to share"
 fi
 
 echo

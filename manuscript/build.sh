@@ -13,7 +13,9 @@ fi
 command -v pdflatex >/dev/null || { echo "pdflatex not found — see tex/SETUP.md"; exit 1; }
 
 if command -v latexmk >/dev/null; then
-  latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex || exit 1
+  if ! latexmk -pdf -silent -interaction=nonstopmode -halt-on-error main.tex >/tmp/_latexmk.log 2>&1; then
+    echo "  BUILD FAILED — last 25 lines:"; tail -25 /tmp/_latexmk.log | sed 's/^/     /'; exit 1
+  fi
 else
   echo "(latexmk missing — falling back to the manual sequence; see tex/SETUP.md)"
   pdflatex -interaction=nonstopmode -halt-on-error main.tex >/dev/null || { echo "pass 1 failed"; exit 1; }

@@ -25,6 +25,10 @@ overleaf/
 *.blg
 *.log
 *.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 *.pdf
 !GPCR_progress_summary.pdf
 .DS_Store
