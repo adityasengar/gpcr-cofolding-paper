@@ -32,13 +32,22 @@ prediction is called active on this axis below 9.080~\AA.
 
 \texttt{d\_gpcrdb\_tm6\_tilt\_246\_637\_ca} is a C$\alpha$--C$\alpha$ distance
 capturing outward displacement of the cytoplasmic end of TM6, the canonical
-activation signature. A prediction is called active above 14.932~\AA.
+activation signature \citep{hilger2020gcgr}. A prediction is called active above 14.932~\AA.
 
 A prediction is called active only when both fire. Thresholds are carried as
 row-level columns and were read from the data rather than reimplemented. Both
 were derived from 80 tier-1 crystallographic reference rows by a midpoint
 objective, and from no prediction. \textbf{Self-classification accuracy on that
 set is a derivation-set figure, not a held-out one}, and is reported as such.
+
+The thresholds are derived from geometry rather than fitted to a classifier, but
+the 80 rows carry state annotations, and the provenance of those annotations
+bounds how independent the instrument is: an instrument calibrated on a given
+labelling cannot then adjudicate that labelling. \textbf{[PI: state the source
+of the state annotations on the 80 tier-1 rows.]} This matters because the
+construct annotation shipped with the same reference set contradicts the RCSB
+record on roughly 40\% of evaluable entries, so the labelling is not assumed
+reliable elsewhere in this work.
 The models do not place water molecules; results are described as consistent
 with the water-bridged arrangement, never as the bridge forming.
 
@@ -53,7 +62,8 @@ were run per condition.
 
 The apo arm is a computational reference condition, not a physical state --- no
 ligand, no membrane, and no basal-activity equivalent. Real receptors show
-constitutive activity that varies widely between receptors, and the apo arm
+constitutive activity that varies widely between receptors, and their allosteric
+coupling differs correspondingly \citep{georgiou2025heterogeneity}; the apo arm
 should not be equated with a physiological inactive state.
 
 OpenFold3 seeds were generated as $5 \times 5$ outer/inner after a seeding fix,
@@ -85,10 +95,14 @@ E3 (4{,}890 rows) flags receptors whose reference fails its own predicate on a
 given axis. \textbf{It is applied per axis} --- \texttt{excl\_E3\_npxxy}
 (4{,}690 rows, 24 receptors) or \texttt{excl\_E3\_tilt} (2{,}000 rows, 10
 receptors) --- and only where a reference value serves as a denominator or a
-regression predictor. It merges two distinct causes: references that genuinely
-fail the predicate, and receptors for which the axis is not measurable at all
-(EDNRB, for example, carries Leu at 7.53, so an NPxxY hydroxyl distance is
-undefined). The E3 union is never applied, and E3 is irrelevant to raw
+regression predictor. It merges two distinct causes with different
+consequences, and we report them separately. On the NPxxY axis, 12 receptors
+(2{,}295 rows) have no measurable value because the axis is undefined for them
+--- EDNRB, for example, carries Leu at 7.53, so an NPxxY hydroxyl distance does
+not exist --- while a further 12 receptors (2{,}395 rows) have a measurable
+reference that fails the predicate. The first is missing data; the second is an
+observation about reference quality. On the tilt axis all 10 flagged receptors
+are of the second kind and none is unmeasurable. The E3 union is never applied, and E3 is irrelevant to raw
 distributions, predicate firing rates and confidence correlations, which never
 touch a reference separation.
 

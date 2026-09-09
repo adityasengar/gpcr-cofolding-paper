@@ -11,11 +11,18 @@ Before applying them to predictions, both measurements were run on the deposited
 reference structures, where the answer is already known. Across 167 unique
 reference entries the two-instrument predicate returned the expected call on 159
 and deviated on nine --- five annotated active, four annotated inactive.
+\textbf{This is a derivation-set figure, not a held-out one}: the thresholds
+were fitted on 80 of these same reference rows, so 159/167 measures internal
+consistency rather than generalisation.
 
 The deviations are informative rather than a nuisance. Several entries annotated
 active were solved with an agonist bound but no transducer, and these never form
 the NPxxY network: the hydrogen-bond arrangement requires G$\alpha$ clamping, so
-the predicate declines to call them active, correctly. Others reflect construct
+the predicate declines to call them active. That reading is supported
+directly by experiment: the TM5/TM6 movement ``is observed only when both the
+agonist and the G protein or mimetic Nb are present; no movement of TM5, TM6 is
+observed when only the agonist is present'' \citep[p.~21]{georgiou2025heterogeneity}.
+Others reflect construct
 engineering inside the measurement window rather than receptor conformation.
 Five of the nine deviations are unclassified as to cause; the remainder split
 between expected biology, curation error, a measurement artifact, and one entry
@@ -28,7 +35,9 @@ equivalent would inherit that heterogeneity silently (Fig.~1).
 
 \subsection*{Partner-conditioned activation across four backbones}
 
-Given the receptor sequence alone, predictions are predominantly inactive. Given
+Given the receptor sequence alone, predictions are predominantly inactive ---
+the collapse onto a single basin, and its state, are established for this
+receptor class \citep{heo2022multistate,chib2025gpcrstates}. Given
 the receptor sequence together with its cognate G$\alpha$, they are
 predominantly active. The direction is consistent on all four backbones across
 the 40 Class~A receptors (Fig.~2, Table~2).
@@ -44,6 +53,28 @@ Pooled row-level predicate-active rates move from 16.0\% to 83.4\% (Boltz-2),
 are the authoritative ones; the cluster interval is up to $2.2\times$ wider than
 the receptor interval. Chai-1 is the soft predictor throughout --- a smaller
 shift with a much wider interval --- which recurs across metrics.
+
+\paragraph{Relation to prior work.}
+That a co-folded G protein drives an active-state receptor is not new.
+\citet{chiesa2025templatebias} showed on 63 post-cutoff Class~A receptor--G$_s$
+pairs that ``the models explicitly modeling G-protein binding'' outperform
+template-biased alternatives (p.~6302), and attribute the gain to co-folding
+rather than to training-set composition (p.~6305);
+\citet{ye2026multistatebias} report that ``large protein partners drive clear
+conformational switching between states'' where small molecules do not (p.~2).
+Our contribution is not the direction of the effect but its scale and its
+controls. Four differences are checkable. First, neither study uses an
+AF3-lineage backbone; \citet{chiesa2025templatebias} run AlphaFold2 and
+AlphaFold-Multimer only, and propose their benchmark as ``a baseline'' for newer
+models (p.~6299). Second, neither has an apo arm: only 16 of 145 structures in
+that benchmark represent the receptor bound to G protein alone (p.~6302), and in
+\citet{zhang2026generalization} the ligand is present in both arms, so the
+reported gain is the marginal effect of adding a transducer to an
+already-agonist-bound receptor. Third, both score by RMSD to the deposited
+active reference of the same complex, which cannot be evaluated where no active
+structure exists; we apply an operationalised predicate instead. Fourth, neither
+runs a decoy or scrambled-partner arm, so partner occupancy and partner identity
+are never separated.
 
 The apo arm is a computational reference condition, not a physical state: no
 ligand, no membrane, no basal-activity equivalent. It should not be read as a
@@ -72,7 +103,10 @@ in row-level agreement, and explicitly not as a signed magnitude effect.
 
 \subsection*{Receptor-specific activation amplitude is not reproduced}
 
-Real receptors do not all activate by the same amount. If a model had learned
+Real receptors do not all activate by the same amount; the allosteric coupling
+between the orthosteric site and the cytoplasmic ends of TM5 and TM6 differs
+markedly between receptors \citep[p.~8]{georgiou2025heterogeneity}. If a model
+had learned
 activation rather than an active-looking shape, receptors whose reference
 structures differ greatly should receive large predicted shifts and those whose
 references differ little should receive small ones.
@@ -122,7 +156,20 @@ OpenFold3 moves the other way, strengthening from $-0.26$ to $-0.63$. Reporting
 a single pooled pLDDT correlation would have produced two opposite and equally
 misleading conclusions.
 
-This is a finding about method rather than about these four models, and it
-generalises beyond this corpus: a confidence score aggregated over a whole
-complex can invert relative to the same score read at the residues that define
-the property in question.
+Confidence scores are not uninformative in general, and the distinction matters.
+\citet{zhang2026generalization} report that interface predicted TM-score is ``a
+useful decision metric'' for \emph{ligand pose} ($R^2 = 0.49$); their
+pLDDT-against-receptor-C$\alpha$ result, $R^2 = 0.046$, is the same null we
+report here. What a confidence score predicts well and what it predicts badly
+are different questions, and pose accuracy is not conformational state. Others
+find no usable relationship between pLDDT and conformation
+\citep[p.~5]{bryant2024cfold}, and the same failure appears for peptide
+placement \citep{junker2026peptidedesign} and for kinase state
+\citep{sun2026kinconfbench}.
+
+This is a finding about method rather than about these four models. On the
+evidence here --- four backbones, one receptor class --- we would put it no
+higher than a hypothesis worth testing elsewhere: that a confidence score
+aggregated over a whole complex can invert relative to the same score read at
+the residues that define the property in question. We are not aware of a prior
+report of a confidence metric changing sign under re-aggregation.
