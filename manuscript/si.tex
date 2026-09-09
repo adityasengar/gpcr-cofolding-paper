@@ -42,27 +42,7 @@ change a reported number are noted in the relevant caption below.
 \clearpage
 \section{Supplementary figures}
 
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba3_connector.pdf}
-\caption{\textbf{An orthogonal signature corroborates the direction.}
-The P5.50--F6.44 PIF connector was never used to set a threshold or to call any
-prediction. \textbf{a}, connector distance in the references (active versus
-inactive) beside the predictions (predicate-active versus predicate-inactive).
-\textbf{b}, per-backbone delta with cluster intervals; \textbf{zero is marked and
-every interval crosses it}. \textbf{c}, row-level agreement, which is the strong
-part of this analysis and is given the most visual weight.
-\textit{Filter:} E1+E2; $n = 77$ reference and 512 prediction rows.}
-\end{figure}
-
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s1_exclusions.pdf}
-\caption{\textbf{The exclusion sets, and why they are not one filter.}
-Coverage of each flag, and every headline statistic under every exclusion
-combination as a percentage shift from baseline. No sign flip occurs anywhere and
-no statistic moves by more than 0.5\%. This panel is about the filters, not about
-the values: what is plotted is stability, not magnitude.
-\textit{Filter:} the sweep is the filter; each cell states its own set.}
-\end{figure}
+\subsection{How the instrument and the panel were built}
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{s2_reference_audit.pdf}
@@ -75,7 +55,31 @@ archive; the panel states this rather than drawing a zero, which would read as a
 measured absence.
 \textit{Filter:} references as shipped; $n = 167$ entries.}
 \end{figure}
-
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s6_predicate_calibration.pdf}
+\caption{\textbf{Predicate calibration.} Distance from the active reference for
+predicate-active predictions. Two of 4{,}256 testable rows lie beyond 3~\AA.
+Note the denominator: of 4{,}866 predicate-active rows, 610 carry no active
+reference and cannot be tested at all; they are shown separately rather than
+counted as successes.
+\textit{Filter:} E1+E2; $n = 4{,}256$ testable of 4{,}866 predicate-active.}
+\end{figure}
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s9_fold_integrity.pdf}
+\caption{\textbf{Fold integrity.} TM6 helicity pass rates, drawn as per-cell
+distributions rather than as bars, with one axis per receptor class so that a
+percentage is never shown against a denominator from a different class.
+\textit{Filter:} E1+E2; $n = 9{,}461$ rows. Overall pass rate 96.3\%.}
+\end{figure}
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s7_clusters_holdout.pdf}
+\caption{\textbf{Paralog clusters and date-stratified holdout.} Cluster
+composition and holdout membership. The cluster map as shipped resolves to 29
+clusters with 16 singletons (55\%), against the 26 and 42\% used for the
+bootstrap convention; the panel draws what the file contains and says so. The
+extended holdout stratum is underpowered and is descriptive only.
+\textit{Filter:} cluster map as shipped; $n = 48$ receptors.}
+\end{figure}
 \begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{s3_bootstrap_comparison.pdf}
 \caption{\textbf{Cluster versus receptor bootstrap.} The cluster bootstrap over
@@ -87,14 +91,17 @@ multi-member clusters.
 \textit{Filter:} E1+E2; 1{,}000 resamples, seed 20260909.}
 \end{figure}
 
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s4_per_receptor.pdf}
-\caption{\textbf{Per-receptor results.} Apo and cognate medians on both axes for
-every receptor and backbone, with the receptors that carry no active reference
-marked rather than omitted.
-\textit{Filter:} E1+E2; $n = 48$ receptors $\times$ 4 backbones.}
-\end{figure}
+\subsection{Robustness to analysis choices}
 
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s1_exclusions.pdf}
+\caption{\textbf{The exclusion sets, and why they are not one filter.}
+Coverage of each flag, and every headline statistic under every exclusion
+combination as a percentage shift from baseline. No sign flip occurs anywhere and
+no statistic moves by more than 0.5\%. This panel is about the filters, not about
+the values: what is plotted is stability, not magnitude.
+\textit{Filter:} the sweep is the filter; each cell states its own set.}
+\end{figure}
 \begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{s5_inclusion_sets.pdf}
 \caption{\textbf{Amplitude under all three inclusion sets.} Slopes on both axes
@@ -105,26 +112,26 @@ that result is not an artefact of the restriction choice. On NPxxY,
 \textit{Filter:} per-axis E3 as labelled; $n$ per fit on the panel.}
 \end{figure}
 
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s6_predicate_calibration.pdf}
-\caption{\textbf{Predicate calibration.} Distance from the active reference for
-predicate-active predictions. Two of 4{,}256 testable rows lie beyond 3~\AA.
-Note the denominator: of 4{,}866 predicate-active rows, 610 carry no active
-reference and cannot be tested at all; they are shown separately rather than
-counted as successes.
-\textit{Filter:} E1+E2; $n = 4{,}256$ testable of 4{,}866 predicate-active.}
-\end{figure}
+\subsection{Extended results}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s7_clusters_holdout.pdf}
-\caption{\textbf{Paralog clusters and date-stratified holdout.} Cluster
-composition and holdout membership. The cluster map as shipped resolves to 29
-clusters with 16 singletons (55\%), against the 26 and 42\% used for the
-bootstrap convention; the panel draws what the file contains and says so. The
-extended holdout stratum is underpowered and is descriptive only.
-\textit{Filter:} cluster map as shipped; $n = 48$ receptors.}
+\includegraphics[width=\textwidth]{ba3_connector.pdf}
+\caption{\textbf{An orthogonal signature corroborates the direction.}
+The P5.50--F6.44 PIF connector was never used to set a threshold or to call any
+prediction. \textbf{a}, connector distance in the references (active versus
+inactive) beside the predictions (predicate-active versus predicate-inactive).
+\textbf{b}, per-backbone delta with cluster intervals; \textbf{zero is marked and
+every interval crosses it}. \textbf{c}, row-level agreement, which is the strong
+part of this analysis and is given the most visual weight.
+\textit{Filter:} E1+E2; $n = 77$ reference and 512 prediction rows.}
 \end{figure}
-
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{s4_per_receptor.pdf}
+\caption{\textbf{Per-receptor results.} Apo and cognate medians on both axes for
+every receptor and backbone, with the receptors that carry no active reference
+marked rather than omitted.
+\textit{Filter:} E1+E2; $n = 48$ receptors $\times$ 4 backbones.}
+\end{figure}
 \begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{s8_aa2ar_case.pdf}
 \caption{\textbf{AA2AR case study.} Anchor pLDDT and geometry across arms and
@@ -135,15 +142,6 @@ sitting within 1~\AA{} of the inactive reference} --- that is, a confident and
 supporting observation for the confidence result, not as a counterexample.
 \textit{Filter:} AA2AR only; $n$ per cell on the panel.}
 \end{figure}
-
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s9_fold_integrity.pdf}
-\caption{\textbf{Fold integrity.} TM6 helicity pass rates, drawn as per-cell
-distributions rather than as bars, with one axis per receptor class so that a
-percentage is never shown against a denominator from a different class.
-\textit{Filter:} E1+E2; $n = 9{,}461$ rows. Overall pass rate 96.3\%.}
-\end{figure}
-
 \clearpage
 \section{Supplementary tables}
 
