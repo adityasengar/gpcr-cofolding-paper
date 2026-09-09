@@ -129,44 +129,51 @@ and page numbers are available on both machines. That is the layer most queries 
 one — clone it separately on each machine. Overleaf is the sync channel for LaTeX;
 this repo is the sync channel for everything else.
 
-### Who does what — corrected 2026-09-09
+### Who does what
 
-Earlier versions of this file had these roles backwards. This is the real layout.
+Each laptop runs **one orchestrator** plus one or more working agents. The orchestrator
+is the only session on its machine that touches git.
 
-| | **this laptop** | **the other laptop** |
+| | **laptop: MacBook-Pro-3** | **laptop: laptop2** |
 |---|---|---|
-| role | authors the manuscript; runs several sessions in different folders | holds the scripts and data; can also compile the LaTeX |
-| writes | `manuscript/**`, `CLAIMS.md`, `draft/**`, `lit/**` | `data/**`, `analysis/**`, `RESULTS.md`, `STATUS.md` |
-| reads | everything | everything |
-| authors LaTeX? | **yes** | no — compiles and checks only |
+| orchestrator | yes — owns git here | yes — owns git there |
+| working agents | lit agent (`lit/**`, `draft/**`) | data agent (`data/**`, `analysis/**`, `RESULTS.md`, `STATUS.md`) |
+| authors the manuscript | **yes** (`manuscript/**`) | no — compiles and checks |
+| holds the bulk data | no — small imports only | yes; real corpus is 1 TB+, here and on the HPC |
 
-**Data lives on the other laptop.** What is in `data/` here is a copy. When the two
-disagree, that machine wins.
+Which machine you are on is in `.machine` (gitignored, per-machine).
 
-### Two different sharing problems — do not confuse them
+### The one rule that keeps this safe
 
-**Across the two laptops.** They never run at once. Git handles it: `./session_start.sh`
-to pull and see what changed since this machine last signed off, `./session_end.sh` to
-record why. Working and tested.
+**Only the orchestrator runs git — pull, commit, push. Working agents edit files and
+nothing else.**
 
-**Several sessions on THIS laptop, in different folders.** Git gives **no protection
-here** — they share one working tree. If two sessions edit the same file the last write
-silently wins; `git add -A` in one can commit another's half-finished edit. There is no
-conflict and no warning, because these sessions never become separate commits.
+The hazard is not multiple committers; it is *concurrent staging*. Several sessions on
+one laptop share a single working tree, so if one runs `git add -A` while another is
+mid-edit, it commits half-finished work under a misleading message, with no conflict and
+no warning. That has already happened once here: commit `7e03642` swallowed the lit
+agent's five extractions and a 319-line intro draft.
 
-The rule: **only one session writes at a time**, and **never `git add -A` on this
-laptop** — stage the explicit paths you changed. This is not theoretical: commit
-`7e03642` swallowed another session's five extractions and a 319-line intro draft, and
-filed them under a message about LaTeX. Nothing was lost, but the history now lies about
-when that work happened.
+Routing every git operation through one session per machine removes the concurrency
+rather than asking every agent to stage carefully and hoping.
 
-The others read. `./session_start.sh`
-runs `.session-guard.sh`, which warns when another session claimed the tree recently and
-reports uncommitted work already present. It is advisory — it cannot stop anything.
+Consequences:
 
-If you genuinely need two writing at once, give each its own `git worktree` (separate
-directory, separate branch, one repository) and merge afterwards. Do not skip that and
-hope.
+- A working agent that finishes tells the **user**, who tells that machine's
+  orchestrator. That handoff is the whole protocol — without it the orchestrator either
+  commits mid-edit or lets two agents' work merge into one commit describing neither.
+- **Commit per agent, not per batch**, so history says who did what.
+- Even the orchestrator stages **explicit paths**, never `git add -A`.
+
+### Across the two laptops
+
+They never run at the same time. Each orchestrator starts with `./session_start.sh`
+(pulls, then shows what changed since *this* machine last signed off) and ends with
+`./session_end.sh "summary"` followed by commit **and push**. Committing without pushing
+strands the other machine.
+
+Both orchestrators may edit this file. That is safe only because the machines never run
+concurrently — if that ever stops being true, this file needs a single owner again.
 
 ### The manuscript
 
