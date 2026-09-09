@@ -78,8 +78,11 @@ recorded per row.
 ## Uncertainty
 
 **The cluster bootstrap is authoritative**: 1,000 resamples over 26 paralog
-clusters, seed 20260909. A receptor-level bootstrap is approximately 1.10×
-tighter and is reported as secondary, in supplementary tables only.
+clusters, seed 20260909. A receptor-level bootstrap is reported as
+secondary, in supplementary tables only. The cluster interval is equal to or
+wider than the receptor interval on every headline statistic, by a factor of up
+to 2.2 (D17) — the "approximately 1.10× tighter" figure previously circulated
+holds on 2 of 12 statistics and understates the difference.
 
 Eleven of the 26 clusters are singletons (42%), so the paralogy correction acts
 on only 15 multi-member clusters (C-8). Cluster and receptor intervals are
@@ -118,6 +121,10 @@ Every headline statistic was recomputed under every exclusion combination
 more than 0.5% from baseline.
 
 ## Confidence aggregation
+
+Correlations are computed over approximately 1,600 rows and **32 receptors** per
+backbone; the shipped `n_receptors` column reads 40 on all twelve rows and is
+wrong (D16).
 
 Three aggregations of pLDDT were computed: the whole-complex mean
 (`plddt_mean`), the mean over the six state-defining anchor residues 3.50, 3.51,

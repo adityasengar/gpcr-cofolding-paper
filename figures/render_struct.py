@@ -98,7 +98,7 @@ hide everything, refstruct
 show cartoon, refstruct and polymer
 color {c_reference}, refstruct and polymer
 set cartoon_transparency, {ref_transparency}, refstruct
-align refstruct and ({align_on}), subject and ({align_on})
+align refstruct and ({align_ref_on}), subject and ({align_on})
 """
 
 PEPTIDE_BLOCK = """\
@@ -179,7 +179,9 @@ def build(args):
         ref = REFERENCE_BLOCK.format(
             reference=args.reference, c_reference=COLOURS["reference"],
             ref_transparency=args.ref_transparency,
-            align_on=args.align_on or "polymer and name CA")
+            align_on=args.align_on or "polymer and name CA",
+            align_ref_on=(args.align_ref_on or args.align_on
+                          or "polymer and name CA"))
     pep = ""
     if args.peptide:
         pep = PEPTIDE_BLOCK.format(peptide=args.peptide,
@@ -219,6 +221,14 @@ def main():
     p.add_argument("--structure", required=True, help="the model to draw")
     p.add_argument("--reference", help="a second structure, aligned and drawn in grey")
     p.add_argument("--align-on", help="selection used to superpose (default: CA)")
+    p.add_argument("--align-ref-on",
+                   help="superposition selection IN THE REFERENCE, when it "
+                        "differs from the subject's. Needed whenever the two "
+                        "structures name the receptor differently (3SN6 calls "
+                        "it chain R, 2RH1 calls it chain A) or carry different "
+                        "fusion partners: one selection string for both "
+                        "objects silently aligns on whatever it happens to "
+                        "match in each.")
     p.add_argument("--ligand", default="organic",
                    help="selection drawn as opaque sticks (default: organic)")
     p.add_argument("--peptide", help="selection drawn as an opaque cartoon, e.g. the alpha5-CT chain")
@@ -270,6 +280,8 @@ def main():
         "figure": args.out,
         "structure": os.path.abspath(args.structure),
         "reference": os.path.abspath(args.reference) if args.reference else None,
+        "align_on": args.align_on,
+        "align_ref_on": args.align_ref_on,
         "prediction_id": args.prediction_id,
         "selected_from": args.selected_from,
         "selection_rule": args.selection_rule,

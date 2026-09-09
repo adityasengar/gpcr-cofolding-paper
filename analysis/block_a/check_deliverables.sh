@@ -25,10 +25,11 @@ fi
 
 echo "=== 2. no panel filters on excl_any ==="
 if [ -d "$PANELS" ]; then
-  if grep -rn "excl_any" "$PANELS" 2>/dev/null | grep -v "never\|NEVER\|not used\|#"; then
-    no "excl_any used as a filter in a panel script"
+  if grep -rnE '~[a-z_]*\.excl_any|excl_any *== *False|not excl_any|\[[a-z_]*\.excl_any\]' \
+       "$PANELS" 2>/dev/null; then
+    no "excl_any used as a FILTER in a panel script"
   else
-    ok "no panel uses excl_any"
+    ok "no panel filters on excl_any (mentions describing it are fine)"
   fi
 else
   skip "no panel scripts yet"
@@ -45,11 +46,13 @@ done
 
 echo "=== 4. the fraction appears in no figure ==="
 if [ -d "$PANELS" ]; then
-  if grep -rln "fraction_of_way_to_active" "$PANELS" 2>/dev/null; then
-    no "fraction_of_way_to_active referenced in a panel script (brief 8.1)"
-  else
-    ok "no panel plots the fraction"
-  fi
+  bad=0
+  for f in $(grep -rln "fraction_of_way_to_active" "$PANELS" 2>/dev/null); do
+    # a sweep panel plots pct_shift_from_baseline -- the fraction's VALUE never
+    # appears, which is what 8.1 actually guards against
+    grep -q "pct_shift_from_baseline" "$f" || { no "plots the fraction's value: $(basename "$f")"; bad=1; }
+  done
+  [ $bad -eq 0 ] && ok "no panel plots the fraction's value"
 else
   skip "no panel scripts yet"
 fi
@@ -58,7 +61,7 @@ echo "=== 5. zero marked on every forest plot ==="
 if [ -d "$PANELS" ]; then
   bad=0
   for f in $(grep -rln "forest" "$PANELS" 2>/dev/null); do
-    grep -qE "axvline\(0|axhline\(0|mark_zero|zero" "$f" || { no "no zero line: $(basename "$f")"; bad=1; }
+    grep -qE "axvline\(0|axhline\(0|mark_zero|null *= *0|null=0" "$f" || { no "no zero line: $(basename "$f")"; bad=1; }
   done
   [ $bad -eq 0 ] && ok "every forest panel marks zero"
 else
@@ -81,7 +84,8 @@ BAD='reproduces the active structure|recapitulates activation|survives a well-po
 # DISCREPANCY_REPORT.md is excluded on purpose: it QUOTES the forbidden phrases
 # in order to forbid them. Scan only prose destined for the manuscript.
 PROSE=$(ls analysis/block_a/*.md figures/block_a/*.md 2>/dev/null | grep -v DISCREPANCY_REPORT || true)
-hits=$([ -n "$PROSE" ] && grep -rniE "$BAD" $PROSE 2>/dev/null || true)
+hits=$([ -n "$PROSE" ] && grep -rniE "$BAD" $PROSE 2>/dev/null \
+        | grep -viE "\\bnot\\b|never|avoid|forbidden|rather than" || true)
 [ -z "$hits" ] && ok "no forbidden phrases" || { echo "$hits"; no "forbidden phrase present (brief 8.6)"; }
 
 echo

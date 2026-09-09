@@ -1,0 +1,12 @@
+{
+  "figure": "ba5e_most_confident_apo",
+  "structure": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/confidently_wrong/AA2AR__apo__boltz__seed748489558__row567.cif",
+  "reference": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/confidently_wrong/5G53.cif",
+  "align_on": "chain A and polymer and name CA and resi 6-312",
+  "align_ref_on": "chain A and polymer and name CA and resi 6-312",
+  "prediction_id": "block_a_rows.csv row_id=567 (AA2AR / apo / Boltz-2, seed_outer 748489558)",
+  "selected_from": 25,
+  "selection_rule": "AA2AR x Boltz-2 x apo cell, n=25 rows: the row with the HIGHEST plddt_mean in the cell (73.93; cell median 72.04) - 100th percentile on confidence. NOTE: 11_structures/SELECTION.md states the rule as 'top-quintile RMSD-to-active, highest pLDDT within', which selects row_id 552, not 567; the shipped CIF is 567. What 567 satisfies is highest-pLDDT-in-cell. Its rmsd_to_active_ref is 3.102 A (cell median 2.941, Class A corpus max 5.307) but its rmsd_to_inactive_ref is 0.948 A: this is a confident APO prediction sitting on the INACTIVE reference, so it is far from active by construction and must not be captioned as a confidently wrong model. Superposed on receptor CA resi 6-312, chain A both sides; the reference 5G53 chain A is the A2A receptor, its mini-Gs chains excluded. Anchors L48 (2x46) / L235 (6x37) CA and Y197 (5.58) / Y288 (7.53) OH, verified by reproducing row 567's stored d_gpcrdb_tm6_tilt_246_637_ca = 11.7347 A and d_npxxy_oh = 9.6079 A exactly from the CIF.",
+  "pml": "/Users/aditya/Documents/tools/Novartis_projects/paper/figures/block_a/scenes/ba5e_most_confident_apo.pml",
+  "generated": "2026-09-09T19:24:09"
+}

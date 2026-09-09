@@ -48,8 +48,12 @@ receptors.
 | OpenFold3 | +4.81 Å | [3.95, 5.21] | 24.2% | 79.9% |
 | Protenix2 | +5.31 Å | [4.63, 5.74] | 14.5% | 87.1% |
 
+The two rate columns are **pooled row-level rates**, not means over receptors;
+on this panel the two agree to three decimal places except for Protenix cognate,
+where the shipped value (0.871) differs from both (0.890) and is unexplained.
 All intervals are cluster bootstraps over 26 paralog clusters and are the
-authoritative ones (D5). Chai-1 is the soft predictor throughout — a smaller
+authoritative ones (D5); the cluster interval is up to 2.2× wider than the
+receptor interval, not 1.1× (D17). Chai-1 is the soft predictor throughout — a smaller
 shift with a much wider interval — which recurs across metrics (C-4).
 
 The apo arm is a computational reference condition, not a physical state: no
@@ -110,7 +114,8 @@ uninformative for amplitude — a property of the instrument, not a result about
 the models.** **Figure BA-4.**
 
 This is the load-bearing negative result (C-10), and it must be read alongside
-the fraction in Table 2. **The fraction is a mean; the regression is a
+the fraction in Table 2 — a median over **39** receptors, not the 40 the shipped
+`n_receptors_fraction` column reports (D15). **The fraction is a mean; the regression is a
 covariance.** A high mean shift with near-zero covariance against reference
 separation is exactly what this corpus shows, and the two are not in conflict.
 

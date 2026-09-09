@@ -1,0 +1,12 @@
+{
+  "figure": "ba1a_instrument_schematic",
+  "structure": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/instrument_schematic/3SN6.cif",
+  "reference": "/Users/aditya/Documents/tools/Novartis_projects/paper/data/block_a/11_structures/instrument_schematic/2RH1.cif",
+  "align_on": "chain R and polymer and name CA and resi 30-342",
+  "align_ref_on": "chain A and polymer and name CA and resi 29-342",
+  "prediction_id": null,
+  "selected_from": 1,
+  "selection_rule": "reference structures, not predictions: the canonical beta2AR published pair named in 11_structures/SELECTION.md (3SN6 active, 2RH1 inactive), selected_from 1 because the pair is fixed by SELECTION.md rather than chosen from candidates. Superposed on receptor CA TM1-TM7 only (3SN6 chain R resi 30-342 vs 2RH1 chain A resi 29-342), excluding T4L, the Gs heterotrimer and Nb35, per instrument_schematic/ALIGNMENT.md. Camera derived from the geometry, not by eye: membrane normal vertical (first principal axis of the receptor CA cloud, intracellular side up), active-minus-inactive displacement of the 6x37 CA in the image plane. Anchors are L75 (2x46) and L275 (6x37) CA, and Y219 (5.58) / Y326 (7.53) OH - verified by reproducing 2RH1's shipped d_tilt_ref 11.9283 A and d_npxxy_oh_ref 11.4727 A exactly from the CIF. NOTE: 3SN6 is NOT the ADRB2 panel active reference - 4LDE is - so no panel-derived number is annotated here.",
+  "pml": "/Users/aditya/Documents/tools/Novartis_projects/paper/figures/block_a/scenes/ba1a_instrument_schematic.pml",
+  "generated": "2026-09-09T19:13:01"
+}

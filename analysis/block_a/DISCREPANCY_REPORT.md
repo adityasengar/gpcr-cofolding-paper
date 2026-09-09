@@ -32,6 +32,12 @@ Convention throughout: **the data wins, the discrepancy is stated, not smoothed*
 | **D9** | **Methods §7.1, C-6** | **high — new** | **reference-set denominator is 98 empirically, not the 89 the Methods requires stating** |
 | **D10** | **BA-1b spec** | medium — new | `deviation_class` has five levels, not the three the panel spec assumes |
 | **D11** | brief §8.1 vs §6 | low — new | "fraction in T2 only" cannot hold: §6 requires it in T5 and S-T2 too |
+| **D12** | `11_structures/confidently_wrong/` | **CRITICAL — new** | **the shipped structure is not confidently wrong; it is confidently RIGHT** |
+| **D13** | `ALIGNMENT.md` files | **high — new** | anchor residues and measured values do not match the shipped data |
+| **D14** | SC-6 / D7 | medium — new | 610 of 4,866 predicate-active rows have no active reference and cannot be tested |
+| **D15** | `headline_by_backbone.csv` | medium — new | the `n_receptors_*` columns overstate the effective n |
+| **D16** | `plddt_correlations.csv` | low — new | `n_receptors = 40` on all 12 rows; the population has 32 |
+| **D17** | Methods §7.4 | medium — new | "receptor bootstrap ~1.10× tighter" holds almost nowhere; ratios run 1.00–2.20 |
 
 ---
 
@@ -322,6 +328,134 @@ and its mean-versus-covariance caveat belong to T2 alone.
 The rule's actual purpose — that no reader takes 0.88–0.95 as "reproduces the
 active structure" — is preserved. **The no-figure-panel and no-abstract halves of
 §8.1 are absolute and are being obeyed without exception.**
+
+---
+
+## D12 — NEW, CRITICAL: the "confidently wrong" structure is confidently right
+
+`11_structures/confidently_wrong/` ships an AA2AR prediction that BA-5e is
+specified to present as *"the high-pLDDT AA2AR prediction overlaid on 5G53 …
+label it explicitly as a worst-case illustration"*.
+
+**It is not a worst case. It is a correct prediction.**
+
+| row | receptor / backbone / arm | RMSD to active | RMSD to inactive | pLDDT at anchors | predicate |
+|---|---|---:|---:|---:|---|
+| 552 (what `SELECTION.md`'s rule selects) | AA2AR boltz **apo** | 3.106 Å | **0.857 Å** | 84.3 | inactive |
+| 567 (what actually shipped) | AA2AR boltz **apo** | 3.102 Å | **0.948 Å** | 84.6 | inactive |
+
+Both are **apo-arm** predictions. Both sit within 1 Å of the **inactive**
+reference, which is where an apo prediction should sit, and the predicate calls
+both inactive — correctly. The 3.1 Å distance is from the *active* reference,
+which is not the state this row is supposed to reach.
+
+A panel captioned "confidently wrong" on this row would assert the opposite of
+what the row shows. **The directory name, `SELECTION.md`'s rule, and the BA-5e
+specification are all wrong together**, which is why this survived: each
+corroborates the others and none was checked against the row.
+
+Two further defects in the same directory: the shipped file is row **567** while
+`SELECTION.md`'s stated rule ("top-quintile RMSD-to-active, highest pLDDT
+within") selects row **552**; and 567 is simply the highest-pLDDT row in the
+whole cell, which is a different rule from the one recorded.
+
+**Action**: do not build BA-5e as a worst case. Either drop it, or recaption it
+for what it is — a confident apo prediction landing correctly on the inactive
+reference, which is a *supporting* observation for Beat 5, not a counterexample.
+If a genuine confidently-wrong case is wanted, it must be selected fresh, by a
+stated rule, from rows that are far from the reference **they were meant to
+reach**.
+
+---
+
+## D13 — NEW: the ALIGNMENT.md files name wrong anchor residues
+
+`instrument_schematic/ALIGNMENT.md` gives the tilt anchors as L124/F282, which
+measures 9.03 Å on 2RH1. The anchors that reproduce the shipped
+`d_tilt_ref` = 11.9283 Å exactly are **L75/L275**. `confidently_wrong/` names
+2×46 as L88 (actually **L48**) and Y5.58 as Y213 (actually **Y197**). NPxxY
+Y7.53 is correct in both files.
+
+`instrument_schematic/ALIGNMENT.md` also quotes "measured values (from
+reference_predicates.csv)" of Δtilt ≈ 5.02 Å and ΔNPxxY ≈ +5.4 Å. **Neither
+appears in `reference_predicates.csv` or `reference_separation.csv`**; ADRB2's
+shipped values are +5.634 and **−6.581** — note the sign. And 3SN6 is not in the
+reference set at all: ADRB2's panel active reference is 4LDE.
+
+Any figure drawing measured distances onto a structure must take them from the
+tidy files, not from these ALIGNMENT notes.
+
+---
+
+## D14 — NEW: 610 predicate-active rows cannot be tested at all
+
+D7 corrected SC-6's headline from 0.02% to 0.041% (2 of 4,866). That denominator
+is itself wrong: **only 4,256 of the 4,866 predicate-active rows carry an active
+reference**; the other 610 have no reference to be scored against.
+
+The testable false-positive rate is **2 / 4,256 = 0.047%**. Report it with the
+testable denominator and state the 610 untestable rows, rather than letting rows
+that cannot fail dilute the rate.
+
+---
+
+## D15 — NEW: the `n_receptors_*` columns overstate the effective n
+
+`headline_by_backbone.csv` reports round numbers that exceed the non-null
+per-receptor values in `receptor_summary.csv`:
+
+| column | shipped | non-null |
+|---|---:|---:|
+| `n_receptors_tilt` | 48 | 47 |
+| `n_receptors_delta` | 48 | 39 |
+| `n_receptors_fraction` | 40 | **39** |
+
+**This corrects D6**: the fraction's denominator is not 40 either — the shipped
+fraction is a median over **39** receptors. Quote 39.
+
+---
+
+## D16 — NEW: `plddt_correlations.csv` misreports its receptor count
+
+All 12 rows carry `n_receptors = 40`. The population that reproduces the r values
+has **32** distinct receptors, and `plddt_per_receptor.csv` itself carries 32.
+`n_rows` (~1,600) is consistent; only the receptor count is wrong. Quote 32 in
+Table T4.
+
+---
+
+## D17 — NEW: "receptor bootstrap ~1.10× tighter" is not general
+
+Methods §7.4 states the receptor bootstrap is approximately 1.10× tighter than
+the cluster bootstrap. Measured across the headline statistics, the
+cluster/receptor width ratio runs from **1.00 to 2.20**:
+
+| statistic | boltz | chai | of3 | protenix |
+|---|---:|---:|---:|---:|
+| median tilt shift | **1.84** | 1.11 | **1.91** | 1.43 |
+| median Δ-to-active shift | 1.00 | 1.00 | 1.07 | **2.20** |
+| fraction | 1.00 | 1.72 | 1.04 | 1.37 |
+
+"~1.10×" holds on 2 of 12. The correct statement is that the cluster bootstrap is
+**equal to or wider, by up to a factor of 2.2**, which strengthens rather than
+weakens the case for treating it as authoritative — and makes D5 (receptor
+intervals quoted under a cluster label) more consequential than a 10% error.
+
+---
+
+## Not reproduced
+
+One further mismatch was reported to me and **does not reproduce**: that
+`*_active_rate_panel_mean` are pooled row rates differing from per-receptor means
+by up to a factor of 2.9 (OF3 apo, 0.242 vs 0.083). Recomputing under E1+E2 on
+the full panel gives OF3 apo pooled 0.241 and per-receptor mean 0.241 — the same
+to three places. The reported figure is not reproducible as stated and is not
+recorded as a discrepancy.
+
+It did, however, surface a real and smaller anomaly: **Protenix cognate ships
+0.871 where both the pooled rate and the per-receptor mean are 0.890.** That one
+value differs from both candidate definitions and is unexplained. Flagged for the
+PI rather than resolved here.
 
 ---
 

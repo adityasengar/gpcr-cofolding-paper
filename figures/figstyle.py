@@ -54,6 +54,44 @@ PARTNER_COLOURS = {
 }
 STATE_COLOURS = {"active": VERM, "inactive": BLUE, "borderline": GREY}
 
+# Block A encodings. Four backbones and two arms recur in almost every Block A
+# panel, so they get fixed colours for the same reason the partner arms do: a
+# reader who has learnt "green = OpenFold-3" in figure 2 must not have to relearn
+# it in figure 5.
+BACKBONE_COLOURS = {
+    "boltz":    BLUE,
+    "chai":     VERM,
+    "of3":      GREEN,
+    "protenix": ORANGE,
+}
+BACKBONE_ORDER = ["boltz", "chai", "of3", "protenix"]
+BACKBONE_LABELS = {"boltz": "Boltz-2", "chai": "Chai-1",
+                   "of3": "OpenFold-3", "protenix": "Protenix"}
+
+ARM_COLOURS = {"apo": GREY, "cognate": GREEN}
+ARM_LABELS  = {"apo": "apo", "cognate": "cognate Gα"}
+
+# Reference-set predicate outcomes (BA-1). `unclassified` is deliberately a
+# neutral grey and NOT folded into a named class: 5 of the 9 deviations in
+# reference_predicates.csv carry no classification, and an encoding that hid
+# that would hide the majority of the thing the panel exists to show.
+DEVIATION_COLOURS = {
+    "expected_biology":                   GREEN,
+    "curation_error":                     VERM,
+    "measurement_artifact":               PURPLE,
+    "curation_error_or_expected_biology": ORANGE,
+    "unclassified":                       GREY,
+}
+DEVIATION_MARKERS = {
+    "expected_biology":                   "^",
+    "curation_error":                     "s",
+    "measurement_artifact":               "D",
+    "curation_error_or_expected_biology": "P",   # compound label, own slot
+    "unclassified":                       "X",
+}
+DEVIATION_ORDER = ["unclassified", "curation_error", "expected_biology",
+                   "measurement_artifact", "curation_error_or_expected_biology"]
+
 
 def _sans():
     """Pick the best sans face actually installed, rather than hoping."""

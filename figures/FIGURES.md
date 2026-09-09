@@ -83,6 +83,131 @@ render that names an α5 contact inherits that. Say which structure the label ca
 because a render carries a claim with no quantitative panel behind it. That is the
 single easiest defect to commit here.
 
+## Block A
+
+Panels built from `data/block_a/`, the self-contained Block A drop. Their
+per-panel provenance — source file, exact filter, n after filtering, claim —
+is in `block_a/FIGURE_PROVENANCE.md`, which is the companion to these entries
+and carries the material a caption needs. The scripts are in
+`block_a/panels/`; the shared loader and the exclusion filters are in
+`block_a/badata.py`.
+
+**The filter rule for every Block A entry.** `excl_any` fires on 5,093 of
+9,490 rows (54%) and is the wrong filter almost everywhere: the five flags are
+independent sets with different scopes. E1 (25 rows) and E2 (4) are always
+excluded and keep 99.7% of the corpus. E3 is applied only where a reference
+value is a denominator or a regression predictor, and then through the
+per-axis flags `excl_E3_npxxy` / `excl_E3_tilt`, never the union. E4 is for
+Class-A-scoped claims; E5 is a sensitivity contrast. Every caption states its
+filter and its n.
+
+`fraction_of_way_to_active` is a Table T2 quantity and appears in no figure.
+
+### BA-1 — the instrument and its calibration
+```
+claim   the predicate is a rule over two distances, and it behaves on
+        structures whose state is already known
+shows   a: 3SN6 over 2RH1, TM-bundle superposition, the two predicate axes
+        drawn; b: all 168 references on the predicate plane with both
+        thresholds, the 98 with no NPxxY axis as a rug, and all 9 deviations
+        named and shaped by all five deviation_class levels; c: the reference
+        gap per receptor, tilt SD 2.07 A against NPxxY SD 5.22 A; d: the
+        predicate call census over 168
+data    02_references/{reference_predicates,reference_metadata,
+        reference_separation}.csv; 11_structures/instrument_schematic/
+        (no [R-*] ids: Block A ships its own tidy tables, not RESULTS.md)
+build   python3 block_a/panels/ba1_reference_landscape.py
+        + the render_struct.py command in block_a/FIGURE_PROVENANCE.md
+status  ready — but the caption must say 3SN6 is NOT the ADRB2 panel active
+        reference (4LDE is), and the tilt anchors are L75/L275, not the
+        L124/F282 that instrument_schematic/ALIGNMENT.md names
+```
+
+### BA-2 — the main effect
+```
+claim   C6, C7 — SC-1
+shows   TM6 tilt opens under the cognate Ga co-input on all four backbones and
+        does not under apo; within receptor as well as pooled; and the
+        headline shift with its CLUSTER-bootstrap interval
+data    01_rows/block_a_rows.csv (E1+E2, n=9,461); receptor_summary.csv;
+        headline_by_backbone.csv *_cluster_ci_* columns only
+build   python3 block_a/panels/ba2_arm_shift.py
+status  ready — CIs are the cluster columns, not the receptor columns the
+        claim sheet mislabels as cluster (D5); effective n is 47 receptors,
+        not the 48 that n_receptors_tilt records
+```
+
+### BA-3 — the orthogonal signature
+```
+claim   C6 — SC-3, state-reached half
+shows   predictions the predicate calls active sit where active references sit
+        on the P5.50-F6.44 connector, a coordinate never used to call anything:
+        204/256 and 205/256 row-level agreement. The magnitude difference is
+        -0.56 A with a cluster interval of [-1.196, +0.026], which INCLUDES
+        ZERO, and zero is drawn
+data    05_connector/*.csv, n=512 (the T2 scale-up; excl_* does not apply)
+build   python3 block_a/panels/ba3_connector.py
+status  ready — leads with the agreement counts. No magnitude ratio is
+        plotted: the ratio is taken on the absolute delta, so its interval
+        cannot cross zero by construction (D2)
+```
+
+### BA-4 — amplitude, the negative result
+```
+claim   C6 — SC-3, amplitude half; C-10
+shows   whether a receptor with further to travel travels further. Unity on
+        every regression panel and marked on every forest, because the null
+        under test is slope=1. Protenix on NPxxY is +0.257 [0.074, 0.552] and
+        does NOT cross zero; tilt slopes go negative (Boltz -0.298, Chai
+        -0.659); tilt SD(predictor) is 1.17 A against NPxxY's 5.22 A
+data    04_amplitude/{amplitude_points,amplitude_fits,
+        attenuation_sensitivity}.csv, inclusion set class_a_only,
+        n=28 receptors (NPxxY) / 32 (tilt)
+build   python3 block_a/panels/ba4_amplitude.py
+status  ready — do not write "all CIs cross zero" (D1); do not quote a
+        positive tilt slope range (D3); the tilt axis is uninformative for
+        amplitude, which is an instrument property, not a result
+```
+
+### BA-5 — confidence does not track state
+```
+claim   C8 — SC-11 as restated by W-2
+shows   pLDDT against RMSD-to-active for all three aggregations and four
+        backbones, cluster CIs, zero drawn. Signed on the primary aggregation
+        for 2 of 4 backbones. The aggregation choice moves the answer: OF3
+        -0.258 -> -0.626, Protenix +0.327 -> +0.068. Panel e is the most
+        confident AA2AR apo model over the active reference
+data    06_confidence/{plddt_correlations,plddt_per_receptor}.csv;
+        01_rows/block_a_rows.csv restricted to Class A rows carrying an active
+        reference, n=1,595-1,600 per backbone over 32 receptors
+build   python3 block_a/panels/ba5_confidence.py
+        + the render_struct.py command in block_a/FIGURE_PROVENANCE.md
+status  ready — the caption MUST say plddt_at_anchors was designated primary
+        post hoc. plddt_correlations.csv records n_receptors=40; the
+        population has 32 and the panels quote 32. Panel e must not be
+        captioned "confidently wrong": that row is 0.95 A from the INACTIVE
+        reference, which is where an apo prediction belongs
+```
+
+### S1-S9 — supplementary
+```
+claim   none individually; together they are the audit trail BA-1 to BA-5 rest
+        on, and S8 is the required quantitative panel behind the BA-5e render
+shows   S1 what each exclusion flag covers and what every combination does to
+        every headline metric (no sign flip in 160 cells) · S2 the reference
+        set audit, including three columns that are empty in the drop ·
+        S3 cluster against receptor bootstrap, the only place receptor
+        intervals appear · S4 every receptor x backbone, absent cells drawn
+        absent · S5 the amplitude slopes under all three inclusion sets ·
+        S6 predicate calibration with the untestable rows counted separately ·
+        S7 the paralog clustering and the holdout · S8 the AA2AR case ·
+        S9 fold integrity, one axis per class
+data    01_rows/, 02_references/, 03_aggregates/, 04_amplitude/,
+        06_confidence/, 07_clusters_and_holdout/, 08_exclusions/
+build   python3 block_a/panels/s{1..9}_*.py
+status  ready
+```
+
 ## Corpus figures
 
 Figures whose data is the **literature corpus**, not our predictions. Every number

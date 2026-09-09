@@ -224,7 +224,7 @@ def confidence_vs_measure(ax, df, confidence, measure, group=None,
 
 
 def matrix(ax, table, value_label="", cmap="viridis", annotate=False,
-           vmin=None, vmax=None, zero_is_absent=True):
+           vmin=None, vmax=None, zero_is_absent=True, annotate_fmt="%g"):
     """
     MATRIX form: both axes are indices, the value lives in the cell.
 
@@ -251,23 +251,21 @@ def matrix(ax, table, value_label="", cmap="viridis", annotate=False,
     ax.grid(which="minor", color="white", linewidth=0.6)
     ax.tick_params(which="minor", length=0)
     if annotate:
-        # Contrast against the CELL, not against the median of the table: with
-        # many empty cells the median is near zero and every label then goes
-        # white on a near-white square. Invisible in the code, obvious in the
-        # picture, and it was in this file until a rendered panel showed it.
-        hi = np.nanmax(masked.filled(np.nan)) if masked.count() else 1.0
-        lo = np.nanmin(masked.filled(np.nan)) if masked.count() else 0.0
-        span = (vmax if vmax is not None else hi) - \
-               (vmin if vmin is not None else lo)
-        base = vmin if vmin is not None else lo
+        # Contrast against the COLOUR THE CELL ACTUALLY GOT, via the colormap's
+        # own luminance - not against the value's position in the range. On a
+        # sequential map those agree; on a DIVERGING map they do not, and the
+        # value-based rule paints every above-midpoint cell white, including
+        # the pale ones just above the midpoint. Invisible in the code and
+        # obvious in the picture, twice now.
         for r in range(table.shape[0]):
             for c in range(table.shape[1]):
                 v = data[r, c]
                 if np.isnan(v) or (zero_is_absent and v == 0):
                     continue
-                frac = (v - base) / span if span else 0.0
-                ax.text(c, r, "%g" % v, ha="center", va="center", fontsize=5,
-                        color="white" if frac > 0.55 else "black")
+                rr, gg, bb, _ = im.cmap(im.norm(v))
+                lum = 0.299 * rr + 0.587 * gg + 0.114 * bb
+                ax.text(c, r, annotate_fmt % v, ha="center", va="center",
+                        fontsize=5, color="white" if lum < 0.55 else "black")
     cb = ax.figure.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
     cb.set_label(value_label)
     cb.outline.set_linewidth(0.4)
@@ -275,7 +273,7 @@ def matrix(ax, table, value_label="", cmap="viridis", annotate=False,
 
 
 def count_dots(ax, labels, counts, total, colours=None, order_by_count=True,
-               label_fmt="%d/%d", highlight=None):
+               label_fmt="%d/%d", highlight=None, label_gap=0.015):
     """
     A census: how many items in a fixed population carry each attribute.
 
@@ -303,7 +301,7 @@ def count_dots(ax, labels, counts, total, colours=None, order_by_count=True,
                 solid_capstyle="butt", zorder=1)
         ax.plot([c], [i], marker="o", markersize=4, color=col,
                 markeredgewidth=0, zorder=3)
-        ax.text(c + total * 0.015, i, label_fmt % (c, total), va="center",
+        ax.text(c + total * label_gap, i, label_fmt % (c, total), va="center",
                 ha="left", fontsize=5, color=fs.GREY)
     ax.set_yticks(pos)
     ax.set_yticklabels([lab for lab, _ in pairs])
@@ -402,3 +400,371 @@ def category_legend(ax, categories, ncol=None, loc="upper center",
               bbox_to_anchor=bbox, frameon=False, handlelength=1.0,
               handleheight=0.9, columnspacing=1.0, borderpad=0.0,
               fontsize=5.5)
+
+
+# ---------------------------------------------------------------------------
+# Generators added for Block A. Same contract as the ones above: a DataFrame or
+# plain arrays in, an Axes you supply, the counts back out for the caption.
+# ---------------------------------------------------------------------------
+
+
+def forest(ax, labels, estimates, ci_lo, ci_hi, colours=None, null=0.0,
+           reference=None, reference_label=None, null_label="no effect",
+           xlabel="", ns=None, group_gaps=None, highlight=None,
+           value_fmt="%+.3f", bands=None, band_label=None):
+    """
+    Point estimate with its interval, one row per comparison, with the NULL
+    DRAWN.
+
+    Rule 3's sibling. `no dispersion / CI / test` is the third commonest defect
+    in the corpus (131 of 1,226 panel groups) and the failure mode that follows
+    it is subtler: an interval is drawn but the value it would have to exclude
+    is not, so "crosses zero" and "clear of zero" look identical. This
+    generator therefore refuses to draw without a `null` line, and takes an
+    optional second `reference` (unity, for a slope that is being compared to
+    perfect reproduction) so that two different questions — is it non-zero, is
+    it one — can be read off the same row without either being implied.
+
+    Intervals that exclude the null are drawn solid; intervals that include it
+    are drawn open, so the distinction survives greyscale printing.
+
+    `ns` prints the n behind each row (rule 2). `group_gaps` is a set of row
+    indices before which to leave a blank line, for grouping by backbone/axis.
+    """
+    import numpy as _np
+    n = len(labels)
+    gaps = group_gaps or set()
+    ypos, y = [], 0.0
+    for i in range(n):
+        if i in gaps:
+            y += 0.7
+        ypos.append(y)
+        y += 1.0
+    ypos = _np.asarray(ypos)
+
+    if bands:
+        for i in bands:
+            ax.axhspan(ypos[i] - 0.45, ypos[i] + 0.45, color=fs.YELLOW,
+                       alpha=0.30, linewidth=0, zorder=0)
+    if reference is not None:
+        ax.axvline(reference, color=fs.BLACK, lw=0.6, ls=(0, (4, 2)), zorder=0)
+    ax.axvline(null, color=fs.GREY, lw=0.8, zorder=0)
+
+    for i, lab in enumerate(labels):
+        c = (colours[i] if colours is not None else fs.BLUE)
+        lo, hi, est = ci_lo[i], ci_hi[i], estimates[i]
+        excludes = (lo > null) or (hi < null)
+        ax.plot([lo, hi], [ypos[i]] * 2, color=c, lw=1.1,
+                solid_capstyle="butt", zorder=2)
+        for b in (lo, hi):
+            ax.plot([b, b], [ypos[i] - 0.16, ypos[i] + 0.16], color=c,
+                    lw=0.9, zorder=2)
+        ax.plot([est], [ypos[i]], marker="o", markersize=4.0, color=c,
+                markerfacecolor=c if excludes else "white",
+                markeredgecolor=c, markeredgewidth=0.9, zorder=3)
+        if highlight and lab in highlight:
+            ax.annotate("", (est, ypos[i]), zorder=1)
+
+    ax.set_yticks(ypos)
+    ax.set_yticklabels(labels)
+    ax.set_ylim(ypos[-1] + 0.8, ypos[0] - 0.8)      # first row at the top
+    ax.set_xlabel(xlabel)
+    ax.spines["left"].set_visible(False)
+    ax.tick_params(axis="y", length=0)
+
+    if ns is not None:
+        xr = ax.get_xlim()
+        for i in range(n):
+            ax.text(xr[1], ypos[i], " n=%d" % ns[i], va="center", ha="left",
+                    fontsize=5, color=fs.GREY, clip_on=False)
+
+    handles = []
+    import matplotlib.lines as _mlines
+    handles.append(_mlines.Line2D([], [], color=fs.GREY, lw=0.8,
+                                  label=null_label))
+    if reference is not None:
+        handles.append(_mlines.Line2D([], [], color=fs.BLACK, lw=0.6,
+                                      ls=(0, (4, 2)),
+                                      label=reference_label or "reference"))
+    handles.append(_mlines.Line2D([], [], color=fs.BLACK, lw=0, marker="o",
+                                  markersize=4, markerfacecolor=fs.BLACK,
+                                  label="interval excludes %s" % null_label))
+    handles.append(_mlines.Line2D([], [], color=fs.BLACK, lw=0, marker="o",
+                                  markersize=4, markerfacecolor="white",
+                                  markeredgewidth=0.9,
+                                  label="interval includes %s" % null_label))
+    if bands and band_label:
+        import matplotlib.patches as _mp
+        handles.append(_mp.Patch(facecolor=fs.YELLOW, alpha=0.30,
+                                 edgecolor="none", label=band_label))
+    return {"handles": handles,
+            "excludes_null": [bool((ci_lo[i] > null) or (ci_hi[i] < null))
+                              for i in range(n)]}
+
+
+def regression_with_unity(ax, x, y, slope, intercept, ci_lo=None, ci_hi=None,
+                          colour=None, unity=True, point_labels=None,
+                          xlabel="", ylabel="", annotate=None):
+    """
+    A fitted slope always drawn against the slope it is being compared to.
+
+    An amplitude regression asks "does a receptor that has further to travel
+    travel further" — the hypothesis under test is slope = 1, not slope > 0.
+    A panel that draws only the fit invites the reader to compare it to the
+    flat line by default, which is the wrong null for the claim. So the unity
+    line is drawn on every panel and cannot be switched off by accident, and
+    the slope's CI is drawn as a fan of lines through the data's centroid so
+    the reader sees how far unity is from the interval, not just from the
+    point estimate.
+
+    Returns the n actually plotted, which is what the caption must quote.
+    """
+    import numpy as _np
+    x = _np.asarray(x, dtype=float)
+    y = _np.asarray(y, dtype=float)
+    ok = _np.isfinite(x) & _np.isfinite(y)
+    x, y = x[ok], y[ok]
+    c = colour or fs.BLUE
+
+    xs = _np.linspace(_np.nanmin(x), _np.nanmax(x), 50)
+    if unity:
+        lo = min(_np.nanmin(x), _np.nanmin(y))
+        hi = max(_np.nanmax(x), _np.nanmax(y))
+        ax.plot([lo, hi], [lo, hi], color=fs.BLACK, lw=0.6, ls=(0, (4, 2)),
+                zorder=1)
+    ax.axhline(0, color=fs.GREY, lw=0.5, zorder=0)
+
+    if ci_lo is not None and ci_hi is not None:
+        cx, cy = _np.mean(x), _np.mean(y)
+        for s in (ci_lo, ci_hi):
+            ax.plot(xs, cy + s * (xs - cx), color=c, lw=0.5, alpha=0.55,
+                    zorder=2)
+        ax.fill_between(xs, cy + ci_lo * (xs - cx), cy + ci_hi * (xs - cx),
+                        color=c, alpha=0.12, linewidth=0, zorder=1)
+    ax.plot(xs, intercept + slope * xs, color=c, lw=1.2, zorder=3)
+    ax.scatter(x, y, s=6, color=c, alpha=0.75, linewidths=0, zorder=4)
+
+    if point_labels is not None:
+        for xi, yi, li in zip(x, y, point_labels):
+            ax.annotate(li, (xi, yi), xytext=(2, 2), textcoords="offset points",
+                        fontsize=4, color=fs.GREY)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    if annotate:
+        ax.text(0.02, 0.97, annotate, transform=ax.transAxes, va="top",
+                ha="left", fontsize=5, color=fs.BLACK)
+    fs.annotate_n(ax, _np.mean(ax.get_xlim()), len(x), y=ax.get_ylim()[0])
+    return len(x)
+
+
+def predicate_plane(ax, df, xcol, ycol, group, colours=None, xthr=None,
+                    ythr=None, marker_col=None, marker_order=None,
+                    marker_shapes=None, marker_colours=None, label_col=None,
+                    open_col=None, xlabel="", ylabel="", rug_label="",
+                    label_only_marked=True):
+    """
+    Two measured axes with their decision thresholds, plus a RUG for the items
+    that only one of the two axes can measure.
+
+    98 of the 168 reference structures have no NPxxY-OH value at all - the
+    residues that define the axis are absent, or the class does not have them.
+    A plain scatter drops those silently, and "items the rule could not measure
+    were not drawn" is the quiet version of the corpus's commonest defect. So
+    the items missing the y value are drawn as a rug along the bottom against
+    their x value, with their own n, and the caption can name both populations.
+
+    `marker_col` outlines a subset of points with a shape per category - the
+    deviations, in BA-1b. EVERY level present in the data gets its own shape:
+    the generator raises if `marker_shapes` lacks one rather than folding it
+    into a neighbour, because on this data 5 of the 9 deviations are
+    `unclassified` and one carries a compound label, so a three-shape encoding
+    would mislabel two thirds of the very points the panel exists to show.
+
+    `open_col` is a boolean column drawn hollow rather than filled - for a
+    subpopulation distinction (on/off the 48-receptor panel) that must not
+    consume the colour channel.
+    """
+    import numpy as _np
+    counts = {}
+    have_y = df[ycol].notna()
+    main, rug = df[have_y], df[~have_y]
+
+    if xthr is not None:
+        ax.axvline(xthr, color=fs.GREY, lw=0.6, ls=(0, (2, 2)), zorder=0)
+    if ythr is not None:
+        ax.axhline(ythr, color=fs.GREY, lw=0.6, ls=(0, (2, 2)), zorder=0)
+
+    for i, g in enumerate(sorted(main[group].dropna().unique())):
+        sub = main[main[group] == g]
+        c = _series_colour(g, i, colours)
+        if open_col is not None:
+            filled = sub[sub[open_col].astype(bool)]
+            hollow = sub[~sub[open_col].astype(bool)]
+        else:
+            filled, hollow = sub, sub.iloc[0:0]
+        ax.scatter(filled[xcol], filled[ycol], s=11, facecolors=c,
+                   edgecolors=c, linewidths=0.4, alpha=0.60, zorder=2,
+                   label="%s (%d of %d)"
+                         % (g, len(sub), int((df[group] == g).sum())))
+        if len(hollow):
+            ax.scatter(hollow[xcol], hollow[ycol], s=11, facecolors="white",
+                       edgecolors=c, linewidths=0.5, alpha=0.85, zorder=2)
+        counts[g] = len(sub)
+
+    # The rug first, so its y position exists before anything is drawn on it.
+    rug_y = None
+    if len(rug):
+        y0, y1 = ax.get_ylim()
+        pad = (y1 - y0) * 0.06
+        ax.set_ylim(y0 - pad, y1)
+        y0, y1 = ax.get_ylim()
+        rug_y = y0 + (y1 - y0) * 0.030
+        for i, g in enumerate(sorted(rug[group].dropna().unique())):
+            sub = rug[rug[group] == g]
+            ax.scatter(sub[xcol], _np.full(len(sub), rug_y), marker="|", s=24,
+                       linewidths=0.6, color=_series_colour(g, i, colours),
+                       alpha=0.8, zorder=2)
+        ax.text(0.995, 0.002, "%s (n=%d)" % (rug_label or "y undefined",
+                                             len(rug)),
+                transform=ax.transAxes, ha="right", va="bottom", fontsize=5,
+                color=fs.GREY)
+        counts["_rug"] = len(rug)
+
+    marked = df.iloc[0:0]
+    if marker_col is not None:
+        present = sorted(df[marker_col].dropna().unique())
+        levels = list(marker_order) if marker_order else present
+        missing = [lev for lev in present if lev not in levels]
+        if missing:
+            raise ValueError(
+                "predicate_plane: %r present in %s but absent from "
+                "marker_order; every level must be drawn" % (missing, marker_col))
+        shapes = marker_shapes or {}
+        mcols = marker_colours or {}
+        for lev in levels:
+            sub = df[df[marker_col] == lev]
+            counts["marked:" + str(lev)] = len(sub)
+            if not len(sub):
+                continue
+            yy = sub[ycol].where(sub[ycol].notna(), rug_y)
+            ax.scatter(sub[xcol], yy, marker=shapes.get(lev, "o"), s=36,
+                       facecolors="none", edgecolors=mcols.get(lev, fs.BLACK),
+                       linewidths=1.0, zorder=5)
+        marked = df[df[marker_col].notna()]
+        counts["marked:_on_rug"] = int(marked[ycol].isna().sum())
+
+    if label_col is not None:
+        rows = marked if label_only_marked else df
+        # Deviations cluster, so labels collide unless they are fanned out.
+        # Rank within each y band and alternate the offset direction.
+        rows = rows.sort_values([ycol, xcol], na_position="first")
+        for k, (_, row) in enumerate(rows.iterrows()):
+            yv = row[ycol] if _np.isfinite(row[ycol]) else rug_y
+            dy = (5, -9, 14)[k % 3]
+            dx = (5, 4, 4)[k % 3]
+            ax.annotate(str(row[label_col]), (row[xcol], yv),
+                        xytext=(dx, dy), textcoords="offset points",
+                        fontsize=4.5, color=fs.BLACK, zorder=6)
+
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    counts["_plotted"] = len(main)
+    return counts
+
+
+def curve_family(ax, df, xcol, ycol, series, invalid_col=None, colours=None,
+                 labels=None, xlabel="", ylabel="", baseline=None):
+    """
+    One line per series over a swept parameter, with the region where the
+    correction is not defined SHADED rather than clipped away.
+
+    An attenuation sweep stops being meaningful once the assumed error variance
+    exceeds the observed predictor variance: the corrected slope diverges and
+    then goes missing. Trimming the x-axis at that point would be a truncated
+    axis (139 corpus panels) dressed up as tidiness, and drawing through it
+    would be worse. So the sweep is drawn to its full extent and the unstable
+    region carries a hatched band with its own legend entry.
+    """
+    import numpy as _np
+    if invalid_col is not None and df[invalid_col].any():
+        bad = df.loc[df[invalid_col], xcol]
+        ax.axvspan(bad.min(), df[xcol].max(), color=fs.GREY, alpha=0.16,
+                   linewidth=0, zorder=0)
+        ax.text(bad.min(), ax.get_ylim()[1], " unstable ", fontsize=5,
+                color=fs.GREY, va="top", ha="left")
+    if baseline is not None:
+        ax.axhline(baseline, color=fs.GREY, lw=0.5, ls=(0, (2, 2)), zorder=0)
+    ax.axhline(0, color=fs.GREY, lw=0.5, zorder=0)
+    drawn = {}
+    for i, s in enumerate(sorted(df[series].dropna().unique())):
+        sub = df[df[series] == s].sort_values(xcol)
+        ax.plot(sub[xcol], sub[ycol], color=_series_colour(s, i, colours),
+                lw=1.0, label=(labels or {}).get(s, str(s)), zorder=3)
+        drawn[s] = int(sub[ycol].notna().sum())
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    return drawn
+
+
+def grouped_strip(ax, df, outer, inner, value, outer_order=None,
+                  inner_order=None, inner_colours=None, gap=0.55,
+                  jitter=0.09, max_points=400, rng_seed=0, ylabel=None,
+                  outer_labels=None):
+    """
+    `strip_violin` when the x axis carries two crossed factors.
+
+    Same rules — distribution, median crossbar, every observation, printed n —
+    but the groups are nested, so the reader compares the inner contrast within
+    an outer level rather than reading a single ordering that mixes the two.
+    Collapsing the two factors into one axis of eight labels is what makes a
+    reader compare Boltz-apo with Chai-cognate by accident.
+    """
+    import numpy as _np
+    outers = outer_order or sorted(df[outer].dropna().unique())
+    inners = inner_order or sorted(df[inner].dropna().unique())
+    rng = _np.random.default_rng(rng_seed)
+    counts, centres = {}, []
+    pos = 0.0
+    for o in outers:
+        block = []
+        for j, iv in enumerate(inners):
+            v = df.loc[(df[outer] == o) & (df[inner] == iv),
+                       value].dropna().values
+            counts[(o, iv)] = len(v)
+            block.append(pos)
+            if len(v) > 1:
+                parts = ax.violinplot([v], positions=[pos], widths=0.78,
+                                      showextrema=False, showmedians=False)
+                body = parts["bodies"][0]
+                body.set_facecolor(_series_colour(iv, j, inner_colours))
+                body.set_alpha(0.22)
+                body.set_edgecolor("none")
+            if len(v):
+                c = _series_colour(iv, j, inner_colours)
+                show = v if len(v) <= max_points else \
+                    rng.choice(v, max_points, replace=False)
+                ax.scatter(pos + rng.uniform(-jitter, jitter, len(show)), show,
+                           s=1.0, color=c, alpha=0.30, linewidths=0, zorder=2)
+                med = _np.median(v)
+                ax.plot([pos - 0.30, pos + 0.30], [med, med], color=c, lw=1.4,
+                        zorder=3, solid_capstyle="butt")
+            pos += 1.0
+        centres.append(_np.mean(block))
+        pos += gap
+    ax.set_xticks(centres)
+    ax.set_xticklabels([(outer_labels or {}).get(o, o) for o in outers])
+    ax.set_ylabel(ylabel or value)
+    # Stagger the n labels: with three or more inner levels they collide at
+    # one baseline, and a collided n is the same defect as a missing one.
+    y0, y1 = ax.get_ylim()
+    step = (y1 - y0) * 0.030
+    ax.set_ylim(y0 - step * (len(inners) - 1) - (y1 - y0) * 0.02, y1)
+    y0 = ax.get_ylim()[0]
+    pos = 0.0
+    for o in outers:
+        for j, iv in enumerate(inners):
+            fs.annotate_n(ax, pos, counts[(o, iv)],
+                          y=y0 + step * (len(inners) - 1 - j))
+            pos += 1.0
+        pos += gap
+    return counts
