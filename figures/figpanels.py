@@ -251,14 +251,154 @@ def matrix(ax, table, value_label="", cmap="viridis", annotate=False,
     ax.grid(which="minor", color="white", linewidth=0.6)
     ax.tick_params(which="minor", length=0)
     if annotate:
+        # Contrast against the CELL, not against the median of the table: with
+        # many empty cells the median is near zero and every label then goes
+        # white on a near-white square. Invisible in the code, obvious in the
+        # picture, and it was in this file until a rendered panel showed it.
+        hi = np.nanmax(masked.filled(np.nan)) if masked.count() else 1.0
+        lo = np.nanmin(masked.filled(np.nan)) if masked.count() else 0.0
+        span = (vmax if vmax is not None else hi) - \
+               (vmin if vmin is not None else lo)
+        base = vmin if vmin is not None else lo
         for r in range(table.shape[0]):
             for c in range(table.shape[1]):
                 v = data[r, c]
                 if np.isnan(v) or (zero_is_absent and v == 0):
                     continue
+                frac = (v - base) / span if span else 0.0
                 ax.text(c, r, "%g" % v, ha="center", va="center", fontsize=5,
-                        color="white" if v > np.nanmedian(data) else "black")
+                        color="white" if frac > 0.55 else "black")
     cb = ax.figure.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
     cb.set_label(value_label)
     cb.outline.set_linewidth(0.4)
     return im
+
+
+def count_dots(ax, labels, counts, total, colours=None, order_by_count=True,
+               label_fmt="%d/%d", highlight=None):
+    """
+    A census: how many items in a fixed population carry each attribute.
+
+    Rule 2 in its strictest form, and rule 1 by construction. A census has no
+    distribution to hide — every item either carries the attribute or does
+    not — so a dot on a line from zero is the honest mark, and the axis runs
+    to the full population rather than to the largest count. That is the fix
+    for the defect recorded 58 times in the corpus as a percentage quoted with
+    its denominator left off the panel: here the denominator IS the axis.
+
+    `total` is the population, printed on the axis and beside every dot.
+    Attributes may overlap (a paper can use three state metrics at once), so
+    the counts are NOT a partition and must not be stacked; this generator
+    refuses to normalise them for that reason.
+    """
+    import numpy as _np
+    pairs = list(zip(labels, counts))
+    if order_by_count:
+        pairs = sorted(pairs, key=lambda lc: lc[1])
+    pos = _np.arange(len(pairs))
+    for i, (lab, c) in enumerate(pairs):
+        col = fs.VERM if (highlight and lab in highlight) else \
+            (colours.get(lab, fs.BLUE) if colours else fs.BLUE)
+        ax.plot([0, c], [i, i], color=col, lw=0.8, alpha=0.55,
+                solid_capstyle="butt", zorder=1)
+        ax.plot([c], [i], marker="o", markersize=4, color=col,
+                markeredgewidth=0, zorder=3)
+        ax.text(c + total * 0.015, i, label_fmt % (c, total), va="center",
+                ha="left", fontsize=5, color=fs.GREY)
+    ax.set_yticks(pos)
+    ax.set_yticklabels([lab for lab, _ in pairs])
+    ax.set_xlim(0, total * 1.18)
+    ax.set_ylim(-0.6, len(pairs) - 0.4)
+    ax.set_xlabel("papers (of %d)" % total)
+    ax.spines["left"].set_visible(False)
+    ax.tick_params(axis="y", length=0)
+    return dict(pairs)
+
+
+def presence_matrix(ax, codes, row_labels, categories, col_label=None,
+                    row_total_of=None, sort_cols=True, grid_lw=0.25,
+                    col_order=None):
+    """
+    Which items carry which attributes, one cell per (attribute, item).
+
+    MATRIX form for categorical status rather than a value: the population is
+    on one axis, the attributes on the other, and no count is aggregated away,
+    so a reader can see both the totals and the co-occurrence pattern that a
+    set of separate bar charts destroys. Attributes that overlap cannot be
+    stacked (see `count_dots`), and a matrix is the form that does not force
+    them to be.
+
+    Prevents two recorded defects at once: a percentage with no visible
+    denominator (every column is one item, so the denominator is the width),
+    and the silent dropping of items a rule could not classify — pass those
+    through as their own category and they stay in the picture.
+
+    `codes`       integer array, shape (rows, items); values index `categories`
+    `categories`  list of (name, colour) in code order
+    `row_total_of` name of the category whose per-row count is printed at the
+                  right; None to print nothing.
+    `col_order`   explicit item order; overrides `sort_cols`.
+    """
+    import numpy as _np
+    import matplotlib as _mpl
+    codes = _np.asarray(codes)
+    if col_order is not None:
+        order = list(col_order)
+        codes = codes[:, order]
+    elif sort_cols:
+        # order items so that the co-occurrence pattern reads as a staircase
+        key = _np.array([_np.sum(codes[:, j] == _idx_of(categories, row_total_of))
+                         if row_total_of else codes[:, j].sum()
+                         for j in range(codes.shape[1])])
+        secondary = [tuple(codes[:, j]) for j in range(codes.shape[1])]
+        order = sorted(range(codes.shape[1]),
+                       key=lambda j: (-key[j], secondary[j]))
+        codes = codes[:, order]
+    else:
+        order = list(range(codes.shape[1]))
+
+    cmap = _mpl.colors.ListedColormap([c for _, c in categories])
+    norm = _mpl.colors.BoundaryNorm(_np.arange(-0.5, len(categories), 1), cmap.N)
+    ax.imshow(codes, aspect="auto", cmap=cmap, norm=norm, interpolation="none")
+
+    ax.set_yticks(_np.arange(codes.shape[0]))
+    ax.set_yticklabels(row_labels)
+    ax.set_xticks([])
+    ax.set_xticks(_np.arange(-0.5, codes.shape[1], 1), minor=True)
+    ax.set_yticks(_np.arange(-0.5, codes.shape[0], 1), minor=True)
+    ax.grid(which="minor", color="white", linewidth=grid_lw)
+    ax.tick_params(which="minor", length=0)
+    ax.tick_params(axis="y", length=0)
+    if col_label:
+        ax.set_xlabel("%s (n=%d)" % (col_label, codes.shape[1]))
+
+    totals = {}
+    if row_total_of is not None:
+        k = _idx_of(categories, row_total_of)
+        for r in range(codes.shape[0]):
+            n = int((codes[r] == k).sum())
+            totals[row_labels[r]] = n
+            ax.text(codes.shape[1] + codes.shape[1] * 0.012, r,
+                    "%d/%d" % (n, codes.shape[1]), va="center", ha="left",
+                    fontsize=5, color=fs.GREY)
+        ax.set_xlim(-0.5, codes.shape[1] * 1.10)
+    return {"order": order, "row_totals": totals}
+
+
+def _idx_of(categories, name):
+    for i, (n, _) in enumerate(categories):
+        if n == name:
+            return i
+    return 0
+
+
+def category_legend(ax, categories, ncol=None, loc="upper center",
+                    bbox=(0.5, -0.04)):
+    """Swatch legend for `presence_matrix`, kept out of the plotting area."""
+    import matplotlib.patches as _mpatches
+    handles = [_mpatches.Patch(facecolor=c, edgecolor="none", label=n)
+               for n, c in categories]
+    ax.legend(handles=handles, ncol=ncol or len(categories), loc=loc,
+              bbox_to_anchor=bbox, frameon=False, handlelength=1.0,
+              handleheight=0.9, columnspacing=1.0, borderpad=0.0,
+              fontsize=5.5)

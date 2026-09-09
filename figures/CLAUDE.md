@@ -32,6 +32,10 @@ happened once.
 ```
 FIGURES.md       the ledger: one entry per figure — DURABLE
 figstyle.py      house style: sizes, fonts, palette, save()
+mine_corpus.py   lit/notes/*.md -> data_lit/*.csv, the corpus figures' input
+classify_corpus.py  rules over those tables — DURABLE, every rule is auditable
+data_lit/        extracted corpus tables — DURABLE, in git
+panels/          one script per finished figure
 figpanels.py     panel generators; each names the defect it prevents
 render_struct.py PyMOL renders, driven from the command line
 make_demo.py     builds one of every panel from data/predictions.csv
@@ -73,7 +77,9 @@ a convention, not property — so this only bites if you adapt a specific figure
 ## What the corpus says about failure
 
 Parsing the `## F. Figures` table of all 78 notes gives 1,226 panel-group rows.
-**81% of the 232 structure renders carry a recorded defect.** The two that dominate:
+**80% of the 232 structure renders carry a recorded defect** (186; corrected from
+81%/189 on 2026-09-09 - three `*(blank - reason)*` cells were being counted as
+defects, see `README.md`). Corpus-wide it is 957 of 1,226. The two that dominate:
 a hand-picked example with the selection rule unstated (59), and no quantitative
 panel standing behind the claim the render makes (58).
 

@@ -17,6 +17,18 @@ out/               generated output (not in git — perishable, like RESULTS.md)
 Run `python3 make_demo.py` to see every panel type. Nothing it writes is
 citable; it is a smoke test that the toolkit runs on real columns.
 
+The corpus figures (LF1-LF5 in `FIGURES.md`) are built from the literature
+rather than from `data/`. Their pipeline is:
+
+```
+mine_corpus.py      lit/notes/*.md -> data_lit/{papers,figrows,metrics}.csv
+classify_corpus.py  those          -> data_lit/{tags,metric_kinds,antimem,
+                                                oracle_routes,figdefects}.csv
+panels/lit*.py      those          -> out/lit*.{pdf,png}
+data_lit/           extracted tables - IN git, they are the citable artefact
+panels/             one script per figure
+```
+
 ## Where the design rules come from
 
 Not taste. The corpus in `lit/notes/` carries a `## F. Figures` table for all 78
@@ -31,9 +43,12 @@ it gives the field's actual habits and its actual failures:
 | matrices / heatmaps | 85 |
 | schematics | 131 |
 
-**Structure renders are the single commonest figure in this field, and 81% of
-them (189 of 232) carry a recorded defect.** The two dominant ones, by a wide
-margin:
+**Structure renders are the single commonest figure in this field, and 80% of
+them (186 of 232) carry a recorded defect.** Corpus-wide the number is 957 of
+1,226 rows. *(Corrected 2026-09-09 from "189 of 232" / 968: three render rows
+whose `hides` cell reads `*(blank - reason)*` are blanks, and a non-empty test
+counted them as defects. The rule now used is in `classify_corpus.py`,
+`is_blank_hides`.)* The two dominant ones, by a wide margin:
 
 - **59 rows** — a hand-picked example with the selection rule unstated.
 - **58 rows** — no quantitative panel stands behind the claim the render makes.
