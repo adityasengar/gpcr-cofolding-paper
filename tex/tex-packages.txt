@@ -1,11 +1,11 @@
 # tex-packages.txt — the TeX environment both laptops must match.
-# Captured 2026-09-08 from MacBook-Pro-3.
+# Captured 2026-09-09 from MacBook-Pro-3.
 #
-# distribution : BasicTeX / TeX Live 2025 (tlmgr rev 74241)
-# root         : /usr/local/texlive/2025basic
+# distribution : BasicTeX / TeX Live 2026 (installed via: brew install --cask basictex)
+# root         : /usr/local/texlive/2026basic
+# beyond BasicTeX defaults: latexmk siunitx orcidlink todonotes
 #
 # Regenerate:  tlmgr list --only-installed | sed 's/^i //;s/:.*//' | sort > tex/tex-packages.txt
-# Compare:     diff <(tlmgr list --only-installed | sed 's/^i //;s/:.*//' | sort) tex/tex-packages.txt
 #
 ae
 amscls
@@ -176,27 +176,38 @@ l3kernel
 l3kernel-dev
 l3packages
 latex
+latex-amsmath-dev
 latex-base-dev
 latex-bin
+latex-bin-dev
+latex-bin-dev.universal-darwin
 latex-bin.universal-darwin
 latex-firstaid-dev
 latex-fonts
+latex-graphics-dev
 latex-lab
+latex-lab-dev
+latex-tools-dev
 latexbug
 latexconfig
+latexmk
+latexmk.universal-darwin
 latexmp
 letltxmacro
 lineno
 listings
 lm
 lm-math
+ltx-talk
 ltxcmds
 ltxmisc
 lua-alt-getopt
 lua-uni-algos
+lua-unicode-math
 luahbtex
 luahbtex.universal-darwin
 lualibs
+luamml
 luaotfload
 luaotfload.universal-darwin
 luatex
@@ -204,6 +215,8 @@ luatex.universal-darwin
 luatexbase
 lwarp
 lwarp.universal-darwin
+make4ht
+make4ht.universal-darwin
 makecmds
 makeindex
 makeindex.universal-darwin
@@ -248,6 +261,7 @@ natbib
 newfloat
 ntgclass
 oberdiek
+orcidlink
 pagesel
 parskip
 pdfcolfoot
@@ -270,7 +284,6 @@ pspicture
 ptext
 ragged2e
 rcs
-realscripts
 refcount
 repere
 rerunfilecheck
@@ -289,6 +302,7 @@ setspace
 shapes
 simple-resume-cv
 simple-thesis-dissertation
+siunitx
 slideshow
 splines
 stringenc
@@ -297,10 +311,15 @@ subfig
 symbol
 synctex
 synctex.universal-darwin
+tagpdf
 tetragonos
 tex
 tex-ini-files
 tex.universal-darwin
+tex4ebook
+tex4ebook.universal-darwin
+tex4ht
+tex4ht.universal-darwin
 texlive-common
 texlive-en
 texlive-msg-translations
@@ -319,6 +338,7 @@ times
 tipa
 tlshell
 tlshell.universal-darwin
+todonotes
 tools
 translator
 typehtml
