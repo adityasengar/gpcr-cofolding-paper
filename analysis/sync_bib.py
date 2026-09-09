@@ -46,7 +46,7 @@ def main():
                     s = ln.lstrip()
                     fh.write("%% " + (s[1:] if s.startswith("@") else ln) + "\n")
     # keep the Overleaf export copy in step, when that clone exists
-    ol = os.path.join(ROOT, "paper_tex", "refs.bib")
+    ol = os.path.join(ROOT, "overleaf", "refs.bib")
     if os.path.isdir(os.path.dirname(ol)):
         import shutil; shutil.copyfile(DST, ol)
     print(f"wrote {DST}")

@@ -55,7 +55,7 @@ echo "--- manuscript bibliography ---"
 python3 analysis/sync_bib.py >/tmp/_bib.log 2>&1 && \
   echo "  manuscript/refs.bib regenerated from lit/refs.bib ($(grep -c '^@' manuscript/refs.bib) citable)" || \
   echo "  !! sync_bib.py failed; see /tmp/_bib.log"
-if [ -d paper_tex/.git ] && ! git -C paper_tex diff --quiet 2>/dev/null; then
+if [ -d overleaf/.git ] && ! git -C overleaf diff --quiet 2>/dev/null; then
   echo "  Overleaf copy is behind — run ./publish_overleaf.sh when you want to share"
 fi
 

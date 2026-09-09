@@ -15,8 +15,9 @@ rows_enriched_v3_7.csv
 # 7M, large but the primary local data table — keep? see SESSIONS.md decision
 # data/predictions.csv
 
-# paper_tex is its own git repo with the Overleaf remote. Clone it separately.
-paper_tex/
+# overleaf/ is a separate clone of the Overleaf project, used only as an
+# export target for sharing. Optional, and only where you publish from.
+overleaf/
 
 # build + local noise
 *.aux

@@ -122,10 +122,10 @@ The shared repo is ~21 MB. `.gitignore` excludes the heavy, reconstructible thin
 | `rows_enriched_v3_7.csv` (19M) | HPC export, not authored here | `dataquery` falls back to `data/*.csv`; the provenance columns are unavailable |
 | `lit/validate/txt*`, `ocr/` | regenerable with `pdftotext` | quote re-verification cannot run |
 
-`lit/notes/` (5.9 MB) **does** travel, so the 71 extractions with their verbatim quotes
+`lit/notes/` (6.0 MB) **does** travel, so the 75 extractions with their verbatim quotes
 and page numbers are available on both machines. That is the layer most queries need.
 
-`paper_tex/` is its own git repo with the Overleaf remote and is **excluded** from this
+`overleaf/` is its own git repo with the Overleaf remote and is **excluded** from this
 one — clone it separately on each machine. Overleaf is the sync channel for LaTeX;
 this repo is the sync channel for everything else.
 
@@ -183,7 +183,7 @@ hand-edit it. Unread papers are emitted with their `@` stripped so citing one fa
 loudly; `build.sh` names the offending key.
 
 **Overleaf is an export target, not a workspace.** `./publish_overleaf.sh` copies
-`manuscript/` into the `paper_tex/` clone and pushes, so you can share a read-only link.
+`manuscript/` into the `overleaf/` clone and pushes, so you can share a read-only link.
 Edits made in the Overleaf web editor do **not** come back — they will be overwritten on
 the next publish.
 
@@ -193,21 +193,25 @@ the next publish.
 git clone https://github.com/adityasengar/gpcr-cofolding-paper.git paper
 cd paper
 echo "<a-name-for-that-laptop>" > .machine     # NOT committed; per-machine
-git clone https://git@git.overleaf.com/6aa05386f57a5fee700a37ff paper_tex
+git clone https://git@git.overleaf.com/6aa05386f57a5fee700a37ff overleaf
 ./session_start.sh
 ```
 
-The Overleaf project is a **separate** clone — `paper_tex/` is gitignored here on
+The Overleaf project is a **separate** clone — `overleaf/` is gitignored here on
 purpose, because nesting git repos causes submodule grief. Overleaf syncs the LaTeX;
 this repo syncs everything else.
 
 That machine will **not** have `lit/pdfs/`, `lit/source/`, `rows_enriched_v3_7.csv` or
 the pdftotext caches. `session_start.sh` prints which are missing. It *will* have all
-71 extractions in `lit/notes/`.
+75 extractions in `lit/notes/`. Note that four of those 75 have **no PDF on any machine**
+and carry section locators rather than page numbers; see `lit/CLAUDE.md`.
 
 ## Open, and owned by you
 
 - Define the Block A denominator, then re-run `python3 analysis/q.py receptor_counts`.
-- `lit/`: `why_it_matters` in `MANIFEST.csv`, provisional `stance` in `INDEX.md`, seven
-  papers with no full text, six notes still on schema v2, and one open vocabulary
-  decision (a `non-biomolecular` system tag). See `lit/CLAUDE.md`.
+- `lit/`: `why_it_matters` in `MANIFEST.csv`, provisional `stance` in `INDEX.md`, three
+  papers with no full text, six notes still on schema v2, four notes with no page numbers,
+  one partial note (`ingraham2023chroma`), and two open vocabulary decisions
+  (`non-biomolecular`, and the `af-cluster` collision). See `lit/CLAUDE.md`.
+- **`CLAIMS.md` threats table needs `yu2026domainmotion` added** — nonbinder ligands
+  reproduce the conformational change in 82 enzymes, which directly exposes the decoy arm.
