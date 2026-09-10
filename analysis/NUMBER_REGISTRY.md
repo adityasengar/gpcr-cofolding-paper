@@ -224,6 +224,15 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 70 | F62 | references carrying the NPxxY axis, drawn in BA-1a panel d; 2,295 of the reference rows have no NPxxY because 7.53 is not Tyr |
+| 350 | S236 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
+| 394 | S236 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
+| 0.53 | S272 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
+| 0.000 | S329 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
+| 1.000 | S332 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
+| 14.6 | S341 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
+| 15.6 | S341 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
+| 19.8 | S341 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
 | 25.6 | S342 | the RETRACTED Block C v1 pooled off-site figure; superseded by the v2 census (15.1% apo / 20.3% cognate). Block C verify_claims check C06 asserts it does NOT reproduce, which is the check working -- it is quoted here only as the retraction it is |
 | 0.340 | S361 | DERIVED, not shipped: stage3_2x2_ligand_state_specificity.json per_backbone.boltz, (0.7680-0.9762)-(0.8983-0.7665) = -0.3400, against interaction.estimate -0.3062. The agonist cells carry n_clusters 28 and the antagonist cells 23; the interaction is on the 23 in common, which is why the cell means cannot reconstruct it |
 | 27.9 | S364 | Block C G4 gate, agonist off-site fraction lower bound; independent re-verification 2026-09-10, not recomputed here |
