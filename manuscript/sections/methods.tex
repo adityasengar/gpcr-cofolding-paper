@@ -269,14 +269,30 @@ G$\alpha_{\mathrm{t}}$1 C-terminus at four of those eleven positions, and is
 described by the depositors as a derived peptide. The annotation is wrong, and
 it is wrong in a way our procedure could not detect: the RCSB mutation record
 for that entity is empty, because the peptide is deposited as its own molecule
-rather than as a mutant of the subunit it derives from. \textbf{Twenty-five of
-the forty active references carry the same provenance annotation and none of
-their partner sequences has been compared against a database entry.} For the
-other twenty-four the annotation asserts a complete heterotrimer, a claim about
-composition that the deposition titles do support; 4X1H is the only reference of
-the eighty whose partner is a peptide. We report the gap rather than closing it,
-and no claim in this work rests on the provenance of a reference's partner
-chain.
+rather than as a mutant of the subunit it derives from.
+
+Twenty-five of the forty active references carry that same \emph{native}
+annotation, so we compared each of their G$\alpha$ chains against its canonical
+UniProt sequence directly
+(\texttt{analysis/verify\_partner\_chains.py}). Eighteen could be compared
+without alignment ambiguity, and \textbf{fifteen of the eighteen carry
+engineered substitutions} --- eleven of them the canonical dominant-negative
+signature S47N/G203A/E245A/A326S or a positional variant of it. The annotation
+is therefore wrong far more often than it is right. Two further results decide
+how much that matters. First, \textbf{none of those substitutions falls inside
+the $\alpha$5 C-terminal 21 residues.} G$\alpha_{\mathrm{i}}$1 is 354 residues,
+so the segment the title concerns is 334--354, and every substitution we found
+lies outside it; the $\alpha$5-CT is identical to the canonical sequence in all
+eighteen. 4X1H remains the only reference in the set whose $\alpha$5-CT itself
+departs from the native sequence. Second, RCSB's own \texttt{pdbx\_mutation}
+record is empty for ten of the fifteen, so a check built on that metadata rather
+than on the deposited sequence would have passed two thirds of them --- which is
+the same failure that hid 4X1H, and the reason the construct-contradiction rate
+quoted above should be read as a floor rather than an estimate. The remaining
+seven of the twenty-five are fusions or chimeras whose length differs from the
+canonical sequence, and we report them as unchecked rather than assigning them a
+verdict a length-mismatched comparison cannot support. No claim in this work
+rests on the provenance of a reference's partner chain.
 
 \subsection*{Partner-composition campaign}
 

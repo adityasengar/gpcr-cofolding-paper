@@ -71,6 +71,9 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 | 19 | M210 | Block B, verify_claims check B56,B57 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
 | 9.08 | M244 | tilt/NPxxY threshold, the value every row carries | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
 | 9.082 | M244 | NPxxY threshold, untruncated, as the claim sheets state it | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
+| 354 | M283 | UniProt P63096 sequence length, recomputed by analysis/verify_partner_chains.py | the $\alpha$5 C-terminal 21 residues.} G$\alpha_{\mathrm{i}}$1 is 354 residues, |
+| 334 | M284 | 354 - 21 + 1, the first residue of the $\alpha$5-CT; analysis/verify_partner_chains.py ALPHA5_CT_LEN | so the segment the title concerns is 334--354, and every substitution we found |
+| 354 | M284 | UniProt P63096 sequence length, last residue of the $\alpha$5-CT | so the segment the title concerns is 334--354, and every substitution we found |
 | 21 | M271 | Block B, verify_claims check B32.of3 | G$\alpha$ subunit.} The $\alpha$5 C-terminal 21-mer is a region we measure and |
 | 0.09 | M294 | Block C, verify_claims check C14.protenix | 0.06--0.09 on conditional activation rates. Engagement is a separate, |
 | 12.19 | M297 | Block B, verify_claims check B59 | insertion depth of 12.19~\AA{} --- so engagement is reported alongside the |
