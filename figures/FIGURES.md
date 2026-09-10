@@ -581,3 +581,92 @@ status  ready — the panel a mean is a mean over a population that is pinned at
         the reason the family term differs between scales, and this is the panel
         that shows it rather than asserting it
 ```
+
+## Block C
+
+Panels built from `data/block_c/`. The loader is `figures/block_c/bcdata.py`, and
+**every Block C panel must load through it**.
+
+**The rule specific to this block: state the evidential class on the panel's own
+face.** Block C shipped exactly one row-level file (`12_g4_off_site_census`,
+40,000 rows). Everything else is a summary JSON. So three of these four panels
+draw intervals over a distribution nobody outside the pipeline has seen, and each
+says so on itself rather than letting four tidy intervals imply otherwise. The
+class per panel is in `analysis/block_c/panels/README.md` and is repeated in each
+entry below.
+
+**Three bands, and the middle one is not failure.** In-pocket ≤8 Å,
+entrance-bound 8–15 Å, off-site >15 Å. Entrance-bound is 7,349 of 40,000 rows and
+is an **adjudicated VALID pose**; counting it as error reports 34.8% where the
+truth is 15.1%. `bcdata` carries the thresholds and there is no way to ask it for
+a two-band split.
+
+**`ligand_source` is the load-bearing split, not the role name.** `hetatm` vs
+`peptide_chain`. In the same apo agonist/antagonist cells they are 1.52% and
+66.53% off-site, because peptide receptors bind at the extracellular vestibule.
+Filtering small-molecule rows by role name silently pools them — that is D-C-4,
+and it caught me on my first verification run.
+
+### BC-1 — agonist and antagonist pockets separate, in the apo arm alone
+```
+claim   SC-C-1 — ligand class is written into pocket geometry, and the partner
+        erases it
+shows   the 2x2 of arm (apo, cognate) by ligand role (agonist, antagonist) on
+        pocket-Ca RMSD difference, per backbone, with the interaction interval
+data    06_2x2_interaction/ + g_scc1_cluster_boot.json, 16 paralog clusters;
+        cluster-boot CIs are the authoritative convention (Block A C-8)
+build   cd figures/block_c/panels && python3 bc1_pocket_2x2.py
+status  ready — SUMMARY PANEL, and it says so on its face. rows.tier3.v2.csv was
+        not shipped, so the 23 per-receptor values behind each cell mean do not
+        exist here. Do not let four intervals imply a distribution
+```
+
+### BC-2 — the pre-registered ordinal test, per receptor
+```
+claim   SC-C-2 — ligand role ranks against the same continuous axis
+shows   a, tau per receptor over 23; b, the same with self-reference excluded,
+        n=15. Median tau 0.26-0.39, NOT the 65-87% the claim sheet prints
+data    07_ordinal_recovery/s5_p4_ordinal.json — carries a tau per receptor
+build   cd figures/block_c/panels && python3 bc2_ordinal.py
+status  ready — PER-RECEPTOR PANEL, the only one in this block, and the panel
+        that earned the exercise. Plotting the distribution showed violins around
+        0.3 against printed panel values of 0.74, which is how D-C-3 was found:
+        SC-C-2's table is headed "Kendall's tau" and holds a FRACTION OF
+        RECEPTORS. That mislabel had passed the claim sheet, the dispatch and our
+        own Results, and it reached the manuscript. Both panel definitions are
+        drawn because showing only the more favourable one is the error the pose
+        result in this same block already made and corrected
+```
+
+### BC-3 — prospective ligand-class discrimination, on two backbones of four
+```
+claim   SC-C-4 — leave-one-receptor-out classification of ligand class
+shows   AUROC per backbone with cluster-boot 95% CI over 12 clusters and the
+        permutation null: Boltz 0.852 [0.560, 0.974], Protenix 0.825
+        [0.528, 0.960]; Chai 0.706 and OF3 0.656 both span 0.5
+data    04_classifier/g1_bootstrap_s1_auroc.json + the S1 LORO JSON
+build   cd figures/block_c/panels && python3 bc3_classifier.py
+status  ready — SUMMARY PANEL; the per-receptor LORO folds were not shipped.
+        THE ONE THING IT MUST NOT DO is let a reader take Chai-1 and OpenFold3 as
+        negative. Their intervals span 0.5, which means the test cannot separate
+        them from chance — not that they carry no signal. That difference decides
+        whether the paper says two backbones work or two fail, and the panel
+        draws it rather than ranking four bars
+```
+
+### BC-4 — where the ligands actually are
+```
+claim   SC-C-1's numerator, plus the dispatch's 4(a) retraction and its 4(i)
+        peptide adjudication
+shows   the three-band census over the full corpus: in-pocket, entrance-bound,
+        off-site, split by ligand_source and by arm. Apo 15.1% off-site
+        [14.6, 15.6]; cognate 20.3% [19.8, 20.9]; the v1 pooled 25.6% is retracted
+data    12_g4_off_site_census/ — 40,000 rows, the one row-level file the campaign
+        shipped
+build   cd figures/block_c/panels && python3 bc4_ligand_placement.py
+status  ready — FULL-DATA PANEL, the only one in Block C. It exists to prevent
+        two errors that have each already caught someone: reading entrance-bound
+        as failure (34.8% vs the true 15.1%), and pooling small-molecule with
+        peptide ligands (1.52% vs 66.53% off-site in the SAME cells). Chai
+        carries a residual far mode of 175 rows beyond 60 A, drawn not trimmed
+```
