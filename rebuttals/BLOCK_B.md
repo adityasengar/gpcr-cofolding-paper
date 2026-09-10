@@ -430,8 +430,19 @@ set. What moves is what may be said about it.
 **Asks.** (1) Re-derive `active_stabilization_source` from partner sequence
 rather than complex composition. (2) Add a partner-chain sequence check to the
 reference audit. (3) Add `species`, `method`, `resolution` and `release_date`
-columns — `method` is one placeholder string on all 80 rows and `resolution` is
-entirely NaN, so construct quality cannot be checked from the drop as shipped.
+columns. Both `method` and `resolution` currently hold a single placeholder
+STRING on all 80 rows — `X-ray or cryo-EM (schema lacks explicit method column)`
+and `not tracked in reference_set schema`. They are **non-null**, so a
+`notna()` check passes on both and a script gets a value rather than a gap.
+Construct quality cannot be checked from the drop as shipped, and nothing warns
+you of it.
+
+**Two corrections to this item, both mine.** An earlier revision said
+`resolution` is entirely NaN. It is not — a placeholder string is worse, for the
+reason above. And the RCSB `pdbx_mutation` field proposed as the check for
+ask (2) is itself empty on **ten of the fifteen** engineered chains we have since
+found (`analysis/verify_partner_chains.py`), so the check must read deposited
+sequences, not that metadata.
 
 ---
 

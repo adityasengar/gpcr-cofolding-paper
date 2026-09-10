@@ -190,7 +190,9 @@ would need to inspect construct strings PDB-by-PDB."*
    donor is the one chain the title is about.
 3. **Add `species`, `method`, `resolution` and `release_date` columns** (see §5b
    and item 4 of the Class A list). `method` is the same placeholder string on all
-   80 rows, `resolution` is entirely NaN, and release date is absent — so neither
+   80 rows, `resolution` is the placeholder string `not tracked in reference_set
+   schema` on all 80 (a **non-null**, so a null check passes on it), and release
+   date is absent — so neither
    construct quality nor a training-cutoff argument can be checked from the drop
    as shipped.
 4. **If the 21-mer arm is scheduled, start it on OPSD** — as motivation, with a

@@ -152,7 +152,9 @@ All 80 of our references resolve in the GPCRdb snapshot. Two results:
 3. **Re-score AA2AR against 6GDG** as a sensitivity check on the standing
    anomaly. No new predictions required.
 4. **Add a `species` column to `reference_audit.csv`.** Its `method` column is
-   the same placeholder string on all 80 rows and `resolution` is entirely NaN,
+   the same placeholder string on all 80 rows and `resolution` is a second
+   placeholder string, `not tracked in reference_set schema` — a NON-NULL, so a
+   null check passes on it,
    so neither construct quality nor species can be checked from the drop as
    shipped. All three are available in GPCRdb.
 5. **State the panel selection rule.** With 19 named additions available and a

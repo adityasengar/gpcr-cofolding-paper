@@ -58,8 +58,11 @@ stated, and it leaves four things open:
 1. Was the panel **every** receptor meeting that criterion, or a subset? If a
    subset, chosen how?
 2. Was a resolution or method floor applied? `reference_audit.csv` has a
-   `method` column that is the same placeholder string on all 80 rows and a
-   `resolution` column that is **entirely NaN**, so neither can be checked here.
+   `method` column and a `resolution` column, and **both hold a single
+   placeholder string on all 80 rows** — `X-ray or cryo-EM (schema lacks
+   explicit method column)` and `not tracked in reference_set schema`. They are
+   non-null, so a `notna()` check passes on both and reports the columns as
+   populated. Neither can be checked here, and nothing warns you of it.
 3. Was any receptor meeting the criterion **excluded**, and why?
 4. When was the selection frozen relative to the deposition record?
 
