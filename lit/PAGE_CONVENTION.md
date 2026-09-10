@@ -30,6 +30,21 @@ that `pdf_page + k` appears on each, and validates it two ways:
    `tejero2024opsin` matched "24" inside `10.1038/s41467-024-53208-2`, and `liu2026ensembletests`
    matched "95" inside "0.951".
 
+## The check has two parts, and the second is the one that bites
+
+`pageoffset.py` answers two different questions, in order:
+
+1. **Which PDFs have an offset** — the table below. This is a property of the corpus.
+2. **Which citations are therefore wrong** — it parses every `\citep[p.~N]{key}` out of
+   `../manuscript/**/*.tex` and flags any whose key has an offset and whose `N` is at or below
+   that paper's first printed folio, because such a locator is still a PDF page. It prints the
+   file, the line and the correct value.
+
+Part 2 was added on the orchestrator's suggestion, and it is the one that catches the error *at
+the point of use* rather than the point of extraction — including in sections neither session
+wrote. Self-tested against the pre-fix `intro.tex`: it flagged all 11 bad locators with correct
+line numbers and corrections.
+
 ## Papers needing conversion, as of 2026-09-10
 
 | citekey | printed = pdf + | how confirmed |

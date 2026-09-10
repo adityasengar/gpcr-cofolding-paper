@@ -75,3 +75,32 @@ print("\n  %d of %d PDFs need conversion; the rest are 1-indexed or have no foli
       (len(flagged), len(rows)))
 notes_only = [k for k, o, s in rows if not o and "scanned" in s]
 if notes_only: print("  scanned, verify by hand: %s" % ", ".join(notes_only))
+
+# ---------------------------------------------------------------------------
+# Part 2: which CITATIONS are actually wrong?
+# "Which PDFs have an offset" and "which citations are therefore wrong" are
+# different questions, and the second is the one that reaches a referee. A
+# locator is suspect when its paper has an offset AND the cited number is below
+# that paper's first printed page - i.e. it is still a PDF page.
+# ---------------------------------------------------------------------------
+offs = {k: o for k, o, _ in rows if o}
+tex = sorted(pathlib.Path("../manuscript").rglob("*.tex"))
+if not tex:
+    print("\n  (no manuscript/*.tex found - citation check skipped)")
+else:
+    bad = []
+    for f in tex:
+        body = f.read_text()
+        for m in re.finditer(r'\\citep\[(pp?\.)~([0-9]+)(?:--[0-9]+)?\]\{([a-z0-9]+)\}', body):
+            n, key = int(m.group(2)), m.group(3)
+            if key in offs and n <= offs[key]:
+                line = body[:m.start()].count("\n") + 1
+                bad.append((f.name, line, key, n, n + offs[key]))
+    print("\n" + "=" * 74)
+    print("CITATIONS STILL USING A PDF PAGE  (locator <= that paper's first folio)\n")
+    if not bad:
+        print("  none - every page locator in manuscript/*.tex is a printed folio.")
+    else:
+        for fn, line, key, n, fix in bad:
+            print("  %-16s line %-5d %-28s p.%-7d should be p.%d" % (fn, line, key, n, fix))
+        print("\n  %d citation(s) need converting." % len(bad))

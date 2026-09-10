@@ -15,7 +15,7 @@ python3 analysis/block_a/verify_claims.py      # 34 checks; 15 mismatches are EX
 ./analysis/block_a/check_deliverables.sh       # 7/7
 ```
 
-## The three decisions waiting on Aditya
+## The decisions waiting on Aditya
 
 1. **Pick the graphical abstract.** Five candidates, all built and open:
    `ga1_hero` (three-scene composition, warmest), `ga_style1_pipeline` (safest,
@@ -60,6 +60,39 @@ retrieves and never drafts; the orchestrator drafts and never retrieves.**
 Numbers are in sentences now, and a session that does both writes the paragraph
 first and finds support afterwards.
 
+## The corpus, as the lit session left it (2026-09-10)
+
+- **Citations carry PRINTED pages, not PDF pages.** Seven of 74 PDFs have an
+  offset; `abramson2024af3` +492, `chiesa2025templatebias` +6297 (already
+  recorded as printed --- do not convert twice), `georgiou2025heterogeneity`
+  +3690, `yang2025statespecific` +11424, `gilson2025casp16` +248,
+  `heo2022multistate` +1872, `waymentsteele2024cluster` +831. `hilger2020gcgr`
+  is exempt: it is an eLocator article with no folio anywhere, so PDF page is
+  the article page.
+  **`cd lit && python3 validate/pageoffset.py`** answers both halves --- which
+  PDFs have an offset, and which `\citep[p.~N]{key}` locators in
+  `manuscript/**/*.tex` are still PDF pages, with file, line and the correction.
+  Run it before any commit that adds citations. I negative-tested part 2 by
+  planting two bad locators in a scratch file: it caught both, named the lines,
+  gave the right corrections, and ignored the good one.
+- **`lit/source/pending_text/` is NOT IN GIT** --- `lit/source/` is excluded for
+  size, so it exists on this laptop only. It holds Europe PMC full text for
+  `mafi2022precoupled` and `youngyang2024tas2r5`, which otherwise survived only
+  in `/tmp`. A fresh clone will not have it; do not re-fetch without checking
+  here first.
+- **The four uncited `refs.bib` entries are deliberate.**
+  `mafi2022precoupled`, `youngyang2024tas2r5`, `qin2011preassembly`,
+  `nobles2005precoupling` have their `@` stripped so citing one fails loudly.
+  They exist because the binding-order sweep was built balanced:
+  `bondar2017preassembly` argues *against* pre-assembly and needed the other
+  side of a contested question present. `session_start.sh` listing them as
+  "no paper behind it" is the guard working, not drift.
+- **`lit/GAPS.md` is stale and should not be trusted.** It was generated at 66
+  papers and reports "358 items across 51 papers"; the corpus is 79. It is the
+  pre-citation check, so a stale count is worse than none. Regenerating it is a
+  lit job and has not been done.
+- `lit/MANIFEST.csv` was one row short and is now 79, matching `notes/`.
+
 ## When Block B arrives
 
 Invoke the **`blockintake`** skill. **Block A is groundwork and Block B carries
@@ -90,6 +123,12 @@ claim sheet against the data *before* any panel or sentence.
 - **"Correct" is not "done" for figures.** The renders were geometrically right
   and visually flat until Aditya supplied exemplars. The depth-of-field
   technique now in `figures/reference/README.md` is the fix.
+- **A relayed quote is not a verified quote.** A quote that reached the
+  manuscript through a message from another session carried bracketed
+  conjugation the source did not have, and two page numbers that were PDF pages
+  rather than printed ones. Once one fragment from a relay proves altered, none
+  of it can stand as verbatim --- re-source it or de-quote it. Numbers with
+  locators are usually stronger than fragmentary quotes anyway.
 - **Check, don't assume.** Every serious find this session — the CFTR file, the
   receptor-bootstrap mislabelling, the missing MSA column, the title gap — came
   from recomputing something that looked settled.
@@ -107,4 +146,5 @@ Messages are for asking; files are for remembering.
 | `figures/FIGURES.md` | the figure ledger |
 | `figures/block_a/FIGURE_PROVENANCE.md` | per-panel source, filter, n, claim |
 | `lit/RENDER_CONVENTIONS.md` | how this literature actually draws these figures |
+| `lit/PAGE_CONVENTION.md` | the PDF-vs-printed page rule and the seven offsets |
 | `SESSIONS.md` | why something changed and what not to redo |
