@@ -22,11 +22,26 @@ No arm anywhere supplies a 21-residue peptide or an agonist: `ligand_type` is
 NaN on all 32,000 Block B rows and Block A has no ligand column at all. At the
 top of `CLAIMS.md`. Until resolved, no sentence may imply either result.
 
-**And the experimental precedent for the peptide claim is already in our own
-reference set.** 4X1H, the OPSD active reference, is rhodopsin bound to the
-α5-CT peptide of Gα$_t$ alone — the only peptide-bound entry among 80
-references, and our instrument calls it active on both axes. If a 21-mer arm is
-ever run, start it on OPSD.
+**The nearest thing to a precedent is in our own reference set, and it is
+weaker than it first reads.** 4X1H, the OPSD active reference, is opsin bound to
+a Gα$_t$ C-terminal peptide alone — the only peptide-bound entry among 80
+references, and our instrument calls it active on both axes. But the peptide is
+an **engineered 11-mer**, not the native 21-mer: `VLEDLKSCGLF` against
+UniProt P04695's `IKENLKDCGLF`, four differences in eleven positions. **Not
+citable as precedent for a wild-type 21-mer.** It does strengthen the
+anti-memorization argument — no wild-type 21-mer α5-CT appears with a receptor
+in any deposited structure — and OPSD is still where to start a 21-mer arm, as
+that arm's motivation rather than its scoring reference. Found by the lit session
+2026-09-10, confirmed here; full record in `CLAIMS.md` and
+`analysis/block_b/DISCREPANCY_REPORT.md` D-B-9.
+
+**The generalisable half: nothing in this project checks the sequence of a
+non-receptor chain.** The construct audit reads the receptor entity only, and
+RCSB reports zero mutations for 4X1H's peptide because it is deposited as its own
+derived-peptide molecule — so our check would have returned clean. 25 of 40
+active references carry `active_stabilization_source = native` and no partner
+sequence behind any of them has been compared to UniProt. Request is filed in
+`rebuttals/PANEL_EXPANSION.md` §6.
 
 ## The decisions waiting on Aditya
 

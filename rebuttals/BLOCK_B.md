@@ -388,6 +388,53 @@ three-backbone result and Chai's decoy rows are measuring something else.
 
 ---
 
+## R10 — `active_stabilization_source = native` is a bin no partner sequence was ever checked against
+
+Found by the lit session 2026-09-10, confirmed against RCSB and UniProt.
+`reference_audit.csv` annotates OPSD/4X1H as *"native α5-CT donor class Gt"*.
+The deposited peptide is neither.
+
+| | sequence | length |
+|---|---|---:|
+| 4X1H chain C | `VLEDLKSCGLF` | **11** |
+| native bovine Gα<sub>t</sub>1 (UniProt P04695) | `IKENLKDCGLF` | 11 |
+
+Four of eleven differ: I→V, K→L, N→D, D→S. RCSB calls the entity a *"C-terminal
+**derived** peptide"*. The entry is also opsin — *"Opsin/G(alpha) peptide complex
+stabilized by nonyl-glucoside"* — so the receptor is ligand-free, which
+`activation_class = Ga-complexed-native` does not convey. Released 2015-11-04,
+not 2014; if any cutoff argument uses this entry, release is the date it needs.
+
+**The part that generalises.** Neither of our audits could have caught this. The
+construct audit behind C-11 reads RCSB `pdbx_mutation` on the **receptor**
+entity, so a partner-chain substitution is out of scope by construction. And
+RCSB reports `pdbx_mutation_count = 0` for the peptide entity, because it is
+deposited as its own derived-peptide molecule rather than as a mutant — so
+pointing the audit at it would have returned **clean**. The drop already knows:
+`ASSUMED_NOT_VERIFIED_E.md` records that *"the distinction between wild-type Gαs
+and DNGαs is not captured in the current schema; a fresh dispatch would need to
+inspect construct strings PDB-by-PDB."*
+
+**Scope.** 25 of the 40 active references carry `native`; no partner sequence
+behind any of them has been compared to a database entry. The other 24 are
+probably sound — for them `native` denotes a complete heterotrimer, which
+`G2_REFERENCE_HOMOGENEITY.md` verifies from deposition titles for twelve — and
+4X1H is the only reference of the eighty whose note mentions a peptide, so the
+specific defect does not silently repeat. What repeats is the method gap:
+**nothing in this project checks the sequence of a non-receptor chain**, and the
+α5-CT donor is the chain the title is about.
+
+**No number moves.** 4X1H's geometry is unaffected and it stays in the reference
+set. What moves is what may be said about it.
+
+**Asks.** (1) Re-derive `active_stabilization_source` from partner sequence
+rather than complex composition. (2) Add a partner-chain sequence check to the
+reference audit. (3) Add `species`, `method`, `resolution` and `release_date`
+columns — `method` is one placeholder string on all 80 rows and `resolution` is
+entirely NaN, so construct quality cannot be checked from the drop as shipped.
+
+---
+
 # 3. Suggestions — what would make the paper stronger
 
 Ranked by **what a reviewer asks first**, with a cost class: **free** (re-analysis
@@ -420,7 +467,14 @@ co-input; we cannot currently write that sentence.
 
 A fifth arm supplying only Gα 334–354 — on the same 40 receptors, same
 backbones, same seeds — converts the paper's title from a claim to a result, and
-it is the single highest-value prediction run available. It also completes the
+it is the single highest-value prediction run available.
+
+**Start it on OPSD, but do not score it against 4X1H.** OPSD is the one receptor
+with any deposited peptide-bound active structure, which makes it the natural
+first target. But per R10 that structure carries an engineered 11-mer, so
+scoring a 21-mer prediction against it would be an interface mismatch of the same
+class already recorded for 6E67 — right state, wrong register, and no metric we
+hold catches it. 4X1H is this arm's motivation, not its reference. It also completes the
 telescoping ladder in the direction that matters: apo → 21-mer → decoy →
 shuffled → cognate would separate *how much of the partner you need* from *which
 partner it is*.

@@ -269,6 +269,69 @@ Two fewer resampling units widens nothing dramatically at these n, and no claim
 changes status. But the Methods sentence must say 24 for frame_36 numbers, and
 ours did not. Fixed.
 
+## D-B-9 — `active_stabilization_source = native` is a category never checked against any partner sequence
+
+Found by the lit session on 2026-09-10 and confirmed here against RCSB and
+UniProt. `reference_audit.csv` annotates OPSD/4X1H `active_stabilization_source
+= native`, with the free-text note *"α5-CT peptide of Gα<sub>t</sub> only (no
+full Gα subunit); **native α5-CT donor class Gt**; not a heterotrimer."* The
+deposited peptide is neither native nor an α5-CT of the length our title claims.
+
+| | sequence | length |
+|---|---|---:|
+| 4X1H chain C (RCSB entity 2) | `VLEDLKSCGLF` | **11** |
+| native bovine Gα<sub>t</sub>1, UniProt P04695 C-terminus | `IKENLKDCGLF` | 11 |
+
+Four of eleven positions differ — I→V, K→L, N→D, D→S. RCSB names the entity
+*"C-terminal **derived** peptide of guanine nucleotide-binding protein G(t)
+subunit alpha-1"*; the deposition itself does not call it native. The entry is
+also **opsin**, not rhodopsin: title *"Opsin/G(alpha) peptide complex stabilized
+by nonyl-glucoside"*, i.e. a ligand-free receptor, which our `activation_class`
+of `Ga-complexed-native` does not convey. Deposited 2014-11-24, **released
+2015-11-04** — release is the date a cutoff argument has to use.
+
+**Why neither of our two audits could have caught it, which is the part that
+generalises.**
+
+1. The construct audit behind caveat C-11 compares the drop's `construct` column
+   against RCSB `pdbx_mutation` **on the receptor polymer entity**. A substitution
+   in a partner chain is out of its scope by construction.
+2. Running it on the peptide entity would not have helped either. RCSB reports
+   `pdbx_mutation_count = 0` for 4X1H entity 2, because the peptide is deposited
+   as its own *derived peptide* entity rather than as a mutant of Gα<sub>t</sub>1.
+   **Our check would have returned clean.** This is the fifth self-certifying
+   column in the campaign and the first that certifies by omission rather than by
+   asserting a false `True`.
+
+The drop says as much in its own words. `12_narrative/ASSUMED_NOT_VERIFIED_E.md`,
+on the `{native, mini_G, chimera, nanobody, agonist_only, DVL_DEP}` bins:
+
+> "The distinction between wild-type Gαs and DNGαs is not captured in the current
+> schema; a fresh dispatch would need to inspect construct strings PDB-by-PDB."
+
+**Scope: 25 of the 40 active references carry `native`, and no partner sequence
+behind any of them has been compared to UniProt.** 4X1H is the only one anyone
+has now checked, and it failed. The other 24 are not thereby wrong — for them
+`native` denotes a full Gα heterotrimer, a composition claim that
+`09_references/G2_REFERENCE_HOMOGENEITY.md` does verify from deposition titles
+for twelve of them. 4X1H is the sole reference in all 80 whose note mentions a
+peptide, so the specific defect does not silently repeat. What repeats is the
+**method gap**: nothing in this project checks the sequence of a non-receptor
+chain, and the α5-CT donor is the one chain the title is about.
+
+```bash
+curl -s https://data.rcsb.org/rest/v1/core/polymer_entity/4X1H/2 \
+  | python3 -c "import json,sys; d=json.load(sys.stdin); \
+    print(d['entity_poly']['pdbx_seq_one_letter_code_can'], \
+          d['rcsb_polymer_entity']['pdbx_description'])"
+curl -s https://rest.uniprot.org/uniprotkb/P04695.fasta | tail -1 | tail -c 12
+```
+
+**No number in the manuscript moves.** 4X1H's own geometry is unaffected — TM6
+tilt 17.586 Å, NPxxY 4.921 Å, called active on both axes, and it stays in the
+reference set. What moves is what may be *said* about it: it is not citable as
+precedent for a wild-type 21-mer. Recorded in `CLAIMS.md` by the lit session.
+
 ## What reproduces, which is most of it
 
 Worth stating plainly, because the headline is sound and four of the five groups

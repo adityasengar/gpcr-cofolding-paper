@@ -64,14 +64,22 @@ rows; Block A has no ligand column at all.
 **The panel is a subset, not a census.** ConfoRNets counts 51 both-state
 receptors under a *stricter* rule; GPCRdb has 86. We have 40.
 
-**4X1H, our own OPSD active reference, is rhodopsin bound to the α5-CT peptide
-of Gαt alone.** The only peptide-bound entry among 80 references, and the
-experimental precedent for the paper's title claim — sitting unremarked in our
-own data while both campaigns supply whole subunits.
+**4X1H, our own OPSD active reference, is opsin bound to a Gαt C-terminal
+peptide alone** — the only peptide-bound entry among 80 references, sitting
+unremarked in our own data while both campaigns supply whole subunits.
+**Corrected at the very end of the session by the lit session**: the peptide is
+an engineered 11-mer (`VLEDLKSCGLF` vs native `IKENLKDCGLF`, UniProt P04695),
+so it is not precedent for a wild-type 21-mer. It is instead evidence for
+anti-memorization — no wild-type 21-mer α5-CT appears with a receptor anywhere in
+the PDB. The reference audit's `native α5-CT donor class Gt` annotation is
+wrong, and **neither of our two audits could have caught it**: the construct
+audit reads the receptor entity only, and RCSB reports zero mutations for the
+peptide entity because it is deposited as a derived peptide rather than a mutant.
+Recorded as D-B-9.
 
 ## What I got wrong and corrected
 
-Ten this session. The pattern is now consistent enough to be the finding:
+Eleven this session. The pattern is now consistent enough to be the finding:
 **on every block, my first run was wrong before the drop was.**
 
 - Asserted "there is no ceiling-pinning flag anywhere in the drop" — there is,
@@ -93,6 +101,14 @@ Ten this session. The pattern is now consistent enough to be the finding:
 - Said three of Block C's four panels could not be built. All four built.
 - Published a page locator (`p.~2`) inferred rather than sourced, and caught it
   before the build.
+- **Wrote the whole 4X1H entry in `CLAIMS.md` from the reference audit's
+  annotation instead of from the deposited sequence** — and ended it "it is
+  citable in the introduction now", which is the sentence that made the lit
+  session check. The peptide is an engineered 11-mer. This one is the same
+  failure as the `p.~2` locator, except that I did not catch it: I treated a
+  well-formed annotation in our own drop as a source. The drop is not a source;
+  it is a claim, and this project's own rule is that the data wins over the
+  claim sheet. An annotation is a claim sheet with better manners.
 
 ## What the next session should not redo
 

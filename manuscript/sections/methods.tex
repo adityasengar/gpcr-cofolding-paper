@@ -249,13 +249,34 @@ which changes the call for one borderline row.
 The construct annotation carried with the reference set contradicts the RCSB
 record on approximately 40\% of evaluable entries; the denominator for that rate
 is \textbf{[PI: 162 empirical / 127 as previously stated]}. Several references
-carry fusion partners or engineered residues inside the predicate windows, which
-is recorded per entry in Table~S1. Nine references deviate from their expected
+carry fusion partners or engineered residues inside the predicate windows. The
+fusion partner is recorded per entry in Table~S1; the engineered-mutation count
+is \emph{not} --- that column is empty on every row, and the four specific
+mutations known to fall inside a predicate window are named in the block's own
+caveat record rather than in the table. Nine references deviate from their expected
 predicate call; five of the nine are unclassified as to cause, with the
 remainder split between expected biology, curation error, a measurement
 artifact, and one entry that could be either. Several entries annotated active
 were solved with agonist bound but no transducer and do not form the NPxxY
 network, which the predicate reports correctly.
+
+That construct audit is a check on the \emph{receptor} chain, and no check
+anywhere in this work reads the sequence of a partner chain. The consequence is
+concrete. The active reference for rhodopsin, 4X1H, is annotated in the
+reference set as carrying a native $\alpha$5-CT of the G$_t$ donor class; the
+deposited peptide is eleven residues, differs from the bovine
+G$\alpha_{\mathrm{t}}$1 C-terminus at four of those eleven positions, and is
+described by the depositors as a derived peptide. The annotation is wrong, and
+it is wrong in a way our procedure could not detect: the RCSB mutation record
+for that entity is empty, because the peptide is deposited as its own molecule
+rather than as a mutant of the subunit it derives from. \textbf{Twenty-five of
+the forty active references carry the same provenance annotation and none of
+their partner sequences has been compared against a database entry.} For the
+other twenty-four the annotation asserts a complete heterotrimer, a claim about
+composition that the deposition titles do support; 4X1H is the only reference of
+the eighty whose partner is a peptide. We report the gap rather than closing it,
+and no claim in this work rests on the provenance of a reference's partner
+chain.
 
 \subsection*{Partner-composition campaign}
 

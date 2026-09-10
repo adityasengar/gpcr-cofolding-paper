@@ -123,26 +123,75 @@ was deliberate. `reference_audit.csv` has no species column; it should.
 
 ---
 
-## 6. Something already in our reference set that nobody has used
+## 6. Something already in our reference set that nobody has used — and an
+## annotation defect found while checking it
 
-**4X1H, our OPSD active reference, is rhodopsin bound to the α5-CT peptide of
-Gαt alone — no full Gα subunit.** Our own audit note says so verbatim: *"α5-CT
-peptide of Gαt only (no full Gα subunit); native α5-CT donor class Gt; not a
-heterotrimer."* X-ray, 2.29 Å, wild-type construct, deposited 2014.
-
-And our instrument calls it **active**: TM6 tilt 17.586 Å against a 14.932 Å
-threshold, NPxxY 4.921 Å against 9.08 Å. Both fire.
-
+**4X1H, our OPSD active reference, is a receptor bound to a Gα<sub>t</sub>
+C-terminal peptide alone — no full Gα subunit.** X-ray, 2.29 Å, deposited
+2014-11-24, released 2015-11-04. Our instrument calls it **active**: TM6 tilt
+17.586 Å against a 14.932 Å threshold, NPxxY 4.921 Å against 9.08 Å. Both fire.
 It is the only peptide-bound entry in the whole reference set — checked, one of
-80 — and it is an experimental structure in which **an isolated α5-CT peptide
-holds a receptor in the active state**, sitting unremarked inside our own data.
+80 — an experimental structure in which an isolated α5-CT-derived peptide holds a
+receptor open, sitting unremarked inside our own data.
 
-That matters for three reasons:
+**But the annotation shipped with it is wrong, and that is the actionable half of
+this section.** `reference_audit.csv` calls it *"native α5-CT donor class Gt"*.
+Checked against RCSB and UniProt on 2026-09-10:
 
-1. It is the **experimental precedent for the paper's own title claim**, which
-   currently has no evidence in either block because no arm supplies a peptide.
-2. It is the natural **anchor for the 21-mer arm** in suggestion S2 — a receptor
-   with a deposited peptide-bound active structure to predict against.
-3. It is citable now, in the introduction, whether or not that arm is ever run.
+| | sequence | length |
+|---|---|---:|
+| 4X1H chain C | `VLEDLKSCGLF` | **11** |
+| native bovine Gα<sub>t</sub>1 (UniProt P04695) C-terminus | `IKENLKDCGLF` | 11 |
 
-**Request:** if the 21-mer arm is scheduled, start it on OPSD.
+Four of eleven positions differ (I→V, K→L, N→D, D→S). It is an engineered
+high-affinity analogue, **not the native α5-CT and not a 21-mer**. RCSB names the
+entity a *"C-terminal **derived** peptide"*; the deposition never claimed
+otherwise. The entry is also **opsin** — title *"Opsin/G(alpha) peptide complex
+stabilized by nonyl-glucoside"* — so the receptor is ligand-free, which
+`activation_class = Ga-complexed-native` does not convey.
+
+**Neither of our audits could have caught this.** The construct audit behind
+C-11 compares `construct` against RCSB `pdbx_mutation` on the **receptor**
+entity, so a partner-chain substitution is out of scope by construction. And
+RCSB reports `pdbx_mutation_count = 0` for the peptide entity, because it is
+deposited as its own derived-peptide entity rather than as a mutant — so running
+the audit there would have returned **clean**. The drop already says the bin is
+unverified: `ASSUMED_NOT_VERIFIED_E.md` records that *"the distinction between
+wild-type Gαs and DNGαs is not captured in the current schema; a fresh dispatch
+would need to inspect construct strings PDB-by-PDB."*
+
+### What this changes
+
+1. **4X1H is not citable as precedent for a wild-type 21-mer.** An engineered
+   11-mer holding opsin open is a real result and a fair motivating observation,
+   but it is not the title claim, and a structural referee will pull the sequence
+   exactly as this check did.
+2. **It strengthens the anti-memorization case, which is the part worth keeping.**
+   No wild-type 21-mer α5-CT appears with a receptor in any deposited structure;
+   the isolated-peptide precedent is exclusively short, engineered, pre-cutoff
+   opsin entries. A wild-type 21-mer is therefore not a sequence the models have
+   seen in this context — a quantitative argument, and ours to make.
+3. **OPSD is still where to start a 21-mer arm** (suggestion S2), but 4X1H is
+   that arm's *motivation*, not its scoring reference. Scoring a 21-mer prediction
+   against an 11-mer-analogue structure is an interface mismatch of the same class
+   already recorded for 6E67 — right state, wrong register, and no metric we have
+   catches it.
+
+### Requests
+
+1. **Re-derive `active_stabilization_source` from partner sequence, not from
+   composition.** 25 of the 40 active references carry `native`, and no partner
+   chain behind any of them has been compared to UniProt. The other 24 are
+   probably fine — for them `native` denotes a full heterotrimer, which
+   `G2_REFERENCE_HOMOGENEITY.md` verifies from deposition titles for twelve — but
+   "probably" is what this campaign keeps having to retract.
+2. **Add a partner-chain sequence check to the reference audit.** Nothing in this
+   project currently checks the sequence of any non-receptor chain, and the α5-CT
+   donor is the one chain the title is about.
+3. **Add `species`, `method`, `resolution` and `release_date` columns** (see §5b
+   and item 4 of the Class A list). `method` is the same placeholder string on all
+   80 rows, `resolution` is entirely NaN, and release date is absent — so neither
+   construct quality nor a training-cutoff argument can be checked from the drop
+   as shipped.
+4. **If the 21-mer arm is scheduled, start it on OPSD** — as motivation, with a
+   predicted rather than a deposited reference.

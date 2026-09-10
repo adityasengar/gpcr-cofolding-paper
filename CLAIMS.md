@@ -76,21 +76,42 @@ does not track state correctness.
 
 ### The experimental precedent is already in our own reference set
 
-**4X1H, the active reference for OPSD, is rhodopsin bound to the α5-CT peptide
-of Gα$_t$ alone — no full Gα subunit.** The reference audit says so verbatim:
-*"α5-CT peptide of Gαt only (no full Gα subunit); native α5-CT donor class Gt;
-not a heterotrimer."* X-ray, 2.29 Å, wild-type construct, deposited 2014. Our own
-instrument calls it active on both axes: TM6 tilt 17.586 Å against a 14.932 Å
-threshold, NPxxY 4.921 Å against 9.08 Å.
+**4X1H, the active reference for OPSD, is rhodopsin bound to a Gα$_t$
+C-terminal peptide alone — no full Gα subunit.** X-ray, 2.29 Å, deposited
+2014-11-24, released 2015-11-04. Our own instrument calls it active on both axes:
+TM6 tilt 17.586 Å against a 14.932 Å threshold, NPxxY 4.921 Å against 9.08 Å. It
+is the **only peptide-bound entry among the 80 references**, checked.
 
-It is the **only peptide-bound entry among the 80 references**, checked.
+**But the peptide is an 11-mer and it is not native, so this is a weaker precedent
+than it first reads — and a stronger anti-memorization argument.** Checked against
+RCSB and UniProt 2026-09-10, because the reference audit's phrase *"native α5-CT
+donor class Gt"* does not survive contact with the deposited sequence:
 
-So an experimental structure in which an isolated α5-CT peptide holds a receptor
-open has been sitting inside our own data throughout, while both campaigns supply
-whole subunits and neither tests the peptide. It is citable in the introduction
-now, whatever is or is not run later — and if a 21-mer arm is ever scheduled,
-**OPSD is where to start it**, because it is the one receptor with a deposited
-peptide-bound active structure to predict against.
+- Chain C is **11 residues**, `VLEDLKSCGLF` — not a 21-mer.
+- Native bovine Gα$_t$1 (UniProt P04695) ends `IKENLKDCGLF`. The deposited peptide
+  differs at **four of eleven positions** (I→V, K→L, N→D, D→S). It is an
+  engineered high-affinity analogue, **not the native α5-CT**.
+
+Three consequences, in order of how badly each could bite:
+
+1. **Do not cite 4X1H in the introduction as precedent for a wild-type 21-mer.**
+   An isolated *engineered 11-mer* holding rhodopsin open is a real result and a
+   fair motivating observation, but it is not the claim in our title. A structural
+   referee will pull the sequence, as this check did.
+2. **It strengthens the anti-memorization case.** No wild-type 21-mer α5-CT
+   appears with a receptor in any deposited structure — the isolated-peptide
+   precedent is exclusively short, engineered opsin entries, all pre-cutoff. A
+   wild-type 21-mer is therefore not a sequence the models have seen in this
+   context. That argument is quantitative and it is ours to make.
+3. **OPSD is still where to start a 21-mer arm** — it is the one receptor with any
+   deposited peptide-bound active structure — but the arm would be predicting a
+   21-mer complex that has never been solved, so 4X1H is the *motivation* for that
+   arm, not its reference. Scoring a 21-mer prediction against an 11-mer analogue
+   structure would be an interface mismatch of exactly the kind recorded for 6E67.
+
+Corrected by the lit session 2026-09-10, overwriting an entry written from the
+reference audit alone. The audit's `native` annotation is wrong for this entry and
+should be re-checked wherever else it appears.
 
 **This is Aditya's decision to make, not ours.** Either the title narrows to what
 was run, or a later block supplies an isolated 21-mer arm and an agonist-only
