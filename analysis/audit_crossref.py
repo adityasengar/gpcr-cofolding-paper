@@ -71,6 +71,14 @@ def main():
                 a, b = num(m.group(1)), num(m.group(2))
                 if b < a or b < 3:
                     continue          # not a count-against-denominator
+                # Small numerators collide by coincidence -- "2 of 4 backbones"
+                # and "2 of 112 cells" are unrelated claims. Those are left IN
+                # rather than filtered out: the tool costs a reader two seconds
+                # to dismiss one, and on 2026-09-10 exactly such a coincidence
+                # is what surfaced a stale BA-5 ledger entry still asserting a
+                # per-backbone split that had just been shown to be a pooling
+                # artefact. A checker tuned until it prints nothing has stopped
+                # being a checker.
                 if a < 2:
                     # 0 and 1 are degenerate keys: "0 of 9 strata" and "0 of 84
                     # swept points" are unrelated claims that collide on the

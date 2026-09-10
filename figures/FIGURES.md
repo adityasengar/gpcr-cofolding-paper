@@ -162,11 +162,22 @@ data    06_confidence/{plddt_correlations,plddt_per_receptor}.csv;
         reference, n=1,595-1,600 per backbone over 32 receptors
 build   python3 block_a/panels/ba5_confidence.py
         + the render_struct.py command in block_a/FIGURE_PROVENANCE.md
-status  ready — the caption MUST say plddt_at_anchors was designated primary
-        post hoc. plddt_correlations.csv records n_receptors=40; the
-        population has 32 and the panels quote 32. Panel e must not be
-        captioned "confidently wrong": that row is 0.95 A from the INACTIVE
-        reference, which is where an apo prediction belongs
+status  BLOCKED on a restatement, 2026-09-10 — DO NOT DRAW THIS PANEL YET.
+        The correlations it plots POOL the apo and cognate arms while scoring
+        every row against the ACTIVE reference, which is the wrong target for
+        an apo row, and the two arms differ in both variables at once. The
+        "2 of 4 backbones" above is an artefact of that pooling. Conditioned on
+        arm: cognate -0.30 / -0.43 / -0.42 / -0.16, all four negative and
+        consistent, OF3 NOT an outlier; apo +0.04 / +0.01 / -0.37 / +0.10. The
+        direction of the claim survives and its per-backbone shape does not.
+        Found by an independent re-verification, recomputed here, and left as a
+        [PI] in results.tex because choosing the new headline is Aditya's.
+        Still true when it is redrawn: the caption MUST say plddt_at_anchors
+        was designated primary post hoc; plddt_correlations.csv records
+        n_receptors=40 where the population has 32 and the panels quote 32; and
+        panel e must not be captioned "confidently wrong", because that row is
+        0.95 A from the INACTIVE reference, which is where an apo prediction
+        belongs
 ```
 
 ### S1-S9 — supplementary
