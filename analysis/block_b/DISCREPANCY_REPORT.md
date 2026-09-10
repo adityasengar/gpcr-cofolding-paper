@@ -3,7 +3,7 @@
 `verify_claims.py` recomputes every checkable number in the Block B claim sheet,
 the drop README and the structure addendum from the shipped tidy files.
 
-**91 checks. 76 reproduce. 15 do not, in 5 groups.**
+**109 checks. 88 reproduce. 21 do not, in 8 groups.**
 
 The data wins over the claim sheet, always. Nothing here is repaired in the
 drop; `data/block_b/` and `data/block_b_structures/` are `chmod a-w`.
@@ -17,6 +17,16 @@ summary when it lives in `phase5_power_analysis.csv`; and I compared C-B-7's
 *per-backbone* 24–34 range against an all-backbone total. Block A's checker
 false-positived three times in the same way. Run the anomaly down before
 calling it a finding.
+
+**A fifth bug of mine was worse than those four, and it is the reason this
+report grew.** The decomposition table labels its frames `all_40` and
+`reproduction_36`; every other table in the drop says `frame_36`. My filter
+asked for `frame_36`, got an empty frame, and six decomposition checks then
+**silently did not run** behind an `if len(...)` guard. This report's first
+version listed the decomposition under "what reproduces". It had never been
+checked. A check that vanishes is worse than a check that fails, and the script
+now fails on a missing row rather than skipping it. One of those six, once it
+ran, had already reached the manuscript --- see D-B-6.
 
 ---
 
@@ -202,6 +212,63 @@ right, and this is why.
 
 ---
 
+## D-B-6 — SC-B-2's per-backbone family shares reproduce from nothing, and one of them reached the manuscript
+
+**Severity: high. This one was in our draft.**
+
+The claim sheet states: *"Per-backbone logit family share (all four backbones
+agree, 17–21%): boltz 17.4%, chai 17.5%, of3 20.9%, protenix 17.5%."* The
+shipped `term_share` column on `reproduction_36` gives:
+
+| backbone | claim sheet | shipped |
+|---|---:|---:|
+| Boltz-2 | 17.4% | **14.2%** |
+| Chai-1 | 17.5% | **22.9%** |
+| OpenFold3 | 20.9% | **23.6%** |
+| Protenix2 | 17.5% | **10.9%** |
+
+The real spread is 10.9–23.6%, a factor of two, with Protenix the low outlier.
+"All four backbones agree" is the opposite of what the file says. The **panel**
+share, 17.4%, reproduces exactly — the claim sheet appears to have propagated
+the panel figure into three of the four per-backbone slots.
+
+We had written the claim-sheet version into Results. Corrected: the section now
+gives the four real shares and says the family term is the least robust of the
+three.
+
+## D-B-7 — Protenix's logit family CI does not exclude zero
+
+The claim sheet says of the family term: *"Protenix's probability CI
+[-0.021, +0.061] crosses zero — a ceiling artefact… Logit CI [0.35, 1.05]
+squarely positive."*
+
+The shipped interval on `reproduction_36` is **[−0.047, +5.148]**, and on
+`all_40` **[−0.011, +1.059]**. Both span zero. Protenix's family term signs on
+**neither** scale, and 0.35 is the `all_40` point estimate sitting in a
+lower-bound slot.
+
+Only OpenFold3's per-backbone interval excludes zero ([+0.459, +1.631]). The
+panel term signs because four backbones are pooled over paralog clusters, not
+because each backbone signs it. Results now says so.
+
+## D-B-8 — frame_36 has 24 clusters, not the 26 every interval is labelled with
+
+Excluding EDNRA, EDNRB, GRPR and HRH3 removes the endothelin and bombesin
+clusters **entirely**. Every frame_36 cluster-bootstrap interval in the drop is
+labelled "26 paralog clusters"; the resampling unit is 24.
+
+```bash
+python3 -c "
+import pandas as pd
+r=pd.read_csv('data/block_b/01_rows/rows_tidy.csv',low_memory=False)
+print('all 40:', r.cluster_id.nunique())
+print('frame_36:', r[~r.receptor_slug.isin(['EDNRA','EDNRB','GRPR','HRH3'])].cluster_id.nunique())"
+```
+
+Two fewer resampling units widens nothing dramatically at these n, and no claim
+changes status. But the Methods sentence must say 24 for frame_36 numbers, and
+ours did not. Fixed.
+
 ## What reproduces, which is most of it
 
 Worth stating plainly, because the headline is sound and four of the five groups
@@ -209,8 +276,18 @@ above are about scope and labelling rather than about the result.
 
 - **The ladder**: 0.158 / 0.558 / 0.809 / 0.891 on frame_36, and monotonic on
   all four backbones independently. Not 0.552.
-- **The decomposition**: +0.400 / +0.252 / +0.082 probability, 54.6 / 34.3 /
-  11.1 %; +1.907 / +1.214 / +0.656 logit, 50.5 / 32.1 / 17.4 %.
+- **The decomposition, at panel level only**: +0.400 / +0.252 / +0.082
+  probability, 54.6 / 34.3 / 11.1 %; +1.907 / +1.214 / +0.656 logit, 50.5 /
+  32.1 / 17.4 %. The per-backbone family shares do not — see D-B-6.
+- **The threshold-band argument, on three of four backbones.** Cognate carries
+  less mass than shuffled within ±0.5 Å of the tilt threshold on Boltz-2,
+  OpenFold3 and Protenix2; Chai-1 inverts, and that inversion is one receptor
+  (33 of OX2R's 50 Chai-1 cognate rows sit in the band). The gap lives in the
+  far-inactive tail: 9.0 % of shuffled rows more than 2 Å below threshold
+  against 4.1 % of cognate.
+- **Both bootstraps.** Every shipped `cluster_boot` interval is far closer to a
+  cluster resample than to a receptor resample, in both width directions. Block
+  B does **not** repeat Block A's swapped-column defect.
 - **The 2×2**: all three (arm, p_engaged, p_active|engaged) triples, and the
   engaged-but-inactive floor at 1,699 rows pooled, 278–540 per backbone.
 - **The PIF connector**: all five subset medians and all five cell counts,

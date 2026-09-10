@@ -249,9 +249,18 @@ direction across the same four arms, NPxxY closing and TM6 tilt opening, though
 the panel medians shipped with the campaign do not reproduce from the shipped
 tables and are not quoted here (Discrepancy D-B-2).
 
-\textbf{[GAP: the threshold-band beat --- whether the shuffled-to-cognate gap
-concentrates in the $\pm$0.5~\AA{} band around the tilt threshold --- is pending
-an independent recomputation and will be inserted here.]}
+The rise is a property of the models rather than of where we put the threshold.
+If the predicate were merely reclassifying rows already sitting on its own
+boundary, the partner arms would differ most in the band around the cut. They do
+not: within $\pm$0.5~\AA{} of the tilt threshold the cognate arm carries
+\emph{less} mass than the shuffled arm on three of four backbones (1.06\%
+against 3.33\% on Boltz-2, 0.39\% against 1.89\% on OpenFold3, 0.00\% against
+0.06\% on Protenix2). Chai-1 inverts, at 1.83\% against 0.56\%, and that
+inversion is one receptor: 33 of OX2R's 50 Chai-1 cognate rows fall in the band,
+and removing that receptor alone removes it. The difference between the arms
+lives in the far-inactive tail instead --- 9.0\% of shuffled rows sit more than
+2~\AA{} below the threshold against 4.1\% of cognate rows --- which is a shift
+in the population, not a reclassification at the boundary.
 
 Telescoping the ladder gives the three contributions. Supplying \emph{any}
 partner, even one whose $\alpha$5 tail is scrambled, accounts for $+0.400$
@@ -261,9 +270,17 @@ $+0.082$ [0.047, 0.125]. On the probability scale that last term is 11\% of the
 total; on the logit scale it is 17.4\% [0.39, 1.09], and both are correct. The
 gap between them is not a discrepancy but a compression: cognate rates sit at or
 above 0.98 in 24--34 of 40 cells per backbone, and a probability-scale
-difference has little room left to move. All four backbones agree on the
-logit-scale share to within four points (17.4, 17.5, 20.9, 17.5). Wherever this
-term appears it is named with its scale \textbf{[FIG:decomposition]}.
+difference has little room left to move. Wherever this term appears it is named
+with its scale \textbf{[FIG:decomposition]}.
+
+The family term is also the least robust of the three, and we report it as such.
+Its per-backbone logit shares span 14.2\%, 22.9\%, 23.6\% and 10.9\% for
+Boltz-2, Chai-1, OpenFold3 and Protenix2 --- a factor of two, not a consensus
+--- and only OpenFold3's interval excludes zero on its own
+([$+0.46$, $+1.63$]); the other three span it. The panel term signs because the
+four are pooled across 26 paralog clusters, not because each backbone signs it.
+Getting the family right is the smallest of the three effects, and it is the one
+a single backbone cannot see.
 
 \textbf{The models respond to partner presence far more than to partner
 identity.} Two thirds of the effect is already delivered by a subunit whose

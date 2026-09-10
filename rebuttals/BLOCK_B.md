@@ -236,6 +236,94 @@ these rows before we explain them.
 correct the certification column. We would rather cite the honest version:
 *no slope excludes zero on any predictor powered above n≈10.*
 
+## R7 — SC-B-2's per-backbone family shares, and Protenix's interval
+
+**Severity: high. We had written the first of these into the manuscript.**
+
+**Shipped.** `BLOCK_B_CLAIM_SHEET.md` § SC-B-2: *"Per-backbone logit family
+share (all four backbones agree, 17–21%): boltz 17.4%, chai 17.5%, of3 20.9%,
+protenix 17.5%"*, and *"Protenix's probability CI [-0.021, +0.061] crosses zero
+— a ceiling artefact… Logit CI [0.35, 1.05] squarely positive."*
+
+**Data**, from `05_decomposition/ladder_decomposition.csv`, `reproduction_36`:
+
+| backbone | share, claim sheet | share, shipped | logit CI, shipped |
+|---|---:|---:|---|
+| Boltz-2 | 17.4% | **14.2%** | [−0.074, +1.595] |
+| Chai-1 | 17.5% | **22.9%** | [−0.235, +1.523] |
+| OpenFold3 | 20.9% | **23.6%** | [+0.459, +1.631] |
+| Protenix2 | 17.5% | **10.9%** | **[−0.047, +5.148]** |
+
+The spread is 10.9–23.6%, a factor of two, not "all four agree". The **panel**
+share of 17.4% reproduces exactly, which suggests the panel figure was
+propagated into three of the four per-backbone slots.
+
+Protenix's logit interval spans zero on `reproduction_36` and also on `all_40`
+([−0.011, +1.059]). It signs on neither scale. The quoted lower bound of 0.35 is
+the `all_40` **point estimate** sitting in a lower-bound slot. Only OpenFold3's
+per-backbone interval excludes zero.
+
+**Reproduce.**
+```bash
+python3 -c "
+import pandas as pd
+d=pd.read_csv('data/block_b/05_decomposition/ladder_decomposition.csv')
+f=d[(d.scale=='logit')&(d.contrast=='delta_correct_family_shuffled_to_cognate')]
+print(f[['frame','backbone','term_estimate','term_share','ci_lo','ci_hi']].round(4).to_string(index=False))"
+```
+
+**A note on how we found it late, because it bears on the rest of this file.**
+This table labels its frames `all_40` and `reproduction_36`; every other table
+in the drop says `frame_36`. Our verifier asked for `frame_36`, got an empty
+frame, and six decomposition checks silently did not run. That is our bug, and
+it is fixed — missing rows now fail rather than skip. But the frame-label
+inconsistency is yours, and it is the kind that makes a checker fail open rather
+than closed. **Q9: is `reproduction_36` the same population as `frame_36`?** We
+have assumed yes.
+
+## R8 — frame_36 resamples 24 clusters, and every interval on it says 26
+
+Excluding EDNRA, EDNRB, GRPR and HRH3 removes the endothelin and bombesin
+clusters **entirely**. The bootstrap unit on frame_36 is 24, not 26.
+
+```bash
+python3 -c "
+import pandas as pd
+r=pd.read_csv('data/block_b/01_rows/rows_tidy.csv',low_memory=False)
+print('all 40:', r.cluster_id.nunique())
+print('frame_36:', r[~r.receptor_slug.isin(['EDNRA','EDNRB','GRPR','HRH3'])].cluster_id.nunique())"
+```
+
+**Severity: low on the numbers, medium on the description.** Two fewer units
+changes no claim's status at these n. But every frame_36 interval in the drop is
+labelled "26 paralog clusters", and our Methods said the same until we checked.
+It now says 26 on the full panel and 24 on frame_36.
+
+## R9 — the dispatch's threshold-band claim holds on three backbones, not four
+
+**Shipped.** The dispatch states: *"cognate carries less threshold-band mass than
+shuffled on tilt across all four backbones."*
+
+**Data**, frame_36, within ±0.5 Å of 14.932 Å:
+
+| backbone | shuffled | cognate | holds? |
+|---|---:|---:|---|
+| Boltz-2 | 3.33% | 1.06% | yes |
+| OpenFold3 | 1.89% | 0.39% | yes |
+| Protenix2 | 0.06% | 0.00% | yes |
+| **Chai-1** | **0.56%** | **1.83%** | **inverted** |
+
+The Chai-1 inversion is **one receptor**: 33 of OX2R's 50 Chai-1 cognate rows
+fall inside the band, and removing OX2R alone flips it back (0.34% shuffled
+against 0.00% cognate).
+
+**Severity: low, and in your favour once stated correctly.** The argument does
+not need all four. The gap actually lives in the far-inactive tail — 9.0% of
+shuffled rows more than 2 Å below threshold against 4.1% of cognate — which is a
+stronger form of the same point: a shift in the population, not a
+reclassification at the boundary. We have written it that way, naming Chai-1 and
+OX2R.
+
 ---
 
 # 2. Questions — things only you can answer
@@ -269,7 +357,10 @@ under what Block B does **not** claim. These cannot both be true and the
 difference decides whether a whole class of sentence is available to us. Which
 is it?
 
-**Q8.** Chai does not read the decoy α5-CT edit as aligned MSA columns (0 of 40).
+**Q8.** Is `reproduction_36` in `ladder_decomposition.csv` the same population as
+`frame_36` everywhere else? The label appears in no other table. (R7)
+
+**Q9.** Chai does not read the decoy α5-CT edit as aligned MSA columns (0 of 40).
 Is a rerun with a forced MSA feasible? Until it is, the decoy arm is a
 three-backbone result and Chai's decoy rows are measuring something else.
 

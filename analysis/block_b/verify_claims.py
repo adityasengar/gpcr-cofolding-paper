@@ -198,39 +198,51 @@ for arm, want in LADDER.items():
 
 # ------------------------------------------- SC-B-2, the decomposition shares
 dec = load("05_decomposition/ladder_decomposition.csv")
-d36 = dec[dec.frame == "frame_36"]
+# NOTE: this file labels its frames all_40 / reproduction_36, NOT frame_40 /
+# frame_36 as the claim sheet and every other table do. An earlier version of
+# this script filtered on "frame_36", got an empty frame, and every
+# decomposition check below SILENTLY DID NOT RUN behind an `if len(m):` guard.
+# A check that vanishes is worse than a check that fails. Missing rows now fail.
+check("B30z", "ladder_decomposition.csv uses the claim sheet's frame labels",
+      sorted(dec.frame.unique().tolist()), ["frame_36", "frame_40"],
+      note="it ships all_40 / reproduction_36; every other table says frame_36")
+d36 = dec[dec.frame == "reproduction_36"]
+CONTRAST = {"occupancy": "delta_occupancy_apo_to_decoy",
+            "alpha5ct": "delta_a5ct_sequence_decoy_to_shuffled",
+            "family": "delta_correct_family_shuffled_to_cognate"}
 PROB = {"occupancy": (0.400, 54.6), "alpha5ct": (0.252, 34.3), "family": (0.082, 11.1)}
 LOGIT = {"occupancy": (1.907, 50.5), "alpha5ct": (1.214, 32.1), "family": (0.656, 17.4)}
 
-
-def pick(df, key, scale):
-    m = df[(df.scale.astype(str).str.lower().str.startswith(scale)) &
-           (df.contrast.astype(str).str.lower().str.contains(key))]
-    return m
-
-
-for key, (est, share) in PROB.items():
-    m = pick(d36[d36.backbone.astype(str).str.lower() == "panel"], key, "prob")
-    if len(m) == 0:
-        m = pick(d36, key, "prob")
-    if len(m):
-        check("B31." + key, "SC-B-2 probability-scale term, %s" % key,
+for scale, TAB in (("probability", PROB), ("logit", LOGIT)):
+    for key, (est, share) in TAB.items():
+        m = d36[(d36.scale == scale) & (d36.contrast == CONTRAST[key]) &
+                (d36.backbone == "panel")]
+        tag = "B31" if scale == "probability" else "B33"
+        if len(m) != 1:
+            check(tag + "." + key, "SC-B-2 %s panel row for %s exists" % (scale, key),
+                  len(m), 1)
+            continue
+        check(tag + "." + key, "SC-B-2 %s-scale term, %s" % (scale, key),
               round(float(m.term_estimate.iloc[0]), 3), est, tol=0.0015)
-        got_share = float(m.term_share.iloc[0])
-        got_share = got_share * 100.0 if got_share <= 1.5 else got_share
-        check("B32." + key, "SC-B-2 probability-scale share %%, %s" % key,
-              round(got_share, 1), share, tol=0.15)
-for key, (est, share) in LOGIT.items():
-    m = pick(d36[d36.backbone.astype(str).str.lower() == "panel"], key, "logit")
-    if len(m) == 0:
-        m = pick(d36, key, "logit")
-    if len(m):
-        check("B33." + key, "SC-B-2 logit-scale term, %s" % key,
-              round(float(m.term_estimate.iloc[0]), 3), est, tol=0.0015)
-        got_share = float(m.term_share.iloc[0])
-        got_share = got_share * 100.0 if got_share <= 1.5 else got_share
-        check("B34." + key, "SC-B-2 logit-scale share %%, %s" % key,
-              round(got_share, 1), share, tol=0.15)
+        check(tag + "b." + key, "SC-B-2 %s-scale share %%, %s" % (scale, key),
+              round(100.0 * float(m.term_share.iloc[0]), 1), share, tol=0.15)
+
+# the per-backbone claim: "all four backbones agree, 17-21%"
+PER_BB = {"boltz": 17.4, "chai": 17.5, "of3": 20.9, "protenix": 17.5}
+for bb, want in PER_BB.items():
+    m = d36[(d36.scale == "logit") & (d36.contrast == CONTRAST["family"]) &
+            (d36.backbone == bb)]
+    check("B32." + bb, "SC-B-2 per-backbone logit family share %%, %s" % bb,
+          round(100.0 * float(m.term_share.iloc[0]), 1) if len(m) else None,
+          want, tol=0.15)
+
+# "Protenix logit CI [0.35, 1.05] squarely positive"
+m = d36[(d36.scale == "logit") & (d36.contrast == CONTRAST["family"]) &
+        (d36.backbone == "protenix")]
+check("B32z", "SC-B-2 Protenix logit family CI excludes zero",
+      bool(float(m.ci_lo.iloc[0]) > 0) if len(m) else None, True,
+      note=("shipped CI is [%.3f, %.3f]" % (m.ci_lo.iloc[0], m.ci_hi.iloc[0]))
+           if len(m) else "no row")
 
 check("B35", "SC-B-2 shares are 55/34/11 and NOT the superseded 54/35/11",
       [round(PROB[k][1]) for k in ["occupancy", "alpha5ct", "family"]],

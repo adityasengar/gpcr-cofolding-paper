@@ -517,6 +517,174 @@
   "note": "all four: [17.53, 17.57, 17.56, 17.53]"
  },
  {
+  "id": "B30z",
+  "what": "ladder_decomposition.csv uses the claim sheet's frame labels",
+  "got": [
+   "all_40",
+   "reproduction_36"
+  ],
+  "want": [
+   "frame_36",
+   "frame_40"
+  ],
+  "ok": false,
+  "tol": null,
+  "note": "it ships all_40 / reproduction_36; every other table says frame_36"
+ },
+ {
+  "id": "B31.occupancy",
+  "what": "SC-B-2 probability-scale term, occupancy",
+  "got": 0.4,
+  "want": 0.4,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B31b.occupancy",
+  "what": "SC-B-2 probability-scale share %, occupancy",
+  "got": 54.6,
+  "want": 54.6,
+  "ok": true,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B31.alpha5ct",
+  "what": "SC-B-2 probability-scale term, alpha5ct",
+  "got": 0.252,
+  "want": 0.252,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B31b.alpha5ct",
+  "what": "SC-B-2 probability-scale share %, alpha5ct",
+  "got": 34.3,
+  "want": 34.3,
+  "ok": true,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B31.family",
+  "what": "SC-B-2 probability-scale term, family",
+  "got": 0.082,
+  "want": 0.082,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B31b.family",
+  "what": "SC-B-2 probability-scale share %, family",
+  "got": 11.1,
+  "want": 11.1,
+  "ok": true,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B33.occupancy",
+  "what": "SC-B-2 logit-scale term, occupancy",
+  "got": 1.907,
+  "want": 1.907,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B33b.occupancy",
+  "what": "SC-B-2 logit-scale share %, occupancy",
+  "got": 50.5,
+  "want": 50.5,
+  "ok": true,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B33.alpha5ct",
+  "what": "SC-B-2 logit-scale term, alpha5ct",
+  "got": 1.214,
+  "want": 1.214,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B33b.alpha5ct",
+  "what": "SC-B-2 logit-scale share %, alpha5ct",
+  "got": 32.1,
+  "want": 32.1,
+  "ok": true,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B33.family",
+  "what": "SC-B-2 logit-scale term, family",
+  "got": 0.656,
+  "want": 0.656,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B33b.family",
+  "what": "SC-B-2 logit-scale share %, family",
+  "got": 17.4,
+  "want": 17.4,
+  "ok": true,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B32.boltz",
+  "what": "SC-B-2 per-backbone logit family share %, boltz",
+  "got": 14.2,
+  "want": 17.4,
+  "ok": false,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B32.chai",
+  "what": "SC-B-2 per-backbone logit family share %, chai",
+  "got": 22.9,
+  "want": 17.5,
+  "ok": false,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B32.of3",
+  "what": "SC-B-2 per-backbone logit family share %, of3",
+  "got": 23.6,
+  "want": 20.9,
+  "ok": false,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B32.protenix",
+  "what": "SC-B-2 per-backbone logit family share %, protenix",
+  "got": 10.9,
+  "want": 17.5,
+  "ok": false,
+  "tol": 0.15,
+  "note": ""
+ },
+ {
+  "id": "B32z",
+  "what": "SC-B-2 Protenix logit family CI excludes zero",
+  "got": false,
+  "want": true,
+  "ok": false,
+  "tol": null,
+  "note": "shipped CI is [-0.047, 5.148]"
+ },
+ {
   "id": "B35",
   "what": "SC-B-2 shares are 55/34/11 and NOT the superseded 54/35/11",
   "got": [
