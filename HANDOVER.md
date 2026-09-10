@@ -40,6 +40,56 @@ python3 analysis/block_a/verify_claims.py      # 34 checks; 15 mismatches are EX
 `analysis/block_a/DATA_REQUESTS.md` is paste-ready for the pipeline agent and
 holds these plus six more.
 
+## Parked — raise again later, do not act on it now
+
+**Reframing the study around the distribution of structures the models produce.**
+Aditya's idea, 2026-09-10; he asked for it to be parked and brought back.
+
+The case for it, in one paragraph. The introduction argues these models collapse
+onto one basin — `abramson2024af3`'s own concession that multiple random seeds do
+not approximate the solution ensemble — and then the Results answer that
+distributional setup with a scalar. Meanwhile every cell holds 50 predictions
+(5 seeds × 10 samples in Block B, 25 seeds in Block A) that get collapsed to one
+rate, and that rate is saturated: 115 of 160 cognate cells sit at ≥ 0.98, which
+is precisely why the family term is invisible per backbone. A rate hits a
+ceiling; a distribution does not.
+
+**The free result that makes it worth raising.** Block B's 5 × 10 is a *nested*
+design, so between-seed and within-seed variance separate. Share of within-cell
+variance living between seeds, tilt axis:
+
+| backbone | apo | cognate | decoy | shuffled |
+|---|---:|---:|---:|---:|
+| Boltz-2 | 0.12 | 0.06 | 0.07 | 0.09 |
+| Chai-1 | 0.11 | 0.09 | 0.10 | 0.16 |
+| OpenFold3 | 0.13 | 0.45 | 0.27 | 0.35 |
+| Protenix2 | 0.19 | 0.33 | **0.82** | **0.70** |
+
+NPxxY gives the same pattern, so it is not an axis artefact. The four models
+differ in *where their variability comes from*: Boltz-2 explores within a seed,
+Protenix2's decoy arm is 82% seed-determined and its ten samples are near
+redundant. That is a practical recommendation — more seeds for Protenix, more
+samples for Boltz — and a quantitative form of the ensemble-collapse claim the
+introduction rests on. The partner also *changes* this on two backbones and not
+on the other two.
+
+Reproduce with `python3 analysis/block_b/seed_variance.py`. Nothing in the
+manuscript uses it.
+
+**If it is taken up: add a layer, do not replace the instrument.** The binary
+predicate is the only part calibrated against deposited structures of known
+state, and lit confirmed no paper in 79 conjoins the two axes; dropping it loses
+the grounding and the novelty at once.
+
+**The trap that would sink it.** 50 samples from a generative model are **not a
+conformational ensemble**. No Boltzmann weighting, no claim to one. It is the
+sampling distribution of a generator, and a structural-biology referee stops
+reading at the word "ensemble" used loosely.
+
+**Two free checks before committing:** whether cells are genuinely *bimodal*
+(some seeds active, some not) rather than merely broad, and whether the same
+decomposition holds in Block A's 25-seed design.
+
 ## How the sessions work
 
 Three, on one laptop. **Content versus machinery.**
