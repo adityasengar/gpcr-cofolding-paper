@@ -114,3 +114,87 @@ the drop has.**
 
 Every one of these produced a plausible-looking discrepancy that would have gone
 upstream as a finding.
+
+---
+
+## D-C-2 — 66 data files are named in Block C's own documents and not shipped
+
+**Severity: high. This is the answer to "do we have all the results?" — no.**
+
+The bundle is **complete as declared**: all thirteen directories match the
+`README.md` index exactly, except `13_structures/`, whose index entry the
+dispatch already flags as stale (it says 2 files; 16 are present, correctly).
+All ten claims, eleven caveats and ten withdrawals are there.
+
+What is missing is everything the bundle *refers to*. Scanning every `.md` and
+`.json` in the drop for named `.csv`/`.json` files and checking each against
+what shipped: **66 named, not present.**
+
+Two are already covered from elsewhere in this repo and need no request:
+
+- **`paralogy_clusters.csv`** — the resampling unit for every cluster-boot CI in
+  the block. We hold a copy from Block B, and its SHA-256 is
+  `6158081e…`, **byte-identical to the one `g_scc1_cluster_boot.json` names as
+  its input**. 40 receptors, 26 clusters. Verified, not assumed.
+- **`C-8_cluster_bootstrap_authoritative.md`** — Block A's convention document,
+  present at `data/block_a/10_narrative/caveats/`.
+
+### The two that block verification
+
+| file | what it carries | claims affected |
+|---|---|---|
+| `rows.tier3.v2.csv` (SHA `5ccf58ac…`) | the primary corpus | SC-C-1, 2, 3, 4, 6, 9 |
+| `rows.csv` (scorer `d9c646af…`) | the pose sibling corpus | SC-C-7 |
+
+Without these, 30 of our 53 checks are consistency-only. The off-site census is
+the one row-level file in the bundle and it carries centroid distances, not
+pocket-Cα RMSD, so it cannot substitute.
+
+### Whole analyses whose outputs are named and absent
+
+These are not provenance stubs. Each is referenced as a completed piece of work
+with a filename, and several would materially change what the paper can say:
+
+- **`s4_bw_decomposition.json` / `s4_bw_position_decomposition.json`** — a
+  Ballesteros–Weinstein **position** decomposition. This is the only mechanistic
+  analysis named anywhere in Block C: *which residues carry the ligand-class
+  signal.* The paper currently has no residue-level account in any block.
+- **`task6_p0_correlation.json`** — a **cross-block** correlation on
+  **n=35 common receptors**. Block A, B and C have never been related to one
+  another quantitatively; this is the only file that claims to.
+- **`task_D_species_match_root_cause.json`** — the root cause of the species
+  failures. We independently found that B1B1U5 (jumping spider) and OPSD
+  (bovine) are the panel's two non-human receptors, and C-C-9 attributes their
+  loss to "non-human-species pipeline failures". This file apparently explains
+  the mechanism.
+- **`s7_nulls_ceilings.json`, `s7_s8_ceiling_domain.json`,
+  `s8_applicability.json`** — the nulls, ceilings and applicability work behind
+  SC-C-5.
+- **`task_F_v2_apo_bistability_recheck.json`** and four sibling `task_F_*`
+  files — apo bistability and reference-state stratification.
+- **`nan_reason_census.csv` / `nan_reason_census_by_receptor.csv`** — why cells
+  are unmeasurable, which is the evidence behind C-C-1's saturation claim.
+- **`pr1`–`pr5`** — five pre-registered checks, including
+  `pr2_fshr_lshr_class.json`, the basis for two of the four C-C-9 drops.
+- **`s6_generalization.json`**, `s2_sample_budget.json`, `s3_cross_backbone_consensus.json`.
+
+### One absence that is correct
+
+`g4_scoped_centroid_census.csv` and `.json` are the **retracted v1 census** that
+produced the 25.6% figure. They are named only in the superseded wrap report and
+their absence is right — the retraction is recorded in prose without shipping the
+bad numbers in a form a figure script could read.
+
+### What we are asking for
+
+1. **`rows.tier3.v2.csv`** — without it, the block's two surviving positives
+   cannot be verified against anything but themselves.
+2. **`s4_bw_decomposition.json`** — a residue-level result the paper does not
+   otherwise have.
+3. **`task6_p0_correlation.json`** — the only quantitative link between blocks.
+4. **`task_D_species_match_root_cause.json`** — it bears on a panel-composition
+   problem we found independently.
+5. A statement of whether the other 60 are deliberately excluded as working
+   record, or simply were not gathered. **"Tidy data only" is a defensible
+   policy**; the point is that the bundle does not say which of the 66 fall
+   under it.
