@@ -198,3 +198,57 @@ bad numbers in a form a figure script could read.
    record, or simply were not gathered. **"Tidy data only" is a defensible
    policy**; the point is that the bundle does not say which of the 66 fall
    under it.
+
+---
+
+## D-C-3 — SC-C-2's table is headed "Kendall's τ" and contains a fraction of receptors
+
+**Severity: high. It reached our manuscript before a panel caught it.**
+
+`BLOCK_C_CLAIM_SHEET.md` § SC-C-2 presents:
+
+> **Numbers** (Kendall's τ, receptor-panel-median):
+>
+> | panel | boltz | chai | of3 | protenix |
+> | Tier 3 apo × 23 | 74% | 65% | 74% | 87% |
+
+Those values are **not** Kendall's τ and they are **not** a median. They are the
+`fraction_positive_significant` field of the same JSON's own `summary` block —
+the proportion of receptors whose τ is positive *and* significant.
+
+| backbone | claim sheet "τ" | what it is | actual median τ |
+|---|---:|---:|---:|
+| Boltz-2 | 74% | fraction_positive_significant 0.7391 | **0.386** |
+| Chai-1 | 65% | 0.6522 | **0.259** |
+| OpenFold3 | 74% | 0.7391 | **0.328** |
+| Protenix2 | 87% | 0.8696 | **0.366** |
+
+Both quantities are real and both are worth reporting. The defect is the label:
+a reader told "Kendall's τ of 74%" will take it as a correlation of 0.74, which
+is roughly **twice** the true value.
+
+**Reproduce.**
+```bash
+python3 -c "
+import json, numpy as np
+o=json.load(open('data/block_c/07_ordinal_recovery/s5_p4_ordinal.json'))
+t=o['tier3_apo_23_receptors']
+for bb in ['boltz','chai','of3','protenix']:
+    taus=[v['tau'] for v in t['per_backbone'][bb].values()]
+    print(bb, 'claim-sheet %.0f%%' % (100*t['summary'][bb]['fraction_positive_significant']),
+          'median tau %.3f' % np.median(taus))"
+```
+
+**We published the mislabel and have corrected it.** The Results said *"gives
+Kendall's τ of 65–87% across backbones"*. It now says a positive and significant
+τ on 65–87% **of receptors**, states that this is a count rather than a
+correlation, and gives the median τ (0.26–0.39) beside it.
+
+**How it was caught, which is the point.** The claim sheet, the dispatch and our
+own Results all carried the mislabel and all read fine. It surfaced only when
+BC-2 was built and the per-receptor τ values were plotted: the violins sat around
+0.3 while the panel medians printed 0.74. **A number that survives three prose
+reviews can still be wrong, and drawing it is what finds out.**
+
+**To close.** Relabel the SC-C-2 table, or report both columns. The underlying
+JSON is correct and self-describing; only the claim sheet's heading is wrong.
