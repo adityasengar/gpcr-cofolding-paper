@@ -224,6 +224,7 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 0.340 | S361 | DERIVED, not shipped: stage3_2x2_ligand_state_specificity.json per_backbone.boltz, (0.7680-0.9762)-(0.8983-0.7665) = -0.3400, against interaction.estimate -0.3062. The agonist cells carry n_clusters 28 and the antagonist cells 23; the interaction is on the 23 in common, which is why the cell means cannot reconstruct it |
 | 27.9 | S364 | Block C G4 gate, agonist off-site fraction lower bound; independent re-verification 2026-09-10, not recomputed here |
 | 34.9 | S364 | Block C G4 gate, agonist off-site fraction upper bound; same source |
 | 0.43 | R215 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |

@@ -9,7 +9,7 @@
 
 Before applying them to predictions, both measurements were run on the deposited
 reference structures, where the answer is already known
-(Fig.~\ref{fig:f1}, Fig.~\ref{fig:ba1a}). Across 168 reference
+(Fig.~\ref{fig:f1}). Across 168 reference
 rows --- 167 unique PDB entries, one of which is scored twice because it serves
 two panel receptors --- the two-instrument predicate returned the expected call
 on 159 and deviated on nine, five annotated active and four annotated inactive.
@@ -338,7 +338,7 @@ and is active on 0.893 of those; shuffled engages on 0.967 and is active on
 0.835; decoy engages on 0.704 and is active on 0.665. The engaged-but-inactive
 decoy cell --- a partner seated in the cavity that has not opened it --- is
 populated on every backbone, 1{,}699 rows pooled and 278--540 per backbone
-\textbf{[SI:BB-3]}. It is the only cell in the campaign that can support
+(Fig.~\ref{sfig:engagement}). It is the only cell in the campaign that can support
 a statement about chemistry rather than about occupancy.
 
 An axis that never participates in the call corroborates the direction. On the
@@ -347,7 +347,7 @@ active sit at 15.42~\AA{} (47 cells), against 15.35~\AA{} for apo and 16.00--16.
 for the active-engaged cognate, shuffled and decoy cells. Engaged-but-inactive
 geometry is apo geometry on an axis the predicate never reads. Three of four
 backbones sign cleanly; OpenFold3 signs in the same direction at smaller
-magnitude \textbf{[SI:BB-4]}.
+magnitude (Fig.~\ref{sfig:bbconnector}).
 
 What the models do \emph{not} do is read which family the partner belongs to on
 the continuous axes beneath the predicate. On the largest and best-powered
@@ -357,7 +357,7 @@ the tilt residual against each receptor's own active reference is $+0.024$~\AA{}
 across the 20 whose active reference is a native complex. A pre-registered
 alternative, that donors overshoot or undershoot the reference belonging to the
 wrong family, is signed in \emph{zero} of nine qualifying stratum $\times$ axis
-combinations at 95\% confidence \textbf{[SI:BB-5]}.
+combinations at 95\% confidence (Fig.~\ref{sfig:residuals}).
 
 Three limits bound all of this, and none is a detail.
 
@@ -509,7 +509,7 @@ to find it; the design does not admit it.
 Asked to fold a receptor with nothing supplied, and sampled 500 times per cell
 rather than 25, the four backbones do not behave like a system with two
 accessible basins. They behave like four different systems
-\textbf{[SI:BD-1]}. On $\beta_2$AR, Chai-1 calls 100\% of 500 apo
+(Fig.~\ref{sfig:apolandscape}). On $\beta_2$AR, Chai-1 calls 100\% of 500 apo
 samples active and Boltz-2 calls 0\%; on LPAR$_1$ the arrangement inverts and
 OpenFold-3 calls 91.8\% active while every other backbone is at or below 0.2\%.
 Four cells clear a $+50$ percentage-point margin over the best other backbone on
@@ -548,7 +548,7 @@ that can.
 \subsection*{Steering works in one direction and not the other}
 
 Supplying a partner that should drive the receptor active does exactly that
-\textbf{[SI:BD-2]}. The cognate G$\alpha$ positive control
+(Fig.~\ref{sfig:direction}). The cognate G$\alpha$ positive control
 reaches at least 96\% predicate-active on \textbf{14 of 16} receptor $\times$
 backbone cells; Boltz-2, Chai-1 and Protenix2 reach 100\% on all four of their
 cells, and both misses are OpenFold-3 (58\% on M$_2$, 36\% on the
@@ -565,7 +565,7 @@ move; the fourth, Protenix2, inverts to 76\% active
 (95\% CI $[61.8, 86.9]$) --- and the shipped structure shows why that is not a
 scoring artifact: the inactive nanobody is correctly seated as a 125-residue
 chain B, and the receptor underneath it has an NPxxY hydroxyl separation of
-4.53~\AA{}, which we measured from the coordinates \textbf{[SI:BD-4]}.
+4.53~\AA{}, which we measured from the coordinates (Fig.~\ref{sfig:nbstructures}).
 The model built an active receptor and docked an inactive-state binder onto it.
 On the $\kappa$-opioid receptor all four backbones move \emph{toward} active
 under a nanobody that locks the inactive state (Boltz-2 $+44$, Chai-1 $+8$,
@@ -596,7 +596,7 @@ $-2.73$ (OpenFold-3, $[-4.37, -1.15]$) and $-2.96$ (Protenix2,
 $[-4.68, -1.58]$) percentage points per e-fold of depth. Read as a table of
 slopes, the two strongest levers are OpenFold-3 and Protenix2.
 \textbf{Read against a second axis, they are the two that are not levers at
-all} \textbf{[SI:BD-3]}.
+all} (Fig.~\ref{sfig:depth}).
 
 \textbf{Boltz-2 is a clean lever; Chai-1 is a muted one; OpenFold-3 leans to
 degradation and Protenix2 is mixed and receptor-dependent.} Four independent
@@ -611,7 +611,7 @@ finally, crosses zero under the cluster bootstrap: its point estimate is
 negative and its interval is not, so it is reported as a point estimate and
 nothing is built on it.
 
-Two cells make the distinction concrete \textbf{[SI:BD-5]}. On
+Two cells make the distinction concrete (Fig.~\ref{sfig:levervsdeg}). On
 Boltz-2 with rhodopsin, dropping to depth 8 fires the predicate and moves the
 pocket \emph{toward} the active reference, 1.25~\AA{} to 0.41~\AA{}. On
 Protenix2 with AT$_1$R the predicate fires identically --- NPxxY from 10.93 to

@@ -14,6 +14,12 @@
 % SI changes its prefix and nothing else, so a move is one edit and the prose
 % breaks loudly if the target is gone.
 %
+% THE LEDGER AND THIS FILE MUST AGREE. On 2026-09-10 BA-5 sat placed in this
+% file for an hour after it had been moved to BLOCKED in figures/FIGURES.md --
+% the artefact panel was live in the main text while two sessions were agreeing
+% not to build it. A status in the ledger is not a removal from the document.
+% Before committing a status change there, grep this file for the panel.
+%
 % THE MAIN SEQUENCE IS FIVE FIGURES, which is the median of the 13 comparable
 % peer-reviewed papers in the corpus and matches both the Nature AlphaFold-3
 % paper and the Science RFAA paper. Everything else is SI.
@@ -32,37 +38,33 @@
 % Every caption states its filter and its n.
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{f1_workflow.pdf}
-\caption{\textbf{The instrument, the panel, and what was run.}
-\textbf{a}, the two intrinsic measurements and their thresholds, with the atom
-pair for each named once for the whole paper: TM6 tilt as a C$\alpha$--C$\alpha$
-distance between positions 2$\times$46 and 6$\times$37, called active above
-14.932~\AA; and the NPxxY hydroxyl--hydroxyl distance between Tyr5.58 and
-Tyr7.53, called active below 9.080~\AA. A prediction is called active only when
-both fire. \textbf{b}, 167 deposited reference entries of known state scored on
-those axes. \textbf{c}, the prediction protocol: 48 receptors $\times$ 2 arms
-$\times$ 4 backbones $\times$ 25 seeds, no reference structure supplied.
-\textbf{d}, disposition of all 9{,}490 scored rows.
-\textit{Filter:} none at the panel level; per-panel $n$ is printed in the figure.}
-\label{fig:f1}
-\end{figure}
-
-\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{f1_workflow.pdf}\\[2mm]
 \includegraphics[width=\textwidth]{ba1a_instrument.pdf}
-\caption{\textbf{What the two measurements measure, and how they behave on
-structures whose state is already known.}
-\textbf{a}, \textbf{b}, the active reference (4LDE) superposed on the inactive
-reference (2RH1) for $\beta_2$AR, viewed along the membrane normal and from the
-cytoplasm. The invariant bundle is grey; only the elements carrying the
-measurement are coloured. \textbf{Both distances are annotated with their values
-and with the atom pair each was measured between}, and every value is reproduced
-from the coordinates and checked against the shipped reference table before
-drawing. The soft focus encodes depth only and carries no interpretive meaning.
-\textbf{c}, \textbf{d}, all 167 references carrying the tilt axis and all 70
-carrying NPxxY, by deposited state, with 4LDE and 2RH1 ringed.
-\textit{Filter:} deposited references only; no prediction rows, and no
+\caption{\textbf{The instrument, its calibration, and what was run.}
+\textbf{Top.} \textbf{a}, the two intrinsic measurements and their thresholds,
+with the atom pair for each named once for the whole paper: TM6 tilt as a
+C$\alpha$--C$\alpha$ distance between GPCRdb generic positions 2$\times$46 and
+6$\times$37, called active above 14.932~\AA; and the NPxxY hydroxyl--hydroxyl
+distance between Tyr5.58 and Tyr7.53, called active below 9.080~\AA. A
+prediction is called active only when both fire. \textbf{b}, 167 deposited
+reference entries of known state scored on those axes. \textbf{c}, the
+prediction protocol: 48 receptors $\times$ 2 arms $\times$ 4 backbones $\times$
+25 seeds, with no reference structure supplied. \textbf{d}, disposition of all
+9{,}490 scored rows.
+\textbf{Bottom.} The same two measurements shown on structures whose state is
+already known. \textbf{a}, \textbf{b}, the active reference (4LDE) superposed on
+the inactive reference (2RH1) for $\beta_2$AR, along the membrane normal and
+from the cytoplasm; the invariant bundle is grey and only the elements carrying
+the measurement are coloured. \textbf{Both distances are annotated with their
+values and with the atom pair each was measured between}, every value is
+reproduced from the coordinates and checked against the shipped reference table
+before drawing, and the soft focus encodes depth only. \textbf{c}, \textbf{d},
+all 167 references carrying the tilt axis and all 70 carrying NPxxY, by
+deposited state, with 4LDE and 2RH1 ringed.
+\textit{Filter:} top, none at the panel level, with per-panel $n$ printed in the
+figure; bottom, deposited references only --- no prediction rows, and no
 \texttt{excl} flag applies because those are row-level flags on predictions.}
-\label{fig:ba1a}
+\label{fig:f1}
 \end{figure}
 
 \begin{figure}[htbp]\centering
