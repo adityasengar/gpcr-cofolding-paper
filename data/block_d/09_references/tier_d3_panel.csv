@@ -1,0 +1,38 @@
+# tier_d3_panel: 26 Class A receptors for MSA-depth conformational-generation study
+# committed: 2026-09-06
+# panel_source: refs/tier3_panel.csv (40 Class A panel of record)
+# sealed_excluded: ACM1, ADA2A, ADRB1, CCKAR, DRD3, EDNRA, HRH3, OX2R (per PREREG §14; refs/sealed_active_refs_2026_09_01.csv)
+# candidate_pool: 32 = 40 - 8 sealed
+# family_quotas: aminergic=6, peptide=8, chemokine=3, opioid=3, lipid=2, other=4 (total 26)
+# selection_rule: (1) exclude sealed; (2) stratify to quotas by subfamily; (3) require BOTH active + inactive refs in refs/reference_set.csv (satisfied for all 32 remaining); (4) drop receptors that saturate the quota using deterministic subfamily-diversity picks (drop redundant paralogs first: 5HT5A, ACM4, AA1R, CNR1; drop compute-heavy glycoprotein-hormone big complexes FSHR + LSHR — H100-only constraint) — see docs; (5) discriminator role assigned to receptors overlapping the Tier D1 panel (CNR2 anchor, LPAR1/ADRB2/OPSD mid_range, CXCR4/GHSR/NPY1R confirmatory) plus AA2AR (canonical benchmark) and B1B1U5 (non-mammalian singleton confound); (6) alphabetical tie-break.
+# plan_ref: ~/.claude/plans/twinkling-gathering-scott.md §D3.2 + §D3.5
+# n_panel: 26
+# subfamily_bins: aminergic={5HT1B,5HT2C,ACM2,ADRB2,DRD2,HRH1}; peptide={AGTR1,APJ,EDNRB,GHSR,GRPR,MCHR1,NPY1R,NPY2R}; chemokine={CCR5,CXCR2,CXCR4}; opioid={OPRD,OPRK,OPRX}; lipid={CNR2,LPAR1}; other={AA2AR,B1B1U5,LT4R1,OPSD}
+# quota_note: APJ (apelin, peptide-ligand receptor) promoted from task's "other/sensory/orphan" bin into peptide to fill the peptide quota of 8 (only 7 canonical peptide receptors remain after sealed-exclusion). Rule: "if quota can't be filled, take from closest family with excess" — APJ has peptide chemistry so it is the closest borrow.
+receptor_slug,receptor_class,subfamily,selection_role,msa_depth_prior_note
+5HT1B,A,aminergic,stratified_family,Serotonin Gi paradigm; both refs clean (6G79 active / 4IAR inactive BRIL-fused).
+5HT2C,A,aminergic,stratified_family,Serotonin Gq; active 8DPF is Gq→miniG chimera (α5-CT donor=Gq matches receptor class; note in reference_set curation_note).
+AA2AR,A,other,discriminator,Canonical adenosine benchmark; broadly used as MSA-depth reference receptor in literature.
+ACM2,A,aminergic,stratified_family,Muscarinic Gi; native α5-CT donor active (7T94). Represents muscarinic bin (ACM4 dropped as redundant).
+ADRB2,A,aminergic,discriminator,Paradigmatic β2-adrenergic Gs; D1 mid_range; two-instrument well characterised across backbones.
+AGTR1,A,peptide,stratified_family,AT1 promiscuous Gq/Gi/G12; held-out subset receptor.
+APJ,A,peptide,stratified_family,Apelin Gi with Gq secondary; both refs clean (8XZH/8S4D).
+B1B1U5,A,other,discriminator,JSR1 bistable non-mammalian opsin; taxon confound + intrinsic bistability = high inter-backbone variance prior.
+CCR5,A,chemokine,stratified_family,Chemokine Gi; both refs clean.
+CNR2,A,lipid,discriminator,D1 anchor — only clean G-protein-bound sub-A hit with sustained bistable apo two-instrument population.
+CXCR2,A,chemokine,stratified_family,Chemokine Gi; held-out subset receptor.
+CXCR4,A,chemokine,discriminator,D1 confirmatory — clean G-protein-bound sub-A hit at 4% apo coherent-active; held-out subset.
+DRD2,A,aminergic,stratified_family,Dopamine D2 Gi; held-out subset receptor. Represents dopamine bin (DRD3/DRD5 sealed or absent from panel-of-record).
+EDNRB,A,peptide,stratified_family,ETB Gq/Gi; note 7.53 is Leu not Tyr → NPxxY-OH NaN (secondary axis only).
+GHSR,A,peptide,discriminator,D1 confirmatory — clean G-protein-bound sub-A hit at 2% apo coherent-active; promiscuous Gq/Gi/G12.
+GRPR,A,peptide,stratified_family,BB2 Gq; 7.53 is Leu → NPxxY-OH NaN (secondary axis only).
+HRH1,A,aminergic,stratified_family,H1 histamine Gq; represents histamine bin.
+LPAR1,A,lipid,discriminator,D1 mid_range; lipid Gi/Gq/G12 promiscuous; held-out subset receptor.
+LT4R1,A,other,stratified_family,BLT1 leukotriene Gi/Gq; task-defined "other/sensory/orphan" bin (ligand is a lipid mediator, not a peptide).
+MCHR1,A,peptide,stratified_family,MCH Gi/Gq; held-out subset receptor.
+NPY1R,A,peptide,discriminator,D1 confirmatory — clean G-protein-bound sub-A hit at 2% apo coherent-active.
+NPY2R,A,peptide,stratified_family,Neuropeptide Y Gi; held-out subset receptor.
+OPRD,A,opioid,stratified_family,δ-opioid Gi; both refs clean; represents opioid bin.
+OPRK,A,opioid,stratified_family,κ-opioid Gi; both refs clean.
+OPRX,A,opioid,stratified_family,NOP Gi; both refs clean.
+OPSD,A,other,discriminator,D1 mid_range; bovine rhodopsin Gt (α5-CT peptide only in 4X1H); most-studied conformational-generation reference in the field.

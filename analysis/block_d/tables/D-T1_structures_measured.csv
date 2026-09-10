@@ -1,0 +1,19 @@
+filename,set,tier,receptor,backbone,arm,depth,landed,y558,y753,motif_y753,motif_agrees,npxxy_oh_measured,state_call,dossier_finding
+d1_lpar1_of3_apo.cif,spot_check,d1,lpar1,of3,,,True,225,311,311,True,4.91,active,"LPAR1/OF3 apo: novel active-like fold (91.8% predicate-active, 0.4% sub-A-to-active; helix 60.9%, Rg 27.9 A)"
+d1_cnr2_chai_apo.cif,spot_check,d1,cnr2,chai,,,True,209,299,299,True,2.61,active,CNR2/Chai apo: F5 reference-geometric saturation (100% sub-A to BOTH active AND inactive)
+d1_adrb2_chai_apo.cif,spot_check,d1,adrb2,chai,,,True,219,326,326,True,4.22,active,ADRB2/Chai apo: 100% predicate-active (F1 Chai active-outlier)
+d1_adrb2_boltz_apo.cif,spot_check,d1,adrb2,boltz,,,True,219,326,326,True,11.31,inactive,ADRB2/Boltz apo: 0% predicate-active (Chai contrast; same-receptor per-backbone divergence)
+d1_ghsr_boltz_apo.cif,spot_check,d1,ghsr,boltz,,,True,232,323,323,True,10.09,inactive,GHSR/Boltz apo: 0% predicate-active (F2 3-rec cross-backbone convergent-inactive)
+d2_adrb2_inactive_nb_protenix.cif,spot_check,d2,adrb2,protenix,inactive_nb,,True,219,326,326,True,4.53,active,ADRB2 x inactive_nb x Protenix sample_0: NPxxY-OH 4.53 A (active-like) while inactive-Nb docked (F4 Protenix Nb-B-as-active flagship)
+d2_adrb2_inactive_nb_boltz.cif,spot_check,d2,adrb2,boltz,inactive_nb,,True,219,326,326,True,11.64,inactive,ADRB2 x inactive_nb x Boltz sample_0: NPxxY-OH inactive-like (F3 correct-case)
+d2_oprk_inactive_nb_boltz.cif,spot_check,d2,oprk,boltz,inactive_nb,,True,246,330,330,True,11.27,inactive,OPRK x inactive_nb x Boltz sample_0: 48% inversion stochastic across 50 samples (F3 OPRK unanimous_up)
+d2_acm2_active_nb_chai.cif,spot_check,d2,acm2,chai,active_nb,,True,206,440,440,True,19.12,inactive,ACM2 x active_nb x Chai sample_0: NPxxY-OH 19.1 A (strongly inactive) despite active-Nb docked (F5 Chai receptor-locked)
+d3_protenix_agtr1_depth8.cif,spot_check,d3,agtr1,protenix,,8,True,215,302,302,True,3.56,active,"AGTR1/Protenix depth 8: predicate clears (NPxxY 11 -> 3.4 A, tilt 11 -> 17 A) but pocket_ca_rmsd_active WORSENS (0.76 -> 1.24 A); 7TM Ca moves 15.8 A vs full (GATE-3 degradation flagship)"
+d3_boltz_opsd_depth8.cif,spot_check,d3,opsd,boltz,,8,True,223,306,306,True,4.96,active,OPSD/Boltz depth 8: pocket_ca_rmsd_active 1.25 -> 0.41 A (IMPROVES; GATE-3 clean-lever counterpoint)
+random_01_d1_opsd_apo_protenix.cif,random,d1,opsd,protenix,,,True,223,306,306,True,14.07,inactive,
+random_02_d3_5ht1b_depth32_boltz.cif,random,d3,5ht1b,boltz,,32,True,228,369,369,True,12.4,inactive,
+random_03_d1_npy1r_apo_of3.cif,random,d1,npy1r,of3,,,True,231,320,320,True,12.06,inactive,
+random_04_d1_cnr2_apo_boltz.cif,random,d1,cnr2,boltz,,,True,209,299,299,True,9.95,inactive,
+random_05_d3_b1b1u5_depth8_boltz.cif,random,d3,b1b1u5,boltz,,8,False,,,,,,,
+random_06_d3_apj_depth32_boltz.cif,random,d3,apj,boltz,,32,False,,,,,,,
+random_07_d3_npy1r_apo_chai.cif,random,d3,npy1r,chai,,,False,,,,,,,

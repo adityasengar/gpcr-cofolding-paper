@@ -670,3 +670,115 @@ status  ready — FULL-DATA PANEL, the only one in Block C. It exists to prevent
         peptide ligands (1.52% vs 66.53% off-site in the SAME cells). Chai
         carries a residual far mode of 175 rows beyond 60 A, drawn not trimmed
 ```
+
+## Block D
+
+Panels built from `data/block_d/`. The loader is `figures/block_d/bddata.py`,
+and **every Block D panel must load through it**.
+
+**The rule specific to this block, and it is the whole of it: Block D shipped no
+row-level data.** All three corpora its claim sheet names — 42,180 predictions —
+are absent from the bundle. Five CSVs ship and every one is panel or reference
+metadata. So `bddata` is not a filter, it is a **transcription of record**: each
+table is typed in once, beside the document and section it came from, and no
+panel may hold its own copy of a number. The one exception is the structures,
+which are measured from coordinates rather than transcribed.
+
+**Three traps, encoded rather than documented.**
+
+1. **The CI method is not uniform across tiers.** D3 (26 receptors, 22 clusters)
+   uses cluster-boot. D1 (7, 7) and D2 (4, 4) are cluster-boot-*degenerate* —
+   one receptor per cluster, so the two bootstraps are the same computation —
+   and use receptor-boot. Ask `bddata.ci_method(tier)`; it returns the method
+   *and* the reason, and both belong in the caption.
+2. **The D3 slope unit is `%/ln(depth)`.** Under log10 the same fits read −3.877
+   for Boltz rather than −1.684. `bddata.SLOPE_UNIT` is the only string
+   available for that axis.
+3. **OpenFold-3 and Protenix are not levers.** They carry the two largest slopes
+   and the two weakest claims. `bddata.MECHANISM` holds the four verdicts and
+   any panel with a backbone axis must annotate from it.
+
+**Never pool across backbones.** There is no pooling helper in `bddata`. The
+original D1 headline was a backbone-averaged apo fraction and was withdrawn
+(W-D-2) because the underlying behaviour is bimodal: on ADRB2, Chai calls 100%
+of 500 apo samples active and Boltz calls 0%, and the average of those describes
+nothing that happened.
+
+### BD-1 — the unsteered apo landscape is receptor- and backbone-specific
+```
+claim   SC-D-1, SC-D-11
+shows   a, b: 7 receptors x 4 backbones on the predicate and on sub-A-to-active,
+        apo only, 500 samples/cell; c: the four active-outlier cells drawn twice,
+        once on D1 and once on Block A's independent corpus at n=25
+data    PARTA_D1.md section 1 (transcribed); the five ringed cells carry an
+        NPxxY distance measured here from the shipped coordinates
+build   cd figures/block_d/panels && python3 bd1_apo_landscape.py
+status  ready — SUMMARY, and it says so. The cross-tier panel c is the strongest
+        result in the block because it is the only one that survives a change of
+        corpus. Panel a rings ADRB2 on Chai (4.22 A) against ADRB2 on Boltz
+        (11.31 A): same receptor, opposite call, measured not transcribed
+```
+
+### BD-2 — steering works in the active direction and not the other
+```
+claim   SC-D-4, SC-D-5, SC-D-6, SC-D-7
+shows   a: ACM2 apo -> active-Nb per backbone, with the Ga positive-control band;
+        b: the two inactive-Nb receptors, apo -> inactive-Nb, with exact binomial
+        intervals
+data    PARTA_D2.md F1/F2/F3, n=50 per cell. THE INTERVALS ARE RECOMPUTED — all
+        six Clopper-Pearson intervals reproduce from k and n to the stated decimal
+build   cd figures/block_d/panels && python3 bd2_direction_asymmetry.py
+status  ready — THE CAPTION CARRIES C-D-12 AND THAT IS LOAD-BEARING. All four
+        nanobody anchors predate every datable cutoff, so panel b cannot separate
+        "cannot steer inactive" from "cannot steer inactive on complexes already
+        seen". Two things it must not say, and does not: the OPRK x Boltz cell is
+        48% [33.7, 62.6] at n=50, which supports "approaches half" and not "a
+        majority invert"; and 14 of 16 control cells clear 96%, so the control
+        works and OF3 is the exception
+```
+
+### BD-3 — MSA depth moves the predicate for two different reasons
+```
+claim   SC-D-8; binding on Flag D-2 and Flag D-3
+shows   a-d: one panel per backbone, predicate-active and sub-A-to-active against
+        depth on a log axis, the two degradation panels shaded; e: matched-seed
+        7TM Ca deviation; f: the sub-A and pLDDT deltas
+data    PARTA_D3.md section 1 and GATE_3 section 1 (transcribed)
+build   cd figures/block_d/panels && python3 bd3_depth_ladder.py
+status  ready — the figure IS the gap between the two lines. Where they track,
+        depth steers; where they diverge, depth degrades and the coarse predicate
+        accepts it. Slopes are printed in %/ln(depth); Chai's crosses zero and is
+        printed grey. The four point estimates were refit independently by GATE-2
+        and reproduce exactly, but their intervals rest on draws that were not
+        shipped
+```
+
+### BD-4 — what the directed-nanobody models actually built
+```
+claim   SC-D-7, plus the F3 and F5 contrast cases
+shows   four D2 structures on the NPxxY axis against the 9.08 A threshold, each
+        with its one-line verdict
+data    10_structures/spot_check/, MEASURED from coordinates by
+        analysis/block_d/cifmeasure.py — nothing transcribed
+build   cd figures/block_d/panels && python3 bd4_nb_structures.py
+status  ready — NOT a render, deliberately: four publication renders under
+        RENDER_CONVENTIONS are the figures session's work. What this carries is
+        the evidence, which is the number. Selection rule stated on the panel:
+        these are the pipeline's hand-picked illustrations, one sample each, not
+        a draw, and no rate may be read from them. Row 3 is the honest one — the
+        OPRK cell inverts on 48% of samples and this file is one that did not
+```
+
+### BD-5 — the same predicate call, reached two opposite ways
+```
+claim   SC-D-12; binding on Flag D-6
+shows   Boltz/OPSD against Protenix/AGTR1, full depth -> depth 8, on the pocket
+        axis (which disagrees) and the NPxxY axis (which agrees)
+data    GATE_3 cell medians over 50 samples; the shipped single structure for
+        each cell is plotted SEPARATELY, measured here
+build   cd figures/block_d/panels && python3 bd5_lever_vs_degradation.py
+status  ready — the clearest single argument in the block, and it needs no
+        statistics. A one-sample value and a 50-sample median are different
+        objects and are drawn apart on purpose: confusing them produced a phantom
+        discrepancy in our own first checker (D-D-4)
+```

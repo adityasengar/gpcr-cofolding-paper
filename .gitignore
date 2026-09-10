@@ -60,3 +60,11 @@ data/block_b_structures/**/*.cif
 block_c_figure_data.zip
 block_c_structures.zip
 data/block_c/13_structures/**/*.cif
+
+# Block D, landed 2026-09-10. Coordinates excluded like every other block's:
+# 4.4 MB, and every number we take from them is recorded in
+# analysis/block_d/tables/D-T1_structures_measured.csv and
+# analysis/block_d/cif_measurements.json, both of which ARE committed. The
+# manifest is committed too, so the files can be re-pulled and re-measured.
+block_d_figure_data.zip
+data/block_d/10_structures/**/*.cif

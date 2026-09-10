@@ -188,6 +188,16 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 | 157 | S170 | Block A, verify_claims check CAP9.cognate | 2,611 firing neither predicate, 577 firing both. Cognate: 157 and 3,162. |
 | 3,162 | S170 | Block A, verify_claims check CAP10.cognate | 2,611 firing neither predicate, 577 firing both. Cognate: 157 and 3,162. |
 | 610 | S88 | Block A, verify_claims check CAP11 | Note the denominator: of 4,866 predicate-active rows, 610 carry no active |
+| 61.8 | R521 | Block D, verify_claims check D16 | (95\% CI $[61.8, 86.9]$) --- and the shipped structure shows why that is not a |
+| 86.9 | R521 | Block D, verify_claims check D16 | (95\% CI $[61.8, 86.9]$) --- and the shipped structure shows why that is not a |
+| 4.53 | R524 | Block D, verify_claims check D22 | 4.53~\AA{}, which we measured from the coordinates \textbf{[FIG:nb-structures]}. |
+| 33.7 | R531 | Block D, verify_claims check D15 | and at 50 samples that interval is $[33.7, 62.6]$.} And the whole of this |
+| 62.6 | R531 | Block D, verify_claims check D15 | and at 50 samples that interval is $[33.7, 62.6]$.} And the whole of this |
+| 14,000 | M455 | Block D, verify_claims check D09 | purpose, and it does so three ways. \textbf{D1} runs 14,000 predictions on |
+| 2,370 | M457 | Block D, verify_claims check D11c | and asks what the models do when nothing is supplied. \textbf{D2} runs 2,370 |
+| 22 | M466 | Block D, verify_claims check D07 | arithmetic rather than preference.} D3's 26 receptors resolve into 22 paralog |
+| 22 | M472 | Block D, verify_claims check D07 | 22, 7 and 4 all reproduce from the shipped paralogy map. |
+| 2.303 | M477 | Block D, verify_claims check D21 | 2.303. The unit is written \%/ln(depth) everywhere it appears. |
 ## NOT covered by any automated check
 
 Each of these needs one of three things: a new check in the relevant
@@ -212,6 +222,52 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 100 | R468 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 91.8 | R470 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 0.2 | R470 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 100 | R485 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 112 | R491 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 6.6 | R496 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 100 | R498 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 96 | R508 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 100 | R509 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 58 | R510 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 100 | R514 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 82 | R514 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 100 | R515 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 76 | R520 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 125 | R522 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 4.21 | R542 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 11.16 | R542 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 12.88 | R543 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 1.68 | R549 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 2.69 | R550 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 0.81 | R550 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 0.82 | R550 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 2.38 | R550 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 2.73 | R551 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 4.37 | R551 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 1.15 | R551 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 2.96 | R551 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 4.68 | R552 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 1.58 | R552 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 8.7 | R560 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 20.9 | R561 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 8.7 | R561 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 1.25 | R572 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 10.93 | R573 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 3.40 | R574 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 11.19 | R574 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 16.78 | R574 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 0.76 | R575 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 1.24 | R575 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 38.8 | R600 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 10.0 | R601 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 42,180 | R611 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 25,810 | M461 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 128 | M462 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 4096 | M476 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
+| 42,180 | M496 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
 | 4,866 | S88 | DOES NOT REPRODUCE -- unsourced, recorded as D-A-24 and check CAP12 |
 | 4,256 | S87 | DOES NOT REPRODUCE -- 4,866 minus 610; unsourced, D-A-24 |
 | 84 | F47 | exclusion-sweep points; sweep table not shipped at row level |

@@ -1,0 +1,708 @@
+[
+ {
+  "id": "D01",
+  "kind": "RECOMPUTED",
+  "what": "D1 panel is 7 receptors",
+  "got": 7,
+  "want": 7,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D02",
+  "kind": "RECOMPUTED",
+  "what": "D2 panel is 4 receptors",
+  "got": 4,
+  "want": 4,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D03",
+  "kind": "RECOMPUTED",
+  "what": "D3 panel is 26 receptors",
+  "got": 26,
+  "want": 26,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D04",
+  "kind": "RECOMPUTED",
+  "what": "paralogy map covers 40 receptors",
+  "got": 40,
+  "want": 40,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D05",
+  "kind": "RECOMPUTED",
+  "what": "paralogy map holds 26 clusters",
+  "got": 26,
+  "want": 26,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D06",
+  "kind": "RECOMPUTED",
+  "what": "every D3 receptor is in the paralogy map",
+  "got": 26,
+  "want": 26,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D07",
+  "kind": "RECOMPUTED",
+  "what": "D3's 26 receptors fall in 22 clusters (Flag D-1)",
+  "got": 22,
+  "want": 22,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D08.D1",
+  "kind": "RECOMPUTED",
+  "what": "D1 is cluster-boot-degenerate: 7 receptors in 7 clusters",
+  "got": 7,
+  "want": 7,
+  "ok": true,
+  "note": "1 receptor per cluster, so cluster-boot == receptor-boot"
+ },
+ {
+  "id": "D08.D2",
+  "kind": "RECOMPUTED",
+  "what": "D2 is cluster-boot-degenerate: 4 receptors in 4 clusters",
+  "got": 4,
+  "want": 4,
+  "ok": true,
+  "note": "1 receptor per cluster, so cluster-boot == receptor-boot"
+ },
+ {
+  "id": "D09",
+  "kind": "RECOMPUTED",
+  "what": "D1 = 7 rec x 4 bb x 500 samples",
+  "got": 14000,
+  "want": 14000,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D10",
+  "kind": "RECOMPUTED",
+  "what": "D3 nominal = 26 x 4 x 5 depths x 50",
+  "got": 26000,
+  "want": 26000,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D11",
+  "kind": "RECOMPUTED",
+  "what": "D3 shipped 25,810, i.e. 190 short of nominal",
+  "got": 190,
+  "want": 190,
+  "ok": true,
+  "note": "C-D-6 records a 190-prediction Chai/OF3 shortfall"
+ },
+ {
+  "id": "D11b",
+  "kind": "RECOMPUTED",
+  "what": "D2 nominal cells = 13 arms x 4 backbones",
+  "got": 52,
+  "want": 52,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D11c",
+  "kind": "RECOMPUTED",
+  "what": "D2 total 2,370 = 44 cells at n=50 PLUS the one 170-prediction cell",
+  "got": 2370,
+  "want": 2370,
+  "ok": true,
+  "note": "C-D-5 records AGTR1 x active_nb x OF3 landing 170. That makes 45 populated cells, while PARTA_D2 section 2 says 44 -- see D-D-3"
+ },
+ {
+  "id": "D12",
+  "kind": "RECOMPUTED",
+  "what": "four nanobody anchor PDBs",
+  "got": 4,
+  "want": 4,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D13",
+  "kind": "RECOMPUTED",
+  "what": "C-D-12: no Nb anchor postdates any dated cutoff",
+  "got": 0,
+  "want": 0,
+  "ok": true,
+  "note": "OF3's cutoff is TBD in the shipped table, so it cannot be tested"
+ },
+ {
+  "id": "D14",
+  "kind": "RECOMPUTED",
+  "what": "the four anchor PDBs are the ones named in SC-D-6",
+  "got": [
+   "4MQS",
+   "5JQH",
+   "6OS2",
+   "6VI4"
+  ],
+  "want": [
+   "4MQS",
+   "5JQH",
+   "6OS2",
+   "6VI4"
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D15",
+  "kind": "RECOMPUTED",
+  "what": "Clopper-Pearson 95% CI, OPRK x Boltz inactive_nb 48% (SC-D-6 flagship)",
+  "got": [
+   33.7,
+   62.6
+  ],
+  "want": [
+   33.7,
+   62.6
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D16",
+  "kind": "RECOMPUTED",
+  "what": "Clopper-Pearson 95% CI, ADRB2 x Protenix inactive_nb 76% (SC-D-7)",
+  "got": [
+   61.8,
+   86.9
+  ],
+  "want": [
+   61.8,
+   86.9
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D17",
+  "kind": "RECOMPUTED",
+  "what": "Clopper-Pearson 95% CI, a 0/50 cell",
+  "got": [
+   0.0,
+   7.1
+  ],
+  "want": [
+   0.0,
+   7.1
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D18",
+  "kind": "RECOMPUTED",
+  "what": "Clopper-Pearson 95% CI, OPRK x Chai apo 74%",
+  "got": [
+   59.7,
+   85.4
+  ],
+  "want": [
+   59.7,
+   85.4
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D19",
+  "kind": "RECOMPUTED",
+  "what": "Clopper-Pearson 95% CI, ACM2 x OF3 cognate 58% (SC-D-4 miss)",
+  "got": [
+   43.2,
+   71.8
+  ],
+  "want": [
+   43.2,
+   71.8
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D20",
+  "kind": "RECOMPUTED",
+  "what": "Clopper-Pearson 95% CI, OPRK x OF3 cognate 36% (SC-D-4 miss)",
+  "got": [
+   22.9,
+   50.8
+  ],
+  "want": [
+   22.9,
+   50.8
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D21",
+  "kind": "RECOMPUTED",
+  "what": "log10 slope / ln slope == ln(10) (Flag D-2)",
+  "got": 2.302,
+  "want": 2.303,
+  "ok": true,
+  "note": "GATE-2 table: Boltz -3.877 %/log10 against -1.684 %/ln"
+ },
+ {
+  "id": "D22",
+  "kind": "RECOMPUTED",
+  "what": "SC-D-7 flagship: Protenix builds an active pocket under inactive-Nb",
+  "got": 4.53,
+  "want": 4.53,
+  "ok": true,
+  "note": "measured from coordinates by cifmeasure.py"
+ },
+ {
+  "id": "D23",
+  "kind": "RECOMPUTED",
+  "what": "F5 Chai receptor-locked: active-Nb docked, pocket stays inactive",
+  "got": 19.12,
+  "want": 19.1,
+  "ok": true,
+  "note": "measured from coordinates by cifmeasure.py"
+ },
+ {
+  "id": "D25.1",
+  "kind": "RECOMPUTED",
+  "what": "NPxxY call on d1_adrb2_boltz_apo -- same receptor, Boltz 0%",
+  "got": "inactive",
+  "want": "inactive",
+  "ok": true,
+  "note": "d(OH,OH) = 11.31 A against the 9.08 A threshold"
+ },
+ {
+  "id": "D25.2",
+  "kind": "RECOMPUTED",
+  "what": "NPxxY call on d1_adrb2_chai_apo -- SC-D-1 Chai outlier, ADRB2 100%",
+  "got": "active",
+  "want": "active",
+  "ok": true,
+  "note": "d(OH,OH) = 4.22 A against the 9.08 A threshold"
+ },
+ {
+  "id": "D25.3",
+  "kind": "RECOMPUTED",
+  "what": "NPxxY call on d1_cnr2_chai_apo -- SC-D-1 Chai outlier, CNR2",
+  "got": "active",
+  "want": "active",
+  "ok": true,
+  "note": "d(OH,OH) = 2.61 A against the 9.08 A threshold"
+ },
+ {
+  "id": "D25.4",
+  "kind": "RECOMPUTED",
+  "what": "NPxxY call on d1_ghsr_boltz_apo -- SC-D-2 convergent-inactive",
+  "got": "inactive",
+  "want": "inactive",
+  "ok": true,
+  "note": "d(OH,OH) = 10.09 A against the 9.08 A threshold"
+ },
+ {
+  "id": "D25.5",
+  "kind": "RECOMPUTED",
+  "what": "NPxxY call on d1_lpar1_of3_apo -- SC-D-12 coherent non-reference fold",
+  "got": "active",
+  "want": "active",
+  "ok": true,
+  "note": "d(OH,OH) = 4.91 A against the 9.08 A threshold"
+ },
+ {
+  "id": "D25.6",
+  "kind": "RECOMPUTED",
+  "what": "NPxxY call on d2_adrb2_inactive_nb_boltz -- SC-D-6 correct case",
+  "got": "inactive",
+  "want": "inactive",
+  "ok": true,
+  "note": "d(OH,OH) = 11.64 A against the 9.08 A threshold"
+ },
+ {
+  "id": "D25.7",
+  "kind": "RECOMPUTED",
+  "what": "NPxxY call on d3_boltz_opsd_depth8 -- SC-D-12 clean-lever counterpoint",
+  "got": "active",
+  "want": "active",
+  "ok": true,
+  "note": "d(OH,OH) = 4.96 A against the 9.08 A threshold"
+ },
+ {
+  "id": "D27.1",
+  "kind": "RECOMPUTED",
+  "what": "PARTA_D1 s4 NPxxY-OH for d1_adrb2_boltz_apo",
+  "got": 11.31,
+  "want": 11.58,
+  "ok": false,
+  "note": "no state call changes; see D-D-8"
+ },
+ {
+  "id": "D27.2",
+  "kind": "RECOMPUTED",
+  "what": "PARTA_D1 s4 NPxxY-OH for d1_adrb2_chai_apo",
+  "got": 4.22,
+  "want": 4.19,
+  "ok": false,
+  "note": "no state call changes; see D-D-8"
+ },
+ {
+  "id": "D27.3",
+  "kind": "RECOMPUTED",
+  "what": "PARTA_D1 s4 NPxxY-OH for d1_cnr2_chai_apo",
+  "got": 2.61,
+  "want": 2.25,
+  "ok": false,
+  "note": "no state call changes; see D-D-8"
+ },
+ {
+  "id": "D27.4",
+  "kind": "RECOMPUTED",
+  "what": "PARTA_D1 s4 NPxxY-OH for d1_ghsr_boltz_apo",
+  "got": 10.09,
+  "want": 10.03,
+  "ok": false,
+  "note": "no state call changes; see D-D-8"
+ },
+ {
+  "id": "D27.5",
+  "kind": "RECOMPUTED",
+  "what": "PARTA_D1 s4 NPxxY-OH for d1_lpar1_of3_apo",
+  "got": 4.91,
+  "want": 5.42,
+  "ok": false,
+  "note": "no state call changes; see D-D-8"
+ },
+ {
+  "id": "D24",
+  "kind": "RECOMPUTED",
+  "what": "AGTR1 depth-8 shipped sample is active-side of the 9.08 A threshold",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "3.56 A measured here; GATE-3's 3.40 A is the cell median over 50"
+ },
+ {
+  "id": "D26",
+  "kind": "RECOMPUTED",
+  "what": "all 15 structures: tabled 7.53 agrees with the file's own NPxxY motif",
+  "got": 15,
+  "want": 15,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D30",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-4 and Flag D-9 both say 14/16, not 15/16",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D31",
+  "kind": "CONSISTENCY",
+  "what": "the two SC-D-4 misses are the two OF3 cells",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D32.Boltz",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-6 and Flag D-10 agree on OPRK Boltz delta +44",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D32.Chai",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-6 and Flag D-10 agree on OPRK Chai delta +8",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D32.OF3",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-6 and Flag D-10 agree on OPRK OF3 delta +10",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D32.Protenix",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-6 and Flag D-10 agree on OPRK Protenix delta +6",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D33.Boltz",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-8 slope for Boltz matches GATE-2's recomputation",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D33.Chai",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-8 slope for Chai matches GATE-2's recomputation",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D33.OF3",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-8 slope for OF3 matches GATE-2's recomputation",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D33.Protenix",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-8 slope for Protenix matches GATE-2's recomputation",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D34",
+  "kind": "CONSISTENCY",
+  "what": "Flag D-3 and SC-D-8 both mark Chai UNSIGNED",
+  "got": [
+   true,
+   true
+  ],
+  "want": [
+   true,
+   true
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D35",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-6's flagship CI matches Part A's OPRK x Boltz row",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D36",
+  "kind": "CONSISTENCY",
+  "what": "SC-D-7's 76% CI matches Part A's ADRB2 x Protenix",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D37",
+  "kind": "CONSISTENCY",
+  "what": "Flag D-7 and the claim sheet name the same scorer of record",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-1",
+  "kind": "PROSE-ONLY",
+  "what": "per-cell predicate-active fractions on all 7 D1 receptors (Chai deltas 98.4/60.2/98.0, OF3 91.6)",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D1 rows.csv"
+ },
+ {
+  "id": "SC-D-2",
+  "kind": "PROSE-ONLY",
+  "what": "the three convergent-inactive receptors at max 6.6% on any cell",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D1 rows.csv"
+ },
+ {
+  "id": "SC-D-3",
+  "kind": "PROSE-ONLY",
+  "what": "CNR2 100% sub-A to BOTH references on all 4 backbones",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D1 rows.csv + the reference pocket-Ca table"
+ },
+ {
+  "id": "SC-D-5",
+  "kind": "PROSE-ONLY",
+  "what": "the ACM2 apo->active_nb deltas +58/+70/+100",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D2 rows.csv"
+ },
+ {
+  "id": "SC-D-8b",
+  "kind": "PROSE-ONLY",
+  "what": "sub-A-to-active deltas full->depth-8 (Boltz +8.7, OF3 -20.9, Protenix -8.7)",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D3 rows.csv"
+ },
+ {
+  "id": "SC-D-8d",
+  "kind": "PROSE-ONLY",
+  "what": "matched-seed 7TM Ca deviation 1-4 A vs 10-14 vs 15-20",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D3 rows.csv + the matched-seed pairing"
+ },
+ {
+  "id": "SC-D-8e",
+  "kind": "PROSE-ONLY",
+  "what": "pLDDT vs ln(depth) slopes +0.05/+0.19/+0.68/+0.58",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D3 rows.csv"
+ },
+ {
+  "id": "SC-D-9",
+  "kind": "PROSE-ONLY",
+  "what": "the 5 x 6 cross-backbone Kendall tau concordance table",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D3 rows.csv"
+ },
+ {
+  "id": "SC-D-10",
+  "kind": "PROSE-ONLY",
+  "what": "OPSD x Boltz cross-tier divergence, 38.8% vs 10.0%",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D1 and D3 rows.csv"
+ },
+ {
+  "id": "SC-D-11",
+  "kind": "PROSE-ONLY",
+  "what": "the Block A cross-tier reproduction at n=25/cell",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: Block A rows joined to the D1 outlier cells"
+ },
+ {
+  "id": "SC-D-12",
+  "kind": "PROSE-ONLY",
+  "what": "LPAR1/OF3 helix 60.9%, Rg 27.9 A; AGTR1 pocket-Ca 0.76 -> worse",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: D1 and D3 rows.csv"
+ },
+ {
+  "id": "SC-D-8a",
+  "kind": "PROSE-ONLY",
+  "what": "the cluster-boot CIs on all four D3 slopes",
+  "got": "no file",
+  "want": "no file",
+  "ok": true,
+  "note": "would need: the bootstrap draws, which are not shipped either"
+ }
+]

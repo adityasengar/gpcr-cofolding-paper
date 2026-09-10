@@ -459,3 +459,169 @@ although routing labels differ across ligand roles, the reference PDB they
 resolve to is identical for every receptor, so there is no reference-identity
 information for a classifier to exploit. We did not search for leakage and fail
 to find it; the design does not admit it.
+
+\subsection*{Unsteered, the models are not bistable --- they are receptor- and backbone-specific}
+
+Asked to fold a receptor with nothing supplied, and sampled 500 times per cell
+rather than 25, the four backbones do not behave like a system with two
+accessible basins. They behave like four different systems
+\textbf{[FIG:apo-landscape]}. On $\beta_2$AR, Chai-1 calls 100\% of 500 apo
+samples active and Boltz-2 calls 0\%; on LPAR$_1$ the arrangement inverts and
+OpenFold-3 calls 91.8\% active while every other backbone is at or below 0.2\%.
+Four cells clear a $+50$ percentage-point margin over the best other backbone on
+the same receptor: Chai-1 on CNR2, rhodopsin and $\beta_2$AR, and OpenFold-3 on
+LPAR$_1$.
+
+\textbf{Those four cells reproduce on an independent corpus.} Scored on the
+first campaign's apo rows at 25 samples per cell --- different predictions,
+different run, same instrument --- all four still clear $+50$ points. This is
+the strongest single result in the campaign, because it is the only one that
+survives a change of corpus, and it says the pattern is a property of a
+particular model on a particular receptor rather than of the panel it was
+measured on.
+
+\textbf{The claim this campaign set out to make was withdrawn, and the
+withdrawal is the methodological point.} An earlier reading of the same tier
+reported spontaneous apo bistability from backbone-averaged fractions at 100
+samples per cell. Averaged over the four backbones, $\beta_2$AR sits near 50\%
+active, which sounds like a receptor sampling two states and is instead two
+backbones disagreeing completely. Raising the sample budget fivefold and
+refusing to pool across backbones removed the finding. A pre-registered
+secondary claim of two continuous basins was dropped on the same evidence: a
+dip test fires on 2 of 112 cells, both rhodopsin $\times$ OpenFold-3, which is
+a single-cell observation and not a panel-scale one. \textbf{No figure or
+sentence in this work pools across backbones}, and this is why.
+
+Three receptors --- CXCR4, GHSR and NPY$_1$R --- converge inactive on all four
+backbones, never exceeding 6.6\% on any cell. One further receptor is worth
+naming because it explains an artifact in the ligand-class campaign: on CNR2,
+100\% of samples fall within 1~\AA{} of \emph{both} the active and the inactive
+reference on all four backbones. The two deposited CNR2 structures are
+pocket-C$\alpha$ close to each other, so that axis cannot discriminate on this
+receptor at all, and the two-instrument predicate is the only instrument here
+that can.
+
+\subsection*{Steering works in one direction and not the other}
+
+Supplying a partner that should drive the receptor active does exactly that
+\textbf{[FIG:direction-asymmetry]}. The cognate G$\alpha$ positive control
+reaches at least 96\% predicate-active on \textbf{14 of 16} receptor $\times$
+backbone cells; Boltz-2, Chai-1 and Protenix2 reach 100\% on all four of their
+cells, and both misses are OpenFold-3 (58\% on M$_2$, 36\% on the
+$\kappa$-opioid receptor). An active-directing nanobody reproduces that effect
+on three backbones of four: on M$_2$, the cleanest per-receptor test because
+AT$_1$R's apo state is already active-biased, adding the nanobody moves Boltz-2
+from 42\% to 100\%, OpenFold-3 from 12\% to 82\% and Protenix2 from 0\% to
+100\%. Chai-1 does not move at all.
+
+\textbf{The inactive direction does not work, and the way it fails is
+informative.} On the two receptors carrying an inactive-nanobody arm, no
+backbone reliably steers inactive. Three of the four $\beta_2$AR cells do not
+move; the fourth, Protenix2, inverts to 76\% active
+(95\% CI $[61.8, 86.9]$) --- and the shipped structure shows why that is not a
+scoring artifact: the inactive nanobody is correctly seated as a 125-residue
+chain B, and the receptor underneath it has an NPxxY hydroxyl separation of
+4.53~\AA{}, which we measured from the coordinates \textbf{[FIG:nb-structures]}.
+The model built an active receptor and docked an inactive-state binder onto it.
+On the $\kappa$-opioid receptor all four backbones move \emph{toward} active
+under a nanobody that locks the inactive state (Boltz-2 $+44$, Chai-1 $+8$,
+OpenFold-3 $+10$, Protenix2 $+6$) --- a systematic prior that reads a nanobody
+in chain B as an activating partner, not random noise. \textbf{The flagship cell
+supports "approaches half" and not "a majority": Boltz-2 goes from 4\% to 48\%,
+and at 50 samples that interval is $[33.7, 62.6]$.} And the whole of this
+paragraph is bounded by a confound the campaign could not close:
+\textbf{all four nanobody anchor structures were deposited between 2013 and 2020
+and predate every training cutoff we could date.} Whether directed inactive
+generation is unachievable, or merely unachievable for complexes these models
+have already memorised, is not decided here. A search for a post-cutoff
+inactive-nanobody complex was attempted and documented; it did not produce a
+usable candidate, and it was closed rather than answered.
+
+The instrument is not what failed. The two-instrument predicate was calibrated
+on the nanobody anchor structures themselves and behaves correctly on all of
+them: 4.21~\AA{} and passing on active M$_2$, 11.16~\AA{} and failing on
+inactive $\beta_2$AR, 12.88~\AA{} and failing on the inactive $\kappa$-opioid
+receptor.
+
+\subsection*{Starving the MSA moves the predicate on all four backbones, for two different reasons}
+
+Reducing MSA depth raises the predicate-active fraction on every backbone, and
+the slopes are the largest effects in the campaign: $-1.68$
+(Boltz-2, 95\% CI $[-2.69, -0.81]$), $-0.82$ (Chai-1, $[-2.38, +0.36]$),
+$-2.73$ (OpenFold-3, $[-4.37, -1.15]$) and $-2.96$ (Protenix2,
+$[-4.68, -1.58]$) percentage points per e-fold of depth. Read as a table of
+slopes, the two strongest levers are OpenFold-3 and Protenix2.
+\textbf{Read against a second axis, they are the two that are not levers at
+all} \textbf{[FIG:depth-ladder]}.
+
+\textbf{Boltz-2 is a clean lever; Chai-1 is a muted one; OpenFold-3 leans to
+degradation and Protenix2 is mixed and receptor-dependent.} Four independent
+lines separate them. The predicate-active fraction rises on all four. The
+fraction of samples within 1~\AA{} of the active reference rises 8.7 points on
+Boltz-2 and \emph{falls} 20.9 points on OpenFold-3 and 8.7 on Protenix2.
+Matched-seed backbone deviation between full depth and depth 8 stays at
+1--4~\AA{} on Boltz-2 and reaches 10--14~\AA{} on OpenFold-3 and 16--20~\AA{} on
+Protenix2. And median confidence tracks depth most strongly on exactly the two
+backbones whose pockets move away from the active reference. Chai-1's slope,
+finally, crosses zero under the cluster bootstrap: its point estimate is
+negative and its interval is not, so it is reported as a point estimate and
+nothing is built on it.
+
+Two cells make the distinction concrete \textbf{[FIG:lever-degradation]}. On
+Boltz-2 with rhodopsin, dropping to depth 8 fires the predicate and moves the
+pocket \emph{toward} the active reference, 1.25~\AA{} to 0.41~\AA{}. On
+Protenix2 with AT$_1$R the predicate fires identically --- NPxxY from 10.93 to
+3.40~\AA{}, tilt from 11.19 to 16.78~\AA{} --- while the pocket moves
+\emph{away}, 0.76~\AA{} to 1.24~\AA{}, having started closer to active than it
+ends. A binary predicate reports these two as the same result. They are not the
+same result, and the earlier reading of this tier, which reported MSA depth as a
+lever on all four backbones, was withdrawn on precisely this evidence.
+
+\textbf{This bears on a published claim, and the relationship is not simple.}
+\citet{xing2025purified} report that ``the successful sampling of alternative
+states depends not on MSA depth but on sequence purity'' \citep[p.~3]{xing2025purified}.
+On four AF3-lineage co-folding models, with a fixed two-state predicate and 26
+receptors, we find depth \emph{does} move the state a model reports --- and that
+on half the backbones tested the movement is degradation rather than steering.
+Those two findings are compatible, and the second axis is what reconciles them:
+if depth is not a mechanism for reaching a genuine alternative state, then a
+depth effect on a coarse predicate is exactly what one should expect to see, and
+only a pocket-level measurement separates the two. We read our result as a
+refinement of theirs rather than a contradiction of it, and the one backbone
+where depth survives that second axis --- Boltz-2 --- is the only place we would
+defend depth as a lever.
+
+We also do not claim the design as novel. MSA manipulation has been applied to
+this architecture family \citep{kalakoti2026afsample3} and co-input partners have
+been supplied to it \citep{chiesa2025templatebias,zhang2026generalization}, and
+one recent method combines MSA clustering with co-folded binders directly
+\citep{cheng2026af3cluster}. What this tier does not do is cross the two: depth
+is varied in the apo arm only, so MSA depth and partner presence are never
+varied together inside one model here either.
+
+\subsection*{What the directed-generation campaign does not establish}
+
+Four limits bound everything above. \textbf{The memorization confound is the
+largest}: every nanobody anchor predates every datable training cutoff, so the
+negative result in the inactive direction is not separable from an availability
+effect, and OpenFold-3's cutoff we could not date at all. \textbf{One
+cross-corpus disagreement is unresolved}: rhodopsin on Boltz-2 reads 38.8\% at
+500 samples in the deep-apo tier and 10.0\% at 50 samples in the depth tier's
+full-depth rung, a three-sigma gap between two cells that share a scorer, and we
+flag it rather than retract either. \textbf{Chai-1's depth slope is unsigned},
+as above. And \textbf{the directed tier rests on four receptors} --- four
+paralog clusters, at which point a cluster bootstrap adds nothing to a receptor
+bootstrap, and the panel is too small for the negative result to be more than
+consistent with a general limitation.
+
+To that we add a limit of our own. This campaign delivered its claim sheet, its
+caveats, its withdrawal records and its audit reports, and \textbf{none of the
+three row-level tables those documents name}. Its 42{,}180 predictions are not
+in the bundle we received. Every panel composition, every cluster count, every
+exact binomial interval quoted above, and every structural distance we report
+was recomputed here; \textbf{no headline fraction and no slope interval could
+be}. The pipeline's own audit of those slopes is unusually thorough --- it
+refits them from scratch and finds they reproduce only under one predictor
+convention --- but an audit that cannot be re-run is a report about a
+verification rather than a verification, and the difference is recorded in the
+figure captions rather than smoothed away.

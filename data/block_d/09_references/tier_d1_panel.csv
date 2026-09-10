@@ -1,0 +1,8 @@
+receptor_slug,receptor_class,selection_role,apo_active_frac_mean,selection_note
+CNR2,A,anchor_CNR2,0.27,Only clean G-protein-bound sub-A hit whose apo arm sustains a mixed (bistable) two-instrument population; anchor per plan D1.1
+OPSD,A,mid_range,0.38,mid_range selection: |0.38 - 0.35| = 0.03 (rank 1); G-protein-free stratum (Gate 2 relabelled 4X1H alpha5-CT-peptide)
+ADRB2,A,mid_range,0.26,mid_range selection: |0.26 - 0.35| = 0.09 (rank 2); G-protein-free stratum (4LDE Nb-active)
+LPAR1,A,mid_range,0.22,mid_range selection: |0.22 - 0.35| = 0.13 (rank 3); Class A heldout subset receptor
+CXCR4,A,confirmatory,0.04,Confirmatory subset: clean G-protein-bound sub-A hit (8U4N) at 4% apo coherent-active; deep resample tests whether the sub-A tail replicates at 10x n
+GHSR,A,confirmatory,0.02,Confirmatory subset: clean G-protein-bound sub-A hit (7NA7) at 2% apo coherent-active; deep resample tests whether the sub-A tail replicates at 10x n
+NPY1R,A,confirmatory,0.02,Confirmatory subset: clean G-protein-bound sub-A hit (7X9A) at 2% apo coherent-active; deep resample tests whether the sub-A tail replicates at 10x n

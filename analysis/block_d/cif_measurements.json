@@ -1,0 +1,122 @@
+{
+ "random_01_d1_opsd_apo_protenix.cif": {
+  "chain": "A",
+  "y558": 223,
+  "y753": 306,
+  "motif_y753": 306,
+  "motif_agrees": true,
+  "npxxy_oh": 14.07
+ },
+ "random_02_d3_5ht1b_depth32_boltz.cif": {
+  "chain": "A",
+  "y558": 228,
+  "y753": 369,
+  "motif_y753": 369,
+  "motif_agrees": true,
+  "npxxy_oh": 12.4
+ },
+ "random_03_d1_npy1r_apo_of3.cif": {
+  "chain": "A",
+  "y558": 231,
+  "y753": 320,
+  "motif_y753": 320,
+  "motif_agrees": true,
+  "npxxy_oh": 12.06
+ },
+ "random_04_d1_cnr2_apo_boltz.cif": {
+  "chain": "A",
+  "y558": 209,
+  "y753": 299,
+  "motif_y753": 299,
+  "motif_agrees": true,
+  "npxxy_oh": 9.95
+ },
+ "d1_adrb2_boltz_apo.cif": {
+  "chain": "A",
+  "y558": 219,
+  "y753": 326,
+  "motif_y753": 326,
+  "motif_agrees": true,
+  "npxxy_oh": 11.31
+ },
+ "d1_adrb2_chai_apo.cif": {
+  "chain": "A",
+  "y558": 219,
+  "y753": 326,
+  "motif_y753": 326,
+  "motif_agrees": true,
+  "npxxy_oh": 4.22
+ },
+ "d1_cnr2_chai_apo.cif": {
+  "chain": "A",
+  "y558": 209,
+  "y753": 299,
+  "motif_y753": 299,
+  "motif_agrees": true,
+  "npxxy_oh": 2.61
+ },
+ "d1_ghsr_boltz_apo.cif": {
+  "chain": "A",
+  "y558": 232,
+  "y753": 323,
+  "motif_y753": 323,
+  "motif_agrees": true,
+  "npxxy_oh": 10.09
+ },
+ "d1_lpar1_of3_apo.cif": {
+  "chain": "A",
+  "y558": 225,
+  "y753": 311,
+  "motif_y753": 311,
+  "motif_agrees": true,
+  "npxxy_oh": 4.91
+ },
+ "d2_acm2_active_nb_chai.cif": {
+  "chain": "A",
+  "y558": 206,
+  "y753": 440,
+  "motif_y753": 440,
+  "motif_agrees": true,
+  "npxxy_oh": 19.12
+ },
+ "d2_adrb2_inactive_nb_boltz.cif": {
+  "chain": "A",
+  "y558": 219,
+  "y753": 326,
+  "motif_y753": 326,
+  "motif_agrees": true,
+  "npxxy_oh": 11.64
+ },
+ "d2_adrb2_inactive_nb_protenix.cif": {
+  "chain": "A",
+  "y558": 219,
+  "y753": 326,
+  "motif_y753": 326,
+  "motif_agrees": true,
+  "npxxy_oh": 4.53
+ },
+ "d2_oprk_inactive_nb_boltz.cif": {
+  "chain": "A",
+  "y558": 246,
+  "y753": 330,
+  "motif_y753": 330,
+  "motif_agrees": true,
+  "npxxy_oh": 11.27
+ },
+ "d3_boltz_opsd_depth8.cif": {
+  "chain": "A",
+  "y558": 223,
+  "y753": 306,
+  "motif_y753": 306,
+  "motif_agrees": true,
+  "npxxy_oh": 4.96
+ },
+ "d3_protenix_agtr1_depth8.cif": {
+  "chain": "A",
+  "y558": 215,
+  "y753": 302,
+  "motif_y753": 302,
+  "motif_agrees": true,
+  "npxxy_oh": 3.56
+ }
+}

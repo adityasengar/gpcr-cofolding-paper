@@ -448,3 +448,62 @@ that re-running the analysis reproduces the numbers. Two of the campaign's
 source corpora were not delivered with its analysis bundle, so the two
 surviving positive results could be checked for internal consistency across the
 shipped summaries but could not be recomputed from the underlying rows.
+
+\subsection*{Directed-generation campaign}
+
+A fourth campaign asks whether the state a model produces can be controlled on
+purpose, and it does so three ways. \textbf{D1} runs 14{,}000 predictions on
+seven receptors, apo arm only, 500 samples per receptor $\times$ backbone cell,
+and asks what the models do when nothing is supplied. \textbf{D2} runs 2{,}370
+predictions on four receptors carrying three or four input arms each --- apo, a
+cognate G$\alpha$, and a nanobody known from a deposited structure to lock
+either the active or the inactive conformation --- at 50 samples per cell.
+\textbf{D3} runs 25{,}810 predictions on 26 receptors, apo arm only, across five
+MSA depths (8, 32, 128, 512 and full), again at 50 samples per cell. All three
+were scored by one scorer, \texttt{d9c646af}, against one pinned reference set.
+
+\textbf{The bootstrap is not the same in all three tiers, and the reason is
+arithmetic rather than preference.} D3's 26 receptors resolve into 22 paralog
+clusters and use a cluster bootstrap. D1's seven receptors fall in seven
+clusters and D2's four in four --- one receptor per cluster, at which point a
+cluster bootstrap and a receptor bootstrap are the same computation. D1 and D2
+therefore report receptor-boot intervals, and every interval in this work states
+which it is. We verified the cluster assignments rather than accepting them:
+22, 7 and 4 all reproduce from the shipped paralogy map.
+
+\textbf{MSA depth slopes are reported per e-fold, not per decade.} The four
+headline slopes reproduce only under a natural-log predictor with the full-depth
+rung entered as 4096; the same fits under common log are larger by a factor of
+2.303. The unit is written \%/ln(depth) everywhere it appears.
+
+\textbf{Nanobody arms and what they can establish.} The four nanobody anchors
+are Nb60 on $\beta_2$AR (5JQH, inactive), Nb6 on the $\kappa$-opioid receptor
+(6VI4, inactive), Nb9-8 on the M2 muscarinic receptor (4MQS, active) and
+Nb.AT110i1 on AT$_1$R (6OS2, active). \textbf{All four were deposited between
+2013 and 2020 and predate every training cutoff this work could date} ---
+Chai-1 2021-01-12, Protenix2 2021-09-30, Boltz-2 2023-06-01 --- which we
+confirmed against the shipped anchor table. OpenFold-3's cutoff is recorded as
+undetermined in that table and we did not establish it. A negative result in the
+inactive direction is therefore compatible with two readings, an inability to
+generate the state and an inability to generate it \emph{for complexes already
+seen}, and this campaign does not separate them. A search for a post-cutoff
+inactive-nanobody complex was attempted and documented; it did not yield a
+usable candidate and was closed rather than resolved.
+
+\textbf{What this campaign shipped, and what it did not.} The fourth campaign
+delivered its claim sheet, twelve caveats, ten withdrawal records, four
+audit reports and fifteen coordinate files --- and \textbf{none of the three
+row-level tables its own claim sheet names}. Its 42{,}180 predictions are not in
+the bundle. We could therefore recompute the panel composition, the cluster
+counts, the prediction arithmetic, every exact binomial interval quoted, and
+fifteen NPxxY hydroxyl distances measured from the deposited coordinates; we
+could not recompute a single headline fraction, sub-\AA{}ngstr\"om percentage or
+slope interval. Those are reported here as they were delivered, and the
+distinction is carried in the figure captions rather than left to the reader.
+Fifteen structures is not a sample: no statistic in this work is computed from
+them.
+
+\textbf{The block is not frozen.} Its claim sheet is marked draft and its freeze
+tag was withheld pending the post-cutoff test described above. That test has
+since closed without resolving the question it was held for, and the tag has not
+followed.
