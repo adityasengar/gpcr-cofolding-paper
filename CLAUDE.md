@@ -17,9 +17,9 @@ not track state correctness.
 | stage | skill | reads | writes | status |
 |---|---|---|---|---|
 | prior work | `litquery` | `lit/SCHEMA.md`, `lit/INDEX.md`, `lit/notes/` | nothing | **built** |
-| results | `dataquery` | `data/block_<x>/` | `analysis/block_<x>/` | **Block A landed** |
-| drafting | *(no skill)* | `CLAIMS.md`, `lit/notes/`, the current block | `manuscript/` | **Block A written** |
-| figures | `figbuild` | the current block, `lit/notes/` | `figures/block_<x>/` | **Block A: 5 main, 16 SI** |
+| results | `dataquery` | `data/block_<x>/` | `analysis/block_<x>/` | **A, B and C landed** |
+| drafting | *(no skill)* | `CLAIMS.md`, `lit/notes/`, the current block | `manuscript/` | **A, B and C written** |
+| figures | `figbuild` | the current block, `lit/notes/` | `figures/block_<x>/` | **A: 5 + 16 SI · B: 6 · C: 4** |
 | submission | *(not built)* | `manuscript/`, `lit/refs.bib` | — | pending |
 
 ## The rule that makes this work
@@ -35,9 +35,14 @@ become decoration for a conclusion already reached, and the output is indistingu
 from the grounded version. `litquery` and `dataquery` both refuse to write manuscript
 prose for this reason. Do not relax it when the drafting stage is built.
 
-**Later blocks are not yet run.** Blocks B, C and D have not landed. No draft
-sentence may depend on one, and the Block A section states explicitly what it
-does not claim.
+**Blocks A, B and C have landed; D has not.** No draft sentence may depend on a
+block that has not run. Each section states what it does not claim.
+
+**Two of the paper's three title clauses have no evidence in any landed block.**
+Neither a 21-residue peptide nor an agonist is supplied anywhere: `ligand_type`
+is NaN on all 32,000 Block B rows and Block A has no ligand column. Recorded at
+the top of `CLAIMS.md`. Until that is resolved, no sentence may imply either
+result.
 
 ## Layout
 

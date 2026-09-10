@@ -613,7 +613,21 @@ per-series number lives in Table S1, Table S2 and Figs. S1–S6, none of which a
 
 - **comparable_to_ours**: *(left empty by the extractor per schema v3)*
 
-- **si_in_scope**: **SI NOT HELD — and the gap is material, not cosmetic.** This is a 7-page
+- **si_in_scope**: **HELD as of 2026-09-10** — the SI DOCX was obtained
+  (`../source/si/zhang2026generalization_SI.docx`). **Table S2, the complete list of the 253
+  benchmark GPCRs, is extracted** to `../panels/si_tables/zhang2026generalization_tableS2.csv`
+  with PDB ID, resolution, GPCR class, GPCR state, ligand CCD, ligand pharmacology, max ligand
+  similarity and max sequence similarity per entry; all 253 join to GPCRdb, giving 68 distinct
+  receptors. The FEP+ series table is extracted alongside it (15 series with PDB and ChEMBL
+  ids). What the table shows that the main text does not: **225 active / 28 inactive, 203 of
+  253 G-protein-bound, 215 of 253 agonists** — a benchmark built to test generalisation to
+  unseen families is overwhelmingly agonist-bound, active-state and transducer-coupled.
+  The per-series FEP+ numbers (their Table S1) are in the file but **not extracted**.
+
+  The paragraph below was written before the SI was obtained and is kept because its
+  reasoning about what a missing SI costs is still correct:
+
+  **[superseded] SI NOT HELD — and the gap is material, not cosmetic.** This is a 7-page
   article whose supplementary information is a separate file at the same DOI (p7:
   "Supplementary information The online version contains supplementary material available at
   https://doi.org/10.1038/s44386-026-00066-1") and is not in the corpus. What is missing:

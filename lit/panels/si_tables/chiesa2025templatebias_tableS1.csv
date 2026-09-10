@@ -1,0 +1,146 @@
+receptor,receptor_family,pdb_id
+5HT1A,5-Hydroxytryptamine,8JSP
+5HT1A,5-Hydroxytryptamine,8W8B
+5HT6R,5-Hydroxytryptamine,7YS6
+5HT6R,5-Hydroxytryptamine,8JLZ
+AA2BR,Adenosine,8HDP
+AA2BR,Adenosine,8HDO
+AA2BR,Adenosine,7XY6
+AA2BR,Adenosine,7XY7
+ACM4,Acetylcholine (muscarinic),7TRK
+ACM4,Acetylcholine (muscarinic),7TRP
+ACM4,Acetylcholine (muscarinic),7TRS
+ACM4,Acetylcholine (muscarinic),7TRQ
+ACTHR,Melanocortin,8GY7
+AGTR1,Angiotensin,7F6G
+C3AR,Complement peptide,8HK3
+C3AR,Complement peptide,8HK2
+C3AR,Complement peptide,8IA8
+C3AR,Complement peptide,8I9S
+C3AR,Complement peptide,8J6D
+C3AR,Complement peptide,8I9L
+C3AR,Complement peptide,8I97
+C3AR,Complement peptide,8I95
+C5AR1,Complement peptide,7Y66
+C5AR1,Complement peptide,7Y65
+C5AR1,Complement peptide,7Y67
+C5AR1,Complement peptide,7Y64
+C5AR1,Complement peptide,8IA2
+C5AR1,Complement peptide,8JZZ
+CCR8,Chemokine,8U1U
+CML1,Chemerin receptor,7YKD
+CML1,Chemerin receptor,8SG1
+CNR1,Cannabinoid,8GHV
+CNR2,Cannabinoid,8GUT
+CNR2,Cannabinoid,8GUR
+CNR2,Cannabinoid,8GUQ
+CNR2,Cannabinoid,8GUS
+CXCR1,Chemokine,8IC0
+CXCR3,Chemokine,8K2X
+CXCR3,Chemokine,8HNM
+CXCR3,Chemokine,8HNK
+DRD1,Dopamine,8IRR
+DRD2,Dopamine,8IRS
+DRD3,Dopamine,8IRT
+DRD4,Dopamine,8IRU
+DRD5,Dopamine,8IRV
+EDNRB,Endothelin,8HBD
+EDNRB,Endothelin,8IY5
+FFAR4,Free fatty acid,8ID9
+FFAR4,Free fatty acid,8ID4
+FFAR4,Free fatty acid,8ID6
+FFAR4,Free fatty acid,8ID8
+FFAR4,Free fatty acid,8ID3
+FFAR4,Free fatty acid,8H4I
+FFAR4,Free fatty acid,8IYS
+FSHR,Glycoprotein hormone,8I2G
+GALR1,Galanin,7XJJ
+GASR,Cholecystokinin,8IA7
+GP101,A orphans,8W8Q
+GP101,A orphans,8W8R
+GP132,A orphans,8HVI
+GP132,A orphans,8HQE
+GP132,A orphans,8HQM
+GP132,A orphans,8HQN
+GP161,A orphans,8KH4
+GP174,A orphans,7XV3
+GP174,A orphans,8KH5
+GP174,A orphans,8IZB
+GPR12,A orphans,7Y3G
+GPR20,A orphans,8HSC
+GPR20,A orphans,8HS3
+GPR21,A orphans,8HMV
+GPR21,A orphans,8HJ0
+GPR21,A orphans,8HIX
+GPR21,A orphans,8HJ2
+GPR21,A orphans,8HJ1
+GPR34,A orphans,8SAI
+GPR34,A orphans,8K4N
+GPR34,A orphans,8WRB
+GPR34,A orphans,8XBH
+GPR35,A orphans,8H8J
+GPR52,A orphans,8HMP
+GPR61,A orphans,8KGK
+GRPR,Bombesin,7W3Z
+GRPR,Bombesin,7W40
+HCAR2,Hydroxycarboxylic acid,7XK2
+HCAR2,Hydroxycarboxylic acid,8IHF
+HCAR2,Hydroxycarboxylic acid,8IHI
+HCAR2,Hydroxycarboxylic acid,8IHH
+HCAR2,Hydroxycarboxylic acid,8JIL
+HCAR2,Hydroxycarboxylic acid,8JHY
+HCAR2,Hydroxycarboxylic acid,8JIM
+HCAR2,Hydroxycarboxylic acid,8JII
+HCAR2,Hydroxycarboxylic acid,8IHB
+HCAR2,Hydroxycarboxylic acid,8JZ7
+HCAR2,Hydroxycarboxylic acid,8H2G
+HCAR2,Hydroxycarboxylic acid,8J6R
+HCAR2,Hydroxycarboxylic acid,8J6Q
+HCAR2,Hydroxycarboxylic acid,8J6P
+HCAR2,Hydroxycarboxylic acid,8IJB
+HCAR2,Hydroxycarboxylic acid,8IJD
+HCAR2,Hydroxycarboxylic acid,8IJA
+HCAR2,Hydroxycarboxylic acid,8IJ3
+HCAR3,Hydroxycarboxylic acid,8IHJ
+HRH4,Histamine,8HN8
+HRH4,Histamine,8HOC
+MC3R,Melanocortin,8IOC
+MC5R,Melanocortin,8IOD
+MC5R,Melanocortin,8INR
+NK1R,Tachykinin,8U26
+NMUR2,Neuromedin U,7XK8
+NPY2R,Neuropeptide Y,7YON
+NTR1,Neurotensin,8JPC
+NTR1,Neurotensin,8JPB
+O51E2,Olfactory,8F76
+OPRK,Opioid,8DZQ
+OPRK,Opioid,8DZS
+OPRK,Opioid,8DZP
+OPRK,Opioid,8DZR
+OPRK,Opioid,7Y1F
+OPRK,Opioid,8FEG
+P2RY1,P2Y,7XXH
+P2Y12,P2Y,7XXI
+PE2R3,Prostanoid,8GDC
+PE2R4,Prostanoid,8GCP
+PE2R4,Prostanoid,8GCM
+PE2R4,Prostanoid,8GDA
+PE2R4,Prostanoid,8GD9
+PE2R4,Prostanoid,8GDB
+RL3R2,Relaxin family peptide,7YK7
+RL3R2,Relaxin family peptide,7YK6
+RL3R2,Relaxin family peptide,7YJ4
+S1PR1,Lysophospholipid (S1P),8G94
+SSR2,Somatostatin,7YAC
+SSR2,Somatostatin,7YAE
+TAAR1,Trace amine,8JLO
+TAAR1,Trace amine,8JLP
+TAAR1,Trace amine,8JSO
+TAAR1,Trace amine,8JLQ
+TAAR1,Trace amine,8JLR
+TAAR1,Trace amine,8JLN
+TAAR1,Trace amine,8W87
+TAAR1,Trace amine,8W88
+TAAR1,Trace amine,8W89
+TAAR1,Trace amine,8WC8
+TAAR1,Trace amine,8WCA

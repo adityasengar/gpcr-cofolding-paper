@@ -56,7 +56,9 @@ PDF. See `si_in_scope`.
     The list of the GPCRs was retrieved from GPCRdb." The structure-less subset is **289** per
     the Figure 3 percentages (p5: "209 out of 289"). The universe is 401 — p2: "Known
     structures comprise only 112 out of 401 human non-olfactory receptors."
-  - **Docking subset**: n NOT REPORTED in the PDF (Table S3, not held).
+  - **Docking subset**: **45 protein–ligand complexes across 19 receptors** (28 active, 17
+    inactive) — **RESOLVED 2026-09-10** from the bioRxiv v2 SI, Table S3; extracted to
+    `../panels/si_tables/heo2022multistate_tableS3_docking.csv` with PDB id and ligand CCD.
   - **1** target for intermediate-state sampling (AT1/AGTR1, p6); **5** GPCR Dock 2021
     targets of which 2 had structures released (p8).
 - **method_class**: **template-biasing**, with a secondary MSA-ablation component that is not
@@ -593,19 +595,20 @@ PDF. See `si_in_scope`.
 
 - **comparable_to_ours**:
 
-- **si_in_scope**: **SI NOT HELD, and it matters more than usual here.** The PDF carries
-  Figures 1–5 only; **Figures S1–S15, Tables S1–S3 and Algorithm S1 are referenced but absent**
-  (p13: "Additional supporting information may be found in the online version of the article at
-  the publisher's website"). What is lost: the entire ablation study (S1–S3), the per-class
-  breakdown (Table S1), the benchmark target list (Table S2), the docking complex list (Table
-  S3), the loop accuracy analysis (S8), the direct comparison against GPCRdb and RoseTTAFold
-  (S9), the pLDDT-vs-multi-state analysis (S10), the intermediate-conformation results
-  (S11–S13), the rigid-sidechain docking control (S14), and — critically — **the pseudocode for
-  the MSA-gapping variant (Algorithm S1)**, which is the only place the second use of the
-  annotated databases is specified. Data and code are, however, deposited: p12: "The activation
-  annotated GPCR databases and predicted models in either activation states are deposited at
-  https://doi.org/10.5281/zenodo.5745217. The scripts used for the modeling protocol are shared
-  at https://github.com/huhlim/alphafold-multistate."
+- **si_in_scope**: **HELD as of 2026-09-10, via the bioRxiv preprint rather than Wiley.**
+  `10.1101/2021.11.26.470086` **version 2** (2022-04-08) is the revision that became
+  Proteins 90:1873–1885, is CC-BY, and its SI is at `../source/si/heo2022multistate_SI_biorxiv_v2.pdf`.
+  **Use v2, not v1**: v1's "recently determined" set has only 55 receptors, v2's has the
+  published 68. The two versions' Table S3 are also different tables entirely.
+
+  Extracted: **Table S2** → `../panels/si_tables/heo2022multistate_tableS2.csv`, 68 receptors
+  with UniProt, gene, class and per-state structure counts — reproducing all four published
+  numbers exactly (68 receptors, 49 with an active structure, 30 with an inactive, 15 with
+  both). **Table S3** → `heo2022multistate_tableS3_docking.csv`, 45 complexes over 19
+  receptors, which closes `unresolved` item 4. Table S1 (per-class TM-RMSD) not extracted.
+
+  Note that Table S2 enumerates **receptors, not structures** — it gives per-state counts, not
+  PDB ids. `panels.csv` marks these rows `panel_unit=receptor` for exactly that reason.
 
 ## F. Figures
 
@@ -651,7 +654,8 @@ histogram/scatter arrangement and its r values, Figure 4A's top-1/top-3 series).
      Nothing says post-2018 structures were removed from the template side; only the 70%
      identity filter is mentioned. This is the weak point of an otherwise clean post-cutoff
      design and the paper does not address it.
-  4. **Number of protein–ligand complexes in the docking benchmark** — Table S3, not held. The
+  4. ~~**Number of protein–ligand complexes in the docking benchmark** — Table S3, not held.~~
+     **RESOLVED 2026-09-10: 45 complexes, 19 receptors** (bioRxiv v2 Table S3). Original note: The
      Figure 4A error bars are therefore uninterpretable from the PDF alone.
   5. **No justification is given for the 1.5 Å TM-RMSD "high accuracy" threshold** or the 3 Å
      docking success threshold. Both are used throughout as if standard.

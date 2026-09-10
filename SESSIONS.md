@@ -1,5 +1,7 @@
 # SESSIONS.md — index
 
+- [2026-09-10 — Blocks B and C landed, ten panels built, and four self-certifying columns](sessions/2026-09-10_blocks-b-and-c.md) — three blocks in the manuscript; the fourth mislabel was caught by drawing it, not reading it.
+
 One line per session, newest first. The detail is in `sessions/`.
 
 Git records *what* changed. These record *why*, and what the next session

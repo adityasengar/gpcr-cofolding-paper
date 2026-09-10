@@ -165,8 +165,29 @@ that was read.** They are the numbers our own comparison would need. Flagged in 
   seed counts are not stated. This matters: with one model per target there is no ensemble and no
   best-of-N, but the note cannot confirm it.
 - **`comparable_to_ours`**: *(left empty by the extractor, per SCHEMA v3.)*
-- **`si_in_scope`**: **SI NOT HELD.** Table S1 (the full benchmark list), Figures S1–S2 (per-TM
-  RMSD distributions) and Supporting Information S1 are outside this note.
+- **`si_in_scope`**: **PARTIALLY HELD as of 2026-09-10.** The SI PDF was obtained
+  (`../source/si/chiesa2025templatebias_SI.pdf`, 12 pp) and **Table S1, the full benchmark
+  list, is extracted** to `../panels/si_tables/chiesa2025templatebias_tableS1.csv`: 145 PDB
+  entries, 55 receptors, 31 families — all four published counts reproduce exactly, and all
+  145 join to GPCRdb. Tables S2–S12 (per-domain Pearson R between protocols) and Figures
+  S1–S2 are in the file but **not extracted**.
+
+  **Table S1 resolves an ambiguity in the `n_targets` quote that this note had not flagged:
+  "human GPCRs bound to human Gαs" means Gα subunits, PLURAL, not Gα-s the stimulatory
+  subtype.** The 145 structures carry nine Gα subtypes and
+  are dominated by **Gαi1 (77)**, with Gαs second at 44, then Gαo 9, Gαq 7, Gαi2 4, and one
+  each of Gα13, Gαz, Gαt3, Gα11. This is why the paper's 63 receptor–Gα pairs exceed its 55
+  receptors. **Do not describe this benchmark as Gs-coupled.**
+
+  Two further facts only the table shows: **every one of the 145 is active-state and every
+  one is G-protein-bound**, so the target set contains no inactive arm; and the panel shares
+  only **20 receptors** with `zhang2026generalization`'s 253-complex benchmark.
+
+  **The stated selection rule under-determines the panel.** Re-running "class A GPCRs bound
+  to G protein released after 01 Jan 2023, human receptor and human Gα" against GPCRdb admits
+  152 further structures in the same window across 23 receptors the panel omits entirely,
+  with identical method (100% cryo-EM) and near-identical resolution. No date bound separates
+  them. Cite the table, never the rule.
 
 ## F. Figures
 
@@ -194,7 +215,8 @@ Seven figures identified from the main text; **panels not viewed in detail.**
      numbers a comparison against our own results would need.
   2. **Models per target and seed count NOT REPORTED** in the retrieved text.
   3. **Oracle route 6**: whether a single model or a best-of-N was scored per protocol.
-  4. SI Table S1 (benchmark composition) not held.
+  4. ~~SI Table S1 (benchmark composition) not held.~~ **RESOLVED 2026-09-10** — SI obtained
+     and Table S1 extracted; see `si_in_scope`. Tables S2–S12 remain unextracted.
   5. Whether "explicitly incorporating the binding of a ligand" in the abstract's necessity claim
      is meant to include a protein partner or only a small molecule. The rest of the paper treats
      them separately, so the abstract sentence is looser than the body.

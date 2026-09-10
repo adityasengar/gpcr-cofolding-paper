@@ -33,6 +33,7 @@ lit/
   validate/         quote and page verifiers + cached text
   source/           the original download folder, kept for provenance
   draft/            manuscript sections — EMPTY, and see the two-pass rule below
+  panels/           who benchmarked on which receptors, and which PDB entries
   staleness.sh      lists PDFs with no extraction (currently zero)
   pagetext.sh       prints a paper with ===== PAGE n of N ===== markers
 ```
@@ -49,6 +50,50 @@ are printed in continuously paginated volumes, so their PDF page is not their pr
 `georgiou2025heterogeneity` is +3690, `yang2025statespecific` is +11424. Notes record PDF pages;
 **convert at citation time**. Run `python3 validate/pageoffset.py` whenever a PDF is added. Adding
 a `pages` field to a journal entry in `refs.bib` makes that check authoritative for that paper.
+
+## Receptor panels: which papers used which GPCRs
+
+`panels/panels.csv` holds **613 verified rows across 175 distinct receptors** — the
+benchmark panels of `chiesa2025templatebias` (Table S1), `zhang2026generalization`
+(Table S2), `heo2022multistate` (bioRxiv v2 Tables S2+S3) and `lee2026confornets` (the
+authors' repo), with receptor, class, family, state, resolution, partner Ga and ligand. All three SIs were obtained 2026-09-10 and are in
+`source/si/`. `panels/README.md` carries the method. Check `panel_unit` before counting:
+heo enumerates receptors with per-state counts, not PDB ids.
+
+**When a journal SI is paywalled, look for a CC-BY preprint — and match its version.**
+heo2022's SI came from bioRxiv `10.1101/2021.11.26.470086` **v2**, the revision that became
+the published paper. v1 is the wrong file: 55 receptors instead of 68, and a different
+Table S3.
+
+Three things it settled that the notes could not:
+
+- **"Human Gas" in chiesa means Ga subunits, PLURAL, not Ga-s the subtype.** Its 145
+  structures carry nine Ga subtypes, dominated by Gai1 (77) with Gas second (44). That is
+  why 63 pairs exceed 55 receptors. Never call chiesa a Gs-coupled benchmark.
+- **Chiesa's benchmark is 100% active-state and 100% G-protein-bound** (145/145 both).
+  Zhang's is 89% active, 80% G-protein-bound, 85% agonist.
+- **The four benchmarks barely overlap: union 175 receptors, and NO receptor appears in all
+  four.** 115 appear in exactly one panel, 51 in two, 9 in three. Four papers that all claim
+  to measure GPCR conformational-state prediction are, at receptor level, four different
+  experiments — no cross-paper "X beats Y on GPCRs" claim rests on a shared panel.
+- **Two of lee2026confornets' 51 same-receptor state pairs are cross-species** and the paper
+  does not say so: ACM3 is human 8E9Z (active) vs rat 4U15 (inactive), NTR1 is rat 8FN1
+  (active) vs human 7UL2 (inactive).
+
+**The methodological rule this produced, which applies well beyond panels:** a panel
+rebuilt from a paper's stated selection rule was validated by matching counts — 250
+against a published 253, 1.2% — and turned out to share only 222 of the real 253 entries,
+31 missed and 28 invented. **A matching count is not a matching membership**; a count
+check falsifies, it never confirms. `build_panels.py` therefore emits no rows for a
+rule-only reconstruction. All four panels are now enumerated, none by reconstruction. **`lee2026confornets` came from
+the authors' repo, `github.com/aqlaboratory/confornets`, `assets/gpcr/references.csv`** —
+found only after a direct path lookup, because the **unauthenticated GitHub search API
+returns nothing**; never conclude a repo is absent from a failed search.
+
+Two traps: GPCRdb grows, so any rule with only a lower date bound over-counts against
+today's database and must carry the paper's own snapshot as an upper bound; and GPCRdb's
+`publication_date` already **is** the PDB initial release date (checked against RCSB on
+1,713 entries), so do not "correct" it.
 
 ## Render conventions
 

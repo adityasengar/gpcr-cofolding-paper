@@ -761,16 +761,21 @@ Conflating these two is the single easiest way to mis-cite this paper.
 
 - **comparable_to_ours**: *(left empty by the extractor — populated by whoever holds STATUS.md)*
 
-- **si_in_scope**: **ALL IN PDF — nothing is missing.** Appendices A–H (p13–p26) contain every
-  auxiliary table and figure referenced from the main text: Tables A1–A11 and Figures A1–A11 are all
-  present in the 26-page file. No external supplement is cited. **No code or data availability
-  statement appears anywhere in the PDF** — the only repository link is to the OF3p chassis
-  (p11, reference list: "https://github.com/aqlaboratory/openfold-3"), not to ConforNets. Benchmark
-  composition is described procedurally (App. C, D) but **the per-protein lists and PDB IDs are not
-  given** except for the 11 named A-loop-flipping kinases (p15) and the handful of PDB IDs in figure
-  captions (3VVS, 6FHZ, 1EXM, 1HA3, 8YN2, 8HCQ, 6QV1, 6GV1, 4ZRB). The 51 GPCR pairs, 20 kinase pairs
-  and 34 cryptic-pocket entries are **not enumerated** — so the benchmarks are not exactly
-  reproducible from this PDF.
+- **si_in_scope**: **ALL IN PDF** for the appendix — but the appendix contains **no target
+  list**; Tables A1–A11 are performance summaries only, checked directly. The benchmark
+  itself is in the **authors' repository**, `github.com/aqlaboratory/confornets`, obtained
+  2026-09-10: `assets/gpcr/references.csv` gives all **51 GPCR pairs / 102 structures**,
+  extracted to `../panels/si_tables/lee2026confornets_gpcr_references.csv`. Column
+  `pdbidchain_i` is the **active** member, `pdbidchain_j` the **inactive** member, in all 51
+  rows (cross-checked against GPCRdb); no structure is reused across pairs. The repo also
+  carries `references.csv` for the other six benchmarks (crypticpocket, domainmotion,
+  foldswitching, kinases, membrane, ood60), not yet extracted.
+
+  **Two of the 51 pairs are cross-species and the paper does not say so:** ACM3 pairs human
+  `8E9Z` (active) with rat `4U15` (inactive); NTR1 pairs rat `8FN1` (active) with human
+  `7UL2` (inactive). Both are presented as within-receptor two-state pairs. This is why 51
+  test cases yield 53 distinct GPCRdb proteins, and it qualifies any use of this benchmark
+  as a clean within-receptor conformational contrast.
 
 ## F. Figures
 

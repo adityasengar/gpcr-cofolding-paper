@@ -19,6 +19,29 @@ quoted from a claim sheet.
 | C9 (decomposition) | **Block B** (apo / decoy / shuffled / cognate) | **written** — occupancy 55%, α5-CT sequence 34%, family 11% prob / 17.4% logit |
 | *(new)* whole-Gα co-input drives active state, at panel scale | **Block A** | **written** |
 | *(new)* the effect is partner presence far more than partner identity | **Block B** | **written** |
+| *(new)* ligand class is written into pocket geometry, apo arm only | **Block C** | **written** — 4 backbones, SC-C-1 |
+| *(new)* ligand class is prospectively callable from one structure | **Block C** | **written, scoped** — Boltz + Protenix only; Chai and OF3 inconclusive |
+
+## Block C, and what it may not be joined to
+
+Block C varies the **ligand**, not the transducer, and it is the paper's
+"read from above" leg. Two rules travel with it, both from its own dispatch and
+both load-bearing:
+
+1. **Nothing in Block C may be connected to two-state generation.** Its arms were
+   not designed to test it. The 2×2 result reads as though it bears on that
+   claim; it does not. Checked 2026-09-10 — no sentence in Results or Methods
+   makes the link.
+2. **No Block C number may be compared against a Block A or Block B predicate
+   rate.** The two-instrument predicate is saturated on this panel — floor-pinned
+   in apo, ceiling-pinned in cognate, ~65% of cells unresolvable — so every Block
+   C result is continuous pocket-Cα geometry and the two scales are not
+   commensurable.
+
+Block C also **refuted** its own pre-registered applicability domain: the
+measured slope ran opposite to the prediction. What survives is an after-the-fact
+failure list, and the Results say so rather than implying the method can flag its
+own failures in advance.
 
 ## Two title claims have no evidence in either block
 
@@ -50,6 +73,24 @@ backbones; the effect is mostly partner **presence**, with the α5-CT sequence
 second and the correct family a small, scale-dependent third; the models do not
 read partner family on the continuous axes beneath the predicate; and confidence
 does not track state correctness.
+
+### The experimental precedent is already in our own reference set
+
+**4X1H, the active reference for OPSD, is rhodopsin bound to the α5-CT peptide
+of Gα$_t$ alone — no full Gα subunit.** The reference audit says so verbatim:
+*"α5-CT peptide of Gαt only (no full Gα subunit); native α5-CT donor class Gt;
+not a heterotrimer."* X-ray, 2.29 Å, wild-type construct, deposited 2014. Our own
+instrument calls it active on both axes: TM6 tilt 17.586 Å against a 14.932 Å
+threshold, NPxxY 4.921 Å against 9.08 Å.
+
+It is the **only peptide-bound entry among the 80 references**, checked.
+
+So an experimental structure in which an isolated α5-CT peptide holds a receptor
+open has been sitting inside our own data throughout, while both campaigns supply
+whole subunits and neither tests the peptide. It is citable in the introduction
+now, whatever is or is not run later — and if a 21-mer arm is ever scheduled,
+**OPSD is where to start it**, because it is the one receptor with a deposited
+peptide-bound active structure to predict against.
 
 **This is Aditya's decision to make, not ours.** Either the title narrows to what
 was run, or a later block supplies an isolated 21-mer arm and an agonist-only

@@ -27,20 +27,26 @@ question: *is there anything in the paper nobody has accounted for?*
 
 | | count |
 |---|---:|
-| unique numeric tokens in Results + Methods | **215** |
-| covered by an automated check | **89** |
-| **not covered by any automated check** | **126** |
+| unique numeric tokens in Results + Methods | **255** |
+| covered by an automated check | **117** |
+| **not covered by any automated check** | **138** |
 
 **That second row is the finding of this sweep, and it is not comfortable.**
 Fewer than half the numbers in the paper are recomputed by anything. The rest
-are transcriptions from shipped tables — the exact class of number that has
-already been wrong three times.
+are transcriptions from shipped tables — the exact class of number that has now
+been wrong four times: Block A's `matches_claim_sheet`, Block B's
+`matches_claim_sheet_bool` on eight continuous medians, Block B's per-backbone
+family shares with the panel figure copied into three of four slots, and Block
+C's SC-C-2 table headed "Kendall's τ" while containing a fraction of receptors.
 
-The fix is not to write prose entries for the remaining 126. It is to **extend
-the two verifiers to cover them**, and let this file shrink to the numbers that
-genuinely cannot be recomputed (design constants, generic-numbering positions,
-literature values that belong to a citation). Entries below marked `auto` were
-matched mechanically against a check id and should be confirmed, not trusted.
+**The fourth was caught by drawing it, not by reading it** (D-C-3). It had
+passed the claim sheet, the dispatch and our own Results.
+
+The fix is not to write prose entries for the remaining 138. It is to **extend
+the three verifiers to cover them**, and let this file shrink to the numbers
+that genuinely cannot be recomputed. Entries marked `auto` were matched
+mechanically against a check id at the manuscript's own precision — the paper
+writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted.
 
 ---
 
@@ -50,25 +56,27 @@ matched mechanically against a check id and should be confirmed, not trusted.
 |---|---|---|---|
 | 48 | M8 | Block A, verify_claims check CORPUS | Predictions were run for 48 G-protein-coupled receptors --- 40 Class~A, 4 |
 | 10 | M12 | Block B, verify_claims check B28.apo,B49.Ga-complexed-chimera-or-miniG | Boltz-2 cognate arm is short 10 rows, a documented gap). |
-| 9.080 | M34 | NPxxY threshold as printed in Fig 1a | axis below 9.080~\AA. |
-| 14.932 | M38 | TM6 tilt threshold, every row | activation signature  . A prediction is called active above 14.932~\AA. |
-| 159.95 | M56 | Class B kink-angle threshold | 159.95$^\circ$; for the 4 class~F receptors, where neither substitution is |
-| 7 | M69 | Block B, verify_claims check B28.cognate,B28.decoy,B28.shuffled | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
-| 14 | M69 | Block B, verify_claims check B32.boltz | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
-| 6.26 | M69 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
-| 18 | M70 | Block B, verify_claims check B29.cognate,B29.shuffled,B32.chai | ; 18~\AA{} at 6.42 and 17.4~\AA{} at |
-| 6.42 | M70 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | ; 18~\AA{} at 6.42 and 17.4~\AA{} at |
-| 6.36 | M71 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | 6.36 in the same work  ; and around 14~\AA{} with |
-| 6 | M111 | Block B, verify_claims check B08 | 2$\times$46 and 6$\times$37 and hydroxyl positions at Ballesteros--Weinstein |
-| 15 | M155 | Block B, verify_claims check B17,B22,B41.apo_all | on only 15 multi-member clusters. All confidence intervals quoted in the main |
-| 12 | M172 | Block B, verify_claims check B59 | consequences, and we report them separately. On the NPxxY axis, 12 receptors |
-| 32 | M195 | Block B, verify_claims check B33b.alpha5ct | 1,600 rows and 32 receptors per backbone. |
-| 19 | M205 | Block B, verify_claims check B56,B57 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
-| 9.08 | M239 | tilt/NPxxY threshold, the value every row carries | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
-| 9.082 | M239 | NPxxY threshold, untruncated, as the claim sheets state it | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
-| 21 | M265 | Block B, verify_claims check B32.of3 | G$\alpha$ subunit.} The $\alpha$5 C-terminal 21-mer is a region we measure and |
-| 12.19 | M291 | Block B, verify_claims check B59 | insertion depth of 12.19~\AA{} --- so engagement is reported alongside the |
-| 37.5 | M326 | Block B, verify_claims check B51 | mini-G, chimera or nanobody-stabilised; 15 of 40 active references (37.5\%) are |
+| 9.080 | M39 | NPxxY threshold as printed in Fig 1a | axis below 9.080~\AA. |
+| 14.932 | M43 | TM6 tilt threshold, every row | activation signature  . A prediction is called active above 14.932~\AA. |
+| 159.95 | M61 | Class B kink-angle threshold | 159.95$^\circ$; for the 4 class~F receptors, where neither substitution is |
+| 7 | M74 | Block B, verify_claims check B28.cognate,B28.decoy,B28.shuffled | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
+| 14 | M74 | Block B, verify_claims check B32.boltz | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
+| 6.26 | M74 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
+| 6.42 | M75 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | ; 18~\AA{} at 6.42 and 17.4~\AA{} at |
+| 6.36 | M76 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | 6.36 in the same work  ; and around 14~\AA{} with |
+| 6 | M116 | Block B, verify_claims check B08 | 2$\times$46 and 6$\times$37 and hydroxyl positions at Ballesteros--Weinstein |
+| 12 | M177 | Block B, verify_claims check B59 | consequences, and we report them separately. On the NPxxY axis, 12 receptors |
+| 500 | M188 | Block A, verify_claims check EXCL | instrument scope. E5 (500 rows) marks agonist-only actives and is shown as a |
+| 32 | M200 | Block B, verify_claims check B33b.alpha5ct | 1,600 rows and 32 receptors per backbone. |
+| 19 | M210 | Block B, verify_claims check B56,B57 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
+| 9.08 | M244 | tilt/NPxxY threshold, the value every row carries | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
+| 9.082 | M244 | NPxxY threshold, untruncated, as the claim sheets state it | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
+| 21 | M271 | Block B, verify_claims check B32.of3 | G$\alpha$ subunit.} The $\alpha$5 C-terminal 21-mer is a region we measure and |
+| 0.09 | M294 | Block C, verify_claims check C14.protenix | 0.06--0.09 on conditional activation rates. Engagement is a separate, |
+| 12.19 | M297 | Block B, verify_claims check B59 | insertion depth of 12.19~\AA{} --- so engagement is reported alongside the |
+| 37.5 | M332 | Block B, verify_claims check B51 | mini-G, chimera or nanobody-stabilised; 15 of 40 active references (37.5\%) are |
+| 8 | M383 | Block B, verify_claims check B28.decoy | 8~\AA, entrance-bound between 8 and 15~\AA, and off-site above 15~\AA. |
+| 168 | R11 | Block C, verify_claims check C18 | reference structures, where the answer is already known. Across 168 reference |
 | 80 | R16 | Block B, verify_claims check B48 | were fitted on 80 of these same reference rows, so 159/168 measures internal |
 | 1 | R35 | Block B, verify_claims check B07,B17,B19 | equivalent would inherit that heterogeneity silently (Fig.~1). |
 | 40 | R44 | Block B, verify_claims check B09 | the 40 Class~A receptors (Fig.~2, Table~2), though with a five-fold spread in |
@@ -97,6 +105,9 @@ matched mechanically against a check id and should be confirmed, not trusted.
 | 6.30 | R190 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | 3.51, 5.58, 6.30, 6.34, 7.53) it carries information about conformational |
 | 6.34 | R190 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | 3.51, 5.58, 6.30, 6.34, 7.53) it carries information about conformational |
 | 7.53 | R190 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | 3.51, 5.58, 6.30, 6.34, 7.53) it carries information about conformational |
+| 4 | R191 | Block A, verify_claims check EXCL | correctness --- on two of four backbones (Fig.~4, Table~4). |
+| 0.10 | R193 | Block C, verify_claims check C14.of3 | Whole-complex against anchor-restricted Pearson correlations are $-0.10$ (null) |
+| 0.22 | R194 | Block C, verify_claims check C13.chai | against $-0.22$ (signed) for Boltz-2; $+0.07$ (null) against $-0.16$ (null) for |
 | 0.16 | R194 | Block B, verify_claims check B25.apo | against $-0.22$ (signed) for Boltz-2; $+0.07$ (null) against $-0.16$ (null) for |
 | 640 | R229 | Block B, verify_claims check B02 | samples --- 32,000 predictions, every one of the 640 receptor $\times$ arm |
 | 50 | R230 | Block B, verify_claims check B03,B33b.occupancy | $\times$ backbone cells delivering exactly 50 rows with five distinct seeds. |
@@ -108,6 +119,7 @@ matched mechanically against a check id and should be confirmed, not trusted.
 | 0.891 | R244 | Block B, verify_claims check B25.cognate | [0.445, 0.664] decoy, 0.809 [0.747, 0.869] shuffled, 0.891 [0.838, 0.942] |
 | 0.942 | R244 | Block B, verify_claims check B43 | [0.445, 0.664] decoy, 0.809 [0.747, 0.869] shuffled, 0.891 [0.838, 0.942] |
 | 36 | R245 | Block B, verify_claims check B24 | cognate, on the 36 receptors whose NPxxY axis is defined, with cluster-bootstrap |
+| 0.5 | R255 | Block C, verify_claims check C13.boltz | not: within $\pm$0.5~\AA{} of the tilt threshold the cognate arm carries |
 | 0.00 | R257 | Block B, verify_claims check B05,B06,B23 | against 3.33\% on Boltz-2, 0.39\% against 1.89\% on OpenFold3, 0.00\% against |
 | 0.06 | R258 | Block B, verify_claims check B46 | 0.06\% on Protenix2). Chai-1 inverts, at 1.83\% against 0.56\%, and that |
 | 0.400 | R266 | Block B, verify_claims check B31.occupancy | partner, even one whose $\alpha$5 tail is scrambled, accounts for $+0.400$ |
@@ -137,8 +149,28 @@ matched mechanically against a check id and should be confirmed, not trusted.
 | 0.062 | R311 | Block B, verify_claims check B46 | [$-0.29$, $+0.30$] across 24 receptors, and $-0.062$~\AA{} [$-0.41$, $+0.21$] |
 | 0.41 | R311 | Block B, verify_claims check B47b | [$-0.29$, $+0.30$] across 24 receptors, and $-0.062$~\AA{} [$-0.41$, $+0.21$] |
 | 0.21 | R311 | Block B, verify_claims check B47b | [$-0.29$, $+0.30$] across 24 receptors, and $-0.062$~\AA{} [$-0.41$, $+0.21$] |
-
----
+| 0.454 | R365 | Block C, verify_claims check C13.boltz | backbones: $-0.306$~\AA{} on Boltz-2 [$-0.454$, $-0.164$], $-0.137$ on Chai-1 |
+| 0.164 | R365 | Block C, verify_claims check C14.boltz | backbones: $-0.306$~\AA{} on Boltz-2 [$-0.454$, $-0.164$], $-0.137$ on Chai-1 |
+| 0.216 | R366 | Block C, verify_claims check C13.chai | [$-0.216$, $-0.045$], $-0.252$ on OpenFold3 [$-0.405$, $-0.099$] and $-0.184$ |
+| 0.045 | R366 | Block C, verify_claims check C14.chai | [$-0.216$, $-0.045$], $-0.252$ on OpenFold3 [$-0.405$, $-0.099$] and $-0.184$ |
+| 0.405 | R366 | Block C, verify_claims check C13.of3 | [$-0.216$, $-0.045$], $-0.252$ on OpenFold3 [$-0.405$, $-0.099$] and $-0.184$ |
+| 0.099 | R366 | Block C, verify_claims check C14.of3 | [$-0.216$, $-0.045$], $-0.252$ on OpenFold3 [$-0.405$, $-0.099$] and $-0.184$ |
+| 0.277 | R367 | Block C, verify_claims check C13.protenix | on Protenix2 [$-0.277$, $-0.088$], over 23 receptors resampled as 16 paralog |
+| 0.088 | R367 | Block C, verify_claims check C14.protenix | on Protenix2 [$-0.277$, $-0.088$], over 23 receptors resampled as 16 paralog |
+| 23 | R367 | Block B, verify_claims check B32.chai | on Protenix2 [$-0.277$, $-0.088$], over 23 receptors resampled as 16 paralog |
+| 16 | R367 | Block B, verify_claims check B29.decoy,B29.shuffled,B41.cognate_active_engaged | on Protenix2 [$-0.277$, $-0.088$], over 23 receptors resampled as 16 paralog |
+| 15 | R381 | Block B, verify_claims check B17,B22,B41.apo_all | is 0.26--0.39 across backbones, on the 23-receptor panel. On the 15-receptor |
+| 67 | R382 | Block C, verify_claims check C07b | self-reference-excluded subset the receptor fractions are 67--87\% and the |
+| 0.45 | R383 | Block C, verify_claims check C13.boltz | median $\tau$ 0.20--0.45. Because its threshold was fixed in advance, this test |
+| 0.656 | R391 | Block B, verify_claims check B33.family | permutation null. On Chai-1 (0.706) and OpenFold3 (0.656) the same intervals |
+| 54 | R422 | Block A, verify_claims check EXCL | bimodal --- median dock rates of 54--56\% on Boltz-2 against 0--18\% on Chai-1 |
+| 0 | R422 | Block B, verify_claims check B05,B06,B23 | bimodal --- median dock rates of 54--56\% on Boltz-2 against 0--18\% on Chai-1 |
+| 18 | R422 | Block B, verify_claims check B29.cognate,B29.shuffled,B32.chai | bimodal --- median dock rates of 54--56\% on Boltz-2 against 0--18\% on Chai-1 |
+| 15.1 | R427 | Block C, verify_claims check C05.apo | across all 40,000 predictions: 15.1\% of apo-arm and 20.3\% of cognate-arm |
+| 20.3 | R427 | Block C, verify_claims check C05.cognate | across all 40,000 predictions: 15.1\% of apo-arm and 20.3\% of cognate-arm |
+| 1.52 | R430 | Block C, verify_claims check C07 | antagonist --- that figure is \textbf{1.52\%}. The contrast is not built on |
+| 17.5 | R431 | Block B, verify_claims check B29.cognate,B32.chai,B32.protenix | mis-docked ligands. Peptide agonists sit at a median of 17.5~\AA{} because |
+| 66.5 | R433 | Block B, verify_claims check B37.decoy | counting it as failure would produce a 66.5\% error rate where the true |
 
 ## NOT covered by any automated check
 
@@ -165,44 +197,42 @@ Known categories in what follows:
 | number | where | context |
 |---|---|---|
 | 380 | M10 | backbones, giving 380 receptor $\times$ backbone $\times$ arm cells and 9,490 |
-| 98 | M15 | structures. The reference set comprises \textbf{[PI: 98 empirical / 89 as |
-| 89 | M15 | structures. The reference set comprises \textbf{[PI: 98 empirical / 89 as |
-| 44 | M16 | previously stated]} unique Protein Data Bank entries across the panel --- 44 in |
-| 54 | M17 | an active-role and 54 in an inactive-role assignment --- drawn from a total |
-| 1,351 | M102 | an unsupervised geometric index over 1,351 class~A structures recovers |
-| 46 | M111 | 2$\times$46 and 6$\times$37 and hydroxyl positions at Ballesteros--Weinstein |
-| 37 | M111 | 2$\times$46 and 6$\times$37 and hydroxyl positions at Ballesteros--Weinstein |
-| 0.1.0 | M145 | frozen scorer (version 0.1.0, commit  ) recorded per row. |
-| 1,000 | M149 | The cluster bootstrap is authoritative: 1,000 resamples over 26 paralog |
-| 20260909 | M150 | clusters, seed 20260909. A receptor-level bootstrap is reported as secondary, in |
-| 42 | M154 | Eleven of the 26 clusters are singletons (42\%), so the paralogy correction acts |
-| 2.4 | M164 | removes model-side atom clashes with   below 2.4~\AA. These |
-| 29 | M165 | two together remove 29 rows (0.31\%) and are applied everywhere. |
-| 0.31 | M165 | two together remove 29 rows (0.31\%) and are applied everywhere. |
-| 4,890 | M167 | E3 (4,890 rows) flags receptors whose reference fails its own predicate on a |
-| 4,690 | M169 | (4,690 rows, 24 receptors) or   (2,000 rows, 10 |
-| 2,000 | M169 | (4,690 rows, 24 receptors) or   (2,000 rows, 10 |
-| 2,295 | M173 | (2,295 rows) have no measurable value because the axis is undefined for them |
-| 2,395 | M175 | not exist --- while a further 12 receptors (2,395 rows) have a measurable |
-| 1,495 | M182 | E4 (1,495 rows) restricts to Class~A; Class~B and~F are reported separately as |
-| 500 | M183 | instrument scope. E5 (500 rows) marks agonist-only actives and is shown as a |
-| 1,600 | M195 | 1,600 rows and 32 receptors per backbone. |
-| 43 | M204 | substantial: of the 43 panel active-state references carrying a deposition date, |
-| 35 | M205 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
-| 81 | M205 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
-| 06 | M205 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
-| 01 | M205 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
-| 09 | M206 | (44\%) predate Protenix2's 2021-09-30, and 15 (35\%) predate Chai-1's |
-| 30 | M206 | (44\%) predate Protenix2's 2021-09-30, and 15 (35\%) predate Chai-1's |
-| 1.000000 | M229 | implementations and agree bit-exactly (Pearson $r = 1.000000$). The predicate |
-| 96.3 | M232 | independently: the TM6 helicity anchor holds on 96.3\% of rows. |
-| 162 | M246 | is \textbf{[PI: 162 empirical / 127 as previously stated]}. Several references |
-| 127 | M246 | is \textbf{[PI: 162 empirical / 127 as previously stated]}. Several references |
-| 9.5 | M271 | Hamming distance of 9.5, and each shuffled donor is checked against the |
-| 0.09 | M288 | 0.06--0.09 on conditional activation rates. Engagement is a separate, |
-| 0.90 | M299 | independent evidence. Receptor-level intervals are 0.90--1.26$\times$ the width |
-| 1.26 | M299 | independent evidence. Receptor-level intervals are 0.90--1.26$\times$ the width |
-| 168 | R11 | reference structures, where the answer is already known. Across 168 reference |
+| 98 | M20 | data.]} The reference set comprises \textbf{[PI: 98 empirical / 89 as |
+| 89 | M20 | data.]} The reference set comprises \textbf{[PI: 98 empirical / 89 as |
+| 44 | M21 | previously stated]} unique Protein Data Bank entries across the panel --- 44 in |
+| 1,351 | M107 | an unsupervised geometric index over 1,351 class~A structures recovers |
+| 46 | M116 | 2$\times$46 and 6$\times$37 and hydroxyl positions at Ballesteros--Weinstein |
+| 37 | M116 | 2$\times$46 and 6$\times$37 and hydroxyl positions at Ballesteros--Weinstein |
+| 0.1.0 | M150 | frozen scorer (version 0.1.0, commit  ) recorded per row. |
+| 1,000 | M154 | The cluster bootstrap is authoritative: 1,000 resamples over 26 paralog |
+| 20260909 | M155 | clusters, seed 20260909. A receptor-level bootstrap is reported as secondary, in |
+| 42 | M159 | Eleven of the 26 clusters are singletons (42\%), so the paralogy correction acts |
+| 2.4 | M169 | removes model-side atom clashes with   below 2.4~\AA. These |
+| 29 | M170 | two together remove 29 rows (0.31\%) and are applied everywhere. |
+| 0.31 | M170 | two together remove 29 rows (0.31\%) and are applied everywhere. |
+| 4,890 | M172 | E3 (4,890 rows) flags receptors whose reference fails its own predicate on a |
+| 4,690 | M174 | (4,690 rows, 24 receptors) or   (2,000 rows, 10 |
+| 2,000 | M174 | (4,690 rows, 24 receptors) or   (2,000 rows, 10 |
+| 2,295 | M178 | (2,295 rows) have no measurable value because the axis is undefined for them |
+| 2,395 | M180 | not exist --- while a further 12 receptors (2,395 rows) have a measurable |
+| 1,495 | M187 | E4 (1,495 rows) restricts to Class~A; Class~B and~F are reported separately as |
+| 1,600 | M200 | 1,600 rows and 32 receptors per backbone. |
+| 43 | M209 | substantial: of the 43 panel active-state references carrying a deposition date, |
+| 35 | M210 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
+| 81 | M210 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
+| 06 | M210 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
+| 01 | M210 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
+| 09 | M211 | (44\%) predate Protenix2's 2021-09-30, and 15 (35\%) predate Chai-1's |
+| 30 | M211 | (44\%) predate Protenix2's 2021-09-30, and 15 (35\%) predate Chai-1's |
+| 1.000000 | M234 | implementations and agree bit-exactly (Pearson $r = 1.000000$). The predicate |
+| 96.3 | M237 | independently: the TM6 helicity anchor holds on 96.3\% of rows. |
+| 162 | M251 | is \textbf{[PI: 162 empirical / 127 as previously stated]}. Several references |
+| 127 | M251 | is \textbf{[PI: 162 empirical / 127 as previously stated]}. Several references |
+| 9.5 | M277 | Hamming distance of 9.5, and each shuffled donor is checked against the |
+| 0.90 | M305 | independent evidence. Receptor-level intervals are 0.90--1.26$\times$ the width |
+| 1.26 | M305 | independent evidence. Receptor-level intervals are 0.90--1.26$\times$ the width |
+| 5,000 | M365 | spanning those 23 receptors, 5,000 resamples, seed 1234. Receptor-level |
+| 1234 | M365 | spanning those 23 receptors, 5,000 resamples, seed 1234. Receptor-level |
 | 167 | R12 | rows --- 167 unique PDB entries, one of which is scored twice because it serves |
 | 159 | R14 | on 159 and deviated on nine, five annotated active and four annotated inactive. |
 | 111 | R48 | than a graded shift: 111 of 160 apo cells never fire the predicate on any of 25 |
@@ -247,9 +277,6 @@ Known categories in what follows:
 | 0.07 | R164 | amplitude reproduction. Protenix2's interval, $[0.07, 0.55]$, excludes zero: a |
 | 0.55 | R164 | amplitude reproduction. Protenix2's interval, $[0.07, 0.55]$, excludes zero: a |
 | 0.30 | R172 | slopes are negative (Boltz-2 $-0.30$, Chai-1 $-0.66$). A negative slope is not |
-| 4 | R191 | correctness --- on two of four backbones (Fig.~4, Table~4). |
-| 0.10 | R193 | Whole-complex against anchor-restricted Pearson correlations are $-0.10$ (null) |
-| 0.22 | R194 | against $-0.22$ (signed) for Boltz-2; $+0.07$ (null) against $-0.16$ (null) for |
 | 0.63 | R195 | Chai-1; $-0.26$ (signed) against $-0.63$ (signed) for OpenFold3; and $+0.33$ |
 | 0.33 | R195 | Chai-1; $-0.26$ (signed) against $-0.63$ (signed) for OpenFold3; and $+0.33$ |
 | 0.49 | R207 | useful decision metric'' for \emph{ligand pose} ($R^2 = 0.49$); their |
@@ -264,7 +291,6 @@ Known categories in what follows:
 | 0.747 | R244 | [0.445, 0.664] decoy, 0.809 [0.747, 0.869] shuffled, 0.891 [0.838, 0.942] |
 | 0.869 | R244 | [0.445, 0.664] decoy, 0.809 [0.747, 0.869] shuffled, 0.891 [0.838, 0.942] |
 | 0.838 | R244 | [0.445, 0.664] decoy, 0.809 [0.747, 0.869] shuffled, 0.891 [0.838, 0.942] |
-| 0.5 | R255 | not: within $\pm$0.5~\AA{} of the tilt threshold the cognate arm carries |
 | 1.06 | R256 | \emph{less} mass than the shuffled arm on three of four backbones (1.06\% |
 | 3.33 | R257 | against 3.33\% on Boltz-2, 0.39\% against 1.89\% on OpenFold3, 0.00\% against |
 | 0.39 | R257 | against 3.33\% on Boltz-2, 0.39\% against 1.89\% on OpenFold3, 0.00\% against |
@@ -290,3 +316,21 @@ Known categories in what follows:
 | 2.79 | R332 | receptors with an interval of [$-2.79$, $+0.14$], and |
 | 0.14 | R332 | receptors with an interval of [$-2.79$, $+0.14$], and |
 | 1.62 | R339 | survive: its pocket-C$\alpha$ separation of 1.62~\AA{} ranks 34th of 40, in the |
+| 65 | R355 | apo arm and ceiling-pinned in the cognate arm, leaving roughly 65\% of |
+| 0.306 | R365 | backbones: $-0.306$~\AA{} on Boltz-2 [$-0.454$, $-0.164$], $-0.137$ on Chai-1 |
+| 0.137 | R365 | backbones: $-0.306$~\AA{} on Boltz-2 [$-0.454$, $-0.164$], $-0.137$ on Chai-1 |
+| 0.184 | R366 | [$-0.216$, $-0.045$], $-0.252$ on OpenFold3 [$-0.405$, $-0.099$] and $-0.184$ |
+| 87 | R379 | positive and significant Kendall's $\tau$ on \textbf{65--87\% of receptors} --- |
+| 0.20 | R383 | median $\tau$ 0.20--0.45. Because its threshold was fixed in advance, this test |
+| 0.852 | R389 | curve of 0.852 on Boltz-2 and 0.825 on Protenix2, with cluster-bootstrap |
+| 0.825 | R389 | curve of 0.852 on Boltz-2 and 0.825 on Protenix2, with cluster-bootstrap |
+| 0.560 | R390 | intervals of [0.560, 0.974] and [0.528, 0.960] that exclude both chance and a |
+| 0.974 | R390 | intervals of [0.560, 0.974] and [0.528, 0.960] that exclude both chance and a |
+| 0.528 | R390 | intervals of [0.560, 0.974] and [0.528, 0.960] that exclude both chance and a |
+| 0.960 | R390 | intervals of [0.560, 0.974] and [0.528, 0.960] that exclude both chance and a |
+| 0.706 | R391 | permutation null. On Chai-1 (0.706) and OpenFold3 (0.656) the same intervals |
+| 0.351 | R392 | reach 0.351 and 0.382. \textbf{Those two backbones are inconclusive, not |
+| 0.382 | R392 | reach 0.351 and 0.382. \textbf{Those two backbones are inconclusive, not |
+| 6.93 | R420 | 6.93\% of predictions place the ligand within 3~\AA{} of its reference pose on |
+| 56 | R422 | bimodal --- median dock rates of 54--56\% on Boltz-2 against 0--18\% on Chai-1 |
+| 40,000 | R427 | across all 40,000 predictions: 15.1\% of apo-arm and 20.3\% of cognate-arm |
