@@ -252,3 +252,51 @@ reviews can still be wrong, and drawing it is what finds out.**
 
 **To close.** Relabel the SC-C-2 table, or report both columns. The underlying
 JSON is correct and self-describing; only the claim sheet's heading is wrong.
+
+## D-C-9 — NEW: the 2x2's scope cannot be confirmed, and its own cell counts are mislabelled
+
+Raised 2026-09-10 when the corpus session rendered BC-1 and found the panel
+asserting **"APO ARM ONLY"** on its face while the SI caption beneath it said
+the shipped counts contradict that by a factor of two. A figure and its own
+caption disagreeing on one page is what a referee circles.
+
+**Checked, and neither side is confirmable from the bundle.**
+
+`06_2x2_interaction/stage3_2x2_ligand_state_specificity.json` **ships no row
+counts at all.** Its only per-cell field is `n_clusters`, and it holds 28 for
+the agonist cells and 23 for the antagonist ones. Those cannot be cluster
+counts: SC-C-1 resamples **16** paralog clusters over 23 receptors, and 28
+exceeds the receptor count outright. The field is holding receptor counts under
+a cluster name — a third self-mislabelled column in this block, after SC-C-2's
+"Kendall's tau" that holds a fraction of receptors and `flag_low_confidence`
+that cannot fire.
+
+The census *can* be decomposed by role and arm, which was thought not to be
+possible, and it does not settle the question either:
+
+| role | receptors | rows per backbone, per arm | both arms |
+|---|---:|---:|---:|
+| `full_agonist` | 35 | 1,750 | 3,500 |
+| `neutral_antagonist` | 29 | 1,450 | 2,900 |
+
+Both arms are equally populated across the whole census, 20,000 / 20,000. But 35
+and 29 are **supersets** of the 2x2's 28 and 23, so the census neither confirms
+nor refutes the arm filter on the subset the interaction was estimated on.
+
+**What is true, and what the panel now says.** The apo-only scope is stated as
+*intent* rather than as fact, with one clause recording that the shipped files
+cannot confirm the filter was applied. The design reason for wanting apo-only is
+sound and is kept: with a cognate Ga in the complex the contrast cannot be
+attributed to the ligand, because the partner supplies both mass and a strong
+conformational preference of its own.
+
+`rows.tier3.v2.csv` settles it in one line and did not ship. **It is the same
+file the G4 gate needs** — Block C `DATA_REQUESTS.md` ask 1 now blocks two
+separate Block C claims, which raises its priority above everything else in that
+document.
+
+**A correction to how this was reported to us.** The escalation cited shipped
+`n_rows` of 2,800 and 2,300. Those values are not in the file; only `n_clusters`
+is. The 2x factor was inferred rather than read, and the inference may well be
+right — 28 x 100 is 2,800 — but it is not something the bundle states.
+

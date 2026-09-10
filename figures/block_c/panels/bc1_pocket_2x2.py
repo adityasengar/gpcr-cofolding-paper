@@ -72,7 +72,28 @@ def main():
 
     fs.panel_label(ax, "a", dx=-0.12); fs.panel_label(axi, "b", dx=-0.30)
 
-    note = (u"APO ARM ONLY. With a cognate Gα in the complex the contrast cannot "
+    # SCOPE IS STATED AS INTENT, NOT AS FACT, and the reason is that nothing
+    # shipped can confirm it. The panel asserted "APO ARM ONLY" until
+    # 2026-09-10, and the SI caption beneath it said the shipped counts
+    # contradict that -- a figure and its own caption disagreeing on one page.
+    #
+    # Checked here, and NEITHER side is confirmable from the bundle:
+    #   - stage3_2x2_ligand_state_specificity.json ships NO row counts. Its only
+    #     per-cell field is `n_clusters` = 28 and 23, which cannot be cluster
+    #     counts: SC-C-1 resamples 16 paralog clusters over 23 receptors, and 28
+    #     exceeds the receptor count. It is holding receptor counts under a
+    #     cluster name.
+    #   - the census CAN be decomposed by role and arm, and gives 35 agonist and
+    #     29 antagonist receptors at 50 samples per cell per arm -- 1,750 and
+    #     1,450 per backbone per arm, both arms equally populated at
+    #     20,000/20,000. Those are supersets of the 2x2's 28 and 23, so they
+    #     neither confirm nor refute the arm filter.
+    # rows.tier3.v2.csv would settle it in one line and did not ship. It is
+    # Block C DATA_REQUESTS ask 1, the same file the G4 gate needs.
+    note = (u"INTENDED SCOPE: APO ARM ONLY, and the shipped files cannot confirm "
+            u"the filter was applied — the 2×2 artefact carries no row counts, and "
+            u"the census is a superset. See the caption. The design reason for the "
+            u"scope: with a cognate Gα in the complex the contrast cannot "
             u"be attributed to the ligand, because the partner supplies both mass "
             u"and a strong conformational preference of its own; the apo scope is "
             u"what makes this a statement about the ligand. n=23 receptors "
@@ -108,6 +129,11 @@ def main():
 
     p = fs.save(fig, "bc1_pocket_2x2")
     print(todo)
+    print("BC-1 scope note: the apo-only filter is UNCONFIRMABLE from the "
+          "bundle.\n  stage3_2x2 ships no row counts; its `n_clusters` 28/23 "
+          "are receptor counts.\n  Census decomposes to 35 agonist / 29 "
+          "antagonist receptors, both arms 20,000/20,000.\n  "
+          "rows.tier3.v2.csv settles it. Block C DATA_REQUESTS ask 1.")
     print("BC-1 ->", p[0])
     for bb in B.BACKBONES:
         k = cb[bb]["cluster_boot"]
