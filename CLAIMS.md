@@ -29,7 +29,14 @@ cognate arm supplies the whole Gα subunit, with `d_ga_alpha5_r350_ca` and
 Block A's job is therefore to establish, at panel scale and on four independent
 backbones, that **a co-folded partner drives active-state geometry**, together
 with the instrument that measures it and an honest account of what the models do
-not do. **Block B supplies the reduced 21-mer arm** and carries the titular
+not do.
+
+**"Groundwork" is the right internal word and the wrong published one.** Four
+corpus papers build an instrument and then apply it — `ku2026promise`,
+`bryant2024cfold`, `paajanen2026activation`, `liu2026ensembletests` — and none
+frames the first half as setup; each claims the instrument as a contribution in
+its own abstract. Block A's calibration section should assert the predicate as a
+result, not as permission for what follows. **Block B supplies the reduced 21-mer arm** and carries the titular
 claim; without Block A's instrument and controls it would rest on far less.
 
 Two rules follow, and they are load-bearing:

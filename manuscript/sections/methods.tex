@@ -147,6 +147,31 @@ and the minimum over those anchors. Correlations are computed over approximately
 hoc, after all three had been computed.} All three are reported in Table~4. The
 disclosure, not the designation, is what the result rests on.
 
+\subsection*{Training-set exposure}
+
+No anti-memorization arm was run in this block, and the exposure is
+substantial: of the 43 panel active-state references carrying a deposition date,
+\textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19
+(44\%) predate Protenix2's 2021-09-30, and 15 (35\%) predate Chai-1's
+2021-01-12 \textbf{[PI: confirm the OpenFold3 cutoff]}. The reference active
+states are themselves G protein complexes, so supplying a complete cognate
+G$\alpha$ to a model trained on such complexes is closer to naming a deposited
+structure than a held-out prediction would be.
+
+We therefore make no claim that these predictions are prospective, and none
+that they are free of memorization. The relevant evidence is indirect and lies
+in the negatives: a model retrieving a remembered complex should reproduce that
+complex's geometry, including how far its TM6 moves, yet receptor-to-receptor
+amplitude is not reproduced on three of four backbones and only weakly on the
+fourth. Retrieval predicts the opposite. This is an argument, not a control; a
+date-stratified holdout is required to settle it and is reported separately.
+
+The concern is not hypothetical for this class of model. Predicted conformational
+outcomes have been shown to track the apo:holo ratio of available training
+structures rather than the ligand supplied, with pLDDT unable to separate binders
+from nonbinders \citep{yu2026domainmotion}, and memorization effects are
+documented for structure prediction more broadly \citep{swapna2025memorization}.
+
 \subsection*{Data-layer verification}
 
 Both predicate axes were independently recomputed against non-scorer

@@ -40,7 +40,10 @@ the collapse onto a single basin, and its state, are established for this
 receptor class \citep{heo2022multistate,chib2025gpcrstates}. Given
 the receptor sequence together with its cognate G$\alpha$, they are
 predominantly active. The direction is consistent on all four backbones across
-the 40 Class~A receptors (Fig.~2, Table~2), and it behaves as a switch rather
+the 40 Class~A receptors (Fig.~2, Table~2), though with a five-fold spread in
+magnitude --- agreement in sign across four models is one bit of information, and
+Chai-1's $+1.05$~\AA{} against Protenix2's $+5.31$~\AA{} should not be read as
+four independent confirmations of a single effect size. It behaves as a switch rather
 than a graded shift: 111 of 160 apo cells never fire the predicate on any of 25
 seeds, while 108 of 159 cognate cells fire on all 25. The distributions behind
 those calls, and the shift in magnitude rather than in call, are in
@@ -66,19 +69,36 @@ template-biased alternatives (p.~6302), and attribute the gain to co-folding
 rather than to training-set composition (p.~6305);
 \citet{ye2026multistatebias} report that ``large protein partners drive clear
 conformational switching between states'' where small molecules do not (p.~2).
-Our contribution is not the direction of the effect but its scale and its
-controls. Four differences are checkable. First, neither study uses an
-AF3-lineage backbone; \citet{chiesa2025templatebias} run AlphaFold2 and
-AlphaFold-Multimer only, and propose their benchmark as ``a baseline'' for newer
-models (p.~6299). Second, neither has an apo arm: only 16 of 145 structures in
-that benchmark represent the receptor bound to G protein alone (p.~6302), and in
-\citet{zhang2026generalization} the ligand is present in both arms, so the
-reported gain is the marginal effect of adding a transducer to an
-already-agonist-bound receptor. Third, both score by RMSD to the deposited
-active reference of the same complex, which cannot be evaluated where no active
-structure exists; we apply an operationalised predicate instead. Fourth, neither
-runs a decoy or scrambled-partner arm, so partner occupancy and partner identity
-are never separated.
+Our contribution is not the direction of the effect but the instrument, the
+scale, and what the negatives show.
+
+First, and most consequentially, **both prior studies score by RMSD to the
+deposited active reference of the same complex.** That is not a stylistic
+difference: their procedure cannot be run on a receptor whose active structure
+has never been solved, and it makes ``active'' mean proximity to one deposited
+answer. We apply an operationalised geometric predicate instead, computed on the
+predicted structure alone, which is measurable wherever the sequence is.
+Relatedly, 129 of the 145 references in \citet{chiesa2025templatebias} are
+ligand-bound, so their target state is agonist-plus-G protein rather than an
+intrinsic geometry.
+
+Second, **the instrument is itself calibrated and its failures reported.** We
+score the entire reference set with the same predicate used on predictions and
+characterise every deviation by cause (Fig.~1b). We are not aware of a prior
+study in this area that does so.
+
+Third, **the effect is shown on four independently trained architectures.**
+\citet{chiesa2025templatebias} test one model family, and must argue separately
+that the advantage is not merely an active-state-biased training set --- the gain
+``should not be attributed only to a more recent and active-state biased training
+set, but rather to its ability in modeling allosteric effects during the
+cofolding process'' (p.~6305). Architecture independence supplies that argument
+directly rather than by inference. That study explicitly proposed its benchmark
+as ``a baseline'' for newer models (p.~6299); this is that evaluation.
+
+Fourth, **the evidence is distributional rather than a point estimate**: 9{,}490
+predictions with cluster bootstraps over 26 paralog clusters, against pooled
+means with standard deviations over 31 families.
 
 The arm reported here supplies the complete cognate G$\alpha$ subunit. Whether a
 reduced partner --- the $\alpha$5 C-terminus alone --- is sufficient, and whether
