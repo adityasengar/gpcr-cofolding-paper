@@ -48,10 +48,50 @@ grep -rl "<name of anything deleted this session>" \
 Fix the machinery and the briefs. `lit/notes/` hits are usually other papers'
 filenames — check before editing.
 
-## Step 4 — refresh the two durable files
+## Step 4 — write the session log
 
-**`SESSIONS.md`** — append what changed and *why*, and what the next session
-should not redo. Git records what; this records why.
+**`sessions/<YYYY-MM-DD>_<topic>.md`** — a new file per session, not an append.
+Five headings, and the middle two are the ones that earn their keep:
+
+- what happened
+- **decisions the user made, with their reasons** — an outcome without its
+  reason gets re-litigated
+- what the verification found
+- **what I got wrong and corrected** — there is always something, and this is
+  the section a future session will thank you for
+- what the next session should not redo
+
+Then add one line to **`SESSIONS.md`**, which is the index, newest first.
+
+## Step 5 — carry the durable parts upward
+
+Most of a session belongs only in its log. A few things belong where they will
+be read automatically, and the wrap is the moment to promote them.
+
+**`CLAUDE.md`** — the orchestrator's brief, auto-loaded every session. Promote a
+finding only if a session that never read the log would go wrong without it: a
+changed convention, a file that no longer exists, a rule that was violated and
+now has a guard. Do **not** promote findings, numbers, or anything tied to one
+block — those live in `analysis/block_<x>/`. If something in `CLAUDE.md` became
+false this session, fixing it matters more than adding anything.
+
+Also check the other briefs if their subject moved: `figures/CLAUDE.md`,
+`lit/CLAUDE.md` (propose, do not edit — it belongs to the lit session), and any
+skill whose described state has changed.
+
+**`MEMORY.md`** — the user's durable memory, at
+`~/.claude/projects/<project>/memory/`. Different bar entirely: this is for
+things true **beyond this session and beyond this block** — how Aditya works,
+standing preferences, project-level invariants. One fact per file, with a
+`**Why:**` and a `**How to apply:**`, and a line added to `MEMORY.md`.
+
+The test: *would a session starting fresh next month, on a different block, still
+need this?* Project state fails that test and belongs in the repo. A preference
+he has expressed, or a trap that will recur, passes it.
+
+Check what is already there before writing — update rather than duplicate.
+
+## Step 6 — refresh the handover
 
 **`HANDOVER.md`** — rewrite, do not append. It must answer, in this order:
 where the project is; the decisions waiting on Aditya; how the sessions divide;
@@ -59,7 +99,7 @@ what to do when the next block arrives; what was learnt the hard way; and where
 the state lives. If a decision was resolved this session, remove it. If a new
 one opened, add it at the top.
 
-## Step 5 — emit the two prompts
+## Step 7 — emit the two prompts
 
 ### The compact prompt
 
