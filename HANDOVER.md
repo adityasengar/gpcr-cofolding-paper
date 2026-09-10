@@ -4,69 +4,144 @@ Start in `paper/`. `CLAUDE.md` loads automatically; read it, then this.
 
 ## Where the project is
 
-A manuscript on GPCR co-folding. **Blocks A, B and C are all written** into
-`manuscript/sections/`. Main text 45 pages, SI 18, 65 bibitems, zero undefined.
+**Four blocks are landed, verified and written.** 53 pages, SI 18, 67 bibitems,
+0 undefined citations. Four verifiers, one per block:
 
-| block | what it varies | state |
-|---|---|---|
-| **A** | partner present or absent | Results, Methods, 5 main figures, 16 SI, 8 tables |
-| **B** | which partner, and how much of it | Results, Methods, 6 panels (BB-1..BB-6) |
-| **C** | which ligand | Results, Methods, limitations, 4 panels (BC-1..BC-4) |
+| block | checks | reproduce | note |
+|---|---|---|---|
+| A | 63 | 48 | 15 mismatches, all documented |
+| B | 116 | 95 | 21 mismatches, all documented |
+| C | 64 | 64 | 30 of them consistency-only — one row-level file |
+| **D** | 54 | 49 | **and 12 claims recorded as PROSE-ONLY** |
 
-Three verifiers, all runnable, mismatch counts expected and documented:
-`analysis/block_{a,b,c}/verify_claims.py` — 47 checks / 15 mismatches,
-109 / 21, 53 / 0.
+**Block D shipped no row-level data at all.** The three corpora its claim sheet
+names — 42,180 predictions — are not in the bundle. That forced a third label
+into the verifier: `RECOMPUTED`, `CONSISTENCY`, `PROSE-ONLY`, with the last
+printed in its own total so "N checks pass" can never be read as "N claims
+verified". What could be recomputed held, including all six exact binomial
+intervals and fifteen NPxxY distances measured from the coordinates.
 
-**Two of the paper's three title clauses have no evidence in any landed block.**
-No arm anywhere supplies a 21-residue peptide or an agonist: `ligand_type` is
-NaN on all 32,000 Block B rows and Block A has no ligand column at all. At the
-top of `CLAIMS.md`. Until resolved, no sentence may imply either result.
+**Three independent re-verifications ran on Blocks A, B and C** (corpus session,
+read-only agents that deliberately did not read our discrepancy reports). Their
+verdict on the data is unanimous and good: every aggregate rebuilds bit-exactly
+from the row tables, 79/80 and 103/103 manifest hashes match. **Every defect
+they found is claim-side.** Four landed on files I own; all four are fixed and
+one turned out to be my error, withdrawn.
 
-**The nearest thing to a precedent is in our own reference set, and it is
-weaker than it first reads.** 4X1H, the OPSD active reference, is opsin bound to
-a Gα$_t$ C-terminal peptide alone — the only peptide-bound entry among 80
-references, and our instrument calls it active on both axes. But the peptide is
-an **engineered 11-mer**, not the native 21-mer: `VLEDLKSCGLF` against
-UniProt P04695's `IKENLKDCGLF`, four differences in eleven positions. **Not
-citable as precedent for a wild-type 21-mer.** It does strengthen the
-anti-memorization argument — no wild-type 21-mer α5-CT appears with a receptor
-in any deposited structure — and OPSD is still where to start a 21-mer arm, as
-that arm's motivation rather than its scoring reference. Found by the lit session
-2026-09-10, confirmed here; full record in `CLAIMS.md` and
-`analysis/block_b/DISCREPANCY_REPORT.md` D-B-9.
+**Two things that changed what the paper says**, both verified end-to-end here:
 
-**The generalisable half: nothing in this project checks the sequence of a
-non-receptor chain.** The construct audit reads the receptor entity only, and
-RCSB reports zero mutations for 4X1H's peptide because it is deposited as its own
-derived-peptide molecule — so our check would have returned clean. 25 of 40
-active references carry `active_stabilization_source = native` and no partner
-sequence behind any of them has been compared to UniProt. Request is filed in
-`rebuttals/PANEL_EXPANSION.md` §6.
+- **The α5-CT decomposition term was confounded and a clean one was already in
+  the drop.** The shipped term credits 34% to `decoy → shuffled`, but *shuffled*
+  is a different Gα family, so that step changes tail, scaffold, length and
+  family at once. `decoy → cognate` holds everything fixed but the eleven
+  C-terminal residues: **+0.333 [0.242, 0.432]**, telescoping exactly with
+  occupancy (0.400 + 0.333 = 0.733). The clean contrast is *larger* than the
+  confounded one it replaces.
+- **The peptide claim was live in three places, two of them figure captions**,
+  and is now gone. No arm supplies a peptide; the manipulated segment is eleven
+  residues, not twenty-one.
+
+**Nothing has been sent upstream and no main-text figure panel has been drawn.**
+The figure allocation is proposed and on hold — four of its six figures rest on
+numbers under revision.
 
 ## The decisions waiting on Aditya
 
-1. **Pick the graphical abstract.** Five candidates, all built and open:
-   `ga1_hero` (three-scene composition, warmest), `ga_style1_pipeline` (safest,
-   least memorable by its own account), `ga_style2_population` (most defensible
-   — the renders cannot be read as the evidence), `ga_style3_superposition` (the
-   only true within-receptor contrast), `ga_style4_axis` (most striking at
-   thumbnail; threshold as a place on the page). The two best ideas —
-   population-as-hierarchy and threshold-as-place — are separable and could be
-   combined.
-2. **The steric-exclusion observation** — α5 heavy atoms within 4 Å of TM6:
-   52% and 39% against deposited *inactive* structures, 11% against active,
-   2–4% against the prediction's own TM6. A mechanical account of why the
-   co-input works, but n = 2 receptors and the active control is not zero.
-   Needs an import before it can enter Results.
+**Read this section first. It changed completely on the night of 2026-09-10,
+when Block D landed and three independent re-verifications came back.**
 
-3. **D9** — the reference-set denominator: 89 as previously stated, 98
-   empirical, 167 total. Two `[PI]` placeholders sit in `methods.tex`.
-4. **D19** — were the 80 threshold rows selected by crystallographic tier, or by
-   curated state label? The first leaves the instrument independent of the
-   annotation; the second does not. Costs no compute; someone knows.
+### A. Four claim-side findings that need your call, not mine
 
-`analysis/block_a/DATA_REQUESTS.md` is paste-ready for the pipeline agent and
-holds these plus six more.
+Each changes the *shape* of a result rather than a sentence, so I recorded them
+and stopped. All four are verified — the data reproduces; the claims about it do
+not.
+
+1. **The pLDDT result's "two of four backbones" is an arm-pooling artifact.**
+   The correlations score apo *and* cognate rows against the **active**
+   reference, which is the wrong target for apo, and the two arms differ in both
+   variables at once. Conditioned on arm: cognate gives −0.30 / −0.43 / −0.42 /
+   −0.16, all four negative and consistent, OpenFold3 no longer an outlier; apo
+   gives +0.04 / +0.01 / −0.37 / +0.10. **The direction survives — confidence
+   still does not track state correctness — but the per-backbone split does
+   not.** The honest version is simpler and stronger: all four backbones, one
+   direction, no outlier. `[PI]` in `results.tex`; recomputation in
+   `analysis/block_a/DISCREPANCY_REPORT.md`.
+
+2. **Block C's G4 gate fired and its remedy was never applied.** The gating
+   report states the rule in advance: if off-site fraction is material (≥5% per
+   backbone per class), restate G1 and G2 on the on-site subset. It fires on
+   **8 of 12 cells** — agonist off-site is 27.9–34.9% on every backbone — and
+   the adjudication used the 1.52% small-molecule figure, which excludes the
+   peptide-agonist rows the claim actually runs on. **This is the most serious
+   finding in any of the four blocks**, and closing it needs
+   `rows.tier3.v2.csv`, which did not ship. It may change the Block C result's
+   shape, not just its wording.
+
+3. **Two intervals are the wrong bootstrap.** SC-C-5's CI is a *row* bootstrap
+   where the same claim sheet states "row-boot is invalid"; a genuine receptor
+   bootstrap spans zero. SC-B-2's Protenix family CI crosses zero on both scales
+   and in both frames, and is currently written as "squarely positive".
+
+4. **The 2×2's "apo arm alone" scope is out by exactly a factor of two** — the
+   shipped counts are both arms pooled.
+
+### B. The title, and it is now a narrow question
+
+The paper's title claims a **21-residue** peptide. Four blocks have landed and:
+
+- **no arm in any of them supplies a peptide of any length** — every partner arm
+  supplies a complete Gα subunit or a nanobody;
+- **the segment this work actually manipulates is eleven residues** — the decoy
+  construct edits the last eleven, the partner-tail covariate is computed over
+  eleven, and 4X1H, the only peptide-bound entry in the reference set, is an
+  engineered eleven-residue analogue.
+
+So the narrowed title is about **a Gα co-input and its C-terminal determinant**,
+not a peptide of any size. The alternative is to run the arm. `[PI]` markers sit
+in `intro.tex` and `methods.tex`; `CLAIMS.md` C6 and C7 carry the detail.
+
+### C. The two `real`-class experiments, for the brainstorm you asked for
+
+Not to be chosen without you — this is the material, not the decision.
+
+- **An isolated 21-mer arm** (Block B S2). Converts the title from a claim to a
+  result. Start on OPSD, but *not* scored against 4X1H, which is an 11-mer
+  analogue.
+- **A post-cutoff inactive-nanobody complex** (Block D S2), ~600 predictions on
+  one receptor. Converts Block D's largest caveat into a result **in either
+  direction**: if steering still fails on a complex the models have not seen,
+  the limitation is real; if it succeeds, the negative was an availability
+  artifact.
+- **Crossing MSA depth with partner presence** (Block D S3). Of 81 corpus papers
+  exactly one crosses those inside a single model, and it is AlphaFold2 with a
+  post-hoc docked ligand.
+- **An agonist-alone result may already exist and cost nothing.** Block C holds
+  **7,000 apo × agonist predictions over 35 receptors** and reports no state
+  result on them. Whether that can be quoted is Block C's Q5 and needs a ruling
+  from you or the pipeline team.
+
+### D. Still open from before, unchanged
+
+1. **Pick the graphical abstract.** Five candidates, all built:
+   `ga1_hero` (warmest), `ga_style1_pipeline` (safest), `ga_style2_population`
+   (most defensible — the renders cannot be read as the evidence),
+   `ga_style3_superposition` (the only true within-receptor contrast),
+   `ga_style4_axis` (most striking at thumbnail). The two best ideas —
+   population-as-hierarchy and threshold-as-place — are separable and combinable.
+2. **The steric-exclusion observation** — α5 heavy atoms within 4 Å of TM6: 52%
+   and 39% against deposited *inactive* structures, 11% against active, 2–4%
+   against the prediction's own TM6. A mechanical account of why the co-input
+   works, but n = 2 receptors and the active control is not zero. Needs an
+   import before it can enter Results.
+3. **The reference-set denominators** — 89 as previously stated, 98 empirical,
+   167 total. Two `[PI]` placeholders in `methods.tex`.
+4. **Were the 80 threshold rows selected by crystallographic tier or by curated
+   state label?** The first leaves the instrument independent of the annotation;
+   the second does not. Costs no compute; someone knows.
+
+`analysis/block_{a,b,c,d}/DATA_REQUESTS.md` and `rebuttals/BLOCK_{A,B,C,D}.md`
+are paste-ready and hold these plus sixty-odd more. Nothing has been sent
+upstream.
 
 ## Now decidable: the main-text figure budget
 
