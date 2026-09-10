@@ -215,36 +215,54 @@ status  ready — it must imply NOTHING about magnitude, and it carries no arrow
 
 ### GA-1 — the graphical abstract: one co-input, one state change
 ```
-claim   C6, C7 — SC-1, in one frame
-shows   a receptor predicted alone sits below both predicate thresholds; the
-        same models given the cognate Ga cross both at once; and the effect is
-        panel-wide, not anecdotal. Three renders, each carrying its own two
-        measured distances IN FRAME, over two data panels that hold the
-        population the renders were drawn from
-data    a  AA2AR/boltz/apo row 567 (n=25 in cell, 100th pctile on plddt_mean)
-        b,c DRD2/of3/cognate row 8285 (n=25 in cell, 50th pctile on
-           rmsd_to_active_ref), c against 7JVR
-        d  01_rows/block_a_rows.csv, core (E1+E2), Class A, both axes
-           measurable, n = 7,166 of 7,966; 69 Class A references overlaid;
-           800 rows with no NPxxY value drawn as a rug, not dropped
-        e  per-cell active fraction over 25 seeds, 159 paired Class A cells
-build   python3 block_a/panels/ga1_hero.py       (renders AND composite)
-status  ready — the renders were REBUILT on 2026-09-10 in matplotlib with
-        real depth of field (figures/dofrender.py, block_a/panels/
-        dofscenes.py), replacing the PyMOL bitmaps. They now draw themselves
-        into the composite, so there is no separate render step and no
-        bitmap to trim. The caption MUST say (i) a and b are DIFFERENT
-        RECEPTORS, because the archive ships one prediction per case, (ii)
-        state is reached but per-receptor amplitude is NOT reproduced (BA-4),
-        (iii) Block A's cognate arm supplies the FULL cognate Ga, not the
-        21-residue alpha5-CT fragment, and (iv) THE SOFT FOCUS ENCODES DEPTH
-        ONLY AND CARRIES NO INTERPRETIVE MEANING - no paper in the corpus
-        uses the technique, so it gets no benefit of the doubt. No
-        fraction_of_way_to_active anywhere. Panel c quotes the shipped
-        rmsd_to_active_ref of 1.218 A only as the SELECTION statistic and
-        prints its own superposition, 1.295 A over 269 shared Ca, beside it:
-        1.218 does not reproduce from the coordinates and no panel may
-        present it as something it measures.
+claim   C6, C7 — SC-1, in one image
+shows   ONE left-to-right composition, not a lettered grid: a receptor
+        predicted from sequence alone with TM6 closed; the cognate Ga
+        co-input arriving, drawn as its alpha5 C-terminal 21-mer in the
+        intracellular cavity; the same models with the partner and TM6 open.
+        The SAME atom pair is measured on left and right and both values are
+        printed, so the reader subtracts them by eye. Beneath, one thin
+        full-width strip: every Class A prediction on that one axis, apo
+        against cognate, with both rendered rows marked
+data    left  AA2AR/boltz/apo row 567, tilt 11.7347 A (Leu48 2x46 Ca -
+              Leu235 6x37 Ca), verified from the CIF
+        centre, right  DRD2/of3/cognate row 8285, tilt 17.2766 A (Leu76 -
+              Leu375), same BW pair, verified from the CIF
+        strip 01_rows/block_a_rows.csv, core (E1+E2), Class A: 3,992 apo and
+              3,974 cognate rows of 9,490, smoothed on the tilt axis;
+              predicate threshold 14.932 A drawn
+build   python3 block_a/panels/ga1_hero.py       (renders AND composition)
+status  ready — REDESIGNED 2026-09-10. It was five lettered panels with
+        sub-captions, which is figure grammar: a graphical abstract is one
+        image carrying one idea, legible at thumbnail size, and the two
+        explicit graphical abstracts in the corpus are both single
+        left-to-right compositions. There are now NO PANEL LETTERS anywhere.
+        Built at 130 x 76 mm so the load-bearing type survives reduction to
+        the 80 mm a TOC entry gets.
+
+        NO ARROW anywhere, and no "=" either. An arrow labelled "activation"
+        is the field's characteristic failure on this exact claim and an
+        unlabelled one reads as magnitude, which is BA-4 and is negative on
+        three of four backbones; an "=" would be literally false because left
+        and right are different receptors. A green "+" between the receptor
+        and the thing added to it carries the addition and asserts no
+        direction of change.
+
+        LEFT AND RIGHT ARE DIFFERENT RECEPTORS and the figure says so in
+        frame. 11_structures/ ships four prediction CIFs — one apo (AA2AR)
+        and three cognate (DRD2 and the two ACM1 broken/healthy rows) — so no
+        receptor has both arms. Checked again during the redesign. The strip,
+        not the two renders, is the within-condition contrast.
+
+        THE CAPTION IS LOAD-BEARING. Selection rules, cell sizes and
+        percentiles were deliberately taken OUT of the frame and MUST go into
+        the LaTeX caption. `ga1_hero.py:caption_block()` prints the exact
+        required text and it is reproduced in FIGURE_PROVENANCE.md. It
+        includes: both selection rules and percentiles, that the archive
+        ships one prediction per case, that Block A's cognate arm supplies
+        the FULL cognate Ga and only the alpha5 21-mer is drawn, that the
+        soft focus encodes depth only, and that the figure does NOT show
+        amplitude reproduction. No fraction_of_way_to_active anywhere.
 ```
 
 ### BA-6 — the predicate plane, for the predictions

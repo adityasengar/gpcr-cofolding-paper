@@ -1,45 +1,57 @@
 """
 GA-1 - the graphical abstract: one co-input, one state change.
 
-Three renders over two data panels, in one frame. The renders are built first
-by `hero_renders.py`; this script trims and places them, prints each panel's
-own measured numbers WITH the atom pair they were measured between, and puts
-the population the renders were drawn from directly underneath, with both
-rendered rows ringed on it.
+ONE COMPOSITION, NOT A GRID. This was five lettered panels with sub-captions
+and it read as a figure, because that is what lettered panels with
+sub-captions are. A graphical abstract is one image carrying one idea,
+legible at thumbnail size and read left to right rather than parsed panel by
+panel; the two explicit graphical abstracts in the 78-paper corpus are both
+single left-to-right compositions. So: no panel letters anywhere, three scenes
+that read as one sentence, and a single thin strip beneath them.
 
-Why it is built this way. Only 11 of the corpus's 1,226 panel-group rows put a
-render and a measured quantity in the same frame, and 10 of those 11 carry a
-recorded defect. The failure is always the same shape: the render is exempted
-from the discipline applied to the plot beside it. The three forms recorded are
-a rate badged onto a render with its denominator in another figure, a render
-showing references rather than the predictions the number is about, and an
-exemplar chosen after the metric was computed sitting next to an unselected
-plot. So here:
+    LEFT     the receptor predicted from sequence alone. TM6 closed.
+    CENTRE   the co-input arriving - the alpha5 C-terminal 21-mer in the
+             intracellular cavity. Labelled with what was SUPPLIED.
+    RIGHT    the same models with the partner. TM6 open. The SAME atom pair,
+             so the two numbers can be subtracted by eye.
+    BENEATH  every Class A prediction on that one axis, apo against cognate,
+             with both rendered rows marked. Visually subordinate: it is the
+             footing, not a panel. Without it the composition is two
+             hand-picked pictures, which is the commonest defect in the
+             corpus's 232 structure renders.
 
-  * every number printed on a render is measured on the coordinates of THAT
-    file and reproduces the value stored for that row in the tidy data;
-  * the two atoms it was measured between are named beside it, every time;
-  * both rendered rows are ringed on panel d, so the picture and the
-    population cannot drift apart;
-  * each render's cell, its n, and the row's percentile within it are printed
-    on the panel, not left to the caption.
-
-How the renders are drawn. Panels a-c are vector renders built by
-`dofscenes.py` on `dofrender.py`, not PyMOL bitmaps: a Gaussian-blurred
-heavy-atom density carries the receptor, sharp vector sticks carry the claim.
-The blur encodes DEPTH ONLY and has no interpretive meaning - it is a cue no
-paper in the 78-paper corpus uses, so the caption has to say what it means,
-and the focal plane is placed at the back of the state-defining elements so
-that no part of the claim is ever on the blurred side of it. Emphasis is
-carried by the rule this literature does use: grey for the invariant
-scaffold, colour for what carries the claim.
-
-What this figure may NOT say. It shows the state that is REACHED. It is not
-evidence of amplitude reproduction - whether a receptor with further to travel
-travels further - which is BA-4 and is negative on three of four backbones. So
-there is no arrow, labelled or otherwise, between the panels: an arrow labelled
+NO ARROW. Not between left and right, not anywhere. An arrow labelled
 "activation" is the field's characteristic failure on exactly this claim, and
-an unlabelled one would be read as magnitude.
+an unlabelled one is read as magnitude - which is BA-4, and BA-4 is negative
+on three of four backbones. The centre scene is the connector and it is
+labelled with the input, not the outcome; a green "+" carries the addition
+without asserting a direction of change.
+
+THE SAME ATOM PAIR ON BOTH, printed once. 2x46 Ca - 6x37 Ca is stated large
+under the composition and each render carries only its own two residue names.
+That keeps the strings short enough to survive reduction to 8 cm, and it is
+the strongest available statement that it IS one pair: `hilger2020gcgr`
+reports one displacement as 17.4 A and 18 A at two different residues in two
+panels and never reconciles them.
+
+WHAT IS NOT IN THE FRAME. Selection rules, percentiles and cell sizes are in
+the LaTeX caption instead - `caption_block()` below prints the exact text and
+it is duplicated in FIGURE_PROVENANCE.md. They are load-bearing and they are
+not what a TOC thumbnail is for. What stays in frame is one footnote line:
+what the composition shows, what it does not, and that the soft focus encodes
+depth only.
+
+DIFFERENT RECEPTORS, and the figure says so. `11_structures/` ships four
+prediction CIFs: one apo (AA2AR) and three cognate (DRD2, and the two ACM1
+rows of the broken/healthy pair). No receptor has both arms, so left and
+right cannot be the same receptor. The strip beneath is what carries the
+within-panel contrast.
+
+Geometry is fixed and `constrained_layout` is off: the render crops are
+computed from the cells' real aspect (`dofrender.cell_aspect`), which has to
+happen before anything is drawn.
+
+Sizes are chosen for a 150 mm figure that stays legible reduced to 80 mm.
 """
 import os
 import sys
@@ -52,33 +64,129 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(HERE)))
 
 import badata as B                                            # noqa: E402
 import figstyle as fs                                         # noqa: E402
-import figpanels as fp                                        # noqa: E402
 import matplotlib.pyplot as plt                               # noqa: E402
 
 import dofrender as dof                                       # noqa: E402
 import dofscenes as scenes                                    # noqa: E402
 
-OUT = B.OUT
 XCOL = "d_gpcrdb_tm6_tilt_246_637_ca"
-YCOL = "d_npxxy_oh"
 
-C_TILT = fs.BLACK
-C_NPXXY = fs.PURPLE
-C_ACTIVE = fs.VERM
-C_INACTIVE = fs.BLUE
-C_PEPTIDE = fs.GREEN
+C_APO = "#6E6E6E"
+C_COG = fs.GREEN          # green means "the cognate Ga co-input" throughout
+                          # this figure - the arm in the strip and the a5
+                          # helix in the renders are the same thing
+C_HEAD = "#1A1A1A"
 
 
-def render_cell(fig, gs, row, cols, scene, title, subtitle):
-    """One render panel: the scene draws itself, we only place and title it."""
-    ax = fig.add_subplot(gs[row, cols])
-    info = scene(ax, aspect=dof.cell_aspect(fig, gs, row, cols))
-    # The subtitle is a separate artist so it can be smaller and greyer than
-    # the title; the title pad has to clear it or the two overprint.
-    ax.set_title(title, fontsize=7, fontweight="bold", loc="left", pad=11.0)
-    ax.text(0.0, 1.006, subtitle, transform=ax.transAxes, ha="left",
-            va="bottom", fontsize=5.4, color="#444444")
-    return info
+def _density(values, lo, hi, n=320, sigma_bins=7):
+    """Smoothed histogram. Deterministic, no bandwidth chosen by eye."""
+    v = np.asarray(values, float)
+    v = v[np.isfinite(v)]
+    edges = np.linspace(lo, hi, n + 1)
+    h, _ = np.histogram(v, bins=edges)
+    k = np.exp(-0.5 * (np.arange(-4 * sigma_bins, 4 * sigma_bins + 1)
+                       / float(sigma_bins)) ** 2)
+    k = k / k.sum()
+    y = np.convolve(h.astype(float), k, mode="same")
+    x = 0.5 * (edges[:-1] + edges[1:])
+    return x, y, len(v)
+
+
+def _strip(ax, cA, marks, xlo, xhi):
+    """The footing: one axis, two distributions, both rendered rows marked.
+
+    No axis furniture beyond the scale itself - no y axis, no box, no grid.
+    It has to read as a ruler under the composition rather than as a fifth
+    panel, and a graphical abstract that makes the reader parse a second set
+    of axes has stopped being one image.
+    """
+    peak = 0.0
+    for arm, colour, label in (("apo", C_APO, u"apo — sequence alone"),
+                               ("cognate", C_COG, u"+ cognate Gα")):
+        x, y, n = _density(cA[cA["arm"] == arm][XCOL], xlo, xhi)
+        peak = max(peak, y.max())
+        ax.fill_between(x, 0, y, color=colour, alpha=0.30, linewidth=0,
+                        zorder=2)
+        ax.plot(x, y, color=colour, lw=1.0, zorder=3)
+        j = int(np.argmax(y))
+        ax.annotate(u"%s   n=%s" % (label, "{:,}".format(n)),
+                    (x[j], y[j]), xytext=(0, 1.5),
+                    textcoords="offset points", ha="center", va="bottom",
+                    fontsize=6.8, color=colour, fontweight="bold", zorder=6)
+    ax.axvline(B.THR_TILT, color="#9A9A9A", lw=0.6, ls=(0, (2.5, 2)),
+               zorder=1)
+    ax.annotate(u"predicate threshold %.3f Å" % B.THR_TILT,
+                (B.THR_TILT, peak * 1.08), xytext=(-3, 0),
+                textcoords="offset points", ha="right", va="top",
+                fontsize=5.4, color="#8A8A8A", zorder=6)
+    for value, colour, tag in marks:
+        ax.plot([value, value], [-peak * 0.30, peak * 0.30], color=colour,
+                lw=1.3, solid_capstyle="butt", zorder=7)
+        ax.annotate(tag, (value, -peak * 0.33), xytext=(0, -1),
+                    textcoords="offset points", ha="center", va="top",
+                    fontsize=6.4, color=colour, fontweight="bold", zorder=7)
+    ax.set_xlim(xlo, xhi)
+    ax.set_ylim(-peak * 0.78, peak * 1.22)
+    ax.set_yticks([])
+    ax.tick_params(axis="x", labelsize=6.2, length=2.0, width=0.5, pad=1.5)
+    for side in ("left", "right", "top"):
+        ax.spines[side].set_visible(False)
+    ax.spines["bottom"].set_linewidth(0.5)
+    ax.spines["bottom"].set_position(("data", -peak * 0.78))
+
+
+def caption_block(ia, ir, n_apo, n_cog, n_total):
+    """The material that came OUT of the frame and MUST go into the caption.
+
+    A selection rule that exists only in a script is the corpus's commonest
+    render defect wearing a different hat - 59 of 232 rows are a hand-picked
+    example with the rule unstated. It is out of the picture because a TOC
+    thumbnail is not where it belongs, not because it stopped mattering.
+    """
+    return u"""GA-1 CAPTION - REQUIRED CONTENT, do not drop any line.
+
+A 21-residue Ga alpha5 C-terminal co-input drives the predicted receptor into
+the active state. Left: adenosine A2A (AA2AR) predicted by Boltz-2 from
+sequence alone; TM6 closed, 2x46 Ca - 6x37 Ca = %.2f A. Centre: the cognate
+Ga supplied as a co-input, with its alpha5 C-terminal 21 residues (Ga
+334-354) seated in the intracellular cavity. Right: dopamine D2 (DRD2)
+predicted by OpenFold-3 with the cognate Ga supplied; TM6 open, the same atom
+pair = %.2f A. Grey is the invariant receptor, drawn as a depth-weighted
+heavy-atom density; colour is TM6 and the alpha5 21-mer only. Soft focus
+encodes depth only and carries no interpretive meaning.
+
+LEFT AND RIGHT ARE DIFFERENT RECEPTORS. 11_structures/ ships one apo
+prediction and three cognate ones and no receptor has both arms, so the
+within-condition contrast is the strip beneath, not the two renders.
+
+SELECTION RULES. Left: AA2AR x Boltz-2 x apo cell, n = 25 seeds; the row with
+the highest plddt_mean in the cell (73.93; cell median 72.04), i.e. the 100th
+percentile on confidence. It sits 0.95 A from AA2AR's INACTIVE reference and
+the predicate calls it inactive, which is where an apo prediction belongs;
+the directory name 'confidently_wrong' is wrong (DISCREPANCY_REPORT D12).
+Right: DRD2 x OpenFold-3 x cognate cell, n = 25 seeds; the row with the
+MEDIAN rmsd_to_active_ref in the cell (1.218 A shipped; rank 13 of 25, cell
+range 1.020-1.507 A) - a typical row of its cell, not a best case. All 25
+seeds of that cell are called active.
+
+BOTH ANCHOR PAIRS WERE VERIFIED against the tidy data from the coordinates
+drawn: Leu48 / Leu235 reproduces AA2AR row 567's stored
+d_gpcrdb_tm6_tilt_246_637_ca = 11.7347 A, and Leu76 / Leu375 reproduces DRD2
+row 8285's 17.2766 A. Four of the drop's ALIGNMENT.md files name residues
+that do not reproduce the shipped distances (D13, D20).
+
+STRIP. All Class A predictions under E1+E2 (broken cell, impossible
+geometry): %s apo and %s cognate rows of %s total, smoothed on the tilt axis,
+with the two rendered rows marked. Block A's cognate arm supplies the FULL
+cognate Ga subunit; only its alpha5 C-terminal 21 residues are drawn, because
+the heterotrimer is an input this figure is not reporting.
+
+WHAT THIS FIGURE DOES NOT SHOW: amplitude reproduction - whether a receptor
+with further to travel travels further - which is BA-4 and is negative on
+three of four backbones. There is no arrow anywhere in the composition for
+that reason.""" % (ia["d_tilt"], ir["d_tilt"],
+                   "{:,}".format(n_apo), "{:,}".format(n_cog),
+                   "{:,}".format(n_total))
 
 
 def main():
@@ -87,134 +195,95 @@ def main():
     rows = B.rows()
     core, label, n_core = B.core(rows)
     cA = core[core["gpcr_class"] == "A"].copy()
-    both = cA[cA[YCOL].notna()]
 
-    r567 = rows[rows["row_id"] == 567].iloc[0]
-    r8285 = rows[rows["row_id"] == 8285].iloc[0]
+    # The vertical budget is tight and every number in it is doing work. The
+    # render cells have to come out NARROWER than they are tall or the crop
+    # rule pads a tall 7TM bundle out to a square frame and a third of each
+    # cell is empty ground - which is what the first two attempts did. 37 mm
+    # wide by 49.5 mm tall is close to the bundles' own aspect.
+    # 130 x 76 mm, so a reduction to the 80 mm a TOC entry gets is only
+    # x0.62 and the load-bearing type - the two values and the three headings
+    # - stays above 5 pt. Drawing this at full double-column width and letting
+    # the journal shrink it by 2.25x puts every label under 4 pt.
+    fig = plt.figure(figsize=(130 * fs.MM, 76 * fs.MM))
+    gs = fig.add_gridspec(1, 3, left=0.025, right=0.975,
+                          top=0.895, bottom=0.369, wspace=0.43)
+    aspect = dof.cell_aspect(fig, gs, 0, 0)
 
-    refs = B.load("02_references/reference_predicates.csv")
-    ra = refs[(refs["gpcr_class"] == "A") & refs["d_npxxy_oh_ref"].notna()
-              & refs["d_tilt_ref"].notna()].copy()
-    ref_pts = ra.rename(columns={"d_tilt_ref": "x", "d_npxxy_oh_ref": "y",
-                                 "state": "group"})[["x", "y", "group"]]
-    ref_style = {"active": ("^", fs.VERM, "active reference"),
-                 "inactive": ("s", fs.BLUE, "inactive reference")}
+    axl = fig.add_subplot(gs[0, 0])
+    ia = scenes.ga_left(axl, aspect=aspect)
+    axc = fig.add_subplot(gs[0, 1])
+    ic = scenes.ga_centre(axc, aspect=aspect)
+    axr = fig.add_subplot(gs[0, 2])
+    ir = scenes.ga_right(axr, aspect=aspect)
 
-    # constrained_layout is OFF here on purpose: the render crops are computed
-    # from the cells' real aspect (dofrender.cell_aspect), which requires the
-    # geometry to be fixed before anything is drawn.
-    fig = plt.figure(figsize=(fs.W2, 150 * fs.MM))
-    gs = fig.add_gridspec(2, 6, height_ratios=[1.42, 1.00],
-                          left=0.045, right=0.995, top=0.935, bottom=0.135,
-                          wspace=0.62, hspace=0.30)
+    # --- the three headings, read as one sentence left to right ----------
+    # Both lines sit OUTSIDE the axes. Putting the second one inside, at the
+    # top of the frame, is what the first version did and it landed on TM6.
+    for ax, head, sub, colour in (
+            (axl, u"no co-input — sequence alone",
+             u"AA2AR · Boltz-2", C_HEAD),
+            (axc, u"+ cognate Gα supplied",
+             u"α5 C-terminal 21-mer · Gα 334–354", C_COG),
+            (axr, u"with the co-input",
+             u"DRD2 · OpenFold-3", C_HEAD)):
+        ax.text(0.5, 1.105, head, transform=ax.transAxes, ha="center",
+                va="bottom", fontsize=9.5, fontweight="bold", color=colour)
+        ax.text(0.5, 1.020, sub, transform=ax.transAxes, ha="center",
+                va="bottom", fontsize=6.5, color=colour)
 
-    # ---------------- a: the receptor predicted alone -------------------
-    ia = render_cell(fig, gs, 0, slice(0, 2), scenes.hero_a,
-                     u"a   receptor alone",
-                     u"AA2AR · apo · Boltz-2 · row 567 — predicate: INACTIVE")
+    # A "+" between the receptor and the thing added to it, and NOTHING
+    # between the co-input and the outcome. No arrow, and no "=" either: left
+    # and right are different receptors, so an equation would be literally
+    # false. The headings carry the reading order.
+    fig.text(0.327, 0.632, u"+", ha="center", va="center", fontsize=16,
+             color=C_COG, fontweight="bold")
 
-    # ---------------- b: the same models, cognate Ga supplied -----------
-    ib = render_cell(fig, gs, 0, slice(2, 4), scenes.hero_b,
-                     u"b   + cognate Gα",
-                     u"DRD2 · cognate · OpenFold-3 · row 8285 — ACTIVE")
+    # --- the one measurement, named once, shared by both renders ---------
+    fig.text(0.5, 0.362, u"TM6 tilt · 2×46 Cα – 6×37 Cα · "
+                         u"the same atom pair on both",
+             ha="center", va="top", fontsize=7.8, color=C_HEAD,
+             fontweight="bold")
 
-    # ---------------- c: over the deposited active reference ------------
-    ic = render_cell(fig, gs, 0, slice(4, 6), scenes.hero_c,
-                     u"c   over the deposited active state",
-                     u"row 8285 on 7JVR · view from the cytoplasm")
+    # --- the footing -----------------------------------------------------
+    axs = fig.add_axes([0.070, 0.212, 0.865, 0.092])
+    _strip(axs, cA,
+           [(ia["d_tilt"], fs.BLUE, u"%.2f Å" % ia["d_tilt"]),
+            (ir["d_tilt"], fs.VERM, u"%.2f Å" % ir["d_tilt"])],
+           10.3, 20.0)
+    axs.set_xlabel(u"TM6 tilt (Å) — every Class A prediction, both arms",
+                   fontsize=6.8, labelpad=1.0)
 
-    # ---------------- d: the population the renders came from -----------
-    axd = fig.add_subplot(gs[1, 0:4])
-    marks = [(r567[XCOL], r567[YCOL], "a"), (r8285[XCOL], r8285[YCOL], "b")]
-    counts = fp.density_plane(
-        axd, cA, XCOL, YCOL, "arm", colours=fs.ARM_COLOURS,
-        order=["apo", "cognate"], xthr=B.THR_TILT, ythr=B.THR_NPXXY,
-        xlim=(10.3, 20.0), ylim=(2.0, 25.0),
-        xlabel=u"TM6 tilt, 2×46 Cα – 6×37 Cα (Å)",
-        ylabel=u"NPxxY, Y5.58 OH – Y7.53 OH (Å)",
-        refs=ref_pts, ref_style=ref_style, marks=marks,
-        rug_label="no NPxxY-OH value")
-    axd.add_patch(plt.Rectangle(
-        (B.THR_TILT, axd.get_ylim()[0]), 20.0 - B.THR_TILT,
-        B.THR_NPXXY - axd.get_ylim()[0], facecolor=fs.GREEN, alpha=0.055,
-        edgecolor="none", zorder=0))
-    axd.text(B.THR_TILT + 0.12, B.THR_NPXXY - 0.4,
-             u"predicate: active — tilt > %.3f Å AND NPxxY-OH < %.3f Å"
-             % (B.THR_TILT, B.THR_NPXXY), fontsize=5.2, color=fs.GREEN,
-             va="top", ha="left", zorder=7)
-    axd.set_title(
-        u"every Class A prediction, both arms — the rows drawn in a and b are "
-        u"ringed", fontsize=6.5, loc="left")
-    fs.panel_label(axd, "d", dx=-0.055, dy=1.11)
+    n_apo = int((cA["arm"] == "apo").sum())
+    n_cog = int((cA["arm"] == "cognate").sum())
 
-    # ---------------- e: it is a switch, and it is panel-wide -----------
-    axe = fig.add_subplot(gs[1, 4:6])
-    cells = (cA.groupby(["receptor", "backbone", "arm"])
-             .agg(seeds=("active", "size"), fired=("active", "sum"))
-             .reset_index())
-    cells["frac"] = cells["fired"] / cells["seeds"]
-    wide = cells.pivot_table(index=["receptor", "backbone"], columns="arm",
-                             values="frac").dropna()
-    paired = wide.reset_index()
-    up = int((paired["cognate"] > paired["apo"]).sum())
-    same = int((paired["cognate"] == paired["apo"]).sum())
-    down = int((paired["cognate"] < paired["apo"]).sum())
-    jit = np.random.RandomState(0).uniform(-0.016, 0.016, (len(paired), 2))
-    axe.plot([0, 1], [0, 1], color=fs.GREY, lw=0.6, ls=(0, (3, 2)), zorder=1)
-    axe.text(0.50, 0.465, "identity: no change", fontsize=4.8, color=fs.GREY,
-             rotation=45, rotation_mode="anchor", va="top")
-    for i, bb in enumerate(fs.BACKBONE_ORDER):
-        m = (paired["backbone"] == bb).values
-        axe.scatter(paired["apo"][m] + jit[m, 0],
-                    paired["cognate"][m] + jit[m, 1], s=10,
-                    color=fs.BACKBONE_COLOURS[bb], edgecolors="none",
-                    alpha=0.8, zorder=3, label=fs.BACKBONE_LABELS[bb])
-    axe.set_xlabel("apo: fraction of 25 seeds called active")
-    axe.set_ylabel(u"cognate Gα: fraction called active")
-    axe.set_xlim(-0.06, 1.06)
-    axe.set_ylim(-0.06, 1.06)
-    axe.legend(loc="lower right", fontsize=4.8, handlelength=0.8,
-               labelspacing=0.18, borderpad=0.2)
-    axe.text(0.035, 0.55,
-             u"%d of %d receptor × backbone\ncells up\n%d unchanged · %d down"
-             % (up, len(paired), same, down),
-             transform=axe.transAxes, va="top", ha="left", fontsize=5,
-             color=fs.GREY)
-    axe.set_title(u"not anecdotal, and not a dial", fontsize=6.5, loc="left")
-    fs.panel_label(axe, "e", dx=-0.20, dy=1.11)
-
-    axd.text(0.0, -0.31,
-             u"Filter for d and e: %s, then Class A only — %s of %s rows. d "
-             u"draws the %s with both axes measurable and rugs the %d without "
-             u"an NPxxY-OH value;\n%d Class A deposited references (%d active, "
-             u"%d inactive) are overlaid as open marks. e: %d paired cells, 25 "
-             u"seeds each. a and b are DIFFERENT\nRECEPTORS — the archive ships "
-             u"one prediction per case; the within-panel contrast is d and e.\n"
-             u"RENDERS a–c: grey is the invariant bundle, colour is TM6 "
-             u"(vermillion where the predicate fires, blue where it does not), "
-             u"green is the α5 C-terminal 21-mer.\nEvery distance drawn is "
-             u"measured on the coordinates in that panel and is labelled with "
-             u"the two atoms it was measured between. THE SOFT FOCUS ENCODES "
-             u"DEPTH ONLY\nand carries no interpretive meaning: the focal "
-             u"plane is placed behind the state-defining elements, so no part "
-             u"of TM6, the four anchor residues or the α5 is ever blurred.\n"
-             u"%s.\n%s."
-             % (label, "{:,}".format(len(cA)), "{:,}".format(len(rows)),
-                "{:,}".format(len(both)), len(cA) - len(both), len(ra),
-                int((ra["state"] == "active").sum()),
-                int((ra["state"] == "inactive").sum()), len(paired),
-                ib["omitted"], ia["omitted"]),
-             transform=axd.transAxes, fontsize=4.6, color=fs.GREY,
-             ha="left", va="top", linespacing=1.4)
+    # WRAPPED BY HAND, and it has to stay wrapped. `savefig.bbox` is "tight":
+    # a single line wider than the figure silently expands the canvas to fit
+    # it, and everything else is then squeezed into the left two-thirds. That
+    # is what the first version of this composition did.
+    fig.text(0.5, 0.014,
+             u"Shows the state REACHED when a Gα co-input is supplied. Does "
+             u"NOT show amplitude reproduction (BA-4, negative on 3 of 4 "
+             u"backbones).\nSoft focus encodes depth only and carries no "
+             u"interpretive meaning. Left and right are different receptors — "
+             u"the archive ships one prediction per case, so the\nstrip, not "
+             u"the two renders, is the within-condition contrast. Selection "
+             u"rules, cell sizes and percentiles are in the caption.",
+             ha="center", va="bottom", fontsize=5.2, color="#7A7A7A",
+             linespacing=1.5)
 
     dof.raster_dpi(fig)
     paths = fs.save(fig, "ga1_hero")
     print("GA-1 written:", *paths, sep="\n  ")
-    print("  plane:", counts)
-    for tag, info in (("a", ia), ("b", ib), ("c", ic)):
-        print("  render %s: %s; %.0f%% of panel depth behind the focal plane"
-              % (tag, info["view"], 100 * info["behind_focus"]))
-    print("  paired cells: %d up / %d same / %d down" % (up, same, down))
+    print("  left  %.4f A (row 567) · %s · %.0f%% behind focus"
+          % (ia["d_tilt"], ia["view"], 100 * ia["behind_focus"]))
+    print("  right %.4f A (row 8285) · %s · %.0f%% behind focus"
+          % (ir["d_tilt"], ir["view"], 100 * ir["behind_focus"]))
+    print("  centre %s · %.0f%% behind focus"
+          % (ic["view"], 100 * ic["behind_focus"]))
+    print("  strip: %d apo / %d cognate Class A rows of %d"
+          % (n_apo, n_cog, len(rows)))
+    print("\n" + caption_block(ia, ir, n_apo, n_cog, len(rows)))
 
 
 if __name__ == "__main__":

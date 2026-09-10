@@ -643,3 +643,169 @@ def ba1a_side(ax, aspect=1.0):
 def ba1a_cyto(ax, aspect=1.0):
     """Cytoplasmic view, carrying the TM6 tilt measurement on both."""
     return _ba1a_scene(ax, aspect, "cytoplasmic", "tilt")
+
+
+# --------------------------------------------------------------------------
+# GA-1 - the graphical abstract. ONE composition, not a lettered grid.
+#
+# These three scenes are deliberately not `hero_a/b/c` with smaller type. A
+# graphical abstract is read as a single image at thumbnail size, so almost
+# everything the figure panels carry has to come out: no panel letters, no
+# selection-rule chip, no percentile, no second measurement, no residue
+# ball-and-stick beyond the two atoms the one printed distance is measured
+# between. What stays is the one idea and the one number that supports it.
+#
+# WHAT IS DELIBERATELY ABSENT: an arrow between left and right. The centre
+# scene IS the connector, and it is labelled with what was SUPPLIED rather
+# than with what happened. An arrow labelled "activation" is the field's
+# characteristic failure on exactly this claim, and an unlabelled one is read
+# as magnitude - which is BA-4, and BA-4 is negative on three of four
+# backbones. A left-to-right composition with the co-input drawn in the middle
+# says the same thing and asserts nothing about amplitude.
+#
+# THE SAME ATOM PAIR ON BOTH. The pair is 2x46 Ca - 6x37 Ca in both scenes and
+# is printed ONCE, large, under the composition; each render carries only its
+# own two residue names, which keeps the strings short enough to survive
+# reduction to 8 cm. Printing the pair once is also the strongest available
+# statement that it IS one pair: `hilger2020gcgr` reports one displacement as
+# 17.4 A and 18 A at two different residues and never reconciles them.
+# --------------------------------------------------------------------------
+GA_VALUE_FS = 11.5        # sizes are for a 130 mm figure reduced to ~80 mm
+GA_PAIR_FS = 7.5
+
+
+def _ga_tilt_only(ax, atoms, chain, key, frame, ds, offset, colour=C_TILT,
+                  value_fs=GA_VALUE_FS, pair_fs=GA_PAIR_FS):
+    """The one printed measurement: value, and the two residues it is on.
+
+    Only the two atoms the distance is measured between are drawn, as small
+    spheres. The four-residue ball-and-stick of the figure panels is right for
+    a figure and wrong here - at thumbnail size it is a smudge, and it invites
+    the eye to look for a claim that this composition is not making.
+    """
+    a = ANCHORS[key]
+    c = chain
+    names = dict((r, CR.residue_name(atoms, c, r)) for r in a["tilt"])
+    p = frame.project([CR.atom(atoms, c, a["tilt"][0], "CA"),
+                       CR.atom(atoms, c, a["tilt"][1], "CA")])
+    d = float(np.linalg.norm(CR.atom(atoms, c, a["tilt"][0], "CA")
+                             - CR.atom(atoms, c, a["tilt"][1], "CA")))
+    for xy in p[:, :2]:
+        ax.scatter([xy[0]], [xy[1]], s=13, c=[colour], linewidths=0.5,
+                   edgecolors="white", zorder=8.6)
+    D.measured_distance(
+        ax, p[0, :2], p[1, :2], u"%.2f Å" % d,
+        u"%s%d / %s%d" % (names[a["tilt"][0]].title(), a["tilt"][0],
+                          names[a["tilt"][1]].title(), a["tilt"][1]),
+        colour, offset=offset, fontsize=value_fs, pair_fontsize=pair_fs,
+        lw=1.1)
+    return d
+
+
+def ga_left(ax, aspect=1.0):
+    """Receptor from sequence alone. TM6 closed, one distance."""
+    key, path, chain = "aa2ar", HR.AA2AR_APO, "A"
+    dt, _ = _verify(path, key, "AA2AR row 567")
+    atoms = CR.frame(path)
+    a = ANCHORS[key]
+    ca = np.vstack(_body_runs(atoms, chain, 1, 316, key))
+    frame = D.camera_frame(path, (chain, 1, 316),
+                           ((chain, a["tilt"][0]), (chain, a["tilt"][1])),
+                           "side", ca=ca)
+    P = frame.project(ca)
+    xlim, ylim = D.frame_limits([P[:, :2]], aspect, pad=1.06)
+    ds = (P[:, 2].min(), P[:, 2].max())
+
+    tm6 = frame.project(_tm6_run(atoms, chain, key))
+    anch = frame.project([CR.atom(atoms, chain, a["tilt"][0], "CA"),
+                          CR.atom(atoms, chain, a["tilt"][1], "CA")])
+    focus = D.focal_plane(tm6, anch)
+    behind = D.focus_report([tm6, anch], focus, ds, "GA-1 left")
+
+    D.setup_axes(ax, xlim, ylim)
+    _draw_receptor(ax, frame, atoms, chain, 1, 316, key, xlim, ylim, ds,
+                   focus_at=focus, trace_alpha=0.34)
+    D.ribbon(ax, tm6, C_INACTIVE, lw=3.4, depth_span=ds, zorder=6.0)
+    d = _ga_tilt_only(ax, atoms, chain, key, frame, ds, offset=(-13.0, 9.0))
+    return dict(row=567, d_tilt=d, behind_focus=behind, view=frame.label,
+                omitted=_omitted(atoms, chain, 1, 316, key))
+
+
+def ga_centre(ax, aspect=1.0):
+    """The co-input arriving: the alpha5 21-mer entering the cavity.
+
+    Drawn from the cognate model on the right, cropped to the cavity. It is
+    the only directional element in the composition and it is labelled with
+    what was SUPPLIED, never with an outcome. No distance is drawn here - the
+    contact geometry is BA-8's job, and a third number would make this read as
+    a panel rather than as a transition.
+    """
+    key, path, chain = "drd2", HR.DRD2_COG, "A"
+    _verify(path, key, "DRD2 row 8285")
+    atoms = CR.frame(path)
+    a = ANCHORS[key]
+    ca = np.vstack(_body_runs(atoms, chain, 30, 443, key))
+    frame = D.camera_frame(path, (chain, 30, 443),
+                           ((chain, a["tilt"][0]), (chain, a["tilt"][1])),
+                           "side", ca=ca)
+    pep = np.vstack(D.ca_runs(atoms, "B", 334, 354))
+    Q = frame.project(pep)
+    anch = frame.project([CR.atom(atoms, chain, a["tilt"][0], "CA"),
+                          CR.atom(atoms, chain, a["tilt"][1], "CA")])
+    # same crop rule as BA-8a, tightened: the cavity and the helix in it
+    centre = 0.50 * Q[:, :2].mean(axis=0) + 0.50 * anch[:, :2].mean(axis=0)
+    xlim, ylim = D.frame_limits(
+        [np.array([[centre[0] - 22, centre[1] - 22],
+                   [centre[0] + 22, centre[1] + 22]])], aspect, pad=1.0)
+    heavy = _body_heavy(atoms, chain, 30, 443, key)
+    H = frame.project(heavy)
+    ds = (float(np.percentile(H[:, 2], 1)), float(np.percentile(H[:, 2], 99)))
+
+    tm6 = frame.project(_tm6_run(atoms, chain, key))
+    focus = D.focal_plane(tm6, Q)
+    behind = D.focus_report([tm6, Q], focus, ds, "GA-1 centre")
+
+    D.setup_axes(ax, xlim, ylim)
+    D.depth_of_field_cloud(ax, H, "#8E8880", xlim, ylim, depth_span=ds,
+                           far=(3.4, 0.20), near=(1.3, 0.90),
+                           focus_at=focus, zorder=1.0)
+    D.thin_trace(ax, _proj_runs(frame, _body_runs(atoms, chain, 30, 443, key)),
+                 colour=D.SCAFFOLD, alpha=0.30, depth_span=ds, lw=0.34)
+    D.ribbon(ax, tm6, C_ACTIVE, lw=3.2, depth_span=ds, zorder=6.0)
+    D.blurred_layer(ax, [Q], C_PEPTIDE, xlim, ylim, ds, sigma_A=1.4,
+                    base_alpha=0.42, zorder=1.5)
+    D.ribbon(ax, Q, C_PEPTIDE, lw=5.0, depth_span=ds, zorder=6.8)
+    return dict(behind_focus=behind, view=frame.label)
+
+
+def ga_right(ax, aspect=1.0):
+    """The same models with the partner supplied. TM6 open, same atom pair."""
+    key, path, chain = "drd2", HR.DRD2_COG, "A"
+    dt, _ = _verify(path, key, "DRD2 row 8285")
+    atoms = CR.frame(path)
+    a = ANCHORS[key]
+    ca = np.vstack(_body_runs(atoms, chain, 30, 443, key))
+    frame = D.camera_frame(path, (chain, 30, 443),
+                           ((chain, a["tilt"][0]), (chain, a["tilt"][1])),
+                           "side", ca=ca)
+    pep = np.vstack(D.ca_runs(atoms, "B", 334, 354))
+    P, Q = frame.project(ca), frame.project(pep)
+    xlim, ylim = D.frame_limits([P[:, :2], Q[:, :2]], aspect, pad=1.06)
+    ds = (min(P[:, 2].min(), Q[:, 2].min()), max(P[:, 2].max(), Q[:, 2].max()))
+
+    tm6 = frame.project(_tm6_run(atoms, chain, key))
+    anch = frame.project([CR.atom(atoms, chain, a["tilt"][0], "CA"),
+                          CR.atom(atoms, chain, a["tilt"][1], "CA")])
+    focus = D.focal_plane(tm6, anch, Q)
+    behind = D.focus_report([tm6, anch, Q], focus, ds, "GA-1 right")
+
+    D.setup_axes(ax, xlim, ylim)
+    _draw_receptor(ax, frame, atoms, chain, 30, 443, key, xlim, ylim, ds,
+                   focus_at=focus, trace_alpha=0.34)
+    D.blurred_layer(ax, [Q], C_PEPTIDE, xlim, ylim, ds, sigma_A=1.1,
+                    base_alpha=0.34, zorder=1.4)
+    D.ribbon(ax, tm6, C_ACTIVE, lw=3.4, depth_span=ds, zorder=6.0)
+    D.ribbon(ax, Q, C_PEPTIDE, lw=3.6, depth_span=ds, zorder=6.6)
+    d = _ga_tilt_only(ax, atoms, chain, key, frame, ds, offset=(-16.0, 5.0))
+    return dict(row=8285, d_tilt=d, behind_focus=behind, view=frame.label,
+                omitted=_omitted(atoms, chain, 30, 443, key))

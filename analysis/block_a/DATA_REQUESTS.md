@@ -10,6 +10,25 @@ referee is likely to find on their own.
 
 ---
 
+## 0. One prediction that makes the graphical abstract a real contrast — **cheapest win in this document**
+
+**Why.** `11_structures/` ships exactly four prediction CIFs: one apo (AA2AR)
+and three cognate (DRD2, ACM1 ×2). **No receptor has both arms.** So the
+graphical abstract's before and after are two different receptors — AA2AR on the
+left, DRD2 on the right — and it has to say so in frame. The population strip
+underneath carries the real contrast, which is why the figure is still honest,
+but a within-receptor before/after would be far stronger and is the first thing
+a reader looks for.
+
+**What we need.** *One* coordinate file: the median apo prediction for DRD2, or
+the median cognate prediction for AA2AR. Either one turns the abstract into a
+true within-receptor contrast. Median by the tilt axis, not best-scoring, with
+the selection rule and the row's percentile stated.
+
+**Cost.** One structure already computed — this is an export, not a run.
+
+---
+
 ## 1. A positive control for the amplitude null — **highest value**
 
 **Why.** Beat 4 is our load-bearing negative result: predicted shift does not

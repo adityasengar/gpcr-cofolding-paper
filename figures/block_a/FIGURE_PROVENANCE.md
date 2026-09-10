@@ -810,3 +810,125 @@ path.
 | `dofrender.superpose` | explicit residue window plus an offset, matched residue by residue | one selection reused across both objects superposes the ADRB2 bundle onto 2RH1's T4 lysozyme (D21) |
 | `dofrender.cell_aspect` | crop computed from the gridspec cell's real aspect | `set_aspect("equal")` under `constrained_layout` collapses a render axes to a sliver |
 | `dofscenes._icl3_window` | the TM5→TM6 stretch dropped from every panel by one rule, and the panel says so with its pLDDT | 147 residues of pLDDT-38 coil set the crop, bent the camera and filled the frame with haze; hiding it in one panel and not the other would put two receptors on different footings |
+
+
+---
+
+# Added 2026-09-10 (later the same day) — GA-1 redesigned as ONE composition
+
+The depth-of-field rebuild left GA-1 as five lettered panels with
+sub-captions. That is figure grammar, and it is the wrong grammar: a
+graphical abstract is one image carrying one idea, legible at thumbnail size
+and read left to right rather than parsed panel by panel. The two explicit
+graphical abstracts in the 78-paper corpus are both single left-to-right
+compositions, not lettered grids. BA-8 and BA-1a are unaffected and were not
+touched.
+
+## What it is now
+
+    LEFT     AA2AR predicted from sequence alone. TM6 closed, one distance.
+    CENTRE   the co-input arriving: the alpha5 C-terminal 21-mer in the
+             intracellular cavity, labelled with what was SUPPLIED.
+    RIGHT    DRD2 with the cognate Ga. TM6 open, the SAME atom pair.
+    BENEATH  one thin full-width strip: every Class A prediction on the tilt
+             axis, apo against cognate, both rendered rows marked, no axis
+             furniture beyond the scale itself.
+
+No panel letters anywhere. Built at **130 x 76 mm**, not double-column width:
+a TOC entry gets about 80 mm, so at 180 mm every label lands under 4 pt. At
+130 mm the reduction is x0.62 and the three headings, the two values and the
+strip labels all stay above 5 pt. Checked by downsampling the 600 dpi PNG to
+an 80 mm proxy and reading it.
+
+## The decisions that carry a rule
+
+- **No arrow, and no "=".** The coordinator's brief allowed a connector so
+  long as it carries the supplied input rather than the result. It carries
+  neither, because it is not there: an arrow labelled "activation" is the
+  field's characteristic failure on exactly this claim, an unlabelled one
+  reads as magnitude (BA-4, negative on three of four backbones), and an "="
+  between AA2AR and DRD2 would be literally false. A green **"+"** sits
+  between the receptor and the thing added to it. Addition, no direction of
+  change asserted.
+- **The same atom pair, printed once.** 2x46 Ca - 6x37 Ca is stated large
+  under the composition and each render carries only its own two residue
+  names (Leu48 / Leu235 and Leu76 / Leu375). Printing the pair once is both
+  the strongest statement that it IS one pair and the only way to keep the
+  strings short enough to survive reduction; `hilger2020gcgr` reports one
+  displacement as 17.4 A and 18 A at two different residues and never
+  reconciles them.
+- **Green means one thing in this figure**: the cognate Ga co-input. The
+  alpha5 helix in the renders and the cognate distribution in the strip are
+  the same colour because they are the same thing.
+- **The renders were stripped back.** No selection chip, no percentile, no
+  NPxxY measurement, no four-residue ball-and-stick — only the two atoms the
+  one printed distance is measured between, as small spheres. At thumbnail
+  size the figure-panel furniture is a smudge.
+- **Left and right cannot be the same receptor.** Re-checked during the
+  redesign: `11_structures/` ships exactly four prediction CIFs — one apo
+  (AA2AR) and three cognate (DRD2 row 8285, ACM1 rows 967 and 948) — and no
+  receptor has both arms. The figure says so in frame, in one line, and the
+  strip is what carries the within-condition contrast.
+
+## Two layout defects found and fixed, both invisible in the code
+
+- **A single-line footnote wider than the figure silently ate a third of the
+  composition.** `savefig.bbox` is `"tight"`, so a `fig.text` that overruns
+  the right edge expands the saved canvas to contain it; the three renders
+  were then squeezed into the left two-thirds with white space beside them.
+  The footnote is hand-wrapped to three lines and has to stay wrapped.
+- **Square render cells pad a tall bundle out to a square frame.** The crop
+  rule guarantees nothing is cropped, which means a 7TM bundle in a cell of
+  aspect 1.0 gets a third of its width as empty ground. The cells are now
+  37 x 49.5 mm, close to the bundles' own aspect.
+
+## The caption text, which is now load-bearing
+
+Selection rules, cell sizes and percentiles came OUT of the frame on purpose;
+they did not stop mattering. `ga1_hero.py:caption_block()` prints this and it
+is reproduced here so it cannot be lost between sessions.
+
+```
+GA-1 CAPTION - REQUIRED CONTENT, do not drop any line.
+
+A 21-residue Ga alpha5 C-terminal co-input drives the predicted receptor into
+the active state. Left: adenosine A2A (AA2AR) predicted by Boltz-2 from
+sequence alone; TM6 closed, 2x46 Ca - 6x37 Ca = 11.73 A. Centre: the cognate
+Ga supplied as a co-input, with its alpha5 C-terminal 21 residues (Ga
+334-354) seated in the intracellular cavity. Right: dopamine D2 (DRD2)
+predicted by OpenFold-3 with the cognate Ga supplied; TM6 open, the same atom
+pair = 17.28 A. Grey is the invariant receptor, drawn as a depth-weighted
+heavy-atom density; colour is TM6 and the alpha5 21-mer only. Soft focus
+encodes depth only and carries no interpretive meaning.
+
+LEFT AND RIGHT ARE DIFFERENT RECEPTORS. 11_structures/ ships one apo
+prediction and three cognate ones and no receptor has both arms, so the
+within-condition contrast is the strip beneath, not the two renders.
+
+SELECTION RULES. Left: AA2AR x Boltz-2 x apo cell, n = 25 seeds; the row with
+the highest plddt_mean in the cell (73.93; cell median 72.04), i.e. the 100th
+percentile on confidence. It sits 0.95 A from AA2AR's INACTIVE reference and
+the predicate calls it inactive, which is where an apo prediction belongs;
+the directory name 'confidently_wrong' is wrong (DISCREPANCY_REPORT D12).
+Right: DRD2 x OpenFold-3 x cognate cell, n = 25 seeds; the row with the
+MEDIAN rmsd_to_active_ref in the cell (1.218 A shipped; rank 13 of 25, cell
+range 1.020-1.507 A) - a typical row of its cell, not a best case. All 25
+seeds of that cell are called active.
+
+BOTH ANCHOR PAIRS WERE VERIFIED against the tidy data from the coordinates
+drawn: Leu48 / Leu235 reproduces AA2AR row 567's stored
+d_gpcrdb_tm6_tilt_246_637_ca = 11.7347 A, and Leu76 / Leu375 reproduces DRD2
+row 8285's 17.2766 A. Four of the drop's ALIGNMENT.md files name residues
+that do not reproduce the shipped distances (D13, D20).
+
+STRIP. All Class A predictions under E1+E2 (broken cell, impossible
+geometry): 3,992 apo and 3,974 cognate rows of 9,490 total, smoothed on the tilt axis,
+with the two rendered rows marked. Block A's cognate arm supplies the FULL
+cognate Ga subunit; only its alpha5 C-terminal 21 residues are drawn, because
+the heterotrimer is an input this figure is not reporting.
+
+WHAT THIS FIGURE DOES NOT SHOW: amplitude reproduction - whether a receptor
+with further to travel travels further - which is BA-4 and is negative on
+three of four backbones. There is no arrow anywhere in the composition for
+that reason.
+```
