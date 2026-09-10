@@ -31,6 +31,7 @@ Convention throughout: **the data wins, the discrepancy is stated, not smoothed*
 | **D8** | `headline_by_backbone.csv` | low — new | `matches_claim_sheet` is `True` on all four rows but the fraction disagrees |
 | **D9** | **Methods §7.1, C-6** | **high — new** | **reference-set denominator is 98 empirically, not the 89 the Methods requires stating** |
 | **D10** | **BA-1b spec** | medium — new | `deviation_class` has five levels, not the three the panel spec assumes |
+| **D23** | `*_active_rate_panel_mean` | medium — new | it is a pooled row-level rate over all classes, not a panel mean |
 | **D22** | `rmsd_to_active_ref` | medium — new | does not reproduce from the coordinates, and the scorer's atom set is not in the drop |
 | **D18** | `11_structures/agonist_only_vs_ternary/` | **CRITICAL — new** | **8FZQ.cif is CFTR, not an opioid receptor complex** |
 | **D19** | Methods, templates and MSAs | **high — new** | no row-level record of either; MSA pinning is asserted on no evidence |
@@ -445,6 +446,34 @@ cluster/receptor width ratio runs from **1.00 to 2.20**:
 **equal to or wider, by up to a factor of 2.2**, which strengthens rather than
 weakens the case for treating it as authoritative — and makes D5 (receptor
 intervals quoted under a cluster label) more consequential than a 10% error.
+
+---
+
+## D23 — NEW: `*_active_rate_panel_mean` is a pooled rate, not a panel mean
+
+Adjudicated after two figure sessions reported conflicting versions of this.
+
+**What the column is.** `apo_active_rate_panel_mean` for boltz ships 0.1598.
+The pooled row-level rate over **all rows and all classes**, using the
+class-aware `active` predicate, is **0.1598** — an exact match to four decimals.
+The unweighted mean over cells is 0.1592, close but not the source.
+
+So the column is a **pooled rate**, and the name says *mean*. A pooled rate
+weights every prediction equally; a panel mean weights every receptor equally.
+They differ whenever cells differ in size, and quoting one under the other's
+name will mislead.
+
+**The 16-point gap reported to me is a different thing.**
+`cell_summary.both_fire_rate` averaged over all 48 cells gives 0.1017, which is
+indeed ~16 points lower. But that compares two **different predicates**:
+`both_fire_rate` is NPxxY ∧ tilt, while the shipped column uses the class-aware
+`active`. Restricted to Class A the two agree exactly (0.1220 and 0.1220). The
+gap is Class B and F, not an error in the column.
+
+**Action.** Quote it as a pooled rate and say so, or recompute a genuine panel
+mean and say which. Do not quote it as a "panel mean" unweighted by cell size.
+The manuscript currently describes these as "pooled row-level rates", which is
+correct.
 
 ---
 
