@@ -4,9 +4,20 @@ Start in `paper/`. `CLAUDE.md` loads automatically; read it, then this.
 
 ## Where the project is
 
-A manuscript on GPCR co-folding. **Block A is written**: Results, Methods, 5 main
-figures including a graphical abstract, 16 SI figures, 8 tables. Main text 35
-pages, SI 18. Build is clean — 65 bibitems, zero undefined citations.
+A manuscript on GPCR co-folding. **Blocks A and B are both written** into
+`manuscript/sections/`. Main text 42 pages, SI 18, 65 bibitems, zero undefined
+citations.
+
+Block A: Results, Methods, 5 main figures including a graphical abstract, 16 SI
+figures, 8 tables. Block B: Results and Methods written, six standalone panels
+built (BB-1..BB-6), **figure placement deferred to Block C** — see below.
+
+**Two of the paper's three title clauses have no evidence in either block.**
+Neither campaign supplies a 21-residue peptide and neither supplies an agonist;
+`ligand_type` is NaN on all 32,000 Block B rows and Block A has no ligand column
+at all. This is recorded at the top of `CLAIMS.md` and is Aditya's decision:
+narrow the title, or run the missing arms. Until then no sentence anywhere may
+imply either result.
 
 ```bash
 ./verify.sh                          # everything, and it should be all green
@@ -39,6 +50,29 @@ python3 analysis/block_a/verify_claims.py      # 34 checks; 15 mismatches are EX
 
 `analysis/block_a/DATA_REQUESTS.md` is paste-ready for the pipeline agent and
 holds these plus six more.
+
+## Deferred to Block C, by Aditya, 2026-09-10
+
+**The main-text figure budget.** Six Block B panels (BB-1..BB-6) are built,
+verified and standalone; five Block A figures are in the main text and sixteen
+in the SI. Nothing has been allocated between main text and SI for Block B, and
+nothing should be until Block C lands. The Block B dispatch says so itself:
+*"Block B will not get six main figures; it will most likely contribute part of
+one, merged with Block A material."* Allocating a budget across two blocks when
+four exist is a decision that would only be made twice.
+
+**The demotion rule when the call is finally made.** A figure moves to the SI if
+it is still true and merely less important. A figure replaced *because it was
+wrong* is deleted, with a line in `figures/FIGURES.md` saying why — a superseded
+panel in the SI is worse than no panel, because SI figures get cited and it
+shows a reader a number we no longer stand behind.
+
+**One caution for whoever makes the call.** These panels are demote-or-delete
+candidates only if Block C leaves Block B's claims standing. If Block C
+supersedes a Block B claim rather than extending it, the affected panel needs
+*rebuilding*, not demoting, and the blocks-supersede rule means no Block C
+number may be mixed into a Block B panel. Check `CLAIMS.md` before moving
+anything.
 
 ## Parked — raise again later, do not act on it now
 
