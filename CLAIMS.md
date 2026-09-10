@@ -78,9 +78,28 @@ it supersedes what this file said an hour earlier.**
 This file previously stated that "Block B supplies the reduced 21-mer arm and
 carries the titular claim." **It does not.** Block B's four arms are `apo`,
 `decoy`, `shuffled` and `cognate`, and every arm that carries a partner carries
-a **complete Gα subunit**. The decoy arm scrambles the last 9–11 residues of the
-α5 C-terminal tail *within* a full-length subunit that is byte-identical to its
-parent over the first 339–349 residues. There is no peptide arm.
+a **complete Gα subunit**. There is no peptide arm.
+
+**What each arm actually changes**, audited byte-level in
+`02_constructs/decoy_scramble_verification.md` and re-checked here (B70–B72):
+
+| arm | partner supplied | differs from cognate |
+|---|---|---|
+| `apo` | none | — |
+| `decoy` | the correct Gα subunit | **the last 11 residues only** — `decoy[:-11] == cognate[:-11]` byte-identical on 40/40, tail Hamming 7–11, and the scramble is a *permutation* of the same residues, so whole-sequence composition is preserved |
+| `shuffled` | a **different Gα class** entirely | the whole subunit, including its own real α5-CT |
+| `cognate` | the correct Gα subunit | — |
+
+So the ladder does isolate the α5 C-terminal sequence: the decoy arm perturbs
+that segment and nothing else, and the shuffled arm changes the family. **But
+the segment is ELEVEN residues, not the twenty-one the title claims.** The
+construct report's own column is headed "α5-CT (last 11)"; the manipulated
+quantity elsewhere in the drop is `partner_tail11_helicity_frac`; and 4X1H, the
+only peptide-bound entry in the reference set, is an engineered 11-mer. The
+project has three independent 11-residue objects and one 21-residue title.
+
+All five canonical α5-CT sequences in that construct table verify against
+UniProt, as do all five subunit lengths.
 
 **And there is no ligand anywhere.** `ligand_type` and `ligand_sequence` are
 NaN on all 32,000 Block B rows; Block A has no ligand column at all. Both

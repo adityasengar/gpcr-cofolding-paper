@@ -1090,5 +1090,98 @@
   "ok": false,
   "tol": null,
   "note": "it sits at the 89.9th percentile of the panel boltz C2 rows, and at the 50.0th of GHSR's own"
+ },
+ {
+  "id": "B70.G12",
+  "what": "the construct report's G12 alpha5-CT and length",
+  "got": [
+   "LHDNLKQLMLQ",
+   377
+  ],
+  "want": [
+   "LHDNLKQLMLQ",
+   377
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B70.Gi",
+  "what": "the construct report's Gi alpha5-CT and length",
+  "got": [
+   "IKNNLKDCGLF",
+   354
+  ],
+  "want": [
+   "IKNNLKDCGLF",
+   354
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B70.Gq",
+  "what": "the construct report's Gq alpha5-CT and length",
+  "got": [
+   "LQLNLKEYNLV",
+   359
+  ],
+  "want": [
+   "LQLNLKEYNLV",
+   359
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B70.Gs",
+  "what": "the construct report's Gs alpha5-CT and length",
+  "got": [
+   "QRMHLRQYELL",
+   394
+  ],
+  "want": [
+   "QRMHLRQYELL",
+   394
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B70.Gt",
+  "what": "the construct report's Gt alpha5-CT and length",
+  "got": [
+   "IKENLKDCGLF",
+   350
+  ],
+  "want": [
+   "IKENLKDCGLF",
+   350
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B71",
+  "what": "the decoy tail is 11 residues, not the 21 the title claims",
+  "got": "last 11",
+  "want": "last 11",
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B72",
+  "what": "the shuffled arm is a different Ga class, not a scrambled tail",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": ""
  }
 ]

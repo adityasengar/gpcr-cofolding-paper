@@ -396,6 +396,45 @@ check("B60", "the shipped boltz C2 structure (18.730 A) is typical of the PANEL 
       note="it sits at the %.1fth percentile of the panel boltz C2 rows, "
            "and at the 50.0th of GHSR's own" % (100.0 * (b_c2 < 18.730).mean()))
 
+
+# ------------------------------------------------- B70-B72, the arm contrasts
+# Added 2026-09-10, after the corpus session asked what actually differs between
+# the cognate, decoy and shuffled arms -- because if the alpha5-CT were common
+# to all three, then "a contribution from the alpha5-CT sequence itself" is not
+# what the ladder isolates and the intro's decomposition clause is wrong.
+#
+# It is not common. 02_constructs/decoy_scramble_verification.md audits all 40
+# decoys byte-level: decoy[:-11] == cognate[:-11] on 40/40, tail Hamming 7-11,
+# and the scramble is a PERMUTATION of the same residues rather than a
+# substitution. So the decoy arm perturbs the alpha5-CT and nothing else, and
+# the shuffled arm is a different Ga class entirely. The clause is right.
+#
+# WHAT IS CHECKED HERE is the part that does not depend on trusting that audit:
+# the five canonical alpha5-CT sequences the construct report tabulates, against
+# UniProt. All five match, and so do all five subunit lengths.
+#
+# AND THE UNIT IS ELEVEN RESIDUES, NOT TWENTY-ONE. The construct report's own
+# column is headed "alpha5-CT (last 11)"; the manipulated quantity elsewhere in
+# the drop is `partner_tail11_helicity_frac`; and 4X1H, the only peptide-bound
+# entry in the reference set, is an engineered 11-mer. The title says 21.
+
+_A5 = {"Gs": ("P63092", "QRMHLRQYELL", 394),
+       "Gi": ("P63096", "IKNNLKDCGLF", 354),
+       "Gq": ("P50148", "LQLNLKEYNLV", 359),
+       "G12": ("Q14344", "LHDNLKQLMLQ", 377),
+       "Gt": ("P11488", "IKENLKDCGLF", 350)}
+_report = open(os.path.join(B, "02_constructs",
+                            "construct_build_report.md")).read()
+for _cls, (_acc, _tail, _len) in sorted(_A5.items()):
+    check("B70." + _cls, "the construct report's %s alpha5-CT and length" % _cls,
+          (_tail, _len),
+          (_tail if ("`%s`" % _tail) in _report else "NOT IN REPORT",
+           _len if str(_len) in _report else "LENGTH NOT IN REPORT"))
+check("B71", "the decoy tail is 11 residues, not the 21 the title claims",
+      "last 11", "last 11" if "(last 11)" in _report else "NOT 11")
+check("B72", "the shuffled arm is a different Ga class, not a scrambled tail",
+      True, "shuffled class" in _report)
+
 # ------------------------------------------------------------------- report
 ok = [r for r in RESULTS if r["ok"]]
 bad = [r for r in RESULTS if not r["ok"]]
