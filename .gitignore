@@ -55,3 +55,8 @@ data/block_a/11_structures/
 block_b_figure_data.zip
 block_b_structures.zip
 data/block_b_structures/**/*.cif
+
+# Block C drop, same rule as A and B
+block_c_figure_data.zip
+block_c_structures.zip
+data/block_c/13_structures/**/*.cif

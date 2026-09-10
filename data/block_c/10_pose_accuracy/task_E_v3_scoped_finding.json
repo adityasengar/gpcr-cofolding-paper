@@ -1,0 +1,119 @@
+{
+  "task": "E_v3_scoped_finding",
+  "reconstruction": {
+    "reconstruction_script": "/Users/SENGAAD1/Documents/claude/paper_af3/scripts/post_audit_corrections/task_e_v3_scoped_finding.py",
+    "reconstruction_script_git_sha": "7f809f0f6b717b0916e771d3a177e2ec0a8ee609",
+    "generated_at_utc": "2026-09-05T18:37:07+00:00",
+    "inputs": {
+      "rows_csv": {
+        "path": "/Users/SENGAAD1/Documents/claude/paper_af3/experiments/021_block_c_tier3_pharmacology/analysis/rows.tier3.v2.csv",
+        "sha256": "5ccf58acc8a6b0151250007c6b40d1f728ad4b42c2eeab22bd6509b5809e2103"
+      },
+      "manifest_csv": {
+        "path": "/Users/SENGAAD1/Documents/claude/paper_af3/experiments/021_block_c_tier3_pharmacology/analysis/rescore_manifest.tier3.v2.csv",
+        "sha256": "7104a65010207ae7ffe6dd69658cde747a964478d3b47afabf1b06c4f072b1e9"
+      },
+      "task_e_v2_json": {
+        "path": "/Users/SENGAAD1/Documents/claude/paper_af3/experiments/021_block_c_tier3_pharmacology/analysis/verification/task_E_v2_reference_ligand_mapping.json",
+        "sha256": "bebf360843d71ce8a05f3c1ed0ff7d17b15f380257d99ada7ecad4fb9f115029"
+      }
+    }
+  },
+  "verdict": "DOCKING_POSE_QUALITY_SCOPED",
+  "verdict_wording": "On the subset where atom mapping is valid (OF3 + Protenix, antagonist arm, ref_pdb == input_bound_pdb, n=4500 rows out of 1400 antag), pose accuracy is 6-8% dock-rate (ligand_rmsd_to_ref < 3 A) with median 7.1-8.8 A. This is a striking gap relative to Chai-1's 77% PoseBusters number and is consistent with co-folding + G-alpha + no-template being materially harder than dock-to-apo-receptor. The remaining 20 cells are unmeasurable pending an MCS-based atom matcher; this scoped finding cannot be generalised to Boltz, Chai, or the agonist arm.",
+  "n_valid_rows": 4500,
+  "dock_rate_per_cell": [
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "partner_type": "apo",
+      "n_passed": 1450,
+      "n_populated_ligand_rmsd": 1100,
+      "populated_rate": 0.7586206896551724,
+      "n_ligand_rmsd_lt_3A": 88,
+      "dock_rate_lt_3A": 0.08,
+      "n_ligand_rmsd_lt_2A": 52,
+      "median_ligand_rmsd_A": 7.146529185649969,
+      "p25_ligand_rmsd_A": 4.796616022286645,
+      "p75_ligand_rmsd_A": 9.414464601456263
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "partner_type": "g_alpha",
+      "n_passed": 1450,
+      "n_populated_ligand_rmsd": 1150,
+      "populated_rate": 0.7931034482758621,
+      "n_ligand_rmsd_lt_3A": 83,
+      "dock_rate_lt_3A": 0.07217391304347825,
+      "n_ligand_rmsd_lt_2A": 55,
+      "median_ligand_rmsd_A": 8.76533657375725,
+      "p25_ligand_rmsd_A": 4.911395057135441,
+      "p75_ligand_rmsd_A": 23.643288012272322
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "partner_type": "apo",
+      "n_passed": 1450,
+      "n_populated_ligand_rmsd": 1100,
+      "populated_rate": 0.7586206896551724,
+      "n_ligand_rmsd_lt_3A": 68,
+      "dock_rate_lt_3A": 0.06181818181818182,
+      "n_ligand_rmsd_lt_2A": 50,
+      "median_ligand_rmsd_A": 7.33819837167467,
+      "p25_ligand_rmsd_A": 4.697604379599144,
+      "p75_ligand_rmsd_A": 10.292073923645598
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "partner_type": "g_alpha",
+      "n_passed": 1450,
+      "n_populated_ligand_rmsd": 1150,
+      "populated_rate": 0.7931034482758621,
+      "n_ligand_rmsd_lt_3A": 73,
+      "dock_rate_lt_3A": 0.06347826086956522,
+      "n_ligand_rmsd_lt_2A": 50,
+      "median_ligand_rmsd_A": 8.19435876984716,
+      "p25_ligand_rmsd_A": 4.790007484076749,
+      "p75_ligand_rmsd_A": 22.85312856448482
+    }
+  ],
+  "aggregate": {
+    "n_populated_rows_across_4_cells": 4500,
+    "n_dock_lt_3A_across_4_cells": 312,
+    "aggregate_dock_rate_lt_3A": 0.06933333333333333,
+    "dock_rate_range_over_cells": [
+      0.06181818181818182,
+      0.08
+    ],
+    "median_ligand_rmsd_range_over_cells_A": [
+      7.146529185649969,
+      8.76533657375725
+    ]
+  },
+  "explicit_non_generalisability_scope": {
+    "does_not_cover_backbones": [
+      "boltz",
+      "chai"
+    ],
+    "does_not_cover_arms": [
+      "full_agonist",
+      "decoy_lig"
+    ],
+    "reason_backbones": "Boltz-2 and Chai-1 emit SMILES-derived or normalised atom names that diverge from the CCD atom-name convention. The scorer's (atom_name, element) matcher (scorer/pocket_metrics.py:501-624) returns no_atom_match at high rates on those backbones regardless of docking pose quality. Chai/neutral_antagonist/apo: 0-10% population; Boltz/neutral_antagonist/apo: 31-41% population. Neither cell crosses the 50% population floor for a valid rate estimate.",
+    "reason_arms": "For full_agonist rows the active reference is typically a different PDB from the input's ligand_bound_pdb (a signalling-state structure with a different agonist chemistry), so the reference CCD differs from the input CCD, atom names do not overlap, and the RMSD is no_atom_match. Decoy_lig rows are uninterpretable by construction (property-matched non-binders vs real-ligand ref)."
+  },
+  "comparison_to_posebusters": {
+    "chai_1_posebusters_rate": 0.77,
+    "chai_1_posebusters_benchmark": "dock-to-apo-receptor, single sample, template allowed",
+    "this_scoped_measurement": "co-fold receptor + antagonist + G\u03b1 heterotrimer, 5 samples \u00d7 5 seeds, no template, ref_pdb = input_bound_pdb",
+    "conclusion": "Direct comparison overstates the gap: the setups differ on receptor construct (apo receptor vs full complex), sampling budget (1 vs 25), template usage (yes vs no), and reference selection (input-bound crystal vs role-specific active ref). The 6-8% observed dock rate here is a lower bound on what a PoseBusters-shaped Chai measurement would report."
+  },
+  "supersedes": {
+    "v1_verdict": "DOCKING_NOT_A_FAILURE_MODE (withdrawn as premature)",
+    "v2_verdict": "DOCKING_FAILURE_<50pct (withdrawn \u2014 cell selection was CCD-driven, not pose-driven)",
+    "v3_prev_verdict": "DOCKING_POSE_QUALITY_UNRESOLVED (superseded \u2014 scoped verdict is preferable to full withdrawal)"
+  }
+}

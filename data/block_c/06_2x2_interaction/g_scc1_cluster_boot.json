@@ -1,0 +1,150 @@
+{
+  "task": "recompute_scc1_cluster_boot",
+  "generated_utc": "2026-09-10T11:47:07.210086+00:00",
+  "inputs": {
+    "rows_csv": {
+      "path": "experiments/021_block_c_tier3_pharmacology/analysis/rows.tier3.v2.csv",
+      "sha256": "5ccf58acc8a6b0151250007c6b40d1f728ad4b42c2eeab22bd6509b5809e2103"
+    },
+    "clusters_csv": {
+      "path": "experiments/019_block_b_partner_selection/analysis/paralogy_clusters.csv",
+      "sha256": "6158081ec768d225ae52e6d7d92eb1f8fbacbea3d8832487c1d89dc42675a59d"
+    }
+  },
+  "convention": "cluster-boot over paralog clusters (Block A C-8 authoritative); receptor-boot re-run for cross-check",
+  "n_iter": 5000,
+  "rng_seed": 1234,
+  "n_receptors_in_common": 23,
+  "n_clusters": 16,
+  "cluster_to_receptors": {
+    "adenosine": [
+      "AA1R",
+      "AA2AR"
+    ],
+    "adrenergic_beta": [
+      "ADRB2"
+    ],
+    "angiotensin": [
+      "AGTR1"
+    ],
+    "bombesin": [
+      "GRPR"
+    ],
+    "cannabinoid": [
+      "CNR1",
+      "CNR2"
+    ],
+    "chemokine_ccr": [
+      "CCR5"
+    ],
+    "chemokine_cxcr": [
+      "CXCR2",
+      "CXCR4"
+    ],
+    "endothelin": [
+      "EDNRB"
+    ],
+    "leukotriene": [
+      "LT4R1"
+    ],
+    "lysophosphatidic": [
+      "LPAR1"
+    ],
+    "melanin_concentrating_hormone": [
+      "MCHR1"
+    ],
+    "muscarinic": [
+      "ACM2",
+      "ACM4"
+    ],
+    "npy": [
+      "NPY1R",
+      "NPY2R"
+    ],
+    "opioid": [
+      "OPRD",
+      "OPRK"
+    ],
+    "opioid_nociceptin": [
+      "OPRX"
+    ],
+    "serotonin": [
+      "5HT1B",
+      "5HT5A"
+    ]
+  },
+  "per_backbone": {
+    "boltz": {
+      "point_estimate": -0.30619281276130406,
+      "cluster_boot": {
+        "ci_lo": -0.4541035035867702,
+        "ci_hi": -0.16452085018853435,
+        "n_iter": 5000,
+        "n_iter_finite": 5000,
+        "n_clusters": 16,
+        "signed_nonzero": true
+      },
+      "receptor_boot_recomputed": {
+        "ci_lo": -0.4306353217487542,
+        "ci_hi": -0.1922613495475224,
+        "n_iter_finite": 5000,
+        "n_receptors": 23
+      },
+      "n_common_receptors": 23
+    },
+    "chai": {
+      "point_estimate": -0.13687256201232478,
+      "cluster_boot": {
+        "ci_lo": -0.21586939829713025,
+        "ci_hi": -0.044829753563666586,
+        "n_iter": 5000,
+        "n_iter_finite": 5000,
+        "n_clusters": 16,
+        "signed_nonzero": true
+      },
+      "receptor_boot_recomputed": {
+        "ci_lo": -0.2232160432710687,
+        "ci_hi": -0.055187072959785755,
+        "n_iter_finite": 5000,
+        "n_receptors": 23
+      },
+      "n_common_receptors": 23
+    },
+    "of3": {
+      "point_estimate": -0.25229086460901395,
+      "cluster_boot": {
+        "ci_lo": -0.4052863388400153,
+        "ci_hi": -0.09858248693603644,
+        "n_iter": 5000,
+        "n_iter_finite": 5000,
+        "n_clusters": 16,
+        "signed_nonzero": true
+      },
+      "receptor_boot_recomputed": {
+        "ci_lo": -0.3841400929589637,
+        "ci_hi": -0.12914980083890826,
+        "n_iter_finite": 5000,
+        "n_receptors": 23
+      },
+      "n_common_receptors": 23
+    },
+    "protenix": {
+      "point_estimate": -0.18435133099343692,
+      "cluster_boot": {
+        "ci_lo": -0.2770630379898561,
+        "ci_hi": -0.08772963536020129,
+        "n_iter": 5000,
+        "n_iter_finite": 5000,
+        "n_clusters": 16,
+        "signed_nonzero": true
+      },
+      "receptor_boot_recomputed": {
+        "ci_lo": -0.27074213070109776,
+        "ci_hi": -0.10116335488213013,
+        "n_iter_finite": 5000,
+        "n_receptors": 23
+      },
+      "n_common_receptors": 23
+    }
+  }
+}

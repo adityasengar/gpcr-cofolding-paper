@@ -1,0 +1,416 @@
+{
+  "task": "g4_full_census_v2",
+  "generated_utc": "2026-09-10T13:16:04.081463+00:00",
+  "wall_time_s": 556.926574,
+  "n_rows_processed": 40000,
+  "inputs": {
+    "rows_csv": "/hpc/scratch/sengaad1/paper_af3/experiments/021_block_c_tier3_pharmacology/analysis/rows.tier3.v2.csv",
+    "rows_csv_sha256": "5ccf58acc8a6b0151250007c6b40d1f728ad4b42c2eeab22bd6509b5809e2103",
+    "refset_csv": "/home/sengaad1/paper_af3/refs/reference_set.csv",
+    "refset_csv_sha256": "7a261988ff73eedc9d21e5cc2a9eaf0436b9f38e3827a87493295a8d8382b90c"
+  },
+  "receptor_chain_picker": "v2_anchor_hit (chain with most C\u03b1 at the receptor's named anchor positions; \u22653 hits required)",
+  "peptide_ligand_handling": "when no HETATM ligand \u22655 heavy atoms, fall back to shortest non-receptor polymer chain with 5-100 aa (peptide-sized)",
+  "thresholds": {
+    "in_pocket_A": 8.0,
+    "entrance_bound_A_upper": 15.0,
+    "off_site_A_lower": 15.0,
+    "note": "entrance-bound (8\u201315 \u00c5) counted as VALID per adjudication; off-site fraction reports the \u226515 \u00c5 tail only"
+  },
+  "pooled": {
+    "n": 40000,
+    "n_measurable": 40000,
+    "n_low_confidence": 0,
+    "n_hetatm_ligand": 33200,
+    "n_peptide_ligand": 6800,
+    "n_in_pocket": 25559,
+    "n_entrance_bound": 7349,
+    "n_off_site": 7092,
+    "n_unmeasurable": 0,
+    "off_site_frac": 0.1773,
+    "off_site_ci_95_wilson": [
+      0.1735882011610193,
+      0.18107377710258826
+    ],
+    "in_pocket_frac": 0.638975,
+    "entrance_bound_frac": 0.183725
+  },
+  "by_arm": {
+    "apo": {
+      "n": 20000,
+      "n_measurable": 20000,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 16600,
+      "n_peptide_ligand": 3400,
+      "n_in_pocket": 13047,
+      "n_entrance_bound": 3926,
+      "n_off_site": 3027,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.15135,
+      "off_site_ci_95_wilson": [
+        0.14644995365156957,
+        0.15638395801067836
+      ],
+      "in_pocket_frac": 0.65235,
+      "entrance_bound_frac": 0.1963
+    },
+    "cognate": {
+      "n": 20000,
+      "n_measurable": 20000,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 16600,
+      "n_peptide_ligand": 3400,
+      "n_in_pocket": 12512,
+      "n_entrance_bound": 3423,
+      "n_off_site": 4065,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.20325,
+      "off_site_ci_95_wilson": [
+        0.19773001817203126,
+        0.20888395941515378
+      ],
+      "in_pocket_frac": 0.6256,
+      "entrance_bound_frac": 0.17115
+    }
+  },
+  "by_stratum_backbone_role": {
+    "boltz__full_agonist": {
+      "n": 3500,
+      "n_measurable": 3500,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 2000,
+      "n_peptide_ligand": 1500,
+      "n_in_pocket": 1798,
+      "n_entrance_bound": 625,
+      "n_off_site": 1077,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.3077142857142857,
+      "off_site_ci_95_wilson": [
+        0.2926409437282489,
+        0.3232092705051799
+      ],
+      "in_pocket_frac": 0.5137142857142857,
+      "entrance_bound_frac": 0.17857142857142858
+    },
+    "boltz__neutral_antagonist": {
+      "n": 2900,
+      "n_measurable": 2900,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 2900,
+      "n_peptide_ligand": 0,
+      "n_in_pocket": 2296,
+      "n_entrance_bound": 600,
+      "n_off_site": 4,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.001379310344827586,
+      "off_site_ci_95_wilson": [
+        0.0005365048409150649,
+        0.003541403540864437
+      ],
+      "in_pocket_frac": 0.7917241379310345,
+      "entrance_bound_frac": 0.20689655172413793
+    },
+    "boltz__decoy_lig": {
+      "n": 3600,
+      "n_measurable": 3600,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 3400,
+      "n_peptide_ligand": 200,
+      "n_in_pocket": 2290,
+      "n_entrance_bound": 705,
+      "n_off_site": 605,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.16805555555555557,
+      "off_site_ci_95_wilson": [
+        0.15619620790529962,
+        0.18062259123393007
+      ],
+      "in_pocket_frac": 0.6361111111111111,
+      "entrance_bound_frac": 0.19583333333333333
+    },
+    "chai__full_agonist": {
+      "n": 3500,
+      "n_measurable": 3500,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 2000,
+      "n_peptide_ligand": 1500,
+      "n_in_pocket": 1613,
+      "n_entrance_bound": 664,
+      "n_off_site": 1223,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.3494285714285714,
+      "off_site_ci_95_wilson": [
+        0.3338053970110078,
+        0.3653819178493443
+      ],
+      "in_pocket_frac": 0.46085714285714285,
+      "entrance_bound_frac": 0.18971428571428572
+    },
+    "chai__neutral_antagonist": {
+      "n": 2900,
+      "n_measurable": 2900,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 2900,
+      "n_peptide_ligand": 0,
+      "n_in_pocket": 2084,
+      "n_entrance_bound": 474,
+      "n_off_site": 342,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.11793103448275861,
+      "off_site_ci_95_wilson": [
+        0.10669460623137834,
+        0.13017836920915532
+      ],
+      "in_pocket_frac": 0.7186206896551725,
+      "entrance_bound_frac": 0.16344827586206898
+    },
+    "chai__decoy_lig": {
+      "n": 3600,
+      "n_measurable": 3600,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 3400,
+      "n_peptide_ligand": 200,
+      "n_in_pocket": 1800,
+      "n_entrance_bound": 446,
+      "n_off_site": 1354,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.3761111111111111,
+      "off_site_ci_95_wilson": [
+        0.3604270490148406,
+        0.392059297776872
+      ],
+      "in_pocket_frac": 0.5,
+      "entrance_bound_frac": 0.1238888888888889
+    },
+    "of3__full_agonist": {
+      "n": 3500,
+      "n_measurable": 3500,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 2000,
+      "n_peptide_ligand": 1500,
+      "n_in_pocket": 1910,
+      "n_entrance_bound": 614,
+      "n_off_site": 976,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.27885714285714286,
+      "off_site_ci_95_wilson": [
+        0.2642490281381729,
+        0.2939501781273158
+      ],
+      "in_pocket_frac": 0.5457142857142857,
+      "entrance_bound_frac": 0.17542857142857143
+    },
+    "of3__neutral_antagonist": {
+      "n": 2900,
+      "n_measurable": 2900,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 2900,
+      "n_peptide_ligand": 0,
+      "n_in_pocket": 2129,
+      "n_entrance_bound": 734,
+      "n_off_site": 37,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.012758620689655173,
+      "off_site_ci_95_wilson": [
+        0.009270535909763627,
+        0.01753588493633211
+      ],
+      "in_pocket_frac": 0.7341379310344828,
+      "entrance_bound_frac": 0.25310344827586206
+    },
+    "of3__decoy_lig": {
+      "n": 3600,
+      "n_measurable": 3600,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 3400,
+      "n_peptide_ligand": 200,
+      "n_in_pocket": 2576,
+      "n_entrance_bound": 735,
+      "n_off_site": 289,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.08027777777777778,
+      "off_site_ci_95_wilson": [
+        0.07184237121229953,
+        0.08960800995872642
+      ],
+      "in_pocket_frac": 0.7155555555555555,
+      "entrance_bound_frac": 0.20416666666666666
+    },
+    "protenix__full_agonist": {
+      "n": 3500,
+      "n_measurable": 3500,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 2000,
+      "n_peptide_ligand": 1500,
+      "n_in_pocket": 1893,
+      "n_entrance_bound": 576,
+      "n_off_site": 1031,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.2945714285714286,
+      "off_site_ci_95_wilson": [
+        0.2797009333084787,
+        0.30989238620687837
+      ],
+      "in_pocket_frac": 0.5408571428571428,
+      "entrance_bound_frac": 0.16457142857142856
+    },
+    "protenix__neutral_antagonist": {
+      "n": 2900,
+      "n_measurable": 2900,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 2900,
+      "n_peptide_ligand": 0,
+      "n_in_pocket": 2317,
+      "n_entrance_bound": 577,
+      "n_off_site": 6,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.0020689655172413794,
+      "off_site_ci_95_wilson": [
+        0.0009485467568273018,
+        0.0045068472288501546
+      ],
+      "in_pocket_frac": 0.7989655172413793,
+      "entrance_bound_frac": 0.1989655172413793
+    },
+    "protenix__decoy_lig": {
+      "n": 3600,
+      "n_measurable": 3600,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 3400,
+      "n_peptide_ligand": 200,
+      "n_in_pocket": 2853,
+      "n_entrance_bound": 599,
+      "n_off_site": 148,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.04111111111111111,
+      "off_site_ci_95_wilson": [
+        0.03509942745658283,
+        0.04810112164635222
+      ],
+      "in_pocket_frac": 0.7925,
+      "entrance_bound_frac": 0.1663888888888889
+    }
+  },
+  "by_arm_role": {
+    "apo__full_agonist": {
+      "n": 7000,
+      "n_measurable": 7000,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 4000,
+      "n_peptide_ligand": 3000,
+      "n_in_pocket": 3702,
+      "n_entrance_bound": 1247,
+      "n_off_site": 2051,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.293,
+      "off_site_ci_95_wilson": [
+        0.2824535672373909,
+        0.3037735113418848
+      ],
+      "in_pocket_frac": 0.5288571428571428,
+      "entrance_bound_frac": 0.17814285714285713
+    },
+    "apo__neutral_antagonist": {
+      "n": 5800,
+      "n_measurable": 5800,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 5800,
+      "n_peptide_ligand": 0,
+      "n_in_pocket": 4414,
+      "n_entrance_bound": 1292,
+      "n_off_site": 94,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.016206896551724137,
+      "off_site_ci_95_wilson": [
+        0.013262748755131127,
+        0.01979149586794749
+      ],
+      "in_pocket_frac": 0.7610344827586207,
+      "entrance_bound_frac": 0.22275862068965518
+    },
+    "apo__decoy_lig": {
+      "n": 7200,
+      "n_measurable": 7200,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 6800,
+      "n_peptide_ligand": 400,
+      "n_in_pocket": 4931,
+      "n_entrance_bound": 1387,
+      "n_off_site": 882,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.1225,
+      "off_site_ci_95_wilson": [
+        0.11512741860798562,
+        0.13027520101652143
+      ],
+      "in_pocket_frac": 0.6848611111111111,
+      "entrance_bound_frac": 0.1926388888888889
+    },
+    "cognate__full_agonist": {
+      "n": 7000,
+      "n_measurable": 7000,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 4000,
+      "n_peptide_ligand": 3000,
+      "n_in_pocket": 3512,
+      "n_entrance_bound": 1232,
+      "n_off_site": 2256,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.3222857142857143,
+      "off_site_ci_95_wilson": [
+        0.3114373532306999,
+        0.3333290275509557
+      ],
+      "in_pocket_frac": 0.5017142857142857,
+      "entrance_bound_frac": 0.176
+    },
+    "cognate__neutral_antagonist": {
+      "n": 5800,
+      "n_measurable": 5800,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 5800,
+      "n_peptide_ligand": 0,
+      "n_in_pocket": 4412,
+      "n_entrance_bound": 1093,
+      "n_off_site": 295,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.05086206896551724,
+      "off_site_ci_95_wilson": [
+        0.045498791720730666,
+        0.056819920767907886
+      ],
+      "in_pocket_frac": 0.7606896551724138,
+      "entrance_bound_frac": 0.18844827586206897
+    },
+    "cognate__decoy_lig": {
+      "n": 7200,
+      "n_measurable": 7200,
+      "n_low_confidence": 0,
+      "n_hetatm_ligand": 6800,
+      "n_peptide_ligand": 400,
+      "n_in_pocket": 4588,
+      "n_entrance_bound": 1098,
+      "n_off_site": 1514,
+      "n_unmeasurable": 0,
+      "off_site_frac": 0.21027777777777779,
+      "off_site_ci_95_wilson": [
+        0.20102061482500141,
+        0.2198439416638587
+      ],
+      "in_pocket_frac": 0.6372222222222222,
+      "entrance_bound_frac": 0.1525
+    }
+  },
+  "receptor_anchor_hit_histogram": {
+    "6": 38800,
+    "20": 1200
+  },
+  "far_mode_check": {
+    "n_rows_ge_60A": 176,
+    "n_rows_ge_60A_by_arm": {
+      "cognate": 175,
+      "apo": 1
+    },
+    "note": "v1 bug produced 60-82 \u00c5 cognate-arm rows; if any survive at \u226560 \u00c5 on cognate, second bug likely present"
+  }
+}

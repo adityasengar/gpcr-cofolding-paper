@@ -1,0 +1,495 @@
+[
+ {
+  "id": "C01",
+  "kind": "RECOMPUTED",
+  "what": "off-site census row count",
+  "got": 40000,
+  "want": 40000,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C02",
+  "kind": "RECOMPUTED",
+  "what": "backbones in the census",
+  "got": [
+   "boltz",
+   "chai",
+   "of3",
+   "protenix"
+  ],
+  "want": [
+   "boltz",
+   "chai",
+   "of3",
+   "protenix"
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C03",
+  "kind": "RECOMPUTED",
+  "what": "arms in the census",
+  "got": [
+   "apo",
+   "cognate"
+  ],
+  "want": [
+   "apo",
+   "cognate"
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C04",
+  "kind": "CONSISTENCY",
+  "what": "census JSON states its off-site threshold",
+  "got": 15.0,
+  "want": 15.0,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C04b",
+  "kind": "CONSISTENCY",
+  "what": "in-pocket upper bound",
+  "got": 8.0,
+  "want": 8.0,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C04.in_pocket",
+  "kind": "RECOMPUTED",
+  "what": "census band count, in_pocket",
+  "got": 25559,
+  "want": 25559,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C04.entrance_bound",
+  "kind": "RECOMPUTED",
+  "what": "census band count, entrance_bound",
+  "got": 7349,
+  "want": 7349,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C04.off_site",
+  "kind": "RECOMPUTED",
+  "what": "census band count, off_site",
+  "got": 7092,
+  "want": 7092,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C04p",
+  "kind": "RECOMPUTED",
+  "what": "pooled off-site fraction",
+  "got": 17.73,
+  "want": 17.73,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C05.apo",
+  "kind": "RECOMPUTED",
+  "what": "G4 off-site rate, apo arm (%)",
+  "got": 15.1,
+  "want": 15.1,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C05.cognate",
+  "kind": "RECOMPUTED",
+  "what": "G4 off-site rate, cognate arm (%)",
+  "got": 20.3,
+  "want": 20.3,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C06",
+  "kind": "RECOMPUTED",
+  "what": "the retracted v1 pooled figure 25.6%% does not reproduce",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "pooled recomputes to 17.7%"
+ },
+ {
+  "id": "C07",
+  "kind": "RECOMPUTED",
+  "what": "SC-C-1 numerator off-site rate (%)",
+  "got": 1.52,
+  "want": 1.52,
+  "ok": true,
+  "note": "n=9800 rows"
+ },
+ {
+  "id": "C07b",
+  "kind": "RECOMPUTED",
+  "what": "the same apo agonist/antagonist cells, peptide ligands, off-site rate (%)",
+  "got": 66.53,
+  "want": 66.53,
+  "ok": true,
+  "note": "n=3000; extracellular-vestibule binding, adjudicated biology not docking failure (dispatch 4i)"
+ },
+ {
+  "id": "C08",
+  "kind": "RECOMPUTED",
+  "what": "rows at or beyond 60 A",
+  "got": 176,
+  "want": 176,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C09",
+  "kind": "RECOMPUTED",
+  "what": "of those, the number on Chai",
+  "got": 175,
+  "want": 175,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C11",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 receptors in the common set",
+  "got": 23,
+  "want": 23,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C12",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 paralog clusters",
+  "got": 16,
+  "want": 16,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C13.boltz",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 CI lo, boltz",
+  "got": -0.454,
+  "want": -0.454,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C14.boltz",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 CI hi, boltz",
+  "got": -0.165,
+  "want": -0.164,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C15.boltz",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 signs non-zero on boltz",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C15b.boltz",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 boltz: the README CI is the CLUSTER interval, not the receptor one",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "cluster [-0.454, -0.165] vs receptor [-0.431, -0.192]"
+ },
+ {
+  "id": "C13.chai",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 CI lo, chai",
+  "got": -0.216,
+  "want": -0.216,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C14.chai",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 CI hi, chai",
+  "got": -0.045,
+  "want": -0.045,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C15.chai",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 signs non-zero on chai",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C15b.chai",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 chai: the README CI is the CLUSTER interval, not the receptor one",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "cluster [-0.216, -0.045] vs receptor [-0.223, -0.055]"
+ },
+ {
+  "id": "C13.of3",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 CI lo, of3",
+  "got": -0.405,
+  "want": -0.405,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C14.of3",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 CI hi, of3",
+  "got": -0.099,
+  "want": -0.099,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C15.of3",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 signs non-zero on of3",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C15b.of3",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 of3: the README CI is the CLUSTER interval, not the receptor one",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "cluster [-0.405, -0.099] vs receptor [-0.384, -0.129]"
+ },
+ {
+  "id": "C13.protenix",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 CI lo, protenix",
+  "got": -0.277,
+  "want": -0.277,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C14.protenix",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 CI hi, protenix",
+  "got": -0.088,
+  "want": -0.088,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C15.protenix",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 signs non-zero on protenix",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C15b.protenix",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-1 protenix: the README CI is the CLUSTER interval, not the receptor one",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "cluster [-0.277, -0.088] vs receptor [-0.271, -0.101]"
+ },
+ {
+  "id": "C16.boltz",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-4 AUROC point estimate present for boltz",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "README says 0.852 [0.560, 0.974]"
+ },
+ {
+  "id": "C17.boltz",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-4 boltz scoped correctly (crosses 0.5 -> inconclusive)",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C16.chai",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-4 AUROC point estimate present for chai",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "README says 0.706 [0.351, 0.941]"
+ },
+ {
+  "id": "C17.chai",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-4 chai scoped correctly (crosses 0.5 -> inconclusive)",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C16.of3",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-4 AUROC point estimate present for of3",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "README says 0.656 [0.382, 0.924]"
+ },
+ {
+  "id": "C17.of3",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-4 of3 scoped correctly (crosses 0.5 -> inconclusive)",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C16.protenix",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-4 AUROC point estimate present for protenix",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "README says 0.825 [0.528, 0.960]"
+ },
+ {
+  "id": "C17.protenix",
+  "kind": "CONSISTENCY",
+  "what": "SC-C-4 protenix scoped correctly (crosses 0.5 -> inconclusive)",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C18",
+  "kind": "RECOMPUTED",
+  "what": "reference survey rows",
+  "got": 168,
+  "want": 168,
+  "ok": true,
+  "note": "informational: 168 rows"
+ },
+ {
+  "id": "C19",
+  "kind": "RECOMPUTED",
+  "what": "receptors landed in the census",
+  "got": 36,
+  "want": 36,
+  "ok": true,
+  "note": "dispatch: 36 landed of 40 dispatched; the 4 drops are C-C-9"
+ },
+ {
+  "id": "C20.B1B1U5",
+  "kind": "RECOMPUTED",
+  "what": "C-C-9 drop B1B1U5 is absent from the census",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C20.OPSD",
+  "kind": "RECOMPUTED",
+  "what": "C-C-9 drop OPSD is absent from the census",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C20.FSHR",
+  "kind": "RECOMPUTED",
+  "what": "C-C-9 drop FSHR is absent from the census",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C20.LSHR",
+  "kind": "RECOMPUTED",
+  "what": "C-C-9 drop LSHR is absent from the census",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C21",
+  "kind": "RECOMPUTED",
+  "what": "CIF files present",
+  "got": 14,
+  "want": 14,
+  "ok": true,
+  "note": "the bundle README says 2 files for this directory; dispatch 4(n) confirms the index is stale, not the data"
+ },
+ {
+  "id": "C22",
+  "kind": "RECOMPUTED",
+  "what": "targeted CIFs",
+  "got": 7,
+  "want": 7,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C23",
+  "kind": "RECOMPUTED",
+  "what": "random CIFs",
+  "got": 7,
+  "want": 7,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C24",
+  "kind": "CONSISTENCY",
+  "what": "Flag C-12 still says the 2x2 cluster-boot was NOT recomputed",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": "dispatch 4(m): the flag is STALE, C-C-3 wins, and the recompute exists at 06_2x2_interaction/g_scc1_cluster_boot.json"
+ },
+ {
+  "id": "C25",
+  "kind": "CONSISTENCY",
+  "what": "C-C-3 is marked RESOLVED",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "note": ""
+ }
+]

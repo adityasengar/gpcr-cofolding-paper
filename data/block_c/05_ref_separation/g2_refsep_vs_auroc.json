@@ -1,0 +1,229 @@
+{
+  "task": "G2_refsep_vs_auroc",
+  "generated_utc": "2026-09-10T08:22:47.274018+00:00",
+  "inputs": {
+    "s1_json": {
+      "path": "experiments/021_block_c_tier3_pharmacology/signal_recovery_2026_09_07/s1_loro_classifier.json",
+      "sha256": "3b7ad330b09a7116c6fec59fd00836f23dfa77d6812178262cb86a6fffd5bbeb"
+    },
+    "refsep_csv": {
+      "path": "experiments/019_block_b_partner_selection/analysis/reference_separation_pocket_ca.csv",
+      "sha256": "ed8505771108beec1be739d12802d253b93a0dc3f5429b50bf85d065c53b57cb"
+    }
+  },
+  "s1_variant_used": "C_no_selfref_apo",
+  "s1_feature_set_used": "F_iii_pocket_plus_axes",
+  "n_s1_receptors": 15,
+  "s1_receptors": [
+    "5HT1B",
+    "5HT5A",
+    "AA1R",
+    "AA2AR",
+    "ACM2",
+    "AGTR1",
+    "CXCR2",
+    "CXCR4",
+    "EDNRB",
+    "GRPR",
+    "LPAR1",
+    "LT4R1",
+    "MCHR1",
+    "NPY2R",
+    "OPRX"
+  ],
+  "missing_from_refsep": [],
+  "per_backbone_regression": {
+    "boltz": {
+      "n_receptors": 15,
+      "slope_auroc_per_A": -0.27780704666058603,
+      "intercept": 1.2600129881151567,
+      "r_squared": 0.18194615817008308,
+      "spearman_rho": -0.29692872320923525,
+      "bootstrap": {
+        "slope_ci_95": [
+          -0.752262880670887,
+          0.08025630015265055
+        ],
+        "rho_ci_95": [
+          -0.7813516442572269,
+          0.3187806259009392
+        ],
+        "r_squared_ci_95": [
+          0.00025983324509422926,
+          0.5586240238232606
+        ],
+        "slope_bootstrap_median": -0.2729222574331716,
+        "rho_bootstrap_median": -0.2915092986509922,
+        "r_squared_bootstrap_median": 0.20470831549243268
+      },
+      "bimodality": {
+        "n": 15,
+        "n_perfect_ge_0_85": 13,
+        "n_inverted_lt_0_30": 1,
+        "n_middle": 1,
+        "frac_bimodal": 0.9333333333333333
+      }
+    },
+    "chai": {
+      "n_receptors": 15,
+      "slope_auroc_per_A": -0.23910840277753187,
+      "intercept": 1.0952138518135746,
+      "r_squared": 0.0847983348746314,
+      "spearman_rho": -0.24713322304371133,
+      "bootstrap": {
+        "slope_ci_95": [
+          -0.8398904156560316,
+          0.19641146653623134
+        ],
+        "rho_ci_95": [
+          -0.7187119503606791,
+          0.3082015762254823
+        ],
+        "r_squared_ci_95": [
+          0.00035427944139837243,
+          0.49408284735721636
+        ],
+        "slope_bootstrap_median": -0.2410439926229632,
+        "rho_bootstrap_median": -0.27169776605132945,
+        "r_squared_bootstrap_median": 0.10302036706062778
+      },
+      "bimodality": {
+        "n": 15,
+        "n_perfect_ge_0_85": 9,
+        "n_inverted_lt_0_30": 1,
+        "n_middle": 5,
+        "frac_bimodal": 0.6666666666666666
+      }
+    },
+    "of3": {
+      "n_receptors": 15,
+      "slope_auroc_per_A": -0.4914720253242791,
+      "intercept": 1.378420069294394,
+      "r_squared": 0.29190697812881694,
+      "spearman_rho": -0.318998464816031,
+      "bootstrap": {
+        "slope_ci_95": [
+          -1.0101546977966303,
+          -0.00847310551102684
+        ],
+        "rho_ci_95": [
+          -0.7975225381014964,
+          0.2740579904257834
+        ],
+        "r_squared_ci_95": [
+          0.007806336965236971,
+          0.705608732709085
+        ],
+        "slope_bootstrap_median": -0.49217668928619945,
+        "rho_bootstrap_median": -0.33516261264188374,
+        "r_squared_bootstrap_median": 0.2947061393181936
+      },
+      "bimodality": {
+        "n": 15,
+        "n_perfect_ge_0_85": 8,
+        "n_inverted_lt_0_30": 2,
+        "n_middle": 5,
+        "frac_bimodal": 0.6666666666666666
+      }
+    },
+    "protenix": {
+      "n_receptors": 15,
+      "slope_auroc_per_A": -0.2915700649542696,
+      "intercept": 1.2633214541379814,
+      "r_squared": 0.1556772284821616,
+      "spearman_rho": -0.09266964086291873,
+      "bootstrap": {
+        "slope_ci_95": [
+          -0.8996847103263839,
+          0.16226302446042679
+        ],
+        "rho_ci_95": [
+          -0.706590826163337,
+          0.6076039960954004
+        ],
+        "r_squared_ci_95": [
+          0.0014070094268654246,
+          0.6109874726626203
+        ],
+        "slope_bootstrap_median": -0.2688453211751291,
+        "rho_bootstrap_median": -0.08504865111251246,
+        "r_squared_bootstrap_median": 0.1827074347433537
+      },
+      "bimodality": {
+        "n": 15,
+        "n_perfect_ge_0_85": 12,
+        "n_inverted_lt_0_30": 1,
+        "n_middle": 2,
+        "frac_bimodal": 0.8666666666666667
+      }
+    }
+  },
+  "pooled_regression": {
+    "n_points": 15,
+    "slope_auroc_per_A": -0.3249893849291666,
+    "intercept": 1.2492420908402764,
+    "r_squared": 0.1617736789072337,
+    "spearman_rho": -0.20560760275890277,
+    "bootstrap": {
+      "slope_ci_95": [
+        -0.5709636822344916,
+        -0.0643276380117825
+      ],
+      "rho_ci_95": [
+        -0.45486270542242996,
+        0.08591650188591361
+      ],
+      "r_squared_ci_95": [
+        0.013151597836039789,
+        0.3384446116003078
+      ],
+      "slope_bootstrap_median": -0.32052850286309453,
+      "rho_bootstrap_median": -0.20782378495460813,
+      "r_squared_bootstrap_median": 0.15381428933260421
+    },
+    "bimodality": {
+      "n": 60,
+      "n_perfect_ge_0_85": 42,
+      "n_inverted_lt_0_30": 5,
+      "n_middle": 13,
+      "frac_bimodal": 0.7833333333333333
+    }
+  },
+  "applicability_thresholds": [
+    {
+      "backbone": "boltz",
+      "threshold_pocket_ca_A": null,
+      "frac_reliable_above": null
+    },
+    {
+      "backbone": "chai",
+      "threshold_pocket_ca_A": null,
+      "frac_reliable_above": null
+    },
+    {
+      "backbone": "of3",
+      "threshold_pocket_ca_A": null,
+      "frac_reliable_above": null
+    },
+    {
+      "backbone": "protenix",
+      "threshold_pocket_ca_A": null,
+      "frac_reliable_above": null
+    }
+  ],
+  "agtr1_counterexample": {
+    "pocket_ca_sep_A": 1.8722,
+    "delta_ref_tilt_A": 7.8576,
+    "delta_ref_npxxy_A": -4.779,
+    "per_backbone_auroc": {
+      "boltz": 0.0996,
+      "chai": 0.0,
+      "of3": 0.0,
+      "protenix": 0.0
+    },
+    "pocket_ca_rank_in_40": 39,
+    "pocket_ca_percentile_in_s1_15": 93.33333333333333,
+    "interpretation": "AGTR1 well-separated on tilt (\u0394_ref_tilt=7.86 \u00c5) but pocket_ca_sep=1.87 \u00c5 (rank 39/40 in Block B panel, percentile 93% in S1 15-set). Test: does AGTR1 fit the pocket_ca account (should invert if pocket_ca is small) or break it (if pocket_ca is large and AUROC still inverts)."
+  },
+  "fold_integrity_check_2_test": {}
+}

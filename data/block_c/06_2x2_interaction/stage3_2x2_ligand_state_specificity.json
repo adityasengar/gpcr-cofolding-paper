@@ -1,0 +1,203 @@
+{
+  "reconstruction": {
+    "reconstruction_script": "/Users/SENGAAD1/Documents/claude/paper_af3/scripts/stage3_post_audit_analysis.py",
+    "reconstruction_script_git_sha": "92e6848f0013fde7f0c239e7babc9082b920b6da",
+    "rows_csv": "/Users/SENGAAD1/Documents/claude/paper_af3/experiments/021_block_c_tier3_pharmacology/analysis/rows.tier3.v2.csv",
+    "rows_csv_sha256": "5ccf58acc8a6b0151250007c6b40d1f728ad4b42c2eeab22bd6509b5809e2103",
+    "ref_set_csv": "/Users/SENGAAD1/Documents/claude/paper_af3/refs/reference_set.csv",
+    "ref_set_csv_sha256": "7a261988ff73eedc9d21e5cc2a9eaf0436b9f38e3827a87493295a8d8382b90c",
+    "rcsb_deposit_dates_json": "/Users/SENGAAD1/Documents/claude/paper_af3/refs/cache/rcsb_deposit_dates.json",
+    "rcsb_deposit_dates_sha256": "3e9963d28cc5592cc7549b478e87fddc42de4f0a76984fab59d6ea4cb5a08df1",
+    "generated_at_utc": "2026-09-05T15:09:01+00:00"
+  },
+  "per_backbone": {
+    "boltz": {
+      "cells": {
+        "agonist_active": {
+          "est": 0.7680192954636977,
+          "ci_lo": 0.6983697592582755,
+          "ci_hi": 0.8386256690627131,
+          "n_clusters": 28
+        },
+        "agonist_inactive": {
+          "est": 0.9762195589719448,
+          "ci_lo": 0.8344599915778318,
+          "ci_hi": 1.1266467970051,
+          "n_clusters": 28
+        },
+        "antag_active": {
+          "est": 0.8983271204431744,
+          "ci_lo": 0.8125727478646398,
+          "ci_hi": 0.9816574053068396,
+          "n_clusters": 23
+        },
+        "antag_inactive": {
+          "est": 0.7665321150100051,
+          "ci_lo": 0.6393677823428129,
+          "ci_hi": 0.9120248185384702,
+          "n_clusters": 23
+        }
+      },
+      "interaction": {
+        "estimate": -0.3061928127613044,
+        "ci_lo": -0.4306353217487532,
+        "ci_hi": -0.19226134954752339,
+        "n_receptors_in_common": 23,
+        "signed_nonzero": true,
+        "interpretation": "signed non-zero interaction \u2014 ligand-state-specific pocket geometry"
+      },
+      "n_rows": {
+        "agonist_active": 2800,
+        "agonist_inactive": 2800,
+        "antag_active": 2300,
+        "antag_inactive": 2300
+      },
+      "n_receptors": {
+        "agonist": 28,
+        "antag": 23,
+        "common": 23
+      }
+    },
+    "chai": {
+      "cells": {
+        "agonist_active": {
+          "est": 0.859622016673194,
+          "ci_lo": 0.7528133878058416,
+          "ci_hi": 0.9663631653788345,
+          "n_clusters": 28
+        },
+        "agonist_inactive": {
+          "est": 0.9571313494128628,
+          "ci_lo": 0.8050392346381305,
+          "ci_hi": 1.1328554220018405,
+          "n_clusters": 28
+        },
+        "antag_active": {
+          "est": 0.9215673544307925,
+          "ci_lo": 0.8011943797425204,
+          "ci_hi": 1.0406472967701175,
+          "n_clusters": 23
+        },
+        "antag_inactive": {
+          "est": 0.8684283214290708,
+          "ci_lo": 0.7252752845866729,
+          "ci_hi": 1.0373315823819214,
+          "n_clusters": 23
+        }
+      },
+      "interaction": {
+        "estimate": -0.13687256201232179,
+        "ci_lo": -0.2232160432710647,
+        "ci_hi": -0.05518707295978731,
+        "n_receptors_in_common": 23,
+        "signed_nonzero": true,
+        "interpretation": "signed non-zero interaction \u2014 ligand-state-specific pocket geometry"
+      },
+      "n_rows": {
+        "agonist_active": 2800,
+        "agonist_inactive": 2800,
+        "antag_active": 2300,
+        "antag_inactive": 2300
+      },
+      "n_receptors": {
+        "agonist": 28,
+        "antag": 23,
+        "common": 23
+      }
+    },
+    "of3": {
+      "cells": {
+        "agonist_active": {
+          "est": 0.8118395022746089,
+          "ci_lo": 0.7390401029745016,
+          "ci_hi": 0.8879198268457762,
+          "n_clusters": 28
+        },
+        "agonist_inactive": {
+          "est": 1.0483143311765102,
+          "ci_lo": 0.9125148034193225,
+          "ci_hi": 1.1921930769513973,
+          "n_clusters": 28
+        },
+        "antag_active": {
+          "est": 0.9113918362708916,
+          "ci_lo": 0.8137407824101163,
+          "ci_hi": 1.0091620990018308,
+          "n_clusters": 23
+        },
+        "antag_inactive": {
+          "est": 0.8859002852444947,
+          "ci_lo": 0.7348895431222773,
+          "ci_hi": 1.0688444285901122,
+          "n_clusters": 23
+        }
+      },
+      "interaction": {
+        "estimate": -0.2522908646090126,
+        "ci_lo": -0.3841400929589627,
+        "ci_hi": -0.12914980083890937,
+        "n_receptors_in_common": 23,
+        "signed_nonzero": true,
+        "interpretation": "signed non-zero interaction \u2014 ligand-state-specific pocket geometry"
+      },
+      "n_rows": {
+        "agonist_active": 2800,
+        "agonist_inactive": 2800,
+        "antag_active": 2300,
+        "antag_inactive": 2300
+      },
+      "n_receptors": {
+        "agonist": 28,
+        "antag": 23,
+        "common": 23
+      }
+    },
+    "protenix": {
+      "cells": {
+        "agonist_active": {
+          "est": 0.7717622485186802,
+          "ci_lo": 0.6991817345596483,
+          "ci_hi": 0.8453224818103798,
+          "n_clusters": 28
+        },
+        "agonist_inactive": {
+          "est": 0.9872639089327511,
+          "ci_lo": 0.8611051922769914,
+          "ci_hi": 1.119518139440548,
+          "n_clusters": 28
+        },
+        "antag_active": {
+          "est": 0.8674248340016061,
+          "ci_lo": 0.7766542070070581,
+          "ci_hi": 0.9603957287294772,
+          "n_clusters": 23
+        },
+        "antag_inactive": {
+          "est": 0.8557730992082545,
+          "ci_lo": 0.7401476355193851,
+          "ci_hi": 0.9897909217880917,
+          "n_clusters": 23
+        }
+      },
+      "interaction": {
+        "estimate": -0.18435133099343737,
+        "ci_lo": -0.2707421307010984,
+        "ci_hi": -0.10116335488213257,
+        "n_receptors_in_common": 23,
+        "signed_nonzero": true,
+        "interpretation": "signed non-zero interaction \u2014 ligand-state-specific pocket geometry"
+      },
+      "n_rows": {
+        "agonist_active": 2800,
+        "agonist_inactive": 2800,
+        "antag_active": 2300,
+        "antag_inactive": 2300
+      },
+      "n_receptors": {
+        "agonist": 28,
+        "antag": 23,
+        "common": 23
+      }
+    }
+  }
+}

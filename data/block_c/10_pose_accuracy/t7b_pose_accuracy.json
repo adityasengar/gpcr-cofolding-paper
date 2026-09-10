@@ -1,0 +1,601 @@
+{
+  "task": "t7b_pose_accuracy",
+  "generated_utc": "2026-09-07T11:23:52.813941+00:00",
+  "prereg_git_sha": "e63692f",
+  "dock_threshold_A": 3.0,
+  "inputs": {
+    "rows_v2": {
+      "path": "experiments/021_block_c_tier3_pharmacology/analysis/rows.tier3.v2.csv",
+      "sha256": "5ccf58acc8a6b0151250007c6b40d1f728ad4b42c2eeab22bd6509b5809e2103"
+    },
+    "manifest_v2": {
+      "path": "experiments/021_block_c_tier3_pharmacology/analysis/rescore_manifest.tier3.v2.csv",
+      "sha256": "7104a65010207ae7ffe6dd69658cde747a964478d3b47afabf1b06c4f072b1e9"
+    },
+    "rows_t7b": {
+      "path": "experiments/021_block_c_tier3_pharmacology/rescore_t7b/rows.csv",
+      "sha256": "d0d3b334447a022fb6b786a8e528820741174a8560af3bccb69aa1c65eefced1"
+    }
+  },
+  "n_rows_v2_of3protenix": 20400,
+  "n_rows_t7b_boltz_chai": 20400,
+  "n_rows_v3_merged": 40800,
+  "coverage_and_dock_rate": [
+    {
+      "backbone": "boltz",
+      "ligand_role": "decoy_lig",
+      "arm": "apo",
+      "n_total": 1800,
+      "n_numeric": 819,
+      "n_dock": 74,
+      "coverage": 0.455,
+      "dock_rate_numeric": 0.09035409035409035,
+      "dock_rate_all": 0.04111111111111111
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "decoy_lig",
+      "arm": "cognate",
+      "n_total": 1800,
+      "n_numeric": 968,
+      "n_dock": 0,
+      "coverage": 0.5377777777777778,
+      "dock_rate_numeric": 0.0,
+      "dock_rate_all": 0.0
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "full_agonist",
+      "arm": "apo",
+      "n_total": 1750,
+      "n_numeric": 900,
+      "n_dock": 350,
+      "coverage": 0.5142857142857142,
+      "dock_rate_numeric": 0.3888888888888889,
+      "dock_rate_all": 0.2
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "full_agonist",
+      "arm": "cognate",
+      "n_total": 1750,
+      "n_numeric": 973,
+      "n_dock": 299,
+      "coverage": 0.556,
+      "dock_rate_numeric": 0.30729701952723537,
+      "dock_rate_all": 0.17085714285714285
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1350,
+      "n_dock": 519,
+      "coverage": 0.9310344827586207,
+      "dock_rate_numeric": 0.3844444444444444,
+      "dock_rate_all": 0.35793103448275865
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1400,
+      "n_dock": 538,
+      "coverage": 0.9655172413793104,
+      "dock_rate_numeric": 0.3842857142857143,
+      "dock_rate_all": 0.37103448275862067
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "decoy_lig",
+      "arm": "apo",
+      "n_total": 1800,
+      "n_numeric": 763,
+      "n_dock": 101,
+      "coverage": 0.42388888888888887,
+      "dock_rate_numeric": 0.13237221494102228,
+      "dock_rate_all": 0.05611111111111111
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "decoy_lig",
+      "arm": "cognate",
+      "n_total": 1800,
+      "n_numeric": 935,
+      "n_dock": 0,
+      "coverage": 0.5194444444444445,
+      "dock_rate_numeric": 0.0,
+      "dock_rate_all": 0.0
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "full_agonist",
+      "arm": "apo",
+      "n_total": 1750,
+      "n_numeric": 850,
+      "n_dock": 174,
+      "coverage": 0.4857142857142857,
+      "dock_rate_numeric": 0.20470588235294118,
+      "dock_rate_all": 0.09942857142857142
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "full_agonist",
+      "arm": "cognate",
+      "n_total": 1750,
+      "n_numeric": 926,
+      "n_dock": 215,
+      "coverage": 0.5291428571428571,
+      "dock_rate_numeric": 0.23218142548596113,
+      "dock_rate_all": 0.12285714285714286
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1350,
+      "n_dock": 569,
+      "coverage": 0.9310344827586207,
+      "dock_rate_numeric": 0.42148148148148146,
+      "dock_rate_all": 0.39241379310344826
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1400,
+      "n_dock": 501,
+      "coverage": 0.9655172413793104,
+      "dock_rate_numeric": 0.3578571428571429,
+      "dock_rate_all": 0.34551724137931034
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "decoy_lig",
+      "arm": "apo",
+      "n_total": 1800,
+      "n_numeric": 600,
+      "n_dock": 10,
+      "coverage": 0.3333333333333333,
+      "dock_rate_numeric": 0.016666666666666666,
+      "dock_rate_all": 0.005555555555555556
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "decoy_lig",
+      "arm": "cognate",
+      "n_total": 1800,
+      "n_numeric": 800,
+      "n_dock": 16,
+      "coverage": 0.4444444444444444,
+      "dock_rate_numeric": 0.02,
+      "dock_rate_all": 0.008888888888888889
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "full_agonist",
+      "arm": "apo",
+      "n_total": 1750,
+      "n_numeric": 700,
+      "n_dock": 49,
+      "coverage": 0.4,
+      "dock_rate_numeric": 0.07,
+      "dock_rate_all": 0.028
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "full_agonist",
+      "arm": "cognate",
+      "n_total": 1750,
+      "n_numeric": 750,
+      "n_dock": 50,
+      "coverage": 0.42857142857142855,
+      "dock_rate_numeric": 0.06666666666666667,
+      "dock_rate_all": 0.02857142857142857
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1100,
+      "n_dock": 88,
+      "coverage": 0.7586206896551724,
+      "dock_rate_numeric": 0.08,
+      "dock_rate_all": 0.060689655172413794
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1150,
+      "n_dock": 83,
+      "coverage": 0.7931034482758621,
+      "dock_rate_numeric": 0.07217391304347825,
+      "dock_rate_all": 0.05724137931034483
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "decoy_lig",
+      "arm": "apo",
+      "n_total": 1800,
+      "n_numeric": 600,
+      "n_dock": 29,
+      "coverage": 0.3333333333333333,
+      "dock_rate_numeric": 0.04833333333333333,
+      "dock_rate_all": 0.01611111111111111
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "decoy_lig",
+      "arm": "cognate",
+      "n_total": 1800,
+      "n_numeric": 800,
+      "n_dock": 50,
+      "coverage": 0.4444444444444444,
+      "dock_rate_numeric": 0.0625,
+      "dock_rate_all": 0.027777777777777776
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "full_agonist",
+      "arm": "apo",
+      "n_total": 1750,
+      "n_numeric": 700,
+      "n_dock": 50,
+      "coverage": 0.4,
+      "dock_rate_numeric": 0.07142857142857142,
+      "dock_rate_all": 0.02857142857142857
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "full_agonist",
+      "arm": "cognate",
+      "n_total": 1750,
+      "n_numeric": 750,
+      "n_dock": 50,
+      "coverage": 0.42857142857142855,
+      "dock_rate_numeric": 0.06666666666666667,
+      "dock_rate_all": 0.02857142857142857
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1100,
+      "n_dock": 68,
+      "coverage": 0.7586206896551724,
+      "dock_rate_numeric": 0.06181818181818182,
+      "dock_rate_all": 0.04689655172413793
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1150,
+      "n_dock": 73,
+      "coverage": 0.7931034482758621,
+      "dock_rate_numeric": 0.06347826086956522,
+      "dock_rate_all": 0.0503448275862069
+    }
+  ],
+  "method_census": [
+    {
+      "backbone": "boltz",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": "atom_name_element",
+      "n": 800
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": "mcs",
+      "n": 987
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": "mcs_too_small",
+      "n": 313
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": NaN,
+      "n": 1500
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": "atom_name_element",
+      "n": 750
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": "mcs",
+      "n": 1123
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": "mcs_too_small",
+      "n": 227
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": NaN,
+      "n": 1400
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": "atom_name_element",
+      "n": 500
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": "mcs",
+      "n": 2250
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": "mcs_too_small",
+      "n": 50
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": NaN,
+      "n": 100
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": "atom_name_element",
+      "n": 300
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": "mcs",
+      "n": 1398
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": "mcs_too_small",
+      "n": 402
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": NaN,
+      "n": 1500
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": "atom_name_element",
+      "n": 450
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": "mcs",
+      "n": 1326
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": "mcs_too_small",
+      "n": 324
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": NaN,
+      "n": 1400
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": "mcs",
+      "n": 2750
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": "mcs_too_small",
+      "n": 50
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": NaN,
+      "n": 100
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": "",
+      "n": 3600
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": "",
+      "n": 3500
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": "",
+      "n": 2900
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "decoy_lig",
+      "pocket_ligand_atom_map_method": "",
+      "n": 3600
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "full_agonist",
+      "pocket_ligand_atom_map_method": "",
+      "n": 3500
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "pocket_ligand_atom_map_method": "",
+      "n": 2900
+    }
+  ],
+  "prior_scoped_cell_of3_protenix_neutral_antag": [
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1100,
+      "n_dock": 88,
+      "coverage": 0.7586206896551724,
+      "dock_rate_numeric": 0.08,
+      "dock_rate_all": 0.060689655172413794
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1150,
+      "n_dock": 83,
+      "coverage": 0.7931034482758621,
+      "dock_rate_numeric": 0.07217391304347825,
+      "dock_rate_all": 0.05724137931034483
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1100,
+      "n_dock": 68,
+      "coverage": 0.7586206896551724,
+      "dock_rate_numeric": 0.06181818181818182,
+      "dock_rate_all": 0.04689655172413793
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1150,
+      "n_dock": 73,
+      "coverage": 0.7931034482758621,
+      "dock_rate_numeric": 0.06347826086956522,
+      "dock_rate_all": 0.0503448275862069
+    }
+  ],
+  "canonical_pose_row_neutral_antag_all_backbones": [
+    {
+      "backbone": "boltz",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1350,
+      "n_dock": 519,
+      "coverage": 0.9310344827586207,
+      "dock_rate_numeric": 0.3844444444444444,
+      "dock_rate_all": 0.35793103448275865
+    },
+    {
+      "backbone": "boltz",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1400,
+      "n_dock": 538,
+      "coverage": 0.9655172413793104,
+      "dock_rate_numeric": 0.3842857142857143,
+      "dock_rate_all": 0.37103448275862067
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1350,
+      "n_dock": 569,
+      "coverage": 0.9310344827586207,
+      "dock_rate_numeric": 0.42148148148148146,
+      "dock_rate_all": 0.39241379310344826
+    },
+    {
+      "backbone": "chai",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1400,
+      "n_dock": 501,
+      "coverage": 0.9655172413793104,
+      "dock_rate_numeric": 0.3578571428571429,
+      "dock_rate_all": 0.34551724137931034
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1100,
+      "n_dock": 88,
+      "coverage": 0.7586206896551724,
+      "dock_rate_numeric": 0.08,
+      "dock_rate_all": 0.060689655172413794
+    },
+    {
+      "backbone": "of3",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1150,
+      "n_dock": 83,
+      "coverage": 0.7931034482758621,
+      "dock_rate_numeric": 0.07217391304347825,
+      "dock_rate_all": 0.05724137931034483
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "arm": "apo",
+      "n_total": 1450,
+      "n_numeric": 1100,
+      "n_dock": 68,
+      "coverage": 0.7586206896551724,
+      "dock_rate_numeric": 0.06181818181818182,
+      "dock_rate_all": 0.04689655172413793
+    },
+    {
+      "backbone": "protenix",
+      "ligand_role": "neutral_antagonist",
+      "arm": "cognate",
+      "n_total": 1450,
+      "n_numeric": 1150,
+      "n_dock": 73,
+      "coverage": 0.7931034482758621,
+      "dock_rate_numeric": 0.06347826086956522,
+      "dock_rate_all": 0.0503448275862069
+    }
+  ]
+}
