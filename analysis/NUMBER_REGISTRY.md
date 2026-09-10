@@ -224,6 +224,7 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 25.6 | S342 | the RETRACTED Block C v1 pooled off-site figure; superseded by the v2 census (15.1% apo / 20.3% cognate). Block C verify_claims check C06 asserts it does NOT reproduce, which is the check working -- it is quoted here only as the retraction it is |
 | 0.340 | S361 | DERIVED, not shipped: stage3_2x2_ligand_state_specificity.json per_backbone.boltz, (0.7680-0.9762)-(0.8983-0.7665) = -0.3400, against interaction.estimate -0.3062. The agonist cells carry n_clusters 28 and the antagonist cells 23; the interaction is on the 23 in common, which is why the cell means cannot reconstruct it |
 | 27.9 | S364 | Block C G4 gate, agonist off-site fraction lower bound; independent re-verification 2026-09-10, not recomputed here |
 | 34.9 | S364 | Block C G4 gate, agonist off-site fraction upper bound; same source |
