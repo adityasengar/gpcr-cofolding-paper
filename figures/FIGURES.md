@@ -508,3 +508,76 @@ status  ready — DEPARTS FROM ITS SPEC IN ONE PLACE, deliberately. The spec say
         contradicts itself two paragraphs later. The dashes are not drawn and
         the panel says so in red.
 ```
+
+### BB-2 — the decomposition, on both scales
+```
+claim   SC-B-2 — occupancy 55%, α5-CT sequence 34%, correct family 11% on the
+        probability scale and 17.4% on the logit scale
+shows   a, the three telescoping terms as shares, probability beside logit, so
+        the reader sees that only the family share moves between them;
+        b, the per-backbone family term as SHIPPED against as CLAIMED
+data    05_decomposition/ladder_decomposition.csv, frame reproduction_36
+build   cd figures/block_b/panels && python3 bb2_decomposition.py
+status  ready — panel b exists BECAUSE the claim does not reproduce. SC-B-2 says
+        "all four backbones agree, 17-21%"; the file says 14.2 / 22.9 / 23.6 /
+        10.9. The claimed values are drawn as dashes over the real bars rather
+        than quietly replaced. Three of four intervals span zero (D-B-6, D-B-7)
+```
+
+### BB-3 — engagement and activation are separable
+```
+claim   SC-B-3 — and the engaged-but-inactive decoy cell, which is the only cell
+        in Block B that can support a chemistry claim
+shows   a, the three partner arms on the engagement × activation plane;
+        b, the full cutoff sweep, because 20 Å is a choice and the decoy arm
+        moves 0.53 → 0.66 across it while cognate barely moves;
+        c, the mechanism cell populated on every backbone, 278–540
+data    06_interface/interface_2x2.csv, frame_36, two_instrument, all 6 cutoffs
+build   cd figures/block_b/panels && python3 bb3_engagement.py
+status  ready — apo is absent from a and b BY CONSTRUCTION, not omission: with
+        no partner, p(engaged)=0 and p(active|engaged) is undefined. Said on the
+        panel rather than left as a gap a reader has to explain to themselves
+```
+
+### BB-4 — the PIF connector
+```
+claim   SC-B-4 — decoy cells engaged but not active sit at apo geometry on an
+        axis the predicate never reads
+shows   a, five subsets as distributions with every cell drawn;
+        b, the per-backbone companion
+data    06_interface/interface_pif_connector.csv, 640 cells
+build   cd figures/block_b/panels && python3 bb4_connector.py
+status  ready — reproduces all five medians and all five cell counts exactly
+        (160/130/118/69/47 at 15.35/16.04/16.00/16.03/15.42). NO STRUCTURAL
+        RENDER OF THIS EXISTS AND NONE SHOULD: the whole spread is 0.7 Å, which
+        cannot be drawn honestly at a legible scale. The addendum forbids it and
+        the addendum is right
+```
+
+### BB-5 — the models do not read partner family
+```
+claim   SC-B-6 (Outcome A signed) and SC-B-14 (Outcome B signed nowhere)
+shows   a, the three donor strata at their true widths, all receptors against
+        native-referenced only, open markers where the interval spans zero;
+        b, 0 of 9 stratum × axis combinations sign the pre-registered alternative
+data    07_donor_residuals/phase5_power_analysis.csv, panel rows, residual_tilt
+build   cd figures/block_b/panels && python3 bb5_residuals.py
+status  ready — TWO THINGS IT MUST NOT SAY, and does not: this is not an
+        equivalence result (that upgrade was attempted and retracted), and the
+        interval supporting the conclusion spans zero, which is drawn rather
+        than glossed. One stratum carries it: Gs→Gi at 20 native references,
+        against Gs→Gq at 3 and Gi→Gs at none
+```
+
+### BB-6 — the ladder, per receptor
+```
+claim   SC-B-1 at receptor grain
+shows   a, every receptor's own ladder under the median; b, the distribution at
+        each rung with the ceiling drawn
+data    04_ladder/ladder_per_receptor.csv, frame_36, 144 cells over 36 receptors
+build   cd figures/block_b/panels && python3 bb6_per_receptor.py
+status  ready — the panel a mean is a mean over a population that is pinned at
+        the top: 115 of 144 cognate cells sit at or above 0.98. That ceiling is
+        the reason the family term differs between scales, and this is the panel
+        that shows it rather than asserting it
+```
