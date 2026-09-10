@@ -491,5 +491,59 @@
   "want": true,
   "ok": true,
   "note": ""
+ },
+ {
+  "id": "C54",
+  "kind": "RECOMPUTED",
+  "what": "SC-C-1 resamples 23 receptors",
+  "got": 23,
+  "want": 23,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C55",
+  "kind": "RECOMPUTED",
+  "what": "small-molecule apo off-site %, the figure quoted",
+  "got": 1.52,
+  "want": 1.52,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C56",
+  "kind": "RECOMPUTED",
+  "what": "off-site % on SC-C-1's OWN 23 receptors, unfiltered",
+  "got": 18.92,
+  "want": 18.92,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C57.agonist",
+  "kind": "RECOMPUTED",
+  "what": "apo agonist off-site % on the 23",
+  "got": 35.85,
+  "want": 35.85,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C57.antag",
+  "kind": "RECOMPUTED",
+  "what": "apo antagonist off-site % on the 23",
+  "got": 2.0,
+  "want": 2.0,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C58",
+  "kind": "RECOMPUTED",
+  "what": "Spearman(apo agonist off-site %, per-receptor median tau)",
+  "got": -0.241,
+  "want": -0.241,
+  "ok": true,
+  "note": ""
  }
 ]

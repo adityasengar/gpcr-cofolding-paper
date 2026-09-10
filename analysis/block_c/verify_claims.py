@@ -24,6 +24,7 @@ from __future__ import print_function
 import os, sys, json, glob, hashlib
 import pandas as pd
 import numpy as np
+from scipy import stats as spstats
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 C = os.path.join(ROOT, "data", "block_c")
@@ -221,6 +222,66 @@ check("C24", "CONSISTENCY",
            "exists at 06_2x2_interaction/g_scc1_cluster_boot.json")
 check("C25", "CONSISTENCY", "C-C-3 is marked RESOLVED",
       "RESOLVED" in cc3.upper(), True)
+
+# --------------------------------------------------------- C54-C58, placement
+# Added 2026-09-10 after the Block C request audit.
+#
+# The manuscript reassured the reader about ligand placement with 1.52%, a
+# figure computed over 34 receptors WITH a small-molecule filter, and described
+# it as "the cells the ligand-class contrast is computed on". SC-C-1's 2x2 runs
+# on 23 receptors with NO such filter, and there the rate is 18.92% with a
+# 35.85/2.00 split between the two classes being contrasted. These checks pin
+# the POPULATION as well as the number so the two cannot drift apart again.
+#
+# These lines sit ABOVE the report block deliberately. The first version of them
+# was appended to the end of this file, after sys.exit(), where they were dead
+# code that could never run -- the same failure as Block B's D-B-8, where six
+# decomposition checks silently did not execute behind a guard.
+
+_scc1 = json.load(open(os.path.join(C, "06_2x2_interaction",
+                                    "g_scc1_cluster_boot.json")))
+_recs = sorted({r for v in _scc1["cluster_to_receptors"].values() for r in v})
+check("C54", "RECOMPUTED", "SC-C-1 resamples 23 receptors", len(_recs), 23)
+
+_cen = pd.read_csv(os.path.join(C, "12_g4_off_site_census",
+                                "g4_full_census_v2.csv"), low_memory=False)
+_both = _cen[(_cen.arm == "apo")
+             & (_cen.role.isin(["full_agonist", "neutral_antagonist"]))]
+
+_small = _both[_both.ligand_source == "hetatm"]
+check("C55", "RECOMPUTED", "small-molecule apo off-site %, the figure quoted",
+      round(100 * (_small.distance_A > 15).mean(), 2), 1.52, tol=0.01)
+
+_own = _both[_both.receptor.isin(_recs)]
+check("C56", "RECOMPUTED", "off-site % on SC-C-1's OWN 23 receptors, unfiltered",
+      round(100 * (_own.distance_A > 15).mean(), 2), 18.92, tol=0.01)
+
+_ag = _own[_own.role == "full_agonist"]
+_an = _own[_own.role == "neutral_antagonist"]
+check("C57.agonist", "RECOMPUTED", "apo agonist off-site % on the 23",
+      round(100 * (_ag.distance_A > 15).mean(), 2), 35.85, tol=0.01)
+check("C57.antag", "RECOMPUTED", "apo antagonist off-site % on the 23",
+      round(100 * (_an.distance_A > 15).mean(), 2), 2.00, tol=0.01)
+
+# the test that says the asymmetry does NOT drive the interaction
+_pb = json.load(open(os.path.join(C, "07_ordinal_recovery",
+                                  "s5_p4_ordinal.json"))
+                )["tier3_apo_23_receptors"]["per_backbone"]
+_off = _ag.groupby("receptor").apply(lambda g: (g.distance_A > 15).mean())
+_med = {r: float(np.median([_pb[b][r]["tau"] for b in _pb if r in _pb[b]]))
+        for r in _recs if any(r in _pb[b] for b in _pb)}
+_common = [r for r in _off.index if r in _med and not np.isnan(_med[r])]
+if len(_common) != 23:
+    # a vanished check is worse than a failed one -- fail loudly
+    check("C58", "RECOMPUTED", "Spearman(off-site %, tau): receptors matched",
+          len(_common), 23)
+else:
+    _rho, _ = spstats.spearmanr([_off[r] for r in _common],
+                                [_med[r] for r in _common])
+    check("C58", "RECOMPUTED",
+          "Spearman(apo agonist off-site %, per-receptor median tau)",
+          round(float(_rho), 3), -0.241, tol=0.002)
+
 
 # ------------------------------------------------------------------ report
 ok = [r for r in R if r["ok"]]

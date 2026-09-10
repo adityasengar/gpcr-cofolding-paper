@@ -425,13 +425,31 @@ earlier drafts did, concealed that.
 
 Two further points bound what may be concluded. Ligand placement was audited
 across all 40{,}000 predictions: 15.1\% of apo-arm and 20.3\% of cognate-arm
-ligands sit more than 15~\AA{} from the pocket centroid, but within the cells
-the ligand-class contrast is computed on --- small-molecule, apo, agonist or
-antagonist --- that figure is \textbf{1.52\%}. The contrast is not built on
-mis-docked ligands. Peptide agonists sit at a median of 17.5~\AA{} because
-peptide receptors bind at the extracellular vestibule; that is biology, and
-counting it as failure would produce a 66.5\% error rate where the true
-small-molecule figure is 1.52\%.
+ligands sit more than 15~\AA{} from the pocket centroid. Restricting to
+small-molecule ligands in the apo arm brings that to 1.52\%, because peptide
+agonists sit at a median of 17.5~\AA{} --- peptide receptors bind at the
+extracellular vestibule, which is biology rather than a docking failure, and
+counting it as error would report 66.5\% where the small-molecule figure is
+1.52\%.
+
+\textbf{That reassurance is computed on a wider population than the interaction
+it reassures about, and on the interaction's own population the number is
+larger.} The 2$\times$2 runs on 23 receptors, with no small-molecule
+restriction. Across those 23, \textbf{18.92\%} of apo-arm agonist and antagonist
+ligands are off-site, and the two classes are not off-site equally:
+\textbf{35.85\% of agonist rows against 2.00\% of antagonist rows}. An asymmetry
+in that direction is the exact shape an artifact would take, because a pocket
+that never received its agonist is trivially different from one that received
+its antagonist.
+
+It is not, however, what produces the interaction. Ranking the 23 receptors by
+their apo-arm agonist off-site fraction and correlating that against each
+receptor's own median $\tau$ gives Spearman $\rho = -0.241$ ($p = 0.268$,
+$n = 23$); splitting them at 50\% off-site separates no difference in $\tau$
+either (Mann--Whitney $p = 0.436$, medians 0.282 against 0.386). The receptors
+whose agonists are furthest from the pocket are not the receptors carrying the
+signal. We report the asymmetry rather than the small-molecule figure, because
+it is the one a reader would otherwise find themselves.
 
 Finally, the possibility that the classifier learned reference identity rather
 than ligand class is excluded \textbf{by construction rather than by audit}:

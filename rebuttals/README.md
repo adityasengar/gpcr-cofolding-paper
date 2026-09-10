@@ -76,5 +76,6 @@ in the entry — it is the cheapest way to be trusted on the rest.
 |---|---|---|
 | `BLOCK_A.md` | Block A | drafting |
 | `BLOCK_B.md` | Block B | suggestions written; rebuttals and questions in assembly |
+| `BLOCK_C.md` | Block C | complete — 13 rebuttals, 11 questions, 9 suggestions |
 
 `drafts/` holds per-agent working notes and is not what gets sent.
