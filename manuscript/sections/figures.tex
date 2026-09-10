@@ -1,7 +1,35 @@
-% Main-text figures. Sources: figures/block_a/panels/*.py and render_struct.py
-% Provenance per panel: figures/block_a/FIGURE_PROVENANCE.md
-% Order follows the Nature Communications norm: a pipeline schematic at Figure 1,
-% the headline result at Figure 2. Every caption states its filter and its n.
+% Main-text figures.
+%
+% LABEL SCHEME, set 2026-09-10. Until then this document had ZERO \label
+% commands and results.tex had ZERO \ref commands: the prose and the panels
+% were not connected, which is also why the main/SI split had drifted — there
+% was no reference to keep it honest.
+%
+%   main text   \label{fig:<panel-id>}     e.g. fig:bb2
+%   SI figures  \label{sfig:<panel-id>}    owned by si.tex
+%   SI tables   \label{stab:<id>}          owned by si.tex
+%
+% <panel-id> is the ledger id in figures/FIGURES.md, lowercased, no hyphen:
+% f1, ba1a, ba2, ba3, bb1, bb2, bb6, bc2. A figure that moves between main and
+% SI changes its prefix and nothing else, so a move is one edit and the prose
+% breaks loudly if the target is gone.
+%
+% THE MAIN SEQUENCE IS FIVE FIGURES, which is the median of the 13 comparable
+% peer-reviewed papers in the corpus and matches both the Nature AlphaFold-3
+% paper and the Science RFAA paper. Everything else is SI.
+%
+% NOT IN THIS FILE, deliberately:
+%   BA-5 (confidence) — BLOCKED. The correlations it plots pool the apo and
+%     cognate arms while scoring every row against the ACTIVE reference, which
+%     is the wrong target for an apo row. The "2 of 4 backbones" is an artefact
+%     of that pooling. See FIGURES.md and the [PI] in results.tex. It was in
+%     this file until 2026-09-10 and drawing it now would draw the artefact.
+%   BC-1 (pocket 2x2) — its scope statement says "apo arm alone" and the
+%     shipped counts are both arms pooled, out by exactly 2x. Not drawn in
+%     either position until that is resolved.
+%
+% Provenance per panel: figures/block_<x>/FIGURE_PROVENANCE.md.
+% Every caption states its filter and its n.
 
 \begin{figure}[htbp]\centering
 \includegraphics[width=\textwidth]{f1_workflow.pdf}
@@ -16,50 +44,97 @@ those axes. \textbf{c}, the prediction protocol: 48 receptors $\times$ 2 arms
 $\times$ 4 backbones $\times$ 25 seeds, no reference structure supplied.
 \textbf{d}, disposition of all 9{,}490 scored rows.
 \textit{Filter:} none at the panel level; per-panel $n$ is printed in the figure.}
+\label{fig:f1}
 \end{figure}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba7_switch_not_dial.pdf}
-\caption{\textbf{The partner acts as a switch, not a dial.}
-\textbf{a}, the fraction of seeds the predicate calls active, per receptor
-$\times$ backbone cell. The distribution is bimodal at both ends:
-\textbf{111 of 160 apo cells never fire on any of 25 seeds, and 108 of 159
-cognate cells fire on all 25.} \textbf{b}, the same cells paired, apo against
-cognate, with the identity line labelled; 120 of 159 move up, 37 are unchanged
-and 2 move down, both named. \textbf{c}, the full receptor $\times$ backbone
-grid for each arm on a shared colour scale, receptors ordered by mean change.
-Absent cells are drawn grey and crossed, not as zero.
-\textit{Filter:} E1+E2, then Class~A only --- 7{,}966 of 9{,}490 rows, forming
-319 cells and 159 receptor $\times$ backbone pairs with both arms.}
+\includegraphics[width=\textwidth]{ba1a_instrument.pdf}
+\caption{\textbf{What the two measurements measure, and how they behave on
+structures whose state is already known.}
+\textbf{a}, \textbf{b}, the active reference (4LDE) superposed on the inactive
+reference (2RH1) for $\beta_2$AR, viewed along the membrane normal and from the
+cytoplasm. The invariant bundle is grey; only the elements carrying the
+measurement are coloured. \textbf{Both distances are annotated with their values
+and with the atom pair each was measured between}, and every value is reproduced
+from the coordinates and checked against the shipped reference table before
+drawing. The soft focus encodes depth only and carries no interpretive meaning.
+\textbf{c}, \textbf{d}, all 167 references carrying the tilt axis and all 70
+carrying NPxxY, by deposited state, with 4LDE and 2RH1 ringed.
+\textit{Filter:} deposited references only; no prediction rows, and no
+\texttt{excl} flag applies because those are row-level flags on predictions.}
+\label{fig:ba1a}
 \end{figure}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba4_amplitude.pdf}
-\caption{\textbf{Receptor-specific activation amplitude is not reproduced.}
-\textbf{a}, predicted shift against reference separation on the NPxxY axis,
-with the fitted line, its cluster-bootstrap band, and \textbf{the unity line ---
-the slope a model reproducing amplitude would show --- drawn on every panel}.
-\textbf{b}, slopes on both axes under three inclusion sets, with zero and unity
-both marked; filled circles exclude zero, open circles include it. Protenix2 on
-NPxxY excludes zero at a slope of 0.26, roughly a quarter of unity.
-\textbf{c}, restriction of range: the tilt predictor's SD of 1.17~\AA{} beside
-NPxxY's 5.22~\AA. \textbf{d}, attenuation sensitivity with unstable regions
-shaded --- 44 of 84 swept points are unstable on tilt against 0 of 84 on NPxxY,
-which is why no corrected tilt slope is reported.
-\textit{Filter:} \texttt{class\_a\_only} with per-axis E3; $n = 28$ receptors
-(NPxxY) and 32 (tilt).}
+\includegraphics[width=\textwidth]{ba2_arm_shift.pdf}
+\caption{\textbf{Supplying the cognate G$\alpha$ moves the receptor toward the
+active state on all four backbones.}
+\textbf{a}, raw TM6 tilt for every prediction, apo against cognate, per
+backbone, with the 14.932~\AA{} threshold drawn. \textbf{b}, the same cells
+paired per receptor, 47 paired subjects per backbone. \textbf{c}, the headline
+shift with cluster-bootstrap 95\% confidence intervals --- the authoritative
+convention; receptor-bootstrap intervals are in the supplement. \textbf{d}, the
+predicate-firing fraction per receptor $\times$ backbone $\times$ arm cell,
+against the pooled row-level rate.
+\textit{Filter:} E1+E2, then Class~A; intervals are cluster bootstraps and the
+resampling unit is stated in the Methods for each campaign.}
+\label{fig:ba2}
 \end{figure}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba5_confidence.pdf}
-\caption{\textbf{Confidence is informative only at the state-defining residues.}
-\textbf{a}, all four backbones on all three pLDDT aggregations, with the primary
-aggregation marked and zero marked. \textbf{b}, the same relationship at two
-grains for OpenFold3, which strengthens from $-0.26$ to $-0.63$, and for
-Protenix2, whose apparent overconfidence at whole-complex grain collapses to
-null at anchor grain. \textbf{c}, per-receptor correlation distributions.
-\textbf{d}, the AA2AR case across backbones and arms.
-\textit{Filter:} Class-A restricted; $n \approx 1{,}600$ rows and 32 receptors
-per backbone. The anchor-restricted aggregation was designated primary
-\emph{post hoc}, after all three had been computed; all three are reported.}
+\includegraphics[width=\textwidth]{bb1_ladder.pdf}
+\caption{\textbf{The four-arm ladder: partner presence, partner sequence and
+partner identity are separable.}
+Two-instrument active-call fraction across apo, decoy, shuffled and cognate
+arms, per backbone and pooled over the panel, on the probability scale and on
+the logit scale. The decoy arm carries the correct G$\alpha$ subunit with its
+eleven C-terminal residues permuted; the shuffled arm carries an intact subunit
+from a different G$\alpha$ family; the cognate arm carries the correct subunit.
+\textbf{Every partner arm supplies a complete G$\alpha$ subunit.}
+\textit{Filter:} Class~A, frame\_36 --- 36 receptors, 24 paralog clusters;
+EDNRA, EDNRB, GRPR and HRH3 are excluded because position 7.53 is Leu, not Tyr,
+so the NPxxY axis is undefined. Predicate recomputed from every row rather than
+read from a shipped call column.}
+\label{fig:bb1}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{bb2_decomposition.pdf}
+\caption{\textbf{The ladder decomposes into two contrasts that telescope
+exactly.}
+\textbf{a}, the four arms, with the two clean steps drawn solid and the route
+through the shuffled arm dashed. Supplying any partner, even one whose
+$\alpha$5 tail is permuted, accounts for $+0.400$ [0.334, 0.464]; restoring the
+correct C-terminal sequence accounts for the remaining $+0.333$ [0.242, 0.432].
+The two sum to the apo-to-cognate total exactly. \textbf{b}, what each contrast
+actually varies. \textbf{The decoy-to-cognate step is the only contrast in this
+work that isolates the $\alpha$5 C-terminus}: the two arms carry the same
+subunit, of the same length, from the same family, differing only in eleven
+C-terminal residues and differing there by a permutation, so composition is held
+constant. The campaign's shipped middle term, decoy-to-shuffled, is drawn in
+grey and is \emph{not} an $\alpha$5-CT contrast --- the shuffled arm is a
+different G$\alpha$ family, so that step changes the tail, the scaffold, the
+length and the family at once.
+\textit{Filter:} Class~A, frame\_36, 36 receptors; intervals are a
+1{,}000-resample cluster bootstrap over the 24 paralog clusters that survive
+that frame. Every value recomputed from the per-receptor ladder table; the
+panel refuses to draw if the three shipped terms do not reproduce.}
+\label{fig:bb2}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth]{bc2_ordinal.pdf}
+\caption{\textbf{Ligand class is recoverable from pocket geometry in the apo
+arm, and the per-receptor distribution is what shows it.}
+Kendall's $\tau$ between ligand-role rank and the difference in pocket-C$\alpha$
+RMSD to the active versus the inactive reference, \textbf{one point per
+receptor}, per backbone. \textbf{a}, all 23 receptors; \textbf{b}, the 15 with
+self-reference excluded. Dashed rules mark the fraction of receptors with a
+positive and significant $\tau$ --- a count of receptors, not a correlation.
+Both panel definitions are shown because reporting only the more favourable one
+is an error this campaign has already made and corrected. Negative values are
+receptors where the ordering runs backwards; they are drawn, not trimmed.
+\textit{Filter:} apo arm; the threshold for this test was fixed before the
+campaign ran. Intervals and $n$ per panel are printed in the figure.}
+\label{fig:bc2}
 \end{figure}

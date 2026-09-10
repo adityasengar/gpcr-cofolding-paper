@@ -224,6 +224,8 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 27.9 | S364 | Block C G4 gate, agonist off-site fraction lower bound; independent re-verification 2026-09-10, not recomputed here |
+| 34.9 | S364 | Block C G4 gate, agonist off-site fraction upper bound; same source |
 | 0.43 | R215 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
 | 0.42 | R215 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
 | 0.01 | R218 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
