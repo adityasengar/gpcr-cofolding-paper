@@ -4,27 +4,29 @@ Start in `paper/`. `CLAUDE.md` loads automatically; read it, then this.
 
 ## Where the project is
 
-A manuscript on GPCR co-folding. **Blocks A and B are both written** into
-`manuscript/sections/`. Main text 42 pages, SI 18, 65 bibitems, zero undefined
-citations.
+A manuscript on GPCR co-folding. **Blocks A, B and C are all written** into
+`manuscript/sections/`. Main text 45 pages, SI 18, 65 bibitems, zero undefined.
 
-Block A: Results, Methods, 5 main figures including a graphical abstract, 16 SI
-figures, 8 tables. Block B: Results and Methods written, six standalone panels
-built (BB-1..BB-6), **figure placement deferred to Block C** — see below.
+| block | what it varies | state |
+|---|---|---|
+| **A** | partner present or absent | Results, Methods, 5 main figures, 16 SI, 8 tables |
+| **B** | which partner, and how much of it | Results, Methods, 6 panels (BB-1..BB-6) |
+| **C** | which ligand | Results, Methods, limitations, 4 panels (BC-1..BC-4) |
 
-**Two of the paper's three title clauses have no evidence in either block.**
-Neither campaign supplies a 21-residue peptide and neither supplies an agonist;
-`ligand_type` is NaN on all 32,000 Block B rows and Block A has no ligand column
-at all. This is recorded at the top of `CLAIMS.md` and is Aditya's decision:
-narrow the title, or run the missing arms. Until then no sentence anywhere may
-imply either result.
+Three verifiers, all runnable, mismatch counts expected and documented:
+`analysis/block_{a,b,c}/verify_claims.py` — 47 checks / 15 mismatches,
+109 / 21, 53 / 0.
 
-```bash
-./verify.sh                          # everything, and it should be all green
-./manuscript/build.sh                # main.pdf and si.pdf
-python3 analysis/block_a/verify_claims.py      # 34 checks; 15 mismatches are EXPECTED
-./analysis/block_a/check_deliverables.sh       # 7/7
-```
+**Two of the paper's three title clauses have no evidence in any landed block.**
+No arm anywhere supplies a 21-residue peptide or an agonist: `ligand_type` is
+NaN on all 32,000 Block B rows and Block A has no ligand column at all. At the
+top of `CLAIMS.md`. Until resolved, no sentence may imply either result.
+
+**And the experimental precedent for the peptide claim is already in our own
+reference set.** 4X1H, the OPSD active reference, is rhodopsin bound to the
+α5-CT peptide of Gα$_t$ alone — the only peptide-bound entry among 80
+references, and our instrument calls it active on both axes. If a 21-mer arm is
+ever run, start it on OPSD.
 
 ## The decisions waiting on Aditya
 
@@ -51,28 +53,22 @@ python3 analysis/block_a/verify_claims.py      # 34 checks; 15 mismatches are EX
 `analysis/block_a/DATA_REQUESTS.md` is paste-ready for the pipeline agent and
 holds these plus six more.
 
-## Deferred to Block C, by Aditya, 2026-09-10
+## Now decidable: the main-text figure budget
 
-**The main-text figure budget.** Six Block B panels (BB-1..BB-6) are built,
-verified and standalone; five Block A figures are in the main text and sixteen
-in the SI. Nothing has been allocated between main text and SI for Block B, and
-nothing should be until Block C lands. The Block B dispatch says so itself:
-*"Block B will not get six main figures; it will most likely contribute part of
-one, merged with Block A material."* Allocating a budget across two blocks when
-four exist is a decision that would only be made twice.
+**Block C has landed, so the deferral is spent.** Ten panels exist across B and
+C, five main figures and sixteen SI from A. The whole manuscript gets roughly
+four to six main-text figures, so most of these merge or move.
 
-**The demotion rule when the call is finally made.** A figure moves to the SI if
-it is still true and merely less important. A figure replaced *because it was
-wrong* is deleted, with a line in `figures/FIGURES.md` saying why — a superseded
-panel in the SI is worse than no panel, because SI figures get cited and it
-shows a reader a number we no longer stand behind.
+The rule, decided 2026-09-10: **demote to SI if the figure is still true and
+merely less important; delete it, with a line in `figures/FIGURES.md` saying
+why, if it was replaced because it was wrong.** A superseded panel in the SI is
+worse than no panel — SI figures get cited, and it shows a reader a number we no
+longer stand behind.
 
-**One caution for whoever makes the call.** These panels are demote-or-delete
-candidates only if Block C leaves Block B's claims standing. If Block C
-supersedes a Block B claim rather than extending it, the affected panel needs
-*rebuilding*, not demoting, and the blocks-supersede rule means no Block C
-number may be mixed into a Block B panel. Check `CLAIMS.md` before moving
-anything.
+**One caution.** A Block B or C panel is a demote-or-delete candidate only if
+Block D leaves its claim standing. If D *supersedes* a claim rather than
+extending it, the panel needs **rebuilding**, and the blocks-supersede rule
+forbids mixing a Block D number into an earlier block's panel.
 
 ## Parked — raise again later, do not act on it now
 
@@ -144,6 +140,22 @@ retrieves and never drafts; the orchestrator drafts and never retrieves.**
 Numbers are in sentences now, and a session that does both writes the paragraph
 first and finds support afterwards.
 
+## Open, and not ours to close
+
+- **The panel selection rule.** Aditya told the lit session his criterion was
+  *"unique GPCRs with both active and inactive, and I picked 40 out of them"* —
+  authorial intent, matching our 40/40 observation, and a likely resolution of
+  the 48/46/40 discrepancy in `lit/CLAUDE.md`. **Pending his confirmation, not
+  resolved.** A `[PI]` marker sits in the Methods Panel subsection.
+- **Block C's 66 named-but-unshipped files.** Four matter:
+  `rows.tier3.v2.csv` (without it, 30 of 53 checks are consistency-only),
+  `s4_bw_decomposition.json` (the only residue-level analysis named in any
+  block), `task6_p0_correlation.json` (the only quantitative cross-block link,
+  n=35), and `task_D_species_match_root_cause.json`.
+- **Two rebuttal documents are written and unsent**: `rebuttals/BLOCK_A.md`,
+  `BLOCK_B.md`, plus `PANEL_EXPANSION_CLASS_A.md` with 19 Class A receptors and
+  their PDB pairs.
+
 ## The corpus, as the lit session left it (2026-09-10)
 
 - **Citations carry PRINTED pages, not PDF pages.** Seven of 74 PDFs have an
@@ -176,17 +188,35 @@ first and finds support afterwards.
   pre-citation check, so a stale count is worse than none. Regenerating it is a
   lit job and has not been done.
 - `lit/MANIFEST.csv` was one row short and is now 79, matching `notes/`.
+- **`lit/panels/` is new and committed**, including its 1 MB GPCRdb cache. The
+  cache is in *deliberately*: `rebuttals/PANEL_EXPANSION_CLASS_A.md` cites it for
+  38 PDB IDs and goes to another team, and a document nobody downstream can check
+  is not a rebuttal. Size is not the rule here; provenance is.
+- **`lit/source/si/` is 14 MB and correctly excluded** by the existing
+  `lit/source/` rule. Re-downloadable: zhang from the npj article page, chiesa
+  from the ACS SI link, heo from bioRxiv 10.1101/2021.11.26.470086 **v2** — v1 is
+  the wrong file, 55 receptors rather than 68.
+- **Never let `_human` be a silent default when resolving a receptor slug.** That
+  bug made the lit session report our OPSD pair as cross-species when both
+  entries are `opsd_bovin`. Three known non-human resolutions: OPSD bovine,
+  B1B1U5 `b1b1u5_9arac` (jumping spider), OPRM `oprm_mouse`.
 
-## When Block B arrives
+## When Block D arrives
 
-Invoke the **`blockintake`** skill. **Block A is groundwork and Block B carries
-the titular 21-mer peptide claim** — decided 2026-09-10, recorded at the top of
-`CLAIMS.md` with two rules: no Block A sentence may imply the peptide result,
-and none may depend on Block B having run.
+Invoke the **`blockintake`** skill, and run it in its stated order: **verify the
+claim sheet against the data before any panel or sentence.** That order has now
+caught something in all three blocks, including one defect that had already
+passed a claim sheet, a dispatch and a written draft.
+
+**Block B did not carry the titular peptide claim after all** — this section
+used to say it would. Neither A nor B supplies a peptide or an agonist, which is
+recorded at the top of `CLAIMS.md`. Whether D closes that gap is Aditya's call.
 
 **Give that distinction a mechanical guard before you start.** Two of four
 independent figure agents, both with `CLAIMS.md` in their brief, wrote that the
-21-mer was supplied when the whole Gα was. The framing pulls that way — we draw
+21-mer was supplied when the whole Gα was — and a third recurrence appeared in
+our own outgoing `DATA_REQUESTS.md`, which asked the pipeline agent for "the
+α5-CT 21-mer coordinates as supplied to the model". The framing pulls that way — we draw
 the α5, name the α5, and the title is about the α5. A written rule catches it at
 review; it does not prevent it. It encodes what Block A converged on and
 names the eight failure classes that recurred. The order matters: verify the
@@ -213,6 +243,15 @@ claim sheet against the data *before* any panel or sentence.
   rather than printed ones. Once one fragment from a relay proves altered, none
   of it can stand as verbatim --- re-source it or de-quote it. Numbers with
   locators are usually stronger than fragmentary quotes anyway.
+- **A figure is a verification step, not a presentation step.** Four times, a
+  number passed a claim sheet, a dispatch and a written draft and was caught only
+  when plotted. Build the panel before trusting the value, and put a guard in the
+  panel script that recomputes from rows and refuses to draw what the shipped
+  table disagrees with — one such guard fired on its first run.
+- **Every apparent discrepancy is your own checker bug until proven otherwise.**
+  On all three blocks, the first run was wrong before the drop was. Keep a
+  "checked and NOT a finding" section; it is what makes the real findings
+  believable.
 - **Check, don't assume.** Every serious find this session — the CFTR file, the
   receptor-bootstrap mislabelling, the missing MSA column, the title gap — came
   from recomputing something that looked settled.
