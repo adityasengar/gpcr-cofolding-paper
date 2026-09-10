@@ -160,18 +160,32 @@ for _arm, _neither, _both in (("apo", 2611, 577), ("cognate", 157, 3162)):
     check("CAP10." + _arm, "%s rows firing both" % _arm, _both,
           int((_g.npx & _g.tilt).sum()))
 
-# S-T5's denominator does NOT reproduce and is recorded as a mismatch rather
-# than dropped. 610 predicate-active rows with no active reference reproduces
-# exactly; the 4,866 it is quoted against does not, under any predicate
-# definition tried (both-measured 3,739; tilt-and-NPxxY-or-NaN 5,230; tilt alone
-# 5,548), and neither 4,866 nor 4,256 appears anywhere in the drop or in our
-# own analysis. See DISCREPANCY_REPORT D-A-24.
-_pa = _m[_m.npx & _m.tilt]
+# S-T5's denominator DOES reproduce, and the check that said otherwise was
+# wrong. `active` is a CLASS-CONDITIONAL column: Class A needs both axes, Class
+# B substitutes a kink angle and Class F uses tilt alone -- which this paper's
+# own Methods states. CAP12 rebuilt it with the Class-A rule applied to every
+# class, got 3,739, and declared the shipped 4,866 unsourced.
+#
+# On Class A alone the two agree on 3,742 of 3,742 rows with ZERO
+# disagreements. The whole gap is 607 Class B and 517 Class F rows:
+# 3,742 + 607 + 517 = 4,866 exactly.
+#
+# This is the SECOND time this project has recomputed a class-conditional
+# column with the Class-A rule and reported the result as a defect. See
+# DISCREPANCY_REPORT D-A-24, which is a withdrawal rather than a finding.
+_act = rows.active.astype(bool)
 check("CAP11", "predicate-active rows with no active reference", 610,
-      int(_pa.rmsd_to_active_ref.isna().sum()))
-check("CAP12", "SI S-T5 denominator '4,866 predicate-active'", 4866,
-      int(len(_pa)),
-      note="does not reproduce; 4,866 and 4,256 are unsourced -- D-A-24")
+      int(rows[_act].rmsd_to_active_ref.isna().sum()))
+check("CAP12", "SI S-T5 denominator, the shipped class-conditional active column",
+      4866, int(_act.sum()))
+check("CAP13", "S-T5 testable = 4,866 minus the 610 with no reference", 4256,
+      int(_act.sum()) - int(rows[_act].rmsd_to_active_ref.isna().sum()))
+check("CAP14", "on Class A alone my two-axis rule and the shipped column agree",
+      0, int((rows[rows.gpcr_class == "A"].active.astype(bool)
+              != ((rows[rows.gpcr_class == "A"].d_npxxy_oh < 9.08)
+                  & (rows[rows.gpcr_class == "A"]
+                     .d_gpcrdb_tm6_tilt_246_637_ca > 14.932))).sum()),
+      note="4,866 = 3,742 Class A + 607 Class B + 517 Class F")
 
 
 bad = [r for r in results if not r["reproduces"]]

@@ -204,6 +204,30 @@ OpenFold3 moves the other way, strengthening from $-0.26$ to $-0.63$. Reporting
 a single pooled pLDDT correlation would have produced two opposite and equally
 misleading conclusions.
 
+\textbf{Those correlations pool the apo and cognate arms while scoring every row
+against the active reference, and that pooling --- not the backbones ---
+produces the two-of-four split.} An independent re-verification raised this and
+we recomputed it. The active reference is the appropriate target for a
+cognate-arm row and the wrong target for an apo-arm row, and the two arms differ
+in both variables at once: cognate rows carry higher anchor pLDDT and smaller
+distances to the active reference. Conditioning on arm removes the split.
+\emph{Within the cognate arm}, where the target is the right one, all four
+backbones are negative and consistent --- $-0.30$, $-0.43$, $-0.42$ and $-0.16$
+for Boltz-2, Chai-1, OpenFold3 and Protenix2 --- and OpenFold3 is no longer an
+outlier. \emph{Within the apo arm}, three of four sit at or above zero
+($+0.04$, $+0.01$, $+0.10$; OpenFold3 $-0.37$).
+
+\textbf{The direction of the headline survives and its shape does not.}
+Anchor-restricted confidence remains a weak negative predictor of distance from
+the active state --- no backbone reaches $|r| = 0.45$ even where the reference is
+correct --- so confidence still does not track state correctness. But the
+per-backbone ranking above, and the claim that this holds on two backbones
+rather than four, are artifacts of pooling two arms against one reference.
+\textbf{[PI: the two-of-four framing and Table~4 should be restated on
+arm-conditional correlations. The recomputation is in
+\texttt{analysis/block\_a/DISCREPANCY\_REPORT.md} D-A-25; the choice of which
+to report as the headline is not ours to make silently.]}
+
 Confidence scores are not uninformative in general, and the distinction matters.
 \citet{zhang2026generalization} report that interface predicted TM-score is ``a
 useful decision metric'' for \emph{ligand pose} ($R^2 = 0.49$); their
@@ -264,16 +288,34 @@ lives in the far-inactive tail instead --- 9.0\% of shuffled rows sit more than
 2~\AA{} below the threshold against 4.1\% of cognate rows --- which is a shift
 in the population, not a reclassification at the boundary.
 
-Telescoping the ladder gives the three contributions. Supplying \emph{any}
-partner, even one whose $\alpha$5 tail is scrambled, accounts for $+0.400$
-[0.328, 0.464] of the total rise, 55\%. Restoring a real $\alpha$5-CT sequence
-adds $+0.252$ [0.188, 0.321], 34\%. Getting the family \emph{right} adds
-$+0.082$ [0.047, 0.125]. On the probability scale that last term is 11\% of the
-total; on the logit scale it is 17.4\% [0.39, 1.09], and both are correct. The
-gap between them is not a discrepancy but a compression: cognate rates sit at or
-above 0.98 in 24--34 of 40 cells per backbone, and a probability-scale
-difference has little room left to move. Wherever this term appears it is named
-with its scale \textbf{[FIG:decomposition]}.
+\textbf{The ladder decomposes cleanly into two contrasts, and the shipped
+three-term telescoping does not.} Supplying \emph{any} partner, even one whose
+$\alpha$5 tail is scrambled, accounts for $+0.400$ [0.334, 0.464] of the total
+rise --- 55\%, and this is the apo-to-decoy step. The remaining 45\%,
+$+0.333$ [0.242, 0.432], is the decoy-to-cognate step, and \textbf{that step is
+the only contrast in this campaign that isolates the $\alpha$5 C-terminus}: the
+two arms carry the same subunit, of the same length, from the same G$\alpha$
+family, differing only in the eleven C-terminal residues, and differing there by
+a permutation that preserves composition. The two steps telescope exactly
+($0.400 + 0.333 = 0.733$).
+
+\textbf{We do not report the decoy-to-shuffled step as an $\alpha$5-CT
+contribution, and the campaign's own decomposition does.} That step carries the
+name \texttt{delta\_a5ct\_sequence\_decoy\_to\_shuffled} and a share of 34\%,
+and it is not an $\alpha$5-CT contrast: the shuffled arm is a subunit from a
+\emph{different} G$\alpha$ family, so the step changes the tail, the scaffold,
+the length and the family at once. Its $+0.252$ [0.179, 0.320] is arithmetically
+correct and interpretively confounded, and it is smaller than the clean contrast
+it was standing in for.
+
+Within the decoy-to-cognate step, getting the family \emph{right} --- the
+shuffled-to-cognate contrast, which does hold the arm type fixed --- adds
+$+0.082$ [0.047, 0.127]. On the probability scale that is 11\% of the total; on
+the logit scale it is 17.4\%, and both are correct. The gap is not a discrepancy
+but a compression: cognate rates sit at or above 0.98 in 24--34 of 40 cells per
+backbone, and a probability-scale difference has little room left to move.
+Wherever this term appears it is named with its scale
+\textbf{[FIG:decomposition]}.
 
 The family term is also the least robust of the three, and we report it as such.
 Its per-backbone logit shares span 14.2\%, 22.9\%, 23.6\% and 10.9\% for

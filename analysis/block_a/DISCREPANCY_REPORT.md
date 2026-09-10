@@ -293,35 +293,51 @@ correction — it is contradicted by the archive shipped to support it.
 
 ---
 
-## D-A-24 — NEW: two SI denominators are unsourced and do not reproduce
+## D-A-24 — WITHDRAWN. The number reproduced; my recomputation was wrong.
 
-Supplementary table S-T5's caption reads *"of 4,866 predicate-active rows, 610
-carry no active [reference]"* and *"n = 4,256 testable of 4,866
-predicate-active"*. The two are internally consistent (4,866 - 610 = 4,256) and
-**610 reproduces exactly**. 4,866 does not, under any predicate definition tried:
+**What I recorded.** That supplementary table S-T5's "of 4,866 predicate-active
+rows, 610 carry no active reference" was unsourced: 610 reproduced exactly,
+4,866 reproduced under no predicate definition I tried (3,739 / 5,230 / 5,548),
+and neither 4,866 nor 4,256 appeared anywhere in the drop.
 
-| definition, on E1+E2 | rows |
-|---|---:|
-| tilt AND NPxxY, both measured (the paper's predicate) | 3,739 |
-| tilt AND (NPxxY active or NPxxY undefined) | 5,230 |
-| tilt alone | 5,548 |
-| **caption** | **4,866** |
+**What is true.** `block_a_rows.csv` ships an `active` column. It sums to
+**4,866** over all 9,490 rows, and 4,866 − 610 = **4,256**. Both figures are
+exact and both were always there.
 
-Neither 4,866 nor 4,256 appears anywhere in `data/block_a/`, in
-`analysis/block_a/`, or in the claim sheet. Grepping the drop returns only
-coincidental digit runs inside coordinate files.
+**Why I missed it.** I rebuilt the predicate myself as
+`d_npxxy_oh < 9.08 AND tilt > 14.932` and applied it to every row.
+`active` is **class-conditional**: Class A needs both axes, Class B substitutes
+a kink angle, and Class F uses tilt alone. This paper's own Methods says so.
 
-**Found because the number sweep was extended to captions and the SI on
-2026-09-10.** Until then it covered `results.tex` and `methods.tex` only, so 112
-numeric tokens in the least-read text in the paper were checked by nothing. The
-same extension caught an SI caption still asserting a singleton count that
-Methods had already been corrected on.
+```
+                 n     shipped `active`    my Class-A rule
+  Class A     7,995            3,742              3,742     <- ZERO disagreements
+  Class B       795              607                  0
+  Class F       700              517                  0
+                              -------
+                                4,866
+```
 
-`CAP12` in `verify_claims.py` records this as a standing mismatch rather than
-dropping it, and `CAP11` pins the 610 that does reproduce. **Do not "fix" the
-caption to 3,739** -- the 610 matching exactly suggests 4,866 is a real
-population under some filter we have not reconstructed, and guessing would
-replace an unsourced number with a wrong one. It is ask 3 in `DATA_REQUESTS.md`.
+On the class the rule applies to, my recomputation and the shipped column agree
+on **3,742 of 3,742 rows**. The entire gap is the 1,124 Class B and F rows where
+I applied a rule that does not govern them.
+
+**This is the second time this project has made exactly this mistake.** The
+first was the "unexplained Protenix 0.871", recomputed with the Class A rule on
+a class-conditional column and reported as a defect before being withdrawn. I
+recorded that correction, and then made it again on the same block.
+
+**What changed.** `CAP12` now checks the shipped column and passes; `CAP13` and
+`CAP14` were added, the second asserting the zero-disagreement result above so
+the class-conditional structure is pinned rather than remembered. Ask 3 of
+`DATA_REQUESTS.md` is struck. Found by an independent re-verification run by the
+corpus session, not by us.
+
+**The generalisable part.** A column whose name states a property is not
+necessarily computed the same way for every row of the table. Before declaring a
+shipped aggregate irreproducible, check whether the quantity is conditional on
+something — and check agreement *within* the stratum the rule governs, which is
+the test that would have caught this in one line.
 
 ## D-A-23 — NEW: the shipped cluster map does not reproduce the bootstrap convention
 

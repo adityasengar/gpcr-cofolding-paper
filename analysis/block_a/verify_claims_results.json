@@ -481,10 +481,26 @@
  },
  {
   "id": "CAP12",
-  "what": "SI S-T5 denominator '4,866 predicate-active'",
+  "what": "SI S-T5 denominator, the shipped class-conditional active column",
   "claimed": 4866,
-  "found": 3739,
-  "reproduces": false,
-  "note": "does not reproduce; 4,866 and 4,256 are unsourced -- D-A-24"
+  "found": 4866,
+  "reproduces": true,
+  "note": ""
+ },
+ {
+  "id": "CAP13",
+  "what": "S-T5 testable = 4,866 minus the 610 with no reference",
+  "claimed": 4256,
+  "found": 4256,
+  "reproduces": true,
+  "note": ""
+ },
+ {
+  "id": "CAP14",
+  "what": "on Class A alone my two-axis rule and the shipped column agree",
+  "claimed": 0,
+  "found": 0,
+  "reproduces": true,
+  "note": "4,866 = 3,742 Class A + 607 Class B + 517 Class F"
  }
 ]

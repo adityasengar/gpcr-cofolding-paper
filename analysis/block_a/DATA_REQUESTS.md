@@ -112,7 +112,10 @@ is all it takes, and it decides whether this is a census or a sample.
 
 ---
 
-## 3. Provenance of the 80 tier-1 rows, and the file they came from. **free**
+## 3. ~~Provenance of the 80 tier-1 rows~~ — see below; the S-T5 half of this ask is STRUCK
+
+**STRUCK 2026-09-10, and it was our error.** This ask cited S-T5's 4,866 as unsourced. It is `rows.active.sum()`, a class-conditional column, and it reproduces exactly. See DISCREPANCY_REPORT D-A-24, which is a withdrawal. The tier-1 provenance question below still stands.
+
 
 **Manuscript locator**: `methods.tex:118`, a literal `[PI:]` block;
 `methods.tex:67` and `results.tex:15` both assert the 80-row derivation set.

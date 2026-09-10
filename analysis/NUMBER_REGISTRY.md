@@ -198,6 +198,8 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 | 22 | M466 | Block D, verify_claims check D07 | arithmetic rather than preference.} D3's 26 receptors resolve into 22 paralog |
 | 22 | M472 | Block D, verify_claims check D07 | 22, 7 and 4 all reproduce from the shipped paralogy map. |
 | 2.303 | M477 | Block D, verify_claims check D21 | 2.303. The unit is written \%/ln(depth) everywhere it appears. |
+| 4,866 | S88 | Block A, verify_claims check CAP12 | of 4,866 predicate-active rows, 610 carry no active |
+| 4,256 | S87 | Block A, verify_claims check CAP13 | n = 4,256 testable of 4,866 predicate-active |
 ## NOT covered by any automated check
 
 Each of these needs one of three things: a new check in the relevant
@@ -222,6 +224,19 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 0.43 | R215 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.42 | R215 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.01 | R218 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.334 | R293 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 45 | R294 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.333 | R295 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.242 | R295 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.432 | R295 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.333 | R300 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.733 | R300 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.179 | R307 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.320 | R307 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
+| 0.127 | R313 | Block A/B cluster-boot over 24 clusters, recomputed 2026-09-10 |
 | 100 | R468 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
 | 91.8 | R470 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
 | 0.2 | R470 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
@@ -268,8 +283,8 @@ Known categories in what follows:
 | 128 | M462 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
 | 4096 | M476 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
 | 42,180 | M496 | Block D claim sheet / Part A -- PROSE-ONLY, no row table shipped (D-D-1) |
-| 4,866 | S88 | DOES NOT REPRODUCE -- unsourced, recorded as D-A-24 and check CAP12 |
-| 4,256 | S87 | DOES NOT REPRODUCE -- 4,866 minus 610; unsourced, D-A-24 |
+
+
 | 84 | F47 | exclusion-sweep points; sweep table not shipped at row level |
 | 1.1 | S114 | the widening factor PREVIOUSLY assumed, quoted as superseded by 2.2 |
 | 77 | S194 | reference rows drawn in the S-T8 panel; not recomputed here |
