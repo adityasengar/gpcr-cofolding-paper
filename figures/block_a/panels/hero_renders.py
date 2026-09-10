@@ -15,6 +15,21 @@ Nothing here picks a residue, a camera or a distance by hand:
     field's characteristic failure on exactly this claim is an arrow labelled
     "activation" with no number anywhere on the panel.
 
+SUPERSEDED, 2026-09-10, for everything except S10. The GA-1, BA-8 and BA-1a
+renders are now built in matplotlib with real depth of field by
+`figures/dofrender.py` and `dofscenes.py`, and they draw themselves into their
+composites - `ga1_hero.py`, `ba8_alpha5.py`, `ba1a_instrument.py` - so the
+bitmaps this module writes for `hero_a`, `hero_b`, `hero_c`, `ba8` and `ba1a`
+feed nothing. The module stays because it is still the SINGLE SOURCE OF TRUTH
+for the anchors, the structure paths, the selection-rule strings and
+`verify()`, all of which `dofscenes.py` imports, and because `s10` still goes
+through PyMOL.
+
+One camera caveat if a PyMOL render is ever rebuilt from here: `camera.py`
+fits the bundle axis to every Ca in the receptor window, and DRD2's predicted
+ICL3 (147 residues, mean pLDDT 38.5) bends that axis by 35.5 degrees. The
+matplotlib path passes the 7TM body with ICL3 excluded; this one does not.
+
 Run: python3 figures/block_a/panels/hero_renders.py [--dry-run] [name ...]
 """
 import argparse

@@ -9,11 +9,18 @@ grids are worse still at 32 of 33. So the DRD2 x OpenFold-3 x cognate cell is
 drawn in full - all 25 seeds, both predicate axes - with the rendered row marked
 on it, and the render's caption says which of the 25 it is and why.
 
-The receptor is a surface rather than a cartoon because the subject is a cavity,
-and a cartoon of a cavity reads as a docking picture. Only the alpha5 C-terminal
-21 residues of the supplied Ga are drawn: the heterotrimer is not what this
-panel is about, and drawing it would put an experiment in the figure that the
-figure is not reporting.
+The receptor is a depth-weighted heavy-atom DENSITY rather than a cartoon or a
+PyMOL surface, because the subject is a cavity: a cartoon of a cavity reads as
+a docking picture, and a semi-transparent surface renders the near and far
+walls at once and fills the cavity in. Only the alpha5 C-terminal 21 residues
+of the supplied Ga are drawn: the heterotrimer is not what this panel is
+about, and drawing it would put an experiment in the figure that the figure is
+not reporting.
+
+The soft focus in panel a encodes DEPTH ONLY and carries no interpretive
+meaning. Nothing in the 78-paper corpus uses the technique, so it gets no
+benefit of the doubt: the focal plane is placed behind every state-defining
+element, and the caption says what the blur means.
 """
 import os
 import sys
@@ -27,9 +34,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(HERE)))
 import badata as B                                            # noqa: E402
 import figstyle as fs                                         # noqa: E402
 import matplotlib.pyplot as plt                               # noqa: E402
-import matplotlib.image as mpimg                              # noqa: E402
 
-from ga1_hero import trim                                     # noqa: E402
+import dofrender as dof                                       # noqa: E402
+import dofscenes as scenes                                    # noqa: E402
 
 XCOL = "d_gpcrdb_tm6_tilt_246_637_ca"
 YCOL = "d_npxxy_oh"
@@ -43,23 +50,18 @@ def main():
                 & (rows["arm"] == "cognate")]
     r = cell[cell["row_id"] == ROW].iloc[0]
 
-    fig = plt.figure(figsize=(fs.W2, 104 * fs.MM), constrained_layout=True)
-    gs = fig.add_gridspec(1, 3, width_ratios=[1.75, 0.95, 0.95])
+    # constrained_layout OFF: the render crop is computed from the cell's real
+    # aspect, which needs the geometry fixed before anything is drawn.
+    fig = plt.figure(figsize=(fs.W2, 96 * fs.MM))
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.85, 0.90, 0.90],
+                          left=0.045, right=0.995, top=0.905, bottom=0.235,
+                          wspace=0.42)
 
     axa = fig.add_subplot(gs[0, 0])
-    axa.imshow(trim(os.path.join(B.OUT, "ba8_alpha5_cavity.png")))
-    axa.axis("off")
+    info = scenes.ba8_cavity(axa, aspect=dof.cell_aspect(fig, gs, 0,
+                                                         slice(0, 1)))
     axa.set_title(u"a   the α5 C-terminal 21-mer in the intracellular cavity",
-                  fontsize=7, loc="left", fontweight="bold")
-    axa.text(0.5, -0.02,
-             u"DRD2 · cognate Gα · OpenFold-3 · row 8285 · view from the "
-             u"cytoplasm\nreceptor surface grey · α5 C-terminal 21 residues "
-             u"(Gα 334–354) green\nblack: L76 (2×46) Cα – L375 (6×37) Cα, "
-             u"17.28 Å   ·   purple: Y209 (5.58) OH – Y426 (7.53) OH, 3.99 Å\n"
-             u"R132 (3.50) reaches the α5 backbone O of C351 at 3.16 Å, "
-             u"measured on this model",
-             transform=axa.transAxes, ha="center", va="top", fontsize=4.9,
-             color=fs.GREY, linespacing=1.5)
+                  fontsize=7, loc="left", fontweight="bold", pad=3.0)
 
     # --- b, c: the cell the render came from, on both predicate axes ----
     for k, (col, thr, name, colour, rule) in enumerate([
@@ -98,21 +100,31 @@ def main():
                 transform=ax.transAxes, va="top", ha="left", fontsize=5,
                 color=fs.GREY)
         if k == 0:
-            ax.text(0.03, 0.60,
+            ax.text(0.03, 0.22,
                     u"all %d seeds are called active" % int(cell["active"].sum()),
                     transform=ax.transAxes, va="top", ha="left", fontsize=5,
                     color=fs.VERM)
 
-    axa.text(0.0, -0.22,
-             u"Selection rule: the row with the MEDIAN rmsd_to_active_ref in "
-             u"the DRD2 × OpenFold-3 ×\ncognate cell (1.218 Å; rank 13 of 25, "
-             u"50th percentile) — a typical row of its cell,\nnot a best case. "
-             u"No exclusion applies: neither E1 nor E2 fires anywhere in this\n"
+    axa.text(0.0, -0.055,
+             u"Selection rule: the row with the MEDIAN rmsd_to_active_ref in the "
+             u"DRD2 × OpenFold-3 × cognate cell (1.218 Å; rank 13 of 25, 50th "
+             u"percentile) — a typical row of its cell, not a best case.\n"
+             u"No exclusion applies: neither E1 nor E2 fires anywhere in this "
              u"cell. Both anchor pairs were verified by reproducing this row's "
-             u"stored 17.2766 Å\nand 3.9883 Å from its own coordinates.",
+             u"stored 17.2766 Å and 3.9883 Å from its own coordinates, and the "
+             u"3.16 Å\ncontact was measured on this model rather than taken from "
+             u"a published complex. Grey is the invariant receptor; colour is "
+             u"TM6 and the α5 21-mer. Every distance drawn is labelled with the "
+             u"two atoms\nit was measured between. THE SOFT FOCUS ENCODES DEPTH "
+             u"ONLY and carries no interpretive meaning: the focal plane sits "
+             u"behind TM6, the four anchor residues and the α5, so no part of "
+             u"the claim is blurred\n(%.0f%% of the panel's depth range is behind "
+             u"it). %s."
+             % (100 * info["behind_focus"], info["omitted"]),
              transform=axa.transAxes, fontsize=4.6, color=fs.GREY,
              ha="left", va="top", linespacing=1.5)
 
+    dof.raster_dpi(fig)
     paths = fs.save(fig, "ba8_alpha5")
     print("BA-8 written:", *paths, sep="\n  ")
     print("  cell n=%d, active=%d, tilt med %.3f, npxxy med %.3f"

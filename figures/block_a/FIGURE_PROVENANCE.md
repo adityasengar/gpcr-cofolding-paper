@@ -634,3 +634,179 @@ Recorded so nobody re-derives the gap.
 | `block_a/camera.py` | PyMOL view derived from the coordinates: bundle axis, extracellular-up sign, tilt axis horizontal, and a distance that actually frames the molecule | a camera chosen by mouse cannot be checked; two of the corpus's render defects are camera defects in disguise |
 | `block_a/cifread.py` | minimal mmCIF reader plus `verify_anchor`, which REFUSES a distance that does not reproduce the tidy value | Biopython rejects the prediction CIFs (no `_atom_site.occupancy`); three shipped ALIGNMENT.md files name residues that do not reproduce, and each corroborates the others |
 | `block_a/panels/hero_renders.py` | one driver for every render: verifies, derives the camera, calls `render_struct.py`, carries the selection rule | the rule, the anchors and the camera are then in one auditable place per panel |
+
+---
+
+# Added 2026-09-10 — the structural renders rebuilt in matplotlib with real
+# depth of field
+
+The three GA-1 renders, BA-8a and the two BA-1a views were PyMOL bitmaps. They
+were correct — every anchor verified, every camera derived, every selection
+rule stated — and they were flat: a pale grey cartoon on white, the element
+carrying the claim only slightly darker than the scaffold, every helix at the
+same apparent distance from the camera, the measured numbers exiled to a text
+strip beside the panel, and a white margin so large the composite had to
+auto-trim each bitmap before placing it.
+
+They are now vector renders built in matplotlib, from
+`figures/reference/side_quest_nsb_closeups.py`'s technique: a Gaussian-blurred
+depth-weighted density under sharp vector sticks.
+
+| module | what it is |
+|---|---|
+| `figures/dofrender.py` | the renderer. Camera, projection, Kabsch superposition, the blurred backing, depth-cued ribbons, CPK sticks, the annotated-distance primitive, scale bar, chips. Every function names the defect it prevents. |
+| `figures/block_a/panels/dofscenes.py` | this paper's six scenes. Imports anchors, paths and selection rules from `hero_renders.py`, so there is still one source of truth for them, and re-verifies every pair before drawing. |
+
+## What each rebuilt panel now does that the bitmap did not
+
+- **The measured value and its atom pair are ON the panel**, in the picture,
+  next to the dashes — not in a strip beside it. `dofrender.measured_distance`
+  will not draw a line without both. Not one of the 232 render rows in the
+  corpus survey annotates a magnitude with its atom pair.
+- **A scale bar**, which `ye2026multistatebias` Fig 4A is recorded as lacking.
+- **The selection rule and the row's percentile are printed in the panel's own
+  corner**, not left to the caption — a panel travels without its caption.
+- **Output stays vector.** Only the blurred backing images are raster
+  (`set_rasterized(True)`, written at 400 dpi by `dofrender.raster_dpi`);
+  sticks, dashes, values, atom-pair labels and chips are vector text and paths.
+  ga1_hero.pdf carries 14 images and one embedded font.
+
+## Depth of field: the two constraints it is used under
+
+A corpus check found **no precedent either way** — nothing in the 78 papers
+uses soft focus, defocus or bokeh on a structural render. So there is no
+evidence reviewers read it as elegant and none that they read it as obscuring,
+and the technique gets no benefit of the doubt. Two constraints follow, and
+both are enforced in code rather than left to care:
+
+1. **The blur must never fall on the claim.** This literature de-emphasises by
+   SUBJECT (`tejero2024opsin` Fig 5 ghosts the helices not under discussion and
+   keeps TM5/TM6/TM7 opaque wherever they sit in z); depth of field
+   de-emphasises along a different axis, so a reader trained here reads a
+   blurred helix as "not the subject". `dofrender.focal_plane()` therefore puts
+   the focal plane at the near-most depth of the state-defining elements — TM6,
+   the four anchor residues, the α5 21-mer — and `focus_report()` raises if any
+   of them is behind it. Subject ribbons and anchor sticks carry a linewidth
+   taper for form but essentially no colour fade (`fade=0.12` and `0.0`), so
+   depth never dims the claim. Where two measures could not share one focal
+   plane, the answer is a second view, not a blurred measure: that is why BA-1a
+   is a side view carrying NPxxY and a cytoplasmic view carrying the tilt.
+   Each panel reports how much of its depth range is behind the focal plane —
+   GA-1 a/b/c 34% / 36% / 13%, BA-8a 35%, BA-1a a/b 35% / 24%.
+2. **Every caption must say the blur encodes depth only.** The sentence is
+   printed in the figures' own footnote strips as well, so it cannot be lost
+   in transit: *"THE SOFT FOCUS ENCODES DEPTH ONLY and carries no interpretive
+   meaning."* Any `.tex` caption for GA-1, BA-8 or BA-1a must carry it.
+
+The subject/context colour rule is unchanged and still primary: grey the
+invariant bundle, colour only what carries the claim. Depth of field is a
+second, weaker cue layered under it.
+
+## GA-1 a/b/c `out/ga1_hero.{pdf,png}` — `ga1_hero.py`
+
+Same rows, same anchors, same verified numbers as the bitmap version: AA2AR
+row 567 (11.7347 Å tilt L48/L235 Cα, 9.6079 Å NPxxY Y197/Y288 OH) and DRD2
+row 8285 (17.2766 Å L76/L375 Cα, 3.9883 Å Y209/Y426 OH), 7JVR (17.5860 /
+4.2522) at the same atom pairs. What changed:
+
+- The three render cells now draw themselves into the composite's gridspec;
+  the separate text strips under each render are gone, because the numbers are
+  on the panels.
+- Panel c draws the reference TM6 as a **thick pale shadow** with the
+  prediction as a thinner bright tube inside it. At equal weight — the first
+  attempt — the prediction simply hides the reference and the panel shows one
+  helix, which is the opposite of the claim.
+- Panel c prints **both** tilt values, 17.28 Å (prediction) and 17.59 Å
+  (7JVR), at the SAME atom pair. `hilger2020gcgr` reports one displacement as
+  17.4 Å and 18 Å in two panels at two different residues and never reconciles
+  them; naming the pair on both is what makes the comparison legible.
+- `constrained_layout` is OFF and the crop is computed from each cell's real
+  aspect (`dofrender.cell_aspect`). With it ON, `set_aspect("equal")` collapsed
+  the render axes to postage stamps with overlapping titles.
+
+## BA-8a `out/ba8_alpha5.{pdf,png}` — `ba8_alpha5.py`
+
+Rebuilt as a **side view cropped to the intracellular half**, not the
+cytoplasmic view the bitmap used, and as a heavy-atom density rather than a
+PyMOL surface.
+
+- Looking up the bundle shows the cavity mouth end-on: a 42 Å crop of a 7TM
+  bundle seen end-on is a uniform disc with the peptide lying across it. That
+  is what the old panel showed and it is unreadable as a cavity. Side-on, the
+  helix is seen going in.
+- A semi-transparent molecular surface renders the near and far walls at once
+  and fills the cavity in. `dofrender.depth_of_field_cloud` with a strong near
+  pass and a weak far one (α 0.92 / 0.20) shows the near wall as a wall.
+- Crop rule: centred at 0.38 × the α5 centroid + 0.62 × the tilt-anchor
+  midpoint, half-extent 24 Å. Stated on the panel.
+- Three measured distances, each with its atom pair: 17.28 Å, 3.99 Å, and the
+  R3.50 contact 3.16 Å — **Arg132 NH2 – Cys351 O**, re-confirmed here as the
+  closest heavy-atom contact between R3.50 and Gα 334–354 (next nearest 3.51 Å
+  to Leu353 CD1), measured on this model rather than taken from a published
+  complex.
+
+## BA-1a `out/ba1a_instrument.{pdf,png}` — `ba1a_instrument.py` (NEW SCRIPT)
+
+The two BA-1a views were loose PNGs with no composite and no quantitative
+panel — which is defect #2 in the corpus survey, 58 of 232 rows. They are now
+one figure with the panel that backs them:
+
+- **a** side view, carrying the NPxxY measurement on both references
+  (4LDE 4.8131 Å, 2RH1 11.4727 Å, Y1219/Y1326 OH and Y219/Y326 OH).
+- **b** from the cytoplasm, carrying the TM6 tilt on both (17.5625 Å
+  L1075/L1275 Cα, 11.9283 Å L75/L275 Cα).
+- **c, d** every deposited reference on each axis by deposited state — 167
+  carry the tilt axis, 70 carry NPxxY — with 4LDE and 2RH1 ringed, thresholds
+  drawn, n in the tick labels. Two measures, two panels: they never share an
+  axis.
+- 2RH1 is superposed onto 4LDE over receptor Cα 1029–1342 against 29–342, 282
+  matched pairs, 2.60 Å. The windows are written separately because 4LDE
+  carries a +1000 offset and 2RH1's T4 lysozyme sits at 1002–1161 of the same
+  chain (D21's practical trap).
+
+`hero_renders.py`'s `ba1a`, `hero_a`, `hero_b`, `hero_c` and `ba8` targets are
+**superseded** and no longer feed any composite. They are kept because
+`dofscenes.py` imports `ANCHORS`, the structure paths, the selection-rule
+strings and `verify()` from that module, and because S10 still uses the PyMOL
+path.
+
+## Further discrepancies found while rebuilding, for the orchestrator
+
+- **NEW, and it affected every DRD2 render already shipped: the camera's
+  "membrane normal" was 35.5° off.** `camera.py` fits the bundle axis to the
+  first principal axis of every Cα in the receptor window. DRD2's predicted
+  ICL3 is **147 residues of mean-pLDDT-38.5 coil out of 414** (the rest of the
+  receptor averages 86.0), and fitting through it bends the axis by **35.5°**,
+  so the PyMOL "side view" of DRD2 was 35° off the bundle and drew the α5 at an
+  angle it does not have. camera.py's own docstring warns that this loop can
+  flip the extracellular *sign*; that it also *bends* the axis had not been
+  caught. `dofrender.camera_frame` takes the point cloud explicitly and every
+  scene passes the 7TM body with ICL3 excluded. The α5 helix sits 31.0° off the
+  true bundle axis and 50.5° off the contaminated one.
+- **NEW: `rmsd_to_active_ref` does not reproduce from the coordinates.** Row
+  8285 ships 1.218 Å against 7JVR. Superposing the two files on every shared
+  receptor Cα (269 pairs, 34–441) gives **1.295 Å**, and none of the obvious
+  trimmed windows reproduces 1.218 either: no-ICL3 219–365 → 1.290, no-ICL3
+  225–360 → 1.295, 7TM-only → 1.298, 34–420 → 1.290. The scorer's superposition
+  atom set is not recorded anywhere in the drop. GA-1c therefore quotes 1.218 Å
+  only as the *selection* statistic and prints its own 1.295 Å beside it,
+  labelled; no panel presents 1.218 Å as something it measures.
+- **Correction to this file: scipy IS importable in this environment.** The
+  toolkit table above records `figpanels._smooth2d` as existing because "scipy
+  is not importable (`libmkl_core` missing)". `scipy.ndimage.gaussian_filter`
+  imports and runs — `dofrender.py` depends on it — with only a numpy-version
+  warning. `_smooth2d` is harmless and needs no change, but the stated reason
+  is no longer true.
+
+## Toolkit changes made for these panels
+
+| where | what | why |
+|---|---|---|
+| `figures/dofrender.py` | the whole depth-of-field renderer | PyMOL gives a flat cartoon on white and a bitmap that must be trimmed before placing; this gives depth, keeps the output vector, and makes the annotated distance a primitive rather than a decision |
+| `dofrender.measured_distance` | a dashed line that cannot be drawn without its value AND its atom pair | the corpus is split between printing a magnitude with no atoms named and drawing an arrow with no number at all; neither half annotates a magnitude with its atom pair |
+| `dofrender.focal_plane` / `focus_report` | the focal plane is derived from the claim, and a view that cannot hold the whole claim in focus raises | depth of field de-emphasises along a different axis from the one this literature uses; without this the blur would sometimes fall on the subject |
+| `dofrender.blurred_layer` / `blurred_cloud` | σ in **Ångström**, normalisation on the 97th percentile of inked pixels | a σ in pixels makes two panels look like two lenses; a σ as a canvas fraction turns an atom density into speckle; dividing by the max sets the whole panel's density from its one densest crossing and the layer disappears |
+| `dofrender.ca_runs` | Cα split into contiguous runs | 2RH1 is modelled 29–230 and 263–342; one polyline invents a 20 Å helix through the middle of the receptor where ICL3 is disordered |
+| `dofrender.superpose` | explicit residue window plus an offset, matched residue by residue | one selection reused across both objects superposes the ADRB2 bundle onto 2RH1's T4 lysozyme (D21) |
+| `dofrender.cell_aspect` | crop computed from the gridspec cell's real aspect | `set_aspect("equal")` under `constrained_layout` collapses a render axes to a sliver |
+| `dofscenes._icl3_window` | the TM5→TM6 stretch dropped from every panel by one rule, and the panel says so with its pLDDT | 147 residues of pLDDT-38 coil set the crop, bent the camera and filled the frame with haze; hiding it in one panel and not the other would put two receptors on different footings |

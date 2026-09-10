@@ -31,6 +31,7 @@ Convention throughout: **the data wins, the discrepancy is stated, not smoothed*
 | **D8** | `headline_by_backbone.csv` | low — new | `matches_claim_sheet` is `True` on all four rows but the fraction disagrees |
 | **D9** | **Methods §7.1, C-6** | **high — new** | **reference-set denominator is 98 empirically, not the 89 the Methods requires stating** |
 | **D10** | **BA-1b spec** | medium — new | `deviation_class` has five levels, not the three the panel spec assumes |
+| **D22** | `rmsd_to_active_ref` | medium — new | does not reproduce from the coordinates, and the scorer's atom set is not in the drop |
 | **D18** | `11_structures/agonist_only_vs_ternary/` | **CRITICAL — new** | **8FZQ.cif is CFTR, not an opioid receptor complex** |
 | **D19** | Methods, templates and MSAs | **high — new** | no row-level record of either; MSA pinning is asserted on no evidence |
 | **D20** | two more `ALIGNMENT.md` files | medium — new | ACM1 and DRD2 anchors wrong, same failure as D13 |
@@ -536,6 +537,44 @@ Related, and a practical trap: **4LDE carries a $+1000$ auth-numbering offset**,
 and 2RH1's T4L fusion occupies residues 1002–1161. A single selection string
 across both objects will align the receptor onto the lysozyme. Write the two
 selections separately.
+
+---
+
+## D22 — NEW: `rmsd_to_active_ref` does not reproduce from the coordinates
+
+Row 8285 (DRD2 / OpenFold3 / cognate) ships `rmsd_to_active_ref = 1.218` Å.
+Recomputed over all 269 shared receptor C$\alpha$ (residues 34–441) against
+7JVR it is **1.295 Å** — a 6% difference, and no obvious trimmed window
+reproduces the shipped value: excluding ICL3 gives 1.290, 7TM-only 1.298,
+34–420 gives 1.290.
+
+**The scorer's atom set is documented nowhere in the drop.** No file describes
+which atoms enter the superposition or the RMSD.
+
+This is not a large discrepancy and nothing in the manuscript turns on it, but
+it means a shipped RMSD cannot be reproduced from the shipped coordinates, which
+undercuts the archive's own reproducibility claim. Figures that quote it now do
+so **as a selection statistic only**, printing the independently computed value
+beside it and labelling both.
+
+**Request**: the atom selection used by the scorer for `rmsd_to_active_ref` and
+`rmsd_to_inactive_ref`. One line of Methods, no compute.
+
+---
+
+## A defect in our own code, recorded here because it affected shipped figures
+
+`figures/block_a/camera.py` fits the membrane normal to **every** C$\alpha$ in
+the receptor window. DRD2's predicted ICL3 is 147 residues of mean-pLDDT-38.5
+coil out of 414 (the rest of the receptor averages 86.0), and fitting the axis
+through it **bent the camera by 35.5°** on every DRD2 render shipped before
+2026-09-10. The function's own docstring warned that the loop could flip the
+extracellular *sign*; that it also bends the axis was not caught.
+
+Fixed in `figures/dofrender.py:camera_frame`, which takes the point cloud
+explicitly, with every scene passing the 7TM body and excluding ICL3. All
+affected renders have been rebuilt. `camera.py` itself is unchanged because S10
+still uses it, and the caveat is noted at its call site.
 
 ---
 

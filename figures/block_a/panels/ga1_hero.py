@@ -24,6 +24,16 @@ plot. So here:
   * each render's cell, its n, and the row's percentile within it are printed
     on the panel, not left to the caption.
 
+How the renders are drawn. Panels a-c are vector renders built by
+`dofscenes.py` on `dofrender.py`, not PyMOL bitmaps: a Gaussian-blurred
+heavy-atom density carries the receptor, sharp vector sticks carry the claim.
+The blur encodes DEPTH ONLY and has no interpretive meaning - it is a cue no
+paper in the 78-paper corpus uses, so the caption has to say what it means,
+and the focal plane is placed at the back of the state-defining elements so
+that no part of the claim is ever on the blurred side of it. Emphasis is
+carried by the rule this literature does use: grey for the invariant
+scaffold, colour for what carries the claim.
+
 What this figure may NOT say. It shows the state that is REACHED. It is not
 evidence of amplitude reproduction - whether a receptor with further to travel
 travels further - which is BA-4 and is negative on three of four backbones. So
@@ -44,7 +54,9 @@ import badata as B                                            # noqa: E402
 import figstyle as fs                                         # noqa: E402
 import figpanels as fp                                        # noqa: E402
 import matplotlib.pyplot as plt                               # noqa: E402
-import matplotlib.image as mpimg                              # noqa: E402
+
+import dofrender as dof                                       # noqa: E402
+import dofscenes as scenes                                    # noqa: E402
 
 OUT = B.OUT
 XCOL = "d_gpcrdb_tm6_tilt_246_637_ca"
@@ -57,41 +69,16 @@ C_INACTIVE = fs.BLUE
 C_PEPTIDE = fs.GREEN
 
 
-def trim(path, pad=6):
-    """Crop the white margin PyMOL leaves, so three panels can be placed on a
-    common scale instead of three different amounts of empty space."""
-    im = mpimg.imread(path)
-    rgb = im[..., :3] if im.ndim == 3 else im
-    ink = (rgb < 0.985).any(axis=2) if rgb.ndim == 3 else (rgb < 0.985)
-    rows = np.where(ink.any(axis=1))[0]
-    cols = np.where(ink.any(axis=0))[0]
-    if not len(rows) or not len(cols):
-        return im
-    r0, r1 = max(0, rows[0] - pad), min(im.shape[0], rows[-1] + pad + 1)
-    c0, c1 = max(0, cols[0] - pad), min(im.shape[1], cols[-1] + pad + 1)
-    return im[r0:r1, c0:c1]
-
-
-def render_cell(fig, gs_img, gs_txt, png, title, subtitle, lines, letter,
-                letter_dx=-0.02):
-    ax = fig.add_subplot(gs_img)
-    ax.imshow(trim(os.path.join(OUT, png)))
-    ax.axis("off")
-    ax.set_title(u"%s\n%s" % (title, subtitle), fontsize=7,
-                 fontweight="bold", pad=2.0)
-    fs.panel_label(ax, letter, dx=letter_dx, dy=1.16)
-
-    axt = fig.add_subplot(gs_txt)
-    axt.axis("off")
-    total = sum(1 + t.count("\n") for t, _, _ in lines)
-    step = 1.0 / (total + 0.6)
-    y = 1.0
-    for text, colour, weight in lines:
-        axt.text(0.0, y, text, transform=axt.transAxes, va="top", ha="left",
-                 fontsize=4.9, color=colour, fontweight=weight,
-                 linespacing=1.25)
-        y -= step * (1 + text.count("\n"))
-    return ax
+def render_cell(fig, gs, row, cols, scene, title, subtitle):
+    """One render panel: the scene draws itself, we only place and title it."""
+    ax = fig.add_subplot(gs[row, cols])
+    info = scene(ax, aspect=dof.cell_aspect(fig, gs, row, cols))
+    # The subtitle is a separate artist so it can be smaller and greyer than
+    # the title; the title pad has to clear it or the two overprint.
+    ax.set_title(title, fontsize=7, fontweight="bold", loc="left", pad=11.0)
+    ax.text(0.0, 1.006, subtitle, transform=ax.transAxes, ha="left",
+            va="bottom", fontsize=5.4, color="#444444")
+    return info
 
 
 def main():
@@ -113,53 +100,31 @@ def main():
     ref_style = {"active": ("^", fs.VERM, "active reference"),
                  "inactive": ("s", fs.BLUE, "inactive reference")}
 
-    fig = plt.figure(figsize=(fs.W2, 152 * fs.MM), constrained_layout=True)
-    gs = fig.add_gridspec(3, 6, height_ratios=[1.55, 0.62, 1.05])
+    # constrained_layout is OFF here on purpose: the render crops are computed
+    # from the cells' real aspect (dofrender.cell_aspect), which requires the
+    # geometry to be fixed before anything is drawn.
+    fig = plt.figure(figsize=(fs.W2, 150 * fs.MM))
+    gs = fig.add_gridspec(2, 6, height_ratios=[1.42, 1.00],
+                          left=0.045, right=0.995, top=0.935, bottom=0.135,
+                          wspace=0.62, hspace=0.30)
 
     # ---------------- a: the receptor predicted alone -------------------
-    render_cell(
-        fig, gs[0, 0:2], gs[1, 0:2], "hero_a_apo_alone.png",
-        u"receptor alone",
-        u"AA2AR · apo · Boltz-2 · row 567",
-        [(u"TM6 tilt  11.73 Å   L48 (2×46) Cα – L235 (6×37) Cα", C_TILT, "bold"),
-         (u"NPxxY     9.61 Å   Y197 (5.58) OH – Y288 (7.53) OH", C_NPXXY, "bold"),
-         (u"below the tilt threshold (14.932 Å) and above the\n"
-          u"NPxxY threshold (9.080 Å): predicate calls it INACTIVE",
-          C_INACTIVE, "normal"),
-         (u"highest pLDDT of the 25 rows in its cell (100th pct);\n"
-          u"0.95 Å from AA2AR's INACTIVE reference, 1 of 25 seeds\n"
-          u"in this cell fires the predicate", fs.GREY, "normal")],
-        "a", letter_dx=-0.05)
+    ia = render_cell(fig, gs, 0, slice(0, 2), scenes.hero_a,
+                     u"a   receptor alone",
+                     u"AA2AR · apo · Boltz-2 · row 567 — predicate: INACTIVE")
 
     # ---------------- b: the same models, cognate Ga supplied -----------
-    render_cell(
-        fig, gs[0, 2:4], gs[1, 2:4], "hero_b_cognate.png",
-        u"+ cognate Gα",
-        u"DRD2 · cognate · OpenFold-3 · row 8285",
-        [(u"TM6 tilt  17.28 Å   L76 (2×46) Cα – L375 (6×37) Cα", C_TILT, "bold"),
-         (u"NPxxY     3.99 Å   Y209 (5.58) OH – Y426 (7.53) OH", C_NPXXY, "bold"),
-         (u"above the tilt threshold and below the NPxxY\n"
-          u"threshold: predicate calls it ACTIVE", C_ACTIVE, "normal"),
-         (u"median RMSD-to-active row of its 25-row cell (50th pct);\n"
-          u"the full cognate Gα was supplied, only its α5 C-terminal\n"
-          u"21 residues are drawn", fs.GREY, "normal")],
-        "b")
+    ib = render_cell(fig, gs, 0, slice(2, 4), scenes.hero_b,
+                     u"b   + cognate Gα",
+                     u"DRD2 · cognate · OpenFold-3 · row 8285 — ACTIVE")
 
     # ---------------- c: over the deposited active reference ------------
-    render_cell(
-        fig, gs[0, 4:6], gs[1, 4:6], "hero_c_over_reference.png",
-        u"over the deposited active state",
-        u"row 8285 on 7JVR · view from the cytoplasm",
-        [(u"prediction TM6 vermillion · 7JVR TM6 grey", fs.BLACK, "normal"),
-         (u"7JVR  tilt 17.59 Å · NPxxY 4.25 Å, same atom pairs", C_TILT, "bold"),
-         (u"1.218 Å Cα RMSD to 7JVR over receptor residues 34–441\n"
-          u"(cell range 1.020–1.507 Å over 25 seeds)", fs.GREY, "normal"),
-         (u"state reached — NOT amplitude reproduction, which is\n"
-          u"negative on 3 of 4 backbones (BA-4)", C_ACTIVE, "normal")],
-        "c")
+    ic = render_cell(fig, gs, 0, slice(4, 6), scenes.hero_c,
+                     u"c   over the deposited active state",
+                     u"row 8285 on 7JVR · view from the cytoplasm")
 
     # ---------------- d: the population the renders came from -----------
-    axd = fig.add_subplot(gs[2, 0:4])
+    axd = fig.add_subplot(gs[1, 0:4])
     marks = [(r567[XCOL], r567[YCOL], "a"), (r8285[XCOL], r8285[YCOL], "b")]
     counts = fp.density_plane(
         axd, cA, XCOL, YCOL, "arm", colours=fs.ARM_COLOURS,
@@ -183,7 +148,7 @@ def main():
     fs.panel_label(axd, "d", dx=-0.055, dy=1.11)
 
     # ---------------- e: it is a switch, and it is panel-wide -----------
-    axe = fig.add_subplot(gs[2, 4:6])
+    axe = fig.add_subplot(gs[1, 4:6])
     cells = (cA.groupby(["receptor", "backbone", "arm"])
              .agg(seeds=("active", "size"), fired=("active", "sum"))
              .reset_index())
@@ -220,25 +185,35 @@ def main():
 
     axd.text(0.0, -0.31,
              u"Filter for d and e: %s, then Class A only — %s of %s rows. d "
-             u"draws the %s with both axes\nmeasurable and rugs the %d "
-             u"without an NPxxY-OH value; %d Class A deposited references (%d "
-             u"active,\n%d inactive) are overlaid as open marks. e: %d paired "
-             u"cells, 25 seeds each. In every render grey is the\ninvariant "
-             u"bundle, colour is TM6 (vermillion where the predicate fires, "
-             u"blue where it does not),\ngreen is the α5 C-terminal 21-mer, "
-             u"and every distance is measured on the coordinates drawn. "
-             u"a and b are DIFFERENT RECEPTORS —\nthe archive ships one "
-             u"prediction per case; the within-panel contrast is d and e."
+             u"draws the %s with both axes measurable and rugs the %d without "
+             u"an NPxxY-OH value;\n%d Class A deposited references (%d active, "
+             u"%d inactive) are overlaid as open marks. e: %d paired cells, 25 "
+             u"seeds each. a and b are DIFFERENT\nRECEPTORS — the archive ships "
+             u"one prediction per case; the within-panel contrast is d and e.\n"
+             u"RENDERS a–c: grey is the invariant bundle, colour is TM6 "
+             u"(vermillion where the predicate fires, blue where it does not), "
+             u"green is the α5 C-terminal 21-mer.\nEvery distance drawn is "
+             u"measured on the coordinates in that panel and is labelled with "
+             u"the two atoms it was measured between. THE SOFT FOCUS ENCODES "
+             u"DEPTH ONLY\nand carries no interpretive meaning: the focal "
+             u"plane is placed behind the state-defining elements, so no part "
+             u"of TM6, the four anchor residues or the α5 is ever blurred.\n"
+             u"%s.\n%s."
              % (label, "{:,}".format(len(cA)), "{:,}".format(len(rows)),
                 "{:,}".format(len(both)), len(cA) - len(both), len(ra),
                 int((ra["state"] == "active").sum()),
-                int((ra["state"] == "inactive").sum()), len(paired)),
+                int((ra["state"] == "inactive").sum()), len(paired),
+                ib["omitted"], ia["omitted"]),
              transform=axd.transAxes, fontsize=4.6, color=fs.GREY,
              ha="left", va="top", linespacing=1.4)
 
+    dof.raster_dpi(fig)
     paths = fs.save(fig, "ga1_hero")
     print("GA-1 written:", *paths, sep="\n  ")
     print("  plane:", counts)
+    for tag, info in (("a", ia), ("b", ib), ("c", ic)):
+        print("  render %s: %s; %.0f%% of panel depth behind the focal plane"
+              % (tag, info["view"], 100 * info["behind_focus"]))
     print("  paired cells: %d up / %d same / %d down" % (up, same, down))
 
 

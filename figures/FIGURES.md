@@ -35,6 +35,28 @@ and carries the material a caption needs. The scripts are in
 `block_a/panels/`; the shared loader and the exclusion filters are in
 `block_a/badata.py`.
 
+**The render rule for every Block A entry, added 2026-09-10.** Structure
+renders are built in matplotlib by `figures/dofrender.py` and
+`block_a/panels/dofscenes.py`, not PyMOL, and they draw themselves into their
+composite — there is no separate render step and no bitmap to place. Three
+things are non-negotiable in them and are enforced in code, not by care:
+
+1. **Every measured distance carries its value AND the atom pair, on the
+   panel.** `dofrender.measured_distance` will not draw a line without both.
+   Not one of the 232 render rows in the corpus survey does this.
+2. **Grey means "not the subject".** The invariant bundle is a grey density;
+   colour is TM6 and the α5 21-mer only. Never grey-because-reference.
+3. **The soft focus encodes DEPTH ONLY and every caption must say so.** A
+   corpus check found no paper in the 78 using the technique, so it gets no
+   benefit of the doubt, and this literature de-emphasises by subject rather
+   than by depth. The focal plane is placed behind every state-defining
+   element (`dofrender.focal_plane`) and `focus_report` raises if any of them
+   would fall on the blurred side; where two measures cannot share one focal
+   plane, use two views rather than blurring one of them.
+
+`hero_renders.py`'s PyMOL targets for GA-1, BA-8 and BA-1a are superseded; S10
+still uses them.
+
 **The filter rule for every Block A entry.** `excl_any` fires on 5,093 of
 9,490 rows (54%) and is the wrong filter almost everywhere: the five flags are
 independent sets with different scopes. E1 (25 rows) and E2 (4) are always
@@ -59,16 +81,26 @@ shows   a: 3SN6 over 2RH1, TM-bundle superposition, the two predicate axes
 data    02_references/{reference_predicates,reference_metadata,
         reference_separation}.csv; 11_structures/instrument_schematic/
         (no [R-*] ids: Block A ships its own tidy tables, not RESULTS.md)
-build   python3 block_a/panels/ba1_reference_landscape.py
-        python3 block_a/panels/hero_renders.py ba1a   (panel a, both views)
-status  ready — BA-1a was REBUILT on 2026-09-09. It is now 4LDE (ADRB2's
-        panel ACTIVE reference) over 2RH1 (its inactive one) on TWO views, a
-        side view and a cytoplasmic view, with all four measured values
-        sourced from reference_predicates.csv: 4LDE 17.5625 / 4.8131, 2RH1
-        11.9283 / 11.4727. The earlier version was 3SN6 over 2RH1 with no
-        numbers drawn; 3SN6 is not in the reference set at all, so no number
-        on it could be sourced from a tidy file. Tilt anchors are L75/L275,
-        not the L124/F282 instrument_schematic/ALIGNMENT.md names
+build   python3 block_a/panels/ba1_reference_landscape.py   (b, c, d)
+        python3 block_a/panels/ba1a_instrument.py            (BA-1a, own figure)
+status  ready — BA-1a was REBUILT on 2026-09-09 and REBUILT AGAIN on
+        2026-09-10 as its own figure with the quantitative panel it was
+        missing. It is 4LDE (ADRB2's panel ACTIVE reference) over 2RH1 (its
+        inactive one) on TWO views: a side view carrying the NPxxY
+        measurement and a cytoplasmic view carrying the TM6 tilt, one measure
+        per view because the two do not lie in one plane and an end-on
+        distance is a dot. All four values are sourced from
+        reference_predicates.csv and reproduce from the deposited
+        coordinates: 4LDE 17.5625 / 4.8131, 2RH1 11.9283 / 11.4727, each drawn
+        WITH the atom pair. Panels c and d put both references on the axis
+        distribution of all 167 / 70 references that carry each axis, so the
+        render is not a hand-picked pair standing alone. The 2026-09-09
+        version was two loose PNGs with no quantitative panel; the version
+        before that was 3SN6 over 2RH1 with no numbers drawn, and 3SN6 is not
+        in the reference set at all. Tilt anchors are L75/L275, not the
+        L124/F282 instrument_schematic/ALIGNMENT.md names. The renders are
+        matplotlib depth-of-field, not PyMOL: THE CAPTION MUST SAY THE BLUR
+        ENCODES DEPTH ONLY
 ```
 
 ### BA-2 — the main effect
@@ -196,13 +228,23 @@ data    a  AA2AR/boltz/apo row 567 (n=25 in cell, 100th pctile on plddt_mean)
            measurable, n = 7,166 of 7,966; 69 Class A references overlaid;
            800 rows with no NPxxY value drawn as a rug, not dropped
         e  per-cell active fraction over 25 seeds, 159 paired Class A cells
-build   python3 block_a/panels/hero_renders.py   (all renders)
-        python3 block_a/panels/ga1_hero.py       (the composite)
-status  ready — the caption MUST say (i) a and b are DIFFERENT RECEPTORS,
-        because the archive ships one prediction per case, (ii) state is
-        reached but per-receptor amplitude is NOT reproduced (BA-4), and
+build   python3 block_a/panels/ga1_hero.py       (renders AND composite)
+status  ready — the renders were REBUILT on 2026-09-10 in matplotlib with
+        real depth of field (figures/dofrender.py, block_a/panels/
+        dofscenes.py), replacing the PyMOL bitmaps. They now draw themselves
+        into the composite, so there is no separate render step and no
+        bitmap to trim. The caption MUST say (i) a and b are DIFFERENT
+        RECEPTORS, because the archive ships one prediction per case, (ii)
+        state is reached but per-receptor amplitude is NOT reproduced (BA-4),
         (iii) Block A's cognate arm supplies the FULL cognate Ga, not the
-        21-residue alpha5-CT fragment. No fraction_of_way_to_active anywhere.
+        21-residue alpha5-CT fragment, and (iv) THE SOFT FOCUS ENCODES DEPTH
+        ONLY AND CARRIES NO INTERPRETIVE MEANING - no paper in the corpus
+        uses the technique, so it gets no benefit of the doubt. No
+        fraction_of_way_to_active anywhere. Panel c quotes the shipped
+        rmsd_to_active_ref of 1.218 A only as the SELECTION statistic and
+        prints its own superposition, 1.295 A over 269 shared Ca, beside it:
+        1.218 does not reproduce from the coordinates and no panel may
+        present it as something it measures.
 ```
 
 ### BA-6 — the predicate plane, for the predictions
@@ -254,12 +296,19 @@ data    DRD2/of3/cognate row 8285. Anchors L76 (2x46) / L375 (6x37) CA and
         Y209 (5.58) / Y426 (7.53) OH, each VERIFIED by reproducing the row's
         stored d_gpcrdb_tm6_tilt_246_637_ca = 17.2766 A and d_npxxy_oh =
         3.9883 A from the CIF to 1e-3 A
-build   python3 block_a/panels/hero_renders.py ba8
-        python3 block_a/panels/ba8_alpha5.py
+build   python3 block_a/panels/ba8_alpha5.py     (render AND composite)
 status  ready — the render is panel a and the cell it came from is panels b and
         c of the SAME figure, all 25 seeds on both predicate axes with row 8285
         ringed, so the render cannot be separated from its population. BA-6 is
-        the panel-wide version
+        the panel-wide version. REBUILT 2026-09-10 in matplotlib depth of
+        field: a SIDE view cropped to the intracellular half (the cytoplasmic
+        view showed the cavity mouth end-on, which is a uniform disc) and a
+        heavy-atom density rather than a PyMOL surface (a semi-transparent
+        surface renders both walls at once and fills the cavity in). Three
+        measured distances, each with its atom pair: 17.28, 3.99, and the
+        R3.50 contact at 3.16 A - Arg132 NH2 to Cys351 O, the closest
+        heavy-atom contact to the alpha5 21-mer in THIS model. Caption MUST
+        state that the blur encodes depth only
 ```
 
 ### S10 — what E1 removes
