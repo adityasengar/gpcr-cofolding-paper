@@ -46,7 +46,9 @@ magnitude --- agreement in sign across four models is one bit of information, an
 Chai-1's $+1.05$~\AA{} against Protenix2's $+5.31$~\AA{} should not be read as
 four independent confirmations of a single effect size. It behaves as a switch rather
 than a graded shift: 111 of 160 apo cells never fire the predicate on any of 25
-seeds, while 108 of 159 cognate cells fire on all 25. The distributions behind
+seeds, while 108 of 159 cognate cells fire on all 25. The two denominators
+differ by one because exclusions E1 and E2 remove every row of a single cognate
+cell (ACM1 on Protenix2); no apo cell is emptied. The distributions behind
 those calls, and the shift in magnitude rather than in call, are in
 Fig.~S11.
 
@@ -57,7 +59,7 @@ $+4.81$~\AA{} (OpenFold3, $[3.95, 5.21]$) and
 $+5.31$~\AA{} (Protenix2, $[4.63, 5.74]$).
 Pooled row-level predicate-active rates move from 16.0\% to 83.4\% (Boltz-2),
 32.7\% to 75.0\% (Chai-1), 24.2\% to 79.9\% (OpenFold3) and 14.5\% to 87.1\%
-(Protenix2). All intervals are cluster bootstraps over 29 paralog clusters and
+(Protenix2). All intervals are cluster bootstraps over 26 paralog clusters and
 are the authoritative ones; the cluster interval is up to $2.2\times$ wider than
 the receptor interval. Chai-1 is the soft predictor throughout --- a smaller
 shift with a much wider interval --- which recurs across metrics.
@@ -98,7 +100,7 @@ directly rather than by inference. That study explicitly proposed its benchmark
 as ``a baseline'' for newer models (p.~6299); this is that evaluation.
 
 Fourth, **the evidence is distributional rather than a point estimate**: 9{,}490
-predictions with cluster bootstraps over 29 paralog clusters, against pooled
+predictions with cluster bootstraps over 26 paralog clusters, against pooled
 means with standard deviations over 31 families.
 
 The arm reported here supplies the complete cognate G$\alpha$ subunit. Whether a

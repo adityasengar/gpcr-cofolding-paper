@@ -293,6 +293,74 @@ correction — it is contradicted by the archive shipped to support it.
 
 ---
 
+## D-A-24 — NEW: two SI denominators are unsourced and do not reproduce
+
+Supplementary table S-T5's caption reads *"of 4,866 predicate-active rows, 610
+carry no active [reference]"* and *"n = 4,256 testable of 4,866
+predicate-active"*. The two are internally consistent (4,866 - 610 = 4,256) and
+**610 reproduces exactly**. 4,866 does not, under any predicate definition tried:
+
+| definition, on E1+E2 | rows |
+|---|---:|
+| tilt AND NPxxY, both measured (the paper's predicate) | 3,739 |
+| tilt AND (NPxxY active or NPxxY undefined) | 5,230 |
+| tilt alone | 5,548 |
+| **caption** | **4,866** |
+
+Neither 4,866 nor 4,256 appears anywhere in `data/block_a/`, in
+`analysis/block_a/`, or in the claim sheet. Grepping the drop returns only
+coincidental digit runs inside coordinate files.
+
+**Found because the number sweep was extended to captions and the SI on
+2026-09-10.** Until then it covered `results.tex` and `methods.tex` only, so 112
+numeric tokens in the least-read text in the paper were checked by nothing. The
+same extension caught an SI caption still asserting a singleton count that
+Methods had already been corrected on.
+
+`CAP12` in `verify_claims.py` records this as a standing mismatch rather than
+dropping it, and `CAP11` pins the 610 that does reproduce. **Do not "fix" the
+caption to 3,739** -- the 610 matching exactly suggests 4,866 is a real
+population under some filter we have not reconstructed, and guessing would
+replace an unsourced number with a wrong one. It is ask 3 in `DATA_REQUESTS.md`.
+
+## D-A-23 — NEW: the shipped cluster map does not reproduce the bootstrap convention
+
+`10_narrative/BLOCK_A_CLAIM_SHEET.md` line 7 states the **bootstrap convention**
+as "26 paralog clusters (T7 manual paralogy mapping)", and caveat C-8 repeats it
+as "26 paralog clusters, 42% singletons". Every cluster-bootstrap interval in the
+Block A dossier was computed on that.
+
+`07_clusters_and_holdout/cluster_map.csv` resolves the same 48 receptors into
+**29 clusters with 16 singletons (55%)**.
+
+```bash
+python3 -c "
+import pandas as pd
+a = pd.read_csv('data/block_a/07_clusters_and_holdout/cluster_map.csv')
+s = a.groupby('cluster_id').size()
+print(len(a), 'receptors ->', a.cluster_id.nunique(), 'clusters,', (s==1).sum(), 'singletons')"
+# 48 receptors -> 29 clusters, 16 singletons
+```
+
+**The intervals in the paper are the 26-cluster ones**, because that is what was
+computed. The map is not the object the bootstrap ran on, and we cannot
+establish its provenance relative to the published convention. Both numbers are
+now stated in Methods, and Fig. S7 already drew the disagreement before anyone
+wrote it down here.
+
+**This entry exists to stop a well-meant correction.** On 2026-09-10 a request
+audit reported that "six manuscript sentences depend on 26" while the shipped
+map holds 29, and the orchestrator changed two Results sentences to say 29
+before checking which object the bootstrap used. That made the Methods describe
+a resampling unit that was never resampled --- a worse error than the one it
+replaced, and one no verifier would have caught, because 29 IS what the shipped
+file says. Reverted the same day. **The convention and the map are two different
+objects and the manuscript must name which one it means every time.**
+
+Direction of the effect, so the exposure is bounded: more clusters means more
+resampling units and slightly narrower intervals, so the published 26-cluster
+intervals are the conservative ones.
+
 ## D10 — NEW: `deviation_class` has five levels, not three
 
 Brief §5, BA-1b: label every `deviation=True` point and **shape it by

@@ -114,6 +114,66 @@ check("EXCL", "excl_any share of corpus (%)", 53.7,
 if "--json" in sys.argv:
     print(json.dumps(results, indent=2, default=str)); sys.exit(0)
 
+# --------------------------------------------------------------- CAPTIONS
+# Added 2026-09-10. Until today the number sweep covered results.tex and
+# methods.tex only, so every figure caption and the whole SI were unchecked --
+# 112 numeric tokens. That is the worst place for a gap: a caption's
+# load-bearing content IS its n, its filter and its threshold, and a caption is
+# the least-read text in a paper. One SI caption was still asserting a singleton
+# count that Methods had already been corrected on, because nothing propagated
+# the fix.
+#
+# Every number below is recomputed from block_a_rows.csv on the caption's own
+# stated filter. Where a caption's filter is "E1+E2", that is E1 and E2 only --
+# never excl_any, which removes 54% of the corpus.
+
+_d = rows[~(rows.excl_E1.astype(bool) | rows.excl_E2.astype(bool))].copy()
+check("CAP1", "E1+E2 keeps 9,461 of 9,490 rows", 9461, int(len(_d)))
+check("CAP2", "excl_any would remove 5,093 (54%)", 5093,
+      int(rows.excl_any.astype(bool).sum()))
+
+_A = _d[_d.gpcr_class == "A"].copy()
+check("CAP3", "E1+E2 then Class A leaves 7,966 rows", 7966, int(len(_A)))
+
+_A["fire"] = (_A.d_npxxy_oh < 9.08) & (_A.d_gpcrdb_tm6_tilt_246_637_ca > 14.932)
+_p = _A.groupby(["receptor", "backbone", "arm"])["fire"].mean().unstack("arm").dropna()
+check("CAP4", "Class A pairs with both arms", 159, int(len(_p)))
+check("CAP5", "cells move up on adding the partner", 120,
+      int((_p.cognate > _p.apo).sum()))
+check("CAP6", "cells unchanged", 37, int((_p.cognate == _p.apo).sum()))
+check("CAP7", "cells move down", 2, int((_p.cognate < _p.apo).sum()))
+_ap = _A[_A.arm == "apo"].groupby(["receptor", "backbone"]).size()
+_co = _A[_A.arm == "cognate"].groupby(["receptor", "backbone"]).size()
+check("CAP8", "apo + cognate cells drawn", 319, int(len(_ap) + len(_co)))
+
+# The two-axis cross-tabulation. It counts only rows where BOTH distances were
+# measured: 2,295 of the 9,461 have no NPxxY axis at all, and a row that cannot
+# be measured has not "fired neither". Computing it the naive way gives
+# 3,318/254 instead of 2,611/157, which is how this check earned its existence.
+_m = _d[_d.d_npxxy_oh.notna() & _d.d_gpcrdb_tm6_tilt_246_637_ca.notna()].copy()
+_m["npx"] = _m.d_npxxy_oh < 9.08
+_m["tilt"] = _m.d_gpcrdb_tm6_tilt_246_637_ca > 14.932
+for _arm, _neither, _both in (("apo", 2611, 577), ("cognate", 157, 3162)):
+    _g = _m[_m.arm == _arm]
+    check("CAP9." + _arm, "%s rows firing neither predicate" % _arm, _neither,
+          int((~_g.npx & ~_g.tilt).sum()))
+    check("CAP10." + _arm, "%s rows firing both" % _arm, _both,
+          int((_g.npx & _g.tilt).sum()))
+
+# S-T5's denominator does NOT reproduce and is recorded as a mismatch rather
+# than dropped. 610 predicate-active rows with no active reference reproduces
+# exactly; the 4,866 it is quoted against does not, under any predicate
+# definition tried (both-measured 3,739; tilt-and-NPxxY-or-NaN 5,230; tilt alone
+# 5,548), and neither 4,866 nor 4,256 appears anywhere in the drop or in our
+# own analysis. See DISCREPANCY_REPORT D-A-24.
+_pa = _m[_m.npx & _m.tilt]
+check("CAP11", "predicate-active rows with no active reference", 610,
+      int(_pa.rmsd_to_active_ref.isna().sum()))
+check("CAP12", "SI S-T5 denominator '4,866 predicate-active'", 4866,
+      int(len(_pa)),
+      note="does not reproduce; 4,866 and 4,256 are unsourced -- D-A-24")
+
+
 bad = [r for r in results if not r["reproduces"]]
 print("%-7s %-42s %-14s %-14s %s" % ("claim","quantity","claim sheet","data",""))
 print("-" * 100)
@@ -124,4 +184,15 @@ for r in results:
         ("  (%s)" % r["note"]) if r["note"] and not r["reproduces"] else ""))
 print("-" * 100)
 print("%d of %d reproduce; %d mismatches" % (len(results)-len(bad), len(results), len(bad)))
+
+# Write the results file on EVERY run, not only under a flag.
+# Until 2026-09-10 this script dumped JSON to stdout under `-j` and nothing
+# else, so `verify_claims_results.json` on disk was a hand-saved artefact that
+# no run refreshed -- 47 stale entries while the suite had grown to 61.
+# analysis/sweep_manuscript.py reads these files to confirm that a registry row
+# claiming coverage names a check that ACTUALLY RAN, so a stale file there
+# quietly makes real checks invisible and would let coverage rot unnoticed.
+json.dump(results, open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                     "verify_claims_results.json"), "w"),
+          indent=1, default=str)
 sys.exit(1 if bad else 0)

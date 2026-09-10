@@ -25,7 +25,18 @@ from __future__ import print_function
 import io, os, re, sys, json, glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECTIONS = ["manuscript/sections/results.tex", "manuscript/sections/methods.tex"]
+# Captions and the SI are swept too, added 2026-09-10. They were excluded for
+# no reason anyone recorded, and 112 numeric tokens lived there unchecked --
+# including a caption still asserting the singleton figure that Methods had
+# already been corrected on, because nothing propagated the fix into si.tex.
+# A caption is the least-read text in a paper and the load-bearing part of it is
+# n, the filter and the threshold.
+SECTIONS = ["manuscript/sections/results.tex", "manuscript/sections/methods.tex",
+            "manuscript/sections/figures.tex", "manuscript/si.tex"]
+
+# LaTeX preamble lines carry numbers that are typesetting, not claims
+PREAMBLE = re.compile(r"^\s*\\(usepackage|geometry|setlength|documentclass|"
+                      r"definecolor|renewcommand|newcommand|pagestyle|hypersetup)")
 REGISTRY = os.path.join(ROOT, "analysis", "NUMBER_REGISTRY.md")
 
 # tokens that are never claims: LaTeX lengths, citation years, section numbers,
@@ -56,6 +67,8 @@ def tokens(path):
     out = []
     for i, line in enumerate(io.open(path, encoding="utf-8"), 1):
         line = strip_comments(line)
+        if PREAMBLE.match(line):
+            continue
         if IGNORE_CONTEXT.search(line):
             # keep the line but drop the macro arguments, which carry years/keys
             line = IGNORE_CONTEXT.sub(" ", line)

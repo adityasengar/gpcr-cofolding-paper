@@ -178,7 +178,16 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 | 1.52 | R430 | Block C, verify_claims check C07 | antagonist --- that figure is \textbf{1.52\%}. The contrast is not built on |
 | 17.5 | R431 | Block B, verify_claims check B29.cognate,B32.chai,B32.protenix | mis-docked ligands. Peptide agonists sit at a median of 17.5~\AA{} because |
 | 66.5 | R433 | Block B, verify_claims check B37.decoy | counting it as failure would produce a 66.5\% error rate where the true |
-
+| 9,461 | S98 | Block A, verify_claims check CAP1 | E1+E2; $n = 9,461$ rows. Overall pass rate 96.3\%. |
+| 5,093 | S34 | Block A, verify_claims check CAP2 | Applying the union would remove 5,093 of 9,490 rows (54\%) and would change |
+| 7,966 | F32 | Block A, verify_claims check CAP3 | E1+E2, then Class~A only --- 7,966 of 9,490 rows, forming |
+| 120 | F28 | Block A, verify_claims check CAP5 | cognate, with the identity line labelled; 120 of 159 move up, 37 are unchanged |
+| 319 | F33 | Block A, verify_claims check CAP8 | 319 cells and 159 receptor x backbone pairs with both arms. |
+| 2,611 | S170 | Block A, verify_claims check CAP9.apo | 2,611 firing neither predicate, 577 firing both. Cognate: 157 and 3,162. |
+| 577 | S170 | Block A, verify_claims check CAP10.apo | 2,611 firing neither predicate, 577 firing both. Cognate: 157 and 3,162. |
+| 157 | S170 | Block A, verify_claims check CAP9.cognate | 2,611 firing neither predicate, 577 firing both. Cognate: 157 and 3,162. |
+| 3,162 | S170 | Block A, verify_claims check CAP10.cognate | 2,611 firing neither predicate, 577 firing both. Cognate: 157 and 3,162. |
+| 610 | S88 | Block A, verify_claims check CAP11 | Note the denominator: of 4,866 predicate-active rows, 610 carry no active |
 ## NOT covered by any automated check
 
 Each of these needs one of three things: a new check in the relevant
@@ -203,6 +212,12 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 4,866 | S88 | DOES NOT REPRODUCE -- unsourced, recorded as D-A-24 and check CAP12 |
+| 4,256 | S87 | DOES NOT REPRODUCE -- 4,866 minus 610; unsourced, D-A-24 |
+| 84 | F47 | exclusion-sweep points; sweep table not shipped at row level |
+| 1.1 | S114 | the widening factor PREVIOUSLY assumed, quoted as superseded by 2.2 |
+| 77 | S194 | reference rows drawn in the S-T8 panel; not recomputed here |
+| 512 | S194 | prediction rows drawn in the S-T8 panel; not recomputed here |
 | 159.95 | M61 | Class B kink-angle threshold | 159.95$^\circ$; for the 4 class~F receptors, where neither substitution is |
 | 13 | M165 | 29 clusters - 16 singletons; data/block_a/07_clusters_and_holdout/cluster_map.csv | acts on 13 and 12 multi-member clusters respectively. All confidence intervals |
 | 354 | M283 | UniProt P63096 sequence length, recomputed by analysis/verify_partner_chains.py | the $\alpha$5 C-terminal 21 residues.} G$\alpha_{\mathrm{i}}$1 is 354 residues, |
