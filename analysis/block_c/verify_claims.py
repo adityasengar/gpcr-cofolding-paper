@@ -299,6 +299,33 @@ else:
           round(float(np.median(_lo)), 3), 0.386, tol=0.002)
 
 
+# ------------------------------------------------- C60, the 2x2's actual scope
+# The 2x2 is described as "the apo arm alone" in the claim sheet, in the panel
+# and, until 2026-09-10, in the manuscript. It is not. This check pins the
+# arithmetic that settles it so the scope sentence can never drift back.
+#
+# The census fixes the design grid at exactly 50 rows per
+# (receptor, backbone, role, arm) -- 800 cells, one size, no exceptions -- and
+# the 2x2 artefact ships its own n_rows. Apo alone predicts 28x50 and 23x50;
+# both arms predict 2,800 and 2,300, which is what shipped, on every backbone.
+
+_cen2 = pd.read_csv(os.path.join(C, "12_g4_off_site_census",
+                                 "g4_full_census_v2.csv"), low_memory=False)
+_grid = _cen2.groupby(["receptor", "backbone", "role", "arm"]).size()
+check("C60.grid", "RECOMPUTED",
+      "census design grid is one size: 50 rows per rec x bb x role x arm",
+      (len(_grid), sorted(_grid.unique())), (800, [50]))
+
+_2x2 = J("06_2x2_interaction/stage3_2x2_ligand_state_specificity.json")
+for _bb in ("boltz", "chai", "of3", "protenix"):
+    _nr = dig(_2x2, "per_backbone", _bb, "n_rows") or {}
+    check("C60.%s" % _bb, "RECOMPUTED",
+          "%s 2x2 cell counts are the BOTH-ARMS figure, not apo-only" % _bb,
+          (_nr.get("agonist_active"), _nr.get("antag_active")),
+          (28 * 50 * 2, 23 * 50 * 2),
+          note="apo-only would be %d and %d" % (28 * 50, 23 * 50))
+
+
 # ------------------------------------------------------------------ report
 ok = [r for r in R if r["ok"]]
 bad = [r for r in R if not r["ok"]]

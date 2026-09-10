@@ -200,6 +200,17 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 | 2.303 | M477 | Block D, verify_claims check D21 | 2.303. The unit is written \%/ln(depth) everywhere it appears. |
 | 4,866 | S88 | Block A, verify_claims check CAP12 | of 4,866 predicate-active rows, 610 carry no active |
 | 4,256 | S87 | Block A, verify_claims check CAP13 | n = 4,256 testable of 4,866 predicate-active |
+| 2,800 | R421 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 2,300 | R421 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 800 | R424 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 1,400 | R425 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 1,150 | R426 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 2,800 | R426 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 2,300 | R426 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 1,400 | S409 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 1,150 | S409 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 2,800 | S410 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 2,300 | S411 | Block C, verify_claims check C60 |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
 ## NOT covered by any automated check
 
 Each of these needs one of three things: a new check in the relevant

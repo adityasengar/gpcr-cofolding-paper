@@ -413,11 +413,29 @@ on Protenix2 [$-0.277$, $-0.088$], over 23 receptors resampled as 16 paralog
 clusters. Chai-1's interval reaches within 0.045~\AA{} of zero and is signed by
 a narrow margin.
 
-\textbf{This holds in the apo arm alone.} It is not that the effect is absent
-when a transducer is present; it is that with a cognate G$\alpha$ in the
-complex the contrast cannot be attributed to the ligand, because the partner
-supplies both mass and a strong conformational preference of its own. The
-apo-only scope is what makes the observation about the ligand.
+\textbf{This was intended to hold in the apo arm alone, and the shipped
+artefact shows it does not.} The design reason for wanting an apo-only scope is
+sound and we still hold it: with a cognate G$\alpha$ in the complex the contrast
+cannot be attributed to the ligand, because the partner supplies both mass and a
+strong conformational preference of its own. But the filter was not applied. The
+2$\times$2 artefact records 2{,}800 rows in each agonist cell and 2{,}300 in
+each antagonist cell, on all four backbones, while the campaign's design grid is
+exactly 50 predictions per receptor $\times$ backbone $\times$ ligand role
+$\times$ arm --- 800 cells at one size, with no exceptions across 40{,}000
+scored rows. Apo alone would give $28 \times 50 = 1{,}400$ and
+$23 \times 50 = 1{,}150$. Both arms give 2{,}800 and 2{,}300, which is what
+shipped.
+
+\textbf{So the interaction above is estimated with both arms pooled, and it is
+therefore not yet a statement about the ligand in isolation.} We report it
+because the estimate itself is sound --- properly bootstrapped over paralog
+clusters, and signed on all four backbones --- and because the direction is the
+one the pre-registered ordinal test recovers independently below on an apo-only
+population. What we cannot yet say is how much of it survives when the
+transducer arm is removed. \textbf{[PI: restating this on the apo arm needs
+\texttt{rows.tier3.v2.csv}, which was not delivered; it is ask~1 of the Block~C
+data requests and it also blocks the off-site gate. The estimate is not
+withdrawn, its scope is.]}
 
 A pre-registered ordinal test, locked before this campaign ran, recovers the
 same ordering. Ranking ligand role against the same continuous axis gives a

@@ -596,5 +596,84 @@
   "want": 0.386,
   "ok": true,
   "note": ""
+ },
+ {
+  "id": "C60.grid",
+  "kind": "RECOMPUTED",
+  "what": "census design grid is one size: 50 rows per rec x bb x role x arm",
+  "got": [
+   800,
+   [
+    "50"
+   ]
+  ],
+  "want": [
+   800,
+   [
+    50
+   ]
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C60.boltz",
+  "kind": "RECOMPUTED",
+  "what": "boltz 2x2 cell counts are the BOTH-ARMS figure, not apo-only",
+  "got": [
+   2800,
+   2300
+  ],
+  "want": [
+   2800,
+   2300
+  ],
+  "ok": true,
+  "note": "apo-only would be 1400 and 1150"
+ },
+ {
+  "id": "C60.chai",
+  "kind": "RECOMPUTED",
+  "what": "chai 2x2 cell counts are the BOTH-ARMS figure, not apo-only",
+  "got": [
+   2800,
+   2300
+  ],
+  "want": [
+   2800,
+   2300
+  ],
+  "ok": true,
+  "note": "apo-only would be 1400 and 1150"
+ },
+ {
+  "id": "C60.of3",
+  "kind": "RECOMPUTED",
+  "what": "of3 2x2 cell counts are the BOTH-ARMS figure, not apo-only",
+  "got": [
+   2800,
+   2300
+  ],
+  "want": [
+   2800,
+   2300
+  ],
+  "ok": true,
+  "note": "apo-only would be 1400 and 1150"
+ },
+ {
+  "id": "C60.protenix",
+  "kind": "RECOMPUTED",
+  "what": "protenix 2x2 cell counts are the BOTH-ARMS figure, not apo-only",
+  "got": [
+   2800,
+   2300
+  ],
+  "want": [
+   2800,
+   2300
+  ],
+  "ok": true,
+  "note": "apo-only would be 1400 and 1150"
  }
 ]

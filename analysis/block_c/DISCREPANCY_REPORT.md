@@ -253,50 +253,80 @@ reviews can still be wrong, and drawing it is what finds out.**
 **To close.** Relabel the SC-C-2 table, or report both columns. The underlying
 JSON is correct and self-describing; only the claim sheet's heading is wrong.
 
-## D-C-9 — NEW: the 2x2's scope cannot be confirmed, and its own cell counts are mislabelled
+## D-C-9 — the 2x2's "apo arm alone" scope is CONTRADICTED by its own row counts
 
 Raised 2026-09-10 when the corpus session rendered BC-1 and found the panel
-asserting **"APO ARM ONLY"** on its face while the SI caption beneath it said
-the shipped counts contradict that by a factor of two. A figure and its own
-caption disagreeing on one page is what a referee circles.
+asserting **"APO ARM ONLY"** while the SI caption beneath it said the shipped
+counts contradict that. Settled the same evening, and **the settled answer is
+that the caption was right.**
 
-**Checked, and neither side is confirmable from the bundle.**
+**The evidence, and it closes.**
 
-`06_2x2_interaction/stage3_2x2_ligand_state_specificity.json` **ships no row
-counts at all.** Its only per-cell field is `n_clusters`, and it holds 28 for
-the agonist cells and 23 for the antagonist ones. Those cannot be cluster
-counts: SC-C-1 resamples **16** paralog clusters over 23 receptors, and 28
-exceeds the receptor count outright. The field is holding receptor counts under
-a cluster name — a third self-mislabelled column in this block, after SC-C-2's
-"Kendall's tau" that holds a fraction of receptors and `flag_low_confidence`
-that cannot fire.
+`06_2x2_interaction/stage3_2x2_ligand_state_specificity.json` carries `n_rows`
+on all four backbones — agonist cells **2,800**, antagonist cells **2,300**,
+identical across Boltz, Chai, OF3 and Protenix.
 
-The census *can* be decomposed by role and arm, which was thought not to be
-possible, and it does not settle the question either:
+The census fixes the design grid exactly:
 
-| role | receptors | rows per backbone, per arm | both arms |
+```bash
+python3 -c "
+import pandas as pd
+c = pd.read_csv('data/block_c/12_g4_off_site_census/g4_full_census_v2.csv', low_memory=False)
+s = c.groupby(['receptor','backbone','role','arm']).size()
+print(len(s), 'cells; unique sizes', sorted(s.unique()))"
+# 800 cells; unique sizes [50]
+```
+
+**Fifty rows per (receptor, backbone, role, arm). Not a mode, not a range — 800
+cells and one size, no exceptions across 40,000 rows.** So:
+
+| | apo only | both arms | shipped |
 |---|---:|---:|---:|
-| `full_agonist` | 35 | 1,750 | 3,500 |
-| `neutral_antagonist` | 29 | 1,450 | 2,900 |
+| agonist, 28 receptors | 1,400 | **2,800** | **2,800** |
+| antagonist, 23 receptors | 1,150 | **2,300** | **2,300** |
 
-Both arms are equally populated across the whole census, 20,000 / 20,000. But 35
-and 29 are **supersets** of the 2x2's 28 and 23, so the census neither confirms
-nor refutes the arm filter on the subset the interaction was estimated on.
+Both cells land on the both-arms figure exactly, on every backbone. **The
+apo-only filter was not applied, and the interaction is estimated on both arms
+pooled.**
 
-**What is true, and what the panel now says.** The apo-only scope is stated as
-*intent* rather than as fact, with one clause recording that the shipped files
-cannot confirm the filter was applied. The design reason for wanting apo-only is
-sound and is kept: with a cognate Ga in the complex the contrast cannot be
-attributed to the ligand, because the partner supplies both mass and a strong
-conformational preference of its own.
+The grid constant is what closes it. The census's 35 and 29 receptors are
+supersets of the 2x2's 28 and 23, so the census cannot say which receptors were
+drawn — but it does not need to, because the constant applies to whichever
+subset was.
 
-`rows.tier3.v2.csv` settles it in one line and did not ship. **It is the same
-file the G4 gate needs** — Block C `DATA_REQUESTS.md` ask 1 now blocks two
-separate Block C claims, which raises its priority above everything else in that
-document.
+**TWO WRONG VERSIONS OF THIS ENTRY PRECEDED THIS ONE, AND THE SECOND WAS MINE.**
+The first asserted the apo scope as fact. The second — mine — said the question
+was unconfirmable because "the JSON ships no row counts". It ships four. I
+walked the file with a traversal that **recursed into `n_rows`**: it is a dict,
+and the cell names inside it did not match the key filter I was printing on, so
+the container was visited and never reported. *A check that runs and silently
+prints nothing is indistinguishable from a check that found nothing* — the same
+failure shape as Block B's six decomposition checks that vanished behind an
+`if len(...)` guard, and as the sweep that reported zero paths across eight
+documents when its sentence splitter broke.
 
-**A correction to how this was reported to us.** The escalation cited shipped
-`n_rows` of 2,800 and 2,300. Those values are not in the file; only `n_clusters`
-is. The 2x factor was inferred rather than read, and the inference may well be
-right — 28 x 100 is 2,800 — but it is not something the bundle states.
+**Consequence for the request documents.** `rows.tier3.v2.csv` is still Block C
+ask 1 and still blocks two claims, but the second one changed character: it is
+now needed to **restate** the interaction on the apo arm, not to determine
+whether there is anything to restate. The G4 gate still needs it outright.
+
+## D-C-10 — NEW: `n_clusters` in the 2x2 artefact holds receptor counts
+
+Independent of D-C-9 and unaffected by its resolution.
+`stage3_2x2_ligand_state_specificity.json` gives each cell an `n_clusters` field
+holding **28** for the agonist cells and **23** for the antagonist ones. Those
+cannot be cluster counts: `g_scc1_cluster_boot.json` resamples **16** paralog
+clusters over the 23-receptor set, and 28 exceeds the receptor count outright.
+The field holds receptor counts under a cluster name.
+
+**This is the third self-mislabelled column in Block C** — after SC-C-2's table
+headed "Kendall's $\tau$" that holds a fraction of receptors, and
+`flag_low_confidence`, which is constant `False` on all 40,000 rows and
+structurally cannot fire. A field name is not a definition, and in this block it
+has been wrong three times.
+
+It also means the four cell means are computed on **different receptor sets**
+— 28 for agonist, 23 for antagonist — while the interaction is estimated on the
+23 in common, which is why the cells cannot reconstruct the interaction
+(−0.340 against −0.306).
 

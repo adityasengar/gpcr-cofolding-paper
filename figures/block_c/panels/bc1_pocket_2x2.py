@@ -72,28 +72,37 @@ def main():
 
     fs.panel_label(ax, "a", dx=-0.12); fs.panel_label(axi, "b", dx=-0.30)
 
-    # SCOPE IS STATED AS INTENT, NOT AS FACT, and the reason is that nothing
-    # shipped can confirm it. The panel asserted "APO ARM ONLY" until
-    # 2026-09-10, and the SI caption beneath it said the shipped counts
-    # contradict that -- a figure and its own caption disagreeing on one page.
+    # THE APO-ONLY SCOPE IS CONTRADICTED BY THE SHIPPED COUNTS.
     #
-    # Checked here, and NEITHER side is confirmable from the bundle:
-    #   - stage3_2x2_ligand_state_specificity.json ships NO row counts. Its only
-    #     per-cell field is `n_clusters` = 28 and 23, which cannot be cluster
-    #     counts: SC-C-1 resamples 16 paralog clusters over 23 receptors, and 28
-    #     exceeds the receptor count. It is holding receptor counts under a
-    #     cluster name.
-    #   - the census CAN be decomposed by role and arm, and gives 35 agonist and
-    #     29 antagonist receptors at 50 samples per cell per arm -- 1,750 and
-    #     1,450 per backbone per arm, both arms equally populated at
-    #     20,000/20,000. Those are supersets of the 2x2's 28 and 23, so they
-    #     neither confirm nor refute the arm filter.
-    # rows.tier3.v2.csv would settle it in one line and did not ship. It is
-    # Block C DATA_REQUESTS ask 1, the same file the G4 gate needs.
-    note = (u"INTENDED SCOPE: APO ARM ONLY, and the shipped files cannot confirm "
-            u"the filter was applied — the 2×2 artefact carries no row counts, and "
-            u"the census is a superset. See the caption. The design reason for the "
-            u"scope: with a cognate Gα in the complex the contrast cannot "
+    # This comment has been wrong twice and the second version was mine.
+    #   v1 asserted "APO ARM ONLY" as fact.
+    #   v2 said the question was unconfirmable, because I walked the 2x2 JSON
+    #      with a traversal that RECURSED INTO `n_rows` -- it is a dict, and the
+    #      keys inside it are cell names, which did not match the filter I was
+    #      printing on. The container was visited and never reported. A check
+    #      that runs and silently prints nothing looks exactly like a check that
+    #      found nothing.
+    #
+    # What the files actually say:
+    #   stage3_2x2_ligand_state_specificity.json carries `n_rows` on all four
+    #   backbones: agonist cells 2,800, antagonist cells 2,300.
+    #   The census fixes the design grid at EXACTLY 50 rows per
+    #   (receptor, backbone, role, arm) -- 800 cells, unique size [50], no
+    #   exceptions across 40,000 rows.
+    #   So apo-only predicts 28 x 50 = 1,400 and 23 x 50 = 1,150; both arms
+    #   predict 2,800 and 2,300. The shipped counts are the both-arms figure,
+    #   exactly, on every backbone.
+    #
+    # The grid constant is what closes it. It does not matter that the census's
+    # 35 and 29 receptors are supersets of the 2x2's 28 and 23 -- the constant
+    # applies to whichever subset was drawn.
+    note = (u"INTENDED SCOPE: APO ARM ONLY — AND THE SHIPPED ROW COUNTS ARE TWICE "
+            u"THE APO-ONLY EXPECTATION on every backbone: 2,800 against 28×50 and "
+            u"2,300 against 23×50, at a design grid the census fixes at exactly 50 "
+            u"rows per receptor × backbone × role × arm. The filter appears not to "
+            u"have been applied, and the interaction below is estimated on both "
+            u"arms pooled. The design reason for wanting the apo scope stands: "
+            u"with a cognate Gα in the complex the contrast cannot "
             u"be attributed to the ligand, because the partner supplies both mass "
             u"and a strong conformational preference of its own; the apo scope is "
             u"what makes this a statement about the ligand. n=23 receptors "
@@ -129,11 +138,13 @@ def main():
 
     p = fs.save(fig, "bc1_pocket_2x2")
     print(todo)
-    print("BC-1 scope note: the apo-only filter is UNCONFIRMABLE from the "
-          "bundle.\n  stage3_2x2 ships no row counts; its `n_clusters` 28/23 "
-          "are receptor counts.\n  Census decomposes to 35 agonist / 29 "
-          "antagonist receptors, both arms 20,000/20,000.\n  "
-          "rows.tier3.v2.csv settles it. Block C DATA_REQUESTS ask 1.")
+    print("BC-1 scope note: the apo-only filter was NOT applied.\n"
+          "  stage3_2x2 n_rows = 2,800 agonist / 2,300 antagonist on all four "
+          "backbones.\n  Census grid is exactly 50 rows per "
+          "(receptor, backbone, role, arm), 800 cells, no exceptions.\n"
+          "  apo-only predicts 1,400 and 1,150. Both arms predict 2,800 and "
+          "2,300. Shipped = both arms.\n  rows.tier3.v2.csv is needed to "
+          "RESTATE the result, not to establish this. Block C ask 1.")
     print("BC-1 ->", p[0])
     for bb in B.BACKBONES:
         k = cb[bb]["cluster_boot"]
