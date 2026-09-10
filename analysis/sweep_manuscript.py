@@ -37,6 +37,13 @@ SECTIONS = ["manuscript/sections/results.tex", "manuscript/sections/methods.tex"
 # LaTeX preamble lines carry numbers that are typesetting, not claims
 PREAMBLE = re.compile(r"^\s*\\(usepackage|geometry|setlength|documentclass|"
                       r"definecolor|renewcommand|newcommand|pagestyle|hypersetup)")
+
+# So do \includegraphics options. `height=0.72\textheight` is a layout choice,
+# not a measurement, and registering it would put a typesetting parameter in a
+# document whose whole purpose is to say where each NUMBER came from. The
+# bracketed options are stripped; the FILENAME is left alone, because a panel id
+# like ba1a is not a numeric token anyway.
+GRAPHICS_OPTS = re.compile(r"\\includegraphics\s*\[[^\]]*\]")
 REGISTRY = os.path.join(ROOT, "analysis", "NUMBER_REGISTRY.md")
 
 # tokens that are never claims: LaTeX lengths, citation years, section numbers,
@@ -69,6 +76,7 @@ def tokens(path):
         line = strip_comments(line)
         if PREAMBLE.match(line):
             continue
+        line = GRAPHICS_OPTS.sub(r"\\includegraphics", line)
         if IGNORE_CONTEXT.search(line):
             # keep the line but drop the macro arguments, which carry years/keys
             line = IGNORE_CONTEXT.sub(" ", line)
