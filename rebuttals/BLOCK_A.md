@@ -40,6 +40,44 @@ requests and five open questions, of which two block a Methods sentence today:
   annotation; the second does not, and would need saying in Methods. **Costs no
   compute. Someone knows.**
 
+## Q-A1 — **How was the panel selected?** There is no rule anywhere in either drop.
+
+**Severity: high, and it is the first question a referee asks.**
+
+We searched both drops' READMEs and data dictionaries, `10_narrative/` and
+`12_narrative/` in full, both claim sheets, both dossiers, and every `*.md` in
+`11_structures/`. The only file named `SELECTION.md` is about which *prediction
+row to render* in a figure — a good file, every pick rule-driven with
+percentiles stated — and says nothing about which receptors enter the panel.
+
+What we can verify: **all 40 Class A receptors have both an active and an
+inactive deposited reference, 40 of 40.** So "both states solved" is almost
+certainly the operative criterion. But that is inferred from the output, not
+stated, and it leaves four things open:
+
+1. Was the panel **every** receptor meeting that criterion, or a subset? If a
+   subset, chosen how?
+2. Was a resolution or method floor applied? `reference_audit.csv` has a
+   `method` column that is the same placeholder string on all 80 rows and a
+   `resolution` column that is **entirely NaN**, so neither can be checked here.
+3. Was any receptor meeting the criterion **excluded**, and why?
+4. When was the selection frozen relative to the deposition record?
+
+**Why it is not a formality.** "The effect holds across 40 receptors" means one
+thing if those are *every* receptor with both states solved and something quite
+different if they are a curated subset — a census versus a sample with an
+unstated sampling frame. It also rhymes with something already established: the
+reference set contains no native heterotrimeric Gs complex, which your own Item 1
+verdict calls **a curation choice**. If the reference curation was a choice, the
+panel selection was one too, and at present we can describe only one of them.
+
+**To close.** The selection rule as it was applied, in one paragraph, including
+anything excluded and why. If the rule was "every class A receptor with both
+states in GPCRdb as of <date>", that sentence is all we need and it makes the
+panel a census, which is the stronger claim.
+
+A `[PI]` marker now sits in the manuscript's Panel subsection pending this.
+
 ---
 
 # 3. Suggestions — what would make the paper stronger
