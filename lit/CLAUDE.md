@@ -42,6 +42,14 @@ download names, as **hard links** — same inodes, no duplicated disk. Do not "c
 up" one side expecting to reclaim space, and do not delete `pdfs/` names.
 `source/extra` holds two PDFs that were **never extracted** and are not in the corpus.
 
+## Page numbers: notes are PDF pages, manuscripts need printed folios
+
+`PAGE_CONVENTION.md` records which papers have an offset and how to check. Seven of the 74 PDFs
+are printed in continuously paginated volumes, so their PDF page is not their printed page —
+`georgiou2025heterogeneity` is +3690, `yang2025statespecific` is +11424. Notes record PDF pages;
+**convert at citation time**. Run `python3 validate/pageoffset.py` whenever a PDF is added. Adding
+a `pages` field to a journal entry in `refs.bib` makes that check authoritative for that paper.
+
 ## Render conventions
 
 `RENDER_CONVENTIONS.md` records how this literature actually draws a partner-induced

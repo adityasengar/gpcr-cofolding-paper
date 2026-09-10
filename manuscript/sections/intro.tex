@@ -16,9 +16,9 @@ has become steadily less binary as the experimental methods have improved. A rec
 class A receptors sets out the modern picture directly, describing receptors that occupy ``three
 different conformational states (active, inactive, intermediate-active) that can be interconverted
 for the activation/inactivation process according to a multistate, rheostat-like model, instead of
-a binary (on/off) switch model'' \citep[p.~6]{georgiou2025heterogeneity}, with conformational heterogeneity
+a binary (on/off) switch model'' \citep[p.~3696]{georgiou2025heterogeneity}, with conformational heterogeneity
 present even within what is conventionally called the inactive ensemble
-\citep[p.~9]{georgiou2025heterogeneity}. The same conclusion emerges from the structural databank when it
+\citep[p.~3699]{georgiou2025heterogeneity}. The same conclusion emerges from the structural databank when it
 is analysed without supervision. Projecting the deposited class A structures onto a single learned
 activation coordinate shows that apo and agonist-bound receptors are each bimodal, populating both
 inactive and active conformations, while transducer-bound structures fall almost entirely on the
@@ -28,7 +28,7 @@ Which input sets that state is therefore a substantive biological question rathe
 convention, and the answer is not simply the ligand. Occupancy of the orthosteric pocket and
 occupancy of the active state are distinct variables whose coupling varies from receptor to
 receptor, strongly in A2AR and weakly in $\beta_1$AR, $\beta_2$AR and the $\mu$-opioid receptor
-\citep[p.~8]{georgiou2025heterogeneity}. In class B GCGR the two decouple almost entirely: ``agonist binding
+\citep[p.~3698]{georgiou2025heterogeneity}. In class B GCGR the two decouple almost entirely: ``agonist binding
 alone is insufficient to promote TM6 opening'', and the outward movement of TM6 appears only once
 Gs engages \citep[p.~1]{hilger2020gcgr}. Read across the databank the same asymmetry holds, with ``agonist
 binding shifts this conformational ensemble towards the active state but does not fully stabilize
@@ -36,7 +36,7 @@ it. Instead, a stable active state is only established upon G protein binding, w
 receptor in its active conformation'' \citep[p.~1]{paajanen2026activation}. The contact that carries this is
 specific rather than diffuse. It is the $\alpha_5$ helix of G$\alpha$, and in particular its distal
 C-terminal segment, which ``must be inserted into the receptor's cytoplasmic cleft to couple with
-the GPCR'' \citep[p.~4]{georgiou2025heterogeneity}. A receptor's state is set by what is bound at the
+the GPCR'' \citep[p.~3694]{georgiou2025heterogeneity}. A receptor's state is set by what is bound at the
 intracellular face at least as much as by what is bound in the pocket.
 
 Physical simulation says the same thing in the language of free energy, and adds a detail that
@@ -96,9 +96,9 @@ return one structure per input, a limitation their authors state plainly: such m
 predict static structures as seen in the PDB, not the dynamical behaviour of biomolecular systems
 in solution'', and ``this limitation persists for AF3, in which multiple random seeds for either the
 diffusion head or the overall network do not produce an approximation of the solution ensemble''
-\citep[p.~6]{abramson2024af3}. The failure is not merely one of breadth. On the paired apo and ligand-bound
+\citep[p.~498]{abramson2024af3}. The failure is not merely one of breadth. On the paired apo and ligand-bound
 forms of cereblon, ``AF3 exclusively predicts the closed state for both holo and apo systems''
-\citep[p.~6]{abramson2024af3}, which is to say the model returns whichever state dominates its training
+\citep[p.~498]{abramson2024af3}, which is to say the model returns whichever state dominates its training
 data regardless of what the input specifies. Independent work has since established that this is
 the general behaviour rather than an anecdote. On a PDB-wide, mechanism-stratified benchmark, four
 co-folding models and one ensemble emulator recover all known intrinsic states in only about 8 to
@@ -125,7 +125,7 @@ For receptors the collapse has a direction, and it runs against the state that m
 agonist pharmacology. Sequence-only AF2 and AF3 models agree best with inactive references and
 agree progressively less well as the reference becomes more active \citep{chib2025gpcrstates}; the
 earlier statement of the same phenomenon is that AF2 ``only predicts one state and is biased toward
-either the active or inactive conformation depending on the GPCR class'' \citep[p.~1]{heo2022multistate}.
+either the active or inactive conformation depending on the GPCR class'' \citep[p.~1873]{heo2022multistate}.
 Nor is this a problem that could be solved by generating many structures and selecting among them,
 because the models' own confidence does not track conformational correctness. Cfold reports ``no
 clear relationship between the plDDT and known conformations from the PDB suggesting that
@@ -164,7 +164,7 @@ has since been used to pin active-state templates for ranking peptide agonists a
 receptors \citep{ferguson2026deorphann}, and to condition a fine-tuned co-folding model on a declared
 state for peptide design \citep{yang2025statespecific}. Its limits are documented by the people who use
 it. Templates alone do not move a prediction when a deep alignment is present, because ``using such
-curated template databases was not sufficient to make meaningful changes'' \citep[p.~3]{heo2022multistate};
+curated template databases was not sufficient to make meaningful changes'' \citep[p.~1875]{heo2022multistate};
 in transporters a correct alternative-state template is flipped back to the memorised state
 \citep{swapna2025memorization}; and on a panel spanning kinases and class A receptors both handles
 together fall short, where ``attempts to guide predictions through MSA editing or templating proved
@@ -279,11 +279,11 @@ The second near-miss approaches from the peptide side. A GPCR-specialised co-fol
 conditioned on activation state ranks designed peptides into agonists and antagonists, with
 nanomolar hits assayed, and its authors identify state control as exactly what prior
 peptide-design methods lack, writing that ``these methods do not allow for precise control over the
-GPCR's functional state (e.g., active or inactive)'' \citep[p.~2]{yang2025statespecific}. What separates
+GPCR's functional state (e.g., active or inactive)'' \citep[p.~11426]{yang2025statespecific}. What separates
 that work from the question asked here is the direction of the dependency. The state is declared
 before any peptide is scored, and the authors are explicit that this is the operating mode:
 ``HF-Multistate, when specifying the GPCR state, can partially capture functional shifts in peptide
-design'' \citep[p.~10]{yang2025statespecific}. The peptide there is the designed output. No experiment in
+design'' \citep[p.~11434]{yang2025statespecific}. The peptide there is the designed output. No experiment in
 that work varies a peptide sequence with the state conditioning held fixed and reports the
 resulting receptor conformation.
 
@@ -321,7 +321,7 @@ unseen one.
 Some of that heterogeneity is principled rather than careless, and it constrains what a better
 criterion can look like. Activation is not a switch: class A receptors are described as
 interconverting among active, inactive and intermediate-active conformations on a rheostat
-\citep[p.~6]{georgiou2025heterogeneity}, so a single hard cut-off imposed on a continuum can
+\citep[p.~3696]{georgiou2025heterogeneity}, so a single hard cut-off imposed on a continuum can
 destroy the signal it is meant to detect. A usable state criterion therefore has to be fixed before
 the data are seen, reported with its threshold, and checked against a second, independent readout
 so that its disagreement rate is known rather than assumed. No study in this corpus reports such a
