@@ -27,18 +27,49 @@ alone. Neither is a comparison to a reference.
 
 \texttt{d\_npxxy\_oh} is the hydroxyl--hydroxyl distance between Tyr5.58 and
 Tyr7.53. On activation Tyr7.53 of the NPxxY motif rotates into the receptor core
-and packs against Tyr5.58 in an arrangement that is usually water-mediated. A
-prediction is called active on this axis below 9.080~\AA.
+and packs against Tyr5.58: the ``downward movement of Y5.58 in TM5'' enables ``a
+water-mediated hydrogen bond with Y7.53 of the NPxxY motif --- forming the
+so-called `YY-lock'\,'' \citep[p.~3]{georgiou2025heterogeneity}, described there
+as the defining active-state polar lock. A prediction is called active on this
+axis below 9.080~\AA.
 
 \texttt{d\_gpcrdb\_tm6\_tilt\_246\_637\_ca} is a C$\alpha$--C$\alpha$ distance
 capturing outward displacement of the cytoplasmic end of TM6, the canonical
 activation signature \citep{hilger2020gcgr}. A prediction is called active above 14.932~\AA.
 
-A prediction is called active only when both fire. Thresholds are carried as
+A prediction is called active only when both fire. The two axes are not
+independent observations: the YY-lock is reported to ``strengthen the TM5--TM7
+packing and stabiliz[e] the outward shift of TM6''
+\citep[p.~3]{georgiou2025heterogeneity}, so a structure that satisfies one and
+not the other is the case a conjunction is meant to catch.
+
+This conjunction is defined for class~A receptors only. The DRY, NPxxY and PIF
+motifs ``are absent in family B receptors,'' which ``implies that the mechanisms
+of activation between family B and family A receptors are substantially
+different'' \citep{hilger2020gcgr}, so rule~(2) has no class~B analogue.
+For the 4 class~B receptors it is replaced by a TM6 kink angle below
+159.95$^\circ$; for the 4 class~F receptors, where neither substitution is
+established, the tilt rule is used alone. Both are reported separately as
+instrument scope and neither carries a headline claim.
+
+Thresholds are carried as
 row-level columns and were read from the data rather than reimplemented. Both
 were derived from 80 tier-1 crystallographic reference rows by a midpoint
 objective, and from no prediction. \textbf{Self-classification accuracy on that
 set is a derivation-set figure, not a held-out one}, and is reported as such.
+
+Both axes are individually familiar; requiring them jointly is not. Reported TM6
+displacements in this literature are anchored at different residues and are
+quoted as differences observed between two solved structures rather than as cuts
+applicable to an unseen one: at 6.26, ``$\sim$6~\AA{} in rhodopsin;
+$\sim$14--18~\AA'' across receptors \citep[p.~24]{georgiou2025heterogeneity}; at
+6.42 and 6.36, 18~\AA{} and 17.4~\AA{} in the same
+work \citep[pp.~3,~5]{hilger2020gcgr}; and ``around 14~\AA'' with no residue
+named \citep[p.~13]{ye2026multistatebias}. On the NPxxY axis we are not aware of
+a reported threshold on any atom pair, nor of a measured Tyr5.58--Tyr7.53
+distance. What is new here is therefore not the choice of axes but the
+requirement that both fire, at fixed thresholds, on a named atom pair, applied
+identically to references and to predictions.
 
 The thresholds are derived from geometry rather than fitted to a classifier, but
 the 80 rows carry state annotations, and the provenance of those annotations
@@ -56,9 +87,9 @@ active states of the structures used in developing the models were correctly
 identified'' (p.~3).
 
 Our predicate follows the geometric pattern rather than the label-inheriting
-one: it reads C$\alpha$ and hydroxyl positions at Ballesteros--Weinstein
-positions 3.50, 5.58, 6.34 and 7.53, using generic \emph{numbering} and not
-curated \emph{labels}. The residual exposure is the selection of the 80 tier-1
+one: it reads C$\alpha$ positions at GPCRdb generic positions
+2$\times$46 and 6$\times$37 and hydroxyl positions at Ballesteros--Weinstein
+5.58 and 7.53, using generic \emph{numbering} and not curated \emph{labels}. The residual exposure is the selection of the 80 tier-1
 rows themselves. \textbf{[PI: were those rows selected by crystallographic tier,
 with labels checked only afterwards, or selected by curated label?]} The first
 leaves the instrument independent of the annotation; the second does not, and
