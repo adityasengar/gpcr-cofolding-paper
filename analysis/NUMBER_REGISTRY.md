@@ -224,6 +224,11 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 0.257 | S270 | SI caption, corpus session; Block A amplitude/covariate fits, not separately recomputed here |
+| 0.074 | S270 | SI caption, corpus session; Block A amplitude/covariate fits, not separately recomputed here |
+| 0.552 | S270 | SI caption, corpus session; Block A amplitude/covariate fits, not separately recomputed here |
+| 0.298 | S273 | SI caption, corpus session; Block A amplitude/covariate fits, not separately recomputed here |
+| 0.659 | S273 | SI caption, corpus session; Block A amplitude/covariate fits, not separately recomputed here |
 | 70 | F62 | references carrying the NPxxY axis, drawn in BA-1a panel d; 2,295 of the reference rows have no NPxxY because 7.53 is not Tyr |
 | 350 | S236 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |
 | 394 | S236 | SI caption, corpus session; Block C v2 off-site census (12_g4_off_site_census) -- interval bound, not separately recomputed here |

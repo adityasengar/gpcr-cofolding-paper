@@ -44,6 +44,10 @@ PREAMBLE = re.compile(r"^\s*\\(usepackage|geometry|setlength|documentclass|"
 # bracketed options are stripped; the FILENAME is left alone, because a panel id
 # like ba1a is not a numeric token anyway.
 GRAPHICS_OPTS = re.compile(r"\\includegraphics\s*\[[^\]]*\]")
+
+# and the optional length on a LaTeX line break -- `\\[1.5mm]` is vertical
+# spacing, the same class of thing as a figure height.
+LINEBREAK_LEN = re.compile(r"\\\\\s*\[[0-9.]+(?:pt|mm|cm|ex|em|in)\]")
 REGISTRY = os.path.join(ROOT, "analysis", "NUMBER_REGISTRY.md")
 
 # tokens that are never claims: LaTeX lengths, citation years, section numbers,
@@ -77,6 +81,7 @@ def tokens(path):
         if PREAMBLE.match(line):
             continue
         line = GRAPHICS_OPTS.sub(r"\\includegraphics", line)
+        line = LINEBREAK_LEN.sub(r"\\\\", line)
         if IGNORE_CONTEXT.search(line):
             # keep the line but drop the macro arguments, which carry years/keys
             line = IGNORE_CONTEXT.sub(" ", line)
