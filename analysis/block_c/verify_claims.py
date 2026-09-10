@@ -276,11 +276,27 @@ if len(_common) != 23:
     check("C58", "RECOMPUTED", "Spearman(off-site %, tau): receptors matched",
           len(_common), 23)
 else:
-    _rho, _ = spstats.spearmanr([_off[r] for r in _common],
-                                [_med[r] for r in _common])
+    _rho, _p = spstats.spearmanr([_off[r] for r in _common],
+                                 [_med[r] for r in _common])
     check("C58", "RECOMPUTED",
           "Spearman(apo agonist off-site %, per-receptor median tau)",
           round(float(_rho), 3), -0.241, tol=0.002)
+    check("C58.p", "RECOMPUTED", "Spearman p for C58",
+          round(float(_p), 3), 0.268, tol=0.002)
+
+    # the split test, and the two medians the manuscript quotes beside it
+    _hi = [_med[r] for r in _common if _off[r] > 0.5]
+    _lo = [_med[r] for r in _common if _off[r] <= 0.5]
+    check("C59.n", "RECOMPUTED", "receptors above/below 50% agonist off-site",
+          (len(_hi), len(_lo)), (8, 15))
+    _u, _pu = spstats.mannwhitneyu(_hi, _lo)
+    check("C59.p", "RECOMPUTED",
+          "Mann-Whitney p, tau of high- vs low-off-site receptors",
+          round(float(_pu), 3), 0.436, tol=0.002)
+    check("C59.hi", "RECOMPUTED", "median tau, the 8 high-off-site receptors",
+          round(float(np.median(_hi)), 3), 0.282, tol=0.002)
+    check("C59.lo", "RECOMPUTED", "median tau, the 15 low-off-site receptors",
+          round(float(np.median(_lo)), 3), 0.386, tol=0.002)
 
 
 # ------------------------------------------------------------------ report

@@ -56,9 +56,8 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 |---|---|---|---|
 | 48 | M8 | Block A, verify_claims check CORPUS | Predictions were run for 48 G-protein-coupled receptors --- 40 Class~A, 4 |
 | 10 | M12 | Block B, verify_claims check B28.apo,B49.Ga-complexed-chimera-or-miniG | Boltz-2 cognate arm is short 10 rows, a documented gap). |
-| 9.080 | M39 | NPxxY threshold as printed in Fig 1a | axis below 9.080~\AA. |
-| 14.932 | M43 | TM6 tilt threshold, every row | activation signature  . A prediction is called active above 14.932~\AA. |
-| 159.95 | M61 | Class B kink-angle threshold | 159.95$^\circ$; for the 4 class~F receptors, where neither substitution is |
+| 9.080 | M39 | Block B, verify_claims check B20 | axis below 9.080~\AA. |
+| 14.932 | M43 | Block B, verify_claims check B22 | activation signature  . A prediction is called active above 14.932~\AA. |
 | 7 | M74 | Block B, verify_claims check B28.cognate,B28.decoy,B28.shuffled | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
 | 14 | M74 | Block B, verify_claims check B32.boltz | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
 | 6.26 | M74 | generic numbering (Ballesteros--Weinstein / GPCRdb position, not a measurement) | applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26 |
@@ -69,20 +68,16 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 | 500 | M188 | Block A, verify_claims check EXCL | instrument scope. E5 (500 rows) marks agonist-only actives and is shown as a |
 | 32 | M200 | Block B, verify_claims check B33b.alpha5ct | 1,600 rows and 32 receptors per backbone. |
 | 19 | M210 | Block B, verify_claims check B56,B57 | \textbf{35 (81\%) predate the Boltz-2 structural cutoff of 2023-06-01}, 19 |
-| 9.08 | M244 | tilt/NPxxY threshold, the value every row carries | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
-| 9.082 | M244 | NPxxY threshold, untruncated, as the claim sheets state it | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
+| 9.08 | M244 | Block B, verify_claims check B20, the value every row carries | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
+| 9.082 | M244 | Block B, verify_claims check B20 establishes rows carry 9.08 not this | and is excluded as E1. The NPxxY threshold was truncated to 9.08 from 9.082, |
 | 18.92 | R438 | Block C, verify_claims check C56 | restriction. Across those 23, \textbf{18.92\%} of apo-arm agonist and antagonist |
 | 35.85 | R440 | Block C, verify_claims check C57.agonist | \textbf{35.85\% of agonist rows against 2.00\% of antagonist rows}. An asymmetry |
 | 2.00 | R440 | Block C, verify_claims check C57.antag | \textbf{35.85\% of agonist rows against 2.00\% of antagonist rows}. An asymmetry |
 | 0.241 | R447 | Block C, verify_claims check C58 | receptor's own median $\tau$ gives Spearman $\rho = -0.241$ ($p = 0.268$, |
-| 0.268 | R447 | Spearman p for C58, same recompute; not separately checked | receptor's own median $\tau$ gives Spearman $\rho = -0.241$ ($p = 0.268$, |
-| 0.436 | R449 | Mann-Whitney p, 23 receptors split at 50%% off-site; recomputed 2026-09-10 | either (Mann--Whitney $p = 0.436$, medians 0.282 against 0.386). The receptors |
-| 0.282 | R449 | median tau, the 8 receptors above 50%% agonist off-site | either (Mann--Whitney $p = 0.436$, medians 0.282 against 0.386). The receptors |
-| 0.386 | R449 | median tau, the 15 receptors at or below 50%% agonist off-site | either (Mann--Whitney $p = 0.436$, medians 0.282 against 0.386). The receptors |
-| 13 | M165 | 29 clusters - 16 singletons; data/block_a/07_clusters_and_holdout/cluster_map.csv | acts on 13 and 12 multi-member clusters respectively. All confidence intervals |
-| 354 | M283 | UniProt P63096 sequence length, recomputed by analysis/verify_partner_chains.py | the $\alpha$5 C-terminal 21 residues.} G$\alpha_{\mathrm{i}}$1 is 354 residues, |
-| 334 | M284 | 354 - 21 + 1, the first residue of the $\alpha$5-CT; analysis/verify_partner_chains.py ALPHA5_CT_LEN | so the segment the title concerns is 334--354, and every substitution we found |
-| 354 | M284 | UniProt P63096 sequence length, last residue of the $\alpha$5-CT | so the segment the title concerns is 334--354, and every substitution we found |
+| 0.268 | R447 | Block C, verify_claims check C58.p | receptor's own median $\tau$ gives Spearman $\rho = -0.241$ ($p = 0.268$, |
+| 0.436 | R449 | Block C, verify_claims check C59.p | either (Mann--Whitney $p = 0.436$, medians 0.282 against 0.386). The receptors |
+| 0.282 | R449 | Block C, verify_claims check C59.hi | either (Mann--Whitney $p = 0.436$, medians 0.282 against 0.386). The receptors |
+| 0.386 | R449 | Block C, verify_claims check C59.lo | either (Mann--Whitney $p = 0.436$, medians 0.282 against 0.386). The receptors |
 | 21 | M271 | Block B, verify_claims check B32.of3 | G$\alpha$ subunit.} The $\alpha$5 C-terminal 21-mer is a region we measure and |
 | 0.09 | M294 | Block C, verify_claims check C14.protenix | 0.06--0.09 on conditional activation rates. Engagement is a separate, |
 | 12.19 | M297 | Block B, verify_claims check B59 | insertion depth of 12.19~\AA{} --- so engagement is reported alongside the |
@@ -208,6 +203,11 @@ Known categories in what follows:
 
 | number | where | context |
 |---|---|---|
+| 159.95 | M61 | Class B kink-angle threshold | 159.95$^\circ$; for the 4 class~F receptors, where neither substitution is |
+| 13 | M165 | 29 clusters - 16 singletons; data/block_a/07_clusters_and_holdout/cluster_map.csv | acts on 13 and 12 multi-member clusters respectively. All confidence intervals |
+| 354 | M283 | UniProt P63096 sequence length, recomputed by analysis/verify_partner_chains.py | the $\alpha$5 C-terminal 21 residues.} G$\alpha_{\mathrm{i}}$1 is 354 residues, |
+| 334 | M284 | 354 - 21 + 1, the first residue of the $\alpha$5-CT; analysis/verify_partner_chains.py ALPHA5_CT_LEN | so the segment the title concerns is 334--354, and every substitution we found |
+| 354 | M284 | UniProt P63096 sequence length, last residue of the $\alpha$5-CT | so the segment the title concerns is 334--354, and every substitution we found |
 | 380 | M10 | backbones, giving 380 receptor $\times$ backbone $\times$ arm cells and 9,490 |
 | 98 | M20 | data.]} The reference set comprises \textbf{[PI: 98 empirical / 89 as |
 | 89 | M20 | data.]} The reference set comprises \textbf{[PI: 98 empirical / 89 as |

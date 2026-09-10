@@ -22,7 +22,7 @@ accounted for?"
 Usage:  python3 analysis/sweep_manuscript.py [--list-untraced]
 """
 from __future__ import print_function
-import io, os, re, sys
+import io, os, re, sys, json, glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECTIONS = ["manuscript/sections/results.tex", "manuscript/sections/methods.tex"]
@@ -71,6 +71,62 @@ def tokens(path):
 UNTRACED_HEADING = "## NOT covered by any automated check"
 
 
+
+def coverage_is_real():
+    """Does every number claiming coverage name a check that ACTUALLY RAN?
+
+    The registry's first half means "covered by an automated check". Nothing
+    enforced that until now, so a row could name a check that does not exist --
+    or name no check at all -- and still be counted as covered. That is the same
+    self-certifying shape this project has found four times in the shipped data
+    (`matches_claim_sheet`, `matches_claim_sheet_bool`, a "Kendall's tau" column
+    holding a fraction, `flag_low_confidence` that cannot fire), and this fifth
+    one was in our own machinery. It was introduced by the author of this
+    comment, on 2026-09-10, by registering four recomputed statistics in the
+    first half without writing checks for them.
+
+    The check IDs are read from the verifiers' OWN OUTPUT, not from their source,
+    because ids are built at runtime -- `check("B25." + arm, ...)` never appears
+    literally, and a source-grep reported 46 of 75 ids missing when none were.
+
+    A row may opt out by saying `not a measurement` in its source column: a
+    Ballesteros--Weinstein position like 5.58 is a residue label, not a value
+    anything could recompute.
+    """
+    emitted = set()
+    for f in glob.glob(os.path.join(ROOT, "analysis", "block_*", "verify_claims_results.json")):
+        try:
+            for r in json.load(io.open(f, encoding="utf-8")):
+                if isinstance(r, dict) and "id" in r:
+                    emitted.add(str(r["id"]))
+        except (ValueError, IOError):
+            pass
+    if not emitted:
+        return [("(no verifier results found -- run the three verify_claims.py "
+                 "first; coverage cannot be confirmed)", "")]
+
+    text = io.open(REGISTRY, encoding="utf-8").read()
+    head, _, _ = text.partition(UNTRACED_HEADING)
+    bad = []
+    for line in head.splitlines():
+        line = line.strip()
+        if not line.startswith("|") or line.startswith("|---"):
+            continue
+        cols = [c.strip() for c in line.strip("|").split("|")]
+        if len(cols) < 3 or cols[0].lower() == "number":
+            continue
+        num, src = cols[0], cols[2]
+        if "not a measurement" in src.lower():
+            continue
+        m = re.search(r"check\s+([A-Za-z0-9_.\-]+)", src)
+        if not m:
+            bad.append((num, "claims coverage but names no check"))
+        elif m.group(1) not in emitted:
+            bad.append((num, "names check %s, which no verifier emitted"
+                        % m.group(1)))
+    return bad
+
+
 def registry_numbers():
     """Return (covered, uncovered, n_entries).
 
@@ -117,24 +173,44 @@ def main():
     print("MANUSCRIPT NUMBER SWEEP -- %d numeric tokens, %d registry entries"
           % (total, n_entries))
     print("=" * 78)
+    unreal = coverage_is_real()
     print("  covered by an automated check : %d" % (total - len(uncovered) - len(untraced)))
     print("  registered but NOT checked    : %d" % len(uncovered))
     print("  no registry entry at all      : %d" % len(untraced))
-    if not untraced:
-        print("\nEvery number has an entry. %d of them are still unchecked --"
-              "\nsee the second half of analysis/NUMBER_REGISTRY.md." % len(uncovered))
+    # NOTE ON THIS BLOCK'S SHAPE. An earlier edit inserted the `unreal` report
+    # in the middle of the untraced branch, which produced two inverted exit
+    # codes at once: a clean run fell through and exited 1, and a run where the
+    # coverage guard FIRED returned 0. Both directions of wrong from one badly
+    # placed insertion. The two failure kinds are now collected first and the
+    # exit code is computed once, at the end, from both.
+    if unreal:
+        print("\n%d registry row(s) CLAIM coverage without a check behind them:"
+              % len(unreal))
+        for num, why in unreal:
+            print("    %-10s %s" % (num, why))
+        print("  Either write the check, move the row below "
+              "\"%s\",\n  or mark it `not a measurement`."
+              % UNTRACED_HEADING.strip("# "))
+
+    if untraced:
+        print("\n%d numbers have NO registry entry:\n" % len(untraced))
+        seen = set()
+        for rel, line_no, n, ctx in untraced:
+            key = (n, ctx[:60])
+            if key in seen:
+                continue
+            seen.add(key)
+            print("  %-34s:%-5d %-12s %s" % (os.path.basename(rel), line_no, n,
+                                             ctx[:88]))
+        print("\nAdd a line to analysis/NUMBER_REGISTRY.md for each, naming the "
+              "file\nand filter it came from -- or remove it from the manuscript.")
+
+    if not untraced and not unreal:
+        print("\nEvery number has an entry and every claim of coverage names a "
+              "check\nthat actually ran. %d numbers remain registered but "
+              "unchecked --\nsee the second half of analysis/NUMBER_REGISTRY.md."
+              % len(uncovered))
         return 0
-    print("\n%d numbers have NO registry entry:\n" % len(untraced))
-    seen = set()
-    for rel, line_no, n, ctx in untraced:
-        key = (n, ctx[:60])
-        if key in seen:
-            continue
-        seen.add(key)
-        print("  %-34s:%-5d %-12s %s" % (os.path.basename(rel), line_no, n,
-                                         ctx[:88]))
-    print("\nAdd a line to analysis/NUMBER_REGISTRY.md for each, naming the file"
-          "\nand filter it came from -- or remove it from the manuscript.")
     return 1
 
 

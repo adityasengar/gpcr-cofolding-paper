@@ -545,5 +545,56 @@
   "want": -0.241,
   "ok": true,
   "note": ""
+ },
+ {
+  "id": "C58.p",
+  "kind": "RECOMPUTED",
+  "what": "Spearman p for C58",
+  "got": 0.268,
+  "want": 0.268,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C59.n",
+  "kind": "RECOMPUTED",
+  "what": "receptors above/below 50% agonist off-site",
+  "got": [
+   8,
+   15
+  ],
+  "want": [
+   8,
+   15
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C59.p",
+  "kind": "RECOMPUTED",
+  "what": "Mann-Whitney p, tau of high- vs low-off-site receptors",
+  "got": 0.436,
+  "want": 0.436,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C59.hi",
+  "kind": "RECOMPUTED",
+  "what": "median tau, the 8 high-off-site receptors",
+  "got": 0.282,
+  "want": 0.282,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "C59.lo",
+  "kind": "RECOMPUTED",
+  "what": "median tau, the 15 low-off-site receptors",
+  "got": 0.386,
+  "want": 0.386,
+  "ok": true,
+  "note": ""
  }
 ]
