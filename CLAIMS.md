@@ -1,18 +1,48 @@
-# CLAIMS.md — the argument, and what each claim needs
+# CLAIMS.md — the argument spine
 
-The paper's spine. **This file is durable**: the argument does not change when the
-HPC export is refreshed. Only the evidence status of the numeric claims does.
+**DURABLE.** Survives a data refresh; a block landing changes which claims have
+evidence, never what the claims are.
 
-Each claim carries the evidence it needs, in two currencies:
-`[citekey p.N]` for prior work (verify via `litquery`) and `[R-*]` for our numbers
-(verify via `dataquery` against `RESULTS.md`).
+Each claim carries a `needs:` line naming the block that must supply its
+evidence. A claim with an open `needs:` is not yet writable, however good it
+sounds. Numbers are verified by `analysis/block_<x>/verify_claims.py`, never
+quoted from a claim sheet.
 
-**Gate:** a claim is draftable when every evidence slot is filled *and* no slot depends
-on a `STATUS.md` planned block. `needs:` lines that are still open are the work.
+## Which block defends which claim
+
+| claim | evidence from | status |
+|---|---|---|
+| C1–C5 | the literature corpus alone | **ready** — written into the intro |
+| C6 (peptide drives active) | **not Block A — see below** | **no evidence yet** |
+| C7 (agonist alone does not) | needs a ligand-only arm | **no evidence yet** |
+| C8 (confidence ≠ correctness) | **Block A** | **written** — 2 of 4 backbones at anchor grain |
+| C9 (decomposition) | needs decoy / shuffled / mutant arms | **no evidence yet** |
+| *(new)* whole-Gα co-input drives active state, at panel scale | **Block A** | **written** |
+
+## ⚠ The title claims something Block A does not test
+
+The manuscript title is *"A Gα α5 C-terminal **peptide** co-input drives GPCR
+co-folding models into the active state"*, and the introduction is built around
+that claim. **Block A's cognate arm supplies the whole Gα subunit**, not a
+21-mer: `d_ga_alpha5_r350_ca` and `plddt_ga_alpha5` score the α5 as a *feature
+of the supplied subunit*, and the hero figure states in-frame that "the full
+cognate Gα was supplied, only its α5 C-terminal 21 residues are drawn".
+
+So Block A is **scale, instrument and controls for whole-partner co-input** —
+which is how its Results section is written, and it is honest as written. But
+the paper currently promises a peptide result in its title and intro and
+delivers a whole-subunit result in its Results.
+
+**This needs a decision before submission**, and it is Aditya's:
+
+1. a later block supplies the 21-mer arm and carries the titular claim, with
+   Block A as its groundwork; or
+2. the title and intro are rewritten around whole-Gα co-input.
+
+Until it is resolved, no Block A sentence should imply the peptide claim. None
+currently does — checked 2026-09-10.
 
 ---
-
-## The setup — why the question exists
 
 **C1. Conformational state is the thing that matters for GPCRs, and a single predicted
 structure cannot express it.**
