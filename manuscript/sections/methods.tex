@@ -251,3 +251,82 @@ remainder split between expected biology, curation error, a measurement
 artifact, and one entry that could be either. Several entries annotated active
 were solved with agonist bound but no transducer and do not form the NPxxY
 network, which the predicate reports correctly.
+
+\subsection*{Partner-composition campaign}
+
+A second campaign varies the partner rather than removing it. The panel is 40
+Class~A receptors, disjoint in no way from the first panel's Class~A membership
+and scored by the same instrument, under four input arms on the same four
+backbones: \textbf{apo}, no partner; \textbf{decoy}, the receptor's own cognate
+G$\alpha$ subunit with the last 9--11 residues of the $\alpha$5 C-terminal tail
+scrambled; \textbf{shuffled}, an intact G$\alpha$ from a family outside the
+receptor's cognate and secondary coupling classes; and \textbf{cognate}, the
+correct intact subunit. \textbf{Every partner arm supplies a complete
+G$\alpha$ subunit.} The $\alpha$5 C-terminal 21-mer is a region we measure and
+draw, not an input in either campaign.
+
+Construct identity is verified by content rather than by generator version:
+each decoy is length-matched to its parent and byte-identical over the first
+339--349 residues, with the edit confined to the $\alpha$5-CT tail at a median
+Hamming distance of 9.5, and each shuffled donor is checked against the
+receptor's coupling record to lie strictly outside its cognate and secondary
+classes. Both hold on 40 of 40 receptors. Only three distinct donor sequences
+appear across the 40 shuffled arms.
+
+Sampling is five dispatch seeds $\times$ ten samples per seed in every
+receptor $\times$ arm $\times$ backbone cell, 32{,}000 predictions over 640
+cells with no cell short and no seed collision. This is a declared
+strengthening of the pre-registered five $\times$ five and was fixed before
+dispatch, not after inspecting results.
+
+The predicate is the one defined above, applied unchanged, with the NPxxY
+threshold at the value the rows carry (9.08~\AA{}) and the tilt threshold at
+14.932~\AA{}. Four receptors --- EDNRA, EDNRB, GRPR and HRH3 --- carry leucine
+rather than tyrosine at 7.53, so the NPxxY axis is undefined for them by
+biology rather than by data loss; every two-instrument number is computed on
+the remaining 36 and states that frame, because the two denominators differ by
+0.06--0.09 on conditional activation rates. Engagement is a separate,
+non-predicate quantity: the distance from the $\alpha$5 tip to R3.50, thresholded
+at 20~\AA{}. That cutoff is permissive --- roughly four times the cognate median
+insertion depth of 12.19~\AA{} --- so engagement is reported alongside the
+measured depth rather than as a bare Boolean.
+
+Uncertainty is a cluster bootstrap over 26 paralog clusters, 1{,}000 resamples,
+resampling clusters rather than receptors so that paralogues do not enter as
+independent evidence. Receptor-level intervals are 0.90--1.26$\times$ the width
+and change no claim's status; they are not reported. \textbf{The cluster map was
+reconstructed during the audit from standard receptor-family taxonomy rather
+than recovered from the run}, because no canonical map was found on disk.
+
+Every row is scored against one pinned reference set
+(SHA-256 \texttt{6ee2cad8}), carried in each row and recovered from the
+scoring-time commit; the working copy at HEAD is a superset and was not used.
+No reference structure is supplied to any prediction.
+
+Templates were off on all four backbones. The evidence is launcher static
+analysis and upstream defaults, with an explicit \texttt{--use-templates false}
+on one backbone; a sweep of 20 job-status records, five per backbone, found no
+\texttt{runtime\_config} block and no template-related key at any depth.
+\textbf{A per-row runtime echo is not present on these outputs}, so this is
+configuration evidence, not per-prediction confirmation --- the same evidence
+class stated for the first campaign.
+
+Where structures are shown, superposition is on TM1--TM5 and TM7 C$\alpha$ with
+\textbf{TM6 excluded}, because including the helix whose displacement is the
+subject partially cancels it; the scorer's own RMSD used a 7TM selection, and
+the two differ deliberately.
+
+\subsection*{A limitation of the curated reference set}
+
+Within this Class~A reference set there is \textbf{no native heterotrimeric
+G$_\mathrm{s}$ complex}. Every Class~A G$_\mathrm{s}$ active reference in it is
+mini-G, chimera or nanobody-stabilised; 15 of 40 active references (37.5\%) are
+non-native by this criterion. ADRB2's active reference here is 4LDE, and 3SN6
+exists and was not selected.
+
+This is a property of \emph{this curation}, not of the deposited record, and it
+is stated as such. It bounds one claim in particular: any statement about
+G$_\mathrm{s}$-anchored reference geometry on TM6 tilt is a statement about
+engineered constructs. The reference-bias caveat does not, however, localise to
+the cell that carries the identity-blindness result, which is 20 of 24
+native-referenced and is reported both ways.

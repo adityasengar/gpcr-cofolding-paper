@@ -205,7 +205,7 @@ above are about scope and labelling rather than about the result.
 - **The decomposition**: +0.400 / +0.252 / +0.082 probability, 54.6 / 34.3 /
   11.1 %; +1.907 / +1.214 / +0.656 logit, 50.5 / 32.1 / 17.4 %.
 - **The 2×2**: all three (arm, p_engaged, p_active|engaged) triples, and the
-  engaged-but-inactive floor at 1,699 rows pooled, 248–540 per backbone.
+  engaged-but-inactive floor at 1,699 rows pooled, 278–540 per backbone.
 - **The PIF connector**: all five subset medians and all five cell counts,
   including decoy engaged-but-inactive at 15.42 Å on 47 cells.
 - **SC-B-6**: +0.024 [−0.29, +0.30] on all 24, −0.062 [−0.41, +0.21] on the 20

@@ -13,11 +13,49 @@ quoted from a claim sheet.
 | claim | evidence from | status |
 |---|---|---|
 | C1–C5 | the literature corpus alone | **ready** — written into the intro |
-| C6 (peptide drives active) | **Block B** — Block A is its groundwork | **awaiting Block B** |
-| C7 (agonist alone does not) | **Block B** (ligand-only arm) | **awaiting Block B** |
+| C6 (peptide drives active) | **no block supplies a peptide** — see below | **not testable on A or B** |
+| C7 (agonist alone does not) | **no block supplies an agonist** — see below | **not testable on A or B** |
 | C8 (confidence ≠ correctness) | **Block A** | **written** — 2 of 4 backbones at anchor grain |
-| C9 (decomposition) | **Block B** (decoy / shuffled / mutant arms) | **awaiting Block B** |
+| C9 (decomposition) | **Block B** (apo / decoy / shuffled / cognate) | **written** — occupancy 55%, α5-CT sequence 34%, family 11% prob / 17.4% logit |
 | *(new)* whole-Gα co-input drives active state, at panel scale | **Block A** | **written** |
+| *(new)* the effect is partner presence far more than partner identity | **Block B** | **written** |
+
+## Two title claims have no evidence in either block
+
+**Found 2026-09-10 by recomputing from `data/block_b/01_rows/rows_tidy.csv`, and
+it supersedes what this file said an hour earlier.**
+
+This file previously stated that "Block B supplies the reduced 21-mer arm and
+carries the titular claim." **It does not.** Block B's four arms are `apo`,
+`decoy`, `shuffled` and `cognate`, and every arm that carries a partner carries
+a **complete Gα subunit**. The decoy arm scrambles the last 9–11 residues of the
+α5 C-terminal tail *within* a full-length subunit that is byte-identical to its
+parent over the first 339–349 residues. There is no peptide arm.
+
+**And there is no ligand anywhere.** `ligand_type` and `ligand_sequence` are
+NaN on all 32,000 Block B rows; Block A has no ligand column at all. Both
+campaigns are apo-receptor plus partner.
+
+So of the three clauses the title and `CLAUDE.md` assert:
+
+| clause | status |
+|---|---|
+| a 21-residue α5-CT peptide co-input drives the models active | **untested** — no block supplies a peptide |
+| the agonist alone does not | **untested** — no block supplies an agonist |
+| confidence does not track state correctness | **written from Block A** |
+
+What the two campaigns *do* establish is narrower and still substantial: a
+co-folded Gα partner drives active-state geometry at panel scale on four
+backbones; the effect is mostly partner **presence**, with the α5-CT sequence
+second and the correct family a small, scale-dependent third; the models do not
+read partner family on the continuous axes beneath the predicate; and confidence
+does not track state correctness.
+
+**This is Aditya's decision to make, not ours.** Either the title narrows to what
+was run, or a later block supplies an isolated 21-mer arm and an agonist-only
+arm. Nothing in the manuscript may imply the peptide or the agonist-alone result
+until one of those happens — the existing rule below now applies to Block B's
+prose as well as Block A's.
 
 ## Block A is groundwork; Block B carries the titular claim
 
@@ -41,14 +79,18 @@ claim; without Block A's instrument and controls it would rest on far less.
 
 Two rules follow, and they are load-bearing:
 
-1. **No Block A sentence may imply the peptide result.** Checked 2026-09-10;
-   none does. Re-check whenever Block A prose is edited.
+1. **No sentence in the paper may imply the peptide result or the
+   agonist-alone result.** Neither is tested. Checked 2026-09-10 across Block A
+   and Block B prose; none does. Re-check whenever either is edited. Two of four
+   independent figure agents wrote that the 21-mer was supplied while holding
+   this file, so the framing pulls that way and a written rule is not enough.
 2. **No Block A sentence may depend on Block B having run.** Block A may say
    what it does not cover; it may not say what the next experiment showed.
 
-The reduced-partner contrast — whether the 21-mer alone suffices, and whether
-occupancy or identity is doing the work — is Block B's, and the decoy and
-shuffled arms with it.
+Of that reduced-partner contrast, Block B answered **half**. Whether occupancy
+or identity does the work: answered, by the decoy and shuffled arms — occupancy,
+mostly. Whether the 21-mer alone suffices: **not answered, and not asked**, for
+the reason recorded above.
 
 
 ---

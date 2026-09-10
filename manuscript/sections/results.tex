@@ -219,3 +219,106 @@ higher than a hypothesis worth testing elsewhere: that a confidence score
 aggregated over a whole complex can invert relative to the same score read at
 the residues that define the property in question. We are not aware of a prior
 report of a confidence metric changing sign under re-aggregation.
+
+\subsection*{Partner presence, partner sequence, and partner identity are separable}
+
+The preceding results supply the whole cognate G$\alpha$ subunit or nothing. That
+contrast cannot say \emph{what} about the partner the models are responding to.
+A second campaign separates it into three steps, on 40 Class~A receptors $\times$
+four backbones $\times$ four input arms $\times$ five dispatch seeds $\times$ ten
+samples --- 32{,}000 predictions, every one of the 640 receptor $\times$ arm
+$\times$ backbone cells delivering exactly 50 rows with five distinct seeds.
+
+The arms are nested. \textbf{apo} supplies no partner. \textbf{decoy} supplies
+the receptor's own cognate G$\alpha$ subunit with the last 9--11 residues of the
+$\alpha$5 C-terminal tail scrambled --- length-matched and byte-identical to its
+parent over the first 339--349 residues, verified by sequence hash on 40 of 40
+receptors. \textbf{shuffled} supplies an intact G$\alpha$ from a family the
+receptor does not couple to. \textbf{cognate} supplies the correct intact
+subunit. Every arm that carries a partner carries a complete subunit; no arm
+supplies an isolated peptide, and no arm carries an orthosteric ligand. What
+varies across the four is the partner and nothing else.
+
+Under the same two-instrument predicate, the active-call fraction rises
+monotonically across those four arms: 0.158 [0.081, 0.256] apo, 0.558
+[0.445, 0.664] decoy, 0.809 [0.747, 0.869] shuffled, 0.891 [0.838, 0.942]
+cognate, on the 36 receptors whose NPxxY axis is defined, with cluster-bootstrap
+intervals over 26 paralog clusters. The ordering holds on all four backbones
+independently \textbf{[FIG:ladder]}. Both continuous axes move in the same
+direction across the same four arms, NPxxY closing and TM6 tilt opening, though
+the panel medians shipped with the campaign do not reproduce from the shipped
+tables and are not quoted here (Discrepancy D-B-2).
+
+\textbf{[GAP: the threshold-band beat --- whether the shuffled-to-cognate gap
+concentrates in the $\pm$0.5~\AA{} band around the tilt threshold --- is pending
+an independent recomputation and will be inserted here.]}
+
+Telescoping the ladder gives the three contributions. Supplying \emph{any}
+partner, even one whose $\alpha$5 tail is scrambled, accounts for $+0.400$
+[0.328, 0.464] of the total rise, 55\%. Restoring a real $\alpha$5-CT sequence
+adds $+0.252$ [0.188, 0.321], 34\%. Getting the family \emph{right} adds
+$+0.082$ [0.047, 0.125]. On the probability scale that last term is 11\% of the
+total; on the logit scale it is 17.4\% [0.39, 1.09], and both are correct. The
+gap between them is not a discrepancy but a compression: cognate rates sit at or
+above 0.98 in 28--29 of 40 cells per backbone, and a probability-scale
+difference has little room left to move. All four backbones agree on the
+logit-scale share to within four points (17.4, 17.5, 20.9, 17.5). Wherever this
+term appears it is named with its scale \textbf{[FIG:decomposition]}.
+
+\textbf{The models respond to partner presence far more than to partner
+identity.} Two thirds of the effect is already delivered by a subunit whose
+recognition tail has been scrambled.
+
+Whether the partner is \emph{engaged} is separable from whether the receptor is
+\emph{active}, and the interesting cell is the one where they disagree. At a
+20~\AA{} $\alpha$5-tip-to-R3.50 cutoff, the cognate arm engages on 0.998 of rows
+and is active on 0.893 of those; shuffled engages on 0.967 and is active on
+0.835; decoy engages on 0.704 and is active on 0.665. The engaged-but-inactive
+decoy cell --- a partner seated in the cavity that has not opened it --- is
+populated on every backbone, 1{,}699 rows pooled and 278--540 per backbone
+\textbf{[FIG:engagement]}. It is the only cell in the campaign that can support
+a statement about chemistry rather than about occupancy.
+
+An axis that never participates in the call corroborates the direction. On the
+P5.50--I3.40--F6.44 C$\alpha$ connector, decoy cells that are engaged but not
+active sit at 15.42~\AA{} (47 cells), against 15.35~\AA{} for apo and 16.00--16.04~\AA{}
+for the active-engaged cognate, shuffled and decoy cells. Engaged-but-inactive
+geometry is apo geometry on an axis the predicate never reads. Three of four
+backbones sign cleanly; OpenFold3 signs in the same direction at smaller
+magnitude \textbf{[FIG:connector]}.
+
+What the models do \emph{not} do is read which family the partner belongs to on
+the continuous axes beneath the predicate. On the largest and best-powered
+mismatch --- a G$_\mathrm{s}$ donor placed on G$_\mathrm{i}$-coupled receptors ---
+the tilt residual against each receptor's own active reference is $+0.024$~\AA{}
+[$-0.29$, $+0.30$] across 24 receptors, and $-0.062$~\AA{} [$-0.41$, $+0.21$]
+across the 20 whose active reference is a native complex. A pre-registered
+alternative, that donors overshoot or undershoot the reference belonging to the
+wrong family, is signed in \emph{zero} of nine qualifying stratum $\times$ axis
+combinations at 95\% confidence \textbf{[FIG:residuals]}.
+
+Three limits bound all of this, and none is a detail.
+
+\textbf{There is no bulk control.} No arm supplies a second chain of comparable
+mass that is not a G$\alpha$. The occupancy term is the largest of the three and
+the least controlled: nothing here distinguishes a G protein from a protein.
+
+\textbf{The decoy arm is confounded.} Scrambling the $\alpha$5 tail removes the
+recognition sequence and disrupts inter-chain MSA pairing at the same positions,
+and on Chai-1 the edit does not reach the model as aligned MSA columns at all.
+The fallback ladder that survives this --- apo, shuffled, cognate --- carries the
+headline unchanged.
+
+\textbf{One stratum carries the identity-blindness conclusion.} The
+G$_\mathrm{s}\rightarrow$G$_\mathrm{i}$ cell is powered at 20 native-referenced
+receptors. G$_\mathrm{s}\rightarrow$G$_\mathrm{q}$ collapses to 3 native
+receptors with an interval of [$-2.79$, $+0.14$], and
+G$_\mathrm{i}\rightarrow$G$_\mathrm{s}$ has no native-referenced receptor at all.
+The result is a bulk-reading claim on one well-powered cell, not an equivalence
+result, and the interval that supports it spans zero.
+
+AA2AR is anomalous across several of these analyses. The leading explanation,
+that its two references are too similar for the instrument to separate, does not
+survive: its pocket-C$\alpha$ separation of 1.62~\AA{} ranks 34th of 40, in the
+well-separated third of the panel. Pooled quantities are reported with and
+without it.
