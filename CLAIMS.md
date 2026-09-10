@@ -13,34 +13,36 @@ quoted from a claim sheet.
 | claim | evidence from | status |
 |---|---|---|
 | C1–C5 | the literature corpus alone | **ready** — written into the intro |
-| C6 (peptide drives active) | **not Block A — see below** | **no evidence yet** |
-| C7 (agonist alone does not) | needs a ligand-only arm | **no evidence yet** |
+| C6 (peptide drives active) | **Block B** — Block A is its groundwork | **awaiting Block B** |
+| C7 (agonist alone does not) | **Block B** (ligand-only arm) | **awaiting Block B** |
 | C8 (confidence ≠ correctness) | **Block A** | **written** — 2 of 4 backbones at anchor grain |
-| C9 (decomposition) | needs decoy / shuffled / mutant arms | **no evidence yet** |
+| C9 (decomposition) | **Block B** (decoy / shuffled / mutant arms) | **awaiting Block B** |
 | *(new)* whole-Gα co-input drives active state, at panel scale | **Block A** | **written** |
 
-## ⚠ The title claims something Block A does not test
+## Block A is groundwork; Block B carries the titular claim
 
-The manuscript title is *"A Gα α5 C-terminal **peptide** co-input drives GPCR
-co-folding models into the active state"*, and the introduction is built around
-that claim. **Block A's cognate arm supplies the whole Gα subunit**, not a
-21-mer: `d_ga_alpha5_r350_ca` and `plddt_ga_alpha5` score the α5 as a *feature
-of the supplied subunit*, and the hero figure states in-frame that "the full
-cognate Gα was supplied, only its α5 C-terminal 21 residues are drawn".
+**Decided by Aditya, 2026-09-10.** The title stands. The manuscript claims a
+21-residue α5 C-terminal *peptide* co-input; **Block A does not test that** — its
+cognate arm supplies the whole Gα subunit, with `d_ga_alpha5_r350_ca` and
+`plddt_ga_alpha5` scoring the α5 as a feature of that subunit.
 
-So Block A is **scale, instrument and controls for whole-partner co-input** —
-which is how its Results section is written, and it is honest as written. But
-the paper currently promises a peptide result in its title and intro and
-delivers a whole-subunit result in its Results.
+Block A's job is therefore to establish, at panel scale and on four independent
+backbones, that **a co-folded partner drives active-state geometry**, together
+with the instrument that measures it and an honest account of what the models do
+not do. **Block B supplies the reduced 21-mer arm** and carries the titular
+claim; without Block A's instrument and controls it would rest on far less.
 
-**This needs a decision before submission**, and it is Aditya's:
+Two rules follow, and they are load-bearing:
 
-1. a later block supplies the 21-mer arm and carries the titular claim, with
-   Block A as its groundwork; or
-2. the title and intro are rewritten around whole-Gα co-input.
+1. **No Block A sentence may imply the peptide result.** Checked 2026-09-10;
+   none does. Re-check whenever Block A prose is edited.
+2. **No Block A sentence may depend on Block B having run.** Block A may say
+   what it does not cover; it may not say what the next experiment showed.
 
-Until it is resolved, no Block A sentence should imply the peptide claim. None
-currently does — checked 2026-09-10.
+The reduced-partner contrast — whether the 21-mer alone suffices, and whether
+occupancy or identity is doing the work — is Block B's, and the decoy and
+shuffled arms with it.
+
 
 ---
 
