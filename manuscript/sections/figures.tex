@@ -38,8 +38,11 @@
 % Every caption states its filter and its n.
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{f1_workflow.pdf}\\[2mm]
-\includegraphics[width=\textwidth]{ba1a_instrument.pdf}
+% Two stacked panels plus a long caption overflow the page at full width:
+% the float came out 126.7 pt too tall. Each is capped by height as well as
+% width so the pair plus the caption fits one page.
+\includegraphics[width=\textwidth,height=0.33\textheight,keepaspectratio]{f1_workflow.pdf}\\[1.5mm]
+\includegraphics[width=\textwidth,height=0.30\textheight,keepaspectratio]{ba1a_instrument.pdf}
 \caption{\textbf{The instrument, its calibration, and what was run.}
 \textbf{Top.} \textbf{a}, the two intrinsic measurements and their thresholds,
 with the atom pair for each named once for the whole paper: TM6 tilt as a

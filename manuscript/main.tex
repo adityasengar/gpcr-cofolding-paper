@@ -38,7 +38,11 @@
 % run figures/block_a/panels/*.py. build.sh names any that are missing.
 \graphicspath{{../figures/out/}}
 \usepackage{booktabs}
-\usepackage{booktabs}
+% longtable, added 2026-09-10. S-T1 and S-T2 are generated as longtables rather
+% than table+tabular because S-T2 is 192 rows and a tabular cannot break across
+% a page -- it compiled to a float 1509 pt tall and silently ran off the bottom,
+% losing most of its rows. See analysis/block_a/make_tables.py.
+\usepackage{longtable}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[hidelinks,breaklinks=true]{hyperref}
