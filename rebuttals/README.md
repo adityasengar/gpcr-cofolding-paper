@@ -17,6 +17,30 @@ differently — the report says "we will therefore plot X", the rebuttal says
 "your claim sheet says Y and your own data says Z, here is the one-line
 recomputation."
 
+## Three sections per block, and they answer different questions
+
+| section | question it answers | reader's next move |
+|---|---|---|
+| **1. Rebuttals** | what in the drop is wrong, and how do we know | fix it, or show us we are wrong |
+| **2. Questions** | what can only *you* answer | answer it |
+| **3. Suggestions** | what would make the paper stronger, and what would it cost | decide whether to run it |
+
+The third section is the one worth the most and the easiest to skip. A drop that
+answers every question we asked can still leave the paper one experiment short of
+what a reviewer will demand, and the moment to say so is while the machine is
+still warm and the next campaign is still being planned --- not after the
+manuscript is submitted.
+
+Rank suggestions by **what a reviewer would ask first**, not by what is
+interesting. Give each one a cost class:
+
+- **free** --- pure re-analysis of data we already hold
+- **cheap** --- re-scoring existing predictions, no new inference
+- **real** --- new predictions
+
+A free suggestion that answers a reviewer's first question outranks an expensive
+one that answers their fifth.
+
 ## What goes in one
 
 Every entry carries five things, and an entry missing any of them is not ready:
@@ -51,6 +75,6 @@ in the entry — it is the cheapest way to be trusted on the rest.
 | file | block | status |
 |---|---|---|
 | `BLOCK_A.md` | Block A | drafting |
-| `BLOCK_B.md` | Block B | drafting |
+| `BLOCK_B.md` | Block B | suggestions written; rebuttals and questions in assembly |
 
 `drafts/` holds per-agent working notes and is not what gets sent.
