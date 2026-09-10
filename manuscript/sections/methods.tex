@@ -339,3 +339,59 @@ G$_\mathrm{s}$-anchored reference geometry on TM6 tilt is a statement about
 engineered constructs. The reference-bias caveat does not, however, localise to
 the cell that carries the identity-blindness result, which is 20 of 24
 native-referenced and is reported both ways.
+
+\subsection*{Ligand-class campaign}
+
+A third campaign holds the transducer condition fixed and varies the ligand.
+Forty Class~A receptors were dispatched; \textbf{36 landed} in the primary
+corpus. The four losses are systematic rather than random and are named: two
+receptors whose reference pair is non-human and failed a species-matching step,
+and two whose inactive reference is stabilised by an allosteric modulator rather
+than an orthosteric antagonist, which makes the ligand-class contrast undefined
+for them.
+
+Each prediction carries a ligand of declared role --- full agonist, neutral
+antagonist, or a decoy drawn to match physicochemical properties without
+pharmacological relationship --- under the same apo and cognate arms and the
+same four backbones as above, against the same pinned reference set.
+
+\textbf{The readout is continuous, and deliberately not the activation
+predicate.} For each prediction we compute the C$\alpha$ RMSD of the
+ligand-binding pocket against that receptor's active reference and against its
+inactive reference, and take the difference. The 2$\times$2 contrast is then
+ligand role crossed with reference role, evaluated within receptor and averaged
+across the 23 receptors carrying all four cells. Uncertainty is the cluster
+bootstrap used throughout this work, here over the \textbf{16} paralog clusters
+spanning those 23 receptors, 5{,}000 resamples, seed 1234. Receptor-level
+intervals are computed and reported as secondary.
+
+\textbf{The activation predicate is not used as a Block~C readout and its
+absence is not an oversight.} On this panel it is floor-pinned in the apo arm
+and ceiling-pinned in the cognate arm, with roughly 65\% of receptor $\times$
+backbone $\times$ ligand-class cells sitting on one boundary or the other. A
+predicate built to separate conformational states cannot resolve a contrast
+between two ligands that both leave the receptor in the same state.
+
+The prospective test is a leave-one-receptor-out classifier over pocket and axis
+features, trained to call ligand class from a single predicted structure, with
+each receptor's own reference excluded from its training fold. It runs on the
+15 receptors that survive that exclusion. Its threshold was pre-registered, as
+was the ordinal recovery test reported alongside it.
+
+Ligand placement was audited over all 40{,}000 predictions by the distance from
+the ligand centroid to the pocket centroid, binned as in-pocket at or below
+8~\AA, entrance-bound between 8 and 15~\AA, and off-site above 15~\AA.
+\textbf{Entrance-bound is adjudicated a valid pose}, not a failure: a
+substantial fraction of peptide-receptor complexes bind at the extracellular
+vestibule by biology. Off-site rates are reported per arm and per ligand type,
+never pooled across the two, because peptide ligands are off-site by this
+definition on 66.5\% of rows against 1.52\% for small molecules in the same
+cells.
+
+\textbf{Reproducibility, stated accurately.} Inputs and analysis outputs are
+pinned by SHA-256 and those hashes were checked. \textbf{There is no functional
+rebuild-and-diff harness for this campaign}; we verified file integrity, not
+that re-running the analysis reproduces the numbers. Two of the campaign's
+source corpora were not delivered with its analysis bundle, so the two
+surviving positive results could be checked for internal consistency across the
+shipped summaries but could not be recomputed from the underlying rows.

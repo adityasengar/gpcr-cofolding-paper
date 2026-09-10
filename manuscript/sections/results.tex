@@ -339,3 +339,101 @@ that its two references are too similar for the instrument to separate, does not
 survive: its pocket-C$\alpha$ separation of 1.62~\AA{} ranks 34th of 40, in the
 well-separated third of the panel. Pooled quantities are reported with and
 without it.
+
+\subsection*{Ligand class is written into pocket geometry, but only where the partner is absent}
+
+The two campaigns above vary the transducer. A third varies the
+\emph{ligand}, and asks a question the first two cannot: does a predicted
+pocket occupied by an agonist differ in shape from the same pocket occupied
+by an antagonist? Forty Class~A receptors were dispatched and 36 landed;
+the four losses are systematic and named --- two receptors whose reference
+pair is non-human, and two whose inactive reference carries an allosteric
+rather than an orthosteric antagonist.
+
+\textbf{The activation predicate used everywhere else in this work does not
+function here, and we do not use it.} On this panel it is floor-pinned in the
+apo arm and ceiling-pinned in the cognate arm, leaving roughly 65\% of
+receptor $\times$ backbone $\times$ ligand-class cells on one saturation
+boundary or the other. That is a property of applying a state predicate to a
+question about ligand identity, not a failure of the predicate. Every result
+in this section is therefore computed on continuous pocket-C$\alpha$ geometry,
+and none of these numbers is comparable to the predicate rates reported above.
+
+Measured as the difference between a prediction's pocket-C$\alpha$ RMSD to its
+receptor's active reference and to its inactive reference, agonist-occupied
+and antagonist-occupied pockets separate in the predicted direction on all four
+backbones: $-0.306$~\AA{} on Boltz-2 [$-0.454$, $-0.164$], $-0.137$ on Chai-1
+[$-0.216$, $-0.045$], $-0.252$ on OpenFold3 [$-0.405$, $-0.099$] and $-0.184$
+on Protenix2 [$-0.277$, $-0.088$], over 23 receptors resampled as 16 paralog
+clusters. Chai-1's interval reaches within 0.045~\AA{} of zero and is signed by
+a narrow margin.
+
+\textbf{This holds in the apo arm alone.} It is not that the effect is absent
+when a transducer is present; it is that with a cognate G$\alpha$ in the
+complex the contrast cannot be attributed to the ligand, because the partner
+supplies both mass and a strong conformational preference of its own. The
+apo-only scope is what makes the observation about the ligand.
+
+A pre-registered ordinal test, locked before this campaign ran, recovers the
+same ordering: ligand-role rank against the same continuous axis gives
+Kendall's $\tau$ of 65--87\% across backbones on the 23-receptor panel and
+67--87\% on the 15-receptor self-reference-excluded subset. Because its
+threshold was fixed in advance, it carries evidential weight the 2$\times$2
+does not.
+
+Whether that separation is usable prospectively is a narrower question, and the
+answer is narrower still. A leave-one-receptor-out classifier trained to call
+ligand class from a single predicted structure reaches an area under the ROC
+curve of 0.852 on Boltz-2 and 0.825 on Protenix2, with cluster-bootstrap
+intervals of [0.560, 0.974] and [0.528, 0.960] that exclude both chance and a
+permutation null. On Chai-1 (0.706) and OpenFold3 (0.656) the same intervals
+reach 0.351 and 0.382. \textbf{Those two backbones are inconclusive, not
+negative} --- the test does not distinguish them from chance, which is a
+different statement from showing they carry no signal. Boltz-2's bootstrap
+median, 0.809, sits below its point estimate.
+
+\subsection*{What this campaign set out to establish and did not}
+
+A criterion for knowing in advance which receptors the method would work on was
+pre-registered and \textbf{refuted}. The hypothesis was that receptors whose
+active and inactive references are further apart would be easier to
+discriminate, predicting a positive relationship between reference separation
+and per-receptor classifier performance. The measured relationship ran
+\emph{negative} on all four backbones, and excluding a single receptor
+flattens it to an interval spanning zero. What remains is an empirical list of
+receptors on which the method failed, compiled after the fact. \textbf{It
+cannot be used to flag a failure in advance}, and we do not present it as
+though it could.
+
+Two receptors behave anomalously for unrelated reasons and are reported
+separately rather than merged. AGTR1's active reference is stabilised by a
+$\beta$-arrestin-biased agonist together with a biased-state-selective
+nanobody, with no G$\alpha$ and no G$\beta\gamma$ --- the only such entry among
+the 15, and a question about what that reference represents rather than about
+the model. CXCR2's inversion appears on OpenFold3 and on no other backbone, and
+a structure from that cell shows the ligand correctly seated in the pocket, so
+it is a classifier-feature effect rather than a docking failure.
+
+Pose accuracy, where it can be measured against a matched reference, is low:
+6.93\% of predictions place the ligand within 3~\AA{} of its reference pose on
+the strictly matched subset. Corpus-wide the per-receptor distribution is
+bimodal --- median dock rates of 54--56\% on Boltz-2 against 0--18\% on Chai-1
+and 0\% on the other two in the same cell --- and pooling across receptors, as
+earlier drafts did, concealed that.
+
+Two further points bound what may be concluded. Ligand placement was audited
+across all 40{,}000 predictions: 15.1\% of apo-arm and 20.3\% of cognate-arm
+ligands sit more than 15~\AA{} from the pocket centroid, but within the cells
+the ligand-class contrast is computed on --- small-molecule, apo, agonist or
+antagonist --- that figure is \textbf{1.52\%}. The contrast is not built on
+mis-docked ligands. Peptide agonists sit at a median of 17.5~\AA{} because
+peptide receptors bind at the extracellular vestibule; that is biology, and
+counting it as failure would produce a 66.5\% error rate where the true
+small-molecule figure is 1.52\%.
+
+Finally, the possibility that the classifier learned reference identity rather
+than ligand class is excluded \textbf{by construction rather than by audit}:
+although routing labels differ across ligand roles, the reference PDB they
+resolve to is identical for every receptor, so there is no reference-identity
+information for a classifier to exploit. We did not search for leakage and fail
+to find it; the design does not admit it.
