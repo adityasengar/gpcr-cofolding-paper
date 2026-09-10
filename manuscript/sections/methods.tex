@@ -29,7 +29,7 @@ alone. Neither is a comparison to a reference.
 Tyr7.53. On activation Tyr7.53 of the NPxxY motif rotates into the receptor core
 and packs against Tyr5.58: the ``downward movement of Y5.58 in TM5'' enables ``a
 water-mediated hydrogen bond with Y7.53 of the NPxxY motif --- forming the
-so-called `YY-lock'\,'' \citep[p.~3]{georgiou2025heterogeneity}, described there
+so-called `YY-lock'\,'' \citep[p.~3714]{georgiou2025heterogeneity}, described there
 as the defining active-state polar lock. A prediction is called active on this
 axis below 9.080~\AA.
 
@@ -38,16 +38,21 @@ capturing outward displacement of the cytoplasmic end of TM6, the canonical
 activation signature \citep{hilger2020gcgr}. A prediction is called active above 14.932~\AA.
 
 A prediction is called active only when both fire. The two axes are not
-independent observations: the YY-lock is reported to ``strengthen the TM5--TM7
-packing and stabiliz[e] the outward shift of TM6''
-\citep[p.~3]{georgiou2025heterogeneity}, so a structure that satisfies one and
-not the other is the case a conjunction is meant to catch.
+independent observations: in forming that lock Tyr7.53 ``adopts the unique
+active state conformation \ldots{} strengthening the TM5-TM7 packing and
+stabilizing the outward shift of TM6''
+\citep[p.~3693]{georgiou2025heterogeneity}, so a structure that satisfies one
+and not the other is the case a conjunction is meant to catch.
 
-This conjunction is defined for class~A receptors only. The DRY, NPxxY and PIF
-motifs ``are absent in family B receptors,'' which ``implies that the mechanisms
-of activation between family B and family A receptors are substantially
-different'' \citep{hilger2020gcgr}, so rule~(2) has no class~B analogue.
-For the 4 class~B receptors it is replaced by a TM6 kink angle below
+This conjunction is defined for class~A receptors only, and the two rules do
+not travel together. Family~B activation ``involves structural rearrangements
+that are similar to family A receptors, including the outward movements of TM5
+and TM6,'' but the DRY/ERY, NPxxY and PIF motifs ``are absent in family B
+receptors,'' which ``implies that the mechanisms of activation between family B
+and family A receptors are substantially different from each other''
+\citep[p.~6]{hilger2020gcgr}. Rule~(1) therefore carries over and rule~(2) has
+no class~B analogue. For the 4 class~B receptors it is replaced by a TM6 kink
+angle below
 159.95$^\circ$; for the 4 class~F receptors, where neither substitution is
 established, the tilt rule is used alone. Both are reported separately as
 instrument scope and neither carries a headline claim.
@@ -61,15 +66,30 @@ set is a derivation-set figure, not a held-out one}, and is reported as such.
 Both axes are individually familiar; requiring them jointly is not. Reported TM6
 displacements in this literature are anchored at different residues and are
 quoted as differences observed between two solved structures rather than as cuts
-applicable to an unseen one: at 6.26, ``$\sim$6~\AA{} in rhodopsin;
-$\sim$14--18~\AA'' across receptors \citep[p.~24]{georgiou2025heterogeneity}; at
-6.42 and 6.36, 18~\AA{} and 17.4~\AA{} in the same
-work \citep[pp.~3,~5]{hilger2020gcgr}; and ``around 14~\AA'' with no residue
-named \citep[p.~13]{ye2026multistatebias}. On the NPxxY axis we are not aware of
+applicable to an unseen one: an outward swing of some 7--14~\AA{} at 6.26
+\citep[p.~3714]{georgiou2025heterogeneity}; 18~\AA{} at 6.42 and 17.4~\AA{} at
+6.36 in the same work \citep[pp.~3,~5]{hilger2020gcgr}; and around 14~\AA{} with
+no residue named \citep[p.~13]{ye2026multistatebias}. On the NPxxY axis we are not aware of
 a reported threshold on any atom pair, nor of a measured Tyr5.58--Tyr7.53
 distance. What is new here is therefore not the choice of axes but the
 requirement that both fire, at fixed thresholds, on a named atom pair, applied
 identically to references and to predictions.
+
+A learned alternative exists and should be named rather than left to a rebuttal.
+\citet{paajanen2026activation} derive a single activation coordinate by
+unsupervised PCA over aligned C$\alpha$ positions from more than a thousand
+class~A structures, using ``only protein backbone coordinates from conserved
+structural features of the receptor transmembrane domain'' (p.~3), and place a
+Gaussian-mixture cut on it. The two instruments differ in kind rather than in
+rigour. Theirs is one panel-wide coordinate whose activation meaning is assigned
+after the decomposition, by observing which component separates the
+ligand-annotated classes \citep[p.~10]{paajanen2026activation}; ours is two
+named interatomic distances at fixed thresholds, reported per axis, which is
+what lets a disagreement between the axes be read as a structural fact about one
+prediction rather than as a position on a scalar. Neither is free of annotation
+end to end --- our thresholds derive from 80 annotated reference rows --- so the
+claim here is interpretability and per-axis attribution, not independence from
+the labelling.
 
 The thresholds are derived from geometry rather than fitted to a classifier, but
 the 80 rows carry state annotations, and the provenance of those annotations
