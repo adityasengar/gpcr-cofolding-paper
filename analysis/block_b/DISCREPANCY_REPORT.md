@@ -46,11 +46,18 @@ It propagates into individual claims, inconsistently:
 - **SC-B-2** names *"E-B-4 (ceiling-pinning)"*, which matches the header and
   contradicts the data.
 
-**There is no ceiling-pinning flag anywhere in the drop.** The header defines
-E-B-4 as "cognate rate ≥ 0.98" and no column implements it. Recomputing the
-condition directly gives 28–29 pinned cells per backbone, inside C-B-7's stated
-24–34, so the *quantity* is real — but it is not a shipped flag and a panel that
-"applies E-B-4" gets the non-native set instead.
+**Corrected 2026-09-10.** An earlier version of this section said "there is no
+ceiling-pinning flag anywhere in the drop". That was wrong, and it was wrong
+because I grepped the columns of `rows_tidy.csv` only. The flag exists as
+`ceiling_pinned` in `04_ladder/ladder_per_receptor.csv`, it fires on 115 of 160
+cells — **29 / 28 / 24 / 34** by backbone — and it reproduces exactly from the
+predicate. C-B-7's stated 24–34 is that table, not a range. My own script had
+printed those four numbers; I transcribed the first two as "28–29".
+
+What survives is smaller and still real: the claim sheet's header calls the
+ceiling-pinning set **E-B-4**, and `excl_E_B_4` is the non-native set. The
+quantity is shipped, under a different name, in a different file. A panel that
+"applies E-B-4" still gets the non-native set.
 
 **What we will do.** Refer to exclusion sets by their **membership**, never by
 their E-B-n label, in every caption and every sentence. Where a claim needs the

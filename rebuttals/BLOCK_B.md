@@ -44,10 +44,14 @@ instead of fifteen. SC-B-11 names "E-B-2 (AA2AR)" and would get OPRD + CNR1.
 SC-B-14 names "E-B-4 (native-only)", which is right against the data and wrong
 against its own document's header.
 
-Separately: **no flag implements the header's E-B-4.** Recomputing "cognate rate
-≥ 0.98" directly gives 28–29 cells per backbone, consistent with C-B-7, so the
-quantity is real — but it is not shipped, and a panel that "applies E-B-4" gets
-the non-native set instead.
+Separately, and more narrowly than we first put it: the header's E-B-4 —
+ceiling-pinning — **is** shipped, as `ceiling_pinned` in
+`04_ladder/ladder_per_receptor.csv`, firing on 115 of 160 cells (29 / 28 / 24 /
+34 by backbone) and reproducing exactly from the predicate. It is simply not
+`excl_E_B_4`, which is the non-native set. So a panel that "applies E-B-4" gets
+the wrong set, and the right set is under a different name in a different file.
+Our first pass said no such flag existed; that was our error, from grepping the
+columns of `rows_tidy.csv` only, and it is corrected here.
 
 **To close.** Either correct the claim-sheet header to the shipped semantics, or
 correct the flags to the header. We do not mind which; we mind that we cannot
@@ -180,6 +184,58 @@ a reader shown this structure sees a partner less inserted than nine out of ten
 engaged-but-inactive predictions. Any panel we build on it prints 18.73 Å, names
 GHSR, and carries the panel median beside it.
 
+## R6 — SC-B-11's "no covariate slope excludes zero" is true only for the three predictors it counts
+
+**Shipped.** `BLOCK_B_CLAIM_SHEET.md` § SC-B-11: *"On the three usable
+predictors … no panel slope excludes zero at 95% CI on either continuous or
+logit scale, with or without AA2AR."* C-B-14 is titled "no covariate slope
+excludes zero".
+
+**Data.** `08_covariates/ladder_height_regressions.csv` ships **eight**
+predictors, not three — the three named plus four `cognate_family=*` categorical
+terms and `deposition_count`. Seven of its 80 rows have a CI excluding zero:
+
+| backbone | predictor | scale | n | slope | 95% CI |
+|---|---|---|---:|---:|---|
+| **panel** | **cognate_family=Gs** | continuous | **5** | **+1.309** | **[+0.281, +2.337]** |
+| protenix | cognate_family=Gs | continuous | 5 | +0.849 | [+0.656, +1.042] |
+| chai | cognate_family=Gs | continuous | 5 | +0.456 | [+0.252, +0.659] |
+| protenix | cognate_family=Gi | continuous | 24 | −0.630 | [−1.108, −0.152] |
+| boltz | cognate_family=Gq | continuous | 10 | −0.431 | [−0.854, −0.009] |
+| of3 | delta_ref_tilt | logit | 40 | +0.937 | [+0.232, +1.661] |
+| chai | delta_ref_tilt | logit | 40 | −0.951 | [−2.015, −0.054] |
+
+**Reproduce.**
+```bash
+python3 -c "
+import pandas as pd
+g=pd.read_csv('data/block_b/08_covariates/ladder_height_regressions.csv')
+print(sorted(g.predictor.unique()))
+print(g[(g.ci_lo_all>0)|(g.ci_hi_all<0)][['backbone','predictor','outcome_scale','n_receptors_all','slope_all','ci_lo_all','ci_hi_all']].round(3).to_string(index=False))"
+```
+
+**Severity: medium, and we are not overstating it.** SC-B-11 scopes itself to
+"the three usable predictors", so the sentence is defensible as written. Two
+things are not:
+
+1. There is a **panel** slope excluding zero in the shipped file, and
+   `claim_answers.csv` certifies `any_predictor_ci_excludes_zero = False`. That
+   is a second self-certifying column disagreeing with its own data (see R2).
+2. The two `delta_ref_tilt` logit slopes that exclude zero point in **opposite
+   directions** on two backbones (of3 +0.937, chai −0.951) at the full n=40.
+   "No covariate signal" and "two backbones sign oppositely at n=40" are
+   different statements, and the second is the more interesting one.
+
+**In our favour, and we will say it in the paper:** the `cognate_family=Gs`
+terms rest on **n=5 receptors**. A categorical dummy on five receptors is not
+evidence of a family effect, and we would not build a sentence on it. But
+"usable" is doing silent work in SC-B-11, and a reader with the CSV will find
+these rows before we explain them.
+
+**To close.** Either state in SC-B-11 which predictors were excluded and why, or
+correct the certification column. We would rather cite the honest version:
+*no slope excludes zero on any predictor powered above n≈10.*
+
 ---
 
 # 2. Questions — things only you can answer
@@ -206,7 +262,14 @@ was designed around.
 other 32,000 rows (`04243c45`). Confirm that nothing in the pocket layer feeds a
 claim that also depends on the earlier scorer.
 
-**Q7.** Chai does not read the decoy α5-CT edit as aligned MSA columns (0 of 40).
+**Q7.** `01_instrument_references/SEALED_REFERENCES.md` states *"Block B is
+prospective per PREREG §11b"*. The drop README and the dossier both list
+*"Prospectivity — foreclosed by design; date-stratified holdout is Block C"*
+under what Block B does **not** claim. These cannot both be true and the
+difference decides whether a whole class of sentence is available to us. Which
+is it?
+
+**Q8.** Chai does not read the decoy α5-CT edit as aligned MSA columns (0 of 40).
 Is a rerun with a forced MSA feasible? Until it is, the decoy arm is a
 three-backbone result and Chai's decoy rows are measuring something else.
 
