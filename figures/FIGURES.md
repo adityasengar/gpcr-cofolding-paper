@@ -471,3 +471,40 @@ mechanical parse leaves 265 of 546 route cells (48%) with no recorded verdict.
 level. The per-route detail is in each note's `oracle_leakage` field, in prose, and
 would need a per-note extraction pass to become a figure. LF2 is the complete-data
 substitute.
+
+## Block B
+
+Panels built from `data/block_b/` and `data/block_b_structures/`. The loader is
+`figures/block_b/badata.py`, and **every Block B panel must load through it**.
+
+**Two rules specific to this block, both from failures already recorded in
+`analysis/block_b/DISCREPANCY_REPORT.md`:**
+
+1. **Never write `excl_E_B_n` in a panel script.** The claim sheet mislabels
+   three of the four exclusion flags — its header says E-B-2 is AA2AR when the
+   shipped flag is OPRD+CNR1, and E-B-3 is the 15 non-native when the shipped
+   flag is AA2AR alone. `badata.exclude()` takes sets by MEANING
+   (`npxxy_undefined`, `agonist_only_ref`, `aa2ar_anomaly`, `non_native_ref`)
+   and there is no way to ask it for an E-B-n.
+2. **Recompute, then check against the shipped table before drawing.** BB-1's
+   guard fired on its first run and exposed D-B-3: the shipped aggregates used
+   the untruncated NPxxY threshold 9.082 while every row carries 9.08, which
+   differs on five rows of 32,000 and moves AA2AR/chai/decoy from 0.90 to 0.88.
+
+### BB-1 — the four-arm ladder
+```
+claim   SC-B-1 — the ladder is monotonic across apo < decoy < shuffled < cognate
+shows   the two-instrument active-call fraction on all four arms, four
+        backbones drawn individually and the panel drawn bold with
+        cluster-bootstrap intervals; a logit companion beside it because the
+        probability scale saturates at cognate
+data    01_rows/rows_tidy.csv recomputed per row, cross-checked against
+        04_ladder/ladder_four_scorings.csv on all 20 cells; frame_36, n=36
+        receptors, 24 paralog clusters
+build   cd figures/block_b/panels && python3 bb1_ladder.py
+status  ready — DEPARTS FROM ITS SPEC IN ONE PLACE, deliberately. The spec says
+        to draw 0.158 / 0.552 / 0.810 / 0.892 as reference dashes; those are the
+        SUPERSEDED values the drop's own README retires, and the spec
+        contradicts itself two paragraphs later. The dashes are not drawn and
+        the panel says so in red.
+```

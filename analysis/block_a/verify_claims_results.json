@@ -270,5 +270,109 @@
     "found": 2,
     "reproduces": true,
     "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E1 rows",
+    "claimed": 25,
+    "found": 25,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E2 rows",
+    "claimed": 4,
+    "found": 4,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E3 rows",
+    "claimed": 4890,
+    "found": 4890,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E3_tilt rows",
+    "claimed": 2000,
+    "found": 2000,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E3_npxxy rows",
+    "claimed": 4690,
+    "found": 4690,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E4 rows",
+    "claimed": 1495,
+    "found": 1495,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E5 rows",
+    "claimed": 500,
+    "found": 500,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_any rows",
+    "claimed": 5093,
+    "found": 5093,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E3_npxxy receptors",
+    "claimed": 24,
+    "found": 24,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_E3_tilt receptors",
+    "claimed": 10,
+    "found": 10,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "rows with no NPxxY value",
+    "claimed": 2295,
+    "found": 2295,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "receptors with all-NaN NPxxY",
+    "claimed": 12,
+    "found": 12,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "EXCL",
+    "what": "excl_any share of corpus (%)",
+    "claimed": 53.7,
+    "found": 53.7,
+    "reproduces": true,
+    "note": ""
   }
 ]

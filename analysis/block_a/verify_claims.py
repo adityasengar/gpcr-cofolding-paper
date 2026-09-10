@@ -93,6 +93,23 @@ prim = pldd[pldd.primary_or_secondary == "primary"]
 check("SC-11", "signed at cluster boot on primary", 2,
       int(prim.signed_at_cluster_boot.sum()))
 
+# ---- exclusions ---------------------------------------------------------
+# Added 2026-09-10 after analysis/sweep_manuscript.py found that the exclusion
+# row counts quoted in Methods were checked by nothing. Block B's claim sheet
+# mislabelled three of its four exclusion sets, so ours could not stay unchecked.
+for flag, want in [("excl_E1", 25), ("excl_E2", 4), ("excl_E3", 4890),
+                   ("excl_E3_tilt", 2000), ("excl_E3_npxxy", 4690),
+                   ("excl_E4", 1495), ("excl_E5", 500), ("excl_any", 5093)]:
+    check("EXCL", "%s rows" % flag, want, int(rows[flag].astype(bool).sum()))
+for flag, want in [("excl_E3_npxxy", 24), ("excl_E3_tilt", 10)]:
+    check("EXCL", "%s receptors" % flag, want,
+          int(rows.loc[rows[flag].astype(bool), "receptor"].nunique()))
+check("EXCL", "rows with no NPxxY value", 2295, int(rows.d_npxxy_oh.isna().sum()))
+check("EXCL", "receptors with all-NaN NPxxY", 12,
+      int(sum(1 for _, g in rows.groupby("receptor") if g.d_npxxy_oh.isna().all())))
+check("EXCL", "excl_any share of corpus (%)", 53.7,
+      round(100.0 * rows.excl_any.astype(bool).mean(), 1))
+
 # ---- report -------------------------------------------------------------
 if "--json" in sys.argv:
     print(json.dumps(results, indent=2, default=str)); sys.exit(0)
