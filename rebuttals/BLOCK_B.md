@@ -123,9 +123,31 @@ import pandas as pd
 print(pd.read_csv('data/block_b/01_rows/rows_tidy.csv',low_memory=False,usecols=['threshold_npxxy_oh_active_lt']).iloc[:,0].unique())"
 ```
 
-**Severity: low.** 0.002 Å cannot move a call. But this is the second block
-running, and the paper must quote one number. We quote 9.08, the value the rows
-carry.
+**Severity: medium, and higher than we first said.** We initially wrote that
+0.002 Å could not move a call. It moves five.
+
+Five rows of 32,000 fall in [9.080, 9.082) — AA1R/apo/of3 (twice),
+AA1R/decoy/protenix, AA2AR/decoy/chai, LPAR1/apo/boltz — and your
+`ladder_per_receptor.csv` disagrees with the rows on exactly one of them:
+AA2AR/chai/decoy is 0.90 in the table and 0.88 recomputed from the rows.
+**Your aggregates were computed with 9.082; your rows carry 9.08.**
+
+We found this because our BB-1 panel script refuses to draw a value the shipped
+table and the recomputation disagree on. The guard fired on its first run.
+
+The panel decoy rate is unaffected — 0.5578 against 0.5579, both 0.558.
+Per-receptor cells are not.
+
+```bash
+python3 -c "
+import pandas as pd
+r=pd.read_csv('data/block_b/01_rows/rows_tidy.csv',low_memory=False)
+b=r[(r.d_npxxy_y558_y753_oh>=9.08)&(r.d_npxxy_y558_y753_oh<9.082)]
+print(b[['receptor_slug','arm','backbone','d_npxxy_y558_y753_oh']].to_string(index=False))"
+```
+
+**To close.** Tell us which threshold the shipped aggregates used, and make the
+row column carry the same value.
 
 ## R4 — The structure addendum's depth numbers are GHSR-only, presented as general
 
