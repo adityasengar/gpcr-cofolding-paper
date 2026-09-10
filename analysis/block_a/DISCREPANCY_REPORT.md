@@ -234,12 +234,18 @@ heading number is wrong, by a factor of two.
 
 ---
 
-## D8 — NEW: the shipped `matches_claim_sheet` flag is itself unreliable
+## D8 — the `matches_claim_sheet` tolerance is undocumented where it is used
 
-`03_aggregates/headline_by_backbone.csv` carries `matches_claim_sheet = True` on
-all four rows, and the brief §2 describes this as verified. It is true for the
-median shifts but **false for the fraction**, which differs by up to 0.019 (D6).
-Do not use that column as evidence that a number is safe to quote.
+**Reworded 2026-09-10; the earlier version overstated this.** It read "the
+shipped `matches_claim_sheet` flag is itself unreliable … false for the
+fraction". That is too strong. The README defines the flag as agreement *within
+0.02 of claim*, and every row satisfies it — OpenFold3's fraction is off by
+0.0188, inside the stated tolerance. **The flag does what it says.**
+
+The real defect is narrower: the tolerance lives only in README prose, while
+SC-2 quotes the fractions to four decimals. A reader who takes `True` at the
+precision the numbers are printed at will be wrong by up to 0.019. Do not use
+the column as evidence that a number is safe to quote *at quoted precision*.
 
 ---
 
@@ -262,7 +268,9 @@ in its own `used_for` column:**
 | `evaluable_audit_set` | **162** | "T4 contradiction rate denominator (manuscript: 127; empirical: 162)" |
 
 `reference_metadata.csv` independently confirms it: `is_panel == True` on exactly
-**98** PDBs, and `reference_predicates.csv` splits those 98 as 45 active-role /
+**98** PDBs. The role split depends on which table you ask:
+`reference_predicates.csv` returns 99 rows for those 98 PDBs and splits them 45
+active-role /
 54 inactive-role rows.
 
 Note also that the brief says **40** active while C-6 says **41** — the two
@@ -362,7 +370,7 @@ corroborates the others and none was checked against the row.
 
 Two further defects in the same directory: the shipped file is row **567** while
 `SELECTION.md`'s stated rule ("top-quintile RMSD-to-active, highest pLDDT
-within") selects row **552**; and 567 is simply the highest-pLDDT row in the
+within") selects row **552**; and 567 is simply the highest-`plddt_mean` row in the
 whole cell, which is a different rule from the one recorded.
 
 **Action**: do not build BA-5e as a worst case. Either drop it, or recaption it
@@ -486,10 +494,30 @@ the full panel gives OF3 apo pooled 0.241 and per-receptor mean 0.241 — the sa
 to three places. The reported figure is not reproducible as stated and is not
 recorded as a discrepancy.
 
-It did, however, surface a real and smaller anomaly: **Protenix cognate ships
-0.871 where both the pooled rate and the per-receptor mean are 0.890.** That one
-value differs from both candidate definitions and is unexplained. Flagged for the
-PI rather than resolved here.
+**WITHDRAWN 2026-09-10.** This section previously reported "a real and smaller
+anomaly: Protenix cognate ships 0.871 where both the pooled rate and the
+per-receptor mean are 0.890 … unexplained." There is no anomaly. The shipped
+value 0.870638 **is** the pooled rate of the `active` column and **is** the mean
+over receptors, to six decimals; 0.889565 is the same quantity after E1 drops
+the broken ACM1/cognate/protenix cell, and `exclusion_sweep.csv` reports exactly
+that under `exclusion_set == "E1"`.
+
+We reached "unexplained" by recomputing the predicate as the two-instrument rule
+on every row, which is wrong for this corpus: the shipped `active` column is
+**class-conditional** — Class B substitutes a kink angle and Class F uses tilt
+alone. Applying the Class A rule to all 1,175 rows gives 0.722, agreeing with
+neither figure, and we read that disagreement as the drop's rather than ours.
+
+```bash
+python3 -c "
+import pandas as pd
+a=pd.read_csv('data/block_a/01_rows/block_a_rows.csv',low_memory=False)
+p=a[(a.backbone=='protenix')&(a.arm=='cognate')]
+print('pooled        %.6f' % p.active.mean())
+print('receptor mean %.6f' % p.groupby('receptor').active.mean().mean())
+q=p[~p.excl_E1.astype(bool)]
+print('after E1      %.6f' % q.active.mean())"
+```
 
 ---
 
@@ -539,7 +567,18 @@ would be oracle route 1, and the whole design depends on its absence.
 
 ---
 
-## D20 — NEW: two further ALIGNMENT.md files name wrong anchors
+## D20 — every ALIGNMENT.md file in the drop carries at least one wrong identifier
+
+**Widened 2026-09-10.** This was "two further ALIGNMENT.md files name wrong
+anchors", and the report's summary said four of the drop's files were known to
+be wrong. Once chain identifiers, measured values and file lists are all
+checked, it is **eight of eight** — see the Block A audit's N13 (three files
+name chain A as the receptor where chain A is Gα), N14 (residue numbers that do
+not exist in the file beside it), N15 (kink angles contradicting the shipped
+table) and N16 (a file listed that is not in the drop). No ALIGNMENT file in
+this drop should be trusted for an identifier, a value or a filename.
+
+### The two that started this entry
 
 Same failure class as D13, found by recomputing every anchor against the tidy
 values before drawing it:
@@ -573,9 +612,16 @@ selections separately.
 
 Row 8285 (DRD2 / OpenFold3 / cognate) ships `rmsd_to_active_ref = 1.218` Å.
 Recomputed over all 269 shared receptor C$\alpha$ (residues 34–441) against
-7JVR it is **1.295 Å** — a 6% difference, and no obvious trimmed window
-reproduces the shipped value: excluding ICL3 gives 1.290, 7TM-only 1.298,
-34–420 gives 1.290.
+7JVR it is **1.2952 Å** over all 269 shared Cα — a 6% difference, and no
+trimmed window reproduces the shipped value; the closest any trim gets is
+1.2456 Å.
+
+**Corrected 2026-09-10.** This previously read "excluding ICL3 gives 1.290,
+7TM-only 1.298, 34–420 gives 1.290". Those three windows are not distinguishable
+here: 7JVR's ICL3 (226–365) is unresolved in the reference and is therefore
+already absent from the 269 shared Cα, so "excluding ICL3" removes nothing. The
+conclusion is unchanged — 1.2952 against a shipped 1.218, and nothing
+reproduces — but the three figures were not measuring what the sentence said.
 
 **The scorer's atom set is documented nowhere in the drop.** No file describes
 which atoms enter the superposition or the RMSD.

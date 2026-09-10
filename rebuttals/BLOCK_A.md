@@ -20,8 +20,11 @@ The five that would have put something false in the paper, in one line each:
 - **The "confidently wrong" structure is confidently right** — the claim inverts.
 - **SC-1's intervals headed "cluster-boot" contain the receptor-boot values**,
   which are narrower.
-- **Four `ALIGNMENT.md` files name anchor residues that do not reproduce the
-  shipped distances.** Recomputing from coordinates gives different pairs.
+- **Every `ALIGNMENT.md` file in the drop — eight of eight — carries at least
+  one wrong identifier**: anchor residues that do not reproduce the shipped
+  distances, chain A named as the receptor where chain A is Gα, residue numbers
+  absent from the file beside them, kink angles contradicting the shipped table,
+  and one file listing a structure the drop does not contain.
 - **No template or MSA column exists in the drop**, while the brief asserts both
   were pinned.
 

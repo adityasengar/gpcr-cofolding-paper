@@ -164,7 +164,9 @@ shift:
   `d_gpcrdb_tm6_tilt_246_637_ca`, not best-scoring), with the selection rule and
   each row's percentile within its cell;
 - the same receptor's deposited active and inactive references;
-- the α5-CT 21-mer coordinates **as supplied to the model**, so the rendered
+- the cognate G$\alpha$ chain **as supplied to the model** — the whole subunit,
+  which is what Block A's cognate arm supplies; there is no 21-mer input, and an
+  earlier version of this request asked for one. The rendered
   peptide is the input rather than a reconstruction.
 
 **Deliverable.** Five coordinate files plus a `SELECTION.md` stating the rule.
@@ -245,11 +247,14 @@ bootstrap does not require it. But if it was *intended* to be paired, the
 within-receptor slopegraph and the permutation null both mean something slightly
 different from what was designed. **Was unpaired seeding deliberate?**
 
-## D. Three unexplained numbers
+## D. Unexplained numbers
 
-1. **Protenix cognate predicate rate ships as 0.871**, while both candidate
-   definitions — the pooled row rate and the mean over receptors — give 0.890.
-   No other backbone/arm cell disagrees with both. What is it?
+1. ~~**Protenix cognate predicate rate ships as 0.871** while both candidate
+   definitions give 0.890.~~ **STRUCK 2026-09-10 — our error, not theirs.**
+   0.870638 is both the pooled rate and the receptor mean of the shipped
+   `active` column; 0.889565 is the same after E1. We had recomputed the
+   predicate as the two-instrument Class A rule on every row, but the shipped
+   column is class-conditional (Class B kink, Class F tilt-only). Nothing to ask.
 2. **`n_receptors_fraction` is 40 but only 39 receptors carry a non-null
    fraction** (D15). Which receptor is counted but absent, and why?
 3. **5G53 chain A** gives 18.124 / 3.716 Å against shipped 18.097 / 3.705 —
