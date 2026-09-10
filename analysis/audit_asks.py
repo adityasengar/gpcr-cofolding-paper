@@ -64,9 +64,11 @@ DOCS = [
     "analysis/block_a/DATA_REQUESTS.md",
     "analysis/block_b/DATA_REQUESTS.md",
     "analysis/block_c/DATA_REQUESTS.md",
+    "analysis/block_d/DATA_REQUESTS.md",
     "rebuttals/BLOCK_A.md",
     "rebuttals/BLOCK_B.md",
     "rebuttals/BLOCK_C.md",
+    "rebuttals/BLOCK_D.md",
     "rebuttals/PANEL_EXPANSION.md",
     "rebuttals/PANEL_EXPANSION_CLASS_A.md",
 ]

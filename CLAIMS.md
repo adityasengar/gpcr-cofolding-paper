@@ -13,14 +13,41 @@ quoted from a claim sheet.
 | claim | evidence from | status |
 |---|---|---|
 | C1–C5 | the literature corpus alone | **ready** — written into the intro |
-| C6 (peptide drives active) | **no block supplies a peptide** — see below | **not testable on A or B** |
-| C7 (agonist alone does not) | **no block supplies an agonist** — see below | **not testable on A or B** |
+| C6 (peptide drives active) | **no block supplies a peptide** — see below | **not testable on A, B, C or D** |
+| C7 (agonist alone does not) | **no block supplies an agonist** — see below | **not testable on A, B or D. Block C HOLDS 7,000 apo x agonist predictions and reports no state result on them — see its Q5** |
 | C8 (confidence ≠ correctness) | **Block A** | **written** — 2 of 4 backbones at anchor grain |
 | C9 (decomposition) | **Block B** (apo / decoy / shuffled / cognate) | **written** — occupancy 55%, α5-CT sequence 34%, family 11% prob / 17.4% logit |
 | *(new)* whole-Gα co-input drives active state, at panel scale | **Block A** | **written** |
 | *(new)* the effect is partner presence far more than partner identity | **Block B** | **written** |
 | *(new)* ligand class is written into pocket geometry, apo arm only | **Block C** | **written** — 4 backbones, SC-C-1 |
 | *(new)* ligand class is prospectively callable from one structure | **Block C** | **written, scoped** — Boltz + Protenix only; Chai and OF3 inconclusive |
+| *(new)* unsteered, apo state is receptor- and backbone-specific, not bistable | **Block D** (D1) | **written** — and the four outlier cells reproduce on Block A |
+| *(new)* a partner steers toward active; a state-locking nanobody does not steer toward inactive | **Block D** (D2) | **written, bounded** — every Nb anchor predates every datable cutoff |
+| *(new)* MSA depth moves the predicate, by two different mechanisms | **Block D** (D3) | **written, scoped** — Boltz a clean lever; OF3 and Protenix degradation |
+
+## Block D, and the reason its status column reads differently
+
+**Block D shipped no row-level data.** All three corpora its claim sheet names —
+42,180 predictions — are absent from the bundle; five CSVs ship and every one is
+panel or reference metadata. Twelve of its twelve claims are therefore
+untestable here in whole or in part, and `analysis/block_d/verify_claims.py`
+records each as PROSE-ONLY beside the file that would test it.
+
+What could be recomputed was, and it held: the panel sizes, the 22 paralog
+clusters that license D3's cluster bootstrap, D1 and D2's cluster-boot
+degeneracy, all six exact binomial intervals, and fifteen NPxxY hydroxyl
+distances measured from the deposited coordinates. Two of the manifest's three
+stated distances reproduce to the decimal, and every structural spot-check's
+state call matches the claim it was chosen to illustrate.
+
+**So Block D claims are written with their evidential class attached, not
+without it.** A sentence resting on a D-tier fraction is a sentence resting on a
+number we could not check, and the Methods says so once rather than the figures
+saying it five times.
+
+**Block D does not close C6 or C7.** It supplies nanobodies and whole Gα
+subunits, not a 21-residue peptide and not an agonist alone. The two title
+claims below remain open after four blocks.
 
 ## Block C, and what it may not be joined to
 
@@ -43,7 +70,7 @@ measured slope ran opposite to the prediction. What survives is an after-the-fac
 failure list, and the Results say so rather than implying the method can flag its
 own failures in advance.
 
-## Two title claims have no evidence in either block
+## Two title claims have no evidence in ANY of the four blocks
 
 **Found 2026-09-10 by recomputing from `data/block_b/01_rows/rows_tidy.csv`, and
 it supersedes what this file said an hour earlier.**
