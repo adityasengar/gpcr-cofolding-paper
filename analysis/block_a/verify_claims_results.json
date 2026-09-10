@@ -1,0 +1,274 @@
+[
+  {
+    "id": "CORPUS",
+    "what": "rows x cols",
+    "claimed": "9490x55",
+    "found": "9490x55",
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "CORPUS",
+    "what": "receptors",
+    "claimed": 48,
+    "found": 48,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "CORPUS",
+    "what": "predicate-active rows",
+    "claimed": 4866,
+    "found": 4866,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-1",
+    "what": "boltz median tilt shift",
+    "claimed": 5.036,
+    "found": 5.036,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-1",
+    "what": "boltz CI labelled cluster-boot",
+    "claimed": "cluster",
+    "found": "receptor",
+    "reproduces": false,
+    "note": "|d_cluster|=0.918 |d_receptor|=0.000"
+  },
+  {
+    "id": "SC-1",
+    "what": "chai median tilt shift",
+    "claimed": 1.047,
+    "found": 1.047,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-1",
+    "what": "chai CI labelled cluster-boot",
+    "claimed": "cluster",
+    "found": "receptor",
+    "reproduces": false,
+    "note": "|d_cluster|=0.326 |d_receptor|=0.018"
+  },
+  {
+    "id": "SC-1",
+    "what": "of3 median tilt shift",
+    "claimed": 4.814,
+    "found": 4.814,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-1",
+    "what": "of3 CI labelled cluster-boot",
+    "claimed": "cluster",
+    "found": "receptor",
+    "reproduces": false,
+    "note": "|d_cluster|=0.338 |d_receptor|=0.266"
+  },
+  {
+    "id": "SC-1",
+    "what": "protenix median tilt shift",
+    "claimed": 5.307,
+    "found": 5.307,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-1",
+    "what": "protenix CI labelled cluster-boot",
+    "claimed": "cluster",
+    "found": "receptor",
+    "reproduces": false,
+    "note": "|d_cluster|=0.416 |d_receptor|=0.084"
+  },
+  {
+    "id": "SC-2",
+    "what": "boltz fraction_of_way_to_active",
+    "claimed": 0.9456,
+    "found": 0.9472,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-2",
+    "what": "chai fraction_of_way_to_active",
+    "claimed": 0.8878,
+    "found": 0.8841,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-2",
+    "what": "of3 fraction_of_way_to_active",
+    "claimed": 0.9152,
+    "found": 0.934,
+    "reproduces": false,
+    "note": ""
+  },
+  {
+    "id": "SC-2",
+    "what": "protenix fraction_of_way_to_active",
+    "claimed": 0.9118,
+    "found": 0.9201,
+    "reproduces": false,
+    "note": ""
+  },
+  {
+    "id": "SC-2",
+    "what": "fraction denominator (receptors)",
+    "claimed": "38-39",
+    "found": 40,
+    "reproduces": false,
+    "note": ""
+  },
+  {
+    "id": "SC-2",
+    "what": "stated range '89-95%'",
+    "claimed": "0.89-0.95",
+    "found": "0.884-0.947",
+    "reproduces": false,
+    "note": ""
+  },
+  {
+    "id": "SC-3",
+    "what": "NPxxY: all CIs cross zero",
+    "claimed": true,
+    "found": false,
+    "reproduces": false,
+    "note": ""
+  },
+  {
+    "id": "SC-3",
+    "what": "NPxxY n_receptors",
+    "claimed": 34,
+    "found": 28,
+    "reproduces": false,
+    "note": ""
+  },
+  {
+    "id": "SC-3",
+    "what": "NPxxY SD(dref)",
+    "claimed": 4.71,
+    "found": 5.22,
+    "reproduces": false,
+    "note": ""
+  },
+  {
+    "id": "SC-3",
+    "what": "tilt slopes all positive (0.03-0.50)",
+    "claimed": true,
+    "found": false,
+    "reproduces": false,
+    "note": "slopes [-0.298, -0.659, 0.233, 0.082]"
+  },
+  {
+    "id": "SC-3",
+    "what": "tilt SD(dref)",
+    "claimed": 1.19,
+    "found": 1.17,
+    "reproduces": false,
+    "note": ""
+  },
+  {
+    "id": "SC-3",
+    "what": "connector delta signed (CI excludes 0)",
+    "claimed": true,
+    "found": false,
+    "reproduces": false,
+    "note": "CI [-1.196, 0.026]"
+  },
+  {
+    "id": "SC-3",
+    "what": "connector agreement 204/256",
+    "claimed": 204,
+    "found": 204,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "boltz predicate-active n",
+    "claimed": 1167,
+    "found": 1167,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "boltz rows >3A from active",
+    "claimed": 1,
+    "found": 1,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "chai predicate-active n",
+    "claimed": 1273,
+    "found": 1273,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "chai rows >3A from active",
+    "claimed": 0,
+    "found": 0,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "of3 predicate-active n",
+    "claimed": 1229,
+    "found": 1229,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "of3 rows >3A from active",
+    "claimed": 1,
+    "found": 1,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "protenix predicate-active n",
+    "claimed": 1197,
+    "found": 1197,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "protenix rows >3A from active",
+    "claimed": 0,
+    "found": 0,
+    "reproduces": true,
+    "note": ""
+  },
+  {
+    "id": "SC-6",
+    "what": "headline false-positive rate",
+    "claimed": "0.02%",
+    "found": "0.041%",
+    "reproduces": false,
+    "note": "body of SC-6 says 0.04%"
+  },
+  {
+    "id": "SC-11",
+    "what": "signed at cluster boot on primary",
+    "claimed": 2,
+    "found": 2,
+    "reproduces": true,
+    "note": ""
+  }
+]
