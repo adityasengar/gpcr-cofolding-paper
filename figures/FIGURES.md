@@ -377,8 +377,8 @@ python3 classify_corpus.py   # those  -> data_lit/tags.csv, metric_kinds.csv,
 ```
 
 `data_lit/*.csv` is the citable artefact and carries, for every classified row, the
-note text the rule fired on. These figures do **not** touch `data/predictions.csv`,
-so `analysis/fingerprint.py` drift does not stale them; what stales them is a change
+note text the rule fired on. These figures do **not** touch any results block,
+so a new block does not stale them; what stales them is a change
 to `lit/`. Re-run both scripts after any corpus edit.
 
 `data_lit/oracle_routes.csv` is produced but **no figure uses it** — see the note at

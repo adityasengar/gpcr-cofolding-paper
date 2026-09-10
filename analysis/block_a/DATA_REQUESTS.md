@@ -209,26 +209,17 @@ a boundary the write-up currently keeps clean.
 Not requests for new runs — questions about what we already have. Several affect
 sentences currently in the manuscript.
 
-## A. Is Block A a different campaign from the older export? *(most important)*
+## A. ~~Is Block A a different campaign from the older export?~~ — RESOLVED 2026-09-10
 
-`data/predictions.csv` (17,568 rows) and `data/block_a/` (9,490 rows) **are not
-the same experiments**:
+It was. Only 28 of Block A's 48 receptors appeared in the earlier export, no
+prediction paths coincided, it carried nine arms against Block A's two, and an
+`af2mm` backbone Block A does not have.
 
-- 28 of Block A's 48 receptors appear in the older export; **20 do not**
-- **zero** shared prediction-path strings
-- the older export has nine arms (apo, ligand, antagonist, α5_ct_fragment,
-  α5_ct_variant, cognate_ga, shuffled_ga, decoy_scaffold, arrestin…); Block A
-  has two (apo, cognate)
-- the older export includes an `af2mm` backbone; Block A does not
+**Aditya's decision: blocks supersede.** Each drop replaces the last for new
+claims. The earlier export and everything describing it — `RESULTS.md`,
+`STATUS.md`, `analysis/q.py`, `analysis/fingerprint.py` — were deleted on
+2026-09-10 and are recoverable from git history. Nothing further is needed here.
 
-So the repo holds two unrelated drops. This matters because **`RESULTS.md` and
-`analysis/q.py` describe the older one**, and `analysis/fingerprint.py` watches
-the older one. Nothing currently tracks whether Block A has gone stale.
-
-**Questions.** Does the older export supersede, get superseded, or run in
-parallel as a different block? Should `RESULTS.md` be split, or does Block A get
-its own ledger? Is the older export still the basis of any claim we intend to
-make?
 
 ## B. Provenance of the archive
 

@@ -17,14 +17,23 @@ python3 analysis/block_a/verify_claims.py      # 34 checks; 15 mismatches are EX
 
 ## The three decisions waiting on Aditya
 
-1. **The title outruns Block A.** The title and intro claim a 21-residue α5
-   C-terminal *peptide* co-input; Block A supplies the *whole cognate Gα*.
-   Either a later block carries the titular claim with Block A as groundwork, or
-   the title and intro are rewritten. See the top of `CLAIMS.md`. **Do not let
-   this close quietly.**
-2. **D9** — the reference-set denominator: 89 as previously stated, 98
+1. **Pick the graphical abstract.** Five candidates, all built and open:
+   `ga1_hero` (three-scene composition, warmest), `ga_style1_pipeline` (safest,
+   least memorable by its own account), `ga_style2_population` (most defensible
+   — the renders cannot be read as the evidence), `ga_style3_superposition` (the
+   only true within-receptor contrast), `ga_style4_axis` (most striking at
+   thumbnail; threshold as a place on the page). The two best ideas —
+   population-as-hierarchy and threshold-as-place — are separable and could be
+   combined.
+2. **The steric-exclusion observation** — α5 heavy atoms within 4 Å of TM6:
+   52% and 39% against deposited *inactive* structures, 11% against active,
+   2–4% against the prediction's own TM6. A mechanical account of why the
+   co-input works, but n = 2 receptors and the active control is not zero.
+   Needs an import before it can enter Results.
+
+3. **D9** — the reference-set denominator: 89 as previously stated, 98
    empirical, 167 total. Two `[PI]` placeholders sit in `methods.tex`.
-3. **D19** — were the 80 threshold rows selected by crystallographic tier, or by
+4. **D19** — were the 80 threshold rows selected by crystallographic tier, or by
    curated state label? The first leaves the instrument independent of the
    annotation; the second does not. Costs no compute; someone knows.
 
@@ -53,7 +62,16 @@ first and finds support afterwards.
 
 ## When Block B arrives
 
-Invoke the **`blockintake`** skill. It encodes what Block A converged on and
+Invoke the **`blockintake`** skill. **Block A is groundwork and Block B carries
+the titular 21-mer peptide claim** — decided 2026-09-10, recorded at the top of
+`CLAIMS.md` with two rules: no Block A sentence may imply the peptide result,
+and none may depend on Block B having run.
+
+**Give that distinction a mechanical guard before you start.** Two of four
+independent figure agents, both with `CLAIMS.md` in their brief, wrote that the
+21-mer was supplied when the whole Gα was. The framing pulls that way — we draw
+the α5, name the α5, and the title is about the α5. A written rule catches it at
+review; it does not prevent it. It encodes what Block A converged on and
 names the eight failure classes that recurred. The order matters: verify the
 claim sheet against the data *before* any panel or sentence.
 

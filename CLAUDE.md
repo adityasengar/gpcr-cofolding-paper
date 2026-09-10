@@ -100,9 +100,18 @@ against the pin, the bibliography, and whether another session has work in fligh
 `./verify.sh` runs the full self-check. `./session_end.sh "summary"` writes a handoff
 note into `SESSIONS.md` before committing.
 
-`SESSIONS.md` is the log: git records *what* changed, `SESSIONS.md` records *why* and
-what the next session should not redo. Note that `test-laptop` in that file is **not a
-real machine** — it was a throwaway clone used to test the sync machinery.
+### Skills
+
+| skill | when |
+|---|---|
+| `litquery` | anything about prior work, and figure design by analogy |
+| `dataquery` | anything about our own numbers |
+| `figbuild` | making or checking a figure |
+| `blockintake` | **a new block zip arrives** — carries the eight failure classes Block A hit |
+| `wrap-session` | closing a session: housekeeping, then a compact and a resume prompt |
+
+`sessions/` holds one log per session and `SESSIONS.md` is its index: git records *what* changed, `SESSIONS.md` records *why* and
+what the next session should not redo. Note that `test-laptop` in the older log is **not a real machine** — it was a throwaway clone used to test the sync machinery.
 
 ### What is deliberately not in git
 

@@ -14,8 +14,8 @@ structures/        downloaded PDBs (not in git)
 out/               generated images (not in git — regenerable from the scripts)
 ```
 
-Run `python3 make_demo.py` to see every panel type. Nothing it writes is
-citable; it is a smoke test that the toolkit runs on real columns.
+Run any script in `block_a/panels/` to see the generators in use; each states
+its filter and its n on the panel it draws.
 
 The corpus figures (LF1-LF5 in `FIGURES.md`) are built from the literature
 rather than from `data/`. Their pipeline is:

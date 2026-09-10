@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Convert a draft markdown section to LaTeX, then VERIFY every citation resolves.
 
-  python3 analysis/md2tex.py draft/intro.md manuscript/sections/intro.tex
+  python3 analysis/md2tex.py <source>.md manuscript/sections/<name>.tex
 
 Conversion is deliberately narrow: this handles the constructs our drafts actually use
 and refuses anything it does not understand, rather than guessing. A silent
