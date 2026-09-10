@@ -1,6 +1,0 @@
-backbone,family,n_predictions,n_pass,pass_rate,n_distinct_receptors,n_distinct_experiments,median_d_tm6,median_d_npxxy,median_d_tm5_out,median_d_dry,median_plddt_at_anchors,A1_fail,A2_fail,A3_fail,A5_fail,behavioural_signature
-boltz,AF3,10418,9733,93.4%,77,14,13.20,17.03,8.54,12.41,87.12,320,215,130,20,AF3-family; sequence-specific peptide recognition (L21/L15/E19 chemistry ontology emerges); AA2AR bimodality (~85% pooled active with cognate Gα)
-of3,AF3,2855,2635,92.3%,84,6,13.59,17.08,8.52,15.73,79.45,45,120,10,45,AF3-family; less discriminating than Boltz (permissive on poly-A/G scaffolds); higher A5SpeciesMismatch rate
-protenix,AF3,2535,2360,93.1%,52,3,13.73,16.11,8.39,16.48,84.45,35,85,10,45,AF3-family; scaffold-level recognition (distinguishes α5-CT from poly-random but not point mutations); highest overall scoring pass rate
-chai,AF3,1010,960,95.0%,54,2,9.74,17.90,8.46,8.95,80.49,30,20,0,0,AF3-family (Apache 2.0); joined late (Wave 12+); comparable to Boltz on Task-3b silver set (82.3% Arm 1 hit)
-af2mm,AF2,750,700,93.3%,15,1,13.58,16.92,8.62,15.17,90.30,0,50,0,0,"AF2-multimer (non-AF3 comparator); Wave 46/56.0 multi-axis result +29.5 pp CI [+13,+48] coherent-active — architecture-independent effect"

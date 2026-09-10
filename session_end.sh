@@ -6,7 +6,7 @@ ME=$(cat .machine 2>/dev/null || hostname -s)
 SUMMARY="${1:?usage: ./session_end.sh \"what this session did\"}"
 
 DRIFT=$(lit/corpus_check.sh 2>/dev/null | grep -cE '^[[:space:]]*!!' || echo 0)
-DATA=$(python3 analysis/fingerprint.py --check 2>&1 | head -1 | sed 's/^[[:space:]]*//')
+DATA=$(python3 analysis/block_a/verify_claims.py 2>&1 | tail -1 | sed 's/^[[:space:]]*//')
 
 ENTRY=$(mktemp)
 {

@@ -9,7 +9,7 @@ Make figures. The design counterpart is `litquery` — it answers *what figure s
 this be*, matching on `data_shape` across 1,226 panel-group rows in the corpus. This
 skill answers *build it, and do not build it badly*.
 
-Read `figures/FIGURES.md` first. Then `figures/README.md` for where the rules came from.
+Read `figures/FIGURES.md` and `analysis/block_a/DISCREPANCY_REPORT.md` first. Then `figures/README.md` for where the rules came from.
 
 ## Refuse these. They are not style preferences
 
@@ -18,7 +18,7 @@ Each one is a defect recorded in the corpus's `hides` column, with a count.
 | refuse | because |
 |---|---|
 | a panel with no `FIGURES.md` entry naming its claim | a figure that defends nothing is a plot |
-| a number when `analysis/fingerprint.py --check` reports drift | every `RESULTS.md` verdict is stale until re-derived |
+| a number `analysis/block_a/verify_claims.py` cannot reproduce | the claim sheet and the data disagree in 21 places; the data wins |
 | a render without `--selected-from` and `--selection-rule` | 59 corpus renders are hand-picked with the rule unstated |
 | a render that carries a claim with no quantitative panel beside it | 58 corpus renders do exactly this |
 | a bar where a distribution exists | bars hide spread; use `strip_violin` |
@@ -32,7 +32,7 @@ mention the problem in a caption.
 
 ## How to build
 
-1. `python3 analysis/fingerprint.py --check` — before anything.
+1. `python3 analysis/block_a/verify_claims.py` — before anything.
 2. Find or write the `FIGURES.md` entry. Claim, shows, data with `[R-*]` ids, build
    command, status.
 3. Build with `figures/figpanels.py` generators, never bare matplotlib — the house

@@ -14,7 +14,7 @@ does not; and model confidence does not track state correctness.
 | | |
 |---|---|
 | you write | `figures/**`, and figure **captions** in `manuscript/sections/figures.tex` |
-| you read | `data/`, `CLAIMS.md`, `RESULTS.md`, `lit/notes/`, `lit/INDEX.md` |
+| you read | `data/block_a/`, `analysis/block_a/`, `CLAIMS.md`, `lit/notes/`, `lit/INDEX.md` |
 | you never touch | git, `manuscript/main.tex`, anything under `lit/` or `analysis/` |
 
 Body prose belongs to the lit agent. Captions belong to you, because a caption's
@@ -32,13 +32,14 @@ happened once.
 ```
 FIGURES.md       the ledger: one entry per figure — DURABLE
 figstyle.py      house style: sizes, fonts, palette, save()
+block_a/         the current block: badata.py loader, cifread.py anchor
+                 verification, panels/, FIGURE_PROVENANCE.md
 mine_corpus.py   lit/notes/*.md -> data_lit/*.csv, the corpus figures' input
 classify_corpus.py  rules over those tables — DURABLE, every rule is auditable
 data_lit/        extracted corpus tables — DURABLE, in git
 panels/          one script per finished figure
 figpanels.py     panel generators; each names the defect it prevents
 render_struct.py PyMOL renders, driven from the command line
-make_demo.py     builds one of every panel from data/predictions.csv
 scenes/          .pml sources and camera views — DURABLE, in git
 structures/      downloaded PDBs — not in git
 out/             generated images — not in git
@@ -54,8 +55,10 @@ ledger and the scenes survive a data refresh; the images do not.
 it defends and the `[R-*]` ids of every number it shows. A panel with no entry is not
 a figure, it is a plot.
 
-**Run `python3 ../analysis/fingerprint.py --check` before believing any number.** If
-the data moved, every `RESULTS.md` verdict is stale and so is every panel built on one.
+**Run `python3 ../analysis/block_a/verify_claims.py` before believing any number.**
+It recomputes every checkable claim from the tidy files and exits 1 on any
+mismatch. Mismatches are expected and recorded — what matters is that a panel
+never draws a number the check does not reproduce.
 
 ## Asking the corpus
 
@@ -87,13 +90,32 @@ So `render_struct.py` refuses to run without `--selected-from` and `--selection-
 On the plot side the recurring failures are bars standing in for distributions,
 missing n, broken axes, and two measures sharing one axis. Do not do those.
 
-## What can be plotted today
+## The data you work from
 
-`data/predictions.csv` — 17,568 rows, 16,388 scored — carries `d_tm6`, `d_npxxy`,
-`classified_state`, `plddt_at_anchors_mean` and the eight-arm `partner_type`. The
-central contrast, the decoy and shuffled arms, the confidence-vs-state scatter and
-the coverage grid are all derivable **locally, now**.
+**One block at a time.** The current block is `data/block_a/` — 9,490 scored
+predictions, 48 receptors, 4 backbones, 2 arms (apo and cognate). It is
+**read-only**; never edit the drop. Load it through
+`figures/block_a/badata.py`, which knows the thresholds and the exclusion flags.
 
-`delta_to_active` is null for 41% of rows — several receptors carry no active
-reference — so any panel measuring distance *to the deposited active state* still
-waits on an import from the HPC. `d_tm6` is the raw geometry and does not.
+Block B will arrive as its own zip and supersede Block A for new claims. When it
+does, add `figures/block_b/` beside the existing one rather than editing it.
+
+**Read `analysis/block_a/DISCREPANCY_REPORT.md` before drawing anything.** The
+shipped claim sheet and the shipped data disagree in 21 places. Four were named
+in the brief; seventeen were found here, including a structure file that is the
+wrong protein entirely and four `ALIGNMENT.md` files naming anchors that do not
+reproduce the shipped distances. **Recompute every anchor and every distance
+from coordinates before drawing it** — `figures/block_a/cifread.py:verify_anchor`
+refuses to return one that does not match the tidy value.
+
+## Render conventions
+
+`lit/RENDER_CONVENTIONS.md` records how this literature actually draws these
+figures, surveyed by viewing panels rather than reading captions. The two that
+matter most:
+
+- **Grey means "not the subject", never "reference".** Grey the invariant
+  scaffold and colour only the element carrying the claim.
+- **Annotate every measured distance with the atom pair it was measured
+  between.** No render in the 232-row corpus survey does this; doing it puts us
+  ahead of all of them.

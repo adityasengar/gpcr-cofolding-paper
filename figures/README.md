@@ -9,9 +9,9 @@ the HPC, the same commands make the real figures.
 figstyle.py        house style: sizes, fonts, palette, save()
 figpanels.py       plot generators — distributions, pairs, composition, matrix
 render_struct.py   PyMOL structure renders, driven from the command line
-make_demo.py       builds one of every panel from data/predictions.csv
+block_a/           the current block: loader, anchor checks, panels, provenance
 structures/        downloaded PDBs (not in git)
-out/               generated output (not in git — perishable, like RESULTS.md)
+out/               generated images (not in git — regenerable from the scripts)
 ```
 
 Run `python3 make_demo.py` to see every panel type. Nothing it writes is
@@ -128,19 +128,19 @@ white exactly as it will print. `--transparent-background` gives RGBA instead,
 which only looks right in a compositor: pdflatex and several image tools ignore
 the alpha channel and render the ghost cartoon as flat grey.
 
-## What can be plotted today
+## What the panels read
 
-`data/predictions.csv` (17,568 rows, 16,388 scored) already carries `d_tm6`,
-`d_npxxy`, `classified_state`, `plddt_at_anchors_mean` and the eight-arm
-`partner_type` — apo, ligand, antagonist, α5_ct_fragment, α5_ct_variant,
-cognate_ga, shuffled_ga, decoy_scaffold. So the central contrast, the decoy and
-shuffled arms, the confidence-vs-state scatter and the coverage grid are all
-derivable **locally, now**.
+`data/block_a/` — 9,490 scored predictions, 48 receptors (40 Class A, 4 B, 4 F),
+4 backbones, 2 arms. Read-only. Load it through `figures/block_a/badata.py`.
 
-What is not: `delta_to_active` is null for 41% of rows because several receptors
-carry no active reference, so any panel measuring distance *to the deposited
-active state* still waits on the import. `d_tm6` is the raw geometric quantity
-and does not.
+Blocks supersede one another: Block B will arrive as its own zip and get its own
+`figures/block_b/`. The earlier export this file used to describe was a different
+campaign and was deleted on 2026-09-10; see `CLAUDE.md`.
 
-Run `python3 analysis/fingerprint.py --check` before believing any number a
-panel shows.
+Before drawing anything, read `analysis/block_a/DISCREPANCY_REPORT.md` (21
+groups) and `lit/RENDER_CONVENTIONS.md`. Verify every anchor and distance against
+the tidy values with `figures/block_a/cifread.py:verify_anchor` — four of the
+drop's `ALIGNMENT.md` files name residues that do not reproduce the shipped
+numbers, and one shipped structure is the wrong protein entirely.
+
+Run `python3 analysis/block_a/verify_claims.py` before believing any number.

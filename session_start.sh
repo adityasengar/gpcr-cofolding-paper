@@ -43,13 +43,13 @@ echo "--- corpus integrity ---"
 [ -x lit/corpus_check.sh ] && lit/corpus_check.sh 2>&1 | sed 's/^/  /'
 
 echo
-echo "--- data freshness ---"
-python3 analysis/fingerprint.py --check 2>&1 | sed 's/^/  /'
+echo "--- block A claim check ---"
+python3 analysis/block_a/verify_claims.py 2>&1 | tail -1 | sed 's/^/  /'
 
 echo
 echo "--- assets kept out of git (this laptop only) ---"
 printf "  lit/pdfs/   %s\n" "$([ -d lit/pdfs ] && echo "$(ls lit/pdfs/*.pdf 2>/dev/null|wc -l|tr -d ' ') PDFs" || echo 'ABSENT — notes only; say so rather than guessing')"
-printf "  rows_enriched_v3_7.csv  %s\n" "$([ -f rows_enriched_v3_7.csv ] && echo present || echo 'ABSENT')"
+printf "  data/block_a/          %s\n" "$([ -d data/block_a ] && echo present || echo 'ABSENT')"
 echo
 echo "--- manuscript bibliography ---"
 TMPB=$(mktemp)

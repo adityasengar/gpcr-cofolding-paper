@@ -43,9 +43,10 @@ else
 fi
 
 # --- data ---
-python3 analysis/fingerprint.py --check >/dev/null 2>&1 \
-  && ok "data fingerprint" "OK (or absent by design)" || bad "data fingerprint" "CHANGED — re-derive RESULTS.md"
-python3 analysis/q.py ladder >/dev/null 2>&1 && ok "analysis queries run" "OK" || bad "analysis queries" "FAIL"
+N=$(python3 -c "import pandas,sys; print(len(pandas.read_csv('data/block_a/01_rows/block_a_rows.csv')))" 2>/dev/null)
+[ "$N" = "9490" ] && ok "block A rows" "9,490" || bad "block A rows" "expected 9,490, got ${N:-none}"
+./analysis/block_a/check_deliverables.sh >/dev/null 2>&1 \
+  && ok "block A deliverables" "all checks pass" || bad "block A deliverables" "see check_deliverables.sh"
 
 # --- bibliography ---
 T=$(mktemp); cp manuscript/refs.bib "$T" 2>/dev/null
