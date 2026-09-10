@@ -115,6 +115,31 @@ note into `SESSIONS.md` before committing.
 | `blockintake` | **a new block zip arrives** — carries the eight failure classes Block A hit |
 | `wrap-session` | closing a session: housekeeping, then a compact and a resume prompt |
 
+### What we ask the pipeline for, and where it lives
+
+**Two files per block, and they have different audiences.** Keep them apart —
+merging them produces a document neither reader can act on.
+
+| file | audience | holds |
+|---|---|---|
+| `analysis/block_<x>/DATA_REQUESTS.md` | the **pipeline team** | numbered asks for files and columns, ranked by whether a manuscript sentence depends on the answer, each with a cost class; then open questions about the data |
+| `rebuttals/BLOCK_<X>.md` | the **orchestrator agent** | **R**ebuttals (what the drop got wrong, with the recomputation), **Q**uestions (what we cannot resolve ourselves), **S**uggestions (experiments that would elevate the paper) |
+
+Cost classes are **free** (re-analysis of data already held), **cheap**
+(re-scoring existing predictions, no new inference) and **real** (new
+predictions). Every ask carries one. As of 2026-09-10: Block A 15 asks, B 17,
+C 18 — and **every Block C ask is free**, because its numbers are already
+computed and sitting in files that were not zipped.
+
+`rebuttals/` also holds `PANEL_EXPANSION.md` and `PANEL_EXPANSION_CLASS_A.md`
+(19 Class A receptors with both states that our panel lacks) and a `README.md`
+carrying the conventions. Nothing here has been sent upstream yet.
+
+**The rule that keeps these documents usable:** an ask for a file we already
+hold destroys the credibility of every real ask beside it. `analysis/audit_asks.py`
+checks every path in all six documents against the filesystem and fails on any
+that is claimed absent and is not.
+
 `sessions/` holds one log per session and `SESSIONS.md` is its index: git records *what* changed, `SESSIONS.md` records *why* and
 what the next session should not redo. Note that `test-laptop` in the older log is **not a real machine** — it was a throwaway clone used to test the sync machinery.
 

@@ -218,6 +218,19 @@ first and finds support afterwards.
 
 ## When Block D arrives
 
+**Aditya's stated sequence, 2026-09-10: land and audit D, then BRAINSTORM THE
+NEXT EXPERIMENTS TOGETHER.** Do not arrive with a chosen experimental programme.
+The deliverable at that point is material for a decision — what each title clause
+still lacks, the `real`-class suggestions already written (Block B S1, S2, S3 are
+the bulk control, the isolated 21-mer arm and the agonist arm), each with its
+cost and what it would close. He picks. New predictions are the expensive class
+here and almost everything else we have asked for is free or cheap.
+
+Produce D's two ask documents as for the others —
+`analysis/block_d/DATA_REQUESTS.md` for the pipeline team and
+`rebuttals/BLOCK_D.md` for the orchestrator agent. The convention is in
+`CLAUDE.md` under "What we ask the pipeline for".
+
 Invoke the **`blockintake`** skill, and run it in its stated order: **verify the
 claim sheet against the data before any panel or sentence.** That order has now
 caught something in all three blocks, including one defect that had already
