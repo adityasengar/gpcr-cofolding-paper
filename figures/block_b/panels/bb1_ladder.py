@@ -139,8 +139,13 @@ def main():
             u"value-label section gives the canonical set used here.")
     fig.text(0.01, -0.02, "\n".join(textwrap.wrap(note, 132)),
              fontsize=5.4, color=fs.GREY, va="top", ha="left")
-    fig.text(0.01, -0.115, "\n".join(textwrap.wrap(warn, 132)),
-             fontsize=5.4, color=fs.VERM, va="top", ha="left")
+    # The `warn` text above is a BUILD note, not caption text, and it is deliberately
+    # NOT drawn on the figure: BB-1 is a main-text panel and red developer annotation
+    # must not reach a submission. The information is preserved where it belongs --
+    # in FIGURE_PROVENANCE.md and in the FIGURES.md ledger entry, both of which record
+    # why the superseded reference dashes are absent. Print it to the console instead,
+    # so anyone rebuilding still sees it.
+    print("  NOTE (not drawn):", warn)
 
     paths = fs.save(fig, "bb1_ladder")
     print("BB-1 ->", paths[0])

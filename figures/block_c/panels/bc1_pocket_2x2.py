@@ -81,19 +81,33 @@ def main():
             u"inactive) − (antagonist active − antagonist inactive), so a negative "
             u"value means agonists land nearer the active reference and "
             u"antagonists nearer the inactive one.")
+    # THE CAVEAT IS READER-FACING AND STAYS ON THE PANEL. What changed on
+    # 2026-09-10 is the colour and the last sentence.
+    #
+    # It was drawn in fs.VERM, and red on a figure reads as a developer warning
+    # rather than as content. BB-1 was found shipping an actual build note in
+    # the same colour on a MAIN-TEXT figure the same evening; this one is not a
+    # build note, but a submission should not contain red annotation either way.
+    # It is now dark ink, which is emphasis rather than alarm.
+    #
+    # And it ended "Add the per-receptor points when the rows arrive" -- an
+    # instruction to us, not information for a reader. That sentence moved to
+    # the console, where the person who could act on it will see it.
     warn = (u"SUMMARY PANEL. rows.tier3.v2.csv was not delivered with this "
             u"campaign, so the 23 per-receptor values behind each mean are not "
             u"available and no distribution is drawn. Four intervals are not "
             u"evidence about a population: this project has twice found a "
             u"four-value summary concealing a bimodal one — Block A's amplitude "
-            u"fits and Block C's own pose result. Add the per-receptor points "
-            u"when the rows arrive.")
+            u"fits and Block C's own pose result.")
+    todo = ("BC-1 build note: add the per-receptor points when "
+            "rows.tier3.v2.csv arrives (Block C DATA_REQUESTS ask 1).")
     fig.text(0.01, -0.085, "\n".join(textwrap.wrap(note, 132)), fontsize=5.4,
              color=fs.GREY, va="top", ha="left")
     fig.text(0.01, -0.205, "\n".join(textwrap.wrap(warn, 132)), fontsize=5.4,
-             color=fs.VERM, va="top", ha="left")
+             color=fs.BLACK, va="top", ha="left", weight="bold")
 
     p = fs.save(fig, "bc1_pocket_2x2")
+    print(todo)
     print("BC-1 ->", p[0])
     for bb in B.BACKBONES:
         k = cb[bb]["cluster_boot"]
