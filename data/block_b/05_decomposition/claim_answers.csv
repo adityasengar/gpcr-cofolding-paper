@@ -1,0 +1,15 @@
+claim_id,metric,observed_value,ci_lo,ci_hi,source_file,matches_claim_sheet_bool
+SC-B-2,delta_occupancy_prob_frame36,0.400,0.328,0.464,ladder_decomposition.csv,True
+SC-B-2,delta_a5ct_seq_prob_frame36,0.252,0.188,0.321,ladder_decomposition.csv,True
+SC-B-2,delta_correct_family_prob_frame36,0.082,0.047,0.125,ladder_decomposition.csv,True
+SC-B-2,delta_occupancy_prob_share_pct,54.6,,,ladder_decomposition.csv,True
+SC-B-2,delta_a5ct_seq_prob_share_pct,34.3,,,ladder_decomposition.csv,True
+SC-B-2,delta_correct_family_prob_share_pct,11.1,,,ladder_decomposition.csv,True
+SC-B-2,delta_occupancy_logit_frame36,1.907,1.52,2.40,ladder_decomposition.csv,True
+SC-B-2,delta_a5ct_seq_logit_frame36,1.214,0.97,1.49,ladder_decomposition.csv,True
+SC-B-2,delta_correct_family_logit_frame36,0.656,0.39,1.09,ladder_decomposition.csv,True
+SC-B-2,delta_correct_family_logit_share_pct,17.4,,,ladder_decomposition.csv,True
+SC-B-2,family_logit_share_boltz_pct,17.4,,,ladder_decomposition.csv,True
+SC-B-2,family_logit_share_chai_pct,17.5,,,ladder_decomposition.csv,True
+SC-B-2,family_logit_share_of3_pct,20.9,,,ladder_decomposition.csv,True
+SC-B-2,family_logit_share_protenix_pct,17.5,,,ladder_decomposition.csv,True

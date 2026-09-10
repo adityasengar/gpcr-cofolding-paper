@@ -1,0 +1,6 @@
+flag,n_receptors,n_rows_fired,n_rows_remaining_if_applied,total_rows
+excl_E_B_1,4,3200,28800,32000
+excl_E_B_2,2,1600,30400,32000
+excl_E_B_3,1,800,31200,32000
+excl_E_B_4,15,12000,20000,32000
+excl_any,22,14400,17600,32000

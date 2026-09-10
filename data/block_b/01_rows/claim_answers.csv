@@ -1,0 +1,11 @@
+claim_id,metric,observed_value,ci_lo,ci_hi,source_file,matches_claim_sheet_bool
+SC-B-10,total_rows,32000,,,rows_tidy.csv,True
+SC-B-10,total_cells,640,,,rows_tidy.csv,True
+SC-B-10,rows_per_cell,50,,,rows_tidy.csv,True
+SC-B-10,distinct_seeds_per_cell,5,,,rows_tidy.csv,True
+SC-B-10,rows_with_of3_sentinel_seed,0,,,rows_tidy.csv,True
+SC-B-10,rows_with_scorer_git_sha_no_git,0,,,rows_tidy.csv,True
+SC-B-10,rows_apo,8000,,,rows_tidy.csv,True
+SC-B-10,rows_decoy,8000,,,rows_tidy.csv,True
+SC-B-10,rows_shuffled,8000,,,rows_tidy.csv,True
+SC-B-10,rows_cognate,8000,,,rows_tidy.csv,True

@@ -1,0 +1,9 @@
+arm,bootstrap_unit,point_estimate,ci_lo_95,ci_hi_95
+apo,receptor,0.1579,0.0936,0.2326
+apo,cluster,0.1579,0.0828,0.2586
+decoy,receptor,0.5579,0.4557,0.6521
+decoy,cluster,0.5579,0.4503,0.6716
+shuffled,receptor,0.8094,0.7353,0.8697
+shuffled,cluster,0.8094,0.7459,0.8697
+cognate,receptor,0.8911,0.8278,0.9465
+cognate,cluster,0.8911,0.8328,0.9400

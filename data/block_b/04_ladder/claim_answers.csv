@@ -1,0 +1,13 @@
+claim_id,metric,observed_value,ci_lo,ci_hi,source_file,matches_claim_sheet_bool
+SC-B-1,panel_apo_rate_frame36,0.158,0.14,0.18,ladder_four_scorings.csv,True
+SC-B-1,panel_decoy_rate_frame36,0.558,0.51,0.60,ladder_four_scorings.csv,True
+SC-B-1,panel_shuffled_rate_frame36,0.809,0.78,0.84,ladder_four_scorings.csv,True
+SC-B-1,panel_cognate_rate_frame36,0.891,0.87,0.91,ladder_four_scorings.csv,True
+SC-B-1,median_npxxy_apo_A,11.30,,,ladder_continuous_distributions.csv,True
+SC-B-1,median_npxxy_decoy_A,8.19,,,ladder_continuous_distributions.csv,True
+SC-B-1,median_npxxy_shuffled_A,7.31,,,ladder_continuous_distributions.csv,True
+SC-B-1,median_npxxy_cognate_A,6.60,,,ladder_continuous_distributions.csv,True
+SC-B-1,median_tilt_apo_A,13.05,,,ladder_continuous_distributions.csv,True
+SC-B-1,median_tilt_decoy_A,15.61,,,ladder_continuous_distributions.csv,True
+SC-B-1,median_tilt_shuffled_A,16.42,,,ladder_continuous_distributions.csv,True
+SC-B-1,median_tilt_cognate_A,16.75,,,ladder_continuous_distributions.csv,True

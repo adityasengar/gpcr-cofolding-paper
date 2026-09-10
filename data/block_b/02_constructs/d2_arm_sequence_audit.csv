@@ -1,0 +1,14 @@
+D2_receptor,arm,partner_type,partner_identity,partner_perturbation,consumed_sequence_expected_name,consumed_sequence_sha256,matches_real_Nb60_5JQH,matches_partners_fasta_mislabel,manifest_input_sha_first_seed,n_manifest_rows,arm_survived_to_analysis,rows_contributing_to_D2_manuscript_sentence
+ACM2,active_nb,nanobody,4MQS,wt,real_Nb9-8_4MQS,4888b3976a25b1529b9f2d12f52528e5f81a14a4d56cd091569d3e791e84806f,False,False,2205c68d53dc2626cc773ab9c92cc46740dcab399504d8f5fe7b7c61c46435be,20,True,200
+ACM2,apo,apo,,wt,,unknown (partner_type=apo or g_alpha),False,False,,0,True,200
+ACM2,cognate_ga,g_alpha,alphas,wt,,unknown (partner_type=apo or g_alpha),False,False,d0f18486222a15760ff0ac36813900b1b5e5c8834bcfc2b4ed13f7f62ed2df15,20,True,200
+ADRB2,active_nb,nanobody,4LDE,placeholder_nb80_from_nb60_5jqh,placeholder=Nb60_5JQH_real,1406ad7ea26451149ea73339e2282ef0f77f52d693c680cbf790db7af767db62,True,False,cd31bff9ed126366785f080bf974146f8fee2521f29f26463ab2839e6947c392,20,False,0
+ADRB2,apo,apo,,wt,,unknown (partner_type=apo or g_alpha),False,False,,0,True,200
+ADRB2,cognate_ga,g_alpha,alphas,wt,,unknown (partner_type=apo or g_alpha),False,False,be63854ec2017ec3d7f3b07907c9f57d800f2d5db6e0626bfd58e0cee0e2cb32,20,True,200
+ADRB2,inactive_nb,nanobody,5JQH,wt,real_Nb60_5JQH,1406ad7ea26451149ea73339e2282ef0f77f52d693c680cbf790db7af767db62,True,False,cd31bff9ed126366785f080bf974146f8fee2521f29f26463ab2839e6947c392,20,True,200
+AGTR1,active_nb,nanobody,6OS2,wt,real_NbAT110i1_le_6OS2,d8c31820ac1bb8784867b0192e97d9efcea90a80218e53a831de7b45f644595a,False,False,353902a1c7af9181552b8ca7ffdfd6e96ec576911973850e9b9db60c113881d9,20,True,170
+AGTR1,apo,apo,,wt,,unknown (partner_type=apo or g_alpha),False,False,,0,True,200
+AGTR1,cognate_ga,g_alpha,alphas,wt,,unknown (partner_type=apo or g_alpha),False,False,c7947e80d873dab88b2ddd676c989d6f3295a265503e2ad9ea71c9e91aec68e5,20,True,200
+OPRK,apo,apo,,wt,,unknown (partner_type=apo or g_alpha),False,False,,0,True,200
+OPRK,cognate_ga,g_alpha,alphas,wt,,unknown (partner_type=apo or g_alpha),False,False,e022ea291ab3944f6919bf6bc6ea6d3c9932fd412d68e895f0ac36fa6ae78e36,20,True,200
+OPRK,inactive_nb,nanobody,6VI4,wt,real_Nb6_6VI4,a7b413fe44dba2a72187b519f26b7312d90ac964e408f0ae607e915e1830a2ab,False,False,e5b570aa5e523588b929b27b8f5a86a83bb0a3fc66cc0fa1383b841b18466ecd,20,True,200

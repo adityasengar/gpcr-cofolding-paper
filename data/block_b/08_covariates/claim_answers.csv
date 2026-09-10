@@ -1,0 +1,9 @@
+claim_id,metric,observed_value,ci_lo,ci_hi,source_file,matches_claim_sheet_bool
+SC-B-11,dref_npxxy_continuous_slope_all,-0.002,-0.037,+0.032,ladder_height_regressions.csv,True
+SC-B-11,dref_npxxy_logit_slope_all,-0.037,-0.128,+0.080,ladder_height_regressions.csv,True
+SC-B-11,dref_tilt_continuous_slope_all,+0.049,-0.122,+0.270,ladder_height_regressions.csv,True
+SC-B-11,dref_tilt_logit_slope_all,+0.134,-0.222,+0.486,ladder_height_regressions.csv,True
+SC-B-11,coupling_promiscuity_continuous_slope_all,-0.106,-0.563,+0.342,ladder_height_regressions.csv,True
+SC-B-11,coupling_promiscuity_logit_slope_all,-0.072,-0.841,+0.663,ladder_height_regressions.csv,True
+SC-B-11,dref_tilt_continuous_slope_no_aa2ar,-0.003,-0.149,+0.143,ladder_height_regressions.csv,True
+SC-B-11,any_predictor_ci_excludes_zero,False,,,ladder_height_regressions.csv,True

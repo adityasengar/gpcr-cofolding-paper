@@ -1,0 +1,7 @@
+receptor,uniprot,bw,uniprot_position,aa_expected,role_note
+GHSR,GHSR_HUMAN,3.50,141,R,DRY-motif arginine (R3.50); anchor for tilt / TM6-outward axes
+GHSR,GHSR_HUMAN,3.51,142,Y,DRY-motif tyrosine
+GHSR,GHSR_HUMAN,5.58,232,Y,NPxxY-OH partner (Y5.58)
+GHSR,GHSR_HUMAN,6.30,258,E,DRY-lock partner on TM6 (6.30)
+GHSR,GHSR_HUMAN,6.34,262,,TM6-inner-face marker for r3.50-r6.34 axis
+GHSR,GHSR_HUMAN,7.53,323,Y,NPxxY-OH partner (Y7.53)

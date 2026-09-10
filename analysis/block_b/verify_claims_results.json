@@ -1,0 +1,926 @@
+[
+ {
+  "id": "B01",
+  "what": "rows_tidy row count",
+  "got": 32000,
+  "want": 32000,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B02",
+  "what": "distinct (receptor,arm,backbone) cells",
+  "got": 640,
+  "want": 640,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B03",
+  "what": "every cell has exactly 50 rows",
+  "got": [
+   50
+  ],
+  "want": [
+   50
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B04",
+  "what": "every cell has 5 distinct seeds",
+  "got": [
+   5
+  ],
+  "want": [
+   5
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B05",
+  "what": "rows carrying the OF3 sentinel seed 2746317213",
+  "got": 0,
+  "want": 0,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B06",
+  "what": "rows with scorer_git_sha == 'no-git'",
+  "got": 0,
+  "want": 0,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B07",
+  "what": "single scorer_git_sha across all rows",
+  "got": 1,
+  "want": 1,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B08",
+  "what": "ref_set_csv_sha256 pinned to 6ee2cad8...",
+  "got": "6ee2cad8",
+  "want": "6ee2cad8",
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B09",
+  "what": "receptors on the panel",
+  "got": 40,
+  "want": 40,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B10",
+  "what": "backbones",
+  "got": [
+   "boltz",
+   "chai",
+   "of3",
+   "protenix"
+  ],
+  "want": [
+   "boltz",
+   "chai",
+   "of3",
+   "protenix"
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B11",
+  "what": "arms",
+  "got": [
+   "apo",
+   "cognate",
+   "decoy",
+   "shuffled"
+  ],
+  "want": [
+   "apo",
+   "cognate",
+   "decoy",
+   "shuffled"
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B12",
+  "what": "paralog clusters",
+  "got": 26,
+  "want": 26,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B13.1",
+  "what": "excl_E_B_1 fires on n rows (README)",
+  "got": 3200,
+  "want": 3200,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B14.1",
+  "what": "excl_E_B_1 membership == exclusion_definitions.csv",
+  "got": [
+   "EDNRA",
+   "EDNRB",
+   "GRPR",
+   "HRH3"
+  ],
+  "want": [
+   "EDNRA",
+   "EDNRB",
+   "GRPR",
+   "HRH3"
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B13.2",
+  "what": "excl_E_B_2 fires on n rows (README)",
+  "got": 1600,
+  "want": 1600,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B14.2",
+  "what": "excl_E_B_2 membership == exclusion_definitions.csv",
+  "got": [
+   "CNR1",
+   "OPRD"
+  ],
+  "want": [
+   "CNR1",
+   "OPRD"
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B13.3",
+  "what": "excl_E_B_3 fires on n rows (README)",
+  "got": 800,
+  "want": 800,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B14.3",
+  "what": "excl_E_B_3 membership == exclusion_definitions.csv",
+  "got": [
+   "AA2AR"
+  ],
+  "want": [
+   "AA2AR"
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B13.4",
+  "what": "excl_E_B_4 fires on n rows (README)",
+  "got": 12000,
+  "want": 12000,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B14.4",
+  "what": "excl_E_B_4 membership == exclusion_definitions.csv",
+  "got": [
+   "5HT1B",
+   "5HT2C",
+   "5HT5A",
+   "AA2AR",
+   "ACM1",
+   "ADRB1",
+   "ADRB2",
+   "AGTR1",
+   "CNR1",
+   "EDNRA",
+   "FSHR",
+   "HRH1",
+   "LSHR",
+   "OPRD",
+   "OX2R"
+  ],
+  "want": [
+   "5HT1B",
+   "5HT2C",
+   "5HT5A",
+   "AA2AR",
+   "ACM1",
+   "ADRB1",
+   "ADRB2",
+   "AGTR1",
+   "CNR1",
+   "EDNRA",
+   "FSHR",
+   "HRH1",
+   "LSHR",
+   "OPRD",
+   "OX2R"
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B15",
+  "what": "excl_any fires on n rows",
+  "got": 14400,
+  "want": 14400,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B16",
+  "what": "claim-sheet header: E-B-2 == {AA2AR}",
+  "got": [
+   "CNR1",
+   "OPRD"
+  ],
+  "want": [
+   "AA2AR"
+  ],
+  "ok": false,
+  "tol": null,
+  "note": "header says E-B-2 is AA2AR; data says E-B-2 is the agonist-only pair"
+ },
+ {
+  "id": "B17",
+  "what": "claim-sheet header: E-B-3 covers 15 receptors (non-native)",
+  "got": 1,
+  "want": 15,
+  "ok": false,
+  "tol": null,
+  "note": "header says E-B-3 is the 15 non-native; data says E-B-3 is AA2AR alone"
+ },
+ {
+  "id": "B18",
+  "what": "cognate cells pinned >= 0.98, per backbone, C-B-7 says 24-34 of 40",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": "observed {'boltz': 29, 'chai': 28, 'of3': 24, 'protenix': 34}"
+ },
+ {
+  "id": "B19",
+  "what": "one NPxxY threshold on every row",
+  "got": 1,
+  "want": 1,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B20",
+  "what": "NPxxY threshold value",
+  "got": 9.08,
+  "want": 9.082,
+  "ok": false,
+  "tol": 1e-09,
+  "note": ""
+ },
+ {
+  "id": "B21",
+  "what": "one tilt threshold on every row",
+  "got": 1,
+  "want": 1,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B22",
+  "what": "tilt threshold value",
+  "got": 14.932,
+  "want": 14.932,
+  "ok": true,
+  "tol": 1e-09,
+  "note": ""
+ },
+ {
+  "id": "B23",
+  "what": "E-B-1 receptors have all-NaN NPxxY-OH",
+  "got": 0,
+  "want": 0,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B24",
+  "what": "frame_36 receptor count",
+  "got": 36,
+  "want": 36,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B25.apo",
+  "what": "SC-B-1 apo binary predicate (frame_36, per-receptor mean)",
+  "got": 0.158,
+  "want": 0.158,
+  "ok": true,
+  "tol": 0.0005,
+  "note": ""
+ },
+ {
+  "id": "B25.decoy",
+  "what": "SC-B-1 decoy binary predicate (frame_36, per-receptor mean)",
+  "got": 0.558,
+  "want": 0.558,
+  "ok": true,
+  "tol": 0.0005,
+  "note": ""
+ },
+ {
+  "id": "B25.shuffled",
+  "what": "SC-B-1 shuffled binary predicate (frame_36, per-receptor mean)",
+  "got": 0.809,
+  "want": 0.809,
+  "ok": true,
+  "tol": 0.0005,
+  "note": ""
+ },
+ {
+  "id": "B25.cognate",
+  "what": "SC-B-1 cognate binary predicate (frame_36, per-receptor mean)",
+  "got": 0.891,
+  "want": 0.891,
+  "ok": true,
+  "tol": 0.0005,
+  "note": ""
+ },
+ {
+  "id": "B26",
+  "what": "SC-B-1 decoy is 0.558 and NOT the superseded 0.552",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B27.boltz",
+  "what": "SC-B-1 ladder monotonic on boltz independently",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": "0.127 < 0.526 < 0.834 < 0.901"
+ },
+ {
+  "id": "B27.chai",
+  "what": "SC-B-1 ladder monotonic on chai independently",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": "0.323 < 0.611 < 0.733 < 0.822"
+ },
+ {
+  "id": "B27.of3",
+  "what": "SC-B-1 ladder monotonic on of3 independently",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": "0.110 < 0.443 < 0.721 < 0.868"
+ },
+ {
+  "id": "B27.protenix",
+  "what": "SC-B-1 ladder monotonic on protenix independently",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": "0.072 < 0.652 < 0.950 < 0.974"
+ },
+ {
+  "id": "B27z",
+  "what": "ladder_continuous_distributions.csv carries a panel row",
+  "got": false,
+  "want": true,
+  "ok": false,
+  "tol": null,
+  "note": "claim_answers.csv names this file as the source of the 8 medians; it holds only the four per-backbone strata"
+ },
+ {
+  "id": "B28.apo",
+  "what": "SC-B-1 continuous NPxxY-OH median, apo (closest of 4 aggregations)",
+  "got": 10.29,
+  "want": 11.3,
+  "ok": false,
+  "tol": 0.005,
+  "note": "all four: [10.15, 10.23, 10.29, 10.21]"
+ },
+ {
+  "id": "B29.apo",
+  "what": "SC-B-1 continuous tilt median, apo (closest of 4 aggregations)",
+  "got": 12.86,
+  "want": 13.05,
+  "ok": false,
+  "tol": 0.005,
+  "note": "all four: [12.22, 12.13, 12.86, 12.22]"
+ },
+ {
+  "id": "B28.decoy",
+  "what": "SC-B-1 continuous NPxxY-OH median, decoy (closest of 4 aggregations)",
+  "got": 6.8,
+  "want": 8.19,
+  "ok": false,
+  "tol": 0.005,
+  "note": "all four: [6.26, 5.41, 6.8, 6.31]"
+ },
+ {
+  "id": "B29.decoy",
+  "what": "SC-B-1 continuous tilt median, decoy (closest of 4 aggregations)",
+  "got": 15.91,
+  "want": 15.61,
+  "ok": false,
+  "tol": 0.005,
+  "note": "all four: [16.81, 16.72, 15.91, 16.57]"
+ },
+ {
+  "id": "B28.shuffled",
+  "what": "SC-B-1 continuous NPxxY-OH median, shuffled (closest of 4 aggregations)",
+  "got": 5.06,
+  "want": 7.31,
+  "ok": false,
+  "tol": 0.005,
+  "note": "all four: [4.34, 4.24, 5.06, 4.41]"
+ },
+ {
+  "id": "B29.shuffled",
+  "what": "SC-B-1 continuous tilt median, shuffled (closest of 4 aggregations)",
+  "got": 17.64,
+  "want": 16.42,
+  "ok": false,
+  "tol": 0.005,
+  "note": "all four: [17.69, 17.73, 17.64, 17.66]"
+ },
+ {
+  "id": "B28.cognate",
+  "what": "SC-B-1 continuous NPxxY-OH median, cognate (closest of 4 aggregations)",
+  "got": 4.65,
+  "want": 6.6,
+  "ok": false,
+  "tol": 0.005,
+  "note": "all four: [4.29, 4.28, 4.65, 4.4]"
+ },
+ {
+  "id": "B29.cognate",
+  "what": "SC-B-1 continuous tilt median, cognate (closest of 4 aggregations)",
+  "got": 17.53,
+  "want": 16.75,
+  "ok": false,
+  "tol": 0.005,
+  "note": "all four: [17.53, 17.57, 17.56, 17.53]"
+ },
+ {
+  "id": "B35",
+  "what": "SC-B-2 shares are 55/34/11 and NOT the superseded 54/35/11",
+  "got": [
+   55,
+   34,
+   11
+  ],
+  "want": [
+   55,
+   34,
+   11
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B36.cognate",
+  "what": "SC-B-3 p(engaged), cognate",
+  "got": 0.9983,
+  "want": 0.9983,
+  "ok": true,
+  "tol": 0.0006,
+  "note": ""
+ },
+ {
+  "id": "B37.cognate",
+  "what": "SC-B-3 p(active|engaged), cognate",
+  "got": 0.8926,
+  "want": 0.8926,
+  "ok": true,
+  "tol": 0.0006,
+  "note": ""
+ },
+ {
+  "id": "B36.shuffled",
+  "what": "SC-B-3 p(engaged), shuffled",
+  "got": 0.9674,
+  "want": 0.9674,
+  "ok": true,
+  "tol": 0.0006,
+  "note": ""
+ },
+ {
+  "id": "B37.shuffled",
+  "what": "SC-B-3 p(active|engaged), shuffled",
+  "got": 0.8353,
+  "want": 0.8353,
+  "ok": true,
+  "tol": 0.0006,
+  "note": ""
+ },
+ {
+  "id": "B36.decoy",
+  "what": "SC-B-3 p(engaged), decoy",
+  "got": 0.7037,
+  "want": 0.7037,
+  "ok": true,
+  "tol": 0.0006,
+  "note": ""
+ },
+ {
+  "id": "B37.decoy",
+  "what": "SC-B-3 p(active|engaged), decoy",
+  "got": 0.6647,
+  "want": 0.6647,
+  "ok": true,
+  "tol": 0.0006,
+  "note": ""
+ },
+ {
+  "id": "B38",
+  "what": "SC-B-3 decoy engaged-but-inactive, panel_all",
+  "got": 1699,
+  "want": 1699,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B39",
+  "what": "SC-B-3 engaged-but-inactive per backbone within 278-540",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": "observed 278-540"
+ },
+ {
+  "id": "B40.apo_all",
+  "what": "SC-B-4 n cells, apo_all",
+  "got": 160,
+  "want": 160,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B41.apo_all",
+  "what": "SC-B-4 median pif_sum_ca, apo_all",
+  "got": 15.35,
+  "want": 15.35,
+  "ok": true,
+  "tol": 0.005,
+  "note": ""
+ },
+ {
+  "id": "B40.cognate_active_engaged",
+  "what": "SC-B-4 n cells, cognate_active_engaged",
+  "got": 130,
+  "want": 130,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B41.cognate_active_engaged",
+  "what": "SC-B-4 median pif_sum_ca, cognate_active_engaged",
+  "got": 16.04,
+  "want": 16.04,
+  "ok": true,
+  "tol": 0.005,
+  "note": ""
+ },
+ {
+  "id": "B40.shuffled_active_engaged",
+  "what": "SC-B-4 n cells, shuffled_active_engaged",
+  "got": 118,
+  "want": 118,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B41.shuffled_active_engaged",
+  "what": "SC-B-4 median pif_sum_ca, shuffled_active_engaged",
+  "got": 16.0,
+  "want": 16.0,
+  "ok": true,
+  "tol": 0.005,
+  "note": ""
+ },
+ {
+  "id": "B40.decoy_active_engaged",
+  "what": "SC-B-4 n cells, decoy_active_engaged",
+  "got": 69,
+  "want": 69,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B41.decoy_active_engaged",
+  "what": "SC-B-4 median pif_sum_ca, decoy_active_engaged",
+  "got": 16.03,
+  "want": 16.03,
+  "ok": true,
+  "tol": 0.005,
+  "note": ""
+ },
+ {
+  "id": "B40.decoy_engaged_but_inactive",
+  "what": "SC-B-4 n cells, decoy_engaged_but_inactive",
+  "got": 47,
+  "want": 47,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B41.decoy_engaged_but_inactive",
+  "what": "SC-B-4 median pif_sum_ca, decoy_engaged_but_inactive",
+  "got": 15.42,
+  "want": 15.42,
+  "ok": true,
+  "tol": 0.005,
+  "note": ""
+ },
+ {
+  "id": "B42",
+  "what": "SC-B-5 panel-wide TM6 helicity pass rate",
+  "got": 0.988,
+  "want": 0.988,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B43",
+  "what": "SC-B-5 worst arm x backbone cell pass rate",
+  "got": 0.942,
+  "want": 0.941,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B44",
+  "what": "SC-B-6 Gs->Gi tilt residual, all receptors",
+  "got": 0.024,
+  "want": 0.024,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B45",
+  "what": "SC-B-6 Gs->Gi n_receptors, all",
+  "got": 24,
+  "want": 24,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B46",
+  "what": "SC-B-6 Gs->Gi tilt residual, native only",
+  "got": -0.062,
+  "want": -0.062,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B47",
+  "what": "SC-B-6 Gs->Gi n_receptors, native only",
+  "got": 20,
+  "want": 20,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B47b",
+  "what": "SC-B-6 native-only CI [-0.41, +0.21]",
+  "got": [
+   -0.41,
+   0.21
+  ],
+  "want": [
+   -0.41,
+   0.21
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B47c",
+  "what": "SC-B-6 CI spans zero, so NOT an equivalence result",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B48",
+  "what": "SC-B-13 reference audit row count",
+  "got": 80,
+  "want": 80,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B49.Ga-complexed-native",
+  "what": "SC-B-13 activation_class count, Ga-complexed-native",
+  "got": 25,
+  "want": 25,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B49.Ga-complexed-chimera-or-miniG",
+  "what": "SC-B-13 activation_class count, Ga-complexed-chimera-or-miniG",
+  "got": 10,
+  "want": 10,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B49.nanobody-stabilised",
+  "what": "SC-B-13 activation_class count, nanobody-stabilised",
+  "got": 3,
+  "want": 3,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B49.agonist-only-no-partner",
+  "what": "SC-B-13 activation_class count, agonist-only-no-partner",
+  "got": 2,
+  "want": 2,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B50",
+  "what": "SC-B-13 non-native active references",
+  "got": 15,
+  "want": 15,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B51",
+  "what": "SC-B-13 non-native fraction %",
+  "got": 37.5,
+  "want": 37.5,
+  "ok": true,
+  "tol": 0.05,
+  "note": ""
+ },
+ {
+  "id": "B52",
+  "what": "no native heterotrimeric Gs among Class A active references (dispatch 2.4)",
+  "got": 0,
+  "want": 0,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B53",
+  "what": "structure bundle: engagement trio metrics present",
+  "got": true,
+  "want": true,
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B54",
+  "what": "GHSR decoy arm rate (four-backbone mean), addendum says 0.175",
+  "got": 0.175,
+  "want": 0.175,
+  "ok": true,
+  "tol": 0.0015,
+  "note": ""
+ },
+ {
+  "id": "B55",
+  "what": "every predicted CIF's own sha256 matches its filename stem",
+  "got": [
+   11,
+   0
+  ],
+  "want": [
+   11,
+   0
+  ],
+  "ok": true,
+  "tol": null,
+  "note": ""
+ },
+ {
+  "id": "B56",
+  "what": "addendum 3: C2 median tip depth on boltz = 18.81 A, read PANEL-wide",
+  "got": 14.62,
+  "want": 18.81,
+  "ok": false,
+  "tol": 0.005,
+  "note": "GHSR-only boltz C2 median is 18.81, which is where 18.81 comes from"
+ },
+ {
+  "id": "B57",
+  "what": "addendum 3: the same number read as GHSR-only",
+  "got": 18.81,
+  "want": 18.81,
+  "ok": true,
+  "tol": 0.005,
+  "note": ""
+ },
+ {
+  "id": "B58",
+  "what": "addendum 3: cognate median depth 12.3-12.6 A, read PANEL-wide",
+  "got": false,
+  "want": true,
+  "ok": false,
+  "tol": null,
+  "note": "panel cognate median is 12.19 (SC-B-3 says 12.19); GHSR-only is 12.52"
+ },
+ {
+  "id": "B59",
+  "what": "SC-B-3 cognate median depth 12.19 A",
+  "got": 12.19,
+  "want": 12.19,
+  "ok": true,
+  "tol": 0.005,
+  "note": ""
+ },
+ {
+  "id": "B60",
+  "what": "the shipped boltz C2 structure (18.730 A) is typical of the PANEL C2 subset",
+  "got": false,
+  "want": true,
+  "ok": false,
+  "tol": null,
+  "note": "it sits at the 89.9th percentile of the panel boltz C2 rows, and at the 50.0th of GHSR's own"
+ }
+]

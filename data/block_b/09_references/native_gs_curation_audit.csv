@@ -1,0 +1,9 @@
+receptor,active_pdb,active_asrc,native_gs_alternative_available,note
+ADRB2,4LDE,nanobody,3SN6,"3SN6 is the canonical native beta2AR-Gs heterotrimer (deposited 2011, pre-training-cutoff)"
+ADRB1,7BU7,nanobody,,"7BU7 recorded as nanobody-stabilised in campaign curation; alternative native-Gs entries in the PDB not enumerated in this pass"
+AA2AR,5G53,mini_G,,"native-Gs alternatives in the PDB not enumerated"
+FSHR,8I2G,mini_G,,"native-Gs alternatives not enumerated"
+LSHR,7FIH,mini_G,,"native-Gs alternatives not enumerated"
+MC3R,8IOC,chimera,,"non-panel; native-Gs alternatives not enumerated"
+MC5R,8INR,chimera,,"non-panel; native-Gs alternatives not enumerated"
+OXYR,7RYC,chimera,,"non-panel; native-Gs alternatives not enumerated"

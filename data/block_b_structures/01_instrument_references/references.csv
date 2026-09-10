@@ -1,0 +1,3 @@
+receptor,role,pdb_id,resolved_state,stabilising_elements,active_stabilization_source,alpha5_donor_class,d_gpcrdb_tm6_tilt_ref_A,d_npxxy_y558_y753_oh_ref_A,d_r350_r630_ca_ref_A,pinned_provenance_sha256,two_instrument_active,two_instrument_inactive
+GHSR,active,7NA7,Ga-coupled-active,none,native,,17.977742,4.833446,14.387945614298104,64827cdaec1bd8e95c6773caac640cc67a527dd1db45cafb2263af5c1e37b1f6,True,False
+GHSR,inactive,7F83,inactive-inverse-agonist,none,,,12.686695,10.055960,8.105038741424991,cf4feb0170e2f7e9b54537c25ff75afaa458df4a29191127749b994464efc380,False,True

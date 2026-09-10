@@ -1,0 +1,13 @@
+claim_id,metric,observed_value,ci_lo,ci_hi,source_file,matches_claim_sheet_bool
+SC-B-7,templates_off_rows_echo_present,0,,,PHASE_1_CONSTRUCT_IDENTITY.md,True
+SC-B-7,templates_off_launcher_grep_boltz,no_template_flag,,,PHASE_1_CONSTRUCT_IDENTITY.md,True
+SC-B-7,templates_off_launcher_grep_chai,no_template_flag,,,PHASE_1_CONSTRUCT_IDENTITY.md,True
+SC-B-7,templates_off_launcher_grep_of3,use_templates_false_explicit,,,PHASE_1_CONSTRUCT_IDENTITY.md,True
+SC-B-7,templates_off_launcher_grep_protenix,no_template_flag,,,PHASE_1_CONSTRUCT_IDENTITY.md,True
+SC-B-7,templates_off_hpc_status_json_sample_size,20,,,PHASE_1_CONSTRUCT_IDENTITY.md,True
+SC-B-7,templates_off_hpc_status_json_positive_hits,0,,,PHASE_1_CONSTRUCT_IDENTITY.md,True
+SC-B-9,boltz_uppercase_aligned_read,6/6,,,PHASE_1D_EXTENSION.md,True
+SC-B-9,of3_by_construction_read,6/6,,,PHASE_1D_EXTENSION.md,True
+SC-B-9,protenix_uppercase_aligned_read,6/6,,,PHASE_1D_EXTENSION.md,True
+SC-B-9,chai_uppercase_aligned_read,0/40,,,PHASE_1_CONSTRUCT_IDENTITY.md,True
+SC-B-9,decoy_msa_byte_identical_to_cognate,0/18,,,PHASE_1D_EXTENSION.md,True

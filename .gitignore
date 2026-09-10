@@ -49,3 +49,9 @@ figures/structures/
 # shipped file); coordinates and the original zip are not, per lit/pdfs precedent
 block_a_figure_data.zip
 data/block_a/11_structures/
+
+# Block B drop, same rule as Block A: tabular data is committed so every number
+# traces to a shipped file; coordinates and the original zips are not.
+block_b_figure_data.zip
+block_b_structures.zip
+data/block_b_structures/**/*.cif

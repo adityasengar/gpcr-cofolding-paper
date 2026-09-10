@@ -1,0 +1,9 @@
+claim_id,metric,observed_value,ci_lo,ci_hi,source_file,matches_claim_sheet_bool
+SC-B-8,decoy_length_matched_count,40/40,,,donor_ga_class.csv,True
+SC-B-8,decoy_prefix_byte_identical_count,40/40,,,construct_build_report.md,True
+SC-B-8,decoy_tail_hamming_median,9.5,,,construct_build_report.md,True
+SC-B-8,shuffled_wrong_family_count,40/40,,,donor_ga_class.csv,True
+SC-B-8,shuffled_donor_alphas_count,33,,,donor_ga_class.csv,True
+SC-B-8,shuffled_donor_alphai1_count,6,,,donor_ga_class.csv,True
+SC-B-8,shuffled_donor_alpha13_count,1,,,donor_ga_class.csv,True
+SC-B-8,cognate_routing_match_gpcr_coupling,40/40,,,donor_ga_class.csv,True

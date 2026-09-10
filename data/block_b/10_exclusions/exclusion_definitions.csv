@@ -1,0 +1,6 @@
+flag,members,n_receptors,rationale,claim_sheet_reference
+excl_E_B_1,"EDNRA,EDNRB,GRPR,HRH3",4,All-NaN NPxxY-OH under current axis (7.53 = L not Y). Frame_36 = whole panel − E-B-1.,BLOCK_B_CLAIM_SHEET.md § E-B-1
+excl_E_B_2,"OPRD,CNR1",2,Agonist-only active reference; cognate arm cannot reach the two-instrument ceiling by construction.,BLOCK_B_CLAIM_SHEET.md § E-B-2
+excl_E_B_3,"AA2AR",1,Recurrently anomalous across three separate analyses; excluded from pooled inference on family-term slope where AA2AR alone drives the slope.,BLOCK_B_CLAIM_SHEET.md § E-B-3 + caveats/C-B-8
+excl_E_B_4,"5HT1B,5HT2C,5HT5A,AA2AR,ACM1,ADRB1,ADRB2,AGTR1,CNR1,EDNRA,FSHR,HRH1,LSHR,OPRD,OX2R",15,"Non-native-anchored active reference (chimera / mini-G / nanobody / scFv / agonist-only / DVL-DEP). active_stabilization_source != native. Applied where Phase 5 reference-bias caveat (C-B-10) is load-bearing.",BLOCK_B_CLAIM_SHEET.md § E-B-4 + caveats/C-B-10
+excl_any,logical OR of E_B_1 .. E_B_4,,Convenience flag; NEVER apply as a whole. Figure agent turns each set on/off individually.,

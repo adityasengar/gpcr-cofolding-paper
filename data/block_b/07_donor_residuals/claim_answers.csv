@@ -1,0 +1,9 @@
+claim_id,metric,observed_value,ci_lo,ci_hi,source_file,matches_claim_sheet_bool
+SC-B-6,gs_to_gi_tilt_residual_all_A,+0.024,-0.29,+0.30,donor_class_residuals_summary.csv,True
+SC-B-6,gs_to_gi_tilt_residual_native_only_A,-0.062,-0.41,+0.21,donor_class_residuals_summary.csv,True
+SC-B-6,gs_to_gi_native_receptors_n,20,,,phase5_power_analysis.csv,True
+SC-B-6,gs_to_gi_all_receptors_n,24,,,donor_class_residuals_summary.csv,True
+SC-B-6,gs_to_gi_native_fraction_pct,83.3,,,phase5_power_analysis.csv,True
+SC-B-6,gs_to_gi_npxxy_residual_all_A,-0.150,-0.50,+0.29,donor_class_residuals_summary.csv,True
+SC-B-6,gs_to_gi_delta_active_residual_all_A,+0.054,-0.32,+0.50,donor_class_residuals_summary.csv,True
+SC-B-6,outcome_a_verdict,Outcome_A_signed,,,phase5_power_analysis.csv,True

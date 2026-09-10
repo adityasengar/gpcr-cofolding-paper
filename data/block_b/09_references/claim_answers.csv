@@ -1,0 +1,11 @@
+claim_id,metric,observed_value,ci_lo,ci_hi,source_file,matches_claim_sheet_bool
+SC-B-13,refs_ga_complexed_native_count,25,,,reference_audit.csv,True
+SC-B-13,refs_chimera_or_miniG_count,10,,,reference_audit.csv,True
+SC-B-13,refs_nanobody_stabilised_count,3,,,reference_audit.csv,True
+SC-B-13,refs_agonist_only_no_partner_count,2,,,reference_audit.csv,True
+SC-B-13,refs_non_native_total,15,,,reference_audit.csv,True
+SC-B-13,refs_non_native_fraction_pct,37.5,,,reference_audit.csv,True
+SC-B-13,new_curation_errors,0,,,reference_audit.csv,True
+SC-B-13,changed_pdb_assignments,0,,,reference_audit.csv,True
+SC-B-13,gate_6_fail_trigger,False,,,reference_audit.csv,True
+SC-B-13,ref_set_csv_sha256,6ee2cad8e2d7410a920f72192c12c5abaf2ac55c84b58a4b6ec2b19a965202ef,,,reference_set.blockb_pinned.csv,True
