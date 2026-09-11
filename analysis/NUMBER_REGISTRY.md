@@ -190,7 +190,7 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 | 610 | S88 | Block A, verify_claims check CAP11 | Note the denominator: of 4,866 predicate-active rows, 610 carry no active |
 | 61.8 | R521 | Block D, verify_claims check D16 | (95\% CI $[61.8, 86.9]$) --- and the shipped structure shows why that is not a |
 | 86.9 | R521 | Block D, verify_claims check D16 | (95\% CI $[61.8, 86.9]$) --- and the shipped structure shows why that is not a |
-| 4.53 | R524 | Block D, verify_claims check D22 | 4.53~\AA{}, which we measured from the coordinates \textbf{[FIG:nb-structures]}. |
+| 4.53 | R524 | Block D, verify_claims check D22 | 4.53~\AA{}, which we measured from the coordinates (Fig.~\ref{sfig:nbstructures}). |
 | 33.7 | R531 | Block D, verify_claims check D15 | and at 50 samples that interval is $[33.7, 62.6]$.} And the whole of this |
 | 62.6 | R531 | Block D, verify_claims check D15 | and at 50 samples that interval is $[33.7, 62.6]$.} And the whole of this |
 | 14,000 | M455 | Block D, verify_claims check D09 | purpose, and it does so three ways. \textbf{D1} runs 14,000 predictions on |

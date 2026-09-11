@@ -4,46 +4,40 @@ Start in `paper/`. `CLAUDE.md` loads automatically; read it, then this.
 
 ## Where the project is
 
-**Four blocks are landed, verified and written.** 53 pages, SI 18, 67 bibitems,
-0 undefined citations. Four verifiers, one per block:
+**Four blocks landed, verified and written. The document is wired.** 60 pages
+main, 44 SI, 67 bibitems, 0 undefined citations, 0 undefined references, 0
+oversized floats in either document.
 
 | block | checks | reproduce | note |
 |---|---|---|---|
-| A | 63 | 48 | 15 mismatches, all documented |
-| B | 116 | 95 | 21 mismatches, all documented |
-| C | 64 | 64 | 30 of them consistency-only — one row-level file |
-| **D** | 54 | 49 | **and 12 claims recorded as PROSE-ONLY** |
+| A | 63 | 48 | 15 mismatches, documented |
+| B | 116 | 95 | 21 mismatches, documented |
+| C | 69 | 69 | 30 of them consistency-only |
+| **D** | 54 | 49 | **and 12 claims recorded PROSE-ONLY** |
 
-**Block D shipped no row-level data at all.** The three corpora its claim sheet
-names — 42,180 predictions — are not in the bundle. That forced a third label
-into the verifier: `RECOMPUTED`, `CONSISTENCY`, `PROSE-ONLY`, with the last
-printed in its own total so "N checks pass" can never be read as "N claims
-verified". What could be recomputed held, including all six exact binomial
-intervals and fifteen NPxxY distances measured from the coordinates.
+**Block D shipped no row-level data at all** — its three corpora, 42,180
+predictions, are not in the bundle. The verifier carries a third label for it.
 
-**Three independent re-verifications ran on Blocks A, B and C** (corpus session,
-read-only agents that deliberately did not read our discrepancy reports). Their
-verdict on the data is unanimous and good: every aggregate rebuilds bit-exactly
-from the row tables, 79/80 and 103/103 manifest hashes match. **Every defect
-they found is claim-side.** Four landed on files I own; all four are fixed and
-one turned out to be my error, withdrawn.
+**Five main figures, thirty of thirty-two ledger panels placed.** The two absent
+are BA-5 (blocked, below) and the graphical abstract (your pick). The document
+had **zero labels and zero cross-references** until this session; it now has a
+documented prefix scheme and every figure is both placed and cited.
 
-**Two things that changed what the paper says**, both verified end-to-end here:
+**Four guards run in seconds and three have been proved by planting a defect**:
+the number sweep and its coverage check, the request-document auditor, and the
+panel auditor. The fourth, `audit_crossref`, has only ever fired on a
+coincidence — it is not yet evidence of anything.
 
-- **The α5-CT decomposition term was confounded and a clean one was already in
-  the drop.** The shipped term credits 34% to `decoy → shuffled`, but *shuffled*
-  is a different Gα family, so that step changes tail, scaffold, length and
-  family at once. `decoy → cognate` holds everything fixed but the eleven
-  C-terminal residues: **+0.333 [0.242, 0.432]**, telescoping exactly with
-  occupancy (0.400 + 0.333 = 0.733). The clean contrast is *larger* than the
-  confounded one it replaces.
-- **The peptide claim was live in three places, two of them figure captions**,
-  and is now gone. No arm supplies a peptide; the manipulated segment is eleven
-  residues, not twenty-one.
+**Two manuscript claims were false and are fixed.** The α5-CT decomposition term
+was confounded; the clean contrast `decoy → cognate` is **larger** at +0.333
+[0.242, 0.432] and telescopes exactly with occupancy. And the 2×2 was asserted
+to hold "in the apo arm alone"; the shipped row counts are exactly the
+both-arms figure on every backbone, so its scope is withdrawn while its estimate
+stands.
 
-**Nothing has been sent upstream and no main-text figure panel has been drawn.**
-The figure allocation is proposed and on hold — four of its six figures rest on
-numbers under revision.
+**Three independent re-verifications** of Blocks A, B and C agree on the data —
+every aggregate rebuilds bit-exactly, all manifest hashes match. **Every defect
+found was claim-side.**
 
 ## The decisions waiting on Aditya
 
