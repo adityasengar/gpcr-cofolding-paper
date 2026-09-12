@@ -33,7 +33,12 @@ from paths import INPUTS                       # noqa: E402
 
 SYSTEMS = "g2_systems.csv"
 NEED = [SYSTEMS, "ligand_tiers.tsv", "ligand_set_redo.tsv", "g1_receptors.tsv",
-        "g1_panel_freeze.tsv", "g1_partner_registry.tsv", "g1_cognate.tsv"]
+        "g1_panel_freeze.tsv", "g1_partner_registry.tsv", "g1_cognate.tsv",
+        # the decoy identity, from 2026-09-12.  Its absence is a FAILURE here, not
+        # a pending dependency: g2_systems.csv's decoy cells are resolved against
+        # it, so a gate that tolerated its absence would be checking those cells
+        # against nothing.
+        "drule_selected.tsv"]
 
 # The tier a receptor's ligand_tier maps to, and the pool it may be reported in.
 # T2 and T3 are NEVER pooled into T1 -- D-2026-09-12-f: at 2 and 7 clusters neither
@@ -41,7 +46,10 @@ NEED = [SYSTEMS, "ligand_tiers.tsv", "ligand_set_redo.tsv", "g1_receptors.tsv",
 POOL_OF_TIER = {"T1_small_molecule": "T1_HEADLINE",
                 "T2_peptide": "T2_REPORTED_APART",
                 "T3_mixed": "T3_REPORTED_APART"}
-DECOY_UNRESOLVED = "UNRESOLVED:drule_pool"
+# The decoy arm runs below CAMPAIGN.md sec.5.3's pre-registered >=12-cluster bar,
+# by Aditya's decision of 2026-09-12, and every decoy row says so in ligand_flag.
+# G-14 is what makes that unmissable rather than merely written down somewhere.
+EXPLORATORY_FLAG = "EXPLORATORY_MISSED_PREREG_CLUSTER_BAR"
 
 
 def tsv(name, root):
@@ -137,18 +145,110 @@ def main(argv, root=None):
     B(not leak, "G-5  no blocked receptor carries a dispatchable row",
       f"blocked receptors {sorted(blocked_recs)} leaked: {leak}")
 
-    # ------------------- G-6 every decoy cell is unresolved and undispatchable
+    # ----------------------------------------- G-6, G-12, G-13, G-14  the decoys
+    # Rewritten 2026-09-12.  These four RE-DERIVE from inputs/drule_selected.tsv
+    # rather than asserting a constant, so the selection and the dispatch table
+    # cannot drift apart.  The check they replace asserted that EVERY decoy cell is
+    # unresolved -- true while the pool was unbuilt and false the moment
+    # drule_select.py ran, which is precisely why a gate must not hard-code the
+    # state of its own dependency.
     dec = [r for r in rows if r["ligand"] == "decoy_lig"]
-    bad = sorted({(r["receptor_slug"], r["dispatch_status"],
-                   r["ligand_identity_status"]) for r in dec
-                  if r["ligand_name"] != DECOY_UNRESOLVED
-                  or r["ligand_identity_status"] != "UNRESOLVED_DECOY_POOL"
-                  or r["dispatch_status"] == "READY"
-                  or int(r["predictions_pooled"]) > 0
-                  or int(r["predictions_percell"]) > 0})
+    sel = tsv("drule_selected.tsv", root)
+    want_acc, want_ref = {}, {}
+    for r in sel:
+        if r["decoy_status"] == "accepted":
+            want_acc.setdefault(r["receptor_slug"], []).append(
+                (int(r["draw_rank"]), r["candidate_chembl_id"], r["inchikey"]))
+        elif r["decoy_status"] == "decoy-unavailable":
+            want_ref[r["receptor_slug"]] = r
+    for v in want_acc.values():
+        v.sort()
+
+    # -- G-6  a resolved cell names EXACTLY the three accepted decoys -------
+    bad = []
+    for r in dec:
+        s = r["receptor_slug"]
+        if s not in want_acc:
+            continue
+        ids = r["ligand_name"].split("|")
+        iks = r["ligand_inchikey"].split("|")
+        exp_ids = [c for _k, c, _i in want_acc[s]]
+        exp_iks = [i for _k, _c, i in want_acc[s]]
+        why = []
+        if ids != exp_ids:
+            why.append(f"names {ids} not {exp_ids}")
+        if iks != exp_iks:
+            why.append("InChIKeys do not match the selection")
+        if len(set(iks)) != len(iks) or not all(iks):
+            why.append(f"{len(set(iks))} distinct InChIKeys for {len(iks)} decoys -- "
+                       f"ligand_must_key_by=inchikey cannot address them")
+        if len(ids) != int(r["n_shared_draws"]):
+            why.append(f"{len(ids)} molecules across n_shared_draws="
+                       f"{r['n_shared_draws']}; the draws ARE the molecules")
+        if r["ligand_identity_status"] != "RESOLVED_DRULE_DECOY":
+            why.append(f"status {r['ligand_identity_status']}")
+        if r["dispatch_status"] != "READY" or int(r["predictions_pooled"]) == 0:
+            why.append(f"{r['dispatch_status']} at "
+                       f"{r['predictions_pooled']} pooled predictions")
+        if why:
+            bad.append(f"{s}/{r['chain_b_construct']}: " + "; ".join(why))
     B(bool(dec) and not bad,
-      "G-6  every decoy cell is unresolved and contributes zero predictions",
-      f"{'the decoy arm is absent entirely' if not dec else bad[:4]}")
+      "G-6  a resolved decoy cell names exactly the three accepted decoys, with "
+      "three distinct InChIKeys, and dispatches",
+      f"{'the decoy arm is absent entirely' if not dec else bad[:3]}")
+
+    # -- G-12  a refused receptor is blocked at zero, with ITS OWN reason ---
+    bad = []
+    for s, want in sorted(want_ref.items()):
+        cells = [r for r in dec if r["receptor_slug"] == s]
+        if not cells:
+            bad.append(f"{s}: refused by the selection and ABSENT from the decoy "
+                       f"arm -- a receptor that vanishes looks like one nobody "
+                       f"considered")
+            continue
+        for r in cells:
+            if (r["ligand_identity_status"] != "BLOCKED_DECOY_UNAVAILABLE"
+                    or r["dispatch_status"] == "READY"
+                    or int(r["predictions_pooled"]) or int(r["predictions_percell"])):
+                bad.append(f"{s}: {r['dispatch_status']} / "
+                           f"{r['ligand_identity_status']} at "
+                           f"{r['predictions_pooled']} predictions")
+            elif want["reason"] not in r["note"]:
+                # verbatim, and per receptor.  B1B1U5 is refused because eligibility
+                # is UNESTABLISHABLE (no ChEMBL target, therefore no exclusion rows);
+                # the other four because too few eligible candidates passed.  Those
+                # are different facts and a generic "no decoy" erases the difference.
+                bad.append(f"{s}: its own recorded reason is not carried in the row")
+    B(not bad, "G-12  a decoy-unavailable receptor is blocked at zero predictions "
+               "and carries its OWN recorded reason, verbatim", f"{bad[:3]}")
+
+    # -- G-13  the resolved set IS the accepted set, in BOTH directions ------
+    # The property the old G-6 had and that must survive: it fires if a decoy
+    # appears for a refused receptor, AND if a passing receptor's arm goes missing.
+    got_res = {r["receptor_slug"] for r in dec
+               if r["ligand_identity_status"] == "RESOLVED_DRULE_DECOY"}
+    extra = sorted(got_res - set(want_acc))
+    missing = sorted(set(want_acc) - got_res)
+    B(not extra and not missing,
+      "G-13  the receptors with a resolved decoy are exactly those the selection "
+      "accepted, in both directions",
+      f"resolved but NOT accepted: {extra}; accepted but NOT in the arm: {missing}")
+
+    # -- G-14  the exploratory marker is on every decoy row ------------------
+    # The arm runs below sec.5.3's pre-registered >=12-cluster bar.  If that is
+    # recorded only in prose, a downstream reader can take it for a confirmatory
+    # result without doing anything wrong, so it travels in the data on every row.
+    noflag = sorted({(r["receptor_slug"], r["item"]) for r in dec
+                     if EXPLORATORY_FLAG not in r["ligand_flag"]})
+    nonote = sorted({(r["receptor_slug"], r["item"]) for r in dec
+                     if "EXPLORATORY, NOT CONFIRMATORY" not in r["note"]})
+    kc = len({r["receptor_cluster"] for r in dec
+              if r["ligand_identity_status"] == "RESOLVED_DRULE_DECOY"})
+    B(bool(dec) and not noflag and not nonote,
+      "G-14  every decoy row carries the EXPLORATORY marker in ligand_flag and the "
+      "deviation arithmetic in note",
+      f"no flag: {noflag[:3]}; no note: {nonote[:3]}"
+      if (noflag or nonote) else "the decoy arm is absent entirely")
 
     # ------------------------------ G-7 each receptor set is exactly its tier
     want = defaultdict(set)
@@ -225,23 +325,33 @@ def main(argv, root=None):
       f"{msa[:4]}")
 
     # ------------------------------------------------------------- PENDING
-    nd = len({(r["receptor_slug"], r["chain_b_construct"]) for r in dec})
     if dec:
-        # The pool IS built (ChEMBL_37, 2026-09-12); what is missing is the
-        # SELECTION.  Derive the pool's state rather than asserting it, so this
-        # line cannot go stale in either direction again.
-        pool_built = os.path.exists(os.path.join(INPUTS, "drule_pool_molecules.tsv"))
-        W("no decoy molecule is selected yet",
-          f"{len(dec)} cells across {nd} (receptor, partner) pairs point at "
-          f"{DECOY_UNRESOLVED}. The candidate pool is "
-          + ("BUILT (inputs/drule_pool_molecules.tsv, ChEMBL_37); what is "
-             "missing is redo/build/drule_select.py -- CAMPAIGN.md sec.5.3's "
-             "eight axes plus the similarity gate, cutting ~115k eligible "
-             "candidates per receptor to a handful and recording which axis "
-             "rejected each rejection"
-             if pool_built else
-             "NOT built -- run redo/build/drule_pool.py against a pinned "
-             "ChEMBL release (DRULE_CHEMBL_SCOPE.md)"))
+        # Every quantity here is DERIVED from the two files, never asserted.  This
+        # line has already gone stale twice -- once saying the pool was not built
+        # after it was, once saying no molecule was selected after selection ran --
+        # and both times the words were right when written and wrong within a day.
+        # So: count the states, and let the sentence follow the count.
+        res = [r for r in dec if r["ligand_identity_status"] == "RESOLVED_DRULE_DECOY"]
+        blk = [r for r in dec if r["ligand_identity_status"]
+               == "BLOCKED_DECOY_UNAVAILABLE"]
+        kc = len({r["receptor_cluster"] for r in res})
+        kr = len({r["receptor_slug"] for r in res})
+        mde, target = 1.218 / max(kc, 1) ** 0.5, 1.218 / 12 ** 0.5
+        by_class = defaultdict(list)
+        for s, w in sorted(want_ref.items()):
+            by_class["eligibility unestablishable (no ChEMBL target)"
+                     if int(w["n_eligible"] or 0) == 0
+                     else "fewer than k candidates passed the eight axes"].append(s)
+        W("the decoy arm is EXPLORATORY -- it runs below its own pre-registered bar",
+          f"{len(res)} of {len(dec)} cells resolve, on {kr} receptors / {kc} "
+          f"clusters; CAMPAIGN.md sec.5.3 pre-registers >=12 clusters. MDE "
+          f"{mde:.3f} vs {target:.3f} at k=12 ({100 * (mde / target - 1):.1f}% less "
+          f"sensitive), {sum(int(r['predictions_pooled']) for r in res)} pooled / "
+          f"{sum(int(r['predictions_percell']) for r in res)} per-cell predictions. "
+          f"Aditya's decision 2026-09-12: run it and pay the loss, strict rule kept. "
+          f"{len(blk)} cells stay blocked, "
+          + "; ".join(f"{', '.join(v)} -- {k}" for k, v in sorted(by_class.items()))
+          + ". NOT a defect and NOT confirmatory: no claim may rest on this arm.")
     chain = sorted({(r["receptor_slug"], r["ligand_role_actual"]) for r in rows
                     if r["ligand_identity_status"] == "UNRESOLVED_CHAIN_NO_SEQUENCE"})
     if chain:
@@ -322,6 +432,27 @@ def _drop(path, match, limit=None):
     _rewrite(path, f)
 
 
+def _dup_inchikey(path):
+    """Collapse two of a decoy cell's three InChIKeys onto one.
+
+    Not a blunt "make it READY": the cell still names three ChEMBL ids and still
+    splits n across three draws, so every total in the table stays right while
+    `ligand_must_key_by = inchikey` now addresses two molecules where three were
+    drawn.  That is the failure a check on this field has to catch.
+    """
+    def f(r):
+        if (r["ligand"] == "decoy_lig"
+                and r["ligand_identity_status"] == "RESOLVED_DRULE_DECOY"
+                and not f.done):
+            iks = r["ligand_inchikey"].split("|")
+            if len(iks) == 3:
+                r["ligand_inchikey"] = "|".join([iks[0], iks[0], iks[2]])
+                f.done = True
+        return r
+    f.done = False
+    _rewrite(path, f)
+
+
 CASES = {
     # a missing input must FAIL, never skip
     "G-1": ("ligand_tiers.tsv", lambda p: os.remove(p)),
@@ -339,9 +470,10 @@ CASES = {
     # the refused receptor slips into dispatch
     "G-5": (SYSTEMS, lambda p: _set(p, {"receptor_slug": "PD2R2"},
                                     "dispatch_status", "READY")),
-    # a decoy acquires a molecule and a dispatch status
-    "G-6": (SYSTEMS, lambda p: _set(p, {"ligand": "decoy_lig"},
-                                    "dispatch_status", "READY", limit=1)),
+    # two of a receptor's three decoys collapse onto one InChIKey -- the subtler
+    # form of the defect, because the cell still names three molecules and still
+    # splits n three ways, and ligand_must_key_by=inchikey silently addresses two
+    "G-6": (SYSTEMS, _dup_inchikey),
     # a receptor silently vanishes from its tier's arm
     "G-7": (SYSTEMS, lambda p: _drop(p, {"receptor_slug": "HRH3"})),
     # a READY row whose partner never resolved
@@ -360,6 +492,25 @@ CASES = {
     # the F-5 confound: a cognate row running its partner MSA on
     "G-11": (SYSTEMS, lambda p: _set(p, {"chain_b_construct": "R3_ct21"},
                                      "partner_msa", "ON", limit=1)),
+    # B1B1U5's categorically different refusal flattened into a generic one
+    "G-12": (SYSTEMS, lambda p: _set(p, {"receptor_slug": "B1B1U5",
+                                         "ligand": "decoy_lig"},
+                                     "note", "pool not built")),
+    # BOTH directions of the resolved-set identity, which is the property the old
+    # G-6 had and that must survive its rewrite
+    "G-13": [
+        # (a) a REFUSED receptor acquires a resolved decoy
+        (SYSTEMS, lambda p: _set(p, {"receptor_slug": "HRH3",
+                                     "ligand": "decoy_lig"},
+                                 "ligand_identity_status", "RESOLVED_DRULE_DECOY")),
+        # (b) a PASSING receptor's decoy arm goes missing
+        (SYSTEMS, lambda p: _drop(p, {"receptor_slug": "OPSD",
+                                      "ligand": "decoy_lig"})),
+    ],
+    # the exploratory marker stripped from one row, so the arm could be read as
+    # confirmatory by someone doing nothing wrong
+    "G-14": (SYSTEMS, lambda p: _set(p, {"ligand": "decoy_lig"},
+                                     "ligand_flag", "", limit=1)),
 }
 
 
@@ -369,28 +520,49 @@ def selftest():
     A checker that has never failed is not known to work.  Each case copies the
     real artefacts into a scratch directory, corrupts exactly one thing, and
     asserts that the run fails AND that the named check is among the failures.
+
+    A check whose identity has two directions gets two plants, as a list -- G-13
+    must fire both when a refused receptor acquires a decoy and when a passing
+    receptor's arm goes missing, and one plant can only ever show one of those.
     """
-    ok = True
-    for name, (fn, corrupt) in CASES.items():
-        tmp = tempfile.mkdtemp()
-        for f in os.listdir(INPUTS):
-            if f.endswith((".tsv", ".csv")):
+    ok, n = True, 0
+    for name, plants in CASES.items():
+        for i, (fn, corrupt) in enumerate(plants if isinstance(plants, list)
+                                          else [plants]):
+            n += 1
+            tmp = tempfile.mkdtemp()
+            # EVERY regular input, not a hand-written extension list: the day one
+            # of these became a .gz, a filter like that silently removed it from
+            # the planted copy and the gate then failed on the missing input
+            # instead of on the plant.
+            want = {f for f in os.listdir(INPUTS)
+                    if os.path.isfile(os.path.join(INPUTS, f))
+                    and not f.startswith(".")}
+            for f in want:
                 shutil.copy(os.path.join(INPUTS, f), tmp)
-        corrupt(os.path.join(tmp, fn))
-        buf, old = io.StringIO(), sys.stdout
-        sys.stdout = buf
-        try:
-            rc = main(["g2_preflight.py"], root=tmp)
-        finally:
-            sys.stdout = old
-            shutil.rmtree(tmp)
-        out = buf.getvalue()
-        fired = re.search(rf"FAIL  {re.escape(name)}\b", out) is not None
-        good = rc == 1 and fired
-        ok &= good
-        sys.stdout.write(f"  {'ok  ' if good else 'MISS'} {name}: planted a defect in "
-                         f"{fn} -> rc={rc}, {name} fired={fired}\n")
-    sys.stdout.write(f"\n{len(CASES)} blocking checks proved\n" if ok
+            assert set(os.listdir(tmp)) == want, "staging did not reproduce inputs/"
+            before = open(os.path.join(tmp, fn), "rb").read()
+            corrupt(os.path.join(tmp, fn))
+            p = os.path.join(tmp, fn)
+            after = open(p, "rb").read() if os.path.exists(p) else None
+            buf, old = io.StringIO(), sys.stdout
+            sys.stdout = buf
+            try:
+                rc = main(["g2_preflight.py"], root=tmp)
+            finally:
+                sys.stdout = old
+                shutil.rmtree(tmp)
+            out = buf.getvalue()
+            applied = after != before
+            fired = re.search(rf"FAIL  {re.escape(name)}\b", out) is not None
+            good = rc == 1 and fired and applied
+            ok &= good
+            tag = f"{name}{chr(97 + i)}" if isinstance(plants, list) else name
+            sys.stdout.write(
+                f"  {'ok  ' if good else 'MISS'} {tag}: planted a defect in {fn} -> "
+                f"rc={rc}, {name} fired={fired}"
+                + ("" if applied else ", THE PLANT DID NOT APPLY") + "\n")
+    sys.stdout.write(f"\n{n} plants over {len(CASES)} blocking checks proved\n" if ok
                      else "\nSOME CHECKS DID NOT FIRE -- they cannot be trusted\n")
     return 0 if ok else 1
 

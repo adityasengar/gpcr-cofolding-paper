@@ -737,6 +737,204 @@ restamp.
 
 ---
 
+## D-2026-09-12-h · The decoy arm RUNS at k = 11, as an EXPLORATORY arm — a declared deviation from the pre-registered ≥12
+
+**Aditya's decision, 2026-09-12, after D-2026-09-12-g returned 11 of 15.** This is an
+explicit, recorded deviation from a pre-registered threshold. It is not a threshold
+modification: **the bar stays at 12, the arm is not claimed to have met it, and it is
+labelled exploratory in the data as well as in the prose.**
+
+### Why the deviation is small, with the arithmetic so a reader need not trust us
+
+The ≥12 bar was never a cliff. It was chosen to guarantee a Minimum Detectable Effect,
+and the MDE is
+
+> **MDE = 1.218 / √k**
+
+which reproduces this campaign's own recorded figures exactly — `GROUP2_LIGANDS.md:59`
+gives **0.314 at k = 15** and `:211` gives **0.352 at k = 12**:
+
+| k (paralog clusters) | MDE | vs the k = 12 target |
+|---:|---:|---|
+| 16 | 0.3045 | — |
+| 15 | 0.3145 | *the figure at §6's full T1* |
+| **12** | **0.3516** | **the pre-registered bar** |
+| **11** | **0.3672** | **+4.4% — what we are accepting** |
+| 9 | 0.4060 | +15.5% — the first run, correctly refused |
+
+**The cost of running at 11 instead of 12 is a 4.4% loss of sensitivity.** That is the
+whole penalty. For comparison, the arm costs **396 predictions pooled** (2,112
+per-cell) — 0.3% of the four-block campaign.
+
+**Both of the alternatives were worse, and both were declined on the record:**
+
+- **Turning a third knob.** Two amendments have already been made to D-RULE *after*
+  watching it fail (D-2026-09-12-g). A third change following a third failure is
+  indistinguishable from fitting the rule to the outcome, however principled the
+  argument for it. **Declined.**
+- **Widening the candidate pool from `within_panel` to `anywhere`.** This is the one
+  scientifically honest escape hatch and it is left on the shelf, pre-registered, in
+  case a referee demands confirmatory status. It was declined *now* for three reasons.
+  (i) It costs a ChEMBL re-download — the 28 GB database was deleted 2026-09-12 and the
+  pool table is stamped `within_panel`. (ii) It **weakens the control**: a
+  `within_panel` decoy is a demonstrated GPCR binder that does not bind *this*
+  receptor; an `anywhere` decoy need not be GPCR-like at all. (iii) **It probably would
+  not rescue the receptors that failed.** HRH3's blocker is MW — histamine is 111.1 Da
+  with a window of [88.9, 133.4] — and the smaller and more generic a molecule is, the
+  more "no activity recorded" means *never assayed* rather than *inactive*. The decoy
+  label gets weaker exactly where the chemistry gets more extreme.
+  **If it is ever taken, the exclusion side must widen in the same change**: our
+  "no activity at the receptor or its paralog cluster" test is defined on *our panel's*
+  clusters, so a wider inclusion pool admits binders of close relatives outside the
+  panel — a serotonin ligand at 5HT1A becoming a candidate decoy for 5HT5A. That is a
+  false-negative decoy label of the same class as the B1B1U5 trap.
+
+### Four other routes considered and declined, with reasons
+
+Recorded because each is plausible, each was proposed, and the reason for declining is
+the useful part.
+
+1. **DUD-E / LIT-PCBA as a decoy source.** Declined as a *source*: DUD-E decoys are
+   drawn from ZINC and carry **no measured activity at all** — they are *presumed*
+   inactive by property matching plus topological dissimilarity. D-RULE requires ≥1
+   **measured** activity at an unrelated target, so adopting DUD-E would **lower** our
+   evidential standard, not raise it, and its GPCR coverage is a handful of targets
+   rather than our missing five. **Kept as a citation**: DUD-E is the peer-reviewed
+   precedent for matching on these property axes and justifies our axis choice.
+   LIT-PCBA is evidentially stronger (measured inactives from dose-response assays) but
+   is ~15 targets; whether any of ours is among them is unchecked and worth 20 minutes,
+   not a path.
+2. **Structural isomers or stereoisomers of the true agonist.** Declined. An isomer is
+   not *rendered* a non-binder by being an isomer — many isomers are active, and this
+   campaign's own **F-11** is specifically about retinal isomers behaving differently,
+   with `ccd_resolves_to_other_isomer` carried as a curation column for exactly that
+   reason. A synthesised isomer also has no activity data by construction, so it fails
+   requirement (iii) outright: we would be **asserting** inactivity. That is precisely
+   the frozen campaign's defect — a prose "no known activity here" argument that no
+   code checked (`MAP_LIGANDS_AND_ANALYSIS.md` §2).
+3. **De novo / generatively designed decoys.** Declined, and most firmly. A generated
+   molecule has zero activity data, so it is an *assumed* non-binder — strictly worse
+   than the frozen campaign, which at least used molecules that had been assayed against
+   something. Worse, **it introduces a confound that maps precisely onto our own
+   result**: these models are sensitive to whether a chemotype is in their training
+   distribution, so a synthetic SMILES never seen in the PDB or ChEMBL may place badly
+   *because it is novel*, and we would read that as the model discriminating binders
+   from non-binders. We would have manufactured our own positive result.
+4. **Lowering the bar to 11 and calling the arm confirmatory.** Declined. The bar stays
+   at 12. What changes is the arm's *status*, not the threshold.
+
+### What must be true in the paper
+
+1. **All three numbers are reported, with dates**: the rule as pre-registered gave
+   **9 of 15** clusters; the two amendments of D-2026-09-12-g gave **11**; the
+   pre-registered bar was **12** and was not met.
+2. **The arm is exploratory and says so**, with `k = 11` and `MDE = 0.367` stated
+   against the 0.352 targeted. No headline or confirmatory claim rests on it.
+3. **The 5-receptor refusal is reported as a methodological finding in its own right**
+   — see F-19. It does not depend on the arm running and is the more durable result.
+4. **"Non-binder" may not be used.** The pool is `within_panel`, so every accepted decoy
+   is a known active at some other panel GPCR, and in several cases at another receptor
+   *in this same arm* — **all three of LT4R1's decoys are S1PR1 ligands**, CCKAR's
+   `CHEMBL4279831` is a CNR1/CNR2 ligand, OPRD's `CHEMBL5915578` is an ACM4 ligand. Legal
+   under §5.3 and arguably the better negative, but the Methods may say only **"no
+   measured activity at this receptor or its paralog cluster."**
+5. **The surviving 11 are a BIASED subset, and the MDE does not capture it.** This is the
+   most important caveat on the arm and it was nearly missed, because k counts clusters
+   and says nothing about *which* clusters. The five refused receptors are the small and
+   polar end of the panel — histamine (111 Da), adenosine and NECA — plus a dianionic
+   lipid (LPA) and the spider opsin. **So the 11 that survive are systematically the
+   lipophilic, drug-like end**, and the ligand-class contrast is therefore evaluated on a
+   narrower chemical space than the agonist arm it is compared against. The bias is a
+   *consequence of the rule working*: D-RULE refuses exactly where matched chemistry is
+   unreachable, so the arm's coverage is correlated with its own admission criterion.
+   **One sentence stating this belongs wherever the arm is reported**, and it is not
+   discharged by quoting MDE 0.367.
+
+### Where it is enforced
+
+The exploratory status is carried in `g2_systems.csv` on every decoy row, not only in
+prose, so the arm cannot be read downstream as confirmatory by accident. `g2_preflight`'s
+G-6 was rewritten: it previously asserted that *every* decoy cell is unresolved, which is
+now false, and it **re-derives the resolved and refused sets from `drule_selected.tsv`**
+rather than asserting a constant — failing in both directions, so a decoy appearing for a
+refused receptor and a passing receptor's arm going missing each trip it.
+
+---
+
+## F-19 · A property-matched decoy does not exist for a third of a Class A panel — and the frozen decoy arm was therefore not a controlled negative
+
+**This is the durable result of the decoy work, and it does not depend on the arm
+running.** Written for the Methods/SI.
+
+### The finding
+
+Applying D-RULE (`CAMPAIGN.md` §5.3, as amended) to 120,973 candidate molecules from a
+hash-pinned release — **ChEMBL_37**, sha256 `33c20374…` — **five of sixteen Class A
+GPCRs admit no set of three property-matched, charge-matched, topologically dissimilar
+decoys at all:**
+
+| receptor | reference agonist | eligible candidates | accepted | the axis that refuses |
+|---|---|---:|---:|---|
+| **B1B1U5** | — | 0 | 0 | **no ChEMBL target; eligibility unestablishable** |
+| AA1R | adenosine | 111,240 | 1 | none singly — MW 267, cLogP −2.0, TPSA 139.5, HBA 9 |
+| AA2AR | — | 111,240 | 0 | MW |
+| **HRH3** | histamine | 114,172 | 0 | **MW — 111.1 Da, window [88.9, 133.4]** |
+| LPAR1 | LPA | 120,207 | 0 | Tanimoto; charge **−2**, 0 rings, 20 rotatable bonds |
+
+**The refusals are chemistry, not curation.** They concentrate on receptors whose native
+agonist is chemically extreme — a 111 Da biogenic amine, a doubly-anionic lipid, a
+polar nucleoside — and a pool of GPCR-active molecules contains almost nothing that
+small, that charged, or that polar. **This is a statement about the reachable limits of
+property-matched decoy design on GPCRs, and we have not found it stated anywhere.**
+
+### Why it bears on the frozen campaign's result
+
+The frozen arm's decoys were 8 hand-picked FDA-approved drugs in a hard-coded Python
+dict, gated only on Morgan Tanimoto < 0.30. Its ±20% property window across six axes was
+**computed and never enforced** — no branch raises — and **all 8 miss the window on three
+to five of the six axes**. Its own source carries the reason as a comment:
+*"Formal-charge mismatch is reported not raised (Decision A — aminergic +1 anchors force
+neutral decoys)"* — so across the aminergic panel the decoy arm differs from the ligand
+arms **systematically in net charge**, and nothing downstream corrects or stratifies for
+it. See `MAP_LIGANDS_AND_ANALYSIS.md` §2.2–§2.4.
+
+**Consequence for a result we hold.** On `rows.tier3.v2.csv` the decoy is
+indistinguishable from the antagonist on every backbone — **+0.011, −0.004, −0.016,
+−0.004**. That admitted two readings: the models are indifferent to pocket occupancy, or
+the decoys were never decoy-like. **F-19 is evidence for the second.** The decoys were
+off-window on most axes and systematically mischarged, and a properly-constructed decoy
+is provably unavailable for a third of the panel.
+
+**So the Block C decoy result must be re-scoped from a claim about the predictors to a
+finding about the decoy set.** That is a withdrawal, and it is the kind that makes the
+surrounding claims more believable rather than less — the partner effect on the same
+rows survives per backbone (agonist apo→cognate 0.094→0.806, 0.259→0.634, 0.166→0.738,
+0.052→0.879) and is untouched by it.
+
+### The three sentences this earns
+
+Stated here so they are written once and not re-derived:
+
+1. *A decoy rule requiring measured activity at an unrelated target, matched molecular
+   properties on eight axes, equal formal charge at pH 7.4 and topological dissimilarity
+   from every ligand of the receptor and its paralog cluster admits no viable decoy set
+   for 5 of 16 Class A GPCRs, including the histamine H3 and LPA₁ receptors.*
+2. *The limit is set by the native agonist's chemistry, not by curation effort: the
+   failures are the receptors whose agonists are smallest, most charged or most polar.*
+3. *A decoy arm built by hand-picking approved drugs, as in the frozen campaign, does not
+   meet this standard on any of its 8 receptors — all 8 miss their own stated ±20%
+   property window on three to five of six axes and are uncharged where the reference
+   ligands are cationic — so its agonist-versus-decoy contrast is not a controlled
+   comparison for pocket occupancy.*
+
+**What this finding does NOT claim.** It does not say decoys are impossible — widening
+the pool beyond panel GPCRs would change the answer, and D-2026-09-12-h records why that
+was declined. It says that under a stated, pre-registered rule on a pinned release, the
+`within_panel` pool cannot supply them for a third of this panel, and it names the axis
+that refuses in each case.
+
+---
+
 ## F-16 · The ladder's length/taxonomy confound is MUCH weaker than I said — three revisions, each downward
 
 **I over-called this, and it took two corrections from outside to get it right.**

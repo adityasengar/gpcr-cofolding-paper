@@ -25,13 +25,17 @@ conflated.
 
 THREE THINGS THIS FILE DELIBERATELY DOES NOT DO
 -----------------------------------------------
-1. **It does not invent a decoy.**  `DRULE_CHEMBL_SCOPE.md` specifies the rule,
-   `drule_pool.py` implements it, and the pool does not exist because it needs a
-   pinned ChEMBL release download -- Aditya's decision, not the script's.  So the
-   decoy arm is enumerated as rows whose ligand is `UNRESOLVED:drule_pool` and whose
-   `dispatch_status` says so.  The alternative -- omitting the arm -- makes a
-   blocked experiment look exactly like one nobody thought of, which is the failure
-   `drule_targets.py` records for B1B1U5.
+1. **It does not invent a decoy, and it does not choose one either.**  The identity
+   comes from `inputs/drule_selected.tsv`, which `drule_select.py` produced by
+   running CAMPAIGN.md sec.5.3's D-RULE over a pinned ChEMBL_37 pool.  This file
+   reads that selection and never re-derives it: a receptor is resolved here iff the
+   selection says `decoy_status = accepted`, and refused here iff it says
+   `decoy-unavailable`, carrying **that receptor's own recorded reason**.  If the
+   selection is absent this script FAILS -- it does not fall back to emitting
+   blocked cells, because a generator that quietly reverts to its old behaviour when
+   its input disappears is the silent-check defect wearing a generator's clothes.
+   (Until 2026-09-12 every decoy cell pointed at `UNRESOLVED:drule_pool`, because the
+   pool needed a release download that was Aditya's decision to make.)
 2. **It does not choose the cognate rung.**  Whether the crossing runs at `R3_ct21`
    (the length in the title) or at `R7_full` (what Block C's "cognate" arm actually
    supplied, so the only rung that makes the 40,800 existing predictions a
@@ -74,9 +78,45 @@ APPROVED = os.path.join(PROTOCOL, "received", "approved_2026_09_12")
 BACKBONES_4 = "boltz2|openfold3|protenix|chai1"
 BB1 = "boltz2"
 
-# The decoy pool is not built.  Every decoy cell points here instead of at a
-# molecule, and nothing that points here may be dispatched.
-DECOY_UNRESOLVED = "UNRESOLVED:drule_pool"
+# ---------------------------------------------------------------------------
+# THE DECOY ARM, from 2026-09-12: resolved from inputs/drule_selected.tsv
+# ---------------------------------------------------------------------------
+# THREE MOLECULES IN ONE CELL, not three rows.  Each decoy cell already carries
+# `n_shared_draws = 3` and the arm's n is split across those draws; the design
+# intent is that the three draws ARE the three decoy molecules, so the molecules
+# travel in the cell and the cell count does not change.  `ligand_name` carries the
+# three ChEMBL ids and `ligand_inchikey` the three InChIKeys, in the SAME order,
+# joined by DECOY_SEP.  The generator fails if the number of molecules and
+# `n_shared_draws` ever disagree -- a cell that splits n three ways while naming two
+# molecules is an unbalanced design nobody would see in a total.
+DECOY_SEP = "|"          # the delimiter `backbones` already uses in this file
+DECOY_UNAVAILABLE = "DECOY_UNAVAILABLE"
+
+# The SMILES stay in drule_selected.tsv and are joined on the InChIKey rather than
+# copied here.  MAP_LIGANDS_AND_ANALYSIS sec.2.4 is the reason: the frozen campaign
+# froze its decoy report into a CSV cell, the ligand table moved under it on
+# 2026-09-04, and nothing noticed.  One copy, hashed in inputs/MANIFEST.tsv, keyed
+# by InChIKey -- which is what `ligand_must_key_by = inchikey` is for.
+
+# EXPLORATORY.  sec.5.3 pre-registers "run the decoy arm only if >=12 clusters pass".
+# D-RULE accepts 3 decoys on 11 of 15 clusters, so the arm runs BELOW its own bar by
+# Aditya's decision of 2026-09-12.  The marker below goes on every decoy row --
+# `ligand_flag`, which is this table's machine-readable per-row tag field and already
+# carries `column_shift_in_source_row` and `source_row_role_disagrees_with_gpcrdb`.
+# NOT `pi_choice`: that field means "a decision the PI has still to make", and this
+# is one already made.  The arithmetic goes in `note`, the human field, per row.
+EXPLORATORY_FLAG = "EXPLORATORY_MISSED_PREREG_CLUSTER_BAR"
+EXPLORATORY_NOTE = (
+    "EXPLORATORY, NOT CONFIRMATORY. This arm runs below its own pre-registered bar: "
+    "CAMPAIGN.md sec.5.3 says run the decoy arm only if >=12 paralog clusters yield "
+    "3 D-RULE-accepted decoys, and {kc} of 15 do (receptors {kr} of 16). MDE at k="
+    "{kc} is 1.218/sqrt({kc}) = {mde:.3f} against the {target:.3f} targeted at k=12 "
+    "-- a {loss:.1f}% loss of sensitivity, for {pooled} pooled predictions. Aditya's "
+    "decision 2026-09-12: run it, keep the strict within_panel pool rule, change no "
+    "chemistry, re-download nothing, and pay the {loss:.1f}%. NO CONFIRMATORY CLAIM "
+    "MAY REST ON THIS ARM, and every row carries "
+    + EXPLORATORY_FLAG + " in ligand_flag so that reading it as one cannot happen by "
+    "accident.")
 
 # DRULE_CHEMBL_SCOPE.md's pool report asks how many clusters yield >=3 accepted
 # decoys.  A decoy arm run on ONE hand-picked molecule per receptor -- which is what
@@ -128,8 +168,9 @@ ARMS = [
               "antagonist at the SAME partner level. What changes is the molecule: "
               "a pool from a pinned ChEMBL release under DRULE_CHEMBL_SCOPE.md, the "
               "property window ENFORCED rather than reported, and n split across "
-              "draws so the decoy is a random effect. UNRESOLVED until the pool "
-              "exists"),
+              "draws so the decoy is a random effect. RESOLVED from 2026-09-12 "
+              "out of inputs/drule_selected.tsv -- 11 of 16 receptors carry three "
+              "D-RULE decoys and 5 are named decoy-unavailable at zero"),
 
     # ---- E2.2 the same crossing at the full subunit -- PI CHOICE ----------
     dict(item="G6f(option)", exp="E2.2", arm="ligand_x_partner_full_subunit",
@@ -148,7 +189,7 @@ ARMS = [
          rset="LIG_T1", partners=["R7_full"], ligands=["decoy_lig"],
          bb=BACKBONES_4, n=(10, 50), draws=DECOY_DRAWS,
          pi_choice="cognate rung for the ligand crossing: R3_ct21 | R7_full | both",
-         note="OPTION, and UNRESOLVED. The decoy level of G6f"),
+         note="OPTION. The decoy level of G6f, on the same 11 resolved receptors"),
 
     # ---- E2.3 the efficacy ladder's fourth level -------------------------
     dict(item="G21(proposed)", exp="E2.3", arm="efficacy_ladder_inverse_agonist",
@@ -227,10 +268,49 @@ def load_inherited():
     return out
 
 
+def load_decoys():
+    """inputs/drule_selected.tsv -> (accepted, refused).
+
+    accepted: slug -> [{chembl_id, inchikey, smiles}, ...] in draw_rank order
+    refused:  slug -> {reason, n_eligible, reason_class}
+
+    `reason_class` is derived from the DATA, not by matching the prose: a refused
+    receptor with ZERO eligible candidates was refused because eligibility could not
+    be established at all (B1B1U5 has no ChEMBL target, so the pool holds no
+    exclusion rows for it), while one with a nonzero eligible set was refused because
+    too few of them passed the eight axes.  Those are categorically different
+    refusals and flattening them into one "no decoy" is the failure this whole
+    directory exists to avoid.
+    """
+    accepted, refused = defaultdict(list), {}
+    for r in tsv(os.path.join(INPUTS, "drule_selected.tsv")):
+        slug = r["receptor_slug"]
+        if r["decoy_status"] == "accepted":
+            accepted[slug].append(dict(rank=int(r["draw_rank"]),
+                                       chembl_id=r["candidate_chembl_id"],
+                                       inchikey=r["inchikey"],
+                                       smiles=r["smiles"]))
+        elif r["decoy_status"] == "decoy-unavailable":
+            n_elig = int(r["n_eligible"] or 0)
+            refused[slug] = dict(
+                reason=r["reason"], n_eligible=n_elig,
+                reason_class=("eligibility_unestablishable_no_chembl_target"
+                              if n_elig == 0 else "fewer_than_k_accepted"))
+        else:
+            raise SystemExit(f"!! drule_selected.tsv: {slug} carries an unknown "
+                             f"decoy_status {r['decoy_status']!r}")
+    for slug in accepted:
+        accepted[slug].sort(key=lambda d: d["rank"])
+    return dict(accepted), refused
+
+
 def main():
     problems = []
     need = ["ligand_tiers.tsv", "ligand_set_redo.tsv", "g1_receptors.tsv",
-            "g1_panel_freeze.tsv", "g1_partner_registry.tsv", "g1_cognate.tsv"]
+            "g1_panel_freeze.tsv", "g1_partner_registry.tsv", "g1_cognate.tsv",
+            # from 2026-09-12 the decoy identity comes from here.  Absent -> FAIL,
+            # never a quiet fall-back to the old UNRESOLVED cells.
+            "drule_selected.tsv"]
     for f in need:
         if not os.path.exists(os.path.join(INPUTS, f)):
             problems.append(f"{f}: absent -- run its generator first")
@@ -255,6 +335,7 @@ def main():
         else:
             blocked[r["receptor_slug"]] = r
     inh = load_inherited()
+    dec_accepted, dec_refused = load_decoys()
 
     try:
         from rdkit import Chem, RDLogger
@@ -340,11 +421,39 @@ def main():
                         is_chain="0", source="-", status="RESOLVED_NO_LIGAND",
                         key_by="-", flag="")
         if level == "decoy_lig":
-            return dict(role_actual="decoy_lig", name=DECOY_UNRESOLVED,
+            picks = dec_accepted.get(slug)
+            if picks:
+                iks = [p["inchikey"] for p in picks]
+                if len(set(iks)) != len(iks) or not all(iks):
+                    raise SystemExit(
+                        f"!! {slug}: drule_selected.tsv gives {len(iks)} decoys with "
+                        f"{len(set(iks))} distinct InChIKeys -- `ligand_must_key_by = "
+                        f"inchikey` cannot address three molecules through a "
+                        f"duplicated key")
+                return dict(role_actual="decoy_lig",
+                            name=DECOY_SEP.join(p["chembl_id"] for p in picks),
+                            ccd="-", inchikey=DECOY_SEP.join(iks), is_chain="0",
+                            source=("DRULE:drule_selected.tsv (D-RULE, CAMPAIGN.md "
+                                    "sec.5.3 + amendments A,B; SMILES joined on "
+                                    "InChIKey, never copied)"),
+                            status="RESOLVED_DRULE_DECOY", key_by="inchikey",
+                            flag=EXPLORATORY_FLAG, n_molecules=len(picks))
+            ref = dec_refused.get(slug)
+            if ref is None:
+                raise SystemExit(
+                    f"!! {slug} has a decoy cell but drule_selected.tsv names it "
+                    f"neither accepted nor decoy-unavailable. A receptor that is in "
+                    f"the arm and absent from the selection is exactly the silence "
+                    f"the selection's zero-decoy rows exist to prevent")
+            return dict(role_actual="decoy_lig",
+                        name=f"{DECOY_UNAVAILABLE}:{ref['reason_class']}",
                         ccd="-", inchikey="-", is_chain="0",
-                        source="PENDING:drule_pool.py (needs a pinned ChEMBL release)",
-                        status="UNRESOLVED_DECOY_POOL", key_by="inchikey",
-                        flag="pool not built")
+                        source="DRULE:drule_selected.tsv (decoy-unavailable, named "
+                               "and carried at zero decoys)",
+                        status="BLOCKED_DECOY_UNAVAILABLE", key_by="inchikey",
+                        flag=f"{EXPLORATORY_FLAG}; {DECOY_UNAVAILABLE}:"
+                             f"{ref['reason_class']}",
+                        decoy_reason=ref["reason"], n_molecules=0)
         role = off_state_role(slug) if level == "antagonist" else level
 
         r = redo.get(slug, {}).get(role)
@@ -429,6 +538,21 @@ def main():
                     source="UNCURATED (named in ligand_tiers.tsv, no bytes held)",
                     status="UNRESOLVED_UNCURATED", key_by="inchikey", flag="")
 
+    # ------------------------------------- the exploratory note, from the data
+    # Every number in it is derived here and none is typed in, so the sentence
+    # cannot drift from the selection the way MAP sec.2.4's decoy notes drifted
+    # from their ligand table.
+    dec_arms = [a for a in ARMS if "decoy_lig" in a["ligands"]]
+    dec_recs = [s for s in RSET["LIG_T1"] if s in dec_accepted]
+    dec_clusters = {rec[s]["cluster"] for s in dec_recs}
+    kc, kr = len(dec_clusters), len(dec_recs)
+    mde, target = 1.218 / kc ** 0.5, 1.218 / 12 ** 0.5
+    dec_pooled = sum(len(a["bb"].split("|")) * (a["n"][0] // a["draws"])
+                     * len(a["partners"]) * kr for a in dec_arms)
+    expl = EXPLORATORY_NOTE.format(kc=kc, kr=kr, mde=mde, target=target,
+                                   loss=100.0 * (mde / target - 1.0),
+                                   pooled=dec_pooled)
+
     # ------------------------------------------------------------ enumerate
     rows = []
     for a in ARMS:
@@ -447,9 +571,7 @@ def main():
                     is_chain = lg["is_chain"] == "1"
                     # dispatchable only if EVERY input is resolved
                     if lg["status"].startswith(("UNRESOLVED", "BLOCKED")):
-                        ds = ("BLOCKED_UNRESOLVED_DECOY_POOL"
-                              if lg["status"] == "UNRESOLVED_DECOY_POOL"
-                              else lg["status"] if lg["status"].startswith("BLOCKED")
+                        ds = (lg["status"] if lg["status"].startswith("BLOCKED")
                               else "BLOCKED_" + lg["status"])
                     elif psha.startswith(("UNRESOLVED", "PENDING")):
                         ds = "BLOCKED_UNRESOLVED_PARTNER"
@@ -457,6 +579,22 @@ def main():
                         ds = "READY"
                     nlo, nhi = a["n"][0] // share, a["n"][1] // share
                     dispatchable = ds == "READY"
+                    note = a["note"]
+                    if level == "decoy_lig":
+                        # the three draws ARE the three molecules; if that ever
+                        # stops being true the cell's n split is wrong and the
+                        # arm is silently unbalanced
+                        nmol = lg.get("n_molecules", 0)
+                        if nmol and nmol != share:
+                            raise SystemExit(
+                                f"!! {slug} {a['item']}: n_shared_draws={share} but "
+                                f"drule_selected.tsv gives {nmol} decoy molecules. "
+                                f"The draws are the molecules; these cannot differ")
+                        note = f"{note}. {expl}"
+                        if lg.get("decoy_reason"):
+                            note = (f"{note} DECOY-UNAVAILABLE for this receptor, "
+                                    f"verbatim from drule_selected.tsv: "
+                                    f"{lg['decoy_reason']}")
                     rows.append(dict(
                         item=a["item"], experiment=a["exp"], arm=a["arm"],
                         receptor_set=a["rset"], pool_group=POOL[a["rset"]],
@@ -499,7 +637,7 @@ def main():
                         blocked_predictions_percell=0 if dispatchable else nbb * nhi,
                         dispatch_status=ds,
                         pi_choice=a["pi_choice"],
-                        note=a["note"]))
+                        note=note))
 
     cols = list(rows[0].keys())
     with open(OUT, "w", newline="") as fh:
