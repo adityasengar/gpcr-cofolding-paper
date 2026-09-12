@@ -63,6 +63,8 @@ G0=$(python3 redo/gates/g0_preflight.py 2>/dev/null | grep -E "FROZEN|NOT FROZEN
 G1=$(python3 redo/gates/g1_preflight.py 2>/dev/null | grep -E "^[0-9]+ passed" | tail -1)
 case "$G0" in "FROZEN"*) ok "redo group 0 gate" "$G0" ;; *) bad "redo group 0 gate" "${G0:-did not run}" ;; esac
 case "$G1" in *"0 failed"*) ok "redo group 1 gate" "$G1" ;; *) bad "redo group 1 gate" "${G1:-did not run}" ;; esac
+G2=$(python3 redo/gates/g2_preflight.py 2>/dev/null | grep -E "^[0-9]+ passed" | tail -1)
+case "$G2" in *"0 failed"*) ok "redo group 2 gate" "$G2" ;; *) bad "redo group 2 gate" "${G2:-did not run}" ;; esac
 
 # --- bibliography ---
 T=$(mktemp); cp manuscript/refs.bib "$T" 2>/dev/null

@@ -97,6 +97,16 @@ thresholds **as carried in the file**.
   document says to prefer. **This table uses the readout its own drop warns against.**
 - **Seeds are ignored.** `seed_used` is in the file and the pre-registration says
   seed is the unit of variance.
+- **THE 800 EXCLUDED ROWS ARE NOT ROLE-NEUTRAL, and this table does not account
+  for that.** Added 2026-09-12 after the Group 2 build caught it. The 800 rows
+  dropped for an empty `receptor_class` are **`B1B1U5` and `OPSD`, 200 per arm
+  each, and every one of them is `full_agonist`** — zero antagonist rows and zero
+  decoy rows are excluded. So the exclusion removes agonist observations only,
+  from two receptors, symmetrically across arms. Any comparison of the agonist
+  level against the antagonist or decoy levels in the table above is therefore
+  drawn on a population the other levels do not share. **Recompute with the two
+  opsins handled explicitly — included with a class assigned, or excluded from
+  every role — before comparing ligand levels at all.**
 
 ## The order of work when someone picks this up
 
