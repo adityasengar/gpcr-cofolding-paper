@@ -80,6 +80,21 @@ ligand class with partner presence on one model**. It needs `rows.tier3.v2.csv`.
    empirical** (44 active + 54 inactive on the panel), 167 is the full set
    including off-panel. Two `[PI]`s in `methods.tex` can now be closed.
 
+## The two maps — read these before anything under `redo/`
+
+Written 2026-09-12. They exist so that the pipeline can be followed end to end
+without opening seven thousand lines of protocol notes.
+
+| map | covers |
+|---|---|
+| `redo/protocol/MAP_FROZEN_CAMPAIGN.md` | **how the frozen paper was actually run** — panel, references, inputs, ligands, decoys, MSAs, dispatch, scoring, analysis, the silent-failure map, and the three holes that cannot be closed from the bundle |
+| `redo/spec/MAP_NEW_CAMPAIGN.md` | **what the redo runs** — 64 receptors with their reference pairs and cognate Gα, the length ladder, 782 partner constructs, ligands, the decoy rebuild, 23 arms with their prediction budgets, the 47-column recording spec |
+
+**The second is GENERATED** — `python3 redo/build/map_new_campaign.py` rebuilds it
+from `redo/inputs/`. Do not hand-edit it; edit the generator. Nothing in it is
+transcribed, because a count asserted in a header has drifted from its own body
+four times on this project.
+
 ## The redo campaign — where it now lives
 
 **`redo/` at the top level**, a peer of `manuscript/` and `lit/`. It was
