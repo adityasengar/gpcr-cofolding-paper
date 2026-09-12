@@ -179,7 +179,7 @@ The role tables above run on different cluster counts (18 / 15 / 18), so they ca
 Seeds are collapsed **inside the receptor** before the cluster mean throughout this document, so five seeds of one receptor cannot outvote one seed of another. The spread above is what that collapsing absorbs.
 
 
-## The G4 off-site confound — and whether the ligand result survives it
+## The G4 off-site confound — and whether the agonist−antagonist contrast survives it
 
 Off-site is `distance_A > 15` Å, the G4 gate's own threshold. In the apo arm the rate is severely **role-asymmetric**:
 
@@ -189,7 +189,7 @@ Off-site is `distance_A > 15` Å, the G4 gate's own threshold. In the apo arm th
 | neutral_antagonist | 5,800 | **1.62%** |
 | decoy_lig | 7,200 | **12.25%** |
 
-So the apo agonist−antagonist contrast compares a population where roughly **a third of agonist rows have no agonist in the pocket** against one where almost every antagonist row does. If C7 were an empty-pocket artefact, restricting to on-site rows should collapse it.
+So the apo agonist−antagonist contrast compares a population where roughly **a third of agonist rows have no agonist in the pocket** against one where almost every antagonist row does. If the contrast were an empty-pocket artefact, restricting to on-site rows should collapse it.
 
 **It does not.** Continuous readout, apo, agonist − antagonist, cluster unit:
 
@@ -204,12 +204,12 @@ So the apo agonist−antagonist contrast compares a population where roughly **a
 | on-site only | of3 | 11 | -0.177 | 0.060 | **+0.237** | [+0.057, +0.443] |
 | on-site only | protenix | 10 | -0.327 | -0.178 | **+0.149** | [+0.090, +0.200] |
 
-**All four backbones still exclude zero, and the magnitudes barely move** — no systematic direction. The restriction costs clusters (14 → 10–11), because receptors that are 100% off-site leave entirely, which is why the intervals widen slightly. **The off-site confound does not explain the ligand effect.**
+**All four backbones still exclude zero, and the magnitudes barely move** — no systematic direction. The restriction costs clusters (14 → 10–11), because receptors that are 100% off-site leave entirely, which is why the intervals widen slightly. **The off-site confound does not explain the agonist-vs-antagonist contrast.**
 
 
 ## The two instruments, compared unit-free
 
-| instrument | backbone | partner Δ | ligand Δ | between-cluster SD | partner/SD | **ligand as % of partner** |
+| instrument | backbone | partner Δ | agonist−antagonist Δ | between-cluster SD | partner/SD | **as % of partner** |
 |---|---|---:|---:|---:|---:|---:|
 | binary | boltz | +0.785 | +0.066 | 0.205 | 3.83 | **8.4%** |
 | binary | chai | +0.343 | +0.029 | 0.421 | 0.81 | **8.4%** |
@@ -220,7 +220,7 @@ So the apo agonist−antagonist contrast compares a population where roughly **a
 | continuous | of3 | +0.356 | +0.253 | 0.503 | 0.71 | **71.2%** |
 | continuous | protenix | +0.640 | +0.189 | 0.487 | 1.31 | **29.5%** |
 
-**The ligand effect as a share of the partner effect changes
+**The agonist−antagonist contrast as a share of the partner effect changes
 5.5–7.9× between the two instruments, PAIRED within
 backbone** — 4.8–9.0% on the binary predicate against
 29.5–71.2% on the continuous readout. The pairing matters: taking
@@ -230,6 +230,12 @@ the smallest binary share against the largest continuous one spans
 agreeing to within 5.5–7.9× is the stronger statement. The partner effect is the
 denominator of both shares, so this is unit-free; comparing the raw Δs is not,
 because one is a change in fraction-active and the other is Ångström.
+
+**This is a claim about two INSTRUMENTS, not about the ligand — and it therefore
+survives F-23 intact.** Both quantities it uses are things this file genuinely
+measures: the partner effect, and the agonist-versus-neutral-antagonist contrast at a
+fixed partner condition. F-23 removes the *interpretation* of the small effect (it is
+not "what the agonist alone does"), not the comparison between the instruments.
 
 **And the binary predicate does something worse than compress small effects — it
 inflates the apparent differences BETWEEN backbones.** Between-cluster SD in the apo

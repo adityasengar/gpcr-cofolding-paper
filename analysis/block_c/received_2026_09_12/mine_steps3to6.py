@@ -308,7 +308,7 @@ def seed_section(rows, out):
 
 
 def offsite_section(rows, out):
-    """Does the ligand-class result survive the G4 off-site confound?
+    """Does the agonist-vs-antagonist contrast survive the G4 off-site confound?
 
     The off-site rate in apo is severely ROLE-ASYMMETRIC -- agonist ~29%,
     antagonist ~2%, decoy ~12% -- so every apo ligand-class contrast compares a
@@ -319,7 +319,8 @@ def offsite_section(rows, out):
     """
     rng = random.Random(SEED)
     sel = [r for r in rows if not r["is_opsin"]]
-    out.append("\n## The G4 off-site confound — and whether the ligand result survives it\n")
+    out.append("\n## The G4 off-site confound — and whether the agonist−antagonist "
+               "contrast survives it\n")
     out.append(f"Off-site is `distance_A > {OFFSITE_A:g}` Å, the G4 gate's own threshold. "
                "In the apo arm the rate is severely **role-asymmetric**:\n")
     out.append("| apo role | n | off-site |")
@@ -330,8 +331,8 @@ def offsite_section(rows, out):
             out.append(f"| {role} | {len(d):,} | **{100*sum(1 for r in d if r['d'] > OFFSITE_A)/len(d):.2f}%** |")
     out.append("\nSo the apo agonist−antagonist contrast compares a population where "
                "roughly **a third of agonist rows have no agonist in the pocket** against "
-               "one where almost every antagonist row does. If C7 were an empty-pocket "
-               "artefact, restricting to on-site rows should collapse it.\n")
+               "one where almost every antagonist row does. If the contrast were an "
+               "empty-pocket artefact, restricting to on-site rows should collapse it.\n")
     out.append("**It does not.** Continuous readout, apo, agonist − antagonist, "
                "cluster unit:\n")
     out.append("| filter | backbone | k | antagonist | agonist | difference | 95% CI |")
@@ -348,7 +349,7 @@ def offsite_section(rows, out):
                "— no systematic direction. The restriction costs clusters (14 → 10–11), "
                "because receptors that are 100% off-site leave entirely, which is why the "
                "intervals widen slightly. **The off-site confound does not explain the "
-               "ligand effect.**\n")
+               "agonist-vs-antagonist contrast.**\n")
 
 
 
@@ -368,8 +369,14 @@ def instrument_section(rows, out):
     rng = random.Random(SEED)
     sel = [r for r in rows if not r["is_opsin"]]
     out.append("\n## The two instruments, compared unit-free\n")
-    out.append("| instrument | backbone | partner Δ | ligand Δ | between-cluster SD "
-               "| partner/SD | **ligand as % of partner** |")
+    # LABELLING, corrected 2026-09-12 after F-23.  The small effect here is NOT
+    # "the ligand effect" -- there is no ligand-free row in this file, so the
+    # agonist's own contribution is not measurable from it.  It is the
+    # AGONIST-VERSUS-NEUTRAL-ANTAGONIST contrast at a fixed partner condition.
+    # Calling it "the ligand effect" silently re-imports the retracted C7 framing,
+    # and a reader takes it as the agonist's contribution.  Caught by lit.
+    out.append("| instrument | backbone | partner Δ | agonist−antagonist Δ "
+               "| between-cluster SD | partner/SD | **as % of partner** |")
     out.append("|---|---|---:|---:|---:|---:|---:|")
     ratios = {"binary": [], "cont": []}
     sds = {"binary": [], "cont": []}
@@ -397,7 +404,7 @@ def instrument_section(rows, out):
     paired = [c / b for b, c in zip(rb, rc)]
     zb, zc = stdz["binary"], stdz["cont"]
     out.append(f"""
-**The ligand effect as a share of the partner effect changes
+**The agonist−antagonist contrast as a share of the partner effect changes
 {min(paired):.1f}–{max(paired):.1f}× between the two instruments, PAIRED within
 backbone** — {min(rb):.1f}–{max(rb):.1f}% on the binary predicate against
 {min(rc):.1f}–{max(rc):.1f}% on the continuous readout. The pairing matters: taking
@@ -407,6 +414,12 @@ the smallest binary share against the largest continuous one spans
 agreeing to within 5.5–7.9× is the stronger statement. The partner effect is the
 denominator of both shares, so this is unit-free; comparing the raw Δs is not,
 because one is a change in fraction-active and the other is Ångström.
+
+**This is a claim about two INSTRUMENTS, not about the ligand — and it therefore
+survives F-23 intact.** Both quantities it uses are things this file genuinely
+measures: the partner effect, and the agonist-versus-neutral-antagonist contrast at a
+fixed partner condition. F-23 removes the *interpretation* of the small effect (it is
+not "what the agonist alone does"), not the comparison between the instruments.
 
 **And the binary predicate does something worse than compress small effects — it
 inflates the apparent differences BETWEEN backbones.** Between-cluster SD in the apo
