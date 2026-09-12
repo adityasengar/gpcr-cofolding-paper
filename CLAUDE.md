@@ -104,6 +104,13 @@ Four rules, and `redo/gates/layout.py` enforces the first three:
    `python3 redo/build/manifest.py` to restamp. A hand-edit trips the layout
    guard and the manifest check; **neither preflight gate notices**, which is
    why the layout guard exists separately from them.
+   **But know what that guarantee is NOT** (`DECISIONS.md` F-21, F-22): L3
+   compares a file to its **own** recorded hash, so it catches an edit made
+   *after* stamping and is blind both to a file **created by hand** and then
+   stamped, and to a file that has gone **stale** against the inputs it derives
+   from. **31 of 64 inputs name no generator**, and at least two — including
+   `g1_recording_spec.tsv`, the campaign's own recording contract — have no
+   writer anywhere in `redo/build/`. L8 reports the count on every run.
 2. **Never compute a path from `__file__`** — import it from `redo/paths.py`.
 3. **The top level is fixed at eight entries.** Growth goes into `runs/`.
 4. **A landed run is read-only**, like `data/block_<x>/`.

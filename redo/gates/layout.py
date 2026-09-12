@@ -15,6 +15,7 @@ directory: **may I edit this file, and has anyone already?**
     L5  every run directory has the same three files
     L6  every run names input hashes we actually hold
     L7  the regenerable bulk is gitignored, and nothing else is
+    L8  every input's named generator exists
 
 Every check here is proved by planting the defect it catches, and **every one of those
 plants is RUNNABLE**:
@@ -228,8 +229,21 @@ def selftest_all():
         open(gi, "w", encoding="utf-8").write("redo/inputs/\n")   # over-broad, and
         #                                                           drops the wanted rule
 
+    def plant_L8(redo):
+        f = os.path.join(redo, "inputs", "MANIFEST.tsv")
+        _materialise(f)
+        lines = open(f, encoding="utf-8").read().splitlines()
+        for i, ln in enumerate(lines[1:], 1):
+            parts = ln.split("\t")
+            if len(parts) > 3 and parts[3] not in ("", "unattributed"):
+                parts[3] = "no_such_generator.py"          # named, and absent
+                lines[i] = "\t".join(parts)
+                break
+        open(f, "w", encoding="utf-8").write("\n".join(lines) + "\n")
+
     cases = [("L1", plant_L1), ("L3", plant_L3), ("L4", plant_L4),
-             ("L5", plant_L5), ("L6", plant_L6), ("L7", plant_L7)]
+             ("L5", plant_L5), ("L6", plant_L6), ("L7", plant_L7),
+             ("L8", plant_L8)]
     bad = 0
     baseline = set()
     sys.stdout.write("\n=== layout guard self-test: L1 and L3-L7, planted ===\n\n")
@@ -264,7 +278,7 @@ def selftest_all():
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
     n = len(cases)
-    sys.stdout.write(f"\n  L1,L3-L7: {n - bad}/{n} plants fire "
+    sys.stdout.write(f"\n  L1,L3-L8: {n - bad}/{n} plants fire "
                      f"(L2 has its own harness: --selftest)\n\n")
     return 1 if bad else 0
 
@@ -409,6 +423,40 @@ def main(argv):
     chk("L6  every run names input hashes we hold", not unknown_inputs,
         "; ".join(unknown_inputs) if unknown_inputs
         else (f"{len(run_ids)} runs" if run_ids else "no runs yet"))
+
+    # -- L8  every input names a generator, and that generator exists ---------
+    # Added 2026-09-12.  The campaign's rule is "inputs/ is CODE ONLY, and a
+    # hand-edit trips the manifest and this guard".  That is only half true: L3
+    # catches an edit made AFTER stamping, and catches nothing at all about a file
+    # created by hand and then stamped.  The manifest's `generator` column is the
+    # only record of how a file came to exist, and until now nothing read it.
+    #
+    # Blocking on the STRONG error -- a generator is named and does not exist, so
+    # the file cannot be regenerated at all.  The weak error -- no generator named
+    # -- is reported with its count rather than failed, because 31 of 64 files are
+    # in that state today and making it blocking would stop the campaign rather
+    # than improve it.  The count is in the detail line so it cannot be skimmed.
+    gen_missing, unattributed = [], []
+    for ln in (open(mpath, encoding="utf-8").read().splitlines()[1:]
+               if os.path.exists(mpath) else []):
+        if not ln.strip():
+            continue
+        parts = ln.split("\t")
+        fname = parts[0]
+        gen = parts[3] if len(parts) > 3 else ""
+        if not gen or gen == "unattributed":
+            unattributed.append(fname)
+            continue
+        for one in gen.split(","):
+            one = one.strip()
+            if one and not os.path.exists(os.path.join(REDO_, "build", one)):
+                gen_missing.append(f"{fname} -> {one}")
+    chk("L8  every input's named generator exists", not gen_missing,
+        (f"named but absent: {gen_missing[:4]}" if gen_missing else "")
+        or (f"{len(unattributed)} of "
+            f"{len(unattributed) + len(recorded) - len(unattributed)} name NO generator "
+            f"-- regenerable only by memory: {sorted(unattributed)[:3]}..."
+            if unattributed else "all attributed"))
 
     # -- L7  gitignore --------------------------------------------------------
     gi = os.path.join(ROOT_, ".gitignore")

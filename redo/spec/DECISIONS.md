@@ -1020,6 +1020,62 @@ that refuses in each case.
 
 ---
 
+## F-22 · "inputs/ is code only" is half true, and 31 of 64 files are regenerable only by memory
+
+**Found 2026-09-12 while trying to add two columns to `g1_recording_spec.tsv` and
+looking for its generator. There isn't one.**
+
+### The rule, and what actually enforces it
+
+`README.md` and `CLAUDE.md` both say: *inputs/ is written by code only, and a
+hand-edit trips the layout guard and the manifest check.* **The second half is only
+true of an edit made AFTER stamping.** A file created by hand and then stamped
+passes L3 for ever, because L3 compares a file to its own recorded hash and that
+hash was taken from the hand-made bytes. **Nothing has ever checked that a file in
+`inputs/` came from code at all.**
+
+### What is actually in there
+
+`MANIFEST.tsv` has a `generator` column, and **nothing read it until today**:
+
+- **31 of 64 inputs name no generator.** Most of those do have one and are merely
+  unattributed — `drule_pool.py` writes `drule_pool_molecules.tsv`, `seqrec_refs.py`
+  writes `seqrec_scoreable.tsv`, `g1_receptors.py` writes `g1_receptors.tsv`.
+- **At least two have no writer anywhere in `redo/build/`.**
+  **`g1_recording_spec.tsv`** — 47 columns, the recording contract the whole campaign
+  is supposed to deliver against — is *read* by three scripts and *written* by none.
+  `g0_selftest.txt` likewise.
+
+So the campaign's delivery contract is a hand-made file sitting in a code-only
+directory, and the guard that exists to prevent exactly that cannot see it.
+
+### The check, added today
+
+**L8 — every input's named generator exists.** It is **blocking on the strong error**
+(a generator is named and is absent, so the file cannot be regenerated at all) and
+**reporting with a count on the weak one** (no generator named), because 31 of 64 are
+in that state and making it blocking would stop the campaign rather than improve it.
+The count sits in the detail line so it cannot be skimmed. Proved by planting;
+`--selftest-all` is now 7/7 over L1 and L3–L8.
+
+### Why this sits beside F-21
+
+They are the same hole from two sides. **F-21:** the manifest cannot tell you an input
+is *stale* against its own inputs. **F-22:** it cannot tell you an input was *generated*
+at all, or by what. Together: for 31 files we have neither provenance nor freshness,
+only a hash proving nobody has touched them since whoever made them said so.
+
+**Neither is fixed. Both are now visible**, which is the difference between a debt and
+a defect.
+
+**What closing it looks like:** each generator declares what it writes and what it
+consumed; `manifest.py` records both; L8 goes blocking on the weak error too and a new
+check fails when a consumed file's hash has moved. That is one change to `manifest.py`
+and a line in ~25 generators — and **attributing a file to the wrong generator is worse
+than leaving it blank**, so it is work to do carefully and with the generators re-run,
+not by pattern-matching filenames.
+
+---
 ## F-20 · `rows.tier3.v2.csv` landed, and nothing recorded that it had
 
 **Found by the registry triage, 2026-09-12, and it is the right thing to have found.**
