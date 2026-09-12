@@ -285,7 +285,13 @@ that cannot reject (§3.4).
 
 Stated plainly, because a map that hides its gaps is worse than no map.
 
-1. **The thresholds' own derivation is not reproducible.**
+1. **~~The thresholds' own derivation is not reproducible.~~ ANSWERED 2026-09-12 —
+   see `DECISIONS.md` F-17.** The rule is `midpoint(active_mean, inactive_mean)`
+   over the 32-receptor Class A panel, with the mean taken **per receptor per role
+   first** so a receptor with two PDBs does not double-weight. Reproduced here to
+   within 1–1.5% from the reference set we hold — corroboration, not exact
+   reproduction, because we lack the panel identity to fit on. The original text
+   is left below because the *fit-set* half of the gap is still open.**
    `scripts/derive_per_class_thresholds.py` is not in the bundle and there is no
    `scripts/` directory. The 80 tier-1 rows are **identified by no file** — the only
    80-row candidate carries the literal placeholder `"X-ray or cryo-EM (schema lacks

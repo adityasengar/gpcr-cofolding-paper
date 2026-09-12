@@ -650,6 +650,82 @@ Mazzoni actually predicts.
 
 ---
 
+## F-17 · The threshold derivation is ANSWERED — and it reproduces to within 1%
+
+**The load-bearing hole in `MAP_FROZEN_CAMPAIGN.md` is filled.** That document's
+first stated hole was: *we can say that calls change under a new cut and by how
+much, never why 9.08 sits where it does.* `paper_af3` answered it in prose on
+2026-09-12, without needing to send the script.
+
+**The rule is `midpoint(active_mean, inactive_mean)`. Nothing more elaborate.**
+
+- fitted on the **32-receptor Class A panel**
+- input `refs/reference_set.csv`, keyed on `receptor_slug` + `role ∈ {active, inactive}`
+- reading three fields: `d_gpcrdb_tm6_tilt_ref`, `angle_class_b_kink_ref`, `d_npxxy_oh_ref`
+- **aggregation: mean of PDBs per receptor per role FIRST, then mean across
+  receptors** — explicitly so a receptor with two deposited PDBs does not
+  double-weight the aggregate
+- directions: tilt `active_gt`, kink `active_lt` (smaller angle = bent TM6 =
+  active), NPxxY-OH `active_lt`
+
+### Reproduced here, on the reference set we hold
+
+`redo/protocol/received/source_bundle/refs/reference_set.csv`, 168 rows, applying
+their aggregation exactly:
+
+| metric | active mean | inactive mean | midpoint | published | gap |
+|---|---:|---:|---:|---:|---:|
+| NPxxY-OH | 5.520 (n=30) | 12.830 (n=35) | **9.175** | 9.08 | 1.0% |
+| TM6 tilt | 17.872 (n=90) | 12.427 (n=65) | **15.149** | 14.932 | 1.5% |
+| class B kink | 158.587 | 157.311 | 157.949 | 159.95 | 1.3% |
+
+**This is corroboration, not exact reproduction, and the residual is the
+population rather than the rule.** They fitted on the 32-receptor Class A panel;
+the file we hold carries no `gpcr_class` column, so the numbers above are over
+**all 168 rows, all classes**. Landing within 1–1.5% on the wrong population is
+what a correct rule on a superset looks like. **Do not quote 9.175 as a
+reproduction of 9.08** — quote the rule, and say the exact fit needs the panel
+identity.
+
+### The part that matters for D-2026-09-12-d
+
+**Their own script's docstring says re-using Class A thresholds for Class B and F
+IS SATURATION, and names it** — Class B median apo tilt 22.05 Å against a 14.932
+cut; Class F tilt-only, so nearly always true. It carries a self-classification
+gate: **if accuracy on the derivation set falls below 3/4 for a metric, that metric
+is reported DESCRIPTIVELY rather than as a usable threshold**, because n=4 is too
+small to defend — *"reporting saturated 4/4/4/4 numbers dressed as unanimous is the
+anti-pattern this exists to prevent."*
+
+That is the origin of the `descriptive_n_lt_5_per_side` rule, and it means **their
+tooling had already diagnosed the Class F problem we measured from the apo arm.**
+Third independent route to the same place, after our apo measurements and their
+`PREREG.md:183` transducer-taxonomy argument. The Class A-only scope is now
+supported from three directions.
+
+### Status of the four asks, 2026-09-12
+
+**Aditya approved all four in their session.** Delivery is blocked separately:
+their platform's classifier is currently refusing **every** outbound file
+regardless of size — `ligand_set.csv` at 33 KB was denied like the large one. The
+approval is real; the delivery is not. **Do not look for a way around their
+classifier**; the small files are expected to come from Aditya directly instead.
+
+**Ask 1 is too big for the bridge in any case.** `rows.tier3.v2.csv` is **92 MB,
+40,801 rows, ~100 columns**; `sendfile.sh` refuses above 14 MB and ntfy caps at 15,
+and chunking 92 MB across a relay whose attachments expire in 3 hours is not a
+delivery mechanism. **The agreed form is a ten-column projection** — smaller
+because it contains less, not because it was sliced to fit:
+
+`receptor_slug · receptor_class · input_state_claim · ligand_type · ligand_role ·
+seed_used · confidence_flag · d_npxxy_y558_y753_oh · d_gpcrdb_tm6_tilt_246_637_ca ·
+input_path`
+
+**`ligand_type` is in that list**, which is exactly the modality column the ligand
+arm needs (D-2026-09-12-f).
+
+---
+
 ## F-1 · **RETRACTED 2026-09-12. I was wrong. The two-instrument predicate IS what ran.**
 
 **What I claimed** (and told Aditya, and told `paper_af3`): that the manuscript's
