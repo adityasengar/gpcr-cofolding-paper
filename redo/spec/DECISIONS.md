@@ -1075,6 +1075,35 @@ and a line in ~25 generators — and **attributing a file to the wrong generator
 than leaving it blank**, so it is work to do carefully and with the generators re-run,
 not by pattern-matching filenames.
 
+### CLOSED for the worst instance, 2026-09-12 — and the by-product is the real finding
+
+`g1_recording_spec.tsv` now has a generator (`redo/build/g1_recording_spec.py`); its
+rows are code, `--check` regenerates and diffs, and it gained the two
+`pocket_ca_rmsd_active` / `_inactive` columns `PLAN.md` Pillar 0 calls blocking. Moving
+it changed **zero** rows' non-empty content.
+
+**But the by-product matters more than the fix. Making the contract into code revealed
+that 10 of its 47 rows were MALFORMED** — four tabs where five belonged, the trailing
+`why` omitted rather than left empty — **and nothing had ever parsed it strictly enough
+to notice, across three consuming scripts.**
+
+**That is this paper's own thesis happening to this paper's own machinery:** an
+instrument everything depended on, that nobody had verified, whose defect was invisible
+precisely because no consumer checked. We found it in our own contract, **before the
+campaign ran**. Disclosed, it is the strongest credential the instrument critique can
+have — the difference between a paper that *asserts* the field does not verify its
+instruments and one that *demonstrates the failure mode on itself and says so*. It
+belongs in Methods, not only here.
+
+**Two things this closure does NOT license, both easy to slip into:**
+
+1. **A generator is not correctness.** `--check` proves the file is *reproducible*, not
+   *right*. A reproducibly generated file can still be stale against its inputs — which
+   is exactly **F-21**, open and unfixed. The two are close enough in shape that a
+   reader will elide them if we let them.
+2. **30 of 64 inputs still name no generator.** One instance closed is one instance.
+   Give the count as a count; L8 prints it on every run.
+
 ---
 ## F-20 · `rows.tier3.v2.csv` landed, and nothing recorded that it had
 
@@ -1129,6 +1158,15 @@ been treating the first as if it delivered the second.
 hashes of the files its generator consumed — alongside its own, and fail when a
 consumed file's current hash differs from the recorded one. That is a `manifest.py`
 change plus a declaration per generator, and it would have caught this in one run.
+
+**The precedent exists in-house and is proven** (lit, 2026-09-12): `lit/GAPS.md` had
+exactly this failure mode — a derived file that could go stale silently, consulted
+precisely when someone was about to make a claim. It was fixed by **generating it and
+making `corpus_check.sh` fail on divergence**, and that check caught injected drift when
+tested. **Same shape, same fix.** What is unclear is affordability: several generators
+here consume external data — RCSB, GPCRdb, a 28 GB ChEMBL release now deleted — so
+"regenerate and diff" is not universally available, which is why the digest form is
+proposed instead.
 Until it exists, **a generator whose inputs have moved must be re-run by hand**, and
 the only thing standing between us and a stale artefact is somebody remembering.
 
