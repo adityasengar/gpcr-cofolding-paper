@@ -459,6 +459,54 @@ gets noticed.
 
 ---
 
+## F-15 · D-C's ligand picks are ENACTED — six of seven, and ADRB1 is blocked by the rule that blocks B1B1U5
+
+**Affinity was the stated blocker and it is gone.** `LIGAND_CURATION_PROPOSAL.md`
+ended by saying every row "still needs an affinity attached from a source we pin".
+Aditya dissolved that on 2026-09-12 — ligand identity is evidenced *structurally*,
+the molecule being co-crystallised in an active or inactive receptor, which is a
+stronger claim than an assay number. So the picks became enactable, and they are
+enacted: `redo/inputs/ligand_set_redo.tsv`, from `redo/build/ligand_set_redo.py`.
+
+**Six picks across four receptors, four of them sitting ON one of our own reference
+structures:**
+
+| receptor | role | ligand | CCD | structure | provenance |
+|---|---|---|---|---|---|
+| S1PR1 | agonist | siponimod | `J8C` | 7TD4 2.6 Å | our ACTIVE reference |
+| S1PR1 | antagonist | W146 | `ML5` | 3V2Y 2.8 Å | our INACTIVE reference |
+| HRH3 | agonist | histamine | `HSM` | 8YN5 2.7 Å | our ACTIVE reference |
+| GHSR | agonist | ibutamoren | `1KD` | 7NA8 2.7 Å | same deposition as our active ref |
+| GHSR | antagonist | CHEMBL1956994 | `8QX` | 6KO5 3.3 Å | our INACTIVE reference |
+| CCKAR | agonist | SR146131 | `IA1` | 7XOV 3.0 Å | off-reference, the only candidate |
+
+**ADRB1 is blocked, and the proposal was wrong to list it as straightforward.**
+Carazolol is on our own inactive reference `7BVQ` and is human — but GPCRdb types it
+**`Inverse agonist`**, not a neutral antagonist, and **amendment C-1 dropped
+`inverse_agonist` from Tier 3**. That is exactly what blocks B1B1U5. Every ADRB1
+candidate GPCRdb calls a true `Antagonist` — `P32`@4BVN 2.1 Å, `3WC`@3ZPR,
+`XF5`@3ZPQ, `I32`@2YCZ — is *Meleagris gallopavo*, against the standing rule that
+**species follows the panel** (our ADRB1 is human, P08588). **Reopen C-1 for an
+inverse agonist, or accept a cross-species antagonist — Aditya's call.**
+
+**I made that error and a check caught it, not a re-reading.** The generator now
+refuses any pick whose assigned role disagrees with GPCRdb's own `function_raw`;
+proved by planting carazolol back into the list, where it exits 1.
+
+**Power consequence: k = 12, not 13.** The proposal's own figures follow
+`MDE = 1.218/sqrt(k)` — verified against all three of its points (k=8 → 0.431,
+k=13 → 0.338, k=15 → 0.314) — so k = 12 gives **MDE ≈ 0.352** against a baseline of
+**0.431**. The curation is still clearly worth doing, which is the point that matters.
+
+**A new gate, `redo/gates/ligands.py`, 5 checks, each proved by planting:** the
+table is present (a missing table FAILS, never skips); every pick traces to exactly
+one candidate row; no role disagrees with its function label; every SMILES parses and
+no receptor's two roles share an InChIKey — the OPSD problem, where agonist and
+antagonist are one molecule in two isomers; every blocked receptor states its reason
+in the table itself. Wired into `verify.sh`.
+
+---
+
 ## F-1 · **RETRACTED 2026-09-12. I was wrong. The two-instrument predicate IS what ran.**
 
 **What I claimed** (and told Aditya, and told `paper_af3`): that the manuscript's

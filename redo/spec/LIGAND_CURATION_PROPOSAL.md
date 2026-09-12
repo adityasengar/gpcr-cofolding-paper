@@ -1,5 +1,12 @@
 # LIGAND_CURATION_PROPOSAL.md — the D-C picks, with reasons
 
+> **ENACTED 2026-09-12, with two corrections.** The picks below are now in
+> `redo/inputs/ligand_set_redo.tsv`, written by `redo/build/ligand_set_redo.py`.
+> **Six of seven, not seven** — ADRB1 is blocked, see the correction under "The
+> picks". And the affinity requirement this document ends on is **dissolved**:
+> Aditya, 2026-09-12, ligand identity is evidenced *structurally*, which is a
+> stronger claim than an assay number.
+
 **Decision D-C (2026-09-12): curate small-molecule agonist/antagonist pairs for the
 seven receptors that have the modality but not the curation.** Baseline is 9
 receptors / 8 clusters, MDE **0.431**; the target is 16 / 15, MDE **0.314**.
@@ -37,13 +44,32 @@ what our panel uses — ADRB1 reads `Meleagris gallopavo` there while our ADRB1 
 | **S1PR1** | both | **siponimod** | `J8C` | `7TD4` 2.6 Å | **our ACTIVE reference** |
 | | | **W146** | `ML5` | `3V2Y` 2.8 Å | **our INACTIVE reference** |
 | **HRH3** | agonist | **histamine** | `HSM` | `8YN5` 2.7 Å | **our ACTIVE reference** |
-| **ADRB1** | antagonist | **carazolol** | `CAU` | `7BVQ` 2.5 Å | **our INACTIVE reference** |
+| ~~**ADRB1**~~ | ~~antagonist~~ | ~~**carazolol**~~ | ~~`CAU`~~ | ~~`7BVQ` 2.5 Å~~ | **BLOCKED — see below** |
 | **GHSR** | both | **ibutamoren** | `1KD` | `7NA8` 2.7 Å | same deposition as our active ref `7NA7` |
 | | | **CHEMBL1956994** | `8QX` | `6KO5` 3.3 Å | **our INACTIVE reference** |
 | **CCKAR** | agonist | **SR146131** | `IA1` | `7XOV` 3.0 Å | **off-reference — the only candidate** |
 
 **Six of seven picks sit on, or in the same deposition as, a structure the panel
 already uses.** That was not designed for; it is what the rule produced.
+
+> **CORRECTION 2026-09-12 — ADRB1 is blocked, by the same rule as B1B1U5.**
+> Carazolol is on our own inactive reference and is human, but GPCRdb types it
+> **`Inverse agonist`**, not a neutral antagonist — and amendment **C-1 dropped
+> `inverse_agonist` from Tier 3**, which is precisely what blocks B1B1U5. Every
+> ADRB1 candidate GPCRdb types a true `Antagonist` — `P32` @ 4BVN 2.1 Å, `3WC` @
+> 3ZPR, `XF5` @ 3ZPQ, `I32` @ 2YCZ — is *Meleagris gallopavo*, and our ADRB1 is
+> human (P08588), against this document's own rule that **species follows the
+> panel**. So the choice is: reopen C-1 for an inverse agonist, or accept a
+> cross-species antagonist. **Aditya's call, not a curation judgement.**
+>
+> I listed it among the straightforward picks and it is not one. The generator now
+> refuses any pick whose assigned role disagrees with GPCRdb's own `function_raw`,
+> and that guard was proved by planting carazolol back into the list.
+>
+> **Consequence for power: k = 12, not 13.** The document's own figures follow
+> `MDE = 1.218 / sqrt(k)` — checked against all three of its points (k=8 → 0.431,
+> k=13 → 0.338, k=15 → 0.314) — so **k = 12 gives MDE ≈ 0.352**, against a baseline
+> of 0.431. **The curation is still clearly worth doing**; that is what matters here.
 
 **CCKAR is the only genuinely new curation.** Its active reference `7MBX` carries
 `CHEMBL216166`, which GPCRdb types **protein**, not small-molecule — consistent
@@ -105,10 +131,12 @@ Two constraints if anyone attempts them anyway:
 |---|---|
 | `receptor`, `ligand_role`, `smiles`, `bound_pdb`, `ligand_ccd` | **have** — from the frozen snapshot |
 | `is_peptide` | **have** — all seven picks are `type=small-molecule` |
-| `affinity_metric`, `affinity_value_nM`, `affinity_source` | **MISSING — this is the remaining work** |
+| ~~`affinity_metric`, `affinity_value_nM`, `affinity_source`~~ | **NOT REQUIRED — Aditya, 2026-09-12.** Ligand identity is evidenced structurally: the molecule is co-crystallised in an active or inactive receptor. That is a stronger claim than an assay number, and it is why this row is struck rather than filled. ChEMBL is still needed for the DECOY side, but only for presence/absence of activity |
 | `inchi`, `iupac_name` | derivable from SMILES with RDKit |
 
-The affinity source must be pinned the way `DRULE_CHEMBL_SCOPE.md` pins the decoy
-pool: one release, recorded activity types, stated assay-confidence floor. Using a
-different provenance for the agonist/antagonist affinities than for the decoy pool
-would make the two halves of the ligand arm incomparable.
+~~The affinity source must be pinned the way `DRULE_CHEMBL_SCOPE.md` pins the decoy
+pool.~~ **Superseded**: there are no affinities to pin on this side. The
+comparability concern it raised does not arise, because the agonist/antagonist half
+is now evidenced structurally and the decoy half by presence/absence of activity —
+two different questions, each with its own stated provenance, rather than one
+metric drawn from two sources.

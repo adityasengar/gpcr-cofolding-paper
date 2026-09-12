@@ -55,6 +55,8 @@ python3 redo/build/manifest.py --check >/dev/null 2>&1 \
   && ok "redo inputs manifest" "in sync" || bad "redo inputs manifest" "STALE — python3 redo/build/manifest.py"
 python3 redo/gates/run_receipt.py >/dev/null 2>&1 \
   && ok "redo run receipts" "accepted (or no runs yet)" || bad "redo run receipts" "REFUSED — run redo/gates/run_receipt.py"
+python3 redo/gates/ligands.py >/dev/null 2>&1 \
+  && ok "redo ligand table" "5 checks clean" || bad "redo ligand table" "FAILED — run redo/gates/ligands.py"
 G0=$(python3 redo/gates/g0_preflight.py 2>/dev/null | grep -E "FROZEN|NOT FROZEN" | tail -1 | sed 's/^ *//')
 G1=$(python3 redo/gates/g1_preflight.py 2>/dev/null | grep -E "^[0-9]+ passed" | tail -1)
 case "$G0" in "FROZEN"*) ok "redo group 0 gate" "$G0" ;; *) bad "redo group 0 gate" "${G0:-did not run}" ;; esac
