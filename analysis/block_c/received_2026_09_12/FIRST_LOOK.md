@@ -21,11 +21,25 @@ Parsed on the `pool` segment, this gives a **perfectly balanced design**:
 **apo 20,400 / cognate 20,400**, and **boltz / protenix / chai / of3 at 10,200
 each**. That balance is itself evidence the parse is right.
 
-**Cross-validate it before trusting it.** `data/block_c/12_g4_off_site_census/`
-carries its own explicit `arm` column over 36 receptors × 4 backbones. The two
-files must agree; nobody has checked yet.
+### CROSS-VALIDATED 2026-09-12 — the parse is exact
 
-800 rows carry an empty `receptor_class` and are excluded here.
+`data/block_c/12_g4_off_site_census/g4_full_census_v2.csv` carries its own
+**explicit `arm` column**. Keyed on (receptor, arm, role, backbone):
+
+- **800 census cells, 800 of them present in `rows.tier3.v2` with IDENTICAL row
+  counts. Zero mismatches.** The path-derived arm agrees with the recorded arm on
+  every shared cell.
+- `rows.tier3.v2` carries **16 cells the census does not**, and they are fully
+  accounted for: **`B1B1U5` and `OPSD`, 400 rows each**. Both are the non-human
+  opsins, and **they are exactly the 800 rows with an empty `receptor_class`** —
+  so the two anomalies are one anomaly, and it is explained rather than excluded.
+
+*(My first attempt reported zero overlap. The census's receptor column is
+`receptor`, not `receptor_slug`, so every key had `None` in first position. My
+checker, not the data — as usual.)*
+
+**The arm mapping can now be relied on.** Step 1 of the order of work below is
+done; steps 2–5 are not.
 
 ## The 2×2, Class A, pooled — the shape, not the number
 
