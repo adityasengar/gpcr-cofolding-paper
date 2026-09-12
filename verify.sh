@@ -49,8 +49,9 @@ N=$(python3 -c "import pandas,sys; print(len(pandas.read_csv('data/block_a/01_ro
   && ok "block A deliverables" "all checks pass" || bad "block A deliverables" "see check_deliverables.sh"
 
 # --- redo campaign ---
+LAY=$(python3 redo/gates/layout.py 2>/dev/null | grep -oE "CLEAN -- [0-9]+ checks pass" | grep -oE "[0-9]+")
 python3 redo/gates/layout.py >/dev/null 2>&1 \
-  && ok "redo layout" "7 checks clean" || bad "redo layout" "VIOLATED — run redo/gates/layout.py"
+  && ok "redo layout" "${LAY:-?} checks clean" || bad "redo layout" "VIOLATED — run redo/gates/layout.py"
 python3 redo/build/manifest.py --check >/dev/null 2>&1 \
   && ok "redo inputs manifest" "in sync" || bad "redo inputs manifest" "STALE — python3 redo/build/manifest.py"
 python3 redo/gates/run_receipt.py >/dev/null 2>&1 \
