@@ -17,9 +17,9 @@ not track state correctness.
 | stage | skill | reads | writes | status |
 |---|---|---|---|---|
 | prior work | `litquery` | `lit/SCHEMA.md`, `lit/INDEX.md`, `lit/notes/` | nothing | **built** |
-| results | `dataquery` | `data/block_<x>/` | `analysis/block_<x>/` | **A, B and C landed** |
-| drafting | *(no skill)* | `CLAIMS.md`, `lit/notes/`, the current block | `manuscript/` | **A, B and C written** |
-| figures | `figbuild` | the current block, `lit/notes/` | `figures/block_<x>/` | **A: 5 + 16 SI · B: 6 · C: 4** |
+| results | `dataquery` | `data/block_<x>/` | `analysis/block_<x>/` | **A, B, C and D landed** |
+| drafting | *(no skill)* | `CLAIMS.md`, `lit/notes/`, the current block | `manuscript/` | **all four written** |
+| figures | `figbuild` | the current block, `lit/notes/` | `figures/block_<x>/` | **4 main figures + 35 SI; ledger in `figures/FIGURES.md`** |
 | submission | *(not built)* | `manuscript/`, `lit/refs.bib` | — | pending |
 
 ## The rule that makes this work
@@ -35,14 +35,25 @@ become decoration for a conclusion already reached, and the output is indistingu
 from the grounded version. `litquery` and `dataquery` both refuse to write manuscript
 prose for this reason. Do not relax it when the drafting stage is built.
 
-**Blocks A, B and C have landed; D has not.** No draft sentence may depend on a
-block that has not run. Each section states what it does not claim.
+**All four blocks have landed and are written.** Each section states what it
+does not claim. **Block D shipped no row-level data at all** — its three corpora,
+42,180 predictions, are absent — so its verifier carries a third evidential class,
+PROSE-ONLY, and a pass count there is not a claim count.
 
-**Two of the paper's three title clauses have no evidence in any landed block.**
-Neither a 21-residue peptide nor an agonist is supplied anywhere: `ligand_type`
-is NaN on all 32,000 Block B rows and Block A has no ligand column. Recorded at
-the top of `CLAIMS.md`. Until that is resolved, no sentence may imply either
-result.
+**Two of the paper's three title clauses still have no result behind them.**
+No arm in any block supplies a **peptide** of any length — every partner arm is a
+complete Gα subunit or a nanobody — and the segment this work actually
+manipulates is **eleven** residues, not 21. The agonist clause is closer: Block C
+does vary the ligand, but it reports no state result on its 7,000 apo × agonist
+predictions, and its 2×2 has **ligand class × reference state** as its factors,
+not presence/absence of partner. Recorded at the top of `CLAIMS.md`. Until those
+are resolved, no sentence may imply either result.
+
+**A heading is not exempt from the evidence rule.** Scope gets asserted where it
+is most read and qualified where it is least read: on 2026-09-11 a section
+heading, an SI caption title and a build-note comment each carried a scope the
+body text underneath correctly withdrew. When a scope changes, grep the **short**
+text — headings, caption titles, panel titles, ledger status lines.
 
 ## Layout
 
@@ -57,7 +68,43 @@ manuscript/      the LaTeX (canonical): main.tex, si.tex, sections/, tables/
 tex/             pinned TeX environment + check_tex.sh
 lit/             the literature corpus — has its own CLAUDE.md, read it before
                  answering anything about prior work
+redo/            the SECOND campaign — has its own README.md, read it before
+                 touching anything under it
 ```
+
+## redo/ — the second campaign
+
+**The manuscript is frozen as the record.** `redo/` is the campaign that
+supersedes it, and it is a peer of `manuscript/` and `lit/`, not an analysis of
+a block. It was `analysis/redo/` until 2026-09-11, where being a sibling of
+`block_a..d` made it read as a fifth block, which it is not. **`analysis/redo/`
+and `analysis/REDO_EXPERIMENT_CATALOGUE.md` no longer exist** — the catalogue is
+`redo/spec/CATALOGUE.md`.
+
+Blocks A–D are untouched and stay that way. No new claim is built on them.
+
+The layout answers the question a flat directory cannot: **may I edit this file,
+and has anyone already?**
+
+| where | who may write it |
+|---|---|
+| `redo/spec/` | a human, once — decisions and what to run |
+| `redo/build/`, `redo/gates/` | a human — generators and checks |
+| `redo/inputs/` | **code only**, and every file is hashed in `inputs/MANIFEST.tsv` |
+| `redo/cache/`, `redo/runs/`, `redo/protocol/` | **nobody** — it arrived from outside |
+
+Four rules, and `redo/gates/layout.py` enforces the first three:
+
+1. **Never hand-edit `redo/inputs/`.** Change the generator, re-run it, then
+   `python3 redo/build/manifest.py` to restamp. A hand-edit trips the layout
+   guard and the manifest check; **neither preflight gate notices**, which is
+   why the layout guard exists separately from them.
+2. **Never compute a path from `__file__`** — import it from `redo/paths.py`.
+3. **The top level is fixed at eight entries.** Growth goes into `runs/`.
+4. **A landed run is read-only**, like `data/block_<x>/`.
+
+`verify.sh` runs the layout guard, the manifest check and both preflight gates.
+All seven layout checks were proved by planting the defect each one catches.
 
 ## How data arrives: one block at a time
 
@@ -127,9 +174,13 @@ merging them produces a document neither reader can act on.
 
 Cost classes are **free** (re-analysis of data already held), **cheap**
 (re-scoring existing predictions, no new inference) and **real** (new
-predictions). Every ask carries one. As of 2026-09-10: Block A 15 asks, B 17,
-C 18 — and **every Block C ask is free**, because its numbers are already
-computed and sitting in files that were not zipped.
+predictions). Every ask carries one. As of 2026-09-11: Block A 15 asks, B 17,
+C 18, D 12 — and **every Block C ask is free**, because its numbers are already
+computed and sitting in files that were not zipped. **The single highest-value
+ask in all four documents is Block C's ask 1, `rows.tier3.v2.csv`**: it unblocks
+two Block C claims, the G4 off-site gate that fired on 8 of 12 cells, and the
+uncrossed ligand-class × partner-presence result that 18,400 already-scored
+predictions are sitting on.
 
 `rebuttals/` also holds `PANEL_EXPANSION.md` and `PANEL_EXPANSION_CLASS_A.md`
 (19 Class A receptors with both states that our panel lacks) and a `README.md`

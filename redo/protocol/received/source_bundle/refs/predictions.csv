@@ -1,0 +1,2 @@
+prediction_sha,experiment_id,path,receptor_from_path_substring,receptor_resolved,disambig_conflict,receptor_unresolved_in_original,backbone,chain,raw_source_csv,raw_source_sha256
+# Filled at commit 14. Header only at scaffold time.

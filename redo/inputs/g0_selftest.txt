@@ -1,0 +1,29 @@
+pdb    entry        axis           measured      shipped     delta  verdict
+4LDE   adrb2_human  npxxy_oh         4.8131       4.8131   +0.0000  MATCH
+4LDE   adrb2_human  tm6_tilt        17.5625      17.5625   +0.0000  MATCH
+5G53   aa2ar_human  npxxy_oh         3.7158       3.7052   +0.0106  MISMATCH
+5G53   aa2ar_human  tm6_tilt        18.1240      18.0974   +0.0266  MISMATCH
+6PT2   oprd_human   npxxy_oh        16.7487      16.7487   +0.0000  MATCH
+6PT2   oprd_human   tm6_tilt        15.7825      15.7825   +0.0000  MATCH
+5ZTY   cnr2_human   npxxy_oh        10.0794      10.0794   +0.0000  MATCH
+5ZTY   cnr2_human   tm6_tilt        11.5016      11.5016   +0.0000  MATCH
+8GUR   cnr2_human   npxxy_oh         3.2768       3.2768   +0.0000  MATCH
+8GUR   cnr2_human   tm6_tilt        16.3900      16.3900   +0.0000  MATCH
+7JVR   drd2_human   npxxy_oh         4.2522       4.2522   +0.0000  MATCH
+7JVR   drd2_human   tm6_tilt        17.5860      17.5860   +0.0000  MATCH
+                    note: [identity; SIFTS unusable: sifts/R: 5.58: residue R/354 not modelled] 
+7NA7   ghsr_human   npxxy_oh         4.8334       4.8334   +0.0000  MATCH
+7NA7   ghsr_human   tm6_tilt        17.9777      17.9777   +0.0000  MATCH
+7F83   ghsr_human   npxxy_oh        10.0560      10.0560   +0.0000  MATCH
+7F83   ghsr_human   tm6_tilt        12.6867      12.6867   +0.0000  MATCH
+                    note: [identity; SIFTS unusable: sifts/A: 7.53: residue A/1182 not modelled] 
+
+anchor positions used (UniProt numbering), for comparison against `anchor_positions` in data/block_b/09_references/reference_set.blockb_pinned.csv:
+  4LDE   5.58=219 7.53=326 2x46=75 6x37=275   pinned 5.58=219 7.53=326   AGREE
+  5G53   5.58=197 7.53=288 2x46=48 6x37=235   pinned 5.58=197 7.53=288   AGREE
+  6PT2   5.58=233 7.53=318 2x46=91 6x37=263   pinned 5.58=233 7.53=318   AGREE
+  5ZTY   5.58=209 7.53=299 2x46=76 6x37=247   pinned 5.58=209 7.53=299   AGREE
+  8GUR   5.58=209 7.53=299 2x46=76 6x37=247   pinned 5.58=209 7.53=299   AGREE
+  7JVR   5.58=209 7.53=426 2x46=76 6x37=375   pinned 5.58=209 7.53=426   AGREE
+  7NA7   5.58=232 7.53=323 2x46=85 6x37=265   pinned 5.58=232 7.53=323   AGREE
+  7F83   5.58=232 7.53=323 2x46=85 6x37=265   pinned 5.58=232 7.53=323   AGREE

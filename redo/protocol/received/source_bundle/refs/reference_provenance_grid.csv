@@ -1,0 +1,41 @@
+receptor_slug,coupling_class,tier_tm6,tier_npxxy,active_pdb,inactive_pdb,active_stabilization_source,alpha5_donor_class,notes
+5HT1B,Gi,own,not_computed,6G79,4IAR,mini_G,,
+5HT2C,Gq,own,not_computed,8DPF,6BQH,chimera,Gq,active_note=stabilising_elements=none but RCSB shows chimera (donor=Gq) | CHIMERA α5-CT donor=Gq; scaffold-vs-α5-CT class mismatch — coupling assignment must not rely on UniProt Gα accession o
+5HT5A,Gi,own,not_computed,7UM5,7UM4,mini_G,,
+AA1R,Gi,own,not_computed,7LD3,5UEN,native,,
+AA2AR,Gs,own,not_computed,5G53,5NM4,mini_G,,
+ACM1,Gq,own,not_computed,6OIJ,6ZFZ,chimera,Gq,active_note=stabilising_elements=none but RCSB shows chimera (donor=Gq) | CHIMERA α5-CT donor=Gq; scaffold-vs-α5-CT class mismatch — coupling assignment must not rely on UniProt Gα accession o
+ACM2,Gi,own,not_computed,7T94,5ZKC,native,,
+ACM4,Gi,own,not_computed,7TRP,5DSG,native,,
+ADA2A,Gi,own,not_computed,9CBL,6KUX,native,,
+ADRB1,Gs,own,not_computed,7BU7,7BVQ,nanobody,,
+ADRB2,Gs,own,not_computed,4LDE,6PS2,nanobody,,
+AGTR1,Gq,own,not_computed,6OS2,4ZUD,nanobody,,
+APJ,Gi,own,not_computed,8XZH,8S4D,native,,
+B1B1U5,Gi,own,not_computed,9EPR,6I9K,native,,active_note=PDB updated 9EPP→9EPR per PREREG §5: 9EPP is a Gi/q chimera (Gαi1 scaffold + Gαq α5-CT graft) that would mis-assign coupling via UniProt lookup; 9EPR is the native Gi heterotrimer 
+CCKAR,Gq,own,not_computed,7MBX,7F8Y,native,,
+CCR5,Gi,own,not_computed,7F1S,5UIW,native,,
+CNR1,Gi,own,not_computed,5XRA,5U09,agonist_only,,
+CNR2,Gi,own,not_computed,8GUR,5ZTY,native,,
+CXCR2,Gi,own,not_computed,6LFO,6LFL,native,,
+CXCR4,Gi,own,not_computed,8U4N,3ODU,native,,
+DRD2,Gi,own,not_computed,7JVR,6CM4,native,,
+DRD3,Gi,own,not_computed,8IRT,3PBL,native,,
+EDNRA,Gq,own,not_computed,8HCQ,8XVK,mini_G,,
+EDNRB,Gq,own,not_computed,8IY5,6IGK,native,,
+FSHR,Gs,own,not_computed,8I2G,8I2H,mini_G,,active_note=stabilising_elements=none but RCSB shows mini_G | Intra-Gs engineered construct (Gs subunit alpha + Gs-XLas isoform); α5-CT still Gs class; no scaffold/α5-CT mismatch.
+GHSR,Gq,own,not_computed,7NA7,7F83,native,,
+GRPR,Gq,own,not_computed,7W40,7W41,native,,
+HRH1,Gq,own,not_computed,8YN2,8X5Y,mini_G,,
+HRH3,Gi,own,not_computed,8YUU,7F61,native,,
+LPAR1,Gi,own,not_computed,7TD0,4Z36,native,,
+LSHR,Gs,own,not_computed,7FIH,7FIJ,mini_G,,active_note=stabilising_elements=none but RCSB shows mini_G
+LT4R1,Gi,own,not_computed,7VKT,7K15,native,,
+MCHR1,Gi,own,not_computed,8WWK,8YNS,native,,
+NPY1R,Gi,own,not_computed,7X9A,5ZBQ,native,,
+NPY2R,Gi,own,not_computed,7YON,7DDZ,native,,
+OPRD,Gi,own,not_computed,6PT2,4N6H,agonist_only,,
+OPRK,Gi,own,not_computed,8FEG,4DJH,native,,
+OPRX,Gi,own,not_computed,8F7X,5DHH,native,,
+OPSD,Gt,own,not_computed,4X1H,7ZBC,native,,active_note=α5-CT peptide of Gαt only (no full Gα subunit); native α5-CT donor class Gt; not a heterotrimer.
+OX2R,Gq,own,not_computed,7L1V,5WQC,mini_G,,active_note=stabilising_elements=none but RCSB shows mini_G

@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# paper_af3 — laptop-side pre-commit hook (Wave 2).
+#
+# Installed as .git/hooks/pre-commit via `scripts/hooks/install.sh` (a
+# symlink so future edits to this file take effect without reinstall).
+#
+# Contract:
+#   * Reads `git diff --cached --name-only` inside step7_dispatch_gate
+#     itself; we do not re-materialise the list here.
+#   * If no staged file matches PRE_COMMIT_TRIGGERS in the gate, we exit
+#     0 within a few tens of milliseconds (the fast path for docs-only
+#     commits).
+#   * Otherwise we run `python3 scripts/step7_dispatch_gate.py
+#     --pre-commit-mode` and honour its exit code. Blocked → the commit
+#     is aborted with a non-zero exit and the gate's message on stdout.
+#
+# Exit-code discipline: we invoke the gate directly (not through a pipe
+# / tail / awk chain). The paper_af3 framework has burned time on the
+# "exit code lost through a shell pipeline" class of silent-pass bug —
+# this hook does not participate in that pattern.
+#
+# Environment overrides:
+#   PAPER_AF3_SKIP_PRECOMMIT=1   emergency skip; USE ONLY when the
+#                                gate itself is broken and you are
+#                                unblocking a hotfix.
+
+set -e
+set -u
+set -o pipefail
+
+if [ "${PAPER_AF3_SKIP_PRECOMMIT:-0}" = "1" ]; then
+    printf 'pre-commit: PAPER_AF3_SKIP_PRECOMMIT=1 — skipping (emergency override).\n' >&2
+    exit 0
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+if [ -z "$REPO_ROOT" ]; then
+    printf 'pre-commit: could not resolve repo root; aborting commit.\n' >&2
+    exit 1
+fi
+
+GATE="$REPO_ROOT/scripts/step7_dispatch_gate.py"
+if [ ! -f "$GATE" ]; then
+    printf 'pre-commit: %s missing; aborting commit.\n' "$GATE" >&2
+    exit 1
+fi
+
+# Direct invocation — no pipe. Exit code is the gate's exit code.
+python3 "$GATE" --pre-commit-mode

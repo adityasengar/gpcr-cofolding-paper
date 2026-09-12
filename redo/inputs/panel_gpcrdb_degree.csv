@@ -1,0 +1,1717 @@
+pdb,receptor,uniprot_acc,name,family,cls,species,method,resolution,pref_chain,state,degree_active,pct_seq,repr_structure
+1F88,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.8,A,Inactive,24,97,0
+1L9H,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.6,A,Inactive,24,98,0
+1GZM,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.7,A,Inactive,24,94,0
+2HPY,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.8,B,Inactive,24,100,0
+2I35,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.8,A,Inactive,24,94,0
+1HZX,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.8,A,Inactive,24,98,0
+1U19,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.2,A,Inactive,24,100,0
+2G87,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.6,A,Inactive,24,100,0
+2ZIY,OPSD,P31356,Rhodopsin,Opsins,A,Japanese flying squid,X-ray,3.7,A,Inactive,9,83,0
+2J4Y,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.4,B,Inactive,24,94,0
+3C9L,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.7,A,Inactive,24,94,0
+2RH1,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.4,A,Inactive,0,68,0
+3C9M,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.4,A,Inactive,24,94,0
+2PED,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.0,B,Inactive,24,100,0
+2I37,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,4.2,A,Inactive,24,91,0
+2R4R,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.4,A,Inactive,1,52,0
+2Z73,OPSD,P31356,Rhodopsin,Opsins,A,Japanese flying squid,X-ray,2.5,A,Inactive,9,78,0
+3DQB,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.2,A,Active,100,94,0
+3D4S,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.8,A,Inactive,0,67,0
+2R4S,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.4,A,Inactive,1,52,0
+2I36,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,4.1,A,Inactive,24,94,0
+3NY8,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.8,A,Inactive,0,67,0
+3NYA,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.2,A,Inactive,0,67,0
+3EML,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.6,A,Inactive,1,70,0
+3CAP,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.9,A,Active,98,94,0
+3NY9,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.8,A,Inactive,0,67,0
+2VT4,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.7,B,Inactive,0,57,0
+3OE6,CXCR4,P61073,CXCR4,Chemokine,A,Human,X-ray,3.2,A,Inactive,8,77,0
+3KJ6,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.4,A,Inactive,1,54,0
+3OE0,CXCR4,P61073,CXCR4,Chemokine,A,Human,X-ray,2.9,A,Inactive,8,78,0
+3ODU,CXCR4,P61073,CXCR4,Chemokine,A,Human,X-ray,2.5,A,Inactive,8,83,0
+3OE8,CXCR4,P61073,CXCR4,Chemokine,A,Human,X-ray,3.1,A,Inactive,8,76,0
+2Y00,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.5,B,Inactive,0,62,0
+3PBL,DRD3,P35462,D3,Dopamine,A,Human,X-ray,2.9,A,Inactive,1,68,0
+2Y02,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.6,B,Inactive,0,62,0
+3OE9,CXCR4,P61073,CXCR4,Chemokine,A,Human,X-ray,3.1,A,Inactive,8,74,0
+2Y03,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.9,B,Inactive,0,62,0
+2Y04,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,3.1,B,Inactive,0,62,0
+3PDS,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.5,A,Inactive,0,68,0
+3OAX,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.6,A,Inactive,24,100,0
+4IB4,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,X-ray,2.7,A,Intermediate,55,59,0
+4U16,ACM3,P08483,M3,Acetylcholine (muscarinic),A,Rat,X-ray,3.7,B,Inactive,3,47,0
+5CXV,ACM1,P11229,M1,Acetylcholine (muscarinic),A,Human,X-ray,2.7,A,Inactive,3,62,0
+5UIG,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.5,A,Inactive,18,70,0
+5MZP,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.1,A,Inactive,1,71,0
+5YQZ,GLR,P47871,glucagon,Glucagon,B1,Human,X-ray,3.0,R,Inactive,2,83,0
+5ZK3,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,X-ray,2.6,A,Inactive,3,59,0
+6DO1,AGTR1,P30556,AT1,Angiotensin,A,Human,X-ray,2.9,A,Active,93,85,0
+6JZH,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.3,A,Inactive,1,72,0
+6TPG,OX2R,O43614,OX2,Orexin,A,Human,X-ray,2.7,A,Inactive,1,69,0
+6U1N,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,Cryo-EM,4.0,R,Active,100,57,0
+6UOA,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,6.3,B,Intermediate,-,71,0
+6TPK,OXYR,P30559,OT,Vasopressin and oxytocin,A,Human,X-ray,3.2,A,Inactive,16,68,0
+7JJO,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,Cryo-EM,2.6,R,Active,100,58,0
+7BU6,ADRB1,P08588,&beta;1,Adrenoceptors,A,Human,X-ray,2.7,A,Active,99,58,0
+6Z4V,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.6,A,Intermediate,16,79,0
+7ARO,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.1,A,Inactive,1,72,0
+7MBY,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,2.4,R,Active,100,66,0
+7DTY,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.0,R,Active,100,79,0
+6ZG9,ACM1,P11229,M1,Acetylcholine (muscarinic),A,Human,X-ray,2.5,A,Inactive,3,62,0
+7V3Z,CNR1,P21554,CB1,Cannabinoid,A,Human,X-ray,3.3,A,Active,91,60,0
+7VUZ,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,76,0
+7LLL,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.7,R,Active,100,79,0
+7VGZ,MTR1A,P48039,MT1,Melatonin,A,Human,Cryo-EM,3.3,B,Active,100,81,0
+7WI6,GRM3,Q14832,mGlu3,Metabotropic glutamate,C,Human,Cryo-EM,3.7,A,Inactive,-,82,0
+7WVY,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,Cryo-EM,3.0,R,Active,100,85,0
+7X9A,NPY1R,P25929,Y1,Neuropeptide Y,A,Human,Cryo-EM,3.2,R,Active,100,80,0
+7XOU,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,3.2,R,Active,100,67,0
+7XAU,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.0,A,Active,100,76,0
+8DU3,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.5,A,Inactive,1,72,0
+7XZ6,GP119,Q8TDV5,GPR119,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,2.8,R,Active,100,87,0
+7WXW,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,2.8,R,Active,100,30,0
+7Y89,GPR17,Q13304,GPR17,A orphans,A,Human,Cryo-EM,3.0,A,Active,100,78,0
+8F7Q,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.2,R,Active,100,72,0
+8G59,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,2.6,R,Active,100,78,0
+7T90,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.3,A,Active,100,59,0
+8GUS,CNR2,P34972,CB2,Cannabinoid,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+8FLQ,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.6,R,Active,100,61,0
+8HMP,GPR52,Q9Y2T5,GPR52,A orphans,A,Human,Cryo-EM,2.8,R,Active,100,79,0
+8J1A,GPR84,Q9NQS5,GPR84,A orphans,A,Human,Cryo-EM,3.2,R,Active,100,73,0
+8JRU,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,3.5,R,Active,100,53,0
+8THL,ADA1A,P35348,&alpha;1A,Adrenoceptors,A,Human,Cryo-EM,3.1,R,Active,100,52,0
+8HJ1,GPR21,Q99679,GPR21,A orphans,A,Human,Cryo-EM,3.3,R,Active,100,81,0
+8IA7,GASR,P32239,CCK2,Cholecystokinin,A,Human,Cryo-EM,3.1,R,Active,100,62,0
+8JJ8,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,F,Active,99,68,0
+8KGK,GPR61,Q9BZJ8,GPR61,A orphans,A,Human,Cryo-EM,3.2,A,Active,100,57,0
+8W8B,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.0,R,Active,100,66,0
+8GAG,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.3,R,Active,100,56,0
+8GFX,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.0,R,Active,100,68,0
+8GGT,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,96,68,0
+8J24,FFAR2,O15552,FFA2,Free fatty acid,A,Human,Cryo-EM,2.6,D,Active,100,78,0
+8KFX,CCR8,P51685,CCR8,Chemokine,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+8U4S,CXCR4,P61073,CXCR4,Chemokine,A,Human,Cryo-EM,3.4,R,Active,97,81,0
+8X8L,SSR5,P35346,SST5,Somatostatin,A,Human,Cryo-EM,2.7,R,Active,100,75,0
+8YW3,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.7,R,Active,100,83,0
+9IJD,ADRB3,P13945,&beta;3,Adrenoceptors,A,Human,Cryo-EM,2.8,R,Active,100,62,0
+8WVW,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.5,A,Inactive,8,76,0
+8WGD,GRM4,Q14833,mGlu4,Metabotropic glutamate,C,Human,Cryo-EM,4.5,B,Inactive,-,82,0
+9IZH,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.0,R,Active,100,82,0
+3P0G,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.5,A,Active,99,69,0
+4DKL,OPRM,P42866,&mu;,Opioid,A,Mouse,X-ray,2.8,A,Inactive,8,71,0
+4BWB,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,3.6,A,Inactive,2,72,0
+5C1M,OPRM,P42866,&mu;,Opioid,A,Mouse,X-ray,2.1,A,Active,100,74,0
+5EN0,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.8,A,Active,100,94,0
+5UNH,AGTR2,P50052,AT2,Angiotensin,A,Human,X-ray,2.9,B,Active,98,75,0
+5NM2,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.0,A,Inactive,1,72,0
+6D32,Q98SW5,Q98SW5,SMO,Frizzled,F,African clawed frog,X-ray,3.8,A,Active,65,58,0
+6MXT,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.0,A,Active,99,69,0
+6A94,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,2.9,A,Inactive,1,60,0
+6N48,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.2,A,Active,99,70,0
+6PWC,NTR1,P30989,NTS1,Neurotensin,A,Human,Cryo-EM,4.9,R,Active,100,77,0
+6KPC,CNR2,P34972,CB2,Cannabinoid,A,Human,X-ray,3.2,A,Inactive,4,79,0
+6LW5,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,X-ray,2.8,A,Active,100,91,0
+6W2X,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,3.6,B,Inactive,-,71,0
+7BR3,GNRHR,P30968,GnRH1,Gonadotrophin-releasing hormone,A,Human,X-ray,2.8,A,Inactive,16,84,0
+6LPK,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.8,A,Inactive,1,72,0
+7DDZ,NPY2R,P49146,Y2,Neuropeptide Y,A,Human,X-ray,2.8,A,Inactive,1,76,0
+7KNU,CALRL,Q16602,calcitonin-like,Calcitonin,B1,Human,Cryo-EM,3.5,R,Inactive,9,74,0
+7CX3,PE2R2,P43116,EP2,Prostanoid,A,Human,Cryo-EM,2.8,R,Active,100,74,0
+7MT9,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,7.0,R,Active,97,93,0
+7F16,PTH2R,P49190,PTH2,Parathyroid hormone,B1,Human,Cryo-EM,2.8,R,Active,100,68,0
+7S8O,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,2.6,R,Active,100,78,0
+7EO4,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,2.9,A,Active,100,74,0
+7T6V,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,Cryo-EM,3.1,R,Active,100,85,0
+7TYF,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.2,R,Active,100,77,0
+7TUY,GP183,P32249,GPR183,A orphans,A,Human,Cryo-EM,3.0,R,Active,56,73,0
+7W56,NMUR1,Q9HB89,NMU1,Neuromedin U,A,Human,Cryo-EM,2.9,R,Active,100,65,0
+7W0O,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,3.8,R,Active,100,77,0
+7X1T,TRFR,P34981,TRH1,Thyrotropin-releasing hormone,A,Human,Cryo-EM,3.3,A,Active,100,68,0
+7VVL,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.8,R,Active,100,58,0
+7W6P,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,55,0
+7X2V,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,3.1,R,Active,100,30,0
+8EA0,ACM3,P20309,M3,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.6,A,Active,99,48,0
+8HAO,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.8,R,Active,100,61,0
+7T94,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.2,A,Active,100,57,0
+7XK9,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.4,A,Active,99,69,0
+7TRK,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.8,R,Active,100,57,0
+7Y36,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.8,R,Active,100,63,0
+8JCV,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.4,2,Inactive,-,88,0
+8FD1,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,4.3,A,Inactive,24,88,0
+8HNN,CXCR3,P49682,CXCR3,Chemokine,A,Human,Cryo-EM,3.6,R,Inactive,8,70,0
+8IHK,HCAR3,P49019,HCA3,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.2,R,Active,99,73,0
+8JIS,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.5,R,Active,100,83,0
+8W87,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,2.8,R,Active,100,85,0
+7V9L,GHRHR,Q02643,GHRH,Glucagon,B1,Human,Cryo-EM,2.6,R,Active,100,61,0
+8GEF,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.8,R,Active,100,68,0
+8GGN,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,96,69,0
+8IYW,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.5,R,Active,100,80,0
+8JXV,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,3.2,R,Active,100,68,0
+8TQB,GRM3,Q14832,mGlu3,Metabotropic glutamate,C,Human,Cryo-EM,3.3,A,Active,-,85,0
+8WA3,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,2.9,R,Active,100,59,0
+8X64,HRH1,P35367,H1,Histamine,A,Human,Cryo-EM,3.4,B,Inactive,3,53,0
+8XQP,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.3,R,Active,100,90,0
+8YUV,HRH3,Q9Y5N1,H3,Histamine,A,Human,Cryo-EM,3.0,R,Active,100,65,0
+9D3G,CCR6,P51684,CCR6,Chemokine,A,Human,Cryo-EM,3.3,A,Inactive,5,72,0
+8WVU,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.6,A,Inactive,8,77,0
+8X3L,CNR2,P34972,CB2,Cannabinoid,A,Human,Cryo-EM,3.1,R,Active,100,80,0
+9BA0,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.1,R,Inactive,7,60,0
+3PQR,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.9,A,Active,100,94,0
+3V2W,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,X-ray,3.4,A,Inactive,1,68,0
+4NC3,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,X-ray,2.8,A,Intermediate,55,60,0
+4Z36,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,X-ray,2.9,A,Inactive,1,79,0
+5A8E,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.4,A,Inactive,0,59,0
+5L7I,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,3.3,B,Inactive,4,59,0
+5NX2,GLP1R,P43220,GLP-1,Glucagon,B1,Human,X-ray,3.7,A,Intermediate,56,84,0
+5OLH,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.6,A,Inactive,1,72,0
+6FKD,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.5,A,Active,98,94,0
+6H7N,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.5,A,Active,99,60,0
+6GPS,CCR2,P41597,CCR2,Chemokine,A,Human,X-ray,3.3,A,Inactive,9,74,0
+6OS9,NTR1,P30989,NTS1,Neurotensin,A,Human,Cryo-EM,3.0,R,Active,100,73,0
+6TPN,OX2R,O43614,OX2,Orexin,A,Human,X-ray,2.6,A,Inactive,1,71,0
+6LI1,GPR52,Q9Y2T5,GPR52,A orphans,A,Human,X-ray,2.9,A,Inactive,36,81,0
+6LML,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,3.9,R,Active,100,83,0
+6WGT,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,3.4,B,Inactive,1,59,0
+6LPL,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.0,A,Inactive,1,72,0
+7LCI,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.9,R,Active,100,85,0
+7CX2,PE2R2,P43116,EP2,Prostanoid,A,Human,Cryo-EM,2.8,R,Active,100,74,0
+7MT8,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,5.8,R,Active,97,93,0
+7DB6,MTR1A,P48039,MT1,Melatonin,A,Human,Cryo-EM,3.3,D,Active,100,79,0
+7FIJ,LSHR,P22888,LH,Glycoprotein hormone,A,Human,Cryo-EM,3.8,R,Inactive,8,80,0
+7F58,MC4R,P32245,MC4,Melanocortin,A,Human,Cryo-EM,3.1,R,Active,100,82,0
+7NA8,GHSR,Q92847,ghrelin,Ghrelin,A,Human,Cryo-EM,2.7,R,Active,100,78,0
+7EVY,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.0,D,Active,100,71,0
+7VH0,MTR1B,P49286,MT2,Melatonin,A,Human,Cryo-EM,3.5,A,Active,100,75,0
+7WI8,GRM3,Q14832,mGlu3,Metabotropic glutamate,C,Human,Cryo-EM,4.2,A,Inactive,-,82,0
+7WQ3,GALR1,P47211,GAL1,Galanin,A,Human,Cryo-EM,2.7,R,Active,100,83,0
+7EQ1,AGRG5,Q8IZF4,ADGRG5,ADGRG,B2,Human,Cryo-EM,3.3,R,Active,100,54,0
+7WIG,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,2.7,R,Active,100,77,0
+7X8S,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.1,R,Active,100,65,0
+7SK8,ACKR3,P25106,ACKR3,Chemokine,A,Human,Cryo-EM,3.3,A,Active,96,85,0
+7YU8,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,4.5,R,Active,100,80,0
+8HA0,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.6,R,Active,100,61,0
+8HJ2,GPR21,Q99679,GPR21,A orphans,A,Human,Cryo-EM,3.8,R,Active,100,81,0
+7W3Z,GRPR,P30550,BB2,Bombesin,A,Human,Cryo-EM,3.0,A,Active,100,78,0
+7XY7,AA2BR,P29275,A2B,Adenosine,A,Human,Cryo-EM,3.3,R,Active,100,85,0
+8FLT,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.0,R,Active,100,45,0
+8F0J,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.0,R,Active,100,78,0
+8JD4,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,2.9,2,Active,-,84,0
+8GTI,CRFR1,,CRF1,Corticotropin-releasing factor,B1,Human,X-ray,2.2,A,Inactive,16,63,0
+8IHI,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.1,R,Active,100,80,0
+8JIP,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.9,R,Active,100,83,0
+8W77,O52E4,Q8NGH9,OR52E4,Odorant family 52,O1,Human,Cryo-EM,3.6,A,Inactive,-,83,0
+8WCA,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.5,R,Active,100,81,0
+8GEB,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,100,68,0
+8GGA,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,65,0
+8IKL,AGRE5,P48960,ADGRE5,ADGRE,B2,Human,Cryo-EM,2.3,R,Active,100,32,0
+8JH7,FZD6,O60353,FZD6,Frizzled,F,Human,Cryo-EM,3.2,D,Active,78,46,0
+8QW4,FZD3,Q9NPG1,FZD3,Frizzled,F,Human,Cryo-EM,2.9,A,Active,99,48,0
+8U4O,CXCR4,P61073,CXCR4,Chemokine,A,Human,Cryo-EM,3.3,R,Active,100,84,0
+8UO0,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,69,0
+8X63,HRH1,P35367,H1,Histamine,A,Human,Cryo-EM,3.2,B,Inactive,3,55,0
+8XQN,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.1,R,Active,100,90,0
+8ZH8,QRFPR,Q96P65,QRFP,Peptide P518,A,Human,Cryo-EM,3.2,R,Active,100,75,0
+8K3Z,CXCR4,P61073,CXCR4,Chemokine,A,Human,Cryo-EM,2.8,A,Active,100,84,0
+9EW2,FZD7,O75084,FZD7,Frizzled,F,Human,Cryo-EM,3.2,R,Active,100,59,0
+8WWI,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,3.4,R,Active,100,68,0
+8YNT,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,3.4,R,Inactive,8,69,0
+9J5V,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,2.9,R,Active,100,80,0
+3PXO,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.0,A,Active,98,94,0
+3VGA,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.1,A,Inactive,1,72,0
+4J4Q,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.7,A,Active,100,94,0
+4RWS,CXCR4,P61073,CXCR4,Chemokine,A,Human,X-ray,3.1,A,Inactive,8,78,0
+5V57,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,3.0,A,Inactive,0,62,0
+5OM1,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.1,A,Inactive,1,72,0
+6DDF,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.5,R,Active,100,71,0
+6N52,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,4.0,A,Inactive,-,64,0
+6O3C,SMO,P56726,SMO,Frizzled,F,Mouse,X-ray,2.8,A,Active,73,61,0
+6PS8,MTR1A,P48039,MT1,Melatonin,A,Human,X-ray,3.3,A,Inactive,1,83,0
+6TOS,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.1,B,Inactive,1,72,0
+6M1H,PACR,P41586,PAC1,VIP and PACAP,B1,Human,Cryo-EM,3.6,A,Active,100,73,0
+6ZDR,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.9,A,Inactive,1,72,0
+7D7M,PE2R4,P35408,EP4,Prostanoid,A,Human,Cryo-EM,3.3,A,Active,100,58,0
+7L1U,OX2R,O43614,OX2,Orexin,A,Human,Cryo-EM,3.2,R,Active,100,63,0
+7AUE,MC4R,P32245,MC4,Melanocortin,A,Human,Cryo-EM,3.0,R,Active,100,79,0
+7MTQ,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.7,B,Inactive,-,85,0
+7EZK,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,3.1,D,Active,100,69,0
+7F54,MC4R,P32245,MC4,Melanocortin,A,Human,Cryo-EM,3.0,R,Active,100,82,0
+7WF7,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.4,A,Active,100,71,0
+7F4H,MSHR,Q01726,MC1,Melanocortin,A,Human,Cryo-EM,2.7,R,Active,100,84,0
+7TZF,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.4,R,Active,100,77,0
+7W57,NMUR2,Q9GZQ4,NMU2,Neuromedin U,A,Human,Cryo-EM,3.2,R,Active,100,72,0
+7SK4,ACKR3,P25106,ACKR3,Chemokine,A,Human,Cryo-EM,3.3,A,Active,96,84,0
+8DWC,MRGX1,Q96LB2,MRGPRX1,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,78,0
+7F6G,AGTR1,P30556,AT1,Angiotensin,A,Human,Cryo-EM,2.9,A,Active,100,86,0
+8HBD,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,3.0,R,Active,100,68,0
+8IW7,TAAR9,Q5QD04,TAAR9,A orphans,A,Mouse,Cryo-EM,3.0,R,Active,100,78,0
+7XWO,NK2R,P21452,NK2,Tachykinin,A,Human,Cryo-EM,2.7,B,Active,100,68,0
+8HK2,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,2.9,A,Active,100,59,0
+8IC0,CXCR1,P25024,CXCR1,Chemokine,A,Human,Cryo-EM,3.4,A,Active,100,86,0
+8THK,ADA1A,P35348,&alpha;1A,Adrenoceptors,A,Human,Cryo-EM,2.6,R,Active,100,52,0
+8GTG,CRFR1,,CRF1,Corticotropin-releasing factor,B1,Human,X-ray,2.8,A,Inactive,16,63,0
+8IHB,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.9,R,Active,100,80,0
+8JIR,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.6,R,Active,100,83,0
+8TLM,CCR8,P51685,CCR8,Chemokine,A,Human,Cryo-EM,2.9,C,Inactive,9,75,0
+8WCB,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.1,R,Active,100,75,0
+8GE7,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,68,0
+8GG9,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,68,0
+8IKJ,AGRE5,P48960,ADGRE5,ADGRE,B2,Human,Cryo-EM,3.2,R,Inactive,0,64,0
+8JXW,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,3.0,R,Active,100,69,0
+8TR2,GRM3,Q14832,mGlu3,Metabotropic glutamate,C,Human,Cryo-EM,3.5,A,Active,-,85,0
+8WKY,MC4R,P32245,MC4,Melanocortin,A,Human,X-ray,2.9,A,Intermediate,41,79,0
+8XJM,PF2R,P43088,FP,Prostanoid,A,Human,Cryo-EM,2.9,R,Active,100,80,0
+8YKY,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.0,R,Active,100,85,0
+8ZSS,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.1,R,Active,100,83,0
+8JJP,CML2,P46091,chemerin 2,Chemerin receptor,A,Human,Cryo-EM,2.9,A,Active,100,82,0
+8YN7,HRH3,Q9Y5N1,H3,Histamine,A,Human,Cryo-EM,2.8,R,Active,100,64,0
+8JEF,HCAR3,P49019,HCA3,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.0,A,Active,100,73,0
+8X0C,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.2,A,Active,-,63,0
+3QAK,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.7,A,Active,69,69,0
+4BEZ,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.3,A,Active,98,94,0
+4OR2,GRM1,Q13255,mGlu1,Metabotropic glutamate,C,Human,X-ray,2.8,B,Inactive,-,22,0
+4XEE,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.9,A,Active,83,71,0
+5K2A,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.5,A,Inactive,1,72,0
+5V56,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,2.9,B,Inactive,0,61,0
+5OLV,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.0,A,Inactive,1,72,0
+6C1R,C5AR1,P21730,C5a1,Complement peptide,A,Human,X-ray,2.2,B,Inactive,6,83,0
+5ZKC,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,X-ray,2.3,A,Inactive,3,60,0
+6J21,NK1R,P25103,NK1,Tachykinin,A,Human,X-ray,3.2,A,Inactive,1,71,0
+6QNO,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,4.4,R,Active,100,96,0
+6OL9,ACM5,P08912,M5,Acetylcholine (muscarinic),A,Human,X-ray,2.5,A,Inactive,3,53,0
+6LRY,EDNRB,P24530,ETB,Endothelin,A,Human,X-ray,3.0,A,Inactive,16,70,0
+6K41,ADA2B,P18089,&alpha;2B,Adrenoceptors,A,Human,Cryo-EM,2.9,R,Active,100,54,0
+6S0Q,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.7,A,Inactive,1,72,0
+6VN7,VIPR1,P32241,VPAC1,VIP and PACAP,B1,Human,Cryo-EM,3.2,R,Active,100,58,0
+7L0Q,NTR1,P20789,NTS1,Neurotensin,A,Rat,Cryo-EM,4.3,C,Active,100,73,0
+7LJC,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.0,R,Active,100,63,0
+7BB6,V2R,P30518,V2,Vasopressin and oxytocin,A,Human,Cryo-EM,4.2,A,Active,100,73,0
+7F1S,CCR5,P51681,CCR5,Chemokine,A,Human,Cryo-EM,2.8,R,Active,100,78,0
+7DGE,GRM1,Q13255,mGlu1,Metabotropic glutamate,C,Human,Cryo-EM,3.7,A,Intermediate,-,66,0
+7RMG,NK1R,P25103,NK1,Tachykinin,A,Human,Cryo-EM,3.0,R,Active,100,71,0
+7VUH,GP139,Q6DWJ6,GPR139,A orphans,A,Human,Cryo-EM,3.2,R,Active,100,80,0
+7EW0,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.4,D,Active,100,71,0
+7PYR,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.6,A,Inactive,1,72,0
+7V35,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,3.4,R,Active,100,82,0
+7S0G,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,Cryo-EM,3.9,R,Active,100,57,0
+7S15,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.8,R,Active,92,83,0
+7X2C,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.2,F,Active,100,63,0
+7W0P,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,3.2,R,Active,100,77,0
+7QVM,OXYR,P30559,OT,Vasopressin and oxytocin,A,Human,Cryo-EM,3.3,R,Active,100,64,0
+7YP7,AGRG2,Q8CJ12,ADGRG2,ADGRG,B2,Mouse,Cryo-EM,3.1,R,Active,100,24,0
+7TRY,CRFR2,Q13324,CRF2,Corticotropin-releasing factor,B1,Human,Cryo-EM,3.7,P,Active,100,79,0
+7WYB,AGRL3,Q80TS3,ADGRL3,ADGRL,B2,Mouse,Cryo-EM,3.0,R,Active,100,17,0
+8E3Z,VIPR1,P32241,VPAC1,VIP and PACAP,B1,Human,Cryo-EM,2.7,R,Active,100,81,0
+8F76,O51E2,Q9H255,OR51E2,Odorant family 51,O1,Human,Cryo-EM,3.1,A,Active,-,94,0
+8HS3,GPR20,Q99678,GPR20,A orphans,A,Human,Cryo-EM,3.1,R,Active,100,78,0
+8IWM,TAAR9,Q5QD04,TAAR9,A orphans,A,Mouse,Cryo-EM,3.2,R,Active,96,78,0
+8DZR,OPRK,P41145,&kappa;,Opioid,A,Human,Cryo-EM,2.6,A,Active,100,68,0
+8EJC,FFAR1,O14842,FFA1,Free fatty acid,A,Human,Cryo-EM,3.0,R,Active,100,90,0
+8GHV,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,2.8,D,Active,100,59,0
+8H4I,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.1,R,Active,100,78,0
+8JCW,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.0,2,Inactive,-,87,0
+8G05,GPR84,Q9NQS5,GPR84,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,72,0
+8HTI,O52E4,Q8NGH9,OR52E4,Odorant family 52,O1,Human,Cryo-EM,3.0,R,Active,-,97,0
+8J6D,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,3.1,C,Active,100,58,0
+8K2W,CXCR3,P49682,CXCR3,Chemokine,A,Human,Cryo-EM,3.0,R,Inactive,8,71,0
+8TB7,GPR61,Q9BZJ8,GPR61,A orphans,A,Human,Cryo-EM,2.9,R,Active,94,47,0
+8FY8,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.8,R,Active,100,68,0
+8GFV,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.1,R,Active,100,68,0
+8GGS,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,96,68,0
+8J22,FFAR2,O15552,FFA2,Free fatty acid,A,Human,Cryo-EM,3.2,C,Active,100,86,0
+8PKM,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.9,R,Active,100,66,0
+8UH3,5HT1E,P28566,5-HT1E,5-Hydroxytryptamine,A,Human,Cryo-EM,3.3,D,Active,100,74,0
+8UNZ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.8,R,Active,100,69,0
+8X5X,HRH1,P35367,H1,Histamine,A,Human,Cryo-EM,3.5,B,Inactive,3,52,0
+8XOJ,GPER1,Q99527,GPER,Estrogen (G protein-coupled),A,Human,Cryo-EM,3.1,R,Active,100,71,0
+8XVL,EDNRA,P25101,ETA,Endothelin,A,Human,Cryo-EM,3.2,R,Inactive,9,66,0
+8ZJE,KISSR,Q969F8,kisspeptin,Kisspeptin,A,Human,Cryo-EM,3.1,R,Active,100,70,0
+8IRJ,GP179,Q6PRD1,GPR179,C Orphans,C,Human,Cryo-EM,3.5,A,Inactive,-,22,0
+8ZRT,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,3.6,R,Active,83,64,0
+8P13,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,5.2,R,Active,100,91,0
+8XFT,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.2,A,Inactive,8,77,0
+2X72,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.0,A,Active,100,94,0
+3UZC,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.3,A,Inactive,1,71,0
+4MQS,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,X-ray,3.5,A,Active,99,59,0
+4RWD,OPRD,P41143,&delta;,Opioid,A,Human,X-ray,2.7,A,Inactive,8,79,0
+5JQH,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.2,A,Inactive,0,70,0
+5XF1,GLR,P47871,glucagon,Glucagon,B1,Human,X-ray,3.2,B,Inactive,0,81,0
+5OM4,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.0,A,Inactive,1,72,0
+5ZKQ,PTAFR,P25105,PAF,Platelet-activating factor,A,Human,X-ray,2.9,B,Active,56,83,0
+6IGK,EDNRB,P24530,ETB,Endothelin,A,Human,X-ray,2.0,A,Inactive,3,70,0
+6ME9,MTR1B,P49286,MT2,Melatonin,A,Human,X-ray,3.3,B,Inactive,1,79,0
+6KK1,GLP1R,P43220,GLP-1,Glucagon,B1,Human,X-ray,2.8,B,Inactive,0,57,0
+6RZ7,CLTR2,Q9NS75,CysLT2,Leukotriene,A,Human,X-ray,2.4,A,Active,56,79,0
+6PB0,CRFR1,,CRF1,Corticotropin-releasing factor,B1,Human,Cryo-EM,3.0,R,Active,100,68,0
+6WW2,FZD5,Q13467,FZD5,Frizzled,F,Human,Cryo-EM,3.7,R,Inactive,19,55,0
+6Z10,SUCR1,Q6IYF9,succinate,Succinate,A,Rat,X-ray,2.3,A,Active,56,90,0
+7CZ5,GHRHR,Q02643,GHRH,Glucagon,B1,Human,Cryo-EM,2.6,R,Active,100,64,0
+7JVR,DRD2,P14416,D2,Dopamine,A,Human,Cryo-EM,2.8,R,Active,100,61,0
+7EPB,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.1,B,Active,-,89,0
+7KI0,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.5,R,Active,100,83,0
+7RMI,NK1R,P25103,NK1,Tachykinin,A,Human,Cryo-EM,3.2,R,Active,100,70,0
+7P02,NK1R,P25103,NK1,Tachykinin,A,Human,Cryo-EM,2.9,R,Active,100,71,0
+7VGX,NPY1R,P25929,Y1,Neuropeptide Y,A,Human,Cryo-EM,3.2,R,Active,100,73,0
+7FIY,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.4,R,Active,100,77,0
+7WUJ,AGRG4,Q8IZF6,ADGRG4,ADGRG,B2,Human,Cryo-EM,3.3,E,Active,100,9,0
+7SR8,OX2R,O43614,OX2,Orexin,A,Human,Cryo-EM,3.3,R,Active,100,64,0
+7FEE,CNR1,P21554,CB1,Cannabinoid,A,Human,X-ray,2.7,A,Inactive,7,61,0
+7SK3,ACKR3,P25106,ACKR3,Chemokine,A,Human,Cryo-EM,3.8,A,Active,96,84,0
+7YU3,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.4,R,Active,100,80,0
+8EFL,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.2,R,Active,100,72,0
+8A6E,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,1.8,A,Inactive,24,87,0
+8HDO,AA2BR,P29275,A2B,Adenosine,A,Human,Cryo-EM,2.9,R,Active,100,83,0
+7W41,GRPR,P30550,BB2,Bombesin,A,Human,X-ray,3.0,A,Inactive,8,75,0
+8G2Y,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,3.4,R,Active,100,28,0
+7TRQ,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.5,R,Active,100,57,0
+7TRP,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.4,R,Active,100,56,0
+8GW8,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.9,R,Active,100,37,0
+8J18,GPR84,Q9NQS5,GPR84,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,73,0
+8JPF,NTR1,P30989,NTS1,Neurotensin,A,Human,Cryo-EM,3.0,R,Active,83,71,0
+8FD0,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.7,A,Inactive,24,89,0
+8HNM,CXCR3,P49682,CXCR3,Chemokine,A,Human,Cryo-EM,2.9,R,Active,100,75,0
+8IOD,MC5R,P33032,MC5,Melanocortin,A,Human,Cryo-EM,2.6,R,Active,100,83,0
+8JLQ,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,2.8,R,Active,100,83,0
+8U1U,CCR8,P51685,CCR8,Chemokine,A,Human,Cryo-EM,3.1,A,Active,100,83,0
+8GEG,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.8,R,Active,100,68,0
+8GGO,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,96,68,0
+8IYX,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,3.3,C,Active,56,70,0
+8JHN,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.8,D,Active,100,80,0
+8T3S,FFAR2,O15552,FFA2,Free fatty acid,A,Human,Cryo-EM,3.1,R,Active,100,78,0
+8UGY,5HT1E,P28566,5-HT1E,5-Hydroxytryptamine,A,Human,Cryo-EM,3.3,R,Active,100,72,0
+8UNY,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,100,69,0
+8X5Y,HRH1,P35367,H1,Histamine,A,Human,Cryo-EM,3.0,B,Inactive,3,55,0
+8XQS,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.3,R,Active,100,85,0
+8YW4,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.3,R,Active,100,63,0
+9F34,DRD3,P35462,D3,Dopamine,A,Human,Cryo-EM,3.1,R,Active,100,68,0
+8VHF,GP119,Q8TDV5,GPR119,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,3.5,R,Active,100,88,0
+9EPO,FZD7,O75084,FZD7,Frizzled,F,Human,Cryo-EM,1.9,D,Inactive,19,60,0
+8UGW,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.9,A,Active,69,67,0
+8YIC,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.5,R,Active,100,78,0
+9IYB,PD2R2,Q9Y5Y4,DP2,Prostanoid,A,Human,Cryo-EM,2.8,A,Active,100,76,0
+2Y01,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.6,A,Inactive,0,59,0
+4DJH,OPRK,P41145,&kappa;,Opioid,A,Human,X-ray,2.9,A,Inactive,8,76,0
+4U14,ACM3,P08483,M3,Acetylcholine (muscarinic),A,Rat,X-ray,3.6,A,Inactive,3,47,0
+4ZJ8,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.8,A,Inactive,1,72,0
+5T1A,CCR2,P41597,CCR2,Chemokine,A,Human,X-ray,2.8,A,Inactive,9,76,0
+5WS3,OX2R,O43614,OX2,Orexin,A,Human,X-ray,2.3,A,Inactive,1,70,0
+6CM4,DRD2,P14416,D2,Dopamine,A,Human,X-ray,2.9,A,Inactive,1,59,0
+6D27,PD2R2,Q9Y5Y4,DP2,Prostanoid,A,Human,X-ray,2.7,A,Inactive,21,81,0
+6AK3,PE2R3,P43115,EP3,Prostanoid,A,Human,X-ray,2.9,B,Active,88,69,0
+6ME5,MTR1A,P48039,MT1,Melatonin,A,Human,X-ray,3.2,A,Inactive,1,83,0
+6IBB,SUCR1,Q6IYF9,succinate,Succinate,A,Rat,X-ray,2.1,A,Active,56,93,0
+6PS5,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.9,A,Inactive,0,68,0
+6JOD,AGTR2,P50052,AT2,Angiotensin,A,Human,X-ray,3.2,A,Active,100,84,0
+6UUN,CALRL,Q16602,calcitonin-like,Calcitonin,B1,Human,Cryo-EM,3.0,R,Active,100,77,0
+6X1A,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.5,R,Active,100,84,0
+7DHR,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.8,R,Active,100,69,0
+7JVP,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,2.9,R,Active,100,63,0
+7KH0,V2R,P30518,V2,Vasopressin and oxytocin,A,Human,Cryo-EM,2.8,R,Active,100,74,0
+7F1T,CCR5,P51681,CCR5,Chemokine,A,Human,X-ray,2.6,A,Inactive,9,86,0
+7VUY,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,2.8,R,Active,100,78,0
+7LLY,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.3,R,Active,100,77,0
+7TD4,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,2.6,R,Active,100,76,0
+7VAB,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.2,R,Active,100,58,0
+7WU3,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,3.1,R,Active,100,31,0
+7XJH,ADRB3,O02662,&beta;3,Adrenoceptors,A,Dog,Cryo-EM,3.3,R,Active,100,68,0
+7XJK,GALR2,O43603,GAL2,Galanin,A,Human,Cryo-EM,3.3,F,Active,100,72,0
+7XBW,CX3C1,P49238,CX3CR1,Chemokine,A,Human,Cryo-EM,2.8,R,Active,9,81,0
+7XNA,SSR2,P30874,SST2,Somatostatin,A,Human,X-ray,2.7,A,Inactive,8,78,0
+7VVJ,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.2,R,Active,100,62,0
+7VIH,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.0,F,Active,100,73,0
+7XP5,T2R46,P59540,TAS2R46,Taste 2,T2,Human,Cryo-EM,3.1,R,Active,100,97,0
+8EF5,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.3,R,Active,100,72,0
+7ZBE,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,1.8,A,Inactive,24,87,0
+8FYN,AA2AR,P29274,A2A,Adenosine,A,Human,MicroED,2.0,A,Inactive,1,72,0
+8ID8,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+7XXI,P2Y12,Q9H244,P2Y12,P2Y,A,Human,Cryo-EM,3.0,A,Active,100,86,0
+8HK3,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,3.2,C,Active,100,59,0
+8FLU,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.8,R,Active,100,61,0
+8IUM,PF2R,P43088,FP,Prostanoid,A,Human,Cryo-EM,3.1,R,Active,100,82,0
+8JD3,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.3,2,Active,-,89,0
+8HQN,GP132,Q9UNW8,GPR132,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,82,0
+8J46,O52E4,Q8NGH9,OR52E4,Odorant family 52,O1,Human,Cryo-EM,3.7,A,Active,-,83,0
+8JLJ,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.1,R,Active,100,81,0
+8QOT,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.2,A,Inactive,8,72,0
+8GE6,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,67,0
+8GG7,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,96,69,0
+8IEP,GP156,Q8NFN8,GPR156,C Orphans,C,Human,Cryo-EM,2.6,C,Inactive,-,34,0
+8JGG,MRGX1,Q96LB2,MRGPRX1,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,69,0
+8SMV,GP161,Q8N6U8,GPR161,A orphans,A,Human,Cryo-EM,2.7,R,Active,100,51,0
+8U4T,CXCR4,P61073,CXCR4,Chemokine,A,Human,Cryo-EM,3.4,R,Inactive,8,79,0
+8XJL,PF2R,P43088,FP,Prostanoid,A,Human,Cryo-EM,2.8,R,Active,100,80,0
+8YKV,SUCR1,Q9BXA5,succinate,Succinate,A,Human,Cryo-EM,2.5,R,Active,100,81,0
+8ZRK,GP119,Q8TDV5,GPR119,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,2.8,R,Active,100,81,0
+8K6N,NPY2R,P49146,Y2,Neuropeptide Y,A,Human,Cryo-EM,3.2,E,Active,100,79,0
+9D3E,CCR6,P51684,CCR6,Chemokine,A,Human,Cryo-EM,3.0,A,Inactive,5,66,0
+8WWM,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,2.8,R,Active,100,68,0
+9IY8,GPR55,Q9Y2T6,GPR55,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,3.0,R,Active,100,92,0
+2YDV,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.6,A,Active,69,75,0
+4GPO,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,3.5,B,Inactive,0,58,0
+4N4W,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,2.8,A,Inactive,2,44,0
+4Z34,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,X-ray,3.0,A,Inactive,1,80,0
+5IU7,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.9,A,Inactive,1,72,0
+5UNG,AGTR2,P50052,AT2,Angiotensin,A,Human,X-ray,2.8,B,Active,98,83,0
+5WIV,DRD4,P21917,D4,Dopamine,A,Human,X-ray,2.1,A,Inactive,1,65,0
+6FK7,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.6,A,Active,98,94,0
+6BD4,FZD4,Q9ULV1,FZD4,Frizzled,F,Human,X-ray,2.4,A,Inactive,19,61,0
+6FJ3,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,X-ray,2.5,A,Inactive,0,62,0
+6I9K,B1B1U5,B1B1U5,Rhodopsin,Opsins,A,Hasarius adansoni,X-ray,2.2,A,Inactive,9,83,0
+6PS2,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.4,A,Inactive,0,68,0
+6TQ7,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.7,A,Inactive,1,71,0
+6LN2,GLP1R,P43220,GLP-1,Glucagon,B1,Human,X-ray,3.2,A,Inactive,0,83,0
+6PEL,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.2,A,Active,100,93,0
+7C61,5HT1B,P28222,5-HT1B,5-Hydroxytryptamine,A,Human,X-ray,3.0,A,Inactive,16,68,0
+6X18,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.1,R,Active,100,83,0
+7K15,LT4R1,Q15722,BLT1,Leukotriene,A,Human,X-ray,2.9,A,Inactive,9,85,0
+7E2Z,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.1,R,Active,100,66,0
+7O7F,CCR5,P51681,CCR5,Chemokine,A,Human,Cryo-EM,3.2,C,Active,100,85,0
+7PIU,MC4R,P32245,MC4,Melanocortin,A,Human,Cryo-EM,2.6,R,Active,100,78,0
+7VV3,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,79,0
+7RKF,US28,P69332,US28,Unclassified,A,strain AD169,Cryo-EM,4.0,R,Active,100,84,0
+7EJ0,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,100,56,0
+7EZC,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.8,B,Active,69,70,0
+7WUQ,AGRG2,Q8CJ12,ADGRG2,ADGRG,B2,Mouse,Cryo-EM,2.9,R,Active,100,28,0
+7F1O,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.1,F,Active,100,62,0
+7XTC,5HT7R,P34969,5-HT7,5-Hydroxytryptamine,A,Human,Cryo-EM,3.2,R,Active,100,57,0
+8DPH,5HT2C,P28335,5-HT2C,5-Hydroxytryptamine,A,Human,Cryo-EM,3.2,A,Active,100,58,0
+7T32,AA2AR,P29274,A2A,Adenosine,A,Human,Cryo-EM,3.4,A,Inactive,1,69,0
+7XKF,AGRG2,Q8CJ12,ADGRG2,ADGRG,B2,Mouse,Cryo-EM,2.4,R,Active,100,26,0
+7T2H,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.2,D,Active,100,71,0
+7WZ4,GPR88,Q9GZN0,GPR88,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,61,0
+8E3X,PACR,P41586,PAC1,VIP and PACAP,B1,Human,Cryo-EM,2.3,R,Active,100,77,0
+7Y66,C5AR1,P21730,C5a1,Complement peptide,A,Human,Cryo-EM,2.9,D,Active,100,80,0
+8HSC,GPR20,Q99678,GPR20,A orphans,A,Human,Cryo-EM,3.2,R,Active,100,76,0
+8IW4,TAAR9,Q5QD04,TAAR9,A orphans,A,Mouse,Cryo-EM,3.5,R,Active,100,85,0
+8G94,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.2,A,Active,100,75,0
+8FLR,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.9,R,Active,100,61,0
+8JCU,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,2.8,2,Inactive,-,87,0
+8A2P,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.5,A,Inactive,1,71,0
+8HPT,C5AR1,P30993,C5a1,Complement peptide,A,Mouse,Cryo-EM,3.4,A,Active,100,73,0
+8INR,MC5R,P33032,MC5,Melanocortin,A,Human,Cryo-EM,2.7,R,Active,100,83,0
+8JSO,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.4,R,Active,100,83,0
+8TB0,GPR61,Q9BZJ8,GPR61,A orphans,A,Human,Cryo-EM,3.5,R,Active,100,56,0
+8WCC,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.0,R,Active,96,81,0
+8GE4,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,69,0
+8GG8,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,69,0
+8IED,GP156,Q8NFN8,GPR156,C Orphans,C,Human,Cryo-EM,3.3,A,Active,-,33,0
+8JGF,MRGX1,Q96LB2,MRGPRX1,A orphans,A,Human,Cryo-EM,2.7,R,Active,100,73,0
+8RQQ,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.4,A,Inactive,1,72,0
+8UNL,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,68,0
+8V6U,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.0,A,Active,100,55,0
+8X8N,SSR5,P35346,SST5,Somatostatin,A,Human,Cryo-EM,2.9,R,Active,100,74,0
+8XZJ,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,3.0,R,Active,100,80,0
+9AYF,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.6,R,Active,-,76,0
+8YN9,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,2.3,R,Active,100,71,0
+8T1W,GPR6,P46095,GPR6,A orphans,A,Human,X-ray,3.5,A,Inactive,1,73,0
+8XFP,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.2,A,Inactive,8,77,0
+2YDO,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.0,A,Active,69,73,0
+4AMI,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,3.2,A,Inactive,0,58,0
+3ZEV,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,3.0,A,Inactive,2,72,0
+5D5A,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.5,A,Inactive,0,68,0
+5LWE,CCR9,P51686,CCR9,Chemokine,A,Human,X-ray,2.8,B,Inactive,47,67,0
+5XEZ,GLR,P47871,glucagon,Glucagon,B1,Human,X-ray,3.0,B,Inactive,0,82,0
+6BQG,5HT2C,P28335,5-HT2C,5-Hydroxytryptamine,A,Human,X-ray,3.0,A,Active,86,62,0
+6CMO,OPSD,P08100,Rhodopsin,Opsins,A,Human,Cryo-EM,4.5,R,Active,76,92,0
+6MEO,CCR5,P51681,CCR5,Chemokine,A,Human,Cryo-EM,3.9,B,Inactive,9,89,0
+8PM2,TAA7F,Q5QD08,TAAR7F,A orphans,A,Mouse,Cryo-EM,2.9,R,Active,100,73,0
+8GCM,PE2R4,P35408,EP4,Prostanoid,A,Human,Cryo-EM,3.5,R,Active,100,52,0
+8HQE,GP132,Q9UNW8,GPR132,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+8ITL,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.2,R,Active,100,60,0
+8JLK,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.2,R,Active,100,81,0
+8SAI,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,3.3,A,Active,100,76,0
+8WPG,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,2.7,A,Inactive,-,74,0
+8GGF,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,100,49,0
+8GH1,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,4.1,R,Active,95,68,0
+8JER,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.5,R,Active,100,80,0
+8KGG,P2Y10,O00398,P2RY10,A orphans,A,Human,Cryo-EM,3.1,R,Active,100,86,0
+8TRD,GRM3,Q14832,mGlu3,Metabotropic glutamate,C,Human,Cryo-EM,3.4,A,Inactive,-,84,0
+8WMA,FZD4,Q9ULV1,FZD4,Frizzled,F,Human,Cryo-EM,3.5,A,Active,78,60,0
+8XIR,SSR3,P32745,SST3,Somatostatin,A,Human,Cryo-EM,2.5,A,Active,100,69,0
+8Y53,BRS3,P32247,BB3,Bombesin,A,Human,Cryo-EM,2.9,R,Active,100,75,0
+9ASB,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.4,R,Active,-,75,0
+8YN4,HRH2,P25021,H2,Histamine,A,Human,Cryo-EM,3.0,R,Active,100,75,0
+9JR3,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.8,R,Active,100,60,0
+9B9Y,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.5,R,Inactive,7,60,0
+2YCW,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,3.0,A,Inactive,0,61,0
+4EA3,OPRX,P41146,NOP,Opioid,A,Human,X-ray,3.0,A,Inactive,8,75,0
+4BVN,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.1,A,Inactive,0,60,0
+4WW3,OPSD,P31356,Rhodopsin,Opsins,A,Japanese flying squid,X-ray,2.8,A,Inactive,9,78,0
+5IUA,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.2,A,Inactive,1,72,0
+5UZ7,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,4.1,R,Active,100,56,0
+5OLO,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.1,A,Inactive,1,72,0
+6D35,Q98SW5,Q98SW5,SMO,Frizzled,F,African clawed frog,X-ray,3.9,A,Active,65,58,0
+6AKY,CCR5,P51681,CCR5,Chemokine,A,Human,X-ray,2.8,A,Inactive,9,81,0
+6HLO,NK1R,P25103,NK1,Tachykinin,A,Human,X-ray,2.4,A,Inactive,1,70,0
+6OT0,SMO,Q99835,SMO,Frizzled,F,Human,Cryo-EM,3.9,R,Active,100,46,0
+6RZ6,CLTR2,Q9NS75,CysLT2,Leukotriene,A,Human,X-ray,2.4,A,Active,56,82,0
+6PB1,CRFR2,Q13324,CRF2,Corticotropin-releasing factor,B1,Human,Cryo-EM,2.8,P,Active,100,68,0
+6WPW,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,3.1,R,Active,100,83,0
+7L0R,NTR1,P20789,NTS1,Neurotensin,A,Rat,Cryo-EM,4.2,C,Active,100,73,0
+7DFL,HRH1,P35367,H1,Histamine,A,Human,Cryo-EM,3.3,R,Active,100,56,0
+7EPE,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,X-ray,2.5,A,Inactive,-,28,0
+7DUQ,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.5,R,Active,100,83,0
+6ZFZ,ACM1,P11229,M1,Acetylcholine (muscarinic),A,Human,X-ray,2.2,A,Inactive,3,62,0
+7S8N,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,76,0
+7VOD,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,3.3,A,Inactive,1,58,0
+7WC7,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,2.6,A,Inactive,1,59,0
+7T6S,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,Cryo-EM,3.0,R,Active,100,85,0
+7TYH,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,3.3,R,Active,100,78,0
+7SCG,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.0,D,Active,100,71,0
+7V69,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.4,R,Active,100,58,0
+7X2F,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.0,F,Active,100,63,0
+7XOX,GASR,P32239,CCK2,Cholecystokinin,A,Human,Cryo-EM,3.1,R,Active,100,62,0
+7Y15,MRGRD,Q8TDS7,MRGPRD,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,82,0
+7XW7,TSHR,P16473,TSH,Glycoprotein hormone,A,Human,Cryo-EM,5.5,R,Inactive,16,74,0
+7SRQ,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,Cryo-EM,2.7,R,Intermediate,55,53,0
+7VIG,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,2.9,F,Active,100,73,0
+7XRR,OX2R,O43614,OX2,Orexin,A,Human,X-ray,2.9,A,Inactive,1,70,0
+8E3Y,VIPR1,P32241,VPAC1,VIP and PACAP,B1,Human,Cryo-EM,2.3,R,Active,100,81,0
+8A6C,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,1.8,A,Inactive,24,87,0
+8HCQ,EDNRA,P25101,ETA,Endothelin,A,Human,Cryo-EM,3.0,R,Active,100,71,0
+8IW1,TAAR9,Q5QD04,TAAR9,A orphans,A,Mouse,Cryo-EM,3.4,R,Active,100,78,0
+8FLS,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.1,R,Active,100,61,0
+7YKD,CML1,Q99788,chemerin,Chemerin receptor,A,Human,Cryo-EM,2.8,A,Active,100,76,0
+8IYS,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.0,R,Active,100,82,0
+8JPB,NTR1,P30989,NTS1,Neurotensin,A,Human,Cryo-EM,3.1,R,Active,100,71,0
+8E0G,OPRM,P42866,&mu;,Opioid,A,Mouse,X-ray,2.1,A,Active,100,74,0
+8HOC,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,3.0,R,Active,100,71,0
+8IJD,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.3,A,Active,100,81,0
+8JLP,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.2,R,Active,100,84,0
+8T8M,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.0,A,Intermediate,-,62,0
+8GEE,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.7,R,Active,100,68,0
+8GGK,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,96,70,0
+8IU2,OPSR,P04000,OPN1LW,Opsins,A,Human,Cryo-EM,3.4,R,Active,100,82,0
+8JPP,SUCR1,Q9BXA5,succinate,Succinate,A,Human,Cryo-EM,3.2,R,Active,100,91,0
+8T3V,FFAR1,O14842,FFA1,Free fatty acid,A,Human,Cryo-EM,3.4,R,Active,100,92,0
+8UNO,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,69,0
+8W1V,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.0,A,Inactive,0,68,0
+8XJO,TA2R,P21731,TP,Prostanoid,A,Human,Cryo-EM,3.1,R,Active,100,90,0
+8YKW,SUCR1,Q9BXA5,succinate,Succinate,A,Human,Cryo-EM,2.8,R,Active,100,85,0
+8ZPS,PRLHR,P49683,PrRP,Prolactin-releasing peptide,A,Human,Cryo-EM,3.0,R,Active,100,78,0
+8K4P,Q76SF8,Q76SF8,ORF74,Unclassified,A,HHV-8,Cryo-EM,2.8,A,Active,100,86,0
+8XGS,KISSR,Q969F8,kisspeptin,Kisspeptin,A,Human,Cryo-EM,3.0,A,Active,100,74,0
+8KEX,MRGX4,Q96LA9,MRGPRX4,A orphans,A,Human,Cryo-EM,3.2,E,Active,98,79,0
+8X0B,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.1,A,Active,-,64,0
+2YCX,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,3.3,A,Inactive,0,59,0
+4AMJ,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.3,B,Inactive,0,62,0
+4BUO,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.8,A,Inactive,2,72,0
+5DHH,OPRX,P41146,NOP,Opioid,A,Human,X-ray,3.0,A,Inactive,8,76,0
+5K2D,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.9,A,Inactive,1,72,0
+5TZR,FFAR1,O14842,FFA1,Free fatty acid,A,Human,X-ray,2.2,A,Active,56,91,0
+5WKT,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.2,A,Active,100,94,0
+6FK8,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.9,A,Active,98,94,0
+6E3Y,CALRL,Q16602,calcitonin-like,Calcitonin,B1,Human,Cryo-EM,3.3,R,Active,100,75,0
+6QZH,CCR7,P32248,CCR7,Chemokine,A,Human,X-ray,2.1,A,Inactive,5,71,0
+6NI3,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.8,R,Active,100,69,0
+6LUQ,DRD2,P14416,D2,Dopamine,A,Human,X-ray,3.1,A,Inactive,1,59,0
+6VMS,DRD2,P14416,D2,Dopamine,A,Human,Cryo-EM,3.8,R,Active,100,63,0
+6LFL,CXCR2,P25025,CXCR2,Chemokine,A,Human,X-ray,3.2,A,Inactive,5,76,0
+6XBK,SMO,Q99835,SMO,Frizzled,F,Human,Cryo-EM,3.2,R,Active,100,59,0
+7LCJ,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.8,R,Active,99,84,0
+7CKY,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.2,R,Active,100,62,0
+7EPD,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.9,A,Inactive,-,89,0
+7KI1,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.5,R,Active,100,83,0
+7S8P,MRGX4,Q96LA9,MRGPRX4,A orphans,A,Human,Cryo-EM,2.6,R,Active,100,77,0
+7S1M,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.4,R,Active,100,82,0
+7VL8,CCR1,P32246,CCR1,Chemokine,A,Human,Cryo-EM,2.9,R,Active,100,80,0
+7FIN,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.1,R,Active,100,82,0
+7SF7,AGRL3,Q9HAR2,ADGRL3,ADGRL,B2,Human,Cryo-EM,2.9,A,Active,100,19,0
+7F6I,BKRB2,P30411,B2,Bradykinin,A,Human,Cryo-EM,2.8,A,Active,100,78,0
+7XT8,5HT4R,Q13639,5-HT4,5-Hydroxytryptamine,A,Human,Cryo-EM,3.1,R,Active,100,76,0
+8DPG,5HT2C,P28335,5-HT2C,5-Hydroxytryptamine,A,Human,Cryo-EM,3.6,A,Active,100,58,0
+8CU6,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.8,A,Inactive,1,72,0
+7T9I,TSHR,P16473,TSH,Glycoprotein hormone,A,Human,Cryo-EM,2.9,R,Active,100,78,0
+8HQM,GP132,Q9UNW8,GPR132,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+8IZB,GP174,Q9BXC1,GPR174,A orphans,A,Human,Cryo-EM,3.1,R,Active,100,85,0
+8K5C,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.1,A,Active,99,80,0
+8W8S,GP101,Q96P66,GPR101,A orphans,A,Human,Cryo-EM,3.3,R,Active,94,55,0
+8WRB,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,74,0
+8GEH,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,4.0,R,Active,100,67,0
+8GGM,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,96,69,0
+8IYH,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.3,D,Active,100,79,0
+8JXT,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,3.1,R,Active,100,69,0
+8TH3,AGTR1,P30556,AT1,Angiotensin,A,Human,Cryo-EM,3.0,A,Inactive,8,81,0
+8UO3,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,54,0
+8X17,AA3R,P0DMS8,A3,Adenosine,A,Human,Cryo-EM,3.2,R,Active,100,89,0
+8XQL,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.0,R,Active,100,90,0
+8YY8,FZD7,O75084,FZD7,Frizzled,F,Human,Cryo-EM,3.2,R,Active,100,59,0
+9BKJ,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,2.6,R,Active,100,66,0
+8UXY,OR1F1,O43749,OR1F1,Odorant family 1,O2,Human,Cryo-EM,3.3,A,Active,-,94,0
+9C1P,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,2.8,A,Inactive,-,72,0
+8Y69,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.4,D,Inactive,8,77,0
+2YCZ,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,3.7,B,Inactive,0,60,0
+4GRV,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.8,A,Active,83,69,0
+4OO9,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,X-ray,2.6,A,Inactive,-,20,0
+5CGC,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,X-ray,3.1,A,Inactive,-,20,0
+5G53,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.4,A,Active,100,68,0
+5UIW,CCR5,P51681,CCR5,Chemokine,A,Human,X-ray,2.2,A,Inactive,9,85,0
+6C1Q,C5AR1,P21730,C5a1,Complement peptide,A,Human,X-ray,2.9,B,Inactive,6,82,0
+5ZKB,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,X-ray,3.0,A,Inactive,3,60,0
+6J20,NK1R,P25103,NK1,Tachykinin,A,Human,X-ray,2.7,A,Inactive,1,71,0
+6OY9,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,3.9,R,Active,100,94,0
+6PS4,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.6,A,Inactive,0,68,0
+6KPF,CNR2,P34972,CB2,Cannabinoid,A,Human,Cryo-EM,2.9,R,Active,100,81,0
+6VJM,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,4.0,B,Inactive,-,73,0
+6KO5,GHSR,Q92847,ghrelin,Ghrelin,A,Human,X-ray,3.3,A,Inactive,1,80,0
+6ZDV,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.1,A,Inactive,1,72,0
+6WQA,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.0,A,Inactive,1,72,0
+7L0S,NTR1,P20789,NTS1,Neurotensin,A,Rat,Cryo-EM,4.5,C,Active,100,73,0
+7DTW,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,4.5,A,Inactive,-,72,0
+7EPC,GRM7,Q14831,mGlu7,Metabotropic glutamate,C,Human,Cryo-EM,4.0,B,Inactive,-,85,0
+7DW9,V2R,P30518,V2,Vasopressin and oxytocin,A,Human,Cryo-EM,2.6,R,Active,100,75,0
+7EW1,S1PR5,Q9H228,S1P5,Lysophospholipid (S1P),A,Human,Cryo-EM,3.4,A,Active,100,68,0
+7EWP,GP158,Q5T848,GPR158,C Orphans,C,Human,Cryo-EM,4.3,A,Inactive,-,47,0
+7EO2,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,2.9,A,Active,100,73,0
+7T6U,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,Cryo-EM,2.9,R,Active,100,85,0
+7TYO,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.7,R,Active,100,76,0
+7RBT,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.1,R,Active,100,81,0
+7UL2,NTR1,P30989,NTS1,Neurotensin,A,Human,Cryo-EM,2.4,R,Inactive,8,69,0
+7XTA,5HT4R,Q13639,5-HT4,5-Hydroxytryptamine,A,Human,Cryo-EM,3.2,R,Active,100,73,0
+8DCS,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,Cryo-EM,2.5,R,Active,100,57,0
+7VVO,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,4.1,R,Active,100,51,0
+7PP1,P2Y12,Q9H244,P2Y12,P2Y,A,Human,X-ray,2.8,A,Active,56,78,0
+7VIE,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,2.9,F,Active,100,73,0
+7XW9,TRFR,P34981,TRH1,Thyrotropin-releasing hormone,A,Human,Cryo-EM,2.7,R,Active,100,72,0
+8E9Y,ACM3,P20309,M3,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.8,A,Active,100,47,0
+7YK7,RL3R2,Q8TDU9,RXFP4,Relaxin family peptide,A,Human,Cryo-EM,2.8,R,Active,100,75,0
+8H8J,GPR35,Q9HC97,GPR35,A orphans,A,Human,Cryo-EM,3.2,C,Active,100,92,0
+8ID9,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.0,R,Active,100,78,0
+7XV3,GP174,Q9BXC1,GPR174,A orphans,A,Human,Cryo-EM,2.8,R,Active,100,87,0
+8DZQ,OPRK,P41145,&kappa;,Opioid,A,Human,Cryo-EM,2.8,A,Active,100,72,0
+8GUR,CNR2,P34972,CB2,Cannabinoid,A,Human,Cryo-EM,2.8,R,Active,100,78,0
+8C9W,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.1,A,Inactive,1,72,0
+8J19,GPR84,Q9NQS5,GPR84,A orphans,A,Human,Cryo-EM,3.2,R,Active,100,71,0
+8JRV,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,3.3,R,Active,100,64,0
+8A2O,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.5,A,Inactive,1,71,0
+8HNL,CXCR3,P49682,CXCR3,Chemokine,A,Human,Cryo-EM,3.0,R,Active,100,80,0
+8IOC,MC3R,P41968,MC3,Melanocortin,A,Human,Cryo-EM,2.9,R,Active,100,84,0
+8JZ7,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.6,A,Active,100,80,0
+8W8A,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,2.8,R,Active,100,85,0
+8FYT,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.6,R,Active,100,68,0
+8GG1,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.0,R,Active,100,68,0
+8GGY,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.9,R,Active,96,68,0
+8JBF,NK3R,P29371,NK3,Tachykinin,A,Human,Cryo-EM,3.0,B,Active,100,61,0
+8SZG,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.6,A,Active,-,48,0
+8UO2,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,100,68,0
+8X7A,PI2R,P43119,IP,Prostanoid,A,Human,Cryo-EM,2.6,R,Active,100,74,0
+8XZG,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,3.2,R,Active,100,79,0
+9CBM,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,100,55,0
+8JXR,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.6,A,Active,99,61,0
+8XWP,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,3.2,R,Active,100,68,0
+8TYW,GPR6,P46095,GPR6,A orphans,A,Human,Cryo-EM,3.4,A,Active,100,73,0
+8XML,CCR8,P51685,CCR8,Chemokine,A,Human,Cryo-EM,2.6,R,Active,100,63,0
+9B9Z,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.3,R,Inactive,7,60,0
+2YCY,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,3.2,A,Inactive,0,60,0
+4GBR,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,4.0,A,Inactive,0,69,0
+4QIN,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,2.6,A,Inactive,10,43,0
+5F8U,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,3.4,A,Inactive,0,57,0
+5GLI,EDNRB,P24530,ETB,Endothelin,A,Human,X-ray,2.5,A,Inactive,3,71,0
+5UVI,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.2,A,Inactive,1,72,0
+5XSZ,Q08BG4,Q08BG4,LPA6,Lysophospholipid (LPA),A,Zebrafish,X-ray,3.2,A,Active,56,78,0
+6BQH,5HT2C,P28335,5-HT2C,5-Hydroxytryptamine,A,Human,X-ray,2.7,A,Inactive,1,63,0
+6G79,5HT1B,P28222,5-HT1B,5-Hydroxytryptamine,A,Human,Cryo-EM,3.8,S,Active,100,67,0
+6IBL,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.7,A,Active,99,60,0
+6GT3,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.0,A,Inactive,1,72,0
+6PS0,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.4,A,Inactive,0,68,0
+6TPJ,OX2R,O43614,OX2,Orexin,A,Human,X-ray,2.7,A,Inactive,1,68,0
+6M1I,PACR,P41586,PAC1,VIP and PACAP,B1,Human,Cryo-EM,3.5,A,Active,100,75,0
+7C2E,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,4.2,R,Active,100,82,0
+6XOX,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.1,R,Active,100,82,0
+7JV5,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.0,R,Active,100,63,0
+7EB2,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,3.5,D,Active,-,72,0
+7F9Y,GHSR,Q92847,ghrelin,Ghrelin,A,Human,Cryo-EM,2.9,R,Active,100,78,0
+7EIB,BKRB1,P46663,B1,Bradykinin,A,Human,Cryo-EM,3.0,A,Active,100,84,0
+7VDL,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,3.2,R,Active,100,78,0
+7W2Z,GHSR,Q92847,ghrelin,Ghrelin,A,Human,Cryo-EM,2.8,R,Active,100,82,0
+7VKT,LT4R1,Q15722,BLT1,Leukotriene,A,Human,Cryo-EM,2.9,A,Active,100,82,0
+7EJA,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,100,58,0
+7T6B,S1PR2,O95136,S1P2,Lysophospholipid (S1P),A,Human,Cryo-EM,3.2,R,Active,100,75,0
+7SQO,OX2R,O43614,OX2,Orexin,A,Human,Cryo-EM,3.2,R,Active,100,61,0
+7F24,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,4.2,F,Active,100,62,0
+7W0N,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,4.2,R,Active,100,78,0
+7XW6,TSHR,P16473,TSH,Glycoprotein hormone,A,Human,Cryo-EM,2.8,R,Active,100,74,0
+8ITM,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.1,R,Active,100,60,0
+8JLN,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.2,R,Active,100,84,0
+8SG1,CML1,Q99788,chemerin,Chemerin receptor,A,Human,Cryo-EM,2.9,R,Active,100,75,0
+8WPU,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.1,A,Active,-,74,0
+8GGL,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,96,69,0
+8IY9,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.4,R,Active,100,82,0
+8JT8,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,2.7,A,Inactive,1,58,0
+8TH4,AGTR1,P30556,AT1,Angiotensin,A,Human,Cryo-EM,3.3,A,Inactive,8,78,0
+8UNX,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,100,69,0
+8X2K,GPR3,P46089,GPR3,A orphans,A,Human,Cryo-EM,3.0,A,Active,100,79,0
+8XOR,PAR1,P25116,PAR1,Proteinase-activated,A,Human,Cryo-EM,3.0,R,Active,100,70,0
+8ZBE,SSR5,P35346,SST5,Somatostatin,A,Human,Cryo-EM,3.2,A,Active,100,72,0
+9BQJ,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.3,D,Active,100,71,0
+8K6O,NPY1R,P25929,Y1,Neuropeptide Y,A,Human,Cryo-EM,3.3,D,Active,100,78,0
+9EPQ,B1B1U5,B1B1U5,Rhodopsin,Opsins,A,Hasarius adansoni,Cryo-EM,4.2,R,Active,100,86,0
+8WGC,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,6.0,D,Active,-,87,0
+9IZF,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.1,R,Active,100,80,0
+3RZE,HRH1,P35367,H1,Histamine,A,Human,X-ray,3.1,A,Inactive,3,55,0
+3ZPQ,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.8,B,Inactive,0,62,0
+4PHU,FFAR1,O14842,FFA1,Free fatty acid,A,Human,X-ray,2.3,A,Active,56,90,0
+4ZUD,AGTR1,P30556,AT1,Angiotensin,A,Human,X-ray,2.8,A,Inactive,8,75,0
+5K2B,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.5,A,Inactive,1,72,0
+5VBL,APJ,P35414,apelin,Apelin,A,Human,X-ray,2.6,B,Inactive,8,79,0
+5OLG,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.9,A,Inactive,1,72,0
+6FKC,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.5,A,Active,98,94,0
+6H7L,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.7,A,Active,99,60,0
+6GPX,CCR2,P41597,CCR2,Chemokine,A,Human,X-ray,2.7,B,Inactive,9,70,0
+6KQI,CNR1,P21554,CB1,Cannabinoid,A,Human,X-ray,3.3,A,Inactive,7,60,0
+6PT2,OPRD,P41143,&delta;,Opioid,A,Human,X-ray,2.8,A,Active,69,78,0
+6OS1,AGTR1,P30556,AT1,Angiotensin,A,Human,X-ray,2.8,A,Active,93,85,0
+6UUS,CALRL,Q16602,calcitonin-like,Calcitonin,B1,Human,Cryo-EM,2.4,R,Active,100,74,0
+6XBM,SMO,Q99835,SMO,Frizzled,F,Human,Cryo-EM,3.2,R,Active,100,42,0
+7D77,AGRG3,Q86Y34,ADGRG3,ADGRG,B2,Human,Cryo-EM,2.9,R,Active,100,48,0
+7DTT,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.8,A,Active,-,72,0
+7EPA,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.6,A,Intermediate,-,90,0
+7DH5,ADRB3,O02662,&beta;3,Adrenoceptors,A,Dog,Cryo-EM,3.2,R,Active,100,68,0
+7RM5,AA2AR,P29274,A2A,Adenosine,A,Human,MicroED,2.8,A,Inactive,1,72,0
+7FII,LSHR,P22888,LH,Glycoprotein hormone,A,Human,Cryo-EM,4.3,R,Active,100,82,0
+7F4F,MSHR,Q01726,MC1,Melanocortin,A,Human,Cryo-EM,2.9,R,Active,100,85,0
+7TYY,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,3.0,R,Active,100,78,0
+7S0F,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,Cryo-EM,3.0,R,Active,100,56,0
+7F0T,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.1,F,Active,100,63,0
+7ZI0,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,3.0,A,Inactive,4,61,0
+7SK5,ACKR3,P25106,ACKR3,Chemokine,A,Human,Cryo-EM,4.0,A,Active,96,83,0
+7X10,AGRL3,Q80TS3,ADGRL3,ADGRL,B2,Mouse,Cryo-EM,2.9,R,Active,100,17,0
+8E9X,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.7,A,Active,100,57,0
+7YK6,RL3R2,Q8TDU9,RXFP4,Relaxin family peptide,A,Human,Cryo-EM,3.0,R,Active,100,76,0
+8GNG,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.2,X,Inactive,1,69,0
+8ID3,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.1,R,Active,100,81,0
+8IW9,TAAR9,Q5QD04,TAAR9,A orphans,A,Mouse,Cryo-EM,3.1,R,Active,100,89,0
+8CIC,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.1,A,Inactive,1,71,0
+8GUQ,CNR2,P34972,CB2,Cannabinoid,A,Human,Cryo-EM,3.1,R,Active,100,81,0
+7YDJ,AGRE5,P48960,ADGRE5,ADGRE,B2,Human,Cryo-EM,3.0,R,Active,100,33,0
+8IRR,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.2,R,Active,100,63,0
+8JR9,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.6,R,Active,100,43,0
+8FX5,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.5,R,Active,100,57,0
+8HVI,GP132,Q9UNW8,GPR132,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+8J6R,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.8,R,Active,100,81,0
+8K2X,CXCR3,P49682,CXCR3,Chemokine,A,Human,Cryo-EM,3.2,R,Active,100,79,0
+8WC4,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.1,R,Active,100,82,0
+8GE1,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,70,0
+8GG2,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.0,R,Active,100,68,0
+8GGZ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.9,R,Active,96,68,0
+8J6J,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.8,R,Active,100,85,0
+8QJ2,MC4R,P32245,MC4,Melanocortin,A,Human,Cryo-EM,3.4,A,Active,100,74,0
+8UNP,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,69,0
+8WG7,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.5,R,Active,100,60,0
+8XBE,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,3.4,A,Active,100,78,0
+8XVE,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,3.0,R,Active,100,70,0
+8ZPT,PRLHR,P49683,PrRP,Prolactin-releasing peptide,A,Human,Cryo-EM,3.0,R,Active,100,79,0
+8IKH,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.3,R,Active,100,56,0
+8XGO,KISSR,Q969F8,kisspeptin,Kisspeptin,A,Human,Cryo-EM,2.7,A,Active,100,75,0
+8S4D,APJ,P35414,apelin,Apelin,A,Human,X-ray,2.6,A,Inactive,16,73,0
+8XYD,PTAFR,P25105,PAF,Platelet-activating factor,A,Human,Cryo-EM,2.9,A,Active,100,89,0
+9IVM,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.2,R,Active,100,83,0
+3SN6,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.2,R,Active,100,69,0
+4NTJ,P2Y12,Q9H244,P2Y12,P2Y,A,Human,X-ray,2.6,A,Active,56,78,0
+4Z35,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,X-ray,2.9,A,Inactive,1,80,0
+5IUB,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.1,A,Inactive,1,71,0
+5NDZ,PAR2,P55085,PAR2,Proteinase-activated,A,Human,X-ray,3.6,A,Active,56,74,0
+5NM4,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.7,A,Inactive,1,73,0
+5KW2,FFAR1,O14842,FFA1,Free fatty acid,A,Human,X-ray,2.8,A,Active,56,82,0
+6H7O,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.8,A,Active,99,60,0
+5ZTY,CNR2,P34972,CB2,Cannabinoid,A,Human,X-ray,2.8,A,Inactive,4,80,0
+6E67,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.7,B,Active,100,72,0
+6PRZ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.8,A,Inactive,0,68,0
+6TP4,OX1R,O43613,OX1,Orexin,A,Human,X-ray,3.0,A,Inactive,1,70,0
+6LI3,GPR52,Q9Y2T5,GPR52,A orphans,A,Human,Cryo-EM,3.3,R,Active,100,79,0
+6PH7,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.9,A,Active,100,94,0
+6WI9,SCTR,P47872,secretin,Glucagon,B1,Human,Cryo-EM,4.3,R,Active,100,84,0
+7BTS,ADRB1,P08588,&beta;1,Adrenoceptors,A,Human,X-ray,3.1,A,Active,99,58,0
+6YVR,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.5,B,Inactive,2,83,0
+7E9H,GRM4,Q14833,mGlu4,Metabotropic glutamate,C,Human,Cryo-EM,4.0,R,Intermediate,-,84,0
+7M8W,PD2R2,Q9Y5Y4,DP2,Prostanoid,A,Human,X-ray,2.6,A,Inactive,21,83,0
+7EW3,S1PR3,Q99500,S1P3,Lysophospholipid (S1P),A,Human,Cryo-EM,3.1,R,Active,100,77,0
+7EWR,GP158,Q5T848,GPR158,C Orphans,C,Human,Cryo-EM,4.7,A,Inactive,-,47,0
+7WC4,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,3.2,A,Inactive,1,61,0
+7SIL,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,2.7,A,Active,-,72,0
+7TD1,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.1,R,Active,100,80,0
+7WVW,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,Cryo-EM,3.1,R,Active,100,85,0
+7W55,NMUR2,Q9GZQ4,NMU2,Neuromedin U,A,Human,Cryo-EM,2.8,R,Active,100,73,0
+7XOW,GASR,P32239,CCK2,Cholecystokinin,A,Human,Cryo-EM,3.1,R,Active,100,62,0
+7XMT,SSR4,P31391,SST4,Somatostatin,A,Human,Cryo-EM,2.8,R,Active,100,68,0
+7XKE,AGRG2,Q8CJ12,ADGRG2,ADGRG,B2,Mouse,Cryo-EM,2.9,R,Active,100,25,0
+7SRS,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,Cryo-EM,3.3,R,Active,100,60,0
+7WCN,GP119,Q8TDV5,GPR119,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,2.9,R,Active,100,86,0
+7YU4,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.3,A,Active,99,73,0
+8E9W,ACM3,P20309,M3,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.7,A,Active,100,47,0
+7YJ4,RL3R2,Q8TDU9,RXFP4,Relaxin family peptide,A,Human,Cryo-EM,3.2,R,Active,100,76,0
+8HDP,AA2BR,P29275,A2B,Adenosine,A,Human,Cryo-EM,3.2,R,Active,100,84,0
+7XK8,NMUR2,Q9GZQ4,NMU2,Neuromedin U,A,Human,Cryo-EM,3.3,R,Active,100,68,0
+7YAE,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.4,E,Active,100,76,0
+7XXH,P2RY1,P47900,P2Y1,P2Y,A,Human,Cryo-EM,2.9,R,Active,100,81,0
+8F0K,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,1.9,R,Active,100,78,0
+8JD2,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,2.8,2,Active,-,86,0
+8GTM,CRFR1,,CRF1,Corticotropin-releasing factor,B1,Human,X-ray,2.6,A,Inactive,16,63,0
+8IHF,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.0,R,Active,100,80,0
+8JJL,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,A,Inactive,0,68,0
+8KH4,GP161,Q8N6U8,GPR161,A orphans,A,Human,Cryo-EM,3.1,A,Active,100,50,0
+8W8Q,GP101,Q96P66,GPR101,A orphans,A,Human,Cryo-EM,2.9,C,Active,100,56,0
+8FYL,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.9,R,Active,100,68,0
+8GFZ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.0,R,Active,100,67,0
+8GGU,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,96,68,0
+8J23,FFAR2,O15552,FFA2,Free fatty acid,A,Human,Cryo-EM,3.2,A,Active,100,78,0
+8JXX,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,3.1,R,Active,100,67,0
+8U02,DRD2,P14416,D2,Dopamine,A,Human,Cryo-EM,3.3,R,Active,100,61,0
+8UNT,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,69,0
+8WST,MCHR2,Q969V1,MCH2,Melanin-concentrating hormone,A,Human,Cryo-EM,2.4,R,Active,100,84,0
+8XQT,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,2.9,R,Active,100,86,0
+8ZJD,KISSR,Q969F8,kisspeptin,Kisspeptin,A,Human,Cryo-EM,3.1,R,Active,100,72,0
+9IIX,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,2.9,R,Active,100,90,0
+8WGB,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.7,B,Active,-,83,0
+8T1V,GPR6,P46095,GPR6,A orphans,A,Human,X-ray,2.6,A,Inactive,1,73,0
+8X0D,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.5,A,Active,-,63,0
+3AYM,OPSD,P31356,Rhodopsin,Opsins,A,Japanese flying squid,X-ray,2.8,B,Inactive,9,77,0
+3ZPR,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.7,B,Inactive,0,61,0
+4QIM,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,2.6,A,Inactive,7,45,0
+4X1H,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.3,A,Active,100,94,0
+5GLH,EDNRB,P24530,ETB,Endothelin,A,Human,X-ray,2.8,A,Inactive,16,66,0
+5MZJ,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.0,A,Inactive,1,71,0
+5OLZ,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.9,A,Inactive,1,72,0
+5WB1,Q80KM9,Q80KM9,US28,Unclassified,A,strain AD169,X-ray,3.5,A,Active,100,82,0
+6H7M,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.8,A,Active,99,60,0
+6IIV,TA2R,P21731,TP,Prostanoid,A,Human,X-ray,3.0,A,Inactive,33,87,0
+6ME8,MTR1B,P49286,MT2,Melatonin,A,Human,X-ray,3.1,B,Inactive,1,78,0
+6RZ4,CLTR1,Q9Y271,CysLT1,Leukotriene,A,Human,X-ray,2.7,A,Active,56,85,0
+6PT3,OPRD,P41143,&delta;,Opioid,A,Human,X-ray,3.3,A,Active,69,78,0
+6NWE,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.7,A,Active,100,94,0
+6OBA,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.1,A,Inactive,0,68,0
+7C7Q,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,3.0,B,Active,-,71,0
+6XBJ,SMO,Q99835,SMO,Frizzled,F,Human,Cryo-EM,3.9,R,Active,100,59,0
+6Z4Q,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.9,A,Inactive,30,75,0
+7CMV,DRD3,P35462,D3,Dopamine,A,Human,Cryo-EM,2.7,R,Active,100,68,0
+7M3G,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,2.5,A,Active,-,76,0
+7LD4,AA1R,P30542,A1,Adenosine,A,Human,Cryo-EM,3.3,R,Active,100,88,0
+7F8W,GASR,P32239,CCK2,Cholecystokinin,A,Human,Cryo-EM,3.1,R,Active,100,62,0
+7VV5,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,2.8,R,Active,100,81,0
+7SIN,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,5.9,A,Inactive,-,74,0
+7VLA,CCR1,P32246,CCR1,Chemokine,A,Human,Cryo-EM,2.7,R,Active,100,85,0
+7WU2,AGRD1,Q6QNK2,ADGRD1,ADGRD,B2,Human,Cryo-EM,2.8,R,Active,100,32,0
+7X9B,NPY2R,P49146,Y2,Neuropeptide Y,A,Human,Cryo-EM,3.4,R,Active,100,79,0
+7W0L,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,3.6,R,Active,100,78,0
+7XAV,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,2.9,A,Active,100,76,0
+7VVM,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.2,R,Active,100,60,0
+7TS0,CRFR2,Q13324,CRF2,Corticotropin-releasing factor,B1,Human,Cryo-EM,2.8,P,Active,100,72,0
+7Y27,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.5,E,Active,100,74,0
+8F7R,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.3,R,Active,100,72,0
+8FMZ,NTR1,P20789,NTS1,Neurotensin,A,Rat,Cryo-EM,2.6,A,Active,100,66,0
+8I2H,FSHR,P23945,FSH,Glycoprotein hormone,A,Human,Cryo-EM,6.0,A,Inactive,16,82,0
+7YIT,OPRK,P41145,&kappa;,Opioid,A,Human,X-ray,3.3,A,Active,100,74,0
+8DZP,OPRK,P41145,&kappa;,Opioid,A,Human,Cryo-EM,2.7,A,Active,100,74,0
+8IRV,DRD5,P21918,D5,Dopamine,A,Human,Cryo-EM,3.1,R,Active,100,58,0
+7YMJ,ADA1A,P35348,&alpha;1A,Adrenoceptors,A,Human,Cryo-EM,3.4,A,Inactive,8,60,0
+8IUL,PF2R,P43088,FP,Prostanoid,A,Human,Cryo-EM,2.8,R,Active,100,82,0
+8JD6,GRM4,Q14833,mGlu4,Metabotropic glutamate,C,Human,Cryo-EM,3.4,S,Active,-,83,0
+8HN1,ADA1A,P35348,&alpha;1A,Adrenoceptors,A,Human,Cryo-EM,2.9,A,Inactive,3,57,0
+8IJB,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.2,A,Active,100,81,0
+8JLO,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.5,R,Active,100,84,0
+8T6J,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.5,A,Inactive,-,63,0
+8GE3,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,69,0
+8GG5,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,100,68,0
+8I7W,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.4,A,Active,100,80,0
+8JHC,FZD3,Q9NPG1,FZD3,Frizzled,F,Human,Cryo-EM,3.3,R,Active,78,49,0
+8T3O,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.1,R,Active,100,82,0
+8UNN,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,69,0
+8VY9,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,2.9,R,Active,100,88,0
+8XGR,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,3.2,R,Active,100,69,0
+8YUU,HRH3,Q9Y5N1,H3,Histamine,A,Human,Cryo-EM,2.7,R,Active,100,65,0
+9BJK,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.3,R,Inactive,8,72,0
+8JPS,ACKR1,Q16570,ACKR1,Chemokine,A,Human,Cryo-EM,3.7,A,Intermediate,46,76,0
+8YN3,HRH2,P25021,H2,Histamine,A,Human,Cryo-EM,2.6,R,Active,100,78,0
+9JKQ,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,2.7,R,Active,100,87,0
+8WWK,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,2.6,R,Active,100,68,0
+9CHV,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,4.0,A,Intermediate,47,63,0
+3AYN,OPSD,P31356,Rhodopsin,Opsins,A,Japanese flying squid,X-ray,2.7,B,Inactive,9,77,0
+4BEY,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.9,A,Active,100,94,0
+4U15,ACM3,P08483,M3,Acetylcholine (muscarinic),A,Rat,X-ray,2.8,B,Inactive,3,47,0
+4ZJC,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.8,A,Inactive,1,72,0
+5U09,CNR1,P21554,CB1,Cannabinoid,A,Human,X-ray,2.6,A,Inactive,7,60,0
+5XRA,CNR1,P21554,CB1,Cannabinoid,A,Human,X-ray,2.8,A,Active,91,60,0
+5X33,Q9WTK1,Q9WTK1,BLT1,Leukotriene,A,Guinea pig,X-ray,3.7,A,Inactive,9,78,0
+6FFH,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,X-ray,2.7,A,Inactive,-,21,0
+5XJM,AGTR2,P50052,AT2,Angiotensin,A,Human,X-ray,3.2,A,Active,100,78,0
+6E59,NK1R,P25103,NK1,Tachykinin,A,Human,X-ray,3.4,A,Inactive,1,70,0
+6ME7,MTR1B,P49286,MT2,Melatonin,A,Human,X-ray,3.2,A,Inactive,1,79,0
+6KJV,GLP1R,P43220,GLP-1,Glucagon,B1,Human,X-ray,2.8,B,Inactive,0,57,0
+6RZ8,CLTR2,Q9NS75,CysLT2,Leukotriene,A,Human,X-ray,2.7,A,Active,56,78,0
+6PT0,CNR2,P34972,CB2,Cannabinoid,A,Human,Cryo-EM,3.2,R,Active,100,83,0
+6WWZ,CCR6,P51684,CCR6,Chemokine,A,Human,Cryo-EM,3.3,R,Active,100,83,0
+7AD3,STE2,D6VTK4,STE2,STE2,D1,strain ATCC 204508 / S288c,Cryo-EM,3.5,A,Active,-,69,0
+7CKZ,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.1,R,Active,100,62,0
+7EPF,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,X-ray,2.7,A,Inactive,-,28,0
+7MTS,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.2,A,Active,-,90,0
+7FIH,LSHR,P22888,LH,Glycoprotein hormone,A,Human,Cryo-EM,3.2,R,Active,100,79,0
+7WVX,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,Cryo-EM,2.8,R,Active,100,85,0
+7V6A,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.6,R,Active,100,58,0
+7UL3,HRH2,P25021,H2,Histamine,A,Human,Cryo-EM,3.0,A,Inactive,8,75,0
+7UM5,5HT5A,P47898,5-HT5A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.7,A,Active,100,75,0
+7SK9,ACKR3,P25106,ACKR3,Chemokine,A,Human,Cryo-EM,3.7,A,Active,96,78,0
+7X9Y,CCR3,P51677,CCR3,Chemokine,A,Human,Cryo-EM,3.1,R,Active,100,83,0
+8CXO,SMO,P56726,SMO,Frizzled,F,Mouse,Cryo-EM,3.7,A,Inactive,14,43,0
+7SRR,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,Cryo-EM,2.9,R,Active,100,57,0
+7WY0,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,2.8,R,Active,100,30,0
+7YU5,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.3,R,Active,100,80,0
+8EFO,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,2.8,R,Active,100,72,0
+7Y67,C5AR1,P21730,C5a1,Complement peptide,A,Human,Cryo-EM,2.8,D,Active,100,79,0
+8HS2,GPR20,Q99678,GPR20,A orphans,A,Human,Cryo-EM,3.1,R,Active,56,80,0
+7T96,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.2,A,Active,100,59,0
+7ZLY,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,X-ray,2.7,A,Active,56,83,0
+7Y64,C5AR1,P21730,C5a1,Complement peptide,A,Human,Cryo-EM,2.9,D,Active,100,84,0
+8H4L,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.1,R,Active,100,84,0
+8JD1,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.7,2,Inactive,-,86,0
+8GDC,PE2R3,P43115,EP3,Prostanoid,A,Human,Cryo-EM,3.5,R,Active,100,66,0
+8I9S,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,3.3,C,Active,100,57,0
+8J6Q,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.6,R,Active,100,81,0
+8JLR,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.0,R,Active,100,79,0
+8W89,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.0,R,Active,100,84,0
+8XBH,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,2.8,R,Active,100,78,0
+8GFY,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.0,R,Active,100,67,0
+8GGV,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,96,68,0
+8J9N,FZD1,Q9UP38,FZD1,Frizzled,F,Human,Cryo-EM,3.5,B,Active,100,55,0
+8PJK,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.4,R,Active,100,68,0
+8UNQ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,69,0
+8WKZ,MC4R,P32245,MC4,Melanocortin,A,Human,X-ray,3.3,A,Intermediate,41,79,0
+8XJN,TA2R,P21731,TP,Prostanoid,A,Human,Cryo-EM,3.1,R,Active,100,90,0
+8YUT,HRH2,P25021,H2,Histamine,A,Human,Cryo-EM,2.7,R,Active,100,82,0
+9AVG,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.6,R,Active,-,74,0
+8YN6,HRH3,Q9Y5N1,H3,Histamine,A,Human,Cryo-EM,2.8,R,Active,100,65,0
+8P12,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,3.2,R,Active,100,91,0
+8X0H,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,4.1,A,Active,-,64,0
+3PWH,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.3,A,Inactive,1,71,0
+4JKV,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,2.5,A,Inactive,0,44,0
+4XT3,US28,P69332,US28,Unclassified,A,strain AD169,X-ray,3.8,A,Active,100,81,0
+5TVN,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,X-ray,2.9,A,Intermediate,55,61,0
+5N2R,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.8,A,Inactive,1,71,0
+5WF5,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.6,A,Active,69,69,0
+6DRZ,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,X-ray,3.1,A,Intermediate,55,61,0
+5YHL,PE2R4,P35408,EP4,Prostanoid,A,Human,X-ray,4.2,A,Inactive,12,57,0
+6NBH,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.5,R,Active,100,64,0
+6RZ9,CLTR2,Q9NS75,CysLT2,Leukotriene,A,Human,X-ray,2.7,A,Active,56,81,0
+6OS2,AGTR1,P30556,AT1,Angiotensin,A,Human,X-ray,2.7,A,Active,93,85,0
+6WHC,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,3.4,R,Active,100,78,0
+7CFM,GPBAR,Q8TDU6,GPBA,Bile acid,A,Human,Cryo-EM,3.0,R,Active,100,83,0
+7BU7,ADRB1,P08588,&beta;1,Adrenoceptors,A,Human,X-ray,2.6,A,Active,99,58,0
+6ZIN,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.6,A,Inactive,30,76,0
+7E2Y,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.0,R,Active,100,65,0
+7M3J,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,4.1,A,Inactive,-,72,0
+7F9Z,GHSR,Q92847,ghrelin,Ghrelin,A,Human,Cryo-EM,3.2,R,Active,100,77,0
+6ZG4,ACM1,P11229,M1,Acetylcholine (muscarinic),A,Human,X-ray,2.3,A,Inactive,3,62,0
+7S8L,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,2.5,R,Active,100,76,0
+7NA7,GHSR,Q92847,ghrelin,Ghrelin,A,Human,Cryo-EM,2.7,R,Active,100,80,0
+7T11,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,2.7,R,Active,100,77,0
+7TYL,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,3.3,R,Active,100,78,0
+7RA3,GIPR,P48546,GIP,Glucagon,B1,Human,Cryo-EM,3.2,R,Active,100,80,0
+8UO4,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,4.0,R,Active,100,56,0
+8X16,AA3R,P0DMS8,A3,Adenosine,A,Human,Cryo-EM,3.3,R,Active,100,88,0
+8XOS,PAR1,P25116,PAR1,Proteinase-activated,A,Human,Cryo-EM,3.2,R,Active,100,68,0
+8ZFJ,E7FEL0,E7FEL0,GPR4,A orphans,A,Zebrafish,Cryo-EM,3.1,R,Active,100,72,0
+8ZSJ,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,2.8,R,Active,100,83,0
+9IJA,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.1,R,Inactive,0,90,0
+8WVV,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.4,A,Inactive,8,75,0
+8WG9,GRM4,Q14833,mGlu4,Metabotropic glutamate,C,Human,Cryo-EM,4.5,B,Active,-,85,0
+9IZG,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.0,R,Active,100,82,0
+3REY,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.3,A,Inactive,1,71,0
+4MBS,CCR5,P51681,CCR5,Chemokine,A,Human,X-ray,2.7,A,Inactive,9,83,0
+4S0V,OX2R,O43614,OX2,Orexin,A,Human,X-ray,2.5,A,Inactive,1,64,0
+5DGY,OPSD,P08100,Rhodopsin,Opsins,A,Human,X-ray,7.7,A,Active,100,94,0
+5N2S,AA1R,P30542,A1,Adenosine,A,Human,X-ray,3.3,A,Inactive,1,86,0
+5V54,5HT1B,P28222,5-HT1B,5-Hydroxytryptamine,A,Human,X-ray,3.9,A,Inactive,16,71,0
+5ZKP,PTAFR,P25105,PAF,Platelet-activating factor,A,Human,X-ray,2.8,A,Other,-,85,0
+5ZK8,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,X-ray,3.0,A,Inactive,3,59,0
+6NIY,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,3.3,R,Active,100,55,0
+6PS3,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.5,A,Inactive,0,68,0
+6P9X,CRFR1,,CRF1,Corticotropin-releasing factor,B1,Human,Cryo-EM,2.9,R,Active,100,65,0
+6WIV,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,3.3,B,Inactive,-,71,0
+7CUM,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,3.5,B,Inactive,-,72,0
+7E32,5HT1D,P28221,5-HT1D,5-Hydroxytryptamine,A,Human,Cryo-EM,2.9,R,Active,100,76,0
+7MTB,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,4.0,R,Active,97,93,0
+7EZH,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,3.2,D,Active,100,69,0
+7PIV,MC4R,P32245,MC4,Melanocortin,A,Human,Cryo-EM,2.9,R,Active,100,78,0
+7VV4,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,3.0,R,Active,98,80,0
+7WC5,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,3.2,A,Inactive,1,60,0
+7RKN,US28,P69332,US28,Unclassified,A,strain AD169,Cryo-EM,3.6,R,Active,100,83,0
+7WVU,FPR1,P21462,FPR1,Formylpeptide,A,Human,Cryo-EM,3.3,R,Active,100,85,0
+7RG9,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.2,R,Active,100,58,0
+7EUO,FPR1,P21462,FPR1,Formylpeptide,A,Human,Cryo-EM,2.9,R,Active,100,84,0
+7UL5,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.1,A,Inactive,8,77,0
+7XT9,5HT4R,Q13639,5-HT4,5-Hydroxytryptamine,A,Human,Cryo-EM,3.2,R,Active,100,76,0
+8DPF,5HT2C,P28335,5-HT2C,5-Hydroxytryptamine,A,Human,Cryo-EM,2.8,A,Active,100,58,0
+7YXA,S1PR5,Q9H228,S1P5,Lysophospholipid (S1P),A,Human,X-ray,2.2,A,Inactive,1,72,0
+7UTZ,TSHR,P16473,TSH,Glycoprotein hormone,A,Human,Cryo-EM,2.4,R,Active,100,79,0
+8IHH,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.1,R,Active,100,80,0
+8JIM,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.0,E,Active,100,80,0
+8K5B,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.4,A,Active,99,80,0
+8W88,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,2.6,R,Active,100,83,0
+8XBI,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,3.1,R,Active,60,78,0
+8GEJ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,4.2,R,Active,100,65,0
+8GGQ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,96,68,0
+8J20,FFAR3,O14843,FFA3,Free fatty acid,A,Human,Cryo-EM,3.2,D,Active,100,79,0
+8POK,HRH2,P25021,H2,Histamine,A,Human,Cryo-EM,3.4,A,Active,100,77,0
+8U4P,CXCR4,P61073,CXCR4,Chemokine,A,Human,Cryo-EM,3.2,R,Active,100,81,0
+8UNW,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,68,0
+8WZ2,QRFPR,Q96P65,QRFP,Peptide P518,A,Human,Cryo-EM,2.7,R,Active,100,75,0
+8XVH,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,3.3,R,Active,100,69,0
+8ZSP,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.1,R,Active,100,83,0
+9IJE,ADRB3,P13945,&beta;3,Adrenoceptors,A,Human,Cryo-EM,2.3,R,Active,100,62,0
+8WVX,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.3,A,Inactive,8,76,0
+8Y45,OPRD,P41143,&delta;,Opioid,A,Human,Cryo-EM,3.5,A,Active,100,77,0
+9CHU,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,A,Intermediate,47,66,0
+3RFM,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.6,A,Inactive,1,71,0
+4L6R,GLR,P47871,glucagon,Glucagon,B1,Human,X-ray,3.3,A,Inactive,6,61,0
+4QKX,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.3,A,Active,99,69,0
+5DSG,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,X-ray,2.6,B,Inactive,3,60,0
+5UEN,AA1R,P30542,A1,Adenosine,A,Human,X-ray,3.2,B,Inactive,1,91,0
+5XPR,EDNRB,P24530,ETB,Endothelin,A,Human,X-ray,3.6,A,Inactive,3,69,0
+6FFI,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,X-ray,2.2,A,Inactive,-,20,0
+6DRY,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,X-ray,2.9,A,Intermediate,55,60,0
+5YWY,PE2R4,P35408,EP4,Prostanoid,A,Human,X-ray,3.2,A,Inactive,12,57,0
+6NBF,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.0,R,Active,100,62,0
+6TOD,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.1,A,Inactive,1,71,0
+6LI0,GPR52,Q9Y2T5,GPR52,A orphans,A,Human,X-ray,2.2,A,Inactive,36,81,0
+6UVA,CALRL,Q16602,calcitonin-like,Calcitonin,B1,Human,Cryo-EM,2.3,R,Active,100,75,0
+7D3S,SCTR,P47872,secretin,Glucagon,B1,Human,Cryo-EM,2.9,R,Active,100,60,0
+6Z66,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,3.2,A,Intermediate,16,80,0
+7CKX,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.5,R,Active,100,61,0
+7C4S,S1PR3,Q99500,S1P3,Lysophospholipid (S1P),A,Human,X-ray,3.2,A,Active,59,75,0
+7MTR,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.3,A,Active,-,88,0
+7P2L,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,X-ray,2.5,A,Inactive,-,21,0
+7FIG,LSHR,P22888,LH,Glycoprotein hormone,A,Human,Cryo-EM,3.9,R,Active,100,79,0
+7EJX,GPR88,Q9GZN0,GPR88,A orphans,A,Human,Cryo-EM,2.4,R,Active,100,60,0
+7WIC,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,2.8,R,Active,100,78,0
+7UM4,5HT5A,P47898,5-HT5A,5-Hydroxytryptamine,A,Human,X-ray,2.8,A,Inactive,16,71,0
+7WJ5,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.7,R,Active,100,76,0
+7XW5,TSHR,P16473,TSH,Glycoprotein hormone,A,Human,Cryo-EM,3.0,R,Active,100,75,0
+7XK2,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.1,R,Active,100,78,0
+7XJJ,GALR1,P47211,GAL1,Galanin,A,Human,Cryo-EM,3.3,E,Active,100,77,0
+8ITF,TAAR9,Q5QD04,TAAR9,A orphans,A,Mouse,Cryo-EM,3.5,R,Active,100,86,0
+7YDM,AGRE5,P48960,ADGRE5,ADGRE,B2,Human,Cryo-EM,2.9,R,Active,100,33,0
+8IUK,PF2R,P43088,FP,Prostanoid,A,Human,Cryo-EM,2.7,R,Active,100,82,0
+8JD5,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.6,2,Active,-,90,0
+8IJA,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.7,A,Active,100,81,0
+8JJO,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,F,Inactive,0,65,0
+8K5D,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.7,A,Active,99,80,0
+8WC3,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.0,R,Active,100,80,0
+8GDZ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,69,0
+8GG0,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,2.9,R,Active,100,68,0
+8GGW,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,96,68,0
+8J6I,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.9,R,Active,100,79,0
+8SZF,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,2.8,A,Active,-,74,0
+8UWL,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.8,A,Active,100,59,0
+8XGM,CML2,P46091,chemerin 2,Chemerin receptor,A,Human,Cryo-EM,3.3,A,Active,100,86,0
+9F33,DRD3,P35462,D3,Dopamine,A,Human,Cryo-EM,3.1,R,Active,100,68,0
+8UYQ,OR4D5,Q8NGN0,OR4D5,Odorant family 4,O2,Human,Cryo-EM,3.5,A,Active,-,93,0
+9C2F,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,2.8,A,Inactive,-,71,0
+8ZX5,GPR55,Q9Y2T6,GPR55,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,3.0,R,Active,100,88,0
+9K1D,FFAR2,O15552,FFA2,Free fatty acid,A,Human,Cryo-EM,3.3,R,Active,100,81,0
+4A4M,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.3,A,Active,100,94,0
+4LDE,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.8,A,Active,99,69,0
+4XNV,P2RY1,P47900,P2Y1,P2Y,A,Human,X-ray,2.2,A,Active,56,78,0
+5EE7,GLR,P47871,glucagon,Glucagon,B1,Human,X-ray,2.5,A,Inactive,0,54,0
+5XR8,CNR1,P21554,CB1,Cannabinoid,A,Human,X-ray,3.0,A,Active,91,60,0
+5O9H,C5AR1,P21730,C5a1,Complement peptide,A,Human,X-ray,2.7,A,Inactive,6,84,0
+6FKA,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.7,A,Active,98,94,0
+6FUF,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.1,A,Active,100,91,0
+5ZHP,ACM3,P08483,M3,Acetylcholine (muscarinic),A,Rat,X-ray,3.1,B,Inactive,3,47,0
+6ME2,MTR1A,P48039,MT1,Melatonin,A,Human,X-ray,2.8,A,Inactive,1,83,0
+6K1Q,EDNRB,P24530,ETB,Endothelin,A,Human,X-ray,2.7,A,Inactive,3,68,0
+6KUX,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,X-ray,2.7,A,Inactive,1,57,0
+6TOT,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.2,B,Inactive,1,71,0
+6VI4,OPRK,P41145,&kappa;,Opioid,A,Human,X-ray,3.3,B,Inactive,8,73,0
+6PGS,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.9,A,Active,100,94,0
+7C6A,AGTR2,P50052,AT2,Angiotensin,A,Human,X-ray,3.4,A,Active,98,77,0
+6WH4,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,3.4,C,Inactive,1,59,0
+6LPJ,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.8,A,Inactive,1,72,0
+7D76,AGRG3,Q86Y34,ADGRG3,ADGRG,B2,Human,Cryo-EM,3.1,R,Active,100,48,0
+7CMU,DRD3,P35462,D3,Dopamine,A,Human,Cryo-EM,3.0,R,Active,100,68,0
+7M3E,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.2,B,Inactive,-,75,0
+7FD8,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.8,A,Active,-,63,0
+7F8U,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,X-ray,2.8,A,Inactive,1,65,0
+7SHE,GP158,Q5T848,GPR158,C Orphans,C,Human,Cryo-EM,3.4,A,Inactive,-,45,0
+7VOE,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,2.9,A,Inactive,1,58,0
+7F83,GHSR,Q92847,ghrelin,Ghrelin,A,Human,X-ray,2.9,A,Inactive,14,78,0
+7T10,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,2.5,R,Active,100,78,0
+7TYX,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.6,R,Active,100,77,0
+7WU4,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,3.4,R,Active,100,31,0
+7XJI,ADRB3,O02662,&beta;3,Adrenoceptors,A,Dog,Cryo-EM,3.9,R,Active,100,68,0
+7UL4,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,2.8,A,Inactive,8,72,0
+7UM6,5HT5A,P47898,5-HT5A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.8,A,Active,100,72,0
+7XTQ,GPBAR,Q8TDU6,GPBA,Bile acid,A,Human,Cryo-EM,3.2,R,Active,100,83,0
+7X1U,TRFR,P34981,TRH1,Thyrotropin-releasing hormone,A,Human,Cryo-EM,3.2,A,Active,100,68,0
+8CU7,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.1,A,Inactive,1,72,0
+7T9M,TSHR,P16473,TSH,Glycoprotein hormone,A,Human,Cryo-EM,3.1,R,Inactive,26,74,0
+8GE2,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,70,0
+8GG4,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,100,68,0
+8GGX,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,96,68,0
+8JGB,MRGX1,Q96LB2,MRGPRX1,A orphans,A,Human,Cryo-EM,2.8,R,Active,100,67,0
+8K9K,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.0,R,Active,100,70,0
+8TRC,GRM3,Q14832,mGlu3,Metabotropic glutamate,C,Human,Cryo-EM,3.3,A,Inactive,-,84,0
+8WP1,SUCR1,Q9BXA5,succinate,Succinate,A,Human,Cryo-EM,3.2,A,Active,100,91,0
+8XOG,GPER1,Q99527,GPER,Estrogen (G protein-coupled),A,Human,Cryo-EM,2.9,R,Active,100,70,0
+8XVK,EDNRA,P25101,ETA,Endothelin,A,Human,Cryo-EM,3.2,R,Inactive,9,67,0
+8ZMF,5HT2C,P28335,5-HT2C,5-Hydroxytryptamine,A,Human,X-ray,3.6,A,Inactive,1,62,0
+9IIW,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.2,R,Inactive,0,90,0
+8UXV,O51G2,Q8NGK0,OR51G2,Odorant family 51,O1,Human,Cryo-EM,3.2,A,Active,-,96,0
+8YN8,HRH3,Q9Y5N1,H3,Histamine,A,Human,Cryo-EM,2.8,R,Active,100,64,0
+8K4S,MRGX4,Q96LA9,MRGPRX4,A orphans,A,Human,Cryo-EM,2.9,E,Active,100,79,0
+8X0G,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.0,A,Active,-,63,0
+3UON,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,X-ray,3.0,A,Inactive,3,60,0
+4MQT,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,X-ray,3.7,A,Active,99,59,0
+4UHR,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.6,A,Active,69,75,0
+5IU8,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.0,A,Inactive,1,71,0
+5UNF,AGTR2,P50052,AT2,Angiotensin,A,Human,X-ray,2.8,A,Active,98,79,0
+5WQC,OX2R,O43614,OX2,Orexin,A,Human,X-ray,2.0,A,Inactive,1,68,0
+6B3J,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.3,R,Active,100,82,0
+6ME3,MTR1A,P48039,MT1,Melatonin,A,Human,X-ray,2.9,A,Inactive,1,82,0
+6OFJ,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,4.5,A,Inactive,24,93,0
+6PS6,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.7,A,Inactive,0,68,0
+6KPG,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.0,R,Active,100,60,0
+6TKO,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,Cryo-EM,3.3,A,Active,100,58,0
+6S0L,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.7,A,Inactive,1,72,0
+6LFO,CXCR2,P25025,CXCR2,Chemokine,A,Human,Cryo-EM,3.4,R,Active,100,85,0
+7CKW,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.2,R,Active,100,61,0
+7BB7,V2R,P30518,V2,Vasopressin and oxytocin,A,Human,Cryo-EM,4.4,A,Active,100,72,0
+7EVW,FZD7,O75084,FZD7,Frizzled,F,Human,Cryo-EM,3.2,R,Active,100,59,0
+7FD9,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,4.0,A,Inactive,-,63,0
+7F2O,BKRB2,P30411,B2,Bradykinin,A,Human,Cryo-EM,2.9,R,Active,100,73,0
+7VDM,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,3.0,R,Active,100,77,0
+7WC8,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,2.5,A,Inactive,1,59,0
+7T6T,FPR1,P21462,FPR1,Formylpeptide,A,Human,Cryo-EM,3.2,R,Active,100,85,0
+7TD2,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.1,R,Active,100,80,0
+7WVV,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,Cryo-EM,2.9,R,Active,100,85,0
+7SF8,AGRG1,Q9Y653,ADGRG1,ADGRG,B2,Human,Cryo-EM,2.7,A,Active,100,37,0
+7X9C,NPY4R,P50391,Y4,Neuropeptide Y,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+7W0M,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,3.7,R,Active,100,76,0
+8DPI,5HT2C,P28335,5-HT2C,5-Hydroxytryptamine,A,Human,Cryo-EM,3.4,A,Active,100,58,0
+7WU9,PE2R3,P43115,EP3,Prostanoid,A,Human,Cryo-EM,3.4,R,Active,100,70,0
+7F61,HRH3,Q9Y5N1,H3,Histamine,A,Human,X-ray,2.6,A,Inactive,12,68,0
+7VIF,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,2.8,F,Active,100,73,0
+7XP6,T2R46,P59540,TAS2R46,Taste 2,T2,Human,Cryo-EM,3.0,R,Active,100,92,0
+8EF6,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.2,R,Active,100,72,0
+7ZBC,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,1.8,A,Inactive,24,87,0
+8GNE,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.3,A,Inactive,1,72,0
+8I2G,FSHR,P23945,FSH,Glycoprotein hormone,A,Human,Cryo-EM,2.8,R,Active,100,86,0
+8TAO,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,2.9,A,Active,-,64,0
+8GEI,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,4.1,R,Active,100,68,0
+8GGP,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,96,68,0
+8IZ4,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,74,0
+8K9L,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.1,R,Active,100,70,0
+8U8F,GPR3,P46089,GPR3,A orphans,A,Human,Cryo-EM,3.5,R,Active,100,80,0
+8UNU,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,68,0
+8WU1,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.2,R,Active,100,57,0
+8XOI,GPER1,Q99527,GPER,Estrogen (G protein-coupled),A,Human,Cryo-EM,3.2,R,Active,100,70,0
+8XVJ,EDNRA,P25101,ETA,Endothelin,A,Human,Cryo-EM,3.3,R,Inactive,9,68,0
+8ZMG,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,3.4,A,Inactive,1,59,0
+9IJ9,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,2.7,R,Active,100,90,0
+8WVY,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.3,A,Inactive,8,77,0
+8XXV,PD2R2,Q9Y5Y4,DP2,Prostanoid,A,Human,Cryo-EM,2.3,A,Active,100,76,0
+9DQH,MRGRD,Q8TDS7,MRGPRD,A orphans,A,Human,Cryo-EM,2.9,A,Active,100,79,0
+3VG9,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.7,A,Inactive,1,72,0
+4LDO,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.2,A,Active,99,69,0
+4XNW,P2RY1,P47900,P2Y1,P2Y,A,Human,X-ray,2.7,A,Active,56,78,0
+5L7D,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,3.2,B,Inactive,4,59,0
+5VEW,GLP1R,P43220,GLP-1,Glucagon,B1,Human,X-ray,2.7,A,Inactive,0,57,0
+6AQF,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.5,A,Inactive,1,72,0
+6FKB,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.0,A,Active,98,94,0
+6H7J,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,X-ray,2.8,A,Active,99,60,0
+6MET,CCR5,P51681,CCR5,Chemokine,A,Human,Cryo-EM,4.5,B,Inactive,9,89,0
+7YFC,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,3.0,R,Active,100,67,0
+8H2G,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.0,A,Active,100,80,0
+8IHJ,HCAR3,P49019,HCA3,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.1,R,Active,100,73,0
+8JIQ,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,3.4,R,Active,100,79,0
+8T7H,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.3,A,Intermediate,-,64,0
+8GED,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,68,0
+8GGJ,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,96,69,0
+8IQ6,PF2R,P43088,FP,Prostanoid,A,Human,Cryo-EM,3.4,R,Active,100,76,0
+8JT6,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.0,R,Active,100,66,0
+8U4R,CXCR4,P61073,CXCR4,Chemokine,A,Human,Cryo-EM,3.1,R,Inactive,8,79,0
+8WG8,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,2.7,R,Active,100,55,0
+8XBG,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,3.4,A,Active,60,78,0
+8XQR,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.2,R,Active,100,88,0
+8YW5,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,2.8,R,Active,100,79,0
+8JXS,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.0,A,Active,99,61,0
+8XGU,KISSR,Q969F8,kisspeptin,Kisspeptin,A,Human,Cryo-EM,3.0,A,Active,100,72,0
+8RQL,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,3.0,R,Active,100,88,0
+8XXU,PD2R2,Q9Y5Y4,DP2,Prostanoid,A,Human,Cryo-EM,2.5,A,Active,100,80,0
+9IVG,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.0,R,Active,100,83,0
+3V2Y,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,X-ray,2.8,A,Inactive,1,76,0
+4N6H,OPRD,P41143,&delta;,Opioid,A,Human,X-ray,1.8,A,Inactive,8,81,0
+4YAY,AGTR1,P30556,AT1,Angiotensin,A,Human,X-ray,2.9,A,Inactive,8,79,0
+4Z9G,CRFR1,,CRF1,Corticotropin-releasing factor,B1,Human,X-ray,3.2,A,Inactive,16,63,0
+5VEX,GLP1R,P43220,GLP-1,Glucagon,B1,Human,X-ray,3.0,B,Inactive,0,57,0
+5WIU,DRD4,P21917,D4,Dopamine,A,Human,X-ray,2.0,A,Inactive,1,64,0
+5WF6,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.9,A,Active,69,68,0
+6D26,PD2R2,Q9Y5Y4,DP2,Prostanoid,A,Human,X-ray,2.8,A,Inactive,21,82,0
+6N51,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,4.0,B,Intermediate,-,65,0
+6RNK,SUCR1,Q6IYF9,succinate,Succinate,A,Rat,X-ray,1.9,A,Active,56,90,0
+6PS7,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.9,A,Inactive,1,72,0
+6KNM,APJ,P35414,apelin,Apelin,A,Human,X-ray,3.2,B,Inactive,8,78,0
+6LFM,CXCR2,P25025,CXCR2,Chemokine,A,Human,Cryo-EM,3.5,R,Active,100,85,0
+7LJD,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.2,R,Active,100,64,0
+7DD6,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.2,B,Active,-,73,0
+7F1R,CCR5,P51681,CCR5,Chemokine,A,Human,Cryo-EM,3.0,R,Active,100,79,0
+7RTB,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.1,R,Active,100,83,0
+7VUI,GP139,Q6DWJ6,GPR139,A orphans,A,Human,Cryo-EM,3.3,R,Active,100,79,0
+7EVZ,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.1,D,Active,100,71,0
+7VGY,MTR1A,P48039,MT1,Melatonin,A,Human,Cryo-EM,3.1,A,Active,100,80,0
+7WIH,GRM3,Q14832,mGlu3,Metabotropic glutamate,C,Human,Cryo-EM,3.7,A,Active,-,84,0
+7WQ4,GALR2,O43603,GAL2,Galanin,A,Human,Cryo-EM,2.6,R,Active,100,73,0
+7EPT,AGRD1,Q6QNK2,ADGRD1,ADGRD,B2,Human,Cryo-EM,3.0,R,Active,100,31,0
+7F23,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.6,F,Active,100,62,0
+7SUS,APJ,P35414,apelin,Apelin,A,Human,X-ray,2.7,A,Inactive,8,76,0
+7XBX,CX3C1,P49238,CX3CR1,Chemokine,A,Human,Cryo-EM,3.4,R,Active,9,81,0
+7VFX,FPR1,P21462,FPR1,Formylpeptide,A,Human,Cryo-EM,2.8,R,Active,100,84,0
+7X5H,5HT5A,P47898,5-HT5A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.1,R,Active,100,77,0
+8F7S,OPRD,P41143,&delta;,Opioid,A,Human,Cryo-EM,3.0,R,Active,100,78,0
+8FN0,NTR1,P20789,NTS1,Neurotensin,A,Rat,Cryo-EM,2.9,A,Active,100,67,0
+8ID4,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.1,R,Active,100,79,0
+8IWE,TAAR9,Q5QD04,TAAR9,A orphans,A,Mouse,Cryo-EM,3.4,R,Active,96,85,0
+7TRS,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.8,R,Active,100,56,0
+8EJK,FFAR1,O14842,FFA1,Free fatty acid,A,Human,Cryo-EM,3.4,R,Active,100,89,0
+7XY6,AA2BR,P29275,A2B,Adenosine,A,Human,Cryo-EM,3.0,R,Active,100,86,0
+8H0Q,GRPR,P30550,BB2,Bombesin,A,Human,Cryo-EM,3.3,R,Active,100,77,0
+8JD0,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.3,2,Inactive,-,88,0
+8HNK,CXCR3,P49682,CXCR3,Chemokine,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+8JIU,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,2.8,R,Active,100,83,0
+8W8R,GP101,Q96P66,GPR101,A orphans,A,Human,Cryo-EM,3.3,R,Active,100,55,0
+8FYE,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.9,R,Active,100,68,0
+8GFW,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.0,R,Active,100,68,0
+8GGR,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,96,68,0
+8J21,FFAR3,O14843,FFA3,Free fatty acid,A,Human,Cryo-EM,3.3,D,Active,100,79,0
+8K8J,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,2.9,R,Active,100,59,0
+8TZQ,DRD2,P14416,D2,Dopamine,A,Human,Cryo-EM,3.2,R,Active,100,61,0
+8UNS,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,69,0
+8WSS,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,3.0,R,Active,100,67,0
+8XQO,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,2.8,R,Active,100,89,0
+8YZK,GPC5D,Q9NZD1,GPRC5D,C Orphans,C,Human,Cryo-EM,3.4,B,Inactive,-,77,0
+8ZSV,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.0,R,Active,100,85,0
+9IMA,GPC5D,Q9NZD1,GPRC5D,C Orphans,C,Human,Cryo-EM,2.7,A,Inactive,-,72,0
+4DAJ,ACM3,P08483,M3,Acetylcholine (muscarinic),A,Rat,X-ray,3.4,A,Inactive,3,46,0
+4XT1,US28,P69332,US28,Unclassified,A,strain AD169,X-ray,2.9,A,Active,100,82,0
+5TE5,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,4.0,A,Inactive,24,100,0
+5X7D,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,2.7,A,Inactive,0,68,0
+5ZBH,NPY1R,P25929,Y1,Neuropeptide Y,A,Human,X-ray,3.0,A,Inactive,1,78,0
+5YC8,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,X-ray,2.5,A,Inactive,3,60,0
+6HLL,NK1R,P25103,NK1,Tachykinin,A,Human,X-ray,3.3,A,Inactive,1,67,0
+6MH8,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,4.2,A,Inactive,1,72,0
+6PS1,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.2,A,Inactive,0,68,0
+6TQ6,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.6,B,Inactive,1,71,0
+6KP6,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,X-ray,3.0,A,Inactive,3,59,0
+6UO8,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,3.6,B,Active,-,74,0
+6WZG,SCTR,P47872,secretin,Glucagon,B1,Human,Cryo-EM,2.3,R,Active,100,86,0
+7DHI,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,70,0
+7JVQ,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.0,R,Active,100,64,0
+7MBX,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,2.0,R,Active,100,68,0
+7F1Q,CCR5,P51681,CCR5,Chemokine,A,Human,Cryo-EM,2.9,R,Active,100,85,0
+7S8M,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,2.5,R,Active,100,77,0
+7VUG,GP139,Q6DWJ6,GPR139,A orphans,A,Human,Cryo-EM,3.2,R,Active,100,80,0
+7F4I,MSHR,Q01726,MC1,Melanocortin,A,Human,Cryo-EM,3.1,R,Active,100,84,0
+7TYN,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.6,R,Active,100,79,0
+7RGP,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.9,R,Active,100,82,0
+7XJL,GALR2,O43603,GAL2,Galanin,A,Human,Cryo-EM,3.5,F,Active,100,72,0
+7XBD,GALR2,O43603,GAL2,Galanin,A,Human,Cryo-EM,3.1,A,Active,100,72,0
+7XA3,CCR2,P41597,CCR2,Chemokine,A,Human,Cryo-EM,2.9,R,Active,100,79,0
+7WXU,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,2.9,R,Active,100,30,0
+7Y24,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.3,E,Active,100,77,0
+8F7W,OPRK,P41145,&kappa;,Opioid,A,Human,Cryo-EM,3.2,R,Active,100,75,0
+8A6D,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,1.8,A,Inactive,24,87,0
+8HCX,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,3.5,C,Active,100,66,0
+8IRS,DRD2,P14416,D2,Dopamine,A,Human,Cryo-EM,3.0,R,Active,100,60,0
+8IBU,MTLR,O43193,motilin,Motilin,A,Human,Cryo-EM,3.5,R,Active,100,66,0
+7YDP,AGRE5,P48960,ADGRE5,ADGRE,B2,Human,Cryo-EM,3.1,R,Active,100,32,0
+8IRU,DRD4,P21917,D4,Dopamine,A,Human,Cryo-EM,3.2,R,Active,100,64,0
+8JPC,NTR1,P30989,NTS1,Neurotensin,A,Human,Cryo-EM,3.1,R,Active,100,71,0
+8FCZ,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,3.7,A,Inactive,24,89,0
+8HQC,C5AR1,P30993,C5a1,Complement peptide,A,Mouse,Cryo-EM,3.9,A,Active,100,78,0
+8JII,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.2,A,Active,100,80,0
+8KH5,GP174,Q9BXC1,GPR174,A orphans,A,Human,Cryo-EM,2.8,A,Active,100,84,0
+8WC9,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.2,R,Active,100,79,0
+8GE9,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,68,0
+8GGC,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,60,0
+8IEB,GP156,Q8NFN8,GPR156,C Orphans,C,Human,Cryo-EM,3.0,A,Inactive,-,33,0
+8JBH,NK3R,P29371,NK3,Tachykinin,A,Human,Cryo-EM,2.9,B,Active,100,59,0
+8SZH,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.1,A,Active,-,77,0
+8WOG,SUCR1,Q9BXA5,succinate,Succinate,A,Human,Cryo-EM,3.0,A,Active,100,93,0
+8XOH,GPER1,Q99527,GPER,Estrogen (G protein-coupled),A,Human,Cryo-EM,3.2,R,Active,100,71,0
+8XZI,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,2.7,R,Active,100,81,0
+9AUC,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.4,R,Active,100,78,0
+8YN2,HRH1,P35367,H1,Histamine,A,Human,Cryo-EM,2.7,R,Active,100,56,0
+9IQT,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.9,R,Active,100,80,0
+8WWN,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,2.7,R,Active,100,68,0
+9IYA,GPR55,Q9Y2T6,GPR55,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,3.0,A,Active,56,86,0
+3UZA,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.3,A,Inactive,1,71,0
+4LDL,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.1,A,Active,99,69,0
+4UG2,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.6,A,Active,69,71,0
+5DYS,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.3,A,Active,98,94,0
+5NDD,PAR2,P55085,PAR2,Proteinase-activated,A,Human,X-ray,2.8,A,Active,56,74,0
+5NLX,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.1,A,Inactive,1,73,0
+6GDG,AA2AR,P29274,A2A,Adenosine,A,Human,Cryo-EM,4.1,A,Active,100,64,0
+6IIU,TA2R,P21731,TP,Prostanoid,A,Human,X-ray,2.5,A,Inactive,33,87,0
+6OIJ,ACM1,P11229,M1,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.3,R,Active,100,64,0
+6KUW,ADA2C,P18825,&alpha;2C,Adrenoceptors,A,Human,X-ray,2.8,A,Inactive,1,60,0
+6P9Y,PACR,P41586,PAC1,VIP and PACAP,B1,Human,Cryo-EM,3.0,R,Active,100,55,0
+6W2Y,GABR1,Q9UBS5,GABAB1,GABAB,C,Human,Cryo-EM,3.2,B,Inactive,-,69,0
+6WHA,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.4,A,Active,100,52,0
+7D68,GLP2R,O95838,GLP-2,Glucagon,B1,Human,Cryo-EM,3.0,R,Active,100,53,0
+7DTV,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.5,A,Active,-,72,0
+7DD7,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.2,B,Active,-,73,0
+7DUR,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.3,R,Active,100,80,0
+7E6U,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,6.0,A,Inactive,-,72,0
+7F53,MC4R,P32245,MC4,Melanocortin,A,Human,Cryo-EM,3.0,R,Active,100,82,0
+7S3I,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.5,R,Active,100,57,0
+7F4D,MSHR,Q01726,MC1,Melanocortin,A,Human,Cryo-EM,3.0,R,Active,100,83,0
+7TYW,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,3.0,R,Active,100,78,0
+7WU5,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,3.0,R,Active,100,31,0
+7F6H,BKRB2,P30411,B2,Bradykinin,A,Human,Cryo-EM,2.9,A,Active,100,78,0
+7RAN,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.5,A,Active,100,57,0
+7SK7,ACKR3,P25106,ACKR3,Chemokine,A,Human,Cryo-EM,3.3,A,Active,96,74,0
+7YU6,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.5,R,Active,100,80,0
+8EFQ,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.3,R,Active,100,71,0
+7YS6,5HT6R,P50406,5-HT6,5-Hydroxytryptamine,A,Human,Cryo-EM,3.0,A,Active,100,61,0
+8HIX,GPR21,Q99679,GPR21,A orphans,A,Human,Cryo-EM,3.1,R,Active,100,81,0
+7W40,GRPR,P30550,BB2,Bombesin,A,Human,Cryo-EM,3.0,A,Active,100,78,0
+7Y3G,GPR12,P47775,GPR12,A orphans,A,Human,Cryo-EM,2.8,R,Active,100,78,0
+8IA8,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,2.9,A,Active,100,59,0
+7YMH,ADA1A,P35348,&alpha;1A,Adrenoceptors,A,Human,Cryo-EM,3.5,A,Active,100,58,0
+8F2B,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.0,R,Active,100,78,0
+8JWZ,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.4,A,Inactive,1,71,0
+8GDA,PE2R4,P35408,EP4,Prostanoid,A,Human,Cryo-EM,3.3,R,Active,100,58,0
+8I9A,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,3.6,C,Active,100,56,0
+8JHY,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.9,A,Active,100,80,0
+8JZZ,C5AR1,P21730,C5a1,Complement peptide,A,Human,Cryo-EM,3.3,A,Active,100,84,0
+8WC7,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.1,R,Active,100,81,0
+8GEC,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,68,0
+8GGI,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,96,69,0
+8IQ4,PF2R,P43088,FP,Prostanoid,A,Human,Cryo-EM,2.7,R,Active,100,76,0
+8JPN,SUCR1,Q9BXA5,succinate,Succinate,A,Human,Cryo-EM,2.9,R,Active,100,89,0
+8TR0,GRM3,Q14832,mGlu3,Metabotropic glutamate,C,Human,Cryo-EM,3.2,A,Inactive,-,85,0
+8WM9,FZD4,Q9ULV1,FZD4,Frizzled,F,Human,Cryo-EM,3.5,A,Active,78,60,0
+8XIP,SSR1,P30872,SST1,Somatostatin,A,Human,Cryo-EM,3.3,A,Active,100,73,0
+8XVI,EDNRA,P25101,ETA,Endothelin,A,Human,Cryo-EM,3.3,R,Active,100,72,0
+9AXF,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.5,R,Active,-,77,0
+9GYO,GPBAR,Q8TDU6,GPBA,Bile acid,A,Human,Cryo-EM,2.5,R,Active,100,83,0
+8WWJ,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,3.0,R,Active,100,68,0
+8ZX4,GPR55,Q9Y2T6,GPR55,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,2.9,R,Active,100,90,0
+9K1C,FFAR1,O14842,FFA1,Free fatty acid,A,Human,Cryo-EM,3.2,R,Active,100,93,0
+4EJ4,OPRD,P32300,&delta;,Opioid,A,Mouse,X-ray,3.4,A,Inactive,8,76,0
+4BV0,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,3.1,A,Inactive,2,70,0
+5D5B,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.8,A,Inactive,0,68,0
+5T04,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,3.3,A,Active,83,69,0
+5TUD,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,X-ray,3.0,D,Active,86,58,0
+6FK9,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.6,A,Active,98,94,0
+6DS0,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,X-ray,3.2,A,Intermediate,55,59,0
+6M9T,PE2R3,P43115,EP3,Prostanoid,A,Human,X-ray,2.5,A,Active,88,70,0
+6ME4,MTR1A,P48039,MT1,Melatonin,A,Human,X-ray,3.2,A,Inactive,1,83,0
+6OYA,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,3.3,R,Active,100,94,0
+6KUY,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,X-ray,3.2,A,Inactive,1,56,0
+6TQ9,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.7,B,Inactive,1,71,0
+6LPB,PACR,P41586,PAC1,VIP and PACAP,B1,Human,Cryo-EM,3.9,R,Active,100,71,0
+6VCB,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.3,R,Active,100,82,0
+7L0P,NTR1,P20789,NTS1,Neurotensin,A,Rat,Cryo-EM,4.1,C,Active,100,73,0
+7CRH,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.3,R,Active,100,61,0
+7E9G,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.5,R,Intermediate,-,88,0
+7E6T,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.0,A,Active,-,74,0
+7F8Y,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,X-ray,2.5,A,Inactive,1,65,0
+7VDH,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,81,0
+7WC9,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,2.5,A,Inactive,1,59,0
+7JNI,AGTR2,P50052,AT2,Angiotensin,A,Human,X-ray,3.0,A,Active,98,82,0
+7VL9,CCR1,P32246,CCR1,Chemokine,A,Human,Cryo-EM,2.6,R,Active,100,85,0
+7VBH,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.0,R,Active,100,83,0
+7F1Z,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.5,F,Active,100,62,0
+7XTB,5HT6R,P50406,5-HT6,5-Hydroxytryptamine,A,Human,Cryo-EM,3.3,R,Active,100,63,0
+7Y14,MRGRD,Q8TDS7,MRGPRD,A orphans,A,Human,Cryo-EM,3.2,R,Intermediate,46,82,0
+7XN9,SSR2,P30874,SST2,Somatostatin,A,Human,X-ray,2.6,A,Inactive,8,79,0
+7VVK,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.3,R,Active,100,56,0
+7U2K,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.3,D,Active,100,71,0
+7WZ7,AGRF1,Q5T601,ADGRF1,ADGRF,B2,Human,Cryo-EM,2.8,R,Active,100,30,0
+8DWH,MRGX1,Q96LB2,MRGPRX1,A orphans,A,Human,Cryo-EM,3.3,R,Active,100,77,0
+8HAF,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.3,R,Active,100,62,0
+8HJ0,GPR21,Q99679,GPR21,A orphans,A,Human,Cryo-EM,3.1,R,Active,100,81,0
+7TMW,RXFP1,Q9HBX9,RXFP1,Relaxin family peptide,A,Human,Cryo-EM,3.2,R,Active,100,36,0
+8HJ5,MRGX1,Q96LB2,MRGPRX1,A orphans,A,Human,Cryo-EM,3.0,F,Active,100,78,0
+7YAC,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.2,E,Active,100,76,0
+7YDH,AGRE5,P48960,ADGRE5,ADGRE,B2,Human,Cryo-EM,3.1,R,Active,100,33,0
+8H0P,NMBR,P28336,BB1,Bombesin,A,Human,Cryo-EM,3.2,R,Active,100,75,0
+8JCX,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.0,2,Inactive,-,87,0
+8GCP,PE2R4,P35408,EP4,Prostanoid,A,Human,Cryo-EM,3.1,R,Active,100,56,0
+8I97,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,3.2,C,Active,100,57,0
+8J6P,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.6,R,Active,100,81,0
+8JSP,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.7,R,Active,100,68,0
+8U26,NK1R,P25103,NK1,Tachykinin,A,Human,Cryo-EM,2.5,R,Active,100,70,0
+8GE8,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,68,0
+8GGB,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,64,0
+8IEQ,GP156,Q8NFN8,GPR156,C Orphans,C,Human,Cryo-EM,2.7,A,Inactive,-,34,0
+8J9O,FZD1,Q9UP38,FZD1,Frizzled,F,Human,Cryo-EM,3.4,A,Active,78,52,0
+8KFY,CCR8,P51685,CCR8,Chemokine,A,Human,Cryo-EM,3.1,R,Active,100,81,0
+8U4Q,CXCR4,P61073,CXCR4,Chemokine,A,Human,Cryo-EM,3.4,R,Active,100,84,0
+8ZCJ,SSR5,P35346,SST5,Somatostatin,A,Human,Cryo-EM,3.1,G,Active,100,76,0
+9ERX,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,2.9,R,Active,100,62,0
+8UY0,OR2T2,Q6IF00,OR2T2,Odorant family 2,O2,Human,Cryo-EM,3.2,A,Active,-,89,0
+8YNA,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,2.6,R,Active,100,71,0
+8P15,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,5.9,R,Active,100,92,0
+8XFS,LGR4,Q9BXB1,LGR4,A orphans,A,Human,Cryo-EM,3.2,A,Inactive,8,77,0
+4EIY,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.8,A,Inactive,1,72,0
+4O9R,SMO,Q99835,SMO,Frizzled,F,Human,X-ray,3.2,A,Inactive,10,42,0
+4XES,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.6,A,Active,83,72,0
+5K2C,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.9,A,Inactive,1,72,0
+5JTB,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.8,A,Inactive,1,72,0
+5VRA,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.4,A,Inactive,1,72,0
+5ZBQ,NPY1R,P25929,Y1,Neuropeptide Y,A,Human,X-ray,2.7,A,Inactive,1,80,0
+6AKX,CCR5,P51681,CCR5,Chemokine,A,Human,X-ray,2.8,B,Inactive,9,82,0
+6N4B,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.0,R,Active,100,58,0
+6KK7,GLP1R,P43220,GLP-1,Glucagon,B1,Human,X-ray,3.1,B,Inactive,0,56,0
+6TP6,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.3,B,Inactive,1,71,0
+6LI2,GPR52,Q9Y2T5,GPR52,A orphans,A,Human,X-ray,2.8,A,Inactive,36,80,0
+6LMK,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,3.7,R,Active,100,83,0
+6X19,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.1,R,Active,100,84,0
+7DFP,DRD2,P14416,D2,Dopamine,A,Human,X-ray,3.1,A,Inactive,1,57,0
+7L1V,OX2R,O43614,OX2,Orexin,A,Human,Cryo-EM,3.0,R,Active,100,64,0
+7CX4,PE2R2,P43116,EP2,Prostanoid,A,Human,Cryo-EM,2.9,R,Active,100,74,0
+7MTA,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,Cryo-EM,4.1,R,Active,97,93,0
+7EZM,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,2.9,D,Active,100,71,0
+7F55,MC4R,P32245,MC4,Melanocortin,A,Human,Cryo-EM,3.1,R,Active,100,82,0
+7VUJ,GP139,Q6DWJ6,GPR139,A orphans,A,Human,Cryo-EM,3.8,R,Active,100,79,0
+7EW7,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.3,D,Active,100,75,0
+7PX4,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.3,A,Inactive,1,72,0
+7VBI,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.0,R,Active,100,83,0
+7W53,NMUR1,Q9HB89,NMU1,Neuromedin U,A,Human,Cryo-EM,3.2,R,Active,100,62,0
+7UM7,5HT5A,P47898,5-HT5A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.8,A,Active,100,72,0
+7Y13,MRGRD,Q8TDS7,MRGPRD,A orphans,A,Human,Cryo-EM,3.1,R,Intermediate,46,82,0
+7XAT,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,2.9,A,Active,100,78,0
+7XKD,AGRG2,Q8CJ12,ADGRG2,ADGRG,B2,Mouse,Cryo-EM,2.4,R,Active,100,26,0
+7R0C,V2R,P30518,V2,Vasopressin and oxytocin,A,Human,Cryo-EM,4.7,A,Active,100,76,0
+7W7E,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,56,0
+7XP4,T2R46,P59540,TAS2R46,Taste 2,T2,Human,Cryo-EM,3.0,R,Active,100,97,0
+8E9Z,ACM3,P20309,M3,Acetylcholine (muscarinic),A,Human,Cryo-EM,2.7,A,Active,100,47,0
+7YON,NPY2R,P49146,Y2,Neuropeptide Y,A,Human,Cryo-EM,3.0,R,Active,100,79,0
+8HMV,GPR21,Q99679,GPR21,A orphans,A,Human,Cryo-EM,2.9,A,Active,100,79,0
+8EIT,FFAR1,O14842,FFA1,Free fatty acid,A,Human,Cryo-EM,2.8,R,Active,100,89,0
+7ZL9,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,X-ray,2.7,A,Active,56,83,0
+8DZS,OPRK,P41145,&kappa;,Opioid,A,Human,Cryo-EM,2.7,A,Active,100,71,0
+8IRT,DRD3,P35462,D3,Dopamine,A,Human,Cryo-EM,2.7,R,Active,100,68,0
+8H4K,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.1,R,Active,100,83,0
+8JCY,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,2.9,2,Inactive,-,87,0
+8GD9,PE2R4,P35408,EP4,Prostanoid,A,Human,Cryo-EM,3.2,R,Active,100,57,0
+8I9L,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,3.2,C,Active,100,57,0
+8JHI,FZD3,Q9NPG1,FZD3,Frizzled,F,Human,Cryo-EM,3.2,R,Active,100,48,0
+8T3Q,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,3.1,R,Active,100,83,0
+8UNM,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,69,0
+8VY7,T2R14,Q9NYV8,TAS2R14,Taste 2,T2,Human,Cryo-EM,2.7,R,Active,100,87,0
+8XIO,SSR1,P30872,SST1,Somatostatin,A,Human,Cryo-EM,2.7,A,Active,100,73,0
+8XZH,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,2.6,R,Active,100,80,0
+9BKK,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,2.5,R,Active,100,66,0
+8WJX,P2RY1,P47900,P2Y1,P2Y,A,Human,Cryo-EM,3.2,R,Active,100,80,0
+9EPR,B1B1U5,B1B1U5,Rhodopsin,Opsins,A,Hasarius adansoni,Cryo-EM,4.9,R,Active,100,89,0
+8WWL,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,2.8,R,Active,100,68,0
+9CHX,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,A,Intermediate,47,67,0
+3VW7,PAR1,P25116,PAR1,Proteinase-activated,A,Human,X-ray,2.2,A,Active,56,66,0
+4PXZ,P2Y12,Q9H244,P2Y12,P2Y,A,Human,X-ray,2.5,A,Active,56,84,0
+5CGD,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,X-ray,2.6,A,Inactive,-,20,0
+5D6L,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.2,A,Inactive,0,68,0
+5VAI,G1SGD4,G1SGD4,GLP-1,Glucagon,B1,Rabbit,Cryo-EM,4.1,R,Active,100,84,0
+6DDE,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.5,R,Active,100,71,0
+6A93,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,3.0,A,Inactive,1,60,0
+6OSA,NTR1,P30989,NTS1,Neurotensin,A,Human,Cryo-EM,3.0,R,Active,100,77,0
+6TQ4,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.3,B,Inactive,1,70,0
+6UP7,NTR1,P30989,NTS1,Neurotensin,A,Human,Cryo-EM,4.2,R,Active,100,77,0
+6W25,MC4R,P32245,MC4,Melanocortin,A,Human,X-ray,2.8,A,Intermediate,41,79,0
+6WJC,ACM1,P11229,M1,Acetylcholine (muscarinic),A,Human,X-ray,2.6,A,Inactive,3,62,0
+7CA5,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,7.6,B,Inactive,-,70,0
+7LCK,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.2,R,Active,99,84,0
+7KNT,CALRL,Q16602,calcitonin-like,Calcitonin,B1,Human,Cryo-EM,3.2,R,Inactive,9,74,0
+7JOZ,DRD1,P21728,D1,Dopamine,A,Human,X-ray,3.8,R,Active,100,64,0
+7E14,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.9,R,Active,100,81,0
+7DGD,GRM1,Q13255,mGlu1,Metabotropic glutamate,C,Human,Cryo-EM,4.0,A,Inactive,-,66,0
+7F8V,GASR,P32239,CCK2,Cholecystokinin,A,Human,Cryo-EM,3.3,R,Active,100,62,0
+7VV6,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,3.3,R,Active,98,82,0
+7WC6,5HT2A,P28223,5-HT2A,5-Hydroxytryptamine,A,Human,X-ray,2.6,A,Inactive,1,58,0
+7V9M,GHRHR,Q02643,GHRH,Glucagon,B1,Human,Cryo-EM,3.3,R,Active,100,63,0
+7TD3,S1PR1,P21453,S1P1,Lysophospholipid (S1P),A,Human,Cryo-EM,3.0,R,Active,100,76,0
+7FIM,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.4,R,Active,100,83,0
+7WUI,AGRG2,Q8CJ12,ADGRG2,ADGRG,B2,Mouse,Cryo-EM,3.1,R,Active,100,24,0
+7X2D,DRD1,P21728,D1,Dopamine,A,Human,Cryo-EM,3.3,F,Active,100,63,0
+7XOV,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,Cryo-EM,3.0,R,Active,100,67,0
+7XMR,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.1,R,Active,100,77,0
+7XZ5,GP119,Q8TDV5,GPR119,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,3.1,R,Active,100,87,0
+7WY5,AGRL3,Q80TS3,ADGRL3,ADGRL,B2,Mouse,Cryo-EM,2.8,R,Active,100,17,0
+7YU7,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,3.8,R,Active,100,80,0
+8F7X,OPRX,P41146,NOP,Opioid,A,Human,Cryo-EM,3.3,R,Active,100,77,0
+8FN1,NTR1,P20789,NTS1,Neurotensin,A,Rat,Cryo-EM,2.9,A,Active,100,66,0
+8ID6,FFAR4,Q5NUL3,FFA4,Free fatty acid,A,Human,Cryo-EM,2.8,R,Active,100,80,0
+7XKA,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,X-ray,3.1,A,Active,99,69,0
+7Y1F,OPRK,P41145,&kappa;,Opioid,A,Human,Cryo-EM,3.3,R,Active,100,75,0
+8HK5,C5AR1,P21730,C5a1,Complement peptide,A,Human,Cryo-EM,3.0,A,Active,100,84,0
+8IY5,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,2.8,R,Active,100,71,0
+8JWY,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.3,A,Inactive,1,70,0
+8FEG,OPRK,P41145,&kappa;,Opioid,A,Human,Cryo-EM,2.5,B,Active,100,73,0
+8I95,C3AR,Q16581,C3a,Complement peptide,A,Human,Cryo-EM,2.9,C,Active,100,58,0
+8JIL,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.5,A,Active,100,79,0
+8K4N,GPR34,Q9UPC5,GPR34,A orphans,A,Human,Cryo-EM,2.8,D,Active,100,73,0
+8WC8,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,2.9,R,Active,100,81,0
+8GEA,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,68,0
+8GGE,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.5,R,Active,100,56,0
+8I7V,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.8,A,Active,100,80,0
+8JHB,FZD6,O60353,FZD6,Frizzled,F,Human,Cryo-EM,3.3,R,Active,100,47,0
+8SZI,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.5,A,Active,-,57,0
+8UO1,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.6,R,Active,100,68,0
+8X79,PI2R,P43119,IP,Prostanoid,A,Human,Cryo-EM,2.4,R,Active,100,78,0
+8Y52,BRS3,P32247,BB3,Bombesin,A,Human,Cryo-EM,2.9,R,Active,100,75,0
+9CBL,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,Cryo-EM,2.8,R,Active,100,55,0
+8IKG,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.4,R,Active,100,58,0
+8XWQ,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,4.6,R,Active,100,68,0
+8TF5,GPR6,P46095,GPR6,A orphans,A,Human,X-ray,2.1,A,Active,99,73,0
+8X0F,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.3,A,Active,-,63,0
+4IAQ,5HT1B,P28222,5-HT1B,5-Hydroxytryptamine,A,Human,X-ray,2.8,A,Inactive,16,70,0
+4PY0,P2Y12,Q9H244,P2Y12,P2Y,A,Human,X-ray,3.1,A,Active,56,83,0
+5DHG,OPRX,P41146,NOP,Opioid,A,Human,X-ray,3.0,A,Inactive,8,76,0
+5TGZ,CNR1,P21554,CB1,Cannabinoid,A,Human,X-ray,2.8,A,Inactive,7,61,0
+5TZY,FFAR1,O14842,FFA1,Free fatty acid,A,Human,X-ray,3.2,A,Active,56,91,0
+6B73,OPRK,P41145,&kappa;,Opioid,A,Human,X-ray,3.1,A,Active,100,73,0
+6D9H,AA1R,P30542,A1,Adenosine,A,Human,Cryo-EM,3.6,R,Active,100,88,0
+6HLP,NK1R,P25103,NK1,Tachykinin,A,Human,X-ray,2.2,A,Inactive,1,71,0
+6OIK,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.6,R,Active,100,60,0
+6IQL,DRD4,P51436,D4,Dopamine,A,Mouse,X-ray,3.5,A,Inactive,16,65,0
+6ORV,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,3.0,E,Active,100,61,0
+6K42,ADA2B,P18089,&alpha;2B,Adrenoceptors,A,Human,Cryo-EM,4.1,R,Active,100,60,0
+6V9S,OX1R,O43613,OX1,Orexin,A,Human,X-ray,3.5,A,Inactive,1,72,0
+7BW0,GPBAR,Q8TDU6,GPBA,Bile acid,A,Human,Cryo-EM,3.9,R,Active,100,85,0
+7CA3,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,4.5,B,Active,-,72,0
+6Z4S,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.7,A,Inactive,2,77,0
+7DTU,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,4.4,A,Intermediate,-,72,0
+7DD5,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.2,A,Inactive,-,74,0
+7EXD,5HT1F,P30939,5-HT1F,5-Hydroxytryptamine,A,Human,Cryo-EM,3.4,R,Active,100,74,0
+7EW4,S1PR3,Q99500,S1P3,Lysophospholipid (S1P),A,Human,Cryo-EM,3.2,R,Active,100,76,0
+7SHF,GP158,Q5T848,GPR158,C Orphans,C,Human,Cryo-EM,3.4,B,Inactive,-,23,0
+7P00,NK1R,P25103,NK1,Tachykinin,A,Human,Cryo-EM,2.7,R,Active,100,71,0
+7RYC,OXYR,P30559,OT,Vasopressin and oxytocin,A,Human,Cryo-EM,2.9,O,Active,100,73,0
+7TYI,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,3.3,R,Active,100,77,0
+7TUZ,GP183,P32249,GPR183,A orphans,A,Human,Cryo-EM,3.1,R,Active,100,79,0
+7VQX,VIPR2,P41587,VPAC2,VIP and PACAP,B1,Human,Cryo-EM,2.7,R,Active,100,82,0
+7X8R,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.6,R,Active,100,64,0
+7SK6,ACKR3,P25106,ACKR3,Chemokine,A,Human,Cryo-EM,4.0,A,Active,96,83,0
+7WCM,GP119,Q8TDV5,GPR119,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,2.3,R,Active,100,86,0
+7Y26,SSR2,P30874,SST2,Somatostatin,A,Human,Cryo-EM,3.3,E,Active,100,73,0
+8EFB,OPRM,P35372,&mu;,Opioid,A,Human,Cryo-EM,3.2,R,Active,100,71,0
+7YOO,NPY2R,P49146,Y2,Neuropeptide Y,A,Human,Cryo-EM,3.1,R,Active,96,79,0
+7T8X,ACM2,P08172,M2,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.2,A,Active,100,59,0
+8IBV,MTLR,O43193,motilin,Motilin,A,Human,Cryo-EM,3.2,R,Active,100,68,0
+7YM8,ADA1A,P35348,&alpha;1A,Adrenoceptors,A,Human,Cryo-EM,2.9,A,Active,100,58,0
+8F2A,CALCR,P30988,CT,Calcitonin,B1,Human,Cryo-EM,2.2,R,Active,100,78,0
+8JLZ,5HT6R,P50406,5-HT6,5-Hydroxytryptamine,A,Human,Cryo-EM,3.1,R,Active,100,61,0
+7YFD,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,3.1,R,Active,100,67,0
+8HN8,HRH4,Q9H3N8,H4,Histamine,A,Human,Cryo-EM,3.0,R,Active,100,71,0
+8IJ3,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.3,A,Active,100,80,0
+8JIT,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,2.9,R,Active,100,83,0
+8WC5,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.3,R,Active,100,78,0
+8FYX,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,2.6,R,Active,100,68,0
+8GG3,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.1,R,Active,100,68,0
+8GH0,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,4.0,R,Active,96,68,0
+8J6L,HCAR2,Q8TDS4,HCA2,Hydroxycarboxylic acid,A,Human,Cryo-EM,3.1,R,Active,100,81,0
+8KFZ,CCR8,P51685,CCR8,Chemokine,A,Human,Cryo-EM,3.3,R,Active,100,81,0
+8U4N,CXCR4,P61073,CXCR4,Chemokine,A,Human,Cryo-EM,2.7,R,Active,100,80,0
+8UNR,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,69,0
+8WRZ,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.6,R,Active,100,60,0
+8XJK,PF2R,P43088,FP,Prostanoid,A,Human,Cryo-EM,2.6,R,Active,100,80,0
+8YRG,MRGX4,Q96LA9,MRGPRX4,A orphans,A,Human,Cryo-EM,3.1,R,Active,100,74,0
+8ZR5,GP119,Q8TDV5,GPR119,"GPR18, GPR55 and GPR119",A,Human,Cryo-EM,3.3,C,Active,100,85,0
+8K6M,NPY1R,P25929,Y1,Neuropeptide Y,A,Human,Cryo-EM,3.3,D,Active,100,78,0
+9EPP,B1B1U5,B1B1U5,Rhodopsin,Opsins,A,Hasarius adansoni,Cryo-EM,4.1,R,Active,100,87,0
+8WWH,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,2.8,R,Active,100,68,0
+8YNS,MCHR1,Q99705,MCH1,Melanin-concentrating hormone,A,Human,Cryo-EM,3.3,R,Inactive,8,65,0
+9DQJ,MRGRD,Q8TDS7,MRGPRD,A orphans,A,Human,Cryo-EM,2.9,A,Active,100,79,0
+4IAR,5HT1B,P28222,5-HT1B,5-Hydroxytryptamine,A,Human,X-ray,2.7,A,Inactive,16,70,0
+4PXF,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.8,A,Active,100,93,0
+4ZWJ,OPSD,P08100,Rhodopsin,Opsins,A,Human,X-ray,3.3,A,Active,100,94,0
+5NJ6,PAR2,P55085,PAR2,Proteinase-activated,A,Human,X-ray,4.0,A,Active,56,74,0
+5X93,EDNRB,P24530,ETB,Endothelin,A,Human,X-ray,2.2,A,Inactive,3,71,0
+6FK6,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.4,A,Active,98,94,0
+6DRX,5HT2B,P41595,5-HT2B,5-Hydroxytryptamine,A,Human,X-ray,3.1,A,Intermediate,55,59,0
+6IGL,EDNRB,P24530,ETB,Endothelin,A,Human,X-ray,2.7,A,Inactive,3,70,0
+6ME6,MTR1B,P49286,MT2,Melatonin,A,Human,X-ray,2.8,B,Inactive,1,78,0
+6RZ5,CLTR1,Q9Y271,CysLT1,Leukotriene,A,Human,X-ray,2.5,B,Active,56,84,0
+6TO7,OX1R,O43613,OX1,Orexin,A,Human,X-ray,2.3,A,Inactive,1,71,0
+6OS0,AGTR1,P30556,AT1,Angiotensin,A,Human,X-ray,2.9,A,Active,93,85,0
+6UO9,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,4.8,B,Intermediate,-,73,0
+7BZ2,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.8,R,Active,100,69,0
+6XBL,SMO,Q99835,SMO,Frizzled,F,Human,Cryo-EM,3.9,R,Active,100,59,0
+6Z8N,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.8,A,Intermediate,16,80,0
+7E2X,5HT1A,P08908,5-HT1A,5-Hydroxytryptamine,A,Human,Cryo-EM,3.0,R,Active,100,66,0
+7M3F,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,2.8,B,Active,-,75,0
+7LD3,AA1R,P30542,A1,Adenosine,A,Human,Cryo-EM,3.2,R,Active,100,88,0
+7RMH,NK1R,P25103,NK1,Tachykinin,A,Human,Cryo-EM,3.1,R,Active,100,70,0
+7F8X,CCKAR,P32238,CCK1,Cholecystokinin,A,Human,X-ray,3.0,A,Inactive,1,66,0
+7RKM,US28,P69332,US28,Unclassified,A,strain AD169,Cryo-EM,3.5,R,Active,100,83,0
+7EJ8,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,Cryo-EM,3.0,R,Active,100,57,0
+7SBF,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,2.9,R,Active,100,71,0
+7WBJ,VIPR2,P41587,VPAC2,VIP and PACAP,B1,Human,Cryo-EM,3.4,R,Active,100,82,0
+7WV9,CNR1,P21554,CB1,Cannabinoid,A,Human,Cryo-EM,3.4,R,Active,100,61,0
+7Y12,MRGRD,Q8TDS7,MRGPRD,A orphans,A,Human,Cryo-EM,3.1,R,Active,100,82,0
+7XMS,SSR4,P31391,SST4,Somatostatin,A,Human,Cryo-EM,2.9,R,Active,100,71,0
+7T9N,TSHR,P16473,TSH,Glycoprotein hormone,A,Human,Cryo-EM,2.9,R,Active,100,73,0
+8UNV,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,69,0
+8WW2,GPR3,P46089,GPR3,A orphans,A,Human,Cryo-EM,2.8,R,Active,100,81,0
+8XOF,GPER1,Q99527,GPER,Estrogen (G protein-coupled),A,Human,Cryo-EM,2.6,R,Active,100,71,0
+8XZF,APJ,P35414,apelin,Apelin,A,Human,Cryo-EM,3.0,R,Active,100,80,0
+9AVL,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,3.8,R,Active,-,76,0
+8YN5,HRH3,Q9Y5N1,H3,Histamine,A,Human,Cryo-EM,2.7,R,Active,100,65,0
+8JEI,HCAR3,P49019,HCA3,Hydroxycarboxylic acid,A,Human,Cryo-EM,2.7,A,Active,100,74,0
+8X0E,GRM5,P41594,mGlu5,Metabotropic glutamate,C,Human,Cryo-EM,3.4,A,Active,-,63,0
+4K5Y,CRFR1,,CRF1,Corticotropin-releasing factor,B1,Human,X-ray,3.0,C,Inactive,16,60,0
+4RWA,OPRD,P41143,&delta;,Opioid,A,Human,X-ray,3.3,A,Inactive,8,77,0
+5IU4,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,1.7,A,Inactive,1,71,0
+5TE3,OPSD,P02699,Rhodopsin,Opsins,A,Bovine,X-ray,2.7,A,Active,98,94,0
+5W0P,OPSD,P08100,Rhodopsin,Opsins,A,Human,X-ray,3.0,D,Active,100,93,0
+5WB2,Q80KM9,Q80KM9,US28,Unclassified,A,strain AD169,X-ray,3.5,A,Active,100,82,0
+6NBI,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,4.0,R,Active,100,62,0
+6TP3,OX1R,O43613,OX1,Orexin,A,Human,X-ray,3.0,A,Inactive,1,74,0
+6OMM,FPR2,P25090,FPR2/ALX,Formylpeptide,A,Human,Cryo-EM,3.2,R,Active,100,85,0
+7C7S,GABR2,O75899,GABAB2,GABAB,C,Human,Cryo-EM,2.9,B,Inactive,-,71,0
+7CFN,GPBAR,Q8TDU6,GPBA,Bile acid,A,Human,Cryo-EM,3.0,R,Active,100,83,0
+7BVQ,ADRB1,P08588,&beta;1,Adrenoceptors,A,Human,X-ray,2.5,A,Inactive,0,60,0
+6ZA8,NTR1,P20789,NTS1,Neurotensin,A,Rat,X-ray,2.7,A,Intermediate,16,78,0
+7E33,5HT1E,P28566,5-HT1E,5-Hydroxytryptamine,A,Human,Cryo-EM,2.9,R,Active,100,70,0
+7JHJ,Q3KSP2,Q3KSP2,BILF1,Unclassified,A,strain GD1,Cryo-EM,3.2,R,Active,100,89,0
+7EVM,GLP1R,P43220,GLP-1,Glucagon,B1,Human,Cryo-EM,2.5,R,Active,100,61,0
+7EW2,S1PR3,Q99500,S1P3,Lysophospholipid (S1P),A,Human,Cryo-EM,3.1,R,Active,100,77,0
+7EWL,GP158,Q5T848,GPR158,C Orphans,C,Human,Cryo-EM,3.5,A,Inactive,-,41,0
+7VV0,MRGX2,Q96LB1,MRGPRX2,A orphans,A,Human,Cryo-EM,3.5,R,Active,98,80,0
+7B6W,ADA1B,P35368,&alpha;1B,Adrenoceptors,A,Human,X-ray,2.9,A,Inactive,1,51,0
+7SIM,CASR,P41180,CaS,Calcium-sensing,C,Human,Cryo-EM,2.7,A,Active,-,72,0
+7TD0,LPAR1,Q92633,LPA1,Lysophospholipid (LPA),A,Human,Cryo-EM,2.8,R,Active,100,80,0
+7EJK,ADA2A,P08913,&alpha;2A,Adrenoceptors,A,Human,Cryo-EM,3.4,R,Active,100,55,0
+7U2L,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,3.2,D,Active,100,71,0
+7V68,ACM4,P08173,M4,Acetylcholine (muscarinic),A,Human,Cryo-EM,3.4,R,Active,100,58,0
+7WKD,TRFR,P34981,TRH1,Thyrotropin-releasing hormone,A,Human,Cryo-EM,3.0,R,Active,100,66,0
+8DCR,ADRB1,P07700,&beta;1,Adrenoceptors,A,Wild turkey,Cryo-EM,2.6,R,Active,100,57,0
+7VVN,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,3.8,R,Active,100,51,0
+7T2G,OPRM,P42866,&mu;,Opioid,A,Mouse,Cryo-EM,2.5,R,Active,100,70,0
+7WY8,AGRL3,Q80TS3,ADGRL3,ADGRL,B2,Mouse,Cryo-EM,2.8,R,Active,100,17,0
+8DWG,MRGX1,Q96LB2,MRGPRX1,A orphans,A,Human,Cryo-EM,2.7,R,Active,100,77,0
+7Y65,C5AR1,P21730,C5a1,Complement peptide,A,Human,Cryo-EM,3.2,D,Active,100,81,0
+8GY7,ACTHR,Q01718,MC2,Melanocortin,A,Human,Cryo-EM,3.3,R,Active,100,92,0
+8FU6,GLR,P47871,glucagon,Glucagon,B1,Human,Cryo-EM,2.9,R,Active,100,72,0
+8GUT,CNR2,P34972,CB2,Cannabinoid,A,Human,Cryo-EM,3.0,R,Active,100,81,0
+7Y35,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.9,R,Active,100,63,0
+8IY6,EDNRB,P24530,ETB,Endothelin,A,Human,Cryo-EM,3.1,R,Active,83,66,0
+8JCZ,GRM2,Q14416,mGlu2,Metabotropic glutamate,C,Human,Cryo-EM,3.0,2,Inactive,-,87,0
+8GDB,PE2R4,P35408,EP4,Prostanoid,A,Human,Cryo-EM,3.1,R,Active,100,58,0
+8IA2,C5AR1,P21730,C5a1,Complement peptide,A,Human,Cryo-EM,3.2,A,Active,100,84,0
+8JMT,AGRL3,Q9HAR2,ADGRL3,ADGRL,B2,Human,Cryo-EM,3.3,A,Inactive,0,16,0
+8PWN,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.4,A,Inactive,1,72,0
+8WC6,TAAR1,Q923Y8,TA1,Trace amine,A,Mouse,Cryo-EM,3.2,R,Active,100,80,0
+8GE5,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.2,R,Active,100,69,0
+8GG6,ADRB2,P07550,&beta;2,Adrenoceptors,A,Human,Cryo-EM,3.3,R,Active,100,68,0
+8IEI,GP156,Q8NFN8,GPR156,C Orphans,C,Human,Cryo-EM,2.6,A,Inactive,-,34,0
+8JBG,NK3R,P29371,NK3,Tachykinin,A,Human,Cryo-EM,2.8,B,Active,100,60,0
+8RLN,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,2.4,A,Inactive,1,72,0
+8UHB,TAAR1,Q96RJ0,TA1,Trace amine,A,Human,Cryo-EM,3.4,A,Active,100,93,0
+8WDT,AA2AR,P29274,A2A,Adenosine,A,Human,X-ray,3.3,A,Active,69,72,0
+8XIQ,SSR3,P32745,SST3,Somatostatin,A,Human,Cryo-EM,2.7,A,Active,100,69,0
+8YKX,SUCR1,Q9BXA5,succinate,Succinate,A,Human,Cryo-EM,2.7,R,Active,100,84,0
+8ZQE,GPR15,P49685,GPR15,A orphans,A,Human,Cryo-EM,2.9,R,Active,100,77,0
+8K4O,Q76SF8,Q76SF8,ORF74,Unclassified,A,HHV-8,Cryo-EM,3.0,E,Active,100,97,0
+9JR2,PTH1R,Q03431,PTH1,Parathyroid hormone,B1,Human,Cryo-EM,2.8,R,Active,100,59,0
+9AST,XCR1,P46094,XCR1,Chemokine,A,Human,Cryo-EM,3.1,R,Active,100,85,0

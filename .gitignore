@@ -68,3 +68,11 @@ data/block_c/13_structures/**/*.cif
 # manifest is committed too, so the files can be re-pulled and re-measured.
 block_d_figure_data.zip
 data/block_d/10_structures/**/*.cif
+
+# scrape artefact, 2026-09-11
+gpdb_coup.html
+# Group 0 mmCIF cache, regenerable, 1-3 GB
+redo/cache/structures/
+
+# the /loop scheduler's own state, not project content
+.claude/scheduled_tasks.lock

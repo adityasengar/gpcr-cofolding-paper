@@ -1,0 +1,8 @@
+step,rule,n_remaining,n_active,n_inactive,active_to_inactive,n_receptors,n_receptors_both_states
+F0,"Class A, GPCRdb state in {Active, Inactive}, receptor not on panel48",726,611,115,5.31,147,25
+F0b,NPxxY axis defined: Tyr at BOTH 5.58 and 7.53 (g0_anchor_conservation.csv),514,419,95,4.41,110,20
+F1,resolution reported in the snapshot,514,419,95,4.41,110,20
+F2,"resolution <= 3.5 A (khaleq2026hyaline p.12 precedent, tightened)",483,395,88,4.49,109,20
+F3,GPCRdb state label not contradicted by the entry's own ligand pharmacology,434,373,61,6.11,106,17
+F4,Active label not defined solely by arrestin coupling,433,372,61,6.10,106,17
+F5,"human ortholog only (SENSITIVITY ARM, not the primary rule)",385,332,53,6.26,100,15

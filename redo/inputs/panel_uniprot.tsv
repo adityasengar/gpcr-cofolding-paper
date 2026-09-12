@@ -1,0 +1,91 @@
+# UniProt accessions for every GPCRdb protein appearing in panel_systems.csv.
+# Retrieved 2026-09-11 from https://rest.uniprot.org/uniprotkb/search (query by entry name).
+# NOTE: GPCRdb uses the legacy entry name crfr1_human; UniProt has renamed it CRHR1_HUMAN (P34998).
+# That row was fetched by gene name and appended by hand; it is the only row not returned by the id: query.
+Entry	Entry Name	Protein names	Gene Names (primary)	Organism	Organism (ID)	Length
+B1B1U5	B1B1U5_9ARAC	Kumopsin1	HaRh1	Hasarius adansoni	243517	372
+O43614	OX2R_HUMAN	Orexin receptor type 2 (Ox-2-R) (Ox2-R) (Ox2R) (Hypocretin receptor type 2)	HCRTR2	Homo sapiens (Human)	9606	444
+O60353	FZD6_HUMAN	Frizzled-6 (Fz-6) (hFz6)	FZD6	Homo sapiens (Human)	9606	706
+O75084	FZD7_HUMAN	Frizzled-7 (Fz-7) (hFz7) (FzE3)	FZD7	Homo sapiens (Human)	9606	574
+P02699	OPSD_BOVIN	Rhodopsin	RHO	Bos taurus (Bovine)	9913	348
+P07550	ADRB2_HUMAN	Beta-2 adrenergic receptor (Beta-2 adrenoreceptor) (Beta-2 adrenoceptor)	ADRB2	Homo sapiens (Human)	9606	413
+P07700	ADRB1_MELGA	Beta-1 adrenergic receptor (Beta-1 adrenoreceptor) (Beta-1 adrenoceptor) (Beta-T)	ADRB1	Meleagris gallopavo (Wild turkey)	9103	483
+P08100	OPSD_HUMAN	Rhodopsin (Opsin-2)	RHO	Homo sapiens (Human)	9606	348
+P08172	ACM2_HUMAN	Muscarinic acetylcholine receptor M2	CHRM2	Homo sapiens (Human)	9606	466
+P08173	ACM4_HUMAN	Muscarinic acetylcholine receptor M4	CHRM4	Homo sapiens (Human)	9606	479
+P08483	ACM3_RAT	Muscarinic acetylcholine receptor M3	Chrm3	Rattus norvegicus (Rat)	10116	589
+P08588	ADRB1_HUMAN	Beta-1 adrenergic receptor (Beta-1 adrenoreceptor) (Beta-1 adrenoceptor)	ADRB1	Homo sapiens (Human)	9606	477
+P08913	ADA2A_HUMAN	Alpha-2A adrenergic receptor (Alpha-2 adrenergic receptor subtype C10) (Alpha-2A adrenoreceptor) (Alpha-2A adrenoceptor) (Alpha-2AAR)	ADRA2A	Homo sapiens (Human)	9606	465
+P11229	ACM1_HUMAN	Muscarinic acetylcholine receptor M1	CHRM1	Homo sapiens (Human)	9606	460
+P14416	DRD2_HUMAN	Dopamine receptor D2 (Dopamine D2 receptor)	DRD2	Homo sapiens (Human)	9606	443
+P16473	TSHR_HUMAN	Thyrotropin receptor (Thyroid-stimulating hormone receptor) (TSH-R)	TSHR	Homo sapiens (Human)	9606	764
+P20309	ACM3_HUMAN	Muscarinic acetylcholine receptor M3	CHRM3	Homo sapiens (Human)	9606	590
+P20789	NTR1_RAT	Neurotensin receptor type 1 (NT-R-1) (NTR1) (High-affinity levocabastine-insensitive neurotensin receptor) (NTRH)	Ntsr1	Rattus norvegicus (Rat)	10116	424
+P21453	S1PR1_HUMAN	Sphingosine 1-phosphate receptor 1 (S1P receptor 1) (S1P1) (Endothelial differentiation G protein-coupled receptor 1) (Sphingosine 1-phosphate receptor Edg-1) (S1P receptor Edg-1) (CD antigen CD363)	S1PR1	Homo sapiens (Human)	9606	382
+P21554	CNR1_HUMAN	Cannabinoid receptor 1 (CB-R) (CB1) (CANN6)	CNR1	Homo sapiens (Human)	9606	472
+P21730	C5AR1_HUMAN	C5a anaphylatoxin chemotactic receptor 1 (C5a anaphylatoxin chemotactic receptor) (C5a-R) (C5aR) (CD antigen CD88)	C5AR1	Homo sapiens (Human)	9606	350
+P21731	TA2R_HUMAN	Thromboxane A2 receptor (TXA2-R) (Prostanoid TP receptor)	TBXA2R	Homo sapiens (Human)	9606	343
+P21917	DRD4_HUMAN	Dopamine receptor D4 (D(2C) dopamine receptor) (Dopamine D4 receptor)	DRD4	Homo sapiens (Human)	9606	419
+P22888	LSHR_HUMAN	Lutropin-choriogonadotropic hormone receptor (LH/CG-R) (Luteinizing hormone receptor) (LHR) (LSH-R)	LHCGR	Homo sapiens (Human)	9606	699
+P23945	FSHR_HUMAN	Follicle-stimulating hormone receptor (FSH-R) (Follitropin receptor)	FSHR	Homo sapiens (Human)	9606	695
+P24530	EDNRB_HUMAN	Endothelin receptor type B (ET-B) (ET-BR) (Endothelin receptor non-selective type)	EDNRB	Homo sapiens (Human)	9606	442
+P25021	HRH2_HUMAN	Histamine H2 receptor (H2R) (HH2R) (Gastric receptor I)	HRH2	Homo sapiens (Human)	9606	359
+P25025	CXCR2_HUMAN	C-X-C chemokine receptor type 2 (CXC-R2) (CXCR-2) (CDw128b) (GRO/MGSA receptor) (High affinity interleukin-8 receptor B) (IL-8R B) (IL-8 receptor type 2) (CD antigen CD182)	CXCR2	Homo sapiens (Human)	9606	360
+P25101	EDNRA_HUMAN	Endothelin-1 receptor (Endothelin receptor type A) (ET-A) (ETA-R) (hET-AR)	EDNRA	Homo sapiens (Human)	9606	427
+P25103	NK1R_HUMAN	Substance-P receptor (SPR) (NK-1 receptor) (NK-1R) (Tachykinin receptor 1)	TACR1	Homo sapiens (Human)	9606	407
+P25929	NPY1R_HUMAN	Neuropeptide Y receptor type 1 (NPY1-R)	NPY1R	Homo sapiens (Human)	9606	384
+P28222	5HT1B_HUMAN	5-hydroxytryptamine receptor 1B (5-HT-1B) (5-HT1B) (S12) (Serotonin 1D beta receptor) (5-HT-1D-beta) (Serotonin receptor 1B)	HTR1B	Homo sapiens (Human)	9606	390
+P28223	5HT2A_HUMAN	5-hydroxytryptamine receptor 2A (5-HT-2) (5-HT-2A) (Serotonin receptor 2A)	HTR2A	Homo sapiens (Human)	9606	471
+P28335	5HT2C_HUMAN	5-hydroxytryptamine receptor 2C (5-HT-2C) (5-HT2C) (5-HTR2C) (5-hydroxytryptamine receptor 1C) (5-HT-1C) (5-HT1C) (Serotonin receptor 2C)	HTR2C	Homo sapiens (Human)	9606	458
+P29274	AA2AR_HUMAN	Adenosine receptor A2a	ADORA2A	Homo sapiens (Human)	9606	412
+P30542	AA1R_HUMAN	Adenosine receptor A1	ADORA1	Homo sapiens (Human)	9606	326
+P30550	GRPR_HUMAN	Gastrin-releasing peptide receptor (GRP-R) (GRP-preferring bombesin receptor)	GRPR	Homo sapiens (Human)	9606	384
+P30556	AGTR1_HUMAN	Type-1 angiotensin II receptor (AT1AR) (AT1BR) (Angiotensin II type-1 receptor) (AT1 receptor)	AGTR1	Homo sapiens (Human)	9606	359
+P30559	OXYR_HUMAN	Oxytocin receptor (OT-R)	OXTR	Homo sapiens (Human)	9606	389
+P30874	SSR2_HUMAN	Somatostatin receptor type 2 (SS-2-R) (SS2-R) (SS2R) (SST2) (SRIF-1)	SSTR2	Homo sapiens (Human)	9606	369
+P30989	NTR1_HUMAN	Neurotensin receptor type 1 (NT-R-1) (NTR1) (High-affinity levocabastine-insensitive neurotensin receptor) (NTRH)	NTSR1	Homo sapiens (Human)	9606	418
+P30993	C5AR1_MOUSE	C5a anaphylatoxin chemotactic receptor 1 (C5a anaphylatoxin chemotactic receptor) (C5a-R) (C5aR) (CD antigen CD88)	C5ar1	Mus musculus (Mouse)	10090	351
+P31356	OPSD_TODPA	Rhodopsin	RHO	Todarodes pacificus (Japanese flying squid) (Ommastrephes pacificus)	6637	448
+P32238	CCKAR_HUMAN	Cholecystokinin receptor type A (CCK-A receptor) (CCK-AR) (Cholecystokinin-1 receptor) (CCK1-R)	CCKAR	Homo sapiens (Human)	9606	428
+P32300	OPRD_MOUSE	Delta-type opioid receptor (D-OR-1) (DOR-1) (K56) (MSL-2)	Oprd1	Mus musculus (Mouse)	10090	372
+P34972	CNR2_HUMAN	Cannabinoid receptor 2 (CB-2) (CB2) (hCB2) (CX5)	CNR2	Homo sapiens (Human)	9606	360
+P34998	CRHR1_HUMAN	Corticotropin-releasing hormone receptor 1 (CRH-R-1) (CRH-R1) (Corticotropin-releasing factor receptor 1) (CRF-R-1) (CRF-R1) (CRFR-1)	CRHR1	Homo sapiens (Human)	9606	415
+P34998	CRHR1_HUMAN	Corticotropin-releasing hormone receptor 1 (CRH-R-1) (CRH-R1) (Corticotropin-releasing factor receptor 1) (CRF-R-1) (CRF-R1) (CRFR-1)	CRHR1	Homo sapiens (Human)	9606	415
+P35348	ADA1A_HUMAN	Alpha-1A adrenergic receptor (Alpha-1A adrenoreceptor) (Alpha-1A adrenoceptor) (Alpha-1C adrenergic receptor) (Alpha-adrenergic receptor 1c)	ADRA1A	Homo sapiens (Human)	9606	466
+P35367	HRH1_HUMAN	Histamine H1 receptor (H1-R) (H1R) (HH1R)	HRH1	Homo sapiens (Human)	9606	487
+P35372	OPRM_HUMAN	Mu-type opioid receptor (M-OR-1) (MOR-1) (Mu opiate receptor) (Mu opioid receptor) (MOP) (hMOP)	OPRM1	Homo sapiens (Human)	9606	400
+P35408	PE2R4_HUMAN	Prostaglandin E2 receptor EP4 subtype (PGE receptor EP4 subtype) (PGE2 receptor EP4 subtype) (Prostanoid EP4 receptor)	PTGER4	Homo sapiens (Human)	9606	488
+P35414	APJ_HUMAN	Apelin receptor (Angiotensin receptor-like 1) (G protein-coupled receptor APJ) (G protein-coupled receptor HG11)	APLNR	Homo sapiens (Human)	9606	380
+P35462	DRD3_HUMAN	Dopamine receptor D3 (Dopamine D3 receptor)	DRD3	Homo sapiens (Human)	9606	400
+P41143	OPRD_HUMAN	Delta-type opioid receptor (D-OR-1) (DOR-1)	OPRD1	Homo sapiens (Human)	9606	372
+P41145	OPRK_HUMAN	Kappa-type opioid receptor (K-OR-1) (KOR-1)	OPRK1	Homo sapiens (Human)	9606	380
+P41146	OPRX_HUMAN	Nociceptin receptor (Kappa-type 3 opioid receptor) (KOR-3) (Orphanin FQ receptor)	OPRL1	Homo sapiens (Human)	9606	370
+P41597	CCR2_HUMAN	C-C chemokine receptor type 2 (C-C CKR-2) (CC-CKR-2) (CCR-2) (CCR2) (Monocyte chemoattractant protein 1 receptor) (MCP-1-R) (CD antigen CD192)	CCR2	Homo sapiens (Human)	9606	374
+P42866	OPRM_MOUSE	Mu-type opioid receptor (M-OR-1) (MOR-1)	Oprm1	Mus musculus (Mouse)	10090	398
+P43220	GLP1R_HUMAN	Glucagon-like peptide 1 receptor (GLP-1 receptor) (GLP-1-R) (GLP-1R)	GLP1R	Homo sapiens (Human)	9606	463
+P46095	GPR6_HUMAN	G protein-coupled receptor 6 (Sphingosine 1-phosphate receptor GPR6)	GPR6	Homo sapiens (Human)	9606	362
+P47871	GLR_HUMAN	Glucagon receptor (GL-R)	GCGR	Homo sapiens (Human)	9606	477
+P47898	5HT5A_HUMAN	5-hydroxytryptamine receptor 5A (5-HT-5) (5-HT-5A) (5-HT5A) (Serotonin receptor 5A)	HTR5A	Homo sapiens (Human)	9606	357
+P48039	MTR1A_HUMAN	Melatonin receptor type 1A (Mel-1A-R) (Mel1a receptor)	MTNR1A	Homo sapiens (Human)	9606	350
+P48960	AGRE5_HUMAN	Adhesion G protein-coupled receptor E5 (Leukocyte antigen CD97) (CD antigen CD97) [Cleaved into: Adhesion G protein-coupled receptor E5 subunit alpha; Adhesion G protein-coupled receptor E5 subunit beta]	ADGRE5	Homo sapiens (Human)	9606	835
+P49146	NPY2R_HUMAN	Neuropeptide Y receptor type 2 (NPY2-R) (NPY-Y2 receptor) (Y2 receptor)	NPY2R	Homo sapiens (Human)	9606	381
+P49286	MTR1B_HUMAN	Melatonin receptor type 1B (Mel-1B-R) (Mel1b receptor)	MTNR1B	Homo sapiens (Human)	9606	362
+P49682	CXCR3_HUMAN	C-X-C chemokine receptor type 3 (CXC-R3) (CXCR-3) (CKR-L2) (G protein-coupled receptor 9) (Interferon-inducible protein 10 receptor) (IP-10 receptor) (CD antigen CD183)	CXCR3	Homo sapiens (Human)	9606	368
+P51436	DRD4_MOUSE	Dopamine receptor D4 (D(2C) dopamine receptor) (Dopamine D4 receptor)	Drd4	Mus musculus (Mouse)	10090	387
+P51681	CCR5_HUMAN	C-C chemokine receptor type 5 (C-C CKR-5) (CC-CKR-5) (CCR-5) (CCR5) (CHEMR13) (HIV-1 fusion coreceptor) (CD antigen CD195)	CCR5	Homo sapiens (Human)	9606	352
+P51684	CCR6_HUMAN	C-C chemokine receptor type 6 (C-C CKR-6) (CC-CKR-6) (CCR-6) (Chemokine receptor-like 3) (CKR-L3) (DRY6) (G protein-coupled receptor 29) (GPR-CY4) (GPRCY4) (LARC receptor) (CD antigen CD196)	CCR6	Homo sapiens (Human)	9606	374
+P51685	CCR8_HUMAN	C-C chemokine receptor type 8 (C-C CKR-8) (CC-CKR-8) (CCR-8) (CC chemokine receptor CHEMR1) (CMKBRL2) (Chemokine receptor-like 1) (CKR-L1) (GPR-CY6) (GPRCY6) (TER1) (CD antigen CDw198)	CCR8	Homo sapiens (Human)	9606	355
+P56726	SMO_MOUSE	Protein smoothened	Smo	Mus musculus (Mouse)	10090	793
+P61073	CXCR4_HUMAN	C-X-C chemokine receptor type 4 (CXC-R4) (CXCR-4) (FB22) (Fusin) (HM89) (LCR1) (Leukocyte-derived seven transmembrane domain receptor) (LESTR) (Lipopolysaccharide-associated protein 3) (LAP-3) (LPS-associated protein 3) (NPYRL) (Stromal cell-derived factor 1 receptor) (SDF-1 receptor) (CD antigen CD184)	CXCR4	Homo sapiens (Human)	9606	352
+Q03431	PTH1R_HUMAN	Parathyroid hormone/parathyroid hormone-related peptide receptor (PTH/PTHrP type I receptor) (PTH/PTHr receptor) (Parathyroid hormone 1 receptor) (PTH1 receptor)	PTH1R	Homo sapiens (Human)	9606	593
+Q15722	LT4R1_HUMAN	Leukotriene B4 receptor 1 (LTB4-R 1) (LTB4-R1) (Chemoattractant receptor-like 1) (G protein-coupled receptor 16) (P2Y purinoceptor 7) (P2Y7)	LTB4R	Homo sapiens (Human)	9606	352
+Q16602	CALRL_HUMAN	Calcitonin gene-related peptide type 1 receptor (CGRP type 1 receptor) (Calcitonin receptor-like receptor) (CRLR)	CALCRL	Homo sapiens (Human)	9606	461
+Q92633	LPAR1_HUMAN	Lysophosphatidic acid receptor 1 (LPA receptor 1) (LPA-1) (Lysophosphatidic acid receptor Edg-2)	LPAR1	Homo sapiens (Human)	9606	364
+Q92847	GHSR_HUMAN	Growth hormone secretagogue receptor type 1 (GHS-R) (GH-releasing peptide receptor) (GHRP) (Ghrelin receptor)	GHSR	Homo sapiens (Human)	9606	366
+Q99705	MCHR1_HUMAN	Melanin-concentrating hormone receptor 1 (MCH receptor 1) (MCH-R1) (MCHR-1) (G protein-coupled receptor 24) (MCH-1R) (MCH1R) (MCHR) (SLC-1) (Somatostatin receptor-like protein)	MCHR1	Homo sapiens (Human)	9606	353
+Q99835	SMO_HUMAN	Protein smoothened (Protein Gx)	SMO	Homo sapiens (Human)	9606	787
+Q9H228	S1PR5_HUMAN	Sphingosine 1-phosphate receptor 5 (S1P receptor 5) (S1P5) (Endothelial differentiation G protein-coupled receptor 8) (Sphingosine 1-phosphate receptor Edg-8) (S1P receptor Edg-8)	S1PR5	Homo sapiens (Human)	9606	398
+Q9ULV1	FZD4_HUMAN	Frizzled-4 (Fz-4) (hFz4) (FzE4) (CD antigen CD344)	FZD4	Homo sapiens (Human)	9606	537
+Q9Y2T5	GPR52_HUMAN	G protein-coupled receptor 52	GPR52	Homo sapiens (Human)	9606	361
+Q9Y5N1	HRH3_HUMAN	Histamine H3 receptor (H3R) (HH3R) (G protein-coupled receptor 97)	HRH3	Homo sapiens (Human)	9606	445
+Q9Y5Y4	PD2R2_HUMAN	Prostaglandin D2 receptor 2 (Chemoattractant receptor-homologous molecule expressed on Th2 cells) (G protein-coupled receptor 44) (CD antigen CD294)	PTGDR2	Homo sapiens (Human)	9606	395

@@ -1,0 +1,22 @@
+construct	family	accession	len	rule	alpha5_26_supplied	sha256
+R6a_da5	Gs	P63092	368	full subunit, CGN G.H5 deleted (1..L-26)	(none)	7c75cc25b56cb2dac657baecbcc2a034e87e56c3f39fae2e9c982319927bde90
+R6b_a5perm	Gs	P63092	394	full subunit, last 26 replaced by a seeded permutation of itself	RRQQIYLHICMEETRRLNVDDLFNRI	770f480e689a720fa093ef2d3fa0661a1396d7f5a004b4fc9fc50012f03f6a7f
+R6c_a5polyA	Gs	P63092	394	full subunit, last 26 replaced by poly-Ala	AAAAAAAAAAAAAAAAAAAAAAAAAA	fac2a8d031178c96917df0751101baccccece479dba9054462893f29d6f4b0d1
+R6a_da5	Gi1	P63096	328	full subunit, CGN G.H5 deleted (1..L-26)	(none)	9e30e74d599d9fa771b539d49633e2652f1d97a9517daacc4fb208fab9a0233d
+R6b_a5perm	Gi1	P63096	354	full subunit, last 26 replaced by a seeded permutation of itself	FQKVVVTNFVNDLLKDKCADNGIITF	6caa3d165fb3e57cf68c236aacb9a18a6cb279d3648b0a5fbd98da2a02e02968
+R6c_a5polyA	Gi1	P63096	354	full subunit, last 26 replaced by poly-Ala	AAAAAAAAAAAAAAAAAAAAAAAAAA	346aa993e89543017bf5325a4e558b28f1620b685e7512b8dcdf440f596927d7
+R6a_da5	Gq	P50148	333	full subunit, CGN G.H5 deleted (1..L-26)	(none)	b596d3ee285fb9fe2504c944ec3dce54567c45f2169ae66f5d7f86977de646c0
+R6b_a5perm	Gq	P50148	359	full subunit, last 26 replaced by a seeded permutation of itself	ATDNTEQLNEAVKFFYVLKNILLIVR	b507f1744bde7645a27830ee67b08ea930ead2ebe38528877570b7e21fc4dfa7
+R6c_a5polyA	Gq	P50148	359	full subunit, last 26 replaced by poly-Ala	AAAAAAAAAAAAAAAAAAAAAAAAAA	7c8634d26dc275054a2455e9a52085ed75a7528099d6233e566e31de9d12da41
+R6a_da5	G13	Q14344	351	full subunit, CGN G.H5 deleted (1..L-26)	(none)	96b40bcc4c8e385bdd16b669f95951597b4e04b73c258f80d4d0aca7c0b08c92
+R6b_a5perm	G13	Q14344	377	full subunit, last 26 replaced by a seeded permutation of itself	VLVILDNNEDLKTFRLTMLDQIRHKQ	5c3fe038ba6d88fe6a554fce643933622b9386d52622b132f1d9f7f4a5a239c2
+R6c_a5polyA	G13	Q14344	377	full subunit, last 26 replaced by poly-Ala	AAAAAAAAAAAAAAAAAAAAAAAAAA	6ff6904d7038e4216bc85ca9947cd2da371ff5e0dd9623acc22ee12dace2a832
+R6a_da5	Gt1	P11488	324	full subunit, CGN G.H5 deleted (1..L-26)	(none)	b6f08c45cad4f4e6bd72e9de8103311800ce10ec520e4b8fa76485d331108de1
+R6b_a5perm	Gt1	P11488	350	full subunit, last 26 replaced by a seeded permutation of itself	DVVNFKFEKDNTCGIDQITLFAVKLI	a61fae37f213a4c4632d4da9945e03d796888cd090729b400fc3ccdd3ea18cb7
+R6c_a5polyA	Gt1	P11488	350	full subunit, last 26 replaced by poly-Ala	AAAAAAAAAAAAAAAAAAAAAAAAAA	71e15ba8beae45239559a2f6fac1cf1cdf63337de4aca761204d0d676e4f1bf1
+R6a_da5	Gi3	P08754	328	full subunit, CGN G.H5 deleted (1..L-26)	(none)	d1518b6c4a99cca1d3e60112feed4f7308bbecf35083bf7ad1305b725e63a603
+R6b_a5perm	Gi3	P08754	354	full subunit, last 26 replaced by a seeded permutation of itself	DILNANQDYVCKFVVGTFLEKVNIKT	16830343462a56a05a7fc33f31d5adf751dd108f65c1ac0d885f3b4b8b89ac5f
+R6c_a5polyA	Gi3	P08754	354	full subunit, last 26 replaced by poly-Ala	AAAAAAAAAAAAAAAAAAAAAAAAAA	2a4b0d53d0378be55565db240a0df39000482feda8c735e012e72f2900c56d68
+R6a_da5	Go	P09471	328	full subunit, CGN G.H5 deleted (1..L-26)	(none)	2b951794efb82c9b1f9bde193882283fd0c8f5efcc3703b9a3fe8e6b4d4dbb73
+R6b_a5perm	Go	P09471	354	full subunit, last 26 replaced by a seeded permutation of itself	TDIINGIFNAIVYTVCRQNNDLVLAG	9d59dfcdc64a11da10e34e1d324f5a50c8c0b7ec769257ebfa932a9dc7b27664
+R6c_a5polyA	Go	P09471	354	full subunit, last 26 replaced by poly-Ala	AAAAAAAAAAAAAAAAAAAAAAAAAA	24d43f151c3f5cb4d2cdfe3203f0c2f194dd5a66e34ecef5daf3643d1747609a

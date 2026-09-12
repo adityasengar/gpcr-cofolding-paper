@@ -1,0 +1,5 @@
+experiment_id,old_slug,source_branch,description,hpc_output_root,backbones,receptors_covered,state_claim,n_predictions_at_scaffold,notes
+# Filled at commit 14 (M2) by scorer.rerun::build_experiment_ledger walking
+# /hpc/scratch/sengaad1/subsampling/outputs/**. Old slugs (G1..G9, W2..W7,
+# X1, A1, E3..E8) are inherited verbatim in old_slug; experiment_id gets a
+# descriptive rename with human review.

@@ -1,0 +1,80 @@
+{
+  "question": "does model confidence separate correct from incorrect state calls?",
+  "prereg_id": "P7",
+  "ground_truth": "rmsd_to_active_ref < rmsd_to_inactive_ref",
+  "predicate": "block_a `active` column (class A: npxxy AND tilt; B/F: tilt alone)",
+  "exclusions_applied": [
+    "excl_E1",
+    "excl_E2"
+  ],
+  "exclusions_deliberately_not_applied": [
+    "excl_E3*",
+    "excl_E4",
+    "excl_E5",
+    "excl_any"
+  ],
+  "n_rows": 7486,
+  "n_rows_including_forced_inactive": 7886,
+  "forced_inactive_receptors": [
+    "EDNRB",
+    "GRPR"
+  ],
+  "n_receptors": 38,
+  "n_clusters": 24,
+  "overall_accuracy": 0.9418915308576008,
+  "bootstrap": {
+    "unit": "cluster",
+    "resamples": 10000,
+    "seed": 20260912
+  },
+  "results": {
+    "plddt_mean": {
+      "pooled_auc": 0.5780332780709347,
+      "pooled_ci": [
+        0.4551821889352971,
+        0.6846255529895567
+      ],
+      "within_receptor_mean_auc": 0.5706719389375242,
+      "within_receptor_ci": [
+        0.43787851226485136,
+        0.6826574169746011
+      ],
+      "n_receptors_with_any_errors": 28,
+      "n_receptors_evaluable": 12,
+      "min_errors_required": 10,
+      "shrinkage": 0.007361339133410527
+    },
+    "min_plddt_at_anchor": {
+      "pooled_auc": 0.506510693029602,
+      "pooled_ci": [
+        0.40715356433715955,
+        0.6587506719490668
+      ],
+      "within_receptor_mean_auc": 0.6092211115094383,
+      "within_receptor_ci": [
+        0.4415439502165944,
+        0.7515476811411489
+      ],
+      "n_receptors_with_any_errors": 28,
+      "n_receptors_evaluable": 12,
+      "min_errors_required": 10,
+      "shrinkage": -0.1027104184798362
+    },
+    "plddt_at_anchors": {
+      "pooled_auc": 0.573495892813769,
+      "pooled_ci": [
+        0.4665274838319073,
+        0.7213690151767763
+      ],
+      "within_receptor_mean_auc": 0.5825872633263834,
+      "within_receptor_ci": [
+        0.39548505444601845,
+        0.7293987925242549
+      ],
+      "n_receptors_with_any_errors": 28,
+      "n_receptors_evaluable": 12,
+      "min_errors_required": 10,
+      "shrinkage": -0.009091370512614438
+    }
+  }
+}

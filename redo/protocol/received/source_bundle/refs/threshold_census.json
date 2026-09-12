@@ -1,0 +1,11 @@
+{
+  "total_receptors_seen": 82,
+  "pairs_scored": 44,
+  "by_failure_reason": {
+    "A1AminoAcidIdentity": 6,
+    "A2FASTATrunc": 19,
+    "A3WrongChain": 8,
+    "missing_role:active": 4,
+    "missing_role:inactive": 1
+  }
+}

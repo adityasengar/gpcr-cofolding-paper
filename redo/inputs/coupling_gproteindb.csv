@@ -1,0 +1,264 @@
+acc,uniprot,gpcrdb_slug,lab,biosensor,primary_family,primary_subtype,n_fam,rank_Gs,rank_Gio,rank_Gq11,rank_G1213,pct_Gs,pct_Gio,pct_Gq11,pct_G1213,fam_parameter,val_Gs,val_Gio,val_Gq11,val_G1213,n_gprots_tested,ligand_name,phys_surr,ref_doi,ref_text,pct_GsL,pct_GsS,pct_Golf,pct_Gi1,pct_Gi2,pct_Gi3,pct_Ggust,pct_Gz,pct_GoA,pct_GoB,pct_Gq,pct_G11,pct_G14,pct_G15,pct_G12,pct_G13
+P28222,5HT1B,5ht1b_human,Bouvier,GEMTA,Gi/o,GoB,2,nc,1',2',nc,0,100,71,0,log(Emax/EC50),0.0,8.7,6.2,0.0,12,5-hydroxytryptamine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,99,98,-,-,93,98,100,0,0,0,71,0,0
+P28222,5HT1B,5ht1b_human,GproteinDb,merged data,Gi/o,GoB,2,nc,1',2',nc,0,100,36,0,-,-,-,-,-,-,-,-,,,0,-,-,99,98,-,-,93,99,100,0,0,0,36,0,0
+P28222,5HT1B,5ht1b_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P28222,5HT1B,5ht1b_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,0.4,0.0,0.0,5,5-hydroxytryptamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P28223,5HT2A,5ht2a_human,Bouvier,GEMTA,Gq/11,G14,2,nc,2',1',nc,0,77,100,0,log(Emax/EC50),0.0,6.7,8.6,0.0,12,5-hydroxytryptamine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,68,63,-,-,77,62,66,98,99,100,93,0,0
+P28223,5HT2A,5ht2a_human,GproteinDb,merged data,Gq/11,G14,2,nc,2',1',nc,0,22,75,0,-,-,-,-,-,-,-,-,,,0,-,-,23,63,-,-,77,37,66,74,99,100,55,0,0
+P28223,5HT2A,5ht2a_human,GtoPdb,- (annotated from literature),Gq/11,-,2,-,2',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P28223,5HT2A,5ht2a_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,5-hydroxytryptamine,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P28223,5HT2A,5ht2a_human,Lambert,RGB-GDP,-,-,0,nc,nc,nc,nc,0,0,0,0,Econstitutive,0.00,0.00,0.00,0.00,6,None (constitutive activity),-,,,0,-,-,0,-,-,-,-,-,-,0,-,-,-,0,-
+P28223,5HT2A,5ht2a_human,Lambert,RGB-GDP,Gq/11,Gq,1,nc,nc,1',nc,0,0,100,0,Efficacy,0.00,0.00,0.01,0.00,6,5-hydroxytryptamine,Phys,,,0,-,-,0,-,-,-,-,-,-,100,-,-,-,0,-
+P28223,5HT2A,5ht2a_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,2,nc,2',1',nc,0,12,100,0,Activation rate (s -1 ),0.0,0.1,0.5,0.0,5,5-hydroxytryptamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,12,-,100,-,-,17,-,0
+P28335,5HT2C,5ht2c_human,Bouvier,GEMTA,Gi/o,Gz,3,nc,1',2',3',0,100,97,84,log(Emax/EC50),0.0,8.7,8.4,7.3,12,5-hydroxytryptamine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,79,77,-,-,100,78,84,0,0,0,97,84,84
+P28335,5HT2C,5ht2c_human,GproteinDb,merged data,Gq/11,Gz,3,nc,2',1',3',0,50,98,42,-,-,-,-,-,-,-,-,,,0,-,-,79,77,-,-,100,40,84,50,0,0,49,84,42
+P28335,5HT2C,5ht2c_human,GtoPdb,- (annotated from literature),Gq/11,-,2,-,2',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P28335,5HT2C,5ht2c_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,5-hydroxytryptamine,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P28335,5HT2C,5ht2c_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,2,nc,2',1',3',0,1,100,0,Activation rate (s -1 ),0.0,0.1,10.3,0.0,5,5-hydroxytryptamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,1,-,100,-,-,1,-,0
+P47898,5HT5A,5ht5a_human,GproteinDb,merged data,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,-,-,-,-,-,-,-,-,,,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P47898,5HT5A,5ht5a_human,GtoPdb,- (annotated from literature),Gi/o,-,2,-,1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P47898,5HT5A,5ht5a_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,0.1,0.0,0.0,5,5-hydroxytryptamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P30542,AA1R,aa1r_human,Bouvier,GEMTA,Gq/11,G15,3,nc,2',1',3',0,94,100,74,log(Emax/EC50),0.0,6.2,6.6,4.9,12,adenosine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,86,85,-,-,86,94,93,0,0,0,100,74,0
+P30542,AA1R,aa1r_human,GproteinDb,merged data,Gi/o,GoA,3,nc,1',2',3',0,98,28,18,-,-,-,-,-,-,-,-,,,0,-,-,95,85,-,-,86,97,93,0,0,0,56,25,0
+P30542,AA1R,aa1r_human,GtoPdb,- (annotated from literature),Gi/o,-,3,2',1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30542,AA1R,aa1r_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Econstitutive,0.00,0.10,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P30542,AA1R,aa1r_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Efficacy,0.00,0.05,0.00,0.00,6,adenosine,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P30542,AA1R,aa1r_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,2,nc,1',2',nc,0,100,13,0,Activation rate (s -1 ),0.0,5.4,0.7,0.0,5,adenosine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,13,-,0
+P29274,AA2AR,aa2ar_human,Bouvier,GEMTA,Gs,GsL,3,1',nc,3',2',100,0,96,99,log(Emax/EC50),5.8,0.0,5.6,5.8,12,adenosine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,100,-,-,0,0,-,-,0,0,0,0,0,0,96,99,94
+P29274,AA2AR,aa2ar_human,GproteinDb,merged data,Gs,GsL,4,1',4',2',3',100,4,67,50,-,-,-,-,-,-,-,-,,,100,-,-,0,0,-,-,0,4,0,0,0,0,67,99,47
+P29274,AA2AR,aa2ar_human,GtoPdb,- (annotated from literature),Gs,-,2,1',-,2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P29274,AA2AR,aa2ar_human,Martemyanov,FreeGβγ-Nluc,Gs,GsL,3,1',3',2',nc,100,7,38,0,Activation rate (s -1 ),1.6,0.1,0.6,0.0,5,adenosine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,100,-,-,-,-,-,-,-,7,-,0,-,-,38,-,0
+P11229,ACM1,acm1_human,Bouvier,GEMTA,Gq/11,G11,3,2',3',1',nc,75,68,100,0,log(Emax/EC50),5.8,5.3,7.8,0.0,12,acetylcholine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,75,-,-,64,59,-,-,68,57,61,97,100,98,99,0,0
+P11229,ACM1,acm1_human,GproteinDb,merged data,Gq/11,G11,3,2',3',1',nc,38,36,100,0,-,-,-,-,-,-,-,-,,,38,-,-,64,59,-,-,68,31,61,98,100,98,77,0,0
+P11229,ACM1,acm1_human,GtoPdb,- (annotated from literature),Gq/11,-,1,-,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,,Peralta EG et al. Nature 1988,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P11229,ACM1,acm1_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,acetylcholine,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P11229,ACM1,acm1_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,2,nc,2',1',nc,0,5,100,0,Activation rate (s -1 ),0.0,0.1,2.4,0.0,5,acetylcholine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,5,-,100,-,-,55,-,0
+P08172,ACM2,acm2_human,Bouvier,GEMTA,Gi/o,GoB,3,3',1',2',nc,65,100,86,0,log(Emax/EC50),5.6,8.6,7.4,0.0,12,acetylcholine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,65,-,-,92,88,-,-,92,94,100,0,0,52,86,0,0
+P08172,ACM2,acm2_human,GproteinDb,merged data,Gi/o,GoB,3,3',1',2',nc,32,100,44,0,-,-,-,-,-,-,-,-,,,32,-,-,92,88,-,-,92,97,100,0,0,52,44,0,0
+P08172,ACM2,acm2_human,GtoPdb,- (annotated from literature),Gi/o,-,3,2',1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,,Griffin MT et al. The Journal of pharmacology and experimental therapeutics 2007,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P08172,ACM2,acm2_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',2',nc,0,100,2,0,Activation rate (s -1 ),0.0,1.3,0.0,0.0,5,acetylcholine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,2,-,0
+P08173,ACM4,acm4_human,Bouvier,GEMTA,Gi/o,GoB,2,nc,1',2',nc,0,100,78,0,log(Emax/EC50),0.0,8.7,6.9,0.0,12,acetylcholine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,93,94,-,-,90,92,100,52,0,56,78,0,0
+P08173,ACM4,acm4_human,GproteinDb,merged data,Gi/o,GoB,4,3',1',2',4',4,100,22,3,-,-,-,-,-,-,-,-,,,4,-,-,98,94,-,-,90,96,100,15,0,56,40,4,0
+P08173,ACM4,acm4_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Peralta EG et al. Nature 1988,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P08173,ACM4,acm4_human,Lambert,RGB-GDP,Gi/o,Gi1,4,2',1',4',3',16,100,9,11,Efficacy,0.06,0.39,0.04,0.04,6,acetylcholine,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,16,-,-,100,-,-,-,-,-,-,9,-,-,-,11,-
+P08173,ACM4,acm4_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Econstitutive,0.00,0.14,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P08173,ACM4,acm4_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,2,nc,1',2',nc,0,100,3,0,Activation rate (s -1 ),0.0,5.8,0.2,0.0,5,acetylcholine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,3,-,0
+P35348,ADA1A,ada1a_human,Bouvier,GEMTA,Gq/11,G15,3,2',3',1',nc,85,78,100,0,log(Emax/EC50),6.6,6.1,7.8,0.0,12,noradrenaline,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,85,-,-,76,0,-,-,0,78,0,97,97,85,100,0,0
+P35348,ADA1A,ada1a_human,GproteinDb,merged data,Gq/11,Gq,3,2',3',1',nc,53,39,100,0,-,-,-,-,-,-,-,-,,,53,-,-,76,0,-,-,0,39,0,98,97,85,64,0,0
+P35348,ADA1A,ada1a_human,GtoPdb,- (annotated from literature),Gq/11,-,2,-,-,1',2',-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P35348,ADA1A,ada1a_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,(-)-noradrenaline,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P35348,ADA1A,ada1a_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,2,2',nc,1',nc,21,0,100,0,Activation rate (s -1 ),0.3,0.0,1.3,0.0,5,(&plusmn;)-adrenaline,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,21,-,-,-,-,-,-,-,0,-,100,-,-,29,-,0
+P08913,ADA2A,ada2a_human,Bouvier,GEMTA,Gi/o,Gz,4,4',1',2',3',58,100,68,60,log(Emax/EC50),5.3,9.1,6.2,5.5,12,noradrenaline,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,58,-,-,93,91,-,-,100,91,96,50,49,49,68,57,60
+P08913,ADA2A,ada2a_human,GproteinDb,merged data,Gi/o,Gz,4,4',1',2',3',14,100,17,15,-,-,-,-,-,-,-,-,,,14,-,-,98,91,-,-,100,96,96,12,49,49,34,19,30
+P08913,ADA2A,ada2a_human,GtoPdb,- (annotated from literature),Gi/o,-,2,2',1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P08913,ADA2A,ada2a_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Econstitutive,0.00,0.03,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P08913,ADA2A,ada2a_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Efficacy,0.00,0.10,0.00,0.00,6,noradrenaline,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P08913,ADA2A,ada2a_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',2',nc,0,100,0,0,Activation rate (s -1 ),0.0,10.8,0.0,0.0,5,(&plusmn;)-adrenaline,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P08588,ADRB1,adrb1_human,Bouvier,GEMTA,Gs,GsL,4,1',3',2',4',100,64,85,57,log(Emax/EC50),9.6,6.1,8.2,5.5,12,noradrenaline,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,100,-,-,0,0,-,-,64,56,60,48,0,56,85,57,54
+P08588,ADRB1,adrb1_human,GproteinDb,merged data,Gs,GsL,4,1',3',2',4',100,35,60,28,-,-,-,-,-,-,-,-,,,100,-,-,0,0,-,-,64,31,60,24,0,56,60,57,27
+P08588,ADRB1,adrb1_human,GtoPdb,- (annotated from literature),Gs,-,2,1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P08588,ADRB1,adrb1_human,Martemyanov,FreeGβγ-Nluc,Gs,GsL,3,1',3',2',nc,100,6,34,0,Activation rate (s -1 ),2.9,0.2,1.0,0.0,5,(&plusmn;)-adrenaline,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,100,-,-,-,-,-,-,-,6,-,0,-,-,34,-,0
+P07550,ADRB2,adrb2_human,Bouvier,GEMTA,Gs,GsL,2,1',nc,2',nc,100,0,77,0,log(Emax/EC50),8.2,0.0,6.3,0.0,12,noradrenaline,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,100,-,-,0,0,-,-,0,0,0,0,0,0,77,0,0
+P07550,ADRB2,adrb2_human,GproteinDb,merged data,Gs,GsL,3,1',3',2',nc,100,13,25,0,-,-,-,-,-,-,-,-,,,96,76,80,14,39,0,0,32,21,35,5,0,0,63,0,0
+P07550,ADRB2,adrb2_human,GtoPdb,- (annotated from literature),Gs,-,2,1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P07550,ADRB2,adrb2_human,Lambert,RGB-GDP,Gs,GsL,1,1',nc,nc,nc,100,0,0,0,Econstitutive,0.02,0.00,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,100,-,-,0,-,-,-,-,-,-,0,-,-,-,0,-
+P07550,ADRB2,adrb2_human,Lambert,RGB-GDP,Gs,GsL,3,1',2',3',nc,100,56,25,0,Efficacy,0.09,0.05,0.02,0.00,6,noradrenaline,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,100,-,-,56,-,-,-,-,-,-,25,-,-,-,0,-
+P07550,ADRB2,adrb2_human,Martemyanov,FreeGβγ-Nluc,Gs,GsL,2,1',nc,2',nc,100,0,11,0,Activation rate (s -1 ),2.1,0.0,0.2,0.0,5,(&plusmn;)-adrenaline,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,100,-,-,-,-,-,-,-,0,-,0,-,-,11,-,0
+P07550,ADRB2,adrb2_human,Roth,TRUPATH,Gs,G15,3,1',3',2',nc,100,8,11,0,log(Emax/EC50),79.8,6.6,8.5,0.0,15,(-)-adrenaline,Phys,10.1038/s41589-020-0535-8,Olsen RHJ et al. Nature chemical biology 2020,80,76,80,0,78,0,0,64,64,70,0,0,-,100,0,0
+P30556,AGTR1,agtr1_human,Bouvier,GEMTA,Gq/11,G11,3,nc,3',1',2',0,79,100,96,log(Emax/EC50),0.0,7.1,9.0,8.6,12,angiotensin II,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,77,76,-,-,71,79,77,97,100,91,92,93,96
+P30556,AGTR1,agtr1_human,GproteinDb,merged data,Gq/11,G11,3,nc,2',1',3',0,46,67,32,-,-,-,-,-,-,-,-,,,0,-,-,45,76,-,-,71,79,77,66,100,91,92,31,96
+P30556,AGTR1,agtr1_human,GtoPdb,- (annotated from literature),Gi/o,-,2,-,1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30556,AGTR1,agtr1_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,angiotensin II,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30556,AGTR1,agtr1_human,Lambert,RGB-GDP,-,-,0,nc,nc,nc,nc,0,0,0,0,Econstitutive,0.00,0.00,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,0,-,-,-,-,-,-,0,-,-,-,0,-
+P30556,AGTR1,agtr1_human,Lambert,RGB-GDP,Gq/11,Gq,2,nc,2',1',nc,0,58,100,0,Efficacy,0.00,0.03,0.05,0.00,6,angiotensin II,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,58,-,-,-,-,-,-,100,-,-,-,0,-
+P35414,APJ,apj_human,Bouvier,GEMTA,Gi/o,Gi1,3,nc,1',3',2',0,100,63,72,log(Emax/EC50),0.0,9.3,5.8,6.7,12,[Pyr 1 ]apelin-13,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,100,99,-,-,85,94,96,0,0,0,63,72,64
+P35414,APJ,apj_human,GproteinDb,merged data,Gi/o,Gi1,3,nc,1',3',2',0,100,32,36,-,-,-,-,-,-,-,-,,,0,-,-,100,99,-,-,85,97,96,0,0,0,32,72,32
+P35414,APJ,apj_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Hosoya M et al. The Journal of biological chemistry 2000,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P35414,APJ,apj_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',2',nc,0,100,0,0,Activation rate (s -1 ),0.0,5.8,0.0,0.0,5,apelin-17,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P21730,C5AR1,c5ar1_human,Bouvier,GEMTA,Gq/11,G15,2,nc,2',1',nc,0,99,100,0,log(Emax/EC50),0.0,9.2,9.3,0.0,12,C5a,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,98,99,-,-,88,92,98,0,0,0,100,0,0
+P21730,C5AR1,c5ar1_human,GproteinDb,merged data,Gi/o,G15,2,nc,1',2',nc,0,100,33,0,-,-,-,-,-,-,-,-,,,0,-,-,99,99,-,-,88,92,98,0,0,0,100,0,0
+P21730,C5AR1,c5ar1_human,GtoPdb,- (annotated from literature),Gi/o,-,2,-,1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P21730,C5AR1,c5ar1_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Econstitutive,0.00,0.03,0.00,0.00,6,None (constitutive activity),-,,,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P21730,C5AR1,c5ar1_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Efficacy,0.00,0.05,0.00,0.00,6,C5a,Phys,,,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P32238,CCKAR,cckar_human,Bouvier,GEMTA,G12/13,G12,4,4',3',2',1',83,88,99,100,log(Emax/EC50),8.1,8.5,9.7,9.7,12,CCK-8,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,83,-,-,87,84,-,-,80,88,87,96,98,99,90,100,94
+P32238,CCKAR,cckar_human,GproteinDb,merged data,Gq/11,G12,4,4',2',1',3',44,83,100,59,-,-,-,-,-,-,-,-,,,44,-,-,87,84,-,-,80,83,87,98,98,99,52,100,56
+P32238,CCKAR,cckar_human,GtoPdb,- (annotated from literature),Gq/11,-,2,2',-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P32238,CCKAR,cckar_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,CCK-8,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P32238,CCKAR,cckar_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,4,4',2',1',3',5,78,100,18,Activation rate (s -1 ),0.2,3.2,4.1,0.7,5,CCK-8,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,5,-,-,-,-,-,-,-,78,-,100,-,-,14,-,18
+P41597,CCR2,ccr2_human,GproteinDb,merged data,Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P41597,CCR2,ccr2_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P51681,CCR5,ccr5_human,Bouvier,GEMTA,Gi/o,Gz,2,nc,1',2',nc,0,100,70,0,log(Emax/EC50),0.0,9.1,6.4,0.0,12,CCL3,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,98,96,-,-,100,94,97,0,0,0,70,0,0
+P51681,CCR5,ccr5_human,GproteinDb,merged data,Gi/o,Gz,2,nc,1',2',nc,0,100,70,0,-,-,-,-,-,-,-,-,,,0,-,-,98,96,-,-,100,94,97,0,0,0,70,0,0
+P51681,CCR5,ccr5_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P51684,CCR6,ccr6_human,Bouvier,GEMTA,G12/13,G12,3,nc,2',3',1',0,95,95,100,log(Emax/EC50),0.0,8.2,8.2,8.6,12,CCL2,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,86,94,-,-,95,83,91,0,0,0,95,100,0
+P51684,CCR6,ccr6_human,GproteinDb,merged data,G12/13,G12,3,nc,2',3',1',0,95,95,100,-,-,-,-,-,-,-,-,,,0,-,-,86,94,-,-,95,83,91,0,0,0,95,100,0
+P51684,CCR6,ccr6_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P51685,CCR8,ccr8_human,GproteinDb,merged data,Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P51685,CCR8,ccr8_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P21554,CNR1,cnr1_human,Bouvier,GEMTA,Gq/11,Gi1,3,nc,2',1',3',0,100,100,91,log(Emax/EC50),0.0,7.6,7.6,6.9,12,WIN55212-2,Surr,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,100,93,-,-,92,97,99,0,0,48,100,91,88
+P21554,CNR1,cnr1_human,GproteinDb,merged data,Gi/o,Gi1,4,4',1',3',2',18,100,30,44,-,-,-,-,-,-,-,-,,,18,-,-,100,93,-,-,92,98,99,4,0,48,50,58,44
+P21554,CNR1,cnr1_human,GtoPdb,- (annotated from literature),Gi/o,-,2,2',1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P21554,CNR1,cnr1_human,Lambert,RGB-GDP,Gi/o,Gi1,3,3',1',nc,2',34,100,0,41,Econstitutive,0.02,0.06,0.00,0.02,6,None (constitutive activity),-,,,34,-,-,100,-,-,-,-,-,-,0,-,-,-,41,-
+P21554,CNR1,cnr1_human,Lambert,RGB-GDP,Gi/o,Gi1,4,3',1',4',2',37,100,18,43,Efficacy,0.02,0.06,0.01,0.02,6,CP55940,Surr,,,37,-,-,100,-,-,-,-,-,-,18,-,-,-,43,-
+P21554,CNR1,cnr1_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,0.1,0.0,0.0,5,anandamide,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P34972,CNR2,cnr2_human,Bouvier,GEMTA,Gi/o,Gi1,2,nc,1',2',nc,0,100,60,0,log(Emax/EC50),0.0,8.9,5.4,0.0,12,WIN55212-2,Surr,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,100,98,-,-,93,91,97,0,0,0,60,0,0
+P34972,CNR2,cnr2_human,GproteinDb,merged data,Gi/o,Gi1,2,nc,1',2',nc,0,100,60,0,-,-,-,-,-,-,-,-,,,0,-,-,100,98,-,-,93,91,97,0,0,0,60,0,0
+P34972,CNR2,cnr2_human,GtoPdb,- (annotated from literature),Gi/o,-,2,2',1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P25025,CXCR2,cxcr2_human,Bouvier,GEMTA,Gi/o,GoB,2,nc,1',2',nc,0,100,87,0,log(Emax/EC50),0.0,9.4,8.2,0.0,12,CXCL8,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,99,99,-,-,91,97,100,0,0,0,87,0,0
+P25025,CXCR2,cxcr2_human,GproteinDb,merged data,Gi/o,GoB,2,nc,1',2',nc,0,100,87,0,-,-,-,-,-,-,-,-,,,0,-,-,99,99,-,-,91,97,100,0,0,0,87,0,0
+P25025,CXCR2,cxcr2_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Hall DA et al. British journal of pharmacology 1999,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P49682,CXCR3,cxcr3_human,GproteinDb,merged data,Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P49682,CXCR3,cxcr3_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P61073,CXCR4,cxcr4_human,Bouvier,GEMTA,Gi/o,Gi2,1,nc,1',nc,nc,0,100,0,0,log(Emax/EC50),0.0,8.5,0.0,0.0,12,CXCL12&alpha;,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,97,100,-,-,88,92,95,0,0,0,0,0,0
+P61073,CXCR4,cxcr4_human,GproteinDb,merged data,Gi/o,Gi2,2,nc,1',2',nc,0,100,4,0,-,-,-,-,-,-,-,-,,,0,-,-,97,100,-,-,88,96,95,0,0,0,4,0,0
+P61073,CXCR4,cxcr4_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P61073,CXCR4,cxcr4_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',2',nc,0,100,7,0,Activation rate (s -1 ),0.0,0.3,0.0,0.0,5,CXCL12&alpha;,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,7,-,0
+P14416,DRD2,drd2_human,Bouvier,GEMTA,Gi/o,GoB,2,nc,1',2',nc,0,100,61,0,log(Emax/EC50),0.0,8.6,5.3,0.0,12,dopamine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,93,87,-,-,86,93,100,0,0,0,61,0,0
+P14416,DRD2,drd2_human,GproteinDb,merged data,Gi/o,GoB,3,3',1',2',nc,2,100,17,0,-,-,-,-,-,-,-,-,,,2,-,-,98,87,-,-,86,96,100,2,0,0,30,0,0
+P14416,DRD2,drd2_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P14416,DRD2,drd2_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Econstitutive,0.00,0.03,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P14416,DRD2,drd2_human,Lambert,RGB-GDP,Gi/o,Gi1,3,3',1',2',nc,7,100,8,0,Efficacy,0.01,0.14,0.01,0.00,6,dopamine,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,7,-,-,100,-,-,-,-,-,-,8,-,-,-,0,-
+P14416,DRD2,drd2_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,4.2,0.0,0.0,5,dopamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P35462,DRD3,drd3_human,GproteinDb,merged data,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,-,-,-,-,-,-,-,-,,,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P35462,DRD3,drd3_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P35462,DRD3,drd3_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,0.3,0.0,0.0,5,dopamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P21917,DRD4,drd4_human,GproteinDb,merged data,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,-,-,-,-,-,-,-,-,,,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P21917,DRD4,drd4_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Pilla M et al. Nature 1999,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P21917,DRD4,drd4_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,3.9,0.0,0.0,5,dopamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P25101,EDNRA,ednra_human,Bouvier,GEMTA,G12/13,G12,4,4',2',3',1',78,96,93,100,log(Emax/EC50),8.1,9.9,9.6,10.3,12,endothelin-1,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,78,-,-,90,90,-,-,96,91,93,92,91,93,79,100,92
+P25101,EDNRA,ednra_human,GproteinDb,merged data,Gi/o,Gz,4,4',1',2',3',20,74,57,38,-,-,-,-,-,-,-,-,,,20,-,-,63,90,-,-,96,96,93,56,91,93,40,45,55
+P25101,EDNRA,ednra_human,GtoPdb,- (annotated from literature),Gq/11,-,1,-,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P25101,EDNRA,ednra_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,endothelin-1,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P25101,EDNRA,ednra_human,Lambert,RGB-GDP,-,-,0,nc,nc,nc,nc,0,0,0,0,Econstitutive,0.00,0.00,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,0,-,-,-,-,-,-,0,-,-,-,0,-
+P25101,EDNRA,ednra_human,Lambert,RGB-GDP,Gi/o,Gi1,3,nc,1',2',3',0,100,94,36,Efficacy,0.00,0.06,0.06,0.02,6,endothelin-1,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,94,-,-,-,36,-
+P25101,EDNRA,ednra_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,3,nc,1',2',3',0,100,40,18,Activation rate (s -1 ),0.0,0.5,0.2,0.1,5,endothelin-2,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,40,-,-,0,-,18
+P24530,EDNRB,ednrb_human,GproteinDb,merged data,Gi/o,GoA,3,nc,1',2',3',0,67,26,11,-,-,-,-,-,-,-,-,,,0,-,-,50,-,-,-,-,100,-,26,-,-,0,6,20
+P24530,EDNRB,ednrb_human,GtoPdb,- (annotated from literature),Gs,-,3,1',1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P24530,EDNRB,ednrb_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,endothelin-1,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P24530,EDNRB,ednrb_human,Lambert,RGB-GDP,-,-,0,nc,nc,nc,nc,0,0,0,0,Econstitutive,0.00,0.00,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,0,-,-,-,-,-,-,0,-,-,-,0,-
+P24530,EDNRB,ednrb_human,Lambert,RGB-GDP,Gi/o,Gi1,3,nc,1',2',3',0,100,54,12,Efficacy,0.00,0.09,0.05,0.01,6,endothelin-1,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,54,-,-,-,12,-
+P24530,EDNRB,ednrb_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,3,nc,1',2',3',0,100,24,20,Activation rate (s -1 ),0.0,10.2,2.4,2.0,5,endothelin-2,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,24,-,-,0,-,20
+P23945,FSHR,fshr_human,GproteinDb,merged data,Gq/11,-,3,1',1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P23945,FSHR,fshr_human,GtoPdb,- (annotated from literature),Gq/11,-,3,1',1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q92847,GHSR,ghsr_human,Bouvier,GEMTA,G12/13,G12,3,nc,3',2',1',0,88,90,100,log(Emax/EC50),0.0,8.2,8.3,9.3,12,ghrelin,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,85,82,-,-,88,85,88,90,88,89,89,100,90
+Q92847,GHSR,ghsr_human,GproteinDb,merged data,G12/13,G12,3,nc,3',2',1',0,88,90,100,-,-,-,-,-,-,-,-,,,0,-,-,85,82,-,-,88,85,88,90,88,89,89,100,90
+Q92847,GHSR,ghsr_human,GtoPdb,- (annotated from literature),Gq/11,-,3,-,2',1',2',-,-,-,-,-,-,-,-,-,-,-,-,,"Holst B et al. Molecular endocrinology (Baltimore, Md.) 2005 Sivertsen B et al. The Journal of biological chemistry 2011",-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q92847,GHSR,ghsr_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,ibutamoren,Surr,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q9Y2T5,GPR52,gpr52_human,GproteinDb,merged data,Gs,GsL,3,1',3',2',nc,91,24,81,0,-,-,-,-,-,-,-,-,,,91,-,-,0,-,-,-,-,47,-,0,-,-,81,-,0
+Q9Y2T5,GPR52,gpr52_human,Lambert,RGB-GDP,Gq/11,G15,2,2',nc,1',nc,82,0,100,0,Econstitutive,0.03,0.00,0.03,0.00,6,None (constitutive activity),-,10.1371/journal.pone.0247743,Lu S et al. PloS one 2021,82,-,-,0,-,-,-,-,-,-,0,-,-,100,-,0
+Q9Y2T5,GPR52,gpr52_human,Martemyanov,FreeGβγ-Nluc,Gs,GsL,3,1',3',2',nc,100,47,62,0,Activation rate (s -1 ),0.2,0.1,0.1,0.0,5,TP-024,Surr,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,100,-,-,-,-,-,-,-,47,-,0,-,-,62,-,0
+P46095,GPR6,gpr6_human,GproteinDb,merged data,Gi/o,-,2,1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P46095,GPR6,gpr6_human,GtoPdb,- (annotated from literature),Gi/o,-,2,1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Ignatov A et al. The Journal of neuroscience : the official journal of the Society for Neuroscience 2003,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30550,GRPR,grpr_human,GproteinDb,merged data,Gq/11,Gq,3,nc,3',1',2',0,2,100,6,-,-,-,-,-,-,-,-,,,0,-,-,-,-,-,-,-,2,-,100,-,-,0,-,6
+P30550,GRPR,grpr_human,GtoPdb,- (annotated from literature),Gq/11,-,1,-,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30550,GRPR,grpr_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,bombesin,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30550,GRPR,grpr_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,3,nc,3',1',2',0,2,100,6,Activation rate (s -1 ),0.0,0.1,4.6,0.3,5,gastrin-releasing peptide,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,2,-,100,-,-,0,-,6
+P35367,HRH1,hrh1_human,Bouvier,GEMTA,Gq/11,G15,4,4',2',1',3',68,83,100,71,log(Emax/EC50),5.5,6.8,8.1,5.8,12,histamine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,68,-,-,79,75,-,-,83,73,75,92,95,95,100,71,67
+P35367,HRH1,hrh1_human,GproteinDb,merged data,Gq/11,Gq,4,3',2',1',4',24,52,100,21,-,-,-,-,-,-,-,-,,,24,-,-,58,75,-,-,83,52,75,98,95,95,73,24,40
+P35367,HRH1,hrh1_human,GtoPdb,- (annotated from literature),Gq/11,-,1,-,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P35367,HRH1,hrh1_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,histamine,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P35367,HRH1,hrh1_human,Lambert,RGB-GDP,Gq/11,Gq,1,nc,nc,1',nc,0,0,100,0,Econstitutive,0.00,0.00,0.01,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,0,-,-,-,-,-,-,100,-,-,-,0,-
+P35367,HRH1,hrh1_human,Lambert,RGB-GDP,Gq/11,Gq,3,3',2',1',nc,28,96,100,0,Efficacy,0.02,0.07,0.08,0.00,6,histamine,Phys,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,28,-,-,96,-,-,-,-,-,-,100,-,-,-,0,-
+P35367,HRH1,hrh1_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,3,nc,2',1',3',0,30,100,12,Activation rate (s -1 ),0.0,0.4,1.3,0.1,5,histamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,30,-,100,-,-,46,-,12
+P25021,HRH2,hrh2_human,Bouvier,GEMTA,Gs,GsL,4,1',4',2',3',100,58,93,63,log(Emax/EC50),7.0,4.1,6.5,4.4,12,histamine,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,100,-,-,0,0,-,-,46,58,58,0,0,0,93,58,63
+P25021,HRH2,hrh2_human,GproteinDb,merged data,Gs,GsL,4,1',3',2',4',100,20,36,16,-,-,-,-,-,-,-,-,,,100,-,-,8,0,-,-,46,29,58,5,0,0,63,19,32
+P25021,HRH2,hrh2_human,GtoPdb,- (annotated from literature),Gq/11,-,2,2',-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P25021,HRH2,hrh2_human,Lambert,RGB-GDP,Gs,GsL,1,1',nc,nc,nc,100,0,0,0,Econstitutive,0.07,0.00,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,100,-,-,0,-,-,-,-,-,-,0,-,-,-,0,-
+P25021,HRH2,hrh2_human,Lambert,RGB-GDP,Gs,GsL,3,1',2',3',nc,100,24,20,0,Efficacy,0.08,0.02,0.02,0.00,6,amthamine,Surr,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,100,-,-,24,-,-,-,-,-,-,20,-,-,-,0,-
+P25021,HRH2,hrh2_human,Martemyanov,FreeGβγ-Nluc,Gs,GsL,2,1',nc,2',nc,100,0,33,0,Activation rate (s -1 ),1.6,0.0,0.5,0.0,5,histamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,100,-,-,-,-,-,-,-,0,-,0,-,-,33,-,0
+Q9Y5N1,HRH3,hrh3_human,GproteinDb,merged data,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,-,-,-,-,-,-,-,-,,,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+Q9Y5N1,HRH3,hrh3_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q9Y5N1,HRH3,hrh3_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,2.3,0.0,0.0,5,histamine,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+Q92633,LPAR1,lpar1_human,Bouvier,GEMTA,Gi/o,Gi1,3,nc,1',3',2',0,100,73,93,log(Emax/EC50),0.0,8.3,6.1,7.8,12,2-oleoyl-LPA,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,100,0,-,-,0,95,0,73,66,55,69,0,93
+Q92633,LPAR1,lpar1_human,GproteinDb,merged data,Gi/o,Gi1,3,nc,1',3',2',0,100,73,93,-,-,-,-,-,-,-,-,,,0,-,-,100,0,-,-,0,95,0,73,66,55,69,0,93
+Q92633,LPAR1,lpar1_human,GtoPdb,- (annotated from literature),G12/13,-,3,-,1',1',1',-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q92633,LPAR1,lpar1_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,LPA,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P22888,LSHR,lshr_human,GproteinDb,merged data,Gs,-,2,1',-,2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P22888,LSHR,lshr_human,GtoPdb,- (annotated from literature),Gs,-,2,1',-,2',-,-,-,-,-,-,-,-,-,-,-,-,-,,Gilchrist RL et al. The Journal of biological chemistry 1996,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q15722,LT4R1,lt4r1_human,Bouvier,GEMTA,Gi/o,GoB,3,nc,1',2',3',0,100,97,85,log(Emax/EC50),0.0,10.1,9.7,8.6,12,LTB 4,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,99,99,-,-,91,95,100,59,53,65,97,85,85
+Q15722,LT4R1,lt4r1_human,GproteinDb,merged data,Gi/o,GoB,3,nc,1',2',3',0,100,97,85,-,-,-,-,-,-,-,-,,,0,-,-,99,99,-,-,91,95,100,59,53,65,97,85,85
+Q15722,LT4R1,lt4r1_human,GtoPdb,- (annotated from literature),Gq/11,-,2,-,1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,Capra V et al. British journal of pharmacology 1998 Yokomizo T et al. Nature 1997,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q15722,LT4R1,lt4r1_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,LTB 4,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q99705,MCHR1,mchr1_human,GproteinDb,merged data,Gi/o,-,3,1',1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q99705,MCHR1,mchr1_human,GtoPdb,- (annotated from literature),Gi/o,-,3,1',1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q99705,MCHR1,mchr1_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,melanin-concentrating hormone,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P48039,MTR1A,mtr1a_human,Bouvier,GEMTA,Gi/o,Gi1,2,nc,1',2',nc,0,100,89,0,log(Emax/EC50),0.0,10.1,9.0,0.0,12,melatonin,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,100,99,-,-,0,98,99,0,0,0,89,0,0
+P48039,MTR1A,mtr1a_human,GproteinDb,merged data,Gi/o,Gi1,2,nc,1',2',nc,0,100,48,0,-,-,-,-,-,-,-,-,,,0,-,-,100,99,-,-,0,99,99,0,0,0,48,0,0
+P48039,MTR1A,mtr1a_human,GtoPdb,- (annotated from literature),Gi/o,-,2,-,1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,,Kato K et al. Neuropharmacology 2005,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P48039,MTR1A,mtr1a_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,2,nc,1',2',nc,0,100,6,0,Activation rate (s -1 ),0.0,1.2,0.1,0.0,5,melatonin,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,6,-,0
+P49286,MTR1B,mtr1b_human,Bouvier,GEMTA,Gi/o,Gi1,2,nc,1',2',nc,0,100,76,0,log(Emax/EC50),0.0,8.8,6.7,0.0,12,melatonin,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,100,98,-,-,0,91,97,0,0,0,76,0,0
+P49286,MTR1B,mtr1b_human,GproteinDb,merged data,Gi/o,Gi1,2,nc,1',2',nc,0,100,38,0,-,-,-,-,-,-,-,-,,,0,-,-,100,98,-,-,0,96,97,0,0,0,38,0,0
+P49286,MTR1B,mtr1b_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P49286,MTR1B,mtr1b_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',2',nc,0,100,1,0,Activation rate (s -1 ),0.0,0.6,0.0,0.0,5,melatonin,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,1,-,0
+P25103,NK1R,nk1r_human,GproteinDb,merged data,Gq/11,Gq,3,nc,3',1',2',0,6,100,48,-,-,-,-,-,-,-,-,,,0,-,-,-,-,-,-,-,6,-,100,-,-,4,-,48
+P25103,NK1R,nk1r_human,GtoPdb,- (annotated from literature),Gq/11,-,2,1',-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P25103,NK1R,nk1r_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,substance P,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P25103,NK1R,nk1r_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,3,nc,3',1',2',0,6,100,48,Activation rate (s -1 ),0.0,0.3,4.2,2.0,5,substance P,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,6,-,100,-,-,4,-,48
+P25929,NPY1R,npy1r_human,Bouvier,GEMTA,Gi/o,Gz,1,nc,1',nc,nc,0,100,0,0,log(Emax/EC50),0.0,9.3,0.0,0.0,12,neuropeptide Y,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,97,94,-,-,100,89,96,0,0,0,0,0,0
+P25929,NPY1R,npy1r_human,GproteinDb,merged data,Gi/o,Gz,1,nc,1',nc,nc,0,100,0,0,-,-,-,-,-,-,-,-,,,0,-,-,97,94,-,-,100,94,96,0,0,0,0,0,0
+P25929,NPY1R,npy1r_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Krause J et al. Molecular pharmacology 1992 Weng G et al. Molecular pharmacology 1995,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P25929,NPY1R,npy1r_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,0.2,0.0,0.0,5,neuropeptide Y,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P49146,NPY2R,npy2r_human,GproteinDb,merged data,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,-,-,-,-,-,-,-,-,,,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P49146,NPY2R,npy2r_human,GtoPdb,- (annotated from literature),Gi/o,-,2,-,1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P49146,NPY2R,npy2r_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,2.1,0.0,0.0,5,neuropeptide Y,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P30989,NTR1,ntr1_human,GproteinDb,merged data,Gq/11,G11,3,nc,2',1',3',0,66,100,63,-,-,-,-,-,-,-,-,,,0,0,0,95,96,92,97,97,66,95,98,100,-,60,94,63
+P30989,NTR1,ntr1_human,GtoPdb,- (annotated from literature),Gq/11,-,3,2',2',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30989,NTR1,ntr1_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,neurotensin,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30989,NTR1,ntr1_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,3,nc,2',1',3',0,35,100,29,Activation rate (s -1 ),0.0,1.4,4.2,1.2,5,neurotensin,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,35,-,100,-,-,22,-,29
+P30989,NTR1,ntr1_human,Roth,TRUPATH,Gq/11,G11,3,nc,2',1',3',0,97,100,97,log(Emax/EC50),0.0,9.0,9.3,9.0,15,JMV431,Surr,10.1038/s41589-020-0535-8,Olsen RHJ et al. Nature chemical biology 2020,0,0,0,95,96,92,97,97,97,95,95,100,-,98,94,97
+P41143,OPRD,oprd_human,Bouvier,GEMTA,Gi/o,Gz,3,nc,1',2',3',0,100,72,50,log(Emax/EC50),0.0,9.3,6.7,4.7,12,SNC80,Surr,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,96,92,-,-,100,95,99,0,0,57,72,0,50
+P41143,OPRD,oprd_human,GproteinDb,merged data,Gi/o,Gz,3,nc,1',2',3',0,100,36,25,-,-,-,-,-,-,-,-,,,0,-,-,96,92,-,-,100,98,99,0,0,57,36,0,25
+P41143,OPRD,oprd_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P41143,OPRD,oprd_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',2',nc,0,100,1,0,Activation rate (s -1 ),0.0,3.8,0.0,0.0,5,[Leu]enkephalin,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,1,-,0
+P41145,OPRK,oprk_human,Bouvier,GEMTA,Gi/o,GoB,3,nc,1',3',2',0,100,74,78,log(Emax/EC50),0.0,10.2,7.5,7.9,12,dynorphin A,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,99,96,-,-,96,96,100,0,0,0,74,78,0
+P41145,OPRK,oprk_human,GproteinDb,merged data,Gi/o,GoB,3,nc,1',3',2',0,100,37,39,-,-,-,-,-,-,-,-,,,0,-,-,99,96,-,-,96,98,100,0,0,0,37,78,0
+P41145,OPRK,oprk_human,GtoPdb,- (annotated from literature),Gi/o,-,2,-,1',-,2',-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P41145,OPRK,oprk_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,4.6,0.0,0.0,5,dynorphin A,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P35372,OPRM,oprm_human,Bouvier,GEMTA,Gi/o,Gz,2,nc,1',2',nc,0,100,64,0,log(Emax/EC50),0.0,8.9,5.7,0.0,12,DAMGO,Surr,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,92,90,-,-,100,91,96,0,0,0,64,0,0
+P35372,OPRM,oprm_human,GproteinDb,merged data,Gi/o,Gz,2,nc,1',2',nc,0,100,16,0,-,-,-,-,-,-,-,-,,,0,-,-,97,90,-,-,100,96,96,0,0,0,32,0,0
+P35372,OPRM,oprm_human,GtoPdb,- (annotated from literature),Gi/o,-,2,-,1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P35372,OPRM,oprm_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Econstitutive,0.00,0.03,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P35372,OPRM,oprm_human,Lambert,RGB-GDP,Gi/o,Gi1,1,nc,1',nc,nc,0,100,0,0,Efficacy,0.00,0.05,0.00,0.00,6,DAMGO,Surr,10.1073/pnas.1905993116,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2019,0,-,-,100,-,-,-,-,-,-,0,-,-,-,0,-
+P35372,OPRM,oprm_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,1.3,0.0,0.0,5,endomorphin-1,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P41146,OPRX,oprx_human,Bouvier,GEMTA,Gi/o,Gz,2,nc,1',2',nc,0,100,84,0,log(Emax/EC50),0.0,10.8,9.1,0.0,12,nociceptin/orphanin FQ,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,93,89,-,-,100,91,96,0,0,69,84,0,0
+P41146,OPRX,oprx_human,GproteinDb,merged data,Gi/o,Gz,2,nc,1',2',nc,0,100,42,0,-,-,-,-,-,-,-,-,,,0,-,-,93,89,-,-,100,96,96,0,0,69,42,0,0
+P41146,OPRX,oprx_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Dooley CT et al. The Journal of pharmacology and experimental therapeutics 1997,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P41146,OPRX,oprx_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,2,nc,1',2',nc,0,100,1,0,Activation rate (s -1 ),0.0,4.8,0.1,0.0,5,nociceptin/orphanin FQ,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,1,-,0
+O43614,OX2R,ox2r_human,Bouvier,GEMTA,Gq/11,Gq,3,nc,2',1',3',0,92,100,73,log(Emax/EC50),0.0,8.4,9.1,6.7,12,orexin-A,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,74,69,-,-,92,78,83,100,100,94,79,73,66
+O43614,OX2R,ox2r_human,GproteinDb,merged data,Gq/11,Gq,3,nc,2',1',3',0,52,100,40,-,-,-,-,-,-,-,-,,,0,-,-,74,69,-,-,92,44,83,100,100,94,40,73,36
+O43614,OX2R,ox2r_human,GtoPdb,- (annotated from literature),Gi/o,-,3,1',1',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,Ammoun S et al. The Journal of pharmacology and experimental therapeutics 2003 Hoang QV et al. Journal of neurophysiology 2003 Holmqvist T et al. FEBS letters 2002 Sakurai T et al. Cell 1998 Tang J et al. Cellular signalling 2008,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+O43614,OX2R,ox2r_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,orexin-A,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+O43614,OX2R,ox2r_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,3,nc,2',1',3',0,11,100,7,Activation rate (s -1 ),0.0,0.1,0.8,0.1,5,orexin-B,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,11,-,100,-,-,0,-,7
+P30559,OXYR,oxyr_human,Bouvier,GEMTA,Gq/11,Gq,1,nc,nc,1',nc,0,0,100,0,log(Emax/EC50),0.0,0.0,7.6,0.0,12,oxytocin,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,0,0,-,-,0,0,0,100,100,90,96,0,0
+P30559,OXYR,oxyr_human,GproteinDb,merged data,Gq/11,G11,2,nc,2',1',nc,0,20,75,0,-,-,-,-,-,-,-,-,,,0,-,-,23,0,-,-,0,6,0,75,100,90,56,0,0
+P30559,OXYR,oxyr_human,GtoPdb,- (annotated from literature),Gq/11,-,2,-,2',1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30559,OXYR,oxyr_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,oxytocin,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30559,OXYR,oxyr_human,Lambert,RGB-GDP,-,-,0,nc,nc,nc,nc,0,0,0,0,Econstitutive,0.00,0.00,0.00,0.00,6,None (constitutive activity),-,,,0,-,-,0,-,-,-,-,-,-,0,-,-,-,0,-
+P30559,OXYR,oxyr_human,Lambert,RGB-GDP,Gq/11,Gq,2,nc,2',1',nc,0,69,100,0,Efficacy,0.00,0.03,0.04,0.00,6,oxytocin,Phys,,,0,-,-,69,-,-,-,-,-,-,100,-,-,-,0,-
+P30559,OXYR,oxyr_human,Martemyanov,FreeGβγ-Nluc,Gq/11,Gq,2,nc,2',1',nc,0,13,100,0,Activation rate (s -1 ),0.0,0.1,0.6,0.0,5,oxytocin,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,13,-,100,-,-,17,-,0
+Q9Y5Y4,PD2R2,pd2r2_human,GproteinDb,merged data,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,-,-,-,-,-,-,-,-,,,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+Q9Y5Y4,PD2R2,pd2r2_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Sawyer N et al. British journal of pharmacology 2002 Hata AN et al. The Journal of pharmacology and experimental therapeutics 2003,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q9Y5Y4,PD2R2,pd2r2_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,0.6,0.0,0.0,5,PGD 2,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P35408,PE2R4,pe2r4_human,Bouvier,GEMTA,Gs,GsL,4,1',2',3',4',100,85,83,83,log(Emax/EC50),10.5,8.9,8.7,8.7,12,PGE 2,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,100,-,-,85,79,-,-,69,0,67,0,0,0,83,83,75
+P35408,PE2R4,pe2r4_human,GproteinDb,merged data,Gs,GsL,4,1',3',4',2',94,60,31,62,-,-,-,-,-,-,-,-,,,100,82,-,88,84,0,-,69,29,67,0,0,0,47,92,50
+P35408,PE2R4,pe2r4_human,GtoPdb,- (annotated from literature),Gs,-,2,1',2',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P35408,PE2R4,pe2r4_human,Inoue,NanoBiT-G,G12/13,G12,3,3',2',nc,1',82,90,0,100,log(Emax/EC50),7.1,7.8,0.0,8.6,8,PGE 2,Phys,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,82,-,90,90,0,-,-,81,-,0,-,-,-,100,70
+P35408,PE2R4,pe2r4_human,Martemyanov,FreeGβγ-Nluc,Gs,GsL,4,1',3',2',4',100,6,11,4,Activation rate (s -1 ),1.7,0.1,0.2,0.1,5,PGE 2,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,100,-,-,-,-,-,-,-,6,-,0,-,-,11,-,4
+P21453,S1PR1,s1pr1_human,Bouvier,GEMTA,Gi/o,Gi1,3,nc,1',3',2',0,100,79,86,log(Emax/EC50),0.0,7.3,5.8,6.3,12,sphingosine 1-phosphate,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,100,96,-,-,0,91,95,0,0,0,79,86,86
+P21453,S1PR1,s1pr1_human,GproteinDb,merged data,Gi/o,Gi1,3,nc,1',3',2',0,100,79,86,-,-,-,-,-,-,-,-,,,0,-,-,100,96,-,-,0,91,95,0,0,0,79,86,86
+P21453,S1PR1,s1pr1_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,Kon J et al. The Journal of biological chemistry 1999 Okamoto H et al. The Journal of biological chemistry 1998,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q9H228,S1PR5,s1pr5_human,GproteinDb,merged data,Gi/o,-,2,-,1',-,1',-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Q9H228,S1PR5,s1pr5_human,GtoPdb,- (annotated from literature),Gi/o,-,2,-,1',-,1',-,-,-,-,-,-,-,-,-,-,-,-,,Im DS et al. The Journal of biological chemistry 2000,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30874,SSR2,ssr2_human,Bouvier,GEMTA,Gi/o,Gz,3,nc,1',2',3',0,100,75,67,log(Emax/EC50),0.0,10.7,8.0,7.1,12,SRIF-14,Phys,10.7554/eLife.74101,Avet C et al. eLife 2022,0,-,-,96,93,-,-,100,90,96,62,0,70,75,67,0
+P30874,SSR2,ssr2_human,GproteinDb,merged data,Gi/o,Gz,3,nc,1',2',3',0,100,38,34,-,-,-,-,-,-,-,-,,,0,-,-,96,93,-,-,100,95,96,31,0,70,38,67,0
+P30874,SSR2,ssr2_human,GtoPdb,- (annotated from literature),Gi/o,-,1,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P30874,SSR2,ssr2_human,Martemyanov,FreeGβγ-Nluc,Gi/o,GoA,1,nc,1',nc,nc,0,100,0,0,Activation rate (s -1 ),0.0,1.8,0.0,0.0,5,SRIF-14,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,100,-,0,-,-,0,-,0
+P21731,TA2R,ta2r_human,GproteinDb,merged data,G12/13,G13,2,nc,nc,2',1',0,0,56,61,-,-,-,-,-,-,-,-,,,0,0,-,0,0,0,-,-,0,-,56,-,-,18,48,98
+P21731,TA2R,ta2r_human,GtoPdb,- (annotated from literature),Gq/11,-,1,-,-,1',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P21731,TA2R,ta2r_human,Inoue,NanoBiT-G,G12/13,G12,2,nc,nc,2',1',0,0,82,100,log(Emax/EC50),0.0,0.0,7.2,8.7,8,U46619,Surr,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,0,-,0,0,0,-,-,0,-,82,-,-,-,100,95
+P21731,TA2R,ta2r_human,Inoue,TGF𝛼,-,-,1,-,-,-,-,-,-,-,-,log(Emax/EC50),-,-,-,-,1,U46619,Surr,10.1016/j.cell.2019.04.044,Inoue A et al. Cell 2019,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P21731,TA2R,ta2r_human,Lambert,RGB-GDP,-,-,0,nc,nc,nc,nc,0,0,0,0,Econstitutive,0.00,0.00,0.00,0.00,6,None (constitutive activity),-,10.1073/pnas.2003787117,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2020,0,-,-,0,-,-,-,-,-,-,0,-,-,-,0,-
+P21731,TA2R,ta2r_human,Lambert,RGB-GDP,Gq/11,Gq,2,nc,nc,1',2',0,0,100,43,Efficacy,0.00,0.00,0.02,0.01,6,U46619,Surr,10.1073/pnas.2003787117,Okashah N et al. Proceedings of the National Academy of Sciences of the United States of America 2020,0,-,-,0,-,-,-,-,-,-,100,-,-,-,43,-
+P21731,TA2R,ta2r_human,Martemyanov,FreeGβγ-Nluc,G12/13,G13,2,nc,nc,2',1',0,0,43,100,Activation rate (s -1 ),0.0,0.0,0.2,0.5,5,PGH 2,Phys,10.1016/j.celrep.2023.113173,Masuho I et al. Cell reports 2023,0,-,-,-,-,-,-,-,0,-,43,-,-,18,-,100
+P16473,TSHR,tshr_human,GproteinDb,merged data,Gs,-,2,1',-,2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+P16473,TSHR,tshr_human,GtoPdb,- (annotated from literature),Gs,-,2,1',-,2',-,-,-,-,-,-,-,-,-,-,-,-,-,,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-

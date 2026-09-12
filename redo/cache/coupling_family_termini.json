@@ -1,0 +1,98 @@
+{
+ "Gs": {
+  "acc": "P63092",
+  "len": 394,
+  "ct21": "RVFNDCRDIIQRMHLRQYELL",
+  "ct11": "QRMHLRQYELL"
+ },
+ "Golf": {
+  "acc": "P38405",
+  "len": 381,
+  "ct21": "RVFNDCRDIIQRMHLKQYELL",
+  "ct11": "QRMHLKQYELL"
+ },
+ "Gi1": {
+  "acc": "P63096",
+  "len": 354,
+  "ct21": "FVFDAVTDVIIKNNLKDCGLF",
+  "ct11": "IKNNLKDCGLF"
+ },
+ "Gi2": {
+  "acc": "P04899",
+  "len": 355,
+  "ct21": "FVFDAVTDVIIKNNLKDCGLF",
+  "ct11": "IKNNLKDCGLF"
+ },
+ "Gi3": {
+  "acc": "P08754",
+  "len": 354,
+  "ct21": "FVFDAVTDVIIKNNLKECGLY",
+  "ct11": "IKNNLKECGLY"
+ },
+ "Go": {
+  "acc": "P09471",
+  "len": 354,
+  "ct21": "VVFDAVTDIIIANNLRGCGLY",
+  "ct11": "IANNLRGCGLY"
+ },
+ "Gt1": {
+  "acc": "P04695",
+  "len": 350,
+  "ct21": "FVFDAVTDIIIKENLKDCGLF",
+  "ct11": "IKENLKDCGLF"
+ },
+ "Gt2": {
+  "acc": "P19087",
+  "len": 354,
+  "ct21": "FVFDAVTDIIIKENLKDCGLF",
+  "ct11": "IKENLKDCGLF"
+ },
+ "Ggust": {
+  "acc": "P29033",
+  "len": 226,
+  "ct21": "NVTELCYLLIRYCSGKSKKPV",
+  "ct11": "RYCSGKSKKPV"
+ },
+ "Gz": {
+  "acc": "P19086",
+  "len": 355,
+  "ct21": "FVFDAVTDVIIQNNLKYIGLC",
+  "ct11": "IQNNLKYIGLC"
+ },
+ "Gq": {
+  "acc": "P50148",
+  "len": 359,
+  "ct21": "FVFAAVKDTILQLNLKEYNLV",
+  "ct11": "LQLNLKEYNLV"
+ },
+ "G11": {
+  "acc": "P29992",
+  "len": 359,
+  "ct21": "FVFAAVKDTILQLNLKEYNLV",
+  "ct11": "LQLNLKEYNLV"
+ },
+ "G14": {
+  "acc": "O95837",
+  "len": 355,
+  "ct21": "FVFAAVKDTILQLNLREFNLV",
+  "ct11": "LQLNLREFNLV"
+ },
+ "G15": {
+  "acc": "P30679",
+  "len": 374,
+  "ct21": "KVFKDVRDSVLARYLDEINLL",
+  "ct11": "LARYLDEINLL"
+ },
+ "G12": {
+  "acc": "Q03113",
+  "len": 381,
+  "ct21": "FVFHAVKDTILQENLKDIMLQ",
+  "ct11": "LQENLKDIMLQ"
+ },
+ "G13": {
+  "acc": "Q14344",
+  "len": 377,
+  "ct21": "LVFRDVKDTILHDNLKQLMLQ",
+  "ct11": "LHDNLKQLMLQ"
+ }
+}

@@ -1,0 +1,21 @@
+--- a/openfold3/entry_points/experiment_runner.py
++++ b/openfold3/entry_points/experiment_runner.py
+@@ -608,8 +608,16 @@
+             self.set_num_diffusion_samples(num_diffusion_samples)
+
+         if num_model_seeds:
+-            start_seed = 42
+-            self.seeds = generate_seeds(start_seed, num_model_seeds)
++            # paper_af3 vendored patch (2026-09-02): the upstream branch
++            # here reads `start_seed = 42; self.seeds = generate_seeds(...)`
++            # — a hardcoded literal that silently overwrites any launcher-
++            # or yaml-provided seeds and pins every prediction to internal
++            # seed 2746317213 (see refs/of3_seed_bug_mechanism.md).
++            raise ValueError(
++                "openfold3 vendored patch: --num-model-seeds is deprecated "
++                "in this install; pass seeds via runner-yaml "
++                "experiment_settings.seeds. See refs/of3_seed_bug_mechanism.md."
++            )
+
+         if use_msa_server is not None:
+             self.experiment_config.experiment_settings.use_msa_server = use_msa_server

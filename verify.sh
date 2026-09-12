@@ -48,6 +48,18 @@ N=$(python3 -c "import pandas,sys; print(len(pandas.read_csv('data/block_a/01_ro
 ./analysis/block_a/check_deliverables.sh >/dev/null 2>&1 \
   && ok "block A deliverables" "all checks pass" || bad "block A deliverables" "see check_deliverables.sh"
 
+# --- redo campaign ---
+python3 redo/gates/layout.py >/dev/null 2>&1 \
+  && ok "redo layout" "7 checks clean" || bad "redo layout" "VIOLATED — run redo/gates/layout.py"
+python3 redo/build/manifest.py --check >/dev/null 2>&1 \
+  && ok "redo inputs manifest" "in sync" || bad "redo inputs manifest" "STALE — python3 redo/build/manifest.py"
+python3 redo/gates/run_receipt.py >/dev/null 2>&1 \
+  && ok "redo run receipts" "accepted (or no runs yet)" || bad "redo run receipts" "REFUSED — run redo/gates/run_receipt.py"
+G0=$(python3 redo/gates/g0_preflight.py 2>/dev/null | grep -E "FROZEN|NOT FROZEN" | tail -1 | sed 's/^ *//')
+G1=$(python3 redo/gates/g1_preflight.py 2>/dev/null | grep -E "^[0-9]+ passed" | tail -1)
+case "$G0" in "FROZEN"*) ok "redo group 0 gate" "$G0" ;; *) bad "redo group 0 gate" "${G0:-did not run}" ;; esac
+case "$G1" in *"0 failed"*) ok "redo group 1 gate" "$G1" ;; *) bad "redo group 1 gate" "${G1:-did not run}" ;; esac
+
 # --- bibliography ---
 T=$(mktemp); cp manuscript/refs.bib "$T" 2>/dev/null
 python3 analysis/sync_bib.py >/dev/null 2>&1

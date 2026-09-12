@@ -1,0 +1,99 @@
+pdb_id,gpcrdb_entry,receptor_slug,gpcr_class,state,species,method,resolution,publication_date,preferred_chain,transducer_type,ligand_functions,on_panel48,on_panel75,in_confornets,role,rcsb_metadata_cached,flag_res_missing,flag_res_above_floor,flag_non_human,flag_arrestin_active,flag_no_transducer_active,flag_label_conflict,activation_degree,pct_seq_modelled,flag_active_not_fully_active
+5UNF,agtr2_human,agtr2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.8,2017-04-05,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,98,79,1
+5UNG,agtr2_human,agtr2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.8,2017-04-05,B,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,98,83,1
+5UNH,agtr2_human,agtr2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.9,2017-04-05,B,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,98,75,1
+7JNI,agtr2_human,agtr2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,3.0,2022-02-09,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,98,82,1
+6RZ4,cltr1_human,cltr1,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.7,2019-10-30,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,85,1
+6RZ5,cltr1_human,cltr1,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.53,2019-10-30,B,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,84,1
+6RZ6,cltr2_human,cltr2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.43,2019-12-11,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,82,1
+6RZ7,cltr2_human,cltr2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.43,2019-12-11,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,79,1
+6RZ8,cltr2_human,cltr2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.7,2019-12-11,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,78,1
+6RZ9,cltr2_human,cltr2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.73,2019-12-11,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,81,1
+7TUY,gp183_human,gp183,Class A (Rhodopsin),Active,Homo sapiens,Electron microscopy,2.98,2022-04-13,R,none,Inverse agonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,73,1
+8IYX,gpr34_human,gpr34,Class A (Rhodopsin),Active,Homo sapiens,Electron microscopy,3.34,2024-03-20,C,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,70,1
+9IYA,gpr55_human,gpr55,Class A (Rhodopsin),Active,Homo sapiens,Electron microscopy,3.04,2025-01-01,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,86,1
+8TB7,gpr61_human,gpr61,Class A (Rhodopsin),Active,Homo sapiens,Electron microscopy,2.94,2023-10-04,R,none,Inverse agonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,94,47,1
+8TF5,gpr6_human,gpr6,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.1,2024-12-04,A,none,Inverse agonist,0,1,1,calibration,1,0,0,0,0,1,active_label_antagonist_only_no_transducer,99,73,1
+4XNV,p2ry1_human,p2ry1,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.2,2015-04-01,A,none,NAM,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,78,1
+4XNW,p2ry1_human,p2ry1,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.7,2015-04-01,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,78,1
+4NTJ,p2y12_human,p2y12,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.62,2014-03-26,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,78,1
+7PP1,p2y12_human,p2y12,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.78,2022-11-02,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,78,1
+3VW7,par1_human,par1,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.2,2012-12-12,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,66,1
+5NDD,par2_human,par2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.8,2017-05-03,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,74,1
+5NDZ,par2_human,par2,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,3.6,2017-05-03,A,none,Allosteric antagonist,0,0,0,calibration,0,0,1,0,0,1,active_label_antagonist_only_no_transducer,56,74,1
+5ZKQ,ptafr_human,ptafr,Class A (Rhodopsin),Active,Homo sapiens,X-ray diffraction,2.9,2018-06-20,B,none,Inverse agonist,0,0,0,calibration,0,0,0,0,0,1,active_label_antagonist_only_no_transducer,56,83,1
+6RNK,sucr1_rat,sucr1,Class A (Rhodopsin),Active,Rattus norvegicus,X-ray diffraction,1.94,2019-08-14,A,none,Antagonist,0,0,0,calibration,0,0,0,1,0,1,active_label_antagonist_only_no_transducer,56,90,1
+6Z10,sucr1_rat,sucr1,Class A (Rhodopsin),Active,Rattus norvegicus,X-ray diffraction,2.27,2020-09-16,A,none,Antagonist,0,0,0,calibration,0,0,0,1,0,1,active_label_antagonist_only_no_transducer,56,90,1
+4IAQ,5ht1b_human,5ht1b,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.8,2013-03-13,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,16,70,0
+4IAR,5ht1b_human,5ht1b,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.7,2013-03-13,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,16,70,0
+6WGT,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.4,2020-09-23,B,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,59,0
+7VOD,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.3,2021-12-22,A,none,Agonist (partial),0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,58,0
+7VOE,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.9,2021-12-22,A,none,Agonist (partial),0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,58,0
+7WC4,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.2,2022-01-26,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,61,0
+7WC5,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.2,2022-01-26,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,60,0
+7WC6,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.6,2022-01-26,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,58,0
+7WC7,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.6,2022-01-26,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,59,0
+7WC8,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.45,2022-01-26,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,59,0
+7WC9,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.5,2022-01-26,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,59,0
+8JT8,5ht2a_human,5ht2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.7,2024-02-28,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,58,0
+5N2S,aa1r_human,aa1r,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.3,2017-07-26,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,1,86,0
+7ARO,aa2ar_human,aa2ar,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.12,2021-04-07,A,none,Agonist (partial),1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,1,72,0
+8RLN,aa2ar_human,aa2ar,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.43,2024-06-19,A,none,Agonist (partial),1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,1,72,0
+6ZFZ,acm1_human,acm1,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.17,2021-10-06,A,none,Agonist,1,1,0,application,1,0,0,0,0,0,inactive_label_agonist_bound,3,62,0
+6ZG4,acm1_human,acm1,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.33,2021-10-06,A,none,Agonist,1,1,0,application,1,0,0,0,0,0,inactive_label_agonist_bound,3,62,0
+6ZG9,acm1_human,acm1,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.5,2021-10-06,A,none,Agonist,1,1,0,application,1,0,0,0,0,0,inactive_label_agonist_bound,3,62,0
+6KUY,ada2a_human,ada2a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.2,2019-12-04,A,none,Agonist (partial),1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,1,56,0
+2Y00,adrb1_melga,adrb1,Class A (Rhodopsin),Inactive,Meleagris gallopavo,X-ray diffraction,2.5,2011-01-12,B,none,Agonist (partial),1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,0,62,0
+2Y01,adrb1_melga,adrb1,Class A (Rhodopsin),Inactive,Meleagris gallopavo,X-ray diffraction,2.6,2011-03-30,A,none,Agonist (partial),1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,0,59,0
+2Y02,adrb1_melga,adrb1,Class A (Rhodopsin),Inactive,Meleagris gallopavo,X-ray diffraction,2.6,2011-01-12,B,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,0,62,0
+2Y03,adrb1_melga,adrb1,Class A (Rhodopsin),Inactive,Meleagris gallopavo,X-ray diffraction,2.85,2011-01-12,B,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,0,62,0
+2Y04,adrb1_melga,adrb1,Class A (Rhodopsin),Inactive,Meleagris gallopavo,X-ray diffraction,3.05,2011-01-12,B,none,Agonist (partial),1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,0,62,0
+4AMI,adrb1_melga,adrb1,Class A (Rhodopsin),Inactive,Meleagris gallopavo,X-ray diffraction,3.2,2012-05-23,A,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,0,58,0
+3PDS,adrb2_human,adrb2,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.5,2011-01-12,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,0,68,0
+8JJL,adrb2_human,adrb2,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.2,2023-09-06,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,0,68,0
+5VBL,apj_human,apj,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.6,2017-05-31,B,none,Agonist,1,1,0,application,1,0,0,0,0,0,inactive_label_agonist_bound,8,79,0
+6KNM,apj_human,apj,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.2,2020-01-29,B,none,Agonist,1,1,0,application,1,0,0,0,0,0,inactive_label_agonist_bound,8,78,0
+7SUS,apj_human,apj,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.7,2022-07-27,A,none,Agonist,1,1,0,application,1,0,0,0,0,0,inactive_label_agonist_bound,8,76,0
+8S4D,apj_human,apj,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.58,2024-12-04,A,none,Agonist,1,1,0,application,1,0,0,0,0,0,inactive_label_agonist_bound,16,73,0
+7F8X,cckar_human,cckar,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.0,2021-12-29,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,1,66,0
+7F1T,ccr5_human,ccr5,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.6,2021-07-14,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,9,86,0
+7FEE,cnr1_human,cnr1,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.7,2022-06-15,A,none,Agonist|PAM,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,7,61,0
+6KPC,cnr2_human,cnr2,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.2,2020-02-12,A,none,Agonist,1,1,0,application,1,0,0,0,0,0,inactive_label_agonist_bound,4,79,0
+8K2W,cxcr3_human,cxcr3,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.0,2023-11-29,R,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,8,71,0
+8U4R,cxcr4_human,cxcr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.1,2024-03-13,R,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,8,79,0
+8U4T,cxcr4_human,cxcr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.38,2024-03-13,R,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,8,79,0
+5GLH,ednrb_human,ednrb,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.8,2016-09-07,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,16,66,0
+6IGK,ednrb_human,ednrb,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.0,2018-11-21,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,3,70,0
+6IGL,ednrb_human,ednrb,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.7,2018-11-21,A,none,Agonist (partial),1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,3,70,0
+6LRY,ednrb_human,ednrb,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.0,2020-02-12,A,none,Agonist,1,1,1,application,1,0,0,0,0,0,inactive_label_agonist_bound,16,70,0
+6LI0,gpr52_human,gpr52,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.2,2020-02-26,A,none,Agonist,0,1,0,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,36,81,0
+8WVU,lgr4_human,lgr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.61,2024-10-30,A,none,Agonist,0,0,0,calibration,0,0,1,0,0,0,inactive_label_agonist_bound,8,77,0
+8WVX,lgr4_human,lgr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.32,2024-10-30,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,inactive_label_agonist_bound,8,76,0
+8WVY,lgr4_human,lgr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.29,2024-10-30,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,inactive_label_agonist_bound,8,77,0
+8XFP,lgr4_human,lgr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.21,2024-12-04,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,inactive_label_agonist_bound,8,77,0
+8XFS,lgr4_human,lgr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.2,2024-12-04,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,inactive_label_agonist_bound,8,77,0
+8XFT,lgr4_human,lgr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.24,2024-12-04,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,inactive_label_agonist_bound,8,77,0
+8Y69,lgr4_human,lgr4,Class A (Rhodopsin),Inactive,Homo sapiens,Electron microscopy,3.38,2024-12-04,D,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,inactive_label_agonist_bound,8,77,0
+6ME2,mtr1a_human,mtr1a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.8,2019-04-24,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,83,0
+6ME3,mtr1a_human,mtr1a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.9,2019-04-24,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,82,0
+6ME4,mtr1a_human,mtr1a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.2,2019-04-24,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,83,0
+6ME5,mtr1a_human,mtr1a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.2,2019-04-24,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,83,0
+6PS8,mtr1a_human,mtr1a,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.3,2019-11-13,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,83,0
+6ME6,mtr1b_human,mtr1b,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.8,2019-04-24,B,none,Agonist,0,1,0,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,78,0
+6ME7,mtr1b_human,mtr1b,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.2,2019-04-24,A,none,Agonist,0,1,0,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,79,0
+6ME8,mtr1b_human,mtr1b,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.1,2019-04-24,B,none,Agonist,0,1,0,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,78,0
+6ME9,mtr1b_human,mtr1b,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,3.3,2019-04-24,B,none,Agonist,0,1,0,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,1,79,0
+3ZEV,ntr1_rat,ntr1,Class A (Rhodopsin),Inactive,Rattus norvegicus,X-ray diffraction,3.0,2014-01-29,A,none,Agonist,0,1,1,calibration,1,0,0,1,0,0,inactive_label_agonist_bound,2,72,0
+4BUO,ntr1_rat,ntr1,Class A (Rhodopsin),Inactive,Rattus norvegicus,X-ray diffraction,2.75,2014-01-29,A,none,Agonist,0,1,1,calibration,1,0,0,1,0,0,inactive_label_agonist_bound,2,72,0
+4BV0,ntr1_rat,ntr1,Class A (Rhodopsin),Inactive,Rattus norvegicus,X-ray diffraction,3.1,2014-01-29,A,none,Agonist,0,1,1,calibration,1,0,0,1,0,0,inactive_label_agonist_bound,2,70,0
+4BWB,ntr1_rat,ntr1,Class A (Rhodopsin),Inactive,Rattus norvegicus,X-ray diffraction,3.57,2014-01-29,A,none,Agonist,0,1,1,calibration,1,0,1,1,0,0,inactive_label_agonist_bound,2,72,0
+6YVR,ntr1_rat,ntr1,Class A (Rhodopsin),Inactive,Rattus norvegicus,X-ray diffraction,2.46,2021-02-10,B,none,Agonist,0,1,1,calibration,1,0,0,1,0,0,inactive_label_agonist_bound,2,83,0
+2G87,opsd_bovin,opsd,Class A (Rhodopsin),Inactive,Bos taurus,X-ray diffraction,2.6,2006-09-02,A,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,24,100,0
+2HPY,opsd_bovin,opsd,Class A (Rhodopsin),Inactive,Bos taurus,X-ray diffraction,2.8,2006-08-22,B,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,24,100,0
+5TE5,opsd_bovin,opsd,Class A (Rhodopsin),Inactive,Bos taurus,X-ray diffraction,4.01,2017-03-15,A,none,Agonist,1,1,1,application,1,0,1,1,0,0,inactive_label_agonist_bound,24,100,0
+8A6C,opsd_bovin,opsd,Class A (Rhodopsin),Inactive,Bos taurus,X-ray diffraction,1.8,2023-03-29,A,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,24,87,0
+8A6D,opsd_bovin,opsd,Class A (Rhodopsin),Inactive,Bos taurus,X-ray diffraction,1.8,2023-03-29,A,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,24,87,0
+8A6E,opsd_bovin,opsd,Class A (Rhodopsin),Inactive,Bos taurus,X-ray diffraction,1.8,2023-03-29,A,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,24,87,0
+3AYM,opsd_todpa,opsd,Class A (Rhodopsin),Inactive,Todarodes pacificus,X-ray diffraction,2.8,2011-08-17,B,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,9,77,0
+4WW3,opsd_todpa,opsd,Class A (Rhodopsin),Inactive,Todarodes pacificus,X-ray diffraction,2.8,2015-06-17,A,none,Agonist,1,1,1,application,1,0,0,1,0,0,inactive_label_agonist_bound,9,78,0
+7XN9,ssr2_human,ssr2,Class A (Rhodopsin),Inactive,Homo sapiens,X-ray diffraction,2.6,2022-08-03,A,none,Agonist,0,1,1,calibration,1,0,0,0,0,0,inactive_label_agonist_bound,8,79,0

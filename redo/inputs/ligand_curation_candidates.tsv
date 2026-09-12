@@ -1,0 +1,60 @@
+receptor	needed	role_gpcrdb	function_raw	ligand_name	ligand_ccd	bound_pdb	is_our_reference	state	resolution	species	smiles	curation_note
+S1PR1	both	agonist	Agonist	siponimod	J8C	7TD4	yes	Active	2.6	Homo sapiens	CCc1cc(ccc1CN1CC(C1)C(=O)O)/C(=N/OCc1ccc(c(c1)C(F)(F)F)C1CCCCC1)/C	
+S1PR1	both	antagonist	Antagonist	W146	ML5	3V2Y	yes	Inactive	2.8	Homo sapiens	CCCCCCc1cccc(c1)NC(=O)[C@@H](CCP(=O)(O)O)N	
+S1PR1	both	agonist	Agonist	(S)-FTY720-phosphate	J89	7VIF		Active	2.83	Homo sapiens	CCCCCCCCc1ccc(cc1)CC[C@@](COP(=O)(O)O)(CO)N	
+S1PR1	both	agonist	Agonist	sphingosine 1-phosphate	S1P	7VIE		Active	2.86	Homo sapiens	CCCCCCCCCCCCC/C=C/[C@H]([C@H](COP(=O)(O)O)N)O	
+S1PR1	both	agonist	Agonist	icanbelimod	7I4	7VIG		Active	2.89	Homo sapiens	Fc1c(ccc(c1)c1noc(n1)c1ccc(cc1)CC(C)C)CN1CC(C1)C(=O)O	
+S1PR1	both	agonist	Agonist	cenerimod	JER	7EVZ		Active	3.07	Homo sapiens	OC[C@@H](COc1c(C)cc(cc1CC)c1noc(n1)c1cc(OC)nc(c1)C1CCCC1)O	
+S1PR1	both	agonist	Agonist	SEW2871	JEX	7EW7		Active	3.27	Homo sapiens	FC(c1sc(cc1c1ccccc1)c1onc(n1)c1cccc(c1)C(F)(F)F)(F)F	
+S1PR1	both	agonist	Agonist	ozanimod	JEU	7EW0		Active	3.42	Homo sapiens	OCCN[C@H]1CCc2c1cccc2c1noc(n1)c1ccc(c(c1)C#N)OC(C)C	
+S1PR1	both	agonist	Agonist	SAR247799	A1LYQ	8YIC		Active	3.47	Homo sapiens	OC(=O)COc1c(C)cc(cc1C)c1nc2c(o1)nc(nc2)Oc1cccc(c1)Cl	
+CCKAR	agonist	antagonist	Antagonist	lintitript	1OE	7F8U	yes	Inactive	2.8	Homo sapiens	OC(=O)Cn1c(cc2c1cccc2)C(=O)Nc1scc(n1)c1ccccc1Cl	curated agonist is CCK-8 peptide
+CCKAR	agonist	antagonist	Antagonist	DEVAZEPIDE	1OZ	7F8Y		Inactive	2.5	Homo sapiens	CN1C(=O)[C@@H](NC(=O)c2cc3ccccc3[nH]2)N=C(c2ccccc2)c2ccccc21	curated agonist is CCK-8 peptide
+CCKAR	agonist	agonist	Agonist	SR146131	IA1	7XOV		Active	3.0	Homo sapiens	COc1cc(Cl)c(cc1c1nc(sc1CCC1CCCCC1)NC(=O)c1cc2c(n1CC(=O)O)c(C)cc(c2)C)OC	curated agonist is CCK-8 peptide
+GHSR	both	antagonist	Antagonist	CHEMBL1956994	8QX	6KO5	yes	Inactive	3.3	Homo sapiens	Cc1nc2ccc(Oc3ccc(Br)cc3F)nc2c(=O)n1C[C@H]1CCCN(C(C)C)C1	curated agonist is ghrelin peptide
+GHSR	both	agonist	Agonist	ibutamoren	1KD	7NA8		Active	2.7	Homo sapiens	O=C([C@H](NC(=O)C(N)(C)C)COCc1ccccc1)N1CCC2(CC1)CN(c1c2cccc1)S(=O)(=O)C	curated agonist is ghrelin peptide
+GHSR	both	antagonist	Inverse agonist	PF-05190457	1KQ	7F83		Inactive	2.94	Homo sapiens	Cc1ncnc(c1)c1ccc2c(c1)CC[C@H]2N1CC2(C1)CCN(CC2)C(=O)Cc1nc2n(c1)cc(s2)C	curated agonist is ghrelin peptide
+ADRB1	antagonist	antagonist	Inverse agonist	Carazolol	CAU	7BVQ	yes	Inactive	2.5	Homo sapiens	CC(C)NC[C@@H](COC1=CC=CC2=C1C3=CC=CC=C3N2)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	CHEMBL1615159	P0G	7BU7	yes	Active	2.6	Homo sapiens	Cc1ccccc1CC(C)(C)NC[C@H](O)c1ccc(O)c2c1OCC(=O)N2	placeholder row, no SMILES/PDB
+ADRB1	antagonist	antagonist	Antagonist	(S)-Cyanopindolol	P32	4BVN		Inactive	2.1	Meleagris gallopavo	CC(C)(C)NC[C@@H](COC1=CC=CC2=C1CC(=N2)C#N)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	antagonist	Inverse agonist	CHEMBL3799125	CVD	4AMJ		Inactive	2.3	Meleagris gallopavo	COc1ccccc1OCCNC[C@H](O)COc1cccc2[nH]c3ccccc3c12	placeholder row, no SMILES/PDB
+ADRB1	antagonist	antagonist	Inverse agonist	7-methylcyanopindolol	XTK	5A8E		Inactive	2.4	Meleagris gallopavo	C(C)(C)(C)NC[C@@H](COC1=C2C=C(NC2=C(C=C1)C)C#N)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist (partial)	Dobutamine	Y00	2Y00		Inactive	2.5	Meleagris gallopavo	C[C@H](CCC1=CC=C(C=C1)O)NCCC2=CC(=C(C=C2)O)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	(S)-Xamoterol	FVK	6H7N		Active	2.5	Meleagris gallopavo	C1COCCN1C(=O)NCCNC[C@@H](COC2=CC=C(C=C2)O)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	LEVISOPRENALINE	5FW	7JJO		Active	2.6	Meleagris gallopavo	CC(C)NC[C@H](O)c1ccc(O)c(O)c1	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist (partial)	Dobutamine	Y00	2Y01		Inactive	2.6	Meleagris gallopavo	C[C@H](CCCC(C)C)[C@H]1CC[C@@H]2[C@@]1(CC[C@H]3[C@H]2CC=C4[C@@]3(CC[C@@H](C4)OC(=O)CCC(=O)O)C)C	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	CARMOTEROL	WHJ	2Y02		Inactive	2.6	Meleagris gallopavo	COc1ccc(C[C@@H](C)NC[C@H](O)c2ccc(O)c3[nH]c(=O)ccc23)cc1	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	Noradrenaline	E5E	7BU6		Active	2.7	Homo sapiens	C1=CC(=C(C=C1[C@H](C[NH3+])O)O)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	antagonist	Antagonist	CHEMBL1559535	3WC	3ZPR		Inactive	2.7	Meleagris gallopavo	Cc1cc(N2CCNCC2)nc2ccccc12	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	ARFORMOTEROL	H98	6IBL		Active	2.7	Meleagris gallopavo	COc1ccc(C[C@@H](C)NC[C@H](O)c2ccc(O)c(NC=O)c2)cc1	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	levosalbutamol	68H	6H7M		Active	2.76	Meleagris gallopavo	OCc1cc(ccc1O)[C@H](CNC(C)(C)C)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	antagonist	Antagonist	CHEMBL200234	XF5	3ZPQ		Inactive	2.8	Meleagris gallopavo	c1cc(N2CCNCC2)c2cc[nH]c2c1	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	(S)-Cyanopindolol	P32	6H7O		Active	2.8	Meleagris gallopavo	CC(C)(C)NC[C@@H](COC1=CC=CC2=C1CC(=N2)C#N)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	(-)-adrenaline	ALE	7BTS		Active	3.13	Homo sapiens	CNC[C@@H](c1ccc(c(c1)O)O)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	agonist	Agonist	Bucindolol	G90	4AMI		Inactive	3.2	Meleagris gallopavo	CC(C)(CC1=CNC2=CC=CC=C21)NC[C@@H](COC3=CC=CC=C3C#N)O	placeholder row, no SMILES/PDB
+ADRB1	antagonist	antagonist	Antagonist	Iodocyanopindolol	I32	2YCZ		Inactive	3.65	Meleagris gallopavo	CC(C)(C)NC[C@@H](COC1=CC=CC2=C1C(=C(N2)C#N)I)O	placeholder row, no SMILES/PDB
+HRH3	agonist	agonist	Agonist	histamine	HSM	8YN5	yes	Active	2.7	Homo sapiens	NCCc1cnc[nH]1	placeholder row, no SMILES/PDB
+HRH3	agonist	agonist	Agonist	imetit	ITF	8YN6		Active	2.77	Homo sapiens	NC(=N)SCCc1cnc[nH]1	placeholder row, no SMILES/PDB
+HRH3	agonist	agonist	Agonist	proxyfan	A1LY3	8YN8		Active	2.77	Homo sapiens	C(CCc1cnc[nH]1)OCc1ccccc1	placeholder row, no SMILES/PDB
+HRH3	agonist	agonist	Agonist	immepip	A1LY4	8YUV		Active	3.0	Homo sapiens	N1CCC(CC1)Cc1[nH]cnc1	placeholder row, no SMILES/PDB
+OPSD	antagonist	antagonist	Inverse agonist	Retinal (11-cis)	RET	7ZBC	yes	Inactive	1.8	Bos taurus	CC1=C(C(CCC1)(C)C)/C=C/C(=C/C=C\C(=C\C=O)\C)/C	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	other	unknown	B-Nonylglucoside	BNG	4X1H	yes	Active	2.29	Bos taurus	CCCCCCCCCO[C@H]1[C@@H]([C@H]([C@@H]([C@H](O1)CO)O)O)O	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	Retinal (11-cis)	RET	8A6D		Inactive	1.8	Bos taurus	CC1=C(C(CCC1)(C)C)/C=C/C(=C/C=C\C(=C\C=O)\C)/C	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	Retinal (all-trans)	RET	5DYS		Active	2.3	Bos taurus	CC1=C(C(CCC1)(C)C)/C=C/C(=C/C=C/C(=C/C=O)/C)/C	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	COMPOUND SUMMARY	DOK	6FK6		Active	2.36	Bos taurus	CC(C)[C@@H](C1=CC=C(C=C1)Cl)C(=O)N2CCC3(CC2)OC4=CC=CC=C4O3	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	3-[1'-[(2~{S})-2-(4-chlorophenyl)-3-methyl-butanoyl]spiro[1,3-benzodioxole-2,4'-piperidine]-5-yl]propanoic acid	DLB	6FKC		Active	2.46	Bos taurus	CC(C)[C@@H](C1=CC=C(C=C1)Cl)C(=O)N2CCC3(CC2)OC4=C(O3)C=C(C=C4)CCC(=O)O	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	5-chloro-2-(2-oxo-2-spiro[1,3-benzodioxole-2,4'-piperidine]-1'-ylethyl)-3H-pyridin-6-one	DL2	6FKD		Active	2.49	Bos taurus	C1CN(CCC12OC3=CC=CC=C3O2)C(=O)CC4=NC(=O)C(=CC4)Cl	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	(2~{S})-2-(4-chlorophenyl)-3-methyl-1-spiro[1,3-benzodioxole-2,4'-piperidine]-1'-yl-butan-1-one	DO5	6FK7		Active	2.62	Bos taurus	C[C@H]([C@@H](C1=CC=C(C=C1)Cl)C(=O)N2CCC3(CC2)OC4=CC=CC=C4O3)O	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	(2~{S})-3-methyl-2-phenyl-1-spiro[1,3-benzodioxole-2,4'-piperidine]-1'-yl-butan-1-one	DNK	6FK9		Active	2.63	Bos taurus	CC(C)[C@@H](C1=CC=CC=C1)C(=O)N2CCC3(CC2)OC4=CC=CC=C4O3	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	other	unknown	B-Octylglucoside	BOG	4J4Q		Active	2.65	Bos taurus	CCCCCCCCO[C@H]1[C@@H]([C@H]([C@@H]([C@H](O1)CO)O)O)O	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	(2~{S})-2-(3,4-dichlorophenyl)-3-methyl-1-spiro[1,3-benzodioxole-2,4'-piperidine]-1'-yl-butan-1-one	DN5	6FKA		Active	2.7	Bos taurus	CC(C)[C@@H](C1=CC(=C(C=C1)Cl)Cl)C(=O)N2CCC3(CC2)OC4=CC=CC=C4O3	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	antagonist	Inverse agonist	Retinal (9-cis)	RET	3AYN		Inactive	2.7	Todarodes pacificus	CC1=C(C(CCC1)(C)C)/C=C/C(=C\C=C\C(=C\C=O)\C)/C	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	(2~{R},3~{S})-3-azanyl-2-(4-chlorophenyl)-1-spiro[1,3-benzodioxole-2,4'-piperidine]-1'-yl-butan-1-one	DNZ	6FK8		Active	2.87	Bos taurus	C[C@@H]([C@@H](C1=CC=C(C=C1)Cl)C(=O)N2CCC3(CC2)OC4=CC=CC=C4O3)N	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	other	unknown	Nerol	NZZ	6PH7		Active	2.9	Bos taurus	CC(=CCC/C(=C\CO)/C)C	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	other	unknown	Geraniol	64Z	6PGS		Active	2.91	Bos taurus	CC(=CCC/C(=C/CO)/C)C	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	2-(4-Chlorophenyl)-1-spiro[1,3-benzodioxole-2,4'-piperidine]-1'-yl-ethanone	DLH	6FKB		Active	3.03	Bos taurus	C1CN(CCC12OC3=CC=CC=C3O2)C(=O)CC4=CC=C(C=C4)Cl	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	other	unknown	Citronellol	ODM	6PEL		Active	3.19	Bos taurus	C[C@H](CCC=C(C)C)CCO	RETINAL - agonist/antagonist are isomers of one covalent ligand
+OPSD	antagonist	agonist	Agonist	10,20-Methanoretinal	7AB	5TE5		Inactive	4.01	Bos taurus	CC1=C(C(CCC1)(C)C)/C=C/C(=C/2\CC/C(=C\C=O)/C=C2)/C	RETINAL - agonist/antagonist are isomers of one covalent ligand
+B1B1U5	antagonist	antagonist	Inverse agonist	Retinal (11-cis)	RET	6I9K	yes	Inactive	2.15	Hasarius adansoni	CC1=C(C(CCC1)(C)C)/C=C/C(=C/C=C\C(=C\C=O)\C)/C	RETINAL - same; also blocked on D-H (9EPP vs 9EPR)
+B1B1U5	antagonist	agonist	Agonist	11,20-Ethanoretinal	A1H6M	9EPP	yes	Active	4.06	Hasarius adansoni	CC1=C(C(CCC1)(C)C)/C=C/C(=C/C2=C/C(=C/C=O)/CCC2)/C	RETINAL - same; also blocked on D-H (9EPP vs 9EPR)
+B1B1U5	antagonist	agonist	Agonist	Retinal (11-cis)	RET	9EPR		Active	4.9	Hasarius adansoni	CC1=C(C(CCC1)(C)C)/C=C/C(=C/C=C\C(=C\C=O)\C)/C	RETINAL - same; also blocked on D-H (9EPP vs 9EPR)

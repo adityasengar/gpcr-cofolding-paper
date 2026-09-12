@@ -1,0 +1,65 @@
+n	slug	uniprot	gpcrdb	gclass	cluster	paralog	organism	active_pdb	active_res	inactive_pdb	inactive_res	worse_res	core32_provisional	qc	postcut	blockc_roles	ligands
+1	5HT1B	P28222	5ht1b_human	A	001_001_001	serotonin	Homo sapiens (Human)	6G79	3.78	5V54	3.9	3.9	no	I:mut1	pre-all	3	sm / sm / C
+2	5HT2A	P28223	5ht2a_human	A	001_001_001		Homo sapiens (Human)	8UWL	2.8	7WC7	2.6	2.8	yes	A:fid I:fus	pre-all	0	sm / sm / –
+3	5HT2C	P28335	5ht2c_human	A	001_001_001	serotonin	Homo sapiens (Human)	8DPF	2.84	6BQH	2.7	2.84	no	A:fid I:fus	pre-all	2	sm / sm / c
+4	5HT5A	P47898	5ht5a_human	A	001_001_001	serotonin	Homo sapiens (Human)	7X5H	3.1	7UM4	2.8	3.1	no	A:fus+fid I:mut2	C P	3	sm / sm / C
+5	AA1R	P30542	aa1r_human	A	001_006_001	adenosine	Homo sapiens (Human)	7LD3	3.2	5UEN	3.2	3.2	yes	I:fus	pre-all	3	sm / sm / C
+6	AA2AR	P29274	aa2ar_human	A	001_006_001	adenosine	Homo sapiens (Human)	8WDT	3.34	6S0L	2.65	3.34	no	A:fid	pre-all	3	sm / sm / C
+7	ACM1	P11229	acm1_human	A	001_001_002	muscarinic	Homo sapiens (Human)	6OIJ	3.3	6WJC	2.55	3.3	no	A:fid+mut2 I:fus	pre-all	3	sm / sm / C
+8	ACM2	P08172	acm2_human	A	001_001_002	muscarinic	Homo sapiens (Human)	7T94	3.16	5ZK8	3.0	3.16	no	A:fid I:fus	pre-all	3	sm / sm / C
+9	ACM4	P08173	acm4_human	A	001_001_002	muscarinic	Homo sapiens (Human)	7TRP	2.4	5DSG	2.6	2.6	yes	A:fid I:fus	C P	3	sm / sm / C
+10	ADA1A	P35348	ada1a_human	A	001_001_003		Homo sapiens (Human)	7YM8	2.92	8HN1	2.9	2.92	no	A:fid I:fid	C P **B** (both)	0	sm / pep;sm / –
+11	ADA2A	P08913	ada2a_human	A	001_001_003	adrenergic_alpha	Homo sapiens (Human)	7EJ8	3.0	6KUX	2.7	3.0	no	A:fid	C P	2	sm / sm / c
+12	ADRB1	P08588	adrb1_human	A	001_001_003	adrenergic_beta	Homo sapiens (Human)	7BU7	2.6	7BVQ	2.5	2.6	yes	A:fus+fid+mut2 I:fus+mut2	pre-all	2	sm / sm / c
+13	ADRB2	P07550	adrb2_human	A	001_001_003	adrenergic_beta	Homo sapiens (Human)	8GG0	2.9	2R4R	3.4	3.4	no	I:fid	pre-all	3	sm / sm / C
+14	AGTR1	P30556	agtr1_human	A	001_002_001	angiotensin	Homo sapiens (Human)	6OS2	2.7	8TH3	3.0	3.0	yes	A:fus+fid I:fus+fid	pre-all	3	pep;prot / prot;sm / C
+15	APJ	P35414	apj_human	A	001_002_002	apelin	Homo sapiens (Human)	8XZH	2.6	5VBL	2.6	2.6	yes	A:fid I:fus+mut5	C P	2	pep;prot;sm / **none** / c
+16	B1B1U5	B1B1U5	b1b1u5_9arac	A	001_009_001_inv	opsin_invertebrate_jsr1	Hasarius adansoni	9EPP	4.06	6I9K	2.15	4.06	yes	I:mut1 **spider**	C P **B**	0	sm / sm / –
+17	C5AR1	P21730	c5ar1_human	A	001_002_006		Homo sapiens (Human)	7Y66	2.9	6C1R	2.2	2.9	yes	A:fid I:fus+mut3	C P	0	pep / pep;sm / –
+18	CCKAR	P32238	cckar_human	A	001_002_005	cholecystokinin	Homo sapiens (Human)	7MBX	1.95	7F8U	2.8	2.8	yes	A:fid I:fus	C	3	pep;prot;sm / sm / C
+19	CCR2	P41597	ccr2_human	A	001_003_002		Homo sapiens (Human)	7XA3	2.9	6GPX	2.7	2.9	yes	A:fid I:fus	C P	0	pep / sm / –
+20	CCR5	P51681	ccr5_human	A	001_003_002	chemokine_ccr	Homo sapiens (Human)	7O7F	3.15	6MEO	3.9	3.9	no	A:fid	C	3	pep / prot;sm / C
+21	CCR6	P51684	ccr6_human	A	001_003_002		Homo sapiens (Human)	6WWZ	3.34	9D3G	3.26	3.34	no	A:fid I:fus+fid	pre-all	0	pep / sm / –
+22	CCR8	P51685	ccr8_human	A	001_003_002		Homo sapiens (Human)	8KFX	2.96	8TLM	2.9	2.96	no	A:fid I:fus+fid	C P **B** (both)	0	prot;sm / prot / –
+23	CNR1	P21554	cnr1_human	A	001_004_005	cannabinoid	Homo sapiens (Human)	8GHV	2.8	9BA0	3.13	3.13	no	A:fid I:fus	pre-all	3	sm / sm / C
+24	CNR2	P34972	cnr2_human	A	001_004_005	cannabinoid	Homo sapiens (Human)	8GUR	2.84	5ZTY	2.8	2.84	yes	A:fid I:fus+mut7	pre-all	3	sm / sm / C
+25	CXCR2	P25025	cxcr2_human	A	001_003_002	chemokine_cxcr	Homo sapiens (Human)	6LFO	3.4	6LFL	3.2	3.4	no	A:fid I:fus+mut3	pre-all	3	prot / sm / C
+26	CXCR3	P49682	cxcr3_human	A	001_003_002		Homo sapiens (Human)	8HNM	2.94	8K2W	3.0	3.0	no	A:fus+fid I:fus+fid	C P **B** (both)	0	pep;sm / sm / –
+27	CXCR4	P61073	cxcr4_human	A	001_003_002	chemokine_cxcr	Homo sapiens (Human)	8U4N	2.72	8U4R	3.1	3.1	no	I:fid	C P **B**	3	pep;prot;sm / pep;sm / C
+28	DRD2	P14416	drd2_human	A	001_001_004	dopamine	Homo sapiens (Human)	8TZQ	3.2	6CM4	2.87	3.2	no	A:fid I:fus	pre-all	2	sm / sm / c
+29	DRD3	P35462	drd3_human	A	001_001_004	dopamine	Homo sapiens (Human)	8IRT	2.7	3PBL	2.89	2.89	yes	A:fus+fid I:fus+mut3	C	3	sm / sm / C
+30	DRD4	P21917	drd4_human	A	001_001_004		Homo sapiens (Human)	8IRU	3.2	5WIU	1.96	3.2	no	A:fid I:fus	C P **B**	0	sm / sm / –
+31	EDNRA	P25101	ednra_human	A	001_002_007	endothelin	Homo sapiens (Human)	8HCQ	3.01	8XVK	3.21	3.21	no	A:fus+fid I:fus+fid	C P	3	prot / sm / C
+32	EDNRB	P24530	ednrb_human	A	001_002_007	endothelin	Homo sapiens (Human)	8IY5	2.8	5GLI	2.5	2.8	yes	A:fid	C P	3	pep;prot / pep;sm / C
+33	FSHR	P23945	fshr_human	A	001_003_003	glycohormone	Homo sapiens (Human)	8I2G	2.8	8I2H	6.0	6.0	no	A:fid+mut1	C P	0	pep;sm / **none** / –
+34	GHSR	Q92847	ghsr_human	A	001_002_010	ghrelin	Homo sapiens (Human)	7NA7	2.7	6KO5	3.3	3.3	yes	A:fid I:fus	C	2	pep;sm / sm / c
+35	GPR52	Q9Y2T5	gpr52_human	A	001_010_001		Homo sapiens (Human)	8HMP	2.77	6LI2	2.8	2.8	yes	A:fid I:fus+mut5	pre-all	0	sm / **none** / –
+36	GPR6	P46095	gpr6_human	A	001_010_001		Homo sapiens (Human)	8TYW	3.43	8T1V	2.6	3.43	no	A:fid I:fus	C P **B** (both)	0	— / sm / –
+37	GRPR	P30550	grpr_human	A	001_002_003	bombesin	Homo sapiens (Human)	8H0Q	3.3	7W41	2.95	3.3	yes	A:fid+mut1 I:fus+mut3	C P	3	pep / sm / C
+38	HRH1	P35367	hrh1_human	A	001_001_005	histamine	Homo sapiens (Human)	8YN2	2.66	8X5Y	3.0	3.0	no	A:fid I:fus	C	2	sm / sm / c
+39	HRH2	P25021	hrh2_human	A	001_001_005		Homo sapiens (Human)	8YN3	2.56	7UL3	3.0	3.0	no	A:fid I:fid	C P **B**	0	sm / sm / –
+40	HRH3	Q9Y5N1	hrh3_human	A	001_001_005	histamine	Homo sapiens (Human)	8YN5	2.7	7F61	2.6	2.7	yes	A:fid I:mut1	C P **B**	2	lip;sm / sm / c
+41	LPAR1	Q92633	lpar1_human	A	001_004_003	lysophosphatidic	Homo sapiens (Human)	7TD0	2.83	4Z36	2.9	2.9	yes	I:fus+mut3	C P	3	sm / sm / C
+42	LSHR	P22888	lshr_human	A	001_003_003	glycohormone	Homo sapiens (Human)	7FII	4.3	7FIJ	3.8	4.3	no	—	C	0	prot;sm / **none** / –
+43	LT4R1	Q15722	lt4r1_human	A	001_004_002	leukotriene	Homo sapiens (Human)	7VKT	2.9	7K15	2.88	2.9	yes	A:fid+mut1 I:fus	C P	3	sm / sm / C
+44	MCHR1	Q99705	mchr1_human	A	001_002_013	melanin_concentrating_hormone	Homo sapiens (Human)	8WWK	2.61	8YNS	3.33	3.33	yes	A:fid I:fus+fid	C P **B** (both)	3	pep / sm / C
+45	MTR1A	P48039	mtr1a_human	A	001_005_001		Homo sapiens (Human)	7VGY	3.1	6ME2	2.8	3.1	yes	A:fid I:fus	C	0	sm / **none** / –
+46	MTR1B	P49286	mtr1b_human	A	001_005_001		Homo sapiens (Human)	7VH0	3.46	6ME6	2.8	3.46	no	A:fid I:fus+mut11	C P	0	sm / **none** / –
+47	NK1R	P25103	nk1r_human	A	001_002_029		Homo sapiens (Human)	8U26	2.5	6E59	3.4	3.4	yes	A:fid I:fus	C P	0	pep / sm / –
+48	NPY1R	P25929	npy1r_human	A	001_002_020	npy	Homo sapiens (Human)	7X9A	3.2	5ZBQ	2.7	3.2	yes	I:fus+mut3	C P	3	pep / sm / C
+49	NPY2R	P49146	npy2r_human	A	001_002_020	npy	Homo sapiens (Human)	8K6N	3.2	7DDZ	2.8	3.2	no	A:fid	C P	3	pep / sm / C
+50	NTR1	P30989	ntr1_human	A	001_002_021		Homo sapiens (Human)	8JPF	3.02	7UL2	2.4	3.02	yes	I:fid	pre-all	0	pep;prot / sm / –
+51	OPRD	P41143	oprd_human	A	001_002_022	opioid	Homo sapiens (Human)	6PT2	2.8	4N6H	1.8	2.8	yes	I:fus+mut4	pre-all	3	pep;prot;sm / pep;sm / C
+52	OPRK	P41145	oprk_human	A	001_002_022	opioid	Homo sapiens (Human)	8FEG	2.54	6VI4	3.3	3.3	no	A:fid I:fid+mut1	pre-all	3	pep;sm / sm / C
+53	OPRM	P42866	oprm_mouse	A	001_002_022		Mus musculus (Mouse)	5C1M	2.07	7UL4	2.8	2.8	no	A:fid I:fid **mouse**	pre-all	0	pep;sm / prot;sm / –
+54	OPRX	P41146	oprx_human	A	001_002_022	opioid_nociceptin	Homo sapiens (Human)	8F7X	3.28	5DHH	3.0	3.28	no	A:fid I:fus+mut3	C P	3	pep / sm / C
+55	OPSD	P02699	opsd_bovin	A	001_009_001_vert	opsin_vertebrate	Bos taurus (Bovine)	4X1H	2.29	7ZBC	1.8	2.29	yes	**bovine**	pre-all	0	sm / sm / –
+56	OX2R	O43614	ox2r_human	A	001_002_023	orexin	Homo sapiens (Human)	7L1V	3.0	7XRR	2.89	3.0	yes	A:fid	C	3	pep;sm / sm / C
+57	OXYR	P30559	oxyr_human	A	001_002_032		Homo sapiens (Human)	7RYC	2.9	6TPK	3.2	3.2	yes	A:fid	C P	0	pep / sm / –
+58	PD2R2	Q9Y5Y4	pd2r2_human	A	001_004_008		Homo sapiens (Human)	8XXV	2.33	7M8W	2.61	2.61	yes	A:fid I:fus	C P **B**	0	lip / sm / –
+59	PE2R4	P35408	pe2r4_human	A	001_004_008		Homo sapiens (Human)	8GDB	3.1	5YHL	4.2	4.2	no	A:fid I:fid+mut5	pre-all	0	lip;sm / sm / –
+60	S1PR1	P21453	s1pr1_human	A	001_004_004		Homo sapiens (Human)	7TD4	2.6	3V2Y	2.8	2.8	yes	I:fus+mut2	C	0	pep;sm / sm / –
+61	S1PR5	Q9H228	s1pr5_human	A	001_004_004		Homo sapiens (Human)	7EW1	3.4	7YXA	2.2	3.4	no	A:fid I:fus	C	0	sm / sm / –
+62	SSR2	P30874	ssr2_human	A	001_002_028		Homo sapiens (Human)	7T10	2.5	7XN9	2.6	2.6	yes	A:fid	C P	0	pep;prot;sm / pep / –
+63	TA2R	P21731	ta2r_human	A	001_004_008		Homo sapiens (Human)	8XJN	3.06	6IIU	2.5	3.06	no	A:fus+fid I:fus+mut1	C P **B**	0	sm / sm / –
+64	TSHR	P16473	tshr_human	A	001_003_003		Homo sapiens (Human)	7UTZ	2.4	7T9M	3.1	3.1	yes	A:fid	C P	0	prot / prot / –

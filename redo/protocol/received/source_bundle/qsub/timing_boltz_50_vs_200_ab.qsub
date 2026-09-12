@@ -1,0 +1,125 @@
+#!/bin/bash
+# qsub/timing_boltz_50_vs_200_ab.qsub — one-off A/B: Boltz --sampling_steps 50 vs 200.
+#
+# Design (2026-09-01):
+#   AA2AR cognate (AA2AR + Gαs + NECA agonist), Boltz-2 only, MSA server on.
+#   3 seeds × --diffusion_samples 5 × 2 configs (sampling_steps = 50, 200) = 30 samples.
+#   Same seeds across both configs so paired analysis is possible.
+#
+# Submit (one job per (seed, config) pair — 6 jobs total, each produces 5 samples):
+#   qsub -v AB_INPUT=<yaml>,AB_OUT_DIR=<dir>,AB_SEED=<int>,AB_STEPS=<50|200> \
+#        qsub/timing_boltz_50_vs_200_ab.qsub
+#
+# Deliberately NOT wired through the M2.3 supervisor — this is an isolated
+# quick-validation dispatch and must not interact with the campaign manifest.
+#
+#$ -N ta_boltz_ab
+#$ -cwd
+#$ -o /hpc/scratch/sengaad1/paper_af3/experiments/timing_boltz_50_vs_200_ab_2026_09_01/logs/boltz_ab.$JOB_ID.log
+#$ -j y
+#$ -l h_rt=03:00:00
+#$ -l m_mem_free=8G
+#$ -l gpu_card=1
+#$ -l gpu_arch=hopper_h100
+#$ -pe smp 4
+
+set -eo pipefail
+source /etc/profile
+module purge
+module load proxy/GLOBAL
+
+if [ -n "${SGE_HGR_gpu_card:-}" ]; then
+    export CUDA_VISIBLE_DEVICES=$(echo "$SGE_HGR_gpu_card" | grep -oE '[0-9]+' | paste -sd,)
+fi
+unset OMP_NUM_THREADS
+set -u
+
+: "${AB_INPUT:?AB_INPUT is required (path to Boltz input.yaml)}"
+: "${AB_OUT_DIR:?AB_OUT_DIR is required (destination dir)}"
+: "${AB_SEED:?AB_SEED is required (integer seed)}"
+: "${AB_STEPS:?AB_STEPS is required (50 or 200)}"
+
+if [ ! -f "$AB_INPUT" ]; then
+    echo "FATAL: AB_INPUT does not exist: $AB_INPUT" >&2
+    exit 1
+fi
+
+mkdir -p "$AB_OUT_DIR"
+
+BOLTZ_VENV=${BOLTZ_VENV:-/home/sengaad1/software/venvs/boltz}
+BOLTZ_CACHE=${BOLTZ_CACHE:-/hpc/scratch/sengaad1/boltz_cache}
+mkdir -p "$BOLTZ_CACHE"
+source "$BOLTZ_VENV/bin/activate"
+
+echo "=== timing_boltz_50_vs_200_ab ==="
+echo "JOB_ID   : ${JOB_ID:-<none>}"
+echo "HOST     : $(hostname)"
+echo "DATE     : $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "AB_INPUT : $AB_INPUT"
+echo "AB_OUT   : $AB_OUT_DIR"
+echo "AB_SEED  : $AB_SEED"
+echo "AB_STEPS : $AB_STEPS"
+echo "GPU      : ${CUDA_VISIBLE_DEVICES:-<none>}"
+nvidia-smi -L || true
+which boltz
+python3 --version
+
+cp -f "$AB_INPUT" "$AB_OUT_DIR/_input_used.yaml"
+
+TIME_FILE="$AB_OUT_DIR/wall.time"
+START_EPOCH=$(date +%s)
+echo "START_EPOCH=$START_EPOCH" > "$TIME_FILE"
+
+set +e
+/usr/bin/time -v -o "$TIME_FILE.gnu" \
+boltz predict "$AB_INPUT" \
+    --out_dir "$AB_OUT_DIR" \
+    --use_msa_server \
+    --cache "$BOLTZ_CACHE" \
+    --devices 1 --accelerator gpu \
+    --recycling_steps 3 --diffusion_samples 5 --sampling_steps "$AB_STEPS" \
+    --seed "$AB_SEED"
+EXIT=$?
+set -e
+
+END_EPOCH=$(date +%s)
+WALL=$((END_EPOCH - START_EPOCH))
+echo "END_EPOCH=$END_EPOCH" >> "$TIME_FILE"
+echo "WALL_SEC=$WALL" >> "$TIME_FILE"
+echo "EXIT=$EXIT" >> "$TIME_FILE"
+echo "AB_STEPS=$AB_STEPS" >> "$TIME_FILE"
+echo "AB_SEED=$AB_SEED" >> "$TIME_FILE"
+
+echo ""
+echo "=== boltz exit=$EXIT wall=${WALL}s steps=$AB_STEPS seed=$AB_SEED ==="
+cat "$TIME_FILE"
+
+STATUS_JSON="$AB_OUT_DIR/_boltz_status.json"
+python3 - "$EXIT" "$AB_OUT_DIR" "$AB_SEED" "$AB_STEPS" "$WALL" "$STATUS_JSON" <<'PY'
+import json, sys
+from pathlib import Path
+exit_code = int(sys.argv[1])
+out_dir = Path(sys.argv[2])
+seed = int(sys.argv[3])
+steps = int(sys.argv[4])
+wall = int(sys.argv[5])
+status_path = Path(sys.argv[6])
+produced = sorted(str(p) for p in list(out_dir.rglob("*.cif")) + list(out_dir.rglob("*.pdb")))
+status = {
+    "exit_code": exit_code,
+    "seed": seed,
+    "sampling_steps": steps,
+    "wall_sec": wall,
+    "produced_files": produced,
+    "n_produced": len(produced),
+    "ok": exit_code == 0 and len(produced) > 0,
+}
+status_path.write_text(json.dumps(status, indent=2))
+print(json.dumps(status, indent=2))
+PY
+
+echo ""
+echo "=== produced ==="
+find "$AB_OUT_DIR" -maxdepth 6 \( -name '*.cif' -o -name '*.pdb' \) -printf '%p  %s bytes\n' 2>/dev/null | head -30
+
+exit "$EXIT"

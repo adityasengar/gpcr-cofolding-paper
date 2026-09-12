@@ -1,0 +1,10 @@
+metric_col,ref_col,direction,status,n_active,n_inactive,active_mean,inactive_mean,threshold,sensitivity_lo,sensitivity_hi
+d_npxxy_y558_y753_oh,d_npxxy_oh_ref,active_lt,ok,36,34,5.285,12.878,9.082,7.265,10.898
+d_npxxy_y558_y753_ca,d_npxxy_ca_ref,active_lt,ok,40,40,14.572,18.570,16.571,13.257,19.885
+d_y558_pack_min_heavy,d_y558_pack_ref,active_lt,ok,39,37,3.435,5.301,4.368,3.495,5.242
+d_dry_sidechain_r350cz_e630oe1,d_dry_ref,active_gt,ok,19,19,16.563,6.512,11.538,9.230,13.845
+d_tm5_outward_r350_r558_ca,d_tm5_out_ref,active_gt,ok,40,40,8.554,8.620,8.587,6.870,10.305
+icl2_helical_frac,icl2_helical_ref,active_gt,ok,40,40,0.393,0.411,0.402,0.321,0.482
+d_gpcrdb_tm6_tilt_246_637_ca,d_gpcrdb_tm6_tilt_ref,active_gt,ok,40,40,17.595,12.269,14.932,11.945,17.918
+a100_index,a100_index_ref,active_gt,ok,39,32,47.227,-21.546,12.841,10.272,15.409
+angle_class_b_tm6_kink_639_650_654_deg,angle_class_b_kink_ref,active_gt,ok,40,40,163.029,156.875,159.952,127.961,191.942

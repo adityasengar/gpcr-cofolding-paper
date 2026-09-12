@@ -1,0 +1,112 @@
+{
+  "pdb_id": "5TGZ",
+  "uniprot_slug": "cnr1_human",
+  "pdb_sha256": "7062489462ec48f262e8037e54f267bcd6812a36d416bc9b558aa673d159533e",
+  "gpcrdb_residues_ext_sha256": "02171d8de7992dc944b067c2712b1e0d40c847af00bac391cf0fe88cf5e0fd78",
+  "anchors": {
+    "3.50": {
+      "bw_label": "3.50",
+      "uniprot_pos": 214,
+      "aa_expected": "R"
+    },
+    "3.51": {
+      "bw_label": "3.51",
+      "uniprot_pos": 215,
+      "aa_expected": "Y"
+    },
+    "5.58": {
+      "bw_label": "5.58",
+      "uniprot_pos": 294,
+      "aa_expected": "Y"
+    },
+    "6.30": {
+      "bw_label": "6.30",
+      "uniprot_pos": 338,
+      "aa_expected": "D"
+    },
+    "6.34": {
+      "bw_label": "6.34",
+      "uniprot_pos": 342,
+      "aa_expected": "A"
+    },
+    "7.53": {
+      "bw_label": "7.53",
+      "uniprot_pos": 397,
+      "aa_expected": "Y"
+    },
+    "2.46": {
+      "bw_label": "2.46",
+      "uniprot_pos": 159,
+      "aa_expected": "L"
+    },
+    "6.37": {
+      "bw_label": "6.37",
+      "uniprot_pos": 345,
+      "aa_expected": "L"
+    },
+    "1.53": {
+      "bw_label": "1.53",
+      "uniprot_pos": 137,
+      "aa_expected": "V"
+    },
+    "7.55": {
+      "bw_label": "7.55",
+      "uniprot_pos": 399,
+      "aa_expected": "L"
+    },
+    "2.50": {
+      "bw_label": "2.50",
+      "uniprot_pos": 163,
+      "aa_expected": "D"
+    },
+    "3.37": {
+      "bw_label": "3.37",
+      "uniprot_pos": 201,
+      "aa_expected": "T"
+    },
+    "3.42": {
+      "bw_label": "3.42",
+      "uniprot_pos": 206,
+      "aa_expected": "S"
+    },
+    "4.42": {
+      "bw_label": "4.42",
+      "uniprot_pos": 233,
+      "aa_expected": "A"
+    },
+    "5.66": {
+      "bw_label": "5.66",
+      "uniprot_pos": 302,
+      "aa_expected": "H"
+    },
+    "6.58": {
+      "bw_label": "6.58",
+      "uniprot_pos": 366,
+      "aa_expected": "D"
+    },
+    "7.35": {
+      "bw_label": "7.35",
+      "uniprot_pos": 379,
+      "aa_expected": "F"
+    },
+    "6.39": {
+      "bw_label": "6.39",
+      "uniprot_pos": 347,
+      "aa_expected": "L"
+    },
+    "6.50": {
+      "bw_label": "6.50",
+      "uniprot_pos": 358,
+      "aa_expected": "P"
+    },
+    "6.54": {
+      "bw_label": "6.54",
+      "uniprot_pos": 362,
+      "aa_expected": "I"
+    }
+  },
+  "detected_stabilisers": [],
+  "d_tm6_r350_r630_ca_ref": 8.692676515320228,
+  "assertion_status": "OK",
+  "note": "Derived by Block-C sidecar-merge subagent 1.6 (2026-09-04)."
+}

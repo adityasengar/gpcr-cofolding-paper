@@ -1,0 +1,49 @@
+receptor_slug,primary_ga_class,primary_ga_identity,secondary_ga_classes,source,notes,coupling_evidence,panel_extension_source
+5HT1B,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Canonical Gi/o serotonin receptor; consistent across COUPLING and IUPHAR.,primary_reference,class_a_original
+5HT2C,Gq,alphaq,,refs_build.COUPLING+IUPHAR,Canonical Gq/11 serotonin receptor.,primary_reference,class_a_original
+5HT5A,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Gi/o coupling; historically some Gs claims but IUPHAR primary is Gi/o.,primary_reference,class_a_original
+AA1R,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Adenosine A1 receptor; canonical Gi/o.,primary_reference,class_a_original
+AA2AR,Gs,alphas,,refs_build.COUPLING+IUPHAR,Adenosine A2A; canonical Gs (Golf in striatum).,primary_reference,class_a_original
+ACM1,Gq,alphaq,,refs_build.COUPLING+IUPHAR,M1 muscarinic; canonical Gq/11.,primary_reference,class_a_original
+ACM2,Gi,alphai1,,refs_build.COUPLING+IUPHAR,M2 muscarinic; canonical Gi/o.,primary_reference,class_a_original
+ACM4,Gi,alphai1,,refs_build.COUPLING+IUPHAR,M4 muscarinic; canonical Gi/o.,primary_reference,class_a_original
+ADA2A,Gi,alphai1,,IUPHAR,alpha2A adrenoceptor is Gi/o (contrast alpha1=Gq beta=Gs); not in refs_build.COUPLING but well established (Inoue2019 + IUPHAR).,primary_reference,class_a_original
+ADRB1,Gs,alphas,,refs_build.COUPLING+IUPHAR,beta1 adrenergic; canonical Gs (weak Gi at high occupancy).,primary_reference,class_a_original
+ADRB2,Gs,alphas,,refs_build.COUPLING+IUPHAR,beta2 adrenergic; canonical Gs (biased Gi/arrestin under some ligands).,primary_reference,class_a_original
+AGTR1,Gq,alphaq,"Gi,G12",refs_build.COUPLING+IUPHAR,AT1 angiotensin receptor; promiscuous — primary Gq/11 with secondary Gi/o and G12/13.,primary_reference,class_a_original
+APJ,Gi,alphai1,Gq,refs_build.COUPLING+IUPHAR,Apelin receptor; primary Gi/o with reported Gq/11 secondary.,primary_reference,class_a_original
+B1B1U5,Gi,alphai1,Gq,curator_call+RCSB+Tejero2024,"JSR1 (jumping spider rhodopsin-1); UniProt B1B1U5; gene HaRh1; Hasarius adansoni. Inactive=6I9K (Varma PNAS 2019); active=9EPR (Tejero NatCommun 2024, native Gi heterotrimer; AVOID 9EPP/9EPQ which are Gi/q chimeras and would mis-assign coupling via UniProt lookup). Bistable opsin — canonically Gq/i invertebrate visual phototransduction; secondary Gq. taxon_note=non_mammalian_singleton_confound — stratify never pool.",primary_reference,class_a_original
+CCKAR,Gq,alphaq,Gs,IUPHAR,CCK1 receptor; promiscuous — primary Gq/11 with Gs secondary. Not in refs_build.COUPLING.,primary_reference,class_a_original
+CCR5,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Chemokine CCR5; canonical Gi/o.,primary_reference,class_a_original
+CNR1,Gi,alphai1,,refs_build.COUPLING+IUPHAR,CB1 cannabinoid; canonical Gi/o.,primary_reference,class_a_original
+CNR2,Gi,alphai1,,refs_build.COUPLING+IUPHAR,CB2 cannabinoid; canonical Gi/o.,primary_reference,class_a_original
+CXCR2,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Chemokine CXCR2; canonical Gi/o.,primary_reference,class_a_original
+CXCR4,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Chemokine CXCR4; canonical Gi/o.,primary_reference,class_a_original
+DRD2,Gi,alphai1,,refs_build.COUPLING+IUPHAR,D2 dopamine; canonical Gi/o (contrast D1/D5=Gs).,primary_reference,class_a_original
+DRD3,Gi,alphai1,,refs_build.COUPLING+IUPHAR,D3 dopamine; canonical Gi/o.,primary_reference,class_a_original
+EDNRA,Gq,alphaq,"Gs,Gi",refs_build.COUPLING+IUPHAR,ETA endothelin receptor; primary Gq/11 with reported Gs and Gi/o secondaries.,primary_reference,class_a_original
+EDNRB,Gq,alphaq,Gi,refs_build.COUPLING+IUPHAR,ETB endothelin receptor; primary Gq/11 with strong Gi/o secondary.,primary_reference,class_a_original
+FSHR,Gs,alphas,Gq,refs_build.COUPLING+IUPHAR,FSH receptor (glycoprotein hormone family); primary Gs with reported Gq/11 secondary.,primary_reference,class_a_original
+GHSR,Gq,alphaq,"Gi,G12",refs_build.COUPLING+IUPHAR,Ghrelin receptor; promiscuous — primary Gq/11 with Gi/o and G12/13 secondaries; also strong constitutive activity.,primary_reference,class_a_original
+GRPR,Gq,alphaq,,IUPHAR,Gastrin-releasing peptide receptor (BB2); canonical Gq/11. Not in refs_build.COUPLING.,primary_reference,class_a_original
+HRH1,Gq,alphaq,,refs_build.COUPLING+IUPHAR,H1 histamine; canonical Gq/11.,primary_reference,class_a_original
+HRH3,Gi,alphai1,,refs_build.COUPLING+IUPHAR,H3 histamine; canonical Gi/o.,primary_reference,class_a_original
+LPAR1,Gi,alphai1,"Gq,G12",IUPHAR+Inoue2019,LPA1 lysophosphatidic acid receptor; promiscuous — primary Gi/o with Gq/11 and G12/13 secondaries. Not in refs_build.COUPLING.,primary_reference,class_a_original
+LSHR,Gs,alphas,Gq,refs_build.COUPLING+IUPHAR,LH/hCG receptor (glycoprotein hormone family); primary Gs with reported Gq/11 secondary.,primary_reference,class_a_original
+LT4R1,Gi,alphai1,Gq,IUPHAR,BLT1 leukotriene B4 receptor 1; primary Gi/o with Gq/11 secondary. Not in refs_build.COUPLING.,primary_reference,class_a_original
+MCHR1,Gi,alphai1,Gq,IUPHAR,Melanin-concentrating hormone receptor 1; promiscuous — primary Gi/o with Gq/11 secondary. Not in refs_build.COUPLING.,primary_reference,class_a_original
+NPY1R,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Neuropeptide Y1 receptor; canonical Gi/o.,primary_reference,class_a_original
+NPY2R,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Neuropeptide Y2 receptor; canonical Gi/o.,primary_reference,class_a_original
+OPRD,Gi,alphai1,,refs_build.COUPLING+IUPHAR,delta opioid; canonical Gi/o.,primary_reference,class_a_original
+OPRK,Gi,alphai1,,refs_build.COUPLING+IUPHAR,kappa opioid; canonical Gi/o.,primary_reference,class_a_original
+OPRX,Gi,alphai1,,refs_build.COUPLING+IUPHAR,Nociceptin/orphanin FQ receptor (NOP); canonical Gi/o.,primary_reference,class_a_original
+OPSD,Gt,alphat,,refs_build.COUPLING+IUPHAR,"Bovine rhodopsin; cognate Gα is transducin (Gt = GNAT1). Identity switched from alphai1 proxy → alphat 2026-09-01. GNAT1 sequence (UniProt P11488, ~350 aa) must be added to docs/EXPERIMENT_CATALOG/sequences/partners.fasta before Block A dispatch — a α5-CT diff report (GNAT1 vs alphai1 21-mers) is required in PREREG.md.",primary_reference,class_a_original
+OX2R,Gq,alphaq,Gi,refs_build.COUPLING+IUPHAR,Orexin/hypocretin receptor 2; primary Gq/11 with reported Gi/o secondary.,primary_reference,class_a_original
+GLP1R,Gs,alphas,,curator_call+RCSB+Step5_paired_reference_search,Class B (Secretin family); canonical Gs coupling; active reference 6X18 native Gα-s heterotrimer; Class B midpoint anchor pair 3.50-6.34 (Wootten numbering).,primary_reference,class_bf_step5
+GCGR,Gs,alphas,"Gi,Gq",curator_call+RCSB+Step5_paired_reference_search,Class B (Secretin family); canonical Gs coupling; active reference 6LMK native Gα-s heterotrimer; Class B midpoint anchor pair 3.50-6.34 (Wootten numbering).,primary_reference,class_bf_step5
+PTH1R,Gs,alphas,Gq,curator_call+RCSB+Step5_paired_reference_search,Class B (Secretin family); canonical Gs coupling; active reference 8FLQ native Gα-s heterotrimer; Class B midpoint anchor pair 3.50-6.34 (Wootten numbering).,primary_reference,class_bf_step5
+CRHR1,Gs,alphas,,curator_call+RCSB+Step5_paired_reference_search,Class B (Secretin family); canonical Gs coupling; active reference 6P9X native Gα-s heterotrimer; Class B midpoint anchor pair 3.50-6.34 (Wootten numbering).,primary_reference,class_bf_step5
+FZD4,DVL,alphas,,curator_call+RCSB+Step5_paired_reference_search,"Class F Frizzled-4; primary transducer=DVL (Dishevelled DEP domain, non-Gα); active reference stabilized by DVL2 (Cong Nat Commun 2024, 8WM9). PARTNER SUBSTITUTION 2026-09-01: cognate arm uses alphas as pragmatic proxy — DVL2 (UniProt O14641, 736 aa) is not in partners.fasta and adding it requires new MSA pre-warm + Chai .aligned.pqt for a 736-aa partner; deferred to post-Block-A. Interpretation of FZD4 cognate results: partner discrimination effect is a Gs-decoy-like probe here, not a native DVL cognate. Class F midpoint success rule per PREREG §2c using anchor pair 3.50-6.31.",curator_call,class_bf_step5
+FZD6,Gs,alphas,,curator_call+RCSB+Step5_paired_reference_search,"Class F Frizzled; ATYPICAL Gs coupling — structurally documented in 8JHB (XLas Gs isoform for FZD6, minGas for FZD7) but non-canonical relative to standard Wnt/DVL signaling. PARTNER SUBSTITUTION 2026-09-01: cognate arm uses canonical alphas (GNAS-short) not the XLas splice isoform (Q5JWF2) — XLas is not in partners.fasta and adds MSA infra cost; both isoforms share the same α5-CT sequence within the last 21 aa (XLas is an N-terminal splice extension), so the cognate α5-CT probe is unaffected. Use Class F midpoint anchor pair 3.50-6.31.",curator_call,class_bf_step5
+FZD7,Gs,alphas,,curator_call+RCSB+Step5_paired_reference_search,"Class F Frizzled; ATYPICAL Gs coupling — structurally documented in 8YY8 (XLas Gs isoform for FZD6, minGas for FZD7) but non-canonical relative to standard Wnt/DVL signaling. Use Class F midpoint anchor pair 3.50-6.31.",curator_call,class_bf_step5
+SMO,Gi,alphai1,,curator_call+RCSB+Step5_paired_reference_search,Class F Smoothened; canonical Gi coupling (Hedgehog pathway); active reference 6XBL (SMO-Gi). Class F midpoint anchor pair 3.50-6.31.,primary_reference,class_bf_step5

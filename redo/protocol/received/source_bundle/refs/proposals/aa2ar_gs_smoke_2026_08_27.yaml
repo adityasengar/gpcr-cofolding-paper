@@ -1,0 +1,14 @@
+request_id: aa2ar_gs_smoke_2026_08_27
+biological_question: |
+  Layer 5 end-to-end smoke test — the first proposal to go through
+  gpcr-propose → supervisor → scorer with pre_check_status carried
+  through. Confirms the pipeline works before any real analyst request.
+receptor: AA2AR
+partner:
+  type: g_alpha
+  identity: alphas
+state_claim: Ga-coupled-active
+backbones: [boltz]
+seeds: 3
+species: human
+partner_perturbation: wt

@@ -1,0 +1,22 @@
+pdb_id,gpcrdb_entry,receptor_slug,gpcr_class,state,species,method,resolution,publication_date,preferred_chain,transducer_type,ligand_functions,on_panel48,on_panel75,in_confornets,role,rcsb_metadata_cached,flag_res_missing,flag_res_above_floor,flag_non_human,flag_arrestin_active,flag_no_transducer_active,flag_label_conflict,activation_degree,pct_seq_modelled,flag_active_not_fully_active
+4IB4,5ht2b_human,5ht2b,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,2.7,2013-03-13,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,,55,59,0
+4NC3,5ht2b_human,5ht2b,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,2.8,2013-12-18,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,,55,60,0
+5TVN,5ht2b_human,5ht2b,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,2.9,2017-02-01,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,,55,61,0
+6DRX,5ht2b_human,5ht2b,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,3.1,2018-08-29,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,0,,55,59,0
+6DRY,5ht2b_human,5ht2b,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,2.92,2018-08-29,A,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,,55,60,0
+6DRZ,5ht2b_human,5ht2b,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,3.1,2018-08-29,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,0,,55,61,0
+6DS0,5ht2b_human,5ht2b,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,3.19,2018-08-29,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,0,,55,59,0
+7SRQ,5ht2b_human,5ht2b,Class A (Rhodopsin),Intermediate,Homo sapiens,Electron microscopy,2.7,2022-09-21,R,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,,55,53,0
+8JPS,ackr1_human,ackr1,Class A (Rhodopsin),Intermediate,Homo sapiens,Electron microscopy,3.65,2024-07-31,A,none,Agonist,0,0,0,calibration,0,0,1,0,0,0,,46,76,0
+9CHU,adrb2_human,adrb2,Class A (Rhodopsin),Intermediate,Homo sapiens,Electron microscopy,3.49,2024-11-13,A,none,Agonist,1,1,1,application,0,0,0,0,0,0,,47,66,0
+9CHV,adrb2_human,adrb2,Class A (Rhodopsin),Intermediate,Homo sapiens,Electron microscopy,3.95,2024-11-13,A,none,Apo (no ligand),1,1,1,application,0,0,1,0,0,0,,47,63,0
+9CHX,adrb2_human,adrb2,Class A (Rhodopsin),Intermediate,Homo sapiens,Electron microscopy,3.5,2024-11-13,A,none,Inverse agonist,1,1,1,application,0,0,0,0,0,0,,47,67,0
+6W25,mc4r_human,mc4r,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,2.75,2020-04-29,A,none,Antagonist|Cofactor,0,0,0,calibration,0,0,0,0,0,0,,41,79,0
+8WKY,mc4r_human,mc4r,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,2.9,2024-08-07,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,0,,41,79,0
+8WKZ,mc4r_human,mc4r,Class A (Rhodopsin),Intermediate,Homo sapiens,X-ray diffraction,3.3,2024-08-07,A,none,Antagonist,0,0,0,calibration,0,0,0,0,0,0,,41,79,0
+7Y13,mrgrd_human,mrgrd,Class A (Rhodopsin),Intermediate,Homo sapiens,Electron microscopy,3.1,2022-07-20,R,none,Apo (no ligand),0,0,0,calibration,0,0,0,0,0,0,,46,82,0
+7Y14,mrgrd_human,mrgrd,Class A (Rhodopsin),Intermediate,Homo sapiens,Electron microscopy,3.2,2022-07-20,R,none,Agonist,0,0,0,calibration,0,0,0,0,0,0,,46,82,0
+6Z4V,ntr1_rat,ntr1,Class A (Rhodopsin),Intermediate,Rattus norvegicus,X-ray diffraction,2.6,2021-02-10,A,none,Agonist,0,1,1,calibration,0,0,0,1,0,0,,16,79,0
+6Z66,ntr1_rat,ntr1,Class A (Rhodopsin),Intermediate,Rattus norvegicus,X-ray diffraction,3.19,2021-02-10,A,none,Apo (no ligand),0,1,1,calibration,0,0,0,1,0,0,,16,80,0
+6Z8N,ntr1_rat,ntr1,Class A (Rhodopsin),Intermediate,Rattus norvegicus,X-ray diffraction,2.8,2021-02-10,A,none,Agonist,0,1,1,calibration,0,0,0,1,0,0,,16,80,0
+6ZA8,ntr1_rat,ntr1,Class A (Rhodopsin),Intermediate,Rattus norvegicus,X-ray diffraction,2.72,2021-02-10,A,none,Agonist (partial),0,1,1,calibration,0,0,0,1,0,0,,16,78,0

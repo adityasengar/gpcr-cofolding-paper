@@ -1,0 +1,6 @@
+# refs/uncovered_receptors.txt — receptors with no GPCRdb state=Active PDB
+# Explicit opt-in — silence is not automatic. A receptor missing from
+# refs/reference_set.csv but NOT in this file will still fail A4 hard.
+# Populated by the consultant (agent ac213ae) at Option-B v3.
+#
+# One slug per line, blank lines and # comments ignored.

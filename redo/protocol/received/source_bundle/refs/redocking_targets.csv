@@ -1,0 +1,35 @@
+receptor_slug,receptor_common_name,target_ligand_role,target_ligand_smiles,target_ligand_ccd,crystal_pose_pdb,predicted_state_family,wrong_state_family,notes
+5HT1B,Serotonin 5-HT1B,full_agonist,c1cc(ccc1C#N)N2CCN(CC2)C(=O)COc3ccc4c(c3)c(c[nH]4)CC[NH3+],EP5,6G79,active,inactive,Block C neutral_antagonist arm is NA for this receptor (no clean sub-100nM small-mol antag crystal in RCSB); wrong-state (inactive) predicted structure must be sourced from a Block-A/B apo run for this row.; 5HT1B neutral_antagonist reference is NA per refs/reference_set_named_exclusions.md; using agonist path here dodges the missing antag reference.
+5HT2C,Serotonin 5-HT2C,full_agonist,C[C@H]1CNCCc2c1cc(cc2)Cl,T4U,8DPF,active,inactive,Block C neutral_antagonist arm is NA for this receptor (no clean sub-100nM small-mol antag crystal in RCSB); wrong-state (inactive) predicted structure must be sourced from a Block-A/B apo run for this row.
+5HT5A,Serotonin 5-HT5A,full_agonist,c1cc2c(cc1C(=O)N)c(c[nH]2)CCN,8K3,7UM5,active,inactive,
+AA1R,Adenosine A1,full_agonist,c1nc(c2c(n1)n(cn2)[C@H]3[C@@H]([C@@H]([C@H](O3)CO)O)O)N,ADN,7LD3,active,inactive,Block C neutral_antagonist arm is NA for this receptor (no clean sub-100nM small-mol antag crystal in RCSB); wrong-state (inactive) predicted structure must be sourced from a Block-A/B apo run for this row.; ADN = adenosine (endogenous agonist); crystal 7LD3 is AA1R+adenosine+Gi active-state.
+AA2AR,Adenosine A2A,full_agonist,CCNC(=O)[C@@H]1[C@H]([C@H]([C@@H](O1)n2cnc3c2ncnc3N)O)O,NEC,2YDV,active,inactive,
+ACM1,Muscarinic M1,full_agonist,C[N+](C)(C)CC#CCOC1=NOCC1,IXO,6OIJ,active,inactive,Iperoxo (IXO) is a permanent quaternary ammonium cation (+1); confirm Vina/Smina charge handling matches CCD SMILES.
+ACM2,Muscarinic M2,full_agonist,C[N+](C)(C)CC#CCOC1=NOCC1,IXO,4MQS,active,inactive,Iperoxo (IXO) is a permanent quaternary ammonium cation (+1); confirm Vina/Smina charge handling matches CCD SMILES.
+ACM4,Muscarinic M4,full_agonist,C[N+](C)(C)CC#CCOC1=NOCC1,IXO,7TRP,active,inactive,Iperoxo (IXO) is a permanent quaternary ammonium cation (+1); confirm Vina/Smina charge handling matches CCD SMILES.
+ADA2A,alpha-2A adrenergic,full_agonist,c1cc(c(cc1[C@H](C[NH3+])O)O)O,E5E,7EJ0,active,inactive,Block C neutral_antagonist arm is NA for this receptor (no clean sub-100nM small-mol antag crystal in RCSB); wrong-state (inactive) predicted structure must be sourced from a Block-A/B apo run for this row.
+ADRB1,beta-1 adrenergic,full_agonist,CNC[C@@H](c1ccc(c(c1)O)O)O,ALE,7BTS,active,inactive,Block C neutral_antagonist arm is NA for this receptor (no clean sub-100nM small-mol antag crystal in RCSB); wrong-state (inactive) predicted structure must be sourced from a Block-A/B apo run for this row.
+ADRB2,beta-2 adrenergic,full_agonist,CC(C)(Cc1ccc(cc1)O)NC[C@@H](c2ccc(c(c2)O)O)O,XQC,4LDL,active,inactive,
+AGTR1,Angiotensin II type 1,neutral_antagonist,CCCc1nc(c(n1Cc2ccc(cc2)c3ccccc3c4[nH]nnn4)C(=O)O)C(C)(C)O,OLM,4ZUD,inactive,active,
+CCKAR,Cholecystokinin CCK1,neutral_antagonist,CN1c2ccccc2C(=N[C@@H](C1=O)NC(=O)c3cc4ccccc4[nH]3)c5ccccc5,1OZ,7F8Y,inactive,active,
+CCR5,C-C chemokine receptor 5,neutral_antagonist,Cc1nnc(n1C2C[C@H]3CC[C@@H](C2)N3CC[C@@H](c4ccccc4)NC(=O)C5CCC(CC5)(F)F)C(C)C,MRV,4MBS,inactive,active,
+CNR1,Cannabinoid CB1,full_agonist,CC(C)(C)[C@@H](C(=O)OC)NC(=O)c1c2ccccc2n(n1)Cc3ccc(cc3)F,KCA,6N4B,active,inactive,
+CNR2,Cannabinoid CB2,full_agonist,CCCCCCC(C)(C)c1ccc(c(c1)O)[C@@H]2C[C@@H](CC[C@H]2CCCO)O,9GF,8GUR,active,inactive,
+CXCR2,C-X-C chemokine receptor 2,neutral_antagonist,CC[C@H](c1cc(co1)C(C)C)NC2=C(C(=O)C2=O)Nc3ccnc(c3O)C(=O)N(C)C,EBX,6LFL,inactive,active,"EBX @ 6LFL binds the INTRACELLULAR ALLOSTERIC face (not orthosteric ligand pocket); redocking search box must be centered on the intracellular G-protein-coupling site, NOT the orthosteric pocket."
+CXCR4,C-X-C chemokine receptor 4,neutral_antagonist,CC1(CN2C(=CSC2=N1)CS/C(=N\C3CCCCC3)/NC4CCCCC4)C,ITD,3ODU,inactive,active,
+DRD2,Dopamine D2,full_agonist,CCCN(CCc1cccs1)[C@H]2CCc3c(cccc3O)C2,R5F,8IRS,active,inactive,Block C neutral_antagonist arm is NA for this receptor (no clean sub-100nM small-mol antag crystal in RCSB); wrong-state (inactive) predicted structure must be sourced from a Block-A/B apo run for this row.
+DRD3,Dopamine D3,full_agonist,CCCN1CCO[C@H]2[C@H]1COc3c2cc(cc3)O,G6O,7CMV,active,inactive,DRD3 has no active-state entry in refs/reference_set.csv; crystal_pose_pdb 7CMV is used only as the small-molecule pose ceiling for the Vina/Smina comparison.
+EDNRA,Endothelin ETA,neutral_antagonist,Cc1cc(nc(n1)O[C@H](C(=O)O)C(c2ccccc2)(c3ccccc3)OC)C,A1D5J,8XVK,inactive,active,
+EDNRB,Endothelin ETB,neutral_antagonist,CC(C)(C)c1ccc(cc1)S(=O)(=O)Nc2c(c(nc(n2)c3ncccn3)OCCO)Oc4ccccc4OC,K86,5XPR,inactive,active,
+GRPR,Gastrin-releasing peptide R,neutral_antagonist,C[C@](Cc1c[nH]c2c1cccc2)(C(=O)NCC3(CCCCC3)c4ccc(cn4)OC)NC(=O)Nc5ccc(cc5)[N+](=O)[O-],8B8,7W41,inactive,active,
+HRH1,Histamine H1,full_agonist,NCCc1c[nH]cn1,HSM,8YN2,active,inactive,Block C neutral_antagonist arm is NA for this receptor (no clean sub-100nM small-mol antag crystal in RCSB); wrong-state (inactive) predicted structure must be sourced from a Block-A/B apo run for this row.
+HRH3,Histamine H3,neutral_antagonist,CCNC(=O)C1CC(C1)(c2ccc(c(c2)F)CN3CCCC3)F,1IB,7F61,inactive,active,
+LPAR1,Lysophosphatidic acid LPA1,full_agonist,CCCCCCCCC=CCCCCCCCC(=O)OCC(COP(=O)(O)O)O,NKP,7TD0,active,inactive,"LPA 18:1 (1-oleoyl-LPA); endogenous lipid agonist; EC50 ~140 nM (above 100 nM cutoff, kept as physiological); highly flexible chain — Vina exhaustiveness may need increase."
+LT4R1,Leukotriene B4 BLT1,full_agonist,CCCCC\C=C/C[C@@H](O)\C=C\C=C\C=C/[C@@H](O)CCCC(O)=O,LTB,7VKT,active,inactive,
+MCHR1,Melanin-concentrating hormone MCH1,neutral_antagonist,Cc1ccc(cc1C2CCN(CC2)Cc3ccc(cc3)Oc4ccc(c(c4)F)F)NC(=O)C(C)C,A1D6T,8YNS,inactive,active,
+NPY1R,Neuropeptide Y Y1,neutral_antagonist,CCC(=O)NCCNC(=O)/N=C(\N)/NCCC[C@H](C(=O)NCc1ccc(cc1)O)NC(=O)C(c2ccccc2)c3ccccc3,9AO,5ZBQ,inactive,active,
+NPY2R,Neuropeptide Y Y2,neutral_antagonist,CCN(CC)C(=O)[C@H](c1ccccc1)N2CCN(CC2)c3ccc(cc3F)NC(=O)c4ccccc4c5cccnc5,H46,7DDZ,inactive,active,
+OPRD,Delta-opioid,full_agonist,CCN(CC)C(=O)c1ccc(cc1)[C@H](c2cccc(c2)O)N3C[C@H](N(C[C@@H]3C)Cc4ccccc4)C,OWY,6PT3,active,inactive,
+OPRK,Kappa-opioid,neutral_antagonist,C[C@H]1CN(CC[C@@]1(C)c2cccc(c2)O)C[C@H](C(C)C)NC(=O)[C@H]3Cc4ccc(cc4CN3)O,JDC,4DJH,inactive,active,
+OPRX,Nociceptin/Orphanin FQ (NOP),neutral_antagonist,Cc1cccc2c1CC[C@@H](C[C@@H]2O)CN3CCC(CC3)c4c(cccc4Cl)Cl,DGW,5DHH,inactive,active,
+OX2R,Orexin OX2,full_agonist,COC(=O)N1CCC[C@@H]([C@@H]1COC2CCC(CC2)c3ccccc3)NS(=O)(=O)C,A6F,7SQO,active,inactive,

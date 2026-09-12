@@ -1,0 +1,5 @@
+rule,n,n_active,n_inactive,active_to_inactive,n_receptors,n_receptors_both_states
+"I1  receptor-strict vs panel48 (+F0b,F2,F3,F4)",433,372,61,6.10,106,17
+I2  I1 and not a redo-expansion receptor,289,269,20,13.45,86,0
+I3  I1 and not sharing a GPCRdb level-3 family with panel48,260,242,18,13.44,64,7
+I4  I2 and I3,193,192,1,192.00,55,0

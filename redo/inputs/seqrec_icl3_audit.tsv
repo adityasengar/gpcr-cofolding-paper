@@ -1,0 +1,129 @@
+slug	state	pdb	description	fusion_named_in_description	icl3_canon_range	icl3_len	fusion_location	icl3_insertion_aa	icl3_insertion_at	icl3_graft_aa	other_internal_insertion_at	n_term_extra_entity_aa	c_term_extra_entity_aa	canon_present_span	n_canon_resolved
+5HT1B	active	6G79	5-hydroxytryptamine receptor 1B	none	230-315	86	none	0	none	0	none	1	6	34-390	262
+5HT1B	inactive	5V54	5-hydroxytryptamine receptor 1B,OB-1 fused 5-HT1b receptor,5-hydroxytryptamine receptor 1B	none	230-315	86	ICL3	105	239/105aa	0	none	0	0	37-390	283
+5HT2A	active	8UWL	5-hydroxytryptamine receptor 2A	none	259-322	64	none	0	none	0	none	0	0	66-404	276
+5HT2A	inactive	7WC7	5-hydroxytryptamine receptor 2A,5-hydroxytryptamine receptor 2A,Soluble cytochrome b562	BRIL	259-322	64	ICL3	86	265/86aa	0	none	0	0	67-403	277
+5HT2C	active	8DPF	5-hydroxytryptamine receptor 2C	none	237-311	75	none	0	none	0	none	0	0	1-458	264
+5HT2C	inactive	6BQH	5-hydroxytryptamine receptor 2C,Soluble cytochrome b562	BRIL	237-311	75	ICL3|N-term|C-term	106	245/106aa	0	none	26	21	40-393	287
+5HT5A	active	7X5H	Soluble cytochrome b562,5-hydroxytryptamine receptor 5A,hydroxytryptamine receptor 5A	BRIL	221-287	67	N-term|C-term	0	none	0	none	161	173	2-357	274
+5HT5A	inactive	7UM4	5-hydroxytryptamine receptor 5A	none	221-287	67	none	0	none	0	none	0	0	22-357	254
+AA1R	active	7LD3	Chimera protein of Muscarinic acetylcholine receptor M4 and Adenosine receptor A1	fusion_unnamed	197-236	40	N-term	0	none	0	none	56	6	2-326	288
+AA1R	inactive	5UEN	Adenosine receptor A1,Soluble cytochrome b562,Adenosine receptor A1	BRIL	197-236	40	ICL3	114	211/114aa	0	none	2	6	2-311	292
+AA2AR	active	8WDT	Adenosine receptor A2a	none	199-234	36	N-term	0	none	0	none	26	10	2-316	297
+AA2AR	inactive	6S0L	A2a adenosine receptor	none	199-234	36	ICL3	113	201/113aa	0	none	10	11	2-317	287
+ACM1	active	6OIJ	Muscarinic acetylcholine receptor M1	none	210-366	157	none	0	none	0	none	11	6	3-460	293
+ACM1	inactive	6WJC	Muscarinic acetylcholine receptor M1,Endolysin fusion	T4L	210-366	157	ICL3	160	218/160aa	0	none	11	6	3-460	285
+ACM2	active	7T94	Muscarinic acetylcholine receptor M2,muscarinic acetylcholine receptor M2 chimera	fusion_unnamed	208-387	180	none	0	none	0	none	14	9	10-466	265
+ACM2	inactive	5ZK8	Muscarinic acetylcholine receptor M2,Redesigned apo-cytochrome b562,Muscarinic acetylcholine receptor M2	BRIL	208-387	180	ICL3	106	217/106aa	0	none	11	6	10-466	273
+ACM4	active	7TRP	Muscarinic acetylcholine receptor M4	none	217-401	185	none	0	none	0	none	8	8	1-479	267
+ACM4	inactive	5DSG	Muscarinic acetylcholine receptor M4,Endolysin,Endolysin,Muscarinic acetylcholine receptor M4	T4L	217-401	185	ICL3	117	226/117aa	0	none	2	8	22-479	287
+ADA1A	active	7YM8	alpha1A adrenergic receptor	none	206-273	68	ICL3|N-term	117	222/117aa	0	none	46	7	23-371	271
+ADA1A	inactive	8HN1	Alpha-1A adrenergic receptor	none	206-273	68	N-term	0	none	0	none	30	7	23-371	265
+ADA2A	active	7EJ8	Alpha-2A adrenergic receptor	none	233-388	156	none	0	none	0	none	0	0	1-465	263
+ADA2A	inactive	6KUX	alpha2A adrenergic receptor	none	233-388	156	ICL3	106	242/106aa	0	none	0	0	35-460	269
+ADRB1	active	7BU7	Endolysin,Endolysin,Beta-1 adrenergic receptor chimera	T4L;fusion_unnamed	246-323	78	N-term	0	none	0	none	170	0	54-399	277
+ADRB1	inactive	7BVQ	Endolysin,Beta-1 adrenergic receptor chimera	T4L;fusion_unnamed	246-323	78	N-term	0	none	0	none	170	0	54-399	285
+ADRB2	active	8GG0	Beta-2 adrenergic receptor	none	221-274	54	N-term	0	none	0	none	24	16	1-405	282
+ADRB2	inactive	2R4R	Beta-2 adrenergic receptor	none	221-274	54	none	0	none	0	none	0	0	1-365	216
+AGTR1	active	6OS2	Type-1 angiotensin II receptor,Soluble cytochrome b562 BRIL fusion protein	BRIL;fusion_unnamed	217-239	23	ICL3	99	226/99aa	0	none	8	0	2-319	305
+AGTR1	inactive	8TH3	AT118-H nanobody, Type-1 angiotensin II receptor, Soluble cytochrome b562 complex	BRIL	217-239	23	ICL3|N-term|C-term	115	226/115aa	0	none	136	21	2-319	291
+APJ	active	8XZH	Apelin receptor	none	224-246	23	none	0	none	0	none	0	0	1-380	303
+APJ	inactive	5VBL	Apelin receptor,Rubredoxin,Apelin receptor Chimera	rubredoxin;fusion_unnamed	224-246	23	ICL3|N-term|C-term	54	229/54aa	0	none	24	24	7-324	293
+B1B1U5	active	9EPP	Kumopsin1	none	240-277	38	none	0	none	0	none	0	0	20-346	323
+B1B1U5	inactive	6I9K	Kumopsin1	none	240-277	38	none	0	none	0	none	0	8	1-372	310
+C5AR1	active	7Y66	C5a anaphylatoxin chemotactic receptor 1	none	227-242	16	none	0	none	0	none	0	9	1-330	281
+C5AR1	inactive	6C1R	Soluble cytochrome b562, C5a anaphylatoxin chemotactic receptor 1 chimera	BRIL;fusion_unnamed	227-242	16	N-term	0	none	0	none	115	5	30-331	290
+CCKAR	active	7MBX	Cholecystokinin receptor type A	none	235-313	79	none	0	none	0	none	0	8	2-428	292
+CCKAR	inactive	7F8U	Fusion protein of Cholecystokinin receptor type A and Endolysin	T4L;fusion_unnamed	235-313	79	ICL3|C-term	160	240/160aa	0	none	10	20	2-406	278
+CCR2	active	7XA3	Isoform B of C-C chemokine receptor type 2	none	227-243	17	C-term	0	none	0	none	0	47	1-313	285
+CCR2	inactive	6GPX	C-C chemokine receptor type 2,Rubredoxin,C-C chemokine receptor type 2	rubredoxin	227-243	17	ICL3	61	231/61aa	0	none	0	5	29-321	268
+CCR5	active	7O7F	C-C chemokine receptor type 5	none	219-235	17	C-term	0	none	0	none	0	20	1-352	300
+CCR5	inactive	6MEO	C-C chemokine receptor type 5	none	219-235	17	none	0	none	0	none	0	0	1-313	313
+CCR6	active	6WWZ	C-C chemokine receptor type 6,C-C chemokine receptor type 6	none	239-254	16	N-term	0	none	0	none	146	10	2-374	310
+CCR6	inactive	9D3G	CCR6, Soluble cytochrome b562	BRIL	239-254	16	ICL3|N-term	127	235/127aa	0	none	48	0	28-347	262
+CCR8	active	8KFX	C-C chemokine receptor type 8,Fusion protein	fusion_unnamed	223-238	16	N-term|C-term	0	none	0	none	27	193	1-355	288
+CCR8	inactive	8TLM	C-C chemokine receptor type 8, Green fluorescent protein fusion	GFP	223-238	16	N-term|C-term	0	none	0	none	35	281	1-355	266
+CNR1	active	8GHV	Cannabinoid receptor 1	none	300-344	45	none	0	none	0	none	8	8	1-472	280
+CNR1	inactive	9BA0	Cannabinoid receptor 1,Glycogen synthase	PGS	300-344	45	ICL3	204	301/204aa	0	none	9	16	74-416	274
+CNR2	active	8GUR	Cannabinoid receptor 2	none	215-246	32	none	0	none	0	none	0	0	1-360	282
+CNR2	inactive	5ZTY	G protein coupled receptor,T4 lysozyme,G protein coupled receptor	T4L	215-246	32	ICL3|C-term	168	222/168aa	0	none	19	28	21-325	279
+CXCR2	active	6LFO	C-X-C chemokine receptor type 2	none	232-251	20	none	0	none	0	none	0	0	1-360	307
+CXCR2	inactive	6LFL	C-X-C chemokine receptor type 2,GlgA glycogen synthase,C-X-C chemokine receptor type 2	PGS	232-251	20	ICL3	202	241/202aa	0	none	0	0	37-344	269
+CXCR3	active	8HNM	Soluble cytochrome b562,C-X-C chemokine receptor type 3,Oplophorus-luciferin 2-monooxygenase catalytic subunit	BRIL;nanoluc	234-255	22	N-term|C-term	0	none	0	none	138	158	1-361	277
+CXCR3	inactive	8K2W	Soluble cytochrome b562,C-X-C chemokine receptor type 3,Kappa-type opioid receptor	BRIL	234-255	22	ICL3|N-term	22	240/22aa	0	none	138	0	1-361	263
+CXCR4	active	8U4N	C-X-C chemokine receptor type 4	none	217-241	25	C-term	0	none	0	none	19	262	2-352	283
+CXCR4	inactive	8U4R	C-X-C chemokine receptor type 4	none	217-241	25	C-term	0	none	0	none	19	262	2-352	277
+DRD2	active	8TZQ	D(2) dopamine receptor	none	214-373	160	none	0	none	0	none	0	0	1-443	270
+DRD2	inactive	6CM4	D(2) dopamine receptor, endolysin chimera	T4L;fusion_unnamed	214-373	160	ICL3	160	222/160aa	0	none	0	0	35-443	263
+DRD3	active	8IRT	Soluble cytochrome b562,D(3) dopamine receptor	BRIL	210-329	120	N-term	0	none	0	none	154	0	10-400	273
+DRD3	inactive	3PBL	D(3) dopamine receptor, Lysozyme chimera	T4L;fusion_unnamed	210-329	120	ICL3	160	221/160aa	0	none	18	9	10-400	272
+DRD4	active	8IRU	D(4) dopamine receptor	none	214-346	133	ICL3|N-term|C-term	59	283/59aa	0	none	145	173	1-419	268
+DRD4	inactive	5WIU	D(4) dopamine receptor, soluble cytochrome b562 chimera	BRIL;fusion_unnamed	214-346	133	ICL3	105	228/105aa	0	none	4	0	1-419	270
+EDNRA	active	8HCQ	Endothelin-1 receptor,Oplophorus-luciferin 2-monooxygenase catalytic subunit chimera	nanoluc;fusion_unnamed	279-306	28	N-term|C-term	0	none	0	none	77	158	20-406	303
+EDNRA	inactive	8XVK	Endoglucanase H,Endothelin-1 receptor,Soluble cytochrome b562	BRIL;endoglucanase	279-306	28	ICL3|N-term	117	281/117aa	0	none	326	0	50-405	288
+EDNRB	active	8IY5	Endothelin type B receptor	none	297-324	28	C-term	0	none	0	none	0	193	27-442	316
+EDNRB	inactive	5GLI	Endothelin Receptor Subtype-B	none	297-324	28	ICL3|C-term	117	303/117aa	0	none	3	21	66-395	304
+FSHR	active	8I2G	Follicle-stimulating hormone receptor	none	551-573	23	none	0	none	0	none	0	0	18-695	595
+FSHR	inactive	8I2H	Follicle-stimulating hormone receptor	none	551-573	23	none	0	none	0	none	0	0	14-695	568
+GHSR	active	7NA7	Growth hormone secretagogue receptor type 1	none	236-263	28	none	0	none	0	none	0	0	1-366	291
+GHSR	inactive	6KO5	Chimera of Soluble cytochrome b562 and Growth hormone secretagogue receptor type 1	BRIL;fusion_unnamed	236-263	28	N-term	0	none	0	none	106	0	29-346	293
+GPR52	active	8HMP	G-protein coupled receptor 52	none	225-265	41	none	0	none	0	none	0	0	1-324	285
+GPR52	inactive	6LI2	Chimera of G-protein coupled receptor 52 and Rubredoxin	rubredoxin;fusion_unnamed	225-265	41	ICL3|C-term	56	235/56aa	0	none	1	20	17-340	286
+GPR6	active	8TYW	G-protein coupled receptor 6	none	250-277	28	none	0	none	0	none	0	10	1-362	264
+GPR6	inactive	8T1V	G-protein coupled receptor 6, Soluble cytochrome b562 chimera	BRIL;fusion_unnamed	250-277	28	ICL3|N-term	107	256/107aa	0	none	27	19	48-362	266
+GRPR	active	8H0Q	Gastrin-releasing peptide receptor	none	235-264	30	none	0	none	0	none	0	0	1-384	296
+GRPR	inactive	7W41	Gastrin-releasing peptide receptor,GlgA glycogen synthase	PGS	235-264	30	ICL3	202	241/202aa	0	none	0	0	38-337	282
+HRH1	active	8YN2	Histamine H1 receptor	none	212-416	205	N-term|C-term	0	none	0	none	53	176	1-487	272
+HRH1	inactive	8X5Y	Histamine H1 receptor,Soluble cytochrome b562	BRIL	212-416	205	ICL3|C-term	106	217/106aa	0	none	7	50	19-483	270
+HRH2	active	8YN3	Histamine H2 receptor	none	203-232	30	N-term|C-term	0	none	0	none	85	175	1-308	280
+HRH2	inactive	7UL3	Histamine H2 receptor	none	203-232	30	ICL3|N-term	41	199/41aa	0	none	39	6	1-359	228
+HRH3	active	8YN5	Histamine H3 receptor	none	218-359	142	N-term|C-term	0	none	0	none	53	161	1-445	288
+HRH3	inactive	7F61	Histamine H3 receptor	none	218-359	142	none	0	none	0	none	0	0	27-433	301
+LPAR1	active	7TD0	Lysophosphatidic acid receptor 1	none	226-255	30	none	0	none	0	none	11	0	2-340	290
+LPAR1	inactive	4Z36	Lysophosphatidic acid receptor 1,Soluble cytochrome b562	BRIL	226-255	30	ICL3|C-term	101	232/101aa	0	none	19	29	2-326	289
+LSHR	active	7FII	Lutropin-choriogonadotropic hormone receptor	none	550-570	21	none	0	none	0	none	17	8	28-699	570
+LSHR	inactive	7FIJ	Lutropin-choriogonadotropic hormone receptor	none	550-570	21	none	0	none	0	none	17	8	28-699	561
+LT4R1	active	7VKT	Leukotriene B4 receptor 1	none	200-221	22	none	0	none	0	none	0	0	1-352	287
+LT4R1	inactive	7K15	Leukotriene B4 receptor 1,Flavodoxin,Leukotriene B4 receptor 1	flavodoxin	200-221	22	N-term|C-term	0	none	0	none	27	255	5-212	200
+MCHR1	active	8WWK	Fusion protein 1,Melanin-concentrating hormone receptor 1,Fusion protein 2	fusion_unnamed	233-252	20	N-term|C-term	0	none	0	none	122	175	1-327	289
+MCHR1	inactive	8YNS	Melanin-concentrating hormone receptor 1,Soluble cytochrome b562	BRIL	233-252	20	ICL3|N-term|C-term	104	235/104aa	0	none	115	50	1-327	271
+MTR1A	active	7VGY	Melatonin receptor type 1A	none	209-240	32	none	0	none	0	none	0	0	1-350	281
+MTR1A	inactive	6ME2	chimera protein of Melatonin receptor type 1A and GlgA glycogen synthase	PGS;fusion_unnamed	209-240	32	ICL3	196	218/196aa	0	none	2	0	12-325	290
+MTR1B	active	7VH0	Melatonin receptor type 1B	none	222-253	32	none	0	none	0	none	0	0	1-362	273
+MTR1B	inactive	6ME6	Soluble cytochrome b562,Melatonin receptor type 1B,Rubredoxin	BRIL;rubredoxin	222-253	32	ICL3|N-term	53	231/53aa	0	none	113	0	38-340	282
+NK1R	active	8U26	Substance-P receptor	none	220-248	29	none	0	none	0	none	11	0	1-407	284
+NK1R	inactive	6E59	Substance-P receptor, GlgA glycogen synthase, Substance-P receptor chimera	PGS;fusion_unnamed	220-248	29	ICL3	196	227/196aa	0	none	0	10	1-346	283
+NPY1R	active	7X9A	Neuropeptide Y receptor type 1	none	234-262	29	C-term	0	none	0	none	0	38	1-340	309
+NPY1R	inactive	5ZBQ	Neuropeptide Y receptor type 1,T4 Lysozyme	T4L	234-262	29	C-term	0	none	0	none	0	168	2-358	306
+NPY2R	active	8K6N	Neuropeptide Y receptor type 2	none	241-267	27	none	0	none	0	none	0	0	1-341	301
+NPY2R	inactive	7DDZ	Human Neuropeptide Y Y2 Receptor fusion protein	fusion_unnamed	241-267	27	ICL3|N-term	147	250/147aa	0	none	163	8	1-353	290
+NTR1	active	8JPF	Neurotensin receptor type 1	none	260-303	44	none	0	none	0	none	0	0	1-418	298
+NTR1	inactive	7UL2	Neurotensin receptor 1	none	260-303	44	ICL3|N-term	32	255/32aa	0	none	39	0	20-418	255
+OPRD	active	6PT2	Delta opioid receptor	none	239-261	23	N-term	0	none	0	none	156	0	41-338	289
+OPRD	inactive	4N6H	Soluble cytochrome b562, Delta-type opioid receptor chimeric protein	BRIL	239-261	23	N-term	0	none	0	none	113	0	38-338	301
+OPRK	active	8FEG	Kappa-type opioid receptor	none	248-274	27	none	0	none	0	none	3	0	54-358	278
+OPRK	inactive	6VI4	Kappa opioid receptor	none	248-274	27	none	0	none	0	none	2	0	54-358	283
+OPRM	active	5C1M	Mu-type opioid receptor	none	254-277	24	none	0	none	0	none	0	0	52-347	296
+OPRM	inactive	7UL4	Mu-type opioid receptor	none	254-277	24	N-term	0	none	0	none	25	8	6-398	286
+OPRX	active	8F7X	Nociceptin receptor	none	237-264	28	none	0	none	0	none	0	0	2-370	285
+OPRX	inactive	5DHH	Soluble cytochrome b562,Nociceptin receptor	BRIL	237-264	28	N-term	0	none	0	none	116	11	43-339	283
+OPSD	active	4X1H	Rhodopsin	none	225-252	28	none	0	none	0	none	0	0	1-348	326
+OPSD	inactive	7ZBC	Rhodopsin	none	225-252	28	none	0	none	0	none	0	0	1-348	304
+OX2R	active	7L1V	Hypocretin receptor type 2	none	244-304	61	none	0	none	0	none	8	10	3-389	284
+OX2R	inactive	7XRR	Orexin receptor type 2	none	244-304	61	none	0	none	0	none	4	6	33-394	309
+OXYR	active	7RYC	Oxytocin receptor	none	226-272	47	N-term	0	none	0	none	55	6	1-389	285
+OXYR	inactive	6TPK	Oxytocin receptor	none	226-272	47	C-term	0	none	0	none	0	215	35-321	248
+PD2R2	active	8XXV	Prostaglandin D2 receptor 2	none	232-247	16	none	0	none	0	none	0	0	1-348	302
+PD2R2	inactive	7M8W	Prostaglandin D2 receptor 2, Endolysin chimera	T4L;fusion_unnamed	232-247	16	ICL3	125	236/125aa	0	none	1	6	1-339	327
+PE2R4	active	8GDB	Prostaglandin E2 receptor EP4 subtype	none	212-267	56	none	0	none	0	none	0	0	1-488	283
+PE2R4	inactive	5YHL	Prostaglandin E2 receptor EP4 subtype	none	212-267	56	none	0	none	0	none	7	8	8-366	280
+S1PR1	active	7TD4	Sphingosine 1-phosphate receptor 1	none	225-257	33	none	0	none	0	none	11	0	2-382	290
+S1PR1	inactive	3V2Y	Sphingosine 1-phosphate receptor 1, Lysozyme chimera (E.C.3.2.1.17)	T4L;fusion_unnamed	225-257	33	ICL3|C-term	168	231/168aa	0	none	19	29	2-326	283
+S1PR5	active	7EW1	Sphingosine 1-phosphate receptor 5	none	214-252	39	N-term	0	none	0	none	33	17	1-344	269
+S1PR5	inactive	7YXA	Sphingosine 1-phosphate receptor 5,Soluble cytochrome b562	BRIL	214-252	39	ICL3|N-term|C-term	106	223/106aa	0	none	27	21	1-321	285
+SSR2	active	7T10	Somatostatin receptor type 2,Kappa-type opioid receptor	none	230-253	24	N-term	0	none	13	none	39	0	1-369	287
+SSR2	inactive	7XN9	Somatostatin receptor type 2,Endo-1,4-beta-xylanase	none	230-253	24	ICL3|N-term|C-term	185	239/185aa	0	none	26	23	2-359	292
+TA2R	active	8XJN	Fusion tag,Thromboxane A2 receptor,LgBiT	none	220-246	27	N-term|C-term	0	none	0	none	53	175	1-331	310
+TA2R	inactive	6IIU	Soluble cytochrome b562,Thromboxane A2 receptor,Rubredoxin,Thromboxane A2 receptor	BRIL;rubredoxin	220-246	27	ICL3|N-term	54	228/54aa	0	none	116	8	10-323	300
+TSHR	active	7UTZ	Thyrotropin receptor	none	603-625	23	none	0	none	0	none	7	0	21-764	600
+TSHR	inactive	7T9M	Thyrotropin receptor	none	603-625	23	none	0	none	0	none	9	0	22-764	565

@@ -1,0 +1,1369 @@
+{
+  "rows_total": 159,
+  "panel_rows_seen": 80,
+  "panel_rows_processed": 80,
+  "panel_rows_skipped_prefilled": 0,
+  "failed": [],
+  "records": [
+    {
+      "receptor": "5HT1B",
+      "role": "active",
+      "pdb_id": "6G79",
+      "uniprot": "P28222",
+      "icl3_range": [
+        245,
+        302
+      ],
+      "icl3_len": 58,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302",
+      "icl3_residues_missing_count": 58,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "5HT1B",
+      "role": "inactive",
+      "pdb_id": "4IAR",
+      "uniprot": "P28222",
+      "icl3_range": [
+        245,
+        302
+      ],
+      "icl3_len": 58,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302",
+      "icl3_residues_missing_count": 58,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305",
+      "note": ""
+    },
+    {
+      "receptor": "5HT2C",
+      "role": "active",
+      "pdb_id": "8DPF",
+      "uniprot": "P28335",
+      "icl3_range": [
+        251,
+        299
+      ],
+      "icl3_len": 49,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299",
+      "icl3_residues_missing_count": 49,
+      "fusion_partner": "mini_G",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "5HT2C",
+      "role": "inactive",
+      "pdb_id": "6BQH",
+      "uniprot": "P28335",
+      "icl3_range": [
+        251,
+        299
+      ],
+      "icl3_len": 49,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299",
+      "icl3_residues_missing_count": 49,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300",
+      "note": ""
+    },
+    {
+      "receptor": "5HT5A",
+      "role": "active",
+      "pdb_id": "7UM5",
+      "uniprot": "P47898",
+      "icl3_range": [
+        239,
+        273
+      ],
+      "icl3_len": 35,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273",
+      "icl3_residues_missing_count": 35,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "5HT5A",
+      "role": "inactive",
+      "pdb_id": "7UM4",
+      "uniprot": "P47898",
+      "icl3_range": [
+        239,
+        273
+      ],
+      "icl3_len": 35,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273",
+      "icl3_residues_missing_count": 35,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "AA1R",
+      "role": "active",
+      "pdb_id": "7LD3",
+      "uniprot": "P30542",
+      "icl3_range": [
+        216,
+        220
+      ],
+      "icl3_len": 5,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "216,217,218,219,220",
+      "icl3_residues_missing_count": 5,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "AA1R",
+      "role": "inactive",
+      "pdb_id": "5UEN",
+      "uniprot": "P30542",
+      "icl3_range": [
+        216,
+        220
+      ],
+      "icl3_len": 5,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "216,217,218,219,220",
+      "icl3_residues_missing_count": 5,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227",
+      "note": ""
+    },
+    {
+      "receptor": "ACM1",
+      "role": "active",
+      "pdb_id": "6OIJ",
+      "uniprot": "P11229",
+      "icl3_range": [
+        226,
+        353
+      ],
+      "icl3_len": 128,
+      "icl3_status": "partially-excised",
+      "icl3_residues_missing": "228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353",
+      "icl3_residues_missing_count": 39,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "ACM1",
+      "role": "inactive",
+      "pdb_id": "6ZFZ",
+      "uniprot": "P11229",
+      "icl3_range": [
+        226,
+        353
+      ],
+      "icl3_len": 128,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353",
+      "icl3_residues_missing_count": 128,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354",
+      "note": ""
+    },
+    {
+      "receptor": "ACM2",
+      "role": "active",
+      "pdb_id": "7T94",
+      "uniprot": "P08172",
+      "icl3_range": [
+        224,
+        375
+      ],
+      "icl3_len": 152,
+      "icl3_status": "fully-excised",
+      "icl3_residues_missing": "224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375",
+      "icl3_residues_missing_count": 152,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "ACM2",
+      "role": "inactive",
+      "pdb_id": "5ZKC",
+      "uniprot": "P08172",
+      "icl3_range": [
+        224,
+        375
+      ],
+      "icl3_len": 152,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375",
+      "icl3_residues_missing_count": 152,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376",
+      "note": ""
+    },
+    {
+      "receptor": "ACM4",
+      "role": "active",
+      "pdb_id": "7TRP",
+      "uniprot": "P08173",
+      "icl3_range": [
+        233,
+        388
+      ],
+      "icl3_len": 156,
+      "icl3_status": "partially-excised",
+      "icl3_residues_missing": "233,234,235,236,237,238,239,240,241,242,243,244,245,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388",
+      "icl3_residues_missing_count": 83,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "ACM4",
+      "role": "inactive",
+      "pdb_id": "5DSG",
+      "uniprot": "P08173",
+      "icl3_range": [
+        233,
+        388
+      ],
+      "icl3_len": 156,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388",
+      "icl3_residues_missing_count": 152,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389",
+      "note": ""
+    },
+    {
+      "receptor": "ADA2A",
+      "role": "active",
+      "pdb_id": "9CBL",
+      "uniprot": "P08913",
+      "icl3_range": [
+        249,
+        377
+      ],
+      "icl3_len": 129,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377",
+      "icl3_residues_missing_count": 58,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377",
+      "note": ""
+    },
+    {
+      "receptor": "ADA2A",
+      "role": "inactive",
+      "pdb_id": "6KUX",
+      "uniprot": "P08913",
+      "icl3_range": [
+        249,
+        377
+      ],
+      "icl3_len": 129,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,374,375,376,377",
+      "icl3_residues_missing_count": 32,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,374,375,376,377",
+      "note": ""
+    },
+    {
+      "receptor": "ADRB1",
+      "role": "active",
+      "pdb_id": "7BU7",
+      "uniprot": "P08588",
+      "icl3_range": [
+        261,
+        312
+      ],
+      "icl3_len": 52,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312",
+      "icl3_residues_missing_count": 52,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "ADRB1",
+      "role": "inactive",
+      "pdb_id": "7BVQ",
+      "uniprot": "P08588",
+      "icl3_range": [
+        261,
+        312
+      ],
+      "icl3_len": 52,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "ADRB2",
+      "role": "active",
+      "pdb_id": "4LDE",
+      "uniprot": "P07550",
+      "icl3_range": [
+        238,
+        261
+      ],
+      "icl3_len": 24,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "ADRB2",
+      "role": "inactive",
+      "pdb_id": "6PS2",
+      "uniprot": "P07550",
+      "icl3_range": [
+        238,
+        261
+      ],
+      "icl3_len": 24,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261",
+      "icl3_residues_missing_count": 24,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261",
+      "note": ""
+    },
+    {
+      "receptor": "AGTR1",
+      "role": "active",
+      "pdb_id": "6OS2",
+      "uniprot": "P30556",
+      "icl3_range": [
+        226,
+        232
+      ],
+      "icl3_len": 7,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "227,228,229",
+      "icl3_residues_missing_count": 3,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "AGTR1",
+      "role": "inactive",
+      "pdb_id": "4ZUD",
+      "uniprot": "P30556",
+      "icl3_range": [
+        226,
+        232
+      ],
+      "icl3_len": 7,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "226,227,228,229,230,231,232",
+      "icl3_residues_missing_count": 7,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "APJ",
+      "role": "active",
+      "pdb_id": "8XZH",
+      "uniprot": "P35414",
+      "icl3_range": [
+        233,
+        235
+      ],
+      "icl3_len": 3,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "APJ",
+      "role": "inactive",
+      "pdb_id": "8S4D",
+      "uniprot": "P35414",
+      "icl3_range": [
+        233,
+        235
+      ],
+      "icl3_len": 3,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "233,234",
+      "icl3_residues_missing_count": 2,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "230,231,232,233,234",
+      "note": ""
+    },
+    {
+      "receptor": "B1B1U5",
+      "role": "active",
+      "pdb_id": "9EPR",
+      "uniprot": "B1B1U5",
+      "icl3_range": [
+        257,
+        262
+      ],
+      "icl3_len": 6,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "B1B1U5",
+      "role": "inactive",
+      "pdb_id": "6I9K",
+      "uniprot": "B1B1U5",
+      "icl3_range": [
+        257,
+        262
+      ],
+      "icl3_len": 6,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "257,258,259,260,261,262",
+      "icl3_residues_missing_count": 6,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CCKAR",
+      "role": "active",
+      "pdb_id": "7MBX",
+      "uniprot": "P32238",
+      "icl3_range": [
+        246,
+        300
+      ],
+      "icl3_len": 55,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300",
+      "icl3_residues_missing_count": 55,
+      "fusion_partner": "mini_Gs",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CCKAR",
+      "role": "inactive",
+      "pdb_id": "7F8Y",
+      "uniprot": "P32238",
+      "icl3_range": [
+        246,
+        300
+      ],
+      "icl3_len": 55,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300",
+      "icl3_residues_missing_count": 55,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301",
+      "note": ""
+    },
+    {
+      "receptor": "CCR5",
+      "role": "active",
+      "pdb_id": "7F1S",
+      "uniprot": "P51681",
+      "icl3_range": [
+        225,
+        225
+      ],
+      "icl3_len": 1,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CCR5",
+      "role": "inactive",
+      "pdb_id": "5UIW",
+      "uniprot": "P51681",
+      "icl3_range": [
+        225,
+        225
+      ],
+      "icl3_len": 1,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "225",
+      "icl3_residues_missing_count": 1,
+      "fusion_partner": "rubredoxin",
+      "fusion_partner_insertion_range": "224,225,226",
+      "note": ""
+    },
+    {
+      "receptor": "CNR1",
+      "role": "active",
+      "pdb_id": "5XRA",
+      "uniprot": "P21554",
+      "icl3_range": [
+        313,
+        331
+      ],
+      "icl3_len": 19,
+      "icl3_status": "fully-excised",
+      "icl3_residues_missing": "313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331",
+      "icl3_residues_missing_count": 19,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CNR1",
+      "role": "inactive",
+      "pdb_id": "5U09",
+      "uniprot": "P21554",
+      "icl3_range": [
+        313,
+        331
+      ],
+      "icl3_len": 19,
+      "icl3_status": "fully-excised",
+      "icl3_residues_missing": "313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331",
+      "icl3_residues_missing_count": 19,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CNR2",
+      "role": "active",
+      "pdb_id": "8GUR",
+      "uniprot": "P34972",
+      "icl3_range": [
+        226,
+        237
+      ],
+      "icl3_len": 12,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "228,229,230,231,232,233,234,235,236",
+      "icl3_residues_missing_count": 9,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CNR2",
+      "role": "inactive",
+      "pdb_id": "5ZTY",
+      "uniprot": "P34972",
+      "icl3_range": [
+        226,
+        237
+      ],
+      "icl3_len": 12,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "226,227,228,229,230,231,232,233,234",
+      "icl3_residues_missing_count": 9,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "226,227,228,229,230,231,232,233,234",
+      "note": ""
+    },
+    {
+      "receptor": "CXCR2",
+      "role": "active",
+      "pdb_id": "6LFO",
+      "uniprot": "P25025",
+      "icl3_range": [
+        242,
+        244
+      ],
+      "icl3_len": 3,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CXCR2",
+      "role": "inactive",
+      "pdb_id": "6LFL",
+      "uniprot": "P25025",
+      "icl3_range": [
+        242,
+        244
+      ],
+      "icl3_len": 3,
+      "icl3_status": "partially-excised",
+      "icl3_residues_missing": "242,243",
+      "icl3_residues_missing_count": 2,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CXCR4",
+      "role": "active",
+      "pdb_id": "8U4N",
+      "uniprot": "P61073",
+      "icl3_range": [
+        230,
+        233
+      ],
+      "icl3_len": 4,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "CXCR4",
+      "role": "inactive",
+      "pdb_id": "3ODU",
+      "uniprot": "P61073",
+      "icl3_range": [
+        230,
+        233
+      ],
+      "icl3_len": 4,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "DRD2",
+      "role": "active",
+      "pdb_id": "7JVR",
+      "uniprot": "P14416",
+      "icl3_range": [
+        227,
+        361
+      ],
+      "icl3_len": 135,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361",
+      "icl3_residues_missing_count": 135,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "DRD2",
+      "role": "inactive",
+      "pdb_id": "6CM4",
+      "uniprot": "P14416",
+      "icl3_range": [
+        227,
+        361
+      ],
+      "icl3_len": 135,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361",
+      "icl3_residues_missing_count": 135,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362",
+      "note": ""
+    },
+    {
+      "receptor": "DRD3",
+      "role": "active",
+      "pdb_id": "8IRT",
+      "uniprot": "P35462",
+      "icl3_range": [
+        227,
+        317
+      ],
+      "icl3_len": 91,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317",
+      "icl3_residues_missing_count": 91,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "DRD3",
+      "role": "inactive",
+      "pdb_id": "3PBL",
+      "uniprot": "P35462",
+      "icl3_range": [
+        227,
+        317
+      ],
+      "icl3_len": 91,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317",
+      "icl3_residues_missing_count": 91,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318",
+      "note": ""
+    },
+    {
+      "receptor": "EDNRA",
+      "role": "active",
+      "pdb_id": "8HCQ",
+      "uniprot": "P25101",
+      "icl3_range": [
+        290,
+        294
+      ],
+      "icl3_len": 5,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "290,291,292,293",
+      "icl3_residues_missing_count": 4,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "EDNRA",
+      "role": "inactive",
+      "pdb_id": "8XVK",
+      "uniprot": "P25101",
+      "icl3_range": [
+        290,
+        294
+      ],
+      "icl3_len": 5,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "290,291,292,293,294",
+      "icl3_residues_missing_count": 5,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297",
+      "note": ""
+    },
+    {
+      "receptor": "EDNRB",
+      "role": "active",
+      "pdb_id": "8IY5",
+      "uniprot": "P24530",
+      "icl3_range": [
+        308,
+        311
+      ],
+      "icl3_len": 4,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "EDNRB",
+      "role": "inactive",
+      "pdb_id": "6IGK",
+      "uniprot": "P24530",
+      "icl3_range": [
+        308,
+        311
+      ],
+      "icl3_len": 4,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "FSHR",
+      "role": "active",
+      "pdb_id": "8I2G",
+      "uniprot": "P23945",
+      "icl3_range": [
+        558,
+        562
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "FSHR",
+      "role": "inactive",
+      "pdb_id": "8I2H",
+      "uniprot": "P23945",
+      "icl3_range": [
+        558,
+        562
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "GHSR",
+      "role": "active",
+      "pdb_id": "7NA7",
+      "uniprot": "Q92847",
+      "icl3_range": [
+        247,
+        251
+      ],
+      "icl3_len": 5,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "247,248,249,250,251",
+      "icl3_residues_missing_count": 5,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "GHSR",
+      "role": "inactive",
+      "pdb_id": "7F83",
+      "uniprot": "Q92847",
+      "icl3_range": [
+        247,
+        251
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "GRPR",
+      "role": "active",
+      "pdb_id": "7W40",
+      "uniprot": "P30550",
+      "icl3_range": [
+        245,
+        248
+      ],
+      "icl3_len": 4,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "mini_Gq",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "GRPR",
+      "role": "inactive",
+      "pdb_id": "7W41",
+      "uniprot": "P30550",
+      "icl3_range": [
+        245,
+        248
+      ],
+      "icl3_len": 4,
+      "icl3_status": "fully-excised",
+      "icl3_residues_missing": "245,246,247,248",
+      "icl3_residues_missing_count": 4,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "HRH1",
+      "role": "active",
+      "pdb_id": "8YN2",
+      "uniprot": "P35367",
+      "icl3_range": [
+        229,
+        403
+      ],
+      "icl3_len": 175,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403",
+      "icl3_residues_missing_count": 175,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "HRH1",
+      "role": "inactive",
+      "pdb_id": "8X5Y",
+      "uniprot": "P35367",
+      "icl3_range": [
+        229,
+        403
+      ],
+      "icl3_len": 175,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403",
+      "icl3_residues_missing_count": 175,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407",
+      "note": ""
+    },
+    {
+      "receptor": "HRH3",
+      "role": "active",
+      "pdb_id": "8YUU",
+      "uniprot": "Q9Y5N1",
+      "icl3_range": [
+        236,
+        346
+      ],
+      "icl3_len": 111,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342",
+      "icl3_residues_missing_count": 107,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "HRH3",
+      "role": "inactive",
+      "pdb_id": "7F61",
+      "uniprot": "Q9Y5N1",
+      "icl3_range": [
+        236,
+        346
+      ],
+      "icl3_len": 111,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346",
+      "icl3_residues_missing_count": 105,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "LPAR1",
+      "role": "active",
+      "pdb_id": "7TD0",
+      "uniprot": "Q92633",
+      "icl3_range": [
+        241,
+        244
+      ],
+      "icl3_len": 4,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "241,242,243,244",
+      "icl3_residues_missing_count": 4,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "LPAR1",
+      "role": "inactive",
+      "pdb_id": "4Z36",
+      "uniprot": "Q92633",
+      "icl3_range": [
+        241,
+        244
+      ],
+      "icl3_len": 4,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "241,242,243,244",
+      "icl3_residues_missing_count": 4,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "233,234,235,236,237,238,239,240,241,242,243,244,245,246,247",
+      "note": ""
+    },
+    {
+      "receptor": "LSHR",
+      "role": "active",
+      "pdb_id": "7FIH",
+      "uniprot": "P22888",
+      "icl3_range": [
+        555,
+        559
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "LSHR",
+      "role": "inactive",
+      "pdb_id": "7FIJ",
+      "uniprot": "P22888",
+      "icl3_range": [
+        555,
+        559
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "LT4R1",
+      "role": "active",
+      "pdb_id": "7VKT",
+      "uniprot": "Q15722",
+      "icl3_range": [
+        212,
+        215
+      ],
+      "icl3_len": 4,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "LT4R1",
+      "role": "inactive",
+      "pdb_id": "7K15",
+      "uniprot": "Q15722",
+      "icl3_range": [
+        212,
+        215
+      ],
+      "icl3_len": 4,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "MCHR1",
+      "role": "active",
+      "pdb_id": "8WWK",
+      "uniprot": "Q99705",
+      "icl3_range": [
+        305,
+        312
+      ],
+      "icl3_len": 8,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "MCHR1",
+      "role": "inactive",
+      "pdb_id": "8YNS",
+      "uniprot": "Q99705",
+      "icl3_range": [
+        305,
+        312
+      ],
+      "icl3_len": 8,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "305,306,307,308,309,310,311,312",
+      "icl3_residues_missing_count": 8,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "305,306,307,308,309,310,311,312,313,314,315",
+      "note": ""
+    },
+    {
+      "receptor": "NPY1R",
+      "role": "active",
+      "pdb_id": "7X9A",
+      "uniprot": "P25929",
+      "icl3_range": [
+        247,
+        249
+      ],
+      "icl3_len": 3,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "NPY1R",
+      "role": "inactive",
+      "pdb_id": "5ZBQ",
+      "uniprot": "P25929",
+      "icl3_range": [
+        247,
+        249
+      ],
+      "icl3_len": 3,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "247,248,249",
+      "icl3_residues_missing_count": 3,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "NPY2R",
+      "role": "active",
+      "pdb_id": "7YON",
+      "uniprot": "P49146",
+      "icl3_range": [
+        254,
+        255
+      ],
+      "icl3_len": 2,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "NPY2R",
+      "role": "inactive",
+      "pdb_id": "7DDZ",
+      "uniprot": "P49146",
+      "icl3_range": [
+        254,
+        255
+      ],
+      "icl3_len": 2,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OPRD",
+      "role": "active",
+      "pdb_id": "6PT2",
+      "uniprot": "P41143",
+      "icl3_range": [
+        244,
+        248
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OPRD",
+      "role": "inactive",
+      "pdb_id": "4N6H",
+      "uniprot": "P41143",
+      "icl3_range": [
+        244,
+        248
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OPRK",
+      "role": "active",
+      "pdb_id": "8FEG",
+      "uniprot": "P41145",
+      "icl3_range": [
+        257,
+        261
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OPRK",
+      "role": "inactive",
+      "pdb_id": "4DJH",
+      "uniprot": "P41145",
+      "icl3_range": [
+        257,
+        261
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "T4L",
+      "fusion_partner_insertion_range": "262",
+      "note": ""
+    },
+    {
+      "receptor": "OPRX",
+      "role": "active",
+      "pdb_id": "8F7X",
+      "uniprot": "P41146",
+      "icl3_range": [
+        246,
+        250
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "scFv",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OPRX",
+      "role": "inactive",
+      "pdb_id": "5DHH",
+      "uniprot": "P41146",
+      "icl3_range": [
+        246,
+        250
+      ],
+      "icl3_len": 5,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OPSD",
+      "role": "active",
+      "pdb_id": "4X1H",
+      "uniprot": "P02699",
+      "icl3_range": [
+        238,
+        239
+      ],
+      "icl3_len": 2,
+      "icl3_status": "full-length",
+      "icl3_residues_missing": "",
+      "icl3_residues_missing_count": 0,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OPSD",
+      "role": "inactive",
+      "pdb_id": "7ZBC",
+      "uniprot": "P02699",
+      "icl3_range": [
+        238,
+        239
+      ],
+      "icl3_len": 2,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "238,239",
+      "icl3_residues_missing_count": 2,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OX2R",
+      "role": "active",
+      "pdb_id": "7L1V",
+      "uniprot": "O43614",
+      "icl3_range": [
+        257,
+        288
+      ],
+      "icl3_len": 32,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "257,258,259,260",
+      "icl3_residues_missing_count": 4,
+      "fusion_partner": "nanobody",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "OX2R",
+      "role": "inactive",
+      "pdb_id": "5WQC",
+      "uniprot": "O43614",
+      "icl3_range": [
+        257,
+        288
+      ],
+      "icl3_len": 32,
+      "icl3_status": "fully-excised",
+      "icl3_residues_missing": "257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288",
+      "icl3_residues_missing_count": 32,
+      "fusion_partner": "",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "AA2AR",
+      "role": "active",
+      "pdb_id": "5G53",
+      "uniprot": "P29274",
+      "icl3_range": [
+        214,
+        218
+      ],
+      "icl3_len": 5,
+      "icl3_status": "disordered-not-modeled",
+      "icl3_residues_missing": "214,215,216,217,218",
+      "icl3_residues_missing_count": 5,
+      "fusion_partner": "mini_Gs",
+      "fusion_partner_insertion_range": "",
+      "note": ""
+    },
+    {
+      "receptor": "AA2AR",
+      "role": "inactive",
+      "pdb_id": "5NM4",
+      "uniprot": "P29274",
+      "icl3_range": [
+        214,
+        218
+      ],
+      "icl3_len": 5,
+      "icl3_status": "replaced-with-fusion",
+      "icl3_residues_missing": "214,215,216,217,218",
+      "icl3_residues_missing_count": 5,
+      "fusion_partner": "BRIL",
+      "fusion_partner_insertion_range": "209,210,211,212,213,214,215,216,217,218",
+      "note": ""
+    }
+  ]
+}

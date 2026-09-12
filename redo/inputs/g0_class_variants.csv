@@ -1,0 +1,10 @@
+gpcr_class,n_structures,n_active,n_inactive,n_intermediate,n_receptors,n_receptors_both_states,n_receptors_on_panel48,n_inactive_off_panel48,n_active_off_panel48
+Class A (Rhodopsin),1358,965,371,21,188,65,40,115,611
+Class B1 (Secretin),148,128,19,1,16,5,4,2,53
+Class B2 (Adhesion),34,32,2,0,9,2,0,2,32
+Class C (Glutamate),115,47,58,10,13,7,0,58,47
+Class D1 (Ste2-like fungal pheromone),1,1,0,0,1,0,0,0,1
+Class F (Frizzled),34,20,14,0,8,3,4,1,7
+Class O1 (fish-like odorant),5,4,1,0,3,1,0,1,4
+Class O2 (tetrapod specific odorant),3,3,0,0,3,0,0,0,3
+Class T2 (Taste 2),18,16,2,0,2,1,0,2,16

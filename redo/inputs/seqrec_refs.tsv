@@ -1,0 +1,129 @@
+slug	state	pdb	entity	chain	entity_len	description	rcsb_mutation	source_organisms	rcsb_align_accessions	rcsb_align_names_receptor	canon_len	n_canon_present	canon_present_span	n_entity_not_canon	n_unobserved_in_entity	n_canon_resolved	canon_resolved_span	n_point_substitution	point_substitution	n_canon_grafted	grafted_canon_spans	internal_insertions_canonpos_len	n_term_extra_entity_aa	c_term_extra_entity_aa
+5HT1B	active	6G79	6G79_4	S	364	5-hydroxytryptamine receptor 1B		Homo sapiens	P28222	yes	390	357	34-390	7	102	262	45-385	1	L138W	0	none	none	1	6
+5HT1B	inactive	5V54	5V54_1	B	395	5-hydroxytryptamine receptor 1B,OB-1 fused 5-HT1b receptor,5-hydroxytryptamine receptor 1B	L138W	Homo sapiens;Spodoptera frugiperda;Homo sapiens	P28222	yes	390	290	37-390	105	12	283	37-388	1	L138W	0	none	239/105aa	0	0
+5HT2A	active	8UWL	8UWL_1	A	339	5-hydroxytryptamine receptor 2A		Homo sapiens	P28223	yes	471	339	66-404	0	63	276	77-397	0		0	none	none	0	0
+5HT2A	inactive	7WC7	7WC7_1	A	376	5-hydroxytryptamine receptor 2A,5-hydroxytryptamine receptor 2A,Soluble cytochrome b562		Homo sapiens;Homo sapiens;Homo sapiens	P0ABE7;P28223	yes	471	290	67-403	86	18	277	71-401	3	S162K;M164W;S372N	0	none	265/86aa	0	0
+5HT2C	active	8DPF	8DPF_1	A	458	5-hydroxytryptamine receptor 2C		Homo sapiens	P28335	yes	458	458	1-458	0	194	264	59-383	1	S23C	0	none	none	0	0
+5HT2C	inactive	6BQH	6BQH_1	A	452	5-hydroxytryptamine receptor 2C,Soluble cytochrome b562		Homo sapiens;Escherichia coli;Homo sapiens	P0ABE7;P28335	yes	458	299	40-393	153	101	287	46-387	1	C360N	0	none	245/106aa	26	21
+5HT5A	active	7X5H	7X5H_5	R	690	Soluble cytochrome b562,5-hydroxytryptamine receptor 5A,hydroxytryptamine receptor 5A		Escherichia coli;Homo sapiens;Homo sapiens	P0ABE7;P47898	yes	357	356	2-357	334	416	274	38-353	0		0	none	none	161	173
+5HT5A	inactive	7UM4	7UM4_1	A	336	5-hydroxytryptamine receptor 5A	D65N, I278A	Homo sapiens	P47898	yes	357	336	22-357	0	82	254	35-341	2	D86N;I299A	0	none	none	0	0
+AA1R	active	7LD3	7LD3_2	R	387	Chimera protein of Muscarinic acetylcholine receptor M4 and Adenosine receptor A1		Homo sapiens;Homo sapiens	P08173;P30542	yes	326	325	2-326	62	99	288	4-301	0		0	none	none	56	6
+AA1R	inactive	5UEN	5UEN_1	A	416	Adenosine receptor A1,Soluble cytochrome b562,Adenosine receptor A1		Homo sapiens;Escherichia coli;Homo sapiens	P0ABE7;P30542	yes	326	294	2-311	122	32	292	4-311	1	N159A	0	none	211/114aa	2	6
+AA2AR	active	8WDT	8WDT_1	A	351	Adenosine receptor A2a		Homo sapiens	P29274	yes	412	315	2-316	36	54	297	3-307	6	F79A;N154Q;A184L;R199A;L208A;L272A	0	none	none	26	10
+AA2AR	inactive	6S0L	6S0L_1	A	433	A2a adenosine receptor		Homo sapiens	P29274	yes	412	299	2-317	134	45	287	2-305	8	A54L;T88A;R107A;K122A;N154A;L235A;V239A;S277A	0	none	201/113aa	10	11
+ACM1	active	6OIJ	6OIJ_2	R	363	Muscarinic acetylcholine receptor M1	N11Q, N21Q	Homo sapiens;Homo sapiens	P11229	yes	460	346	3-460	17	70	293	22-446	2	N12Q;N110Q	0	none	none	11	6
+ACM1	inactive	6WJC	6WJC_1	A	499	Muscarinic acetylcholine receptor M1,Endolysin fusion		Homo sapiens;Tequatrovirus T4;Homo sapiens	D9IEF7;P11229	yes	460	322	3-460	177	54	285	17-437	3	N12Q;N110Q;S112R	0	none	218/160aa	11	6
+ACM2	active	7T94	7T94_1	A	353	Muscarinic acetylcholine receptor M2,muscarinic acetylcholine receptor M2 chimera		Homo sapiens;Homo sapiens	P08172	yes	466	330	10-466	23	88	265	23-451	0		0	none	none	14	9
+ACM2	inactive	5ZK8	5ZK8_1	A	421	Muscarinic acetylcholine receptor M2,Redesigned apo-cytochrome b562,Muscarinic acetylcholine receptor M2		Homo sapiens;Homo sapiens;Homo sapiens	P08172;P0ABE7	yes	466	298	10-466	123	52	273	18-458	0		0	none	217/106aa	11	6
+ACM4	active	7TRP	7TRP_1	R	349	Muscarinic acetylcholine receptor M4		Homo sapiens;Homo sapiens	P08173	yes	479	333	1-479	16	82	267	33-464	0		0	none	none	8	8
+ACM4	inactive	5DSG	5DSG_1	B	422	Muscarinic acetylcholine receptor M4,Endolysin,Endolysin,Muscarinic acetylcholine receptor M4		Homo sapiens;Tequatrovirus T4;Tequatrovirus T4;Homo sapiens	P00720;P08173	yes	479	295	22-479	127	23	287	24-473	0		0	none	226/117aa	2	8
+ADA1A	active	7YM8	7YM8_2	A	480	alpha1A adrenergic receptor		Homo sapiens	D9IEF7;P35348	yes	466	310	23-371	170	209	271	24-341	0		0	none	222/117aa	46	7
+ADA1A	inactive	8HN1	8HN1_2	A	346	Alpha-1A adrenergic receptor		Homo sapiens	P35348	yes	466	294	23-371	52	66	265	24-343	2	S113R;M115W	0	none	213/15aa	30	7
+ADA2A	active	7EJ8	7EJ8_4	R	465	Alpha-2A adrenergic receptor		Homo sapiens	P08913	yes	465	465	1-465	0	202	263	43-457	0		0	none	none	0	0
+ADA2A	inactive	6KUX	6KUX_1	A	395	alpha2A adrenergic receptor		Homo sapiens	P08913	yes	465	289	35-460	106	20	269	44-458	2	I136A;V137W	0	none	242/106aa	0	0
+ADRB1	active	7BU7	7BU7_1	A	516	Endolysin,Endolysin,Beta-1 adrenergic receptor chimera	C944T,C987A	Tequatrovirus T4;Homo sapiens	D9IEF7;P08588	yes	477	346	54-399	170	69	277	54-392	0		0	none	none	170	0
+ADRB1	inactive	7BVQ	7BVQ_1	A	462	Endolysin,Beta-1 adrenergic receptor chimera	C944T,C987A	Tequatrovirus T4;Homo sapiens	D9IEF7;P08588	yes	477	292	54-399	170	7	285	54-392	0		0	none	none	170	0
+ADRB2	active	8GG0	8GG0_4	R	460	Beta-2 adrenergic receptor		Homo sapiens	P07550	yes	413	393	1-405	67	178	282	32-339	4	M96T;M98T;N187E;C378A	0	none	15/19aa;365/8aa	24	16
+ADRB2	inactive	2R4R	2R4R_1	A	365	Beta-2 adrenergic receptor		Homo sapiens	P07550	yes	413	365	1-365	0	149	216	37-348	2	G16R;E27Q	0	none	none	0	0
+AGTR1	active	6OS2	6OS2_1	A	425	Type-1 angiotensin II receptor,Soluble cytochrome b562 BRIL fusion protein		Homo sapiens;Escherichia coli;Homo sapiens	P0ABE7;P30556	yes	359	318	2-319	107	45	305	11-318	0		0	none	226/99aa	8	0
+AGTR1	inactive	8TH3	8TH3_1	A	582	AT118-H nanobody, Type-1 angiotensin II receptor, Soluble cytochrome b562 complex		Camelidae;Homo sapiens;Escherichia coli;Homo sapiens	P0ABE7;P30556	yes	359	310	2-319	272	189	291	18-316	0		0	none	226/115aa	136	21
+APJ	active	8XZH	8XZH_1	R	380	Apelin receptor		Homo sapiens	P35414	yes	380	380	1-380	0	77	303	18-325	0		0	none	none	0	0
+APJ	inactive	5VBL	5VBL_2	B	407	Apelin receptor,Rubredoxin,Apelin receptor Chimera	V117A, T177N,W261K, C325L, C326M	Homo sapiens;Clostridium pasteurianum;Homo sapiens	P00268;P35414	yes	380	305	7-324	102	54	293	19-324	3	V117A;T177N;W261K	0	none	229/54aa	24	24
+B1B1U5	active	9EPP	9EPP_1	R	327	Kumopsin1		Hasarius adansoni	B1B1U5	yes	372	327	20-346	0	4	323	20-346	0		0	none	none	0	0
+B1B1U5	inactive	6I9K	6I9K_1	A	380	Kumopsin1	C-tail 1D4 epitope (ETSQVAPA)	Hasarius adansoni	B1B1U5	yes	372	372	1-372	8	70	310	20-335	0		0	none	none	0	8
+C5AR1	active	7Y66	7Y66_5	D	339	C5a anaphylatoxin chemotactic receptor 1		Homo sapiens	P21730	yes	350	330	1-330	9	58	281	34-314	0		0	none	none	0	9
+C5AR1	inactive	6C1R	6C1R_1	B	422	Soluble cytochrome b562, C5a anaphylatoxin chemotactic receptor 1 chimera	M29W, H124I, R128L	Escherichia coli;Homo sapiens	P0ABE7;P21730	yes	350	302	30-331	120	51	290	30-327	0		0	none	none	115	5
+CCKAR	active	7MBX	7MBX_6	R	435	Cholecystokinin receptor type A		Homo sapiens	P32238	yes	428	427	2-428	8	143	292	38-386	0		0	none	none	0	8
+CCKAR	inactive	7F8U	7F8U_1	A	534	Fusion protein of Cholecystokinin receptor type A and Endolysin		Homo sapiens;Tequatrovirus T4;Homo sapiens	P00720;P32238	yes	428	344	2-406	190	96	278	37-375	2	D87N;F130W	0	none	240/160aa	10	20
+CCR2	active	7XA3	7XA3_1	R	360	Isoform B of C-C chemokine receptor type 2		Homo sapiens	P41597	yes	374	313	1-313	47	65	285	29-313	0		0	none	none	0	47
+CCR2	inactive	6GPX	6GPX_1	A	349	C-C chemokine receptor type 2,Rubredoxin,C-C chemokine receptor type 2		Homo sapiens;Clostridium pasteurianum;Homo sapiens	P00268;P41597	yes	374	283	29-321	66	25	268	36-321	2	C70Y;G175N	0	none	231/61aa	0	5
+CCR5	active	7O7F	7O7F_3	C	372	C-C chemokine receptor type 5		Homo sapiens	P51681	yes	352	352	1-352	20	72	300	16-315	0		0	none	none	0	20
+CCR5	inactive	6MEO	6MEO_3	B	313	C-C chemokine receptor type 5		Homo sapiens	P51681	yes	352	313	1-313	0	0	313	1-313	0		0	none	none	0	0
+CCR6	active	6WWZ	6WWZ_6	R	529	C-C chemokine receptor type 6,C-C chemokine receptor type 6		Homo sapiens;Homo sapiens	P0ABE7;P51684	yes	374	373	2-374	156	219	310	27-336	0		0	none	none	146	10
+CCR6	inactive	9D3G	9D3G_1	A	480	CCR6, Soluble cytochrome b562		Homo sapiens	NONE	NO	374	305	28-347	175	91	262	38-336	7	L47A;L86A;V96A;L134W;S140A;R159A;G295A	0	none	235/127aa	48	0
+CCR8	active	8KFX	8KFX_4	R	575	C-C chemokine receptor type 8,Fusion protein		Homo sapiens;synthetic construct	P51685	yes	355	355	1-355	220	287	288	30-317	0		0	none	none	27	193
+CCR8	inactive	8TLM	8TLM_3	C	671	C-C chemokine receptor type 8, Green fluorescent protein fusion		Homo sapiens;Aequorea victoria	P42212;P51685	yes	355	355	1-355	316	405	266	33-314	0		0	none	none	35	281
+CNR1	active	8GHV	8GHV_4	D	495	Cannabinoid receptor 1		Homo sapiens	P21554	yes	472	472	1-472	23	215	280	104-412	0		0	none	87/7aa	8	8
+CNR1	inactive	9BA0	9BA0_1	R	535	Cannabinoid receptor 1,Glycogen synthase		Homo sapiens;Pyrococcus abyssi GE5;Homo sapiens	P21554;Q9V2J8	yes	472	298	74-416	237	57	274	100-412	4	S203K;T210A;E273K;T283V	0	none	89/8aa;301/204aa	9	16
+CNR2	active	8GUR	8GUR_4	R	360	Cannabinoid receptor 2		Homo sapiens	P34972	yes	360	360	1-360	0	78	282	22-312	0		0	none	none	0	0
+CNR2	inactive	5ZTY	5ZTY_1	A	500	G protein coupled receptor,T4 lysozyme,G protein coupled receptor	G78L, T127A, T153l,C1053T, C1096A,R242E, G304E	Homo sapiens;Tequatrovirus T4;Homo sapiens	D9IEF7;P34972	yes	360	285	21-325	215	51	279	21-319	4	G78L;T127A;T153L;G304E	0	none	222/168aa	19	28
+CXCR2	active	6LFO	6LFO_5	R	360	C-X-C chemokine receptor type 2		Homo sapiens	P25025	yes	360	360	1-360	0	53	307	26-332	0		0	none	none	0	0
+CXCR2	inactive	6LFL	6LFL_1	A	502	C-X-C chemokine receptor type 2,GlgA glycogen synthase,C-X-C chemokine receptor type 2	L135W, A249E, G303A	Homo sapiens;Pyrococcus abyssi GE5;Homo sapiens	P25025;Q9V2J8	yes	360	300	37-344	202	31	269	46-336	2	L135W;G303A	0	none	241/202aa	0	0
+CXCR3	active	8HNM	8HNM_4	R	657	Soluble cytochrome b562,C-X-C chemokine receptor type 3,Oplophorus-luciferin 2-monooxygenase catalytic subunit		Escherichia coli;Homo sapiens;Oplophorus gracilirostris	P0ABE7;P49682;Q9GV45	yes	368	361	1-361	296	380	277	60-336	0		0	none	none	138	158
+CXCR3	inactive	8K2W	8K2W_2	R	507	Soluble cytochrome b562,C-X-C chemokine receptor type 3,Kappa-type opioid receptor		Escherichia coli;Homo sapiens;Homo sapiens;Homo sapiens	P0ABE7;P41145;P49682	yes	368	347	1-361	160	222	263	54-330	0		0	none	240/22aa	138	0
+CXCR4	active	8U4N	8U4N_4	R	632	C-X-C chemokine receptor type 4		Homo sapiens;Homo sapiens	P42212;P61073	yes	352	351	2-352	281	349	283	36-318	1	N119S	0	none	none	19	262
+CXCR4	inactive	8U4R	8U4R_3	R	632	C-X-C chemokine receptor type 4		Homo sapiens;Homo sapiens	P42212;P61073	yes	352	351	2-352	281	355	277	24-307	1	N119S	0	none	none	19	262
+DRD2	active	8TZQ	8TZQ_4	R	443	D(2) dopamine receptor		Homo sapiens	P14416	yes	443	443	1-443	0	173	270	36-441	0		0	none	none	0	0
+DRD2	inactive	6CM4	6CM4_1	A	430	D(2) dopamine receptor, endolysin chimera		Homo sapiens;Tequatrovirus T4;Homo sapiens	P00720;P14416	yes	443	270	35-443	160	7	263	35-442	3	I122A;L375A;L379A	0	none	222/160aa	0	0
+DRD3	active	8IRT	8IRT_5	R	545	Soluble cytochrome b562,D(3) dopamine receptor		Escherichia coli;Homo sapiens	P0ABE7;P35462	yes	400	391	10-400	154	272	273	31-400	0		0	none	none	154	0
+DRD3	inactive	3PBL	3PBL_1	A	481	D(3) dopamine receptor, Lysozyme chimera	L119W, C1054T, C1097A	Homo sapiens;Homo sapiens;Tequatrovirus T4	P00720;P35462	yes	400	294	10-400	187	49	272	32-400	1	L119W	0	none	221/160aa	18	9
+DRD4	active	8IRU	8IRU_5	R	785	D(4) dopamine receptor		Homo sapiens	NONE	NO	419	408	1-419	377	517	268	32-413	0		0	none	283/59aa	145	173
+DRD4	inactive	5WIU	5WIU_1	A	422	D(4) dopamine receptor, soluble cytochrome b562 chimera		Homo sapiens;Escherichia coli;Homo sapiens	P0ABE7;P21917	yes	419	313	1-419	109	49	270	34-414	0		0	none	228/105aa	4	0
+EDNRA	active	8HCQ	8HCQ_6	R	622	Endothelin-1 receptor,Oplophorus-luciferin 2-monooxygenase catalytic subunit chimera		Homo sapiens;Homo sapiens	Q9GV45	NO	427	387	20-406	235	319	303	66-378	0		0	none	none	77	158
+EDNRA	inactive	8XVK	8XVK_4	R	783	Endoglucanase H,Endothelin-1 receptor,Soluble cytochrome b562		Acetivibrio thermocellus ATCC 27405;Homo sapiens;Escherichia coli;Homo sapiens	P0ABE7;P16218;P25101	yes	427	340	50-405	443	391	288	74-382	0		0	none	281/117aa	326	0
+EDNRB	active	8IY5	8IY5_5	R	609	Endothelin type B receptor		Homo sapiens	P24530	yes	442	416	27-442	193	293	316	88-403	0		8	58-65	none	0	193
+EDNRB	inactive	5GLI	5GLI_1	A	464	Endothelin Receptor Subtype-B		Homo sapiens	P00720;P24530	yes	442	323	66-395	141	35	304	85-395	5	R124Y;D154A;K270A;S342A;I381A	0	none	303/117aa	3	21
+FSHR	active	8I2G	8I2G_5	R	678	Follicle-stimulating hormone receptor	S273I	Homo sapiens	P23945	yes	695	678	18-695	0	83	595	18-645	2	S273I;S680N	0	none	none	0	0
+FSHR	inactive	8I2H	8I2H_1	A	682	Follicle-stimulating hormone receptor		Homo sapiens	P23945	yes	695	682	14-695	0	114	568	20-643	1	S680N	0	none	none	0	0
+GHSR	active	7NA7	7NA7_5	R	366	Growth hormone secretagogue receptor type 1		Homo sapiens	Q92847	yes	366	366	1-366	0	75	291	39-340	2	T130K;N188Q	0	none	none	0	0
+GHSR	inactive	6KO5	6KO5_1	A	424	Chimera of Soluble cytochrome b562 and Growth hormone secretagogue receptor type 1		Escherichia coli;Homo sapiens	P0ABE7;Q92847	yes	366	318	29-346	106	26	293	39-339	2	T130K;N188Q	0	none	none	106	0
+GPR52	active	8HMP	8HMP_4	R	324	G-protein coupled receptor 52		Homo sapiens	Q9Y2T5	yes	361	324	1-324	0	39	285	26-324	2	A130W;C314P	0	none	none	0	0
+GPR52	inactive	6LI2	6LI2_1	A	372	Chimera of G-protein coupled receptor 52 and Rubredoxin	W278Q, C314P, S318A, N321D, V323T	Homo sapiens;Clostridium pasteurianum;Homo sapiens	P00268;Q9Y2T5	yes	361	295	17-340	77	25	286	23-340	6	A130W;W278Q;C314P;S318A;N321D;V323T	0	none	235/56aa	1	20
+GPR6	active	8TYW	8TYW_1	A	372	G-protein coupled receptor 6		Homo sapiens	P46095	yes	362	362	1-362	10	108	264	72-344	0		0	none	none	0	10
+GPR6	inactive	8T1V	8T1V_1	A	455	G-protein coupled receptor 6, Soluble cytochrome b562 chimera		Homo sapiens;Escherichia coli;Homo sapiens	P0ABE7;P46095	yes	362	302	48-362	153	102	266	68-346	6	C123L;A173P;G279R;S291C;Y320L;C345D	0	none	256/107aa	27	19
+GRPR	active	8H0Q	8H0Q_1	R	384	Gastrin-releasing peptide receptor	L131Q	Homo sapiens	P30550	yes	384	384	1-384	0	88	296	42-341	1	L131Q	0	none	none	0	0
+GRPR	inactive	7W41	7W41_1	A	484	Gastrin-releasing peptide receptor,GlgA glycogen synthase	S127K,I157A,R259E	Homo sapiens;Pyrococcus abyssi GE5;Homo sapiens	P30550;Q9V2J8	yes	384	282	38-337	202	0	282	38-337	2	S127K;I157A	0	none	241/202aa	0	0
+HRH1	active	8YN2	8YN2_5	R	716	Histamine H1 receptor		Homo sapiens;Homo sapiens	P35367	yes	487	487	1-487	229	444	272	28-485	0		0	none	none	53	176
+HRH1	inactive	8X5Y	8X5Y_1	B	438	Histamine H1 receptor,Soluble cytochrome b562		Homo sapiens;Escherichia coli;Escherichia coli;Homo sapiens	P0ABE7;P35367	yes	487	275	19-483	163	164	270	20-481	0		0	none	217/106aa	7	50
+HRH2	active	8YN3	8YN3_5	R	568	Histamine H2 receptor		Homo sapiens;Homo sapiens	P25021	yes	359	308	1-308	260	288	280	14-302	0		0	none	none	85	175
+HRH2	inactive	7UL3	7UL3_1	A	400	Histamine H2 receptor		Homo sapiens;Homo sapiens;Homo sapiens	P25021;P41145	yes	359	314	1-359	86	132	228	16-303	0		0	none	199/41aa	39	6
+HRH3	active	8YN5	8YN5_5	R	659	Histamine H3 receptor		Homo sapiens;Homo sapiens	Q9Y5N1	yes	445	445	1-445	214	371	288	34-427	0		0	none	none	53	161
+HRH3	inactive	7F61	7F61_1	A	407	Histamine H3 receptor	S121K	Homo sapiens	Q9Y5N1	yes	445	407	27-433	0	106	301	27-432	1	S121K	0	none	none	0	0
+LPAR1	active	7TD0	7TD0_1	R	350	Lysophosphatidic acid receptor 1		Homo sapiens	Q92633	yes	364	339	2-340	11	60	290	23-323	0		0	none	none	11	0
+LPAR1	inactive	4Z36	4Z36_1	A	459	Lysophosphatidic acid receptor 1,Soluble cytochrome b562	M1007W, H1102I, R1106L	Homo sapiens;Escherichia coli;Escherichia coli;Homo sapiens	P0ABE7;Q92633	yes	364	310	2-326	149	77	289	23-326	2	D204C;V282C	0	none	232/101aa	19	29
+LSHR	active	7FII	7FII_4	R	697	Lutropin-choriogonadotropic hormone receptor		Homo sapiens	P22888	yes	699	672	28-699	25	127	570	32-644	0		0	none	none	17	8
+LSHR	inactive	7FIJ	7FIJ_1	R	697	Lutropin-choriogonadotropic hormone receptor		Homo sapiens	P22888	yes	699	672	28-699	25	136	561	39-644	0		0	none	none	17	8
+LT4R1	active	7VKT	7VKT_1	A	352	Leukotriene B4 receptor 1	L106W/A196I/C287F/S310A	Homo sapiens	Q15722	yes	352	352	1-352	0	65	287	15-301	4	L106W;A196I;C287F;S310A	0	none	none	0	0
+LT4R1	inactive	7K15	7K15_1	A	490	Leukotriene B4 receptor 1,Flavodoxin,Leukotriene B4 receptor 1		Homo sapiens;Nitratidesulfovibrio vulgaris str. Hildenborough;Homo sapiens	P00323;Q15722	yes	352	208	5-212	282	35	200	13-212	3	L106W;S116Y;A196I	0	none	none	27	255
+MCHR1	active	8WWK	8WWK_5	R	624	Fusion protein 1,Melanin-concentrating hormone receptor 1,Fusion protein 2		Homo sapiens;Homo sapiens;Homo sapiens	Q99705	yes	353	327	1-327	297	335	289	38-326	0		0	none	none	122	175
+MCHR1	inactive	8YNS	8YNS_4	R	585	Melanin-concentrating hormone receptor 1,Soluble cytochrome b562		Homo sapiens;Homo sapiens;Escherichia coli;Escherichia coli CFT073;Homo sapiens	A0A2R9AFP0;P0ABE7;Q99705	yes	353	316	1-327	269	206	271	38-327	0		0	none	235/104aa	115	50
+MTR1A	active	7VGY	7VGY_1	A	350	Melatonin receptor type 1A		Homo sapiens	P48039	yes	350	350	1-350	0	69	281	23-313	0		0	none	none	0	0
+MTR1A	inactive	6ME2	6ME2_1	A	503	chimera protein of Melatonin receptor type 1A and GlgA glycogen synthase		Homo sapiens;Pyrococcus abyssi GE5;Homo sapiens	P48039;Q9V2J8	yes	350	305	12-325	198	17	290	22-320	9	D73N;L95F;G104A;F116W;N124D;C127L;W251F;A292P;N299D	0	none	218/196aa	2	0
+MTR1B	active	7VH0	7VH0_1	A	362	Melatonin receptor type 1B		Homo sapiens	P49286	yes	362	362	1-362	0	89	273	38-323	3	L108F;F129W;C140L	0	none	none	0	0
+MTR1B	inactive	6ME6	6ME6_1	A	460	Soluble cytochrome b562,Melatonin receptor type 1B,Rubredoxin	M2007W, H2102I, R2106L, P37S, D86N, L108F, F129W, N137D, C140L, W246F, A305P	Escherichia coli;Homo sapiens;Clostridium pasteurianum;Homo sapiens	P00268;P0ABE7;P49286	yes	362	294	38-340	166	12	282	38-328	8	D86N;L108F;F129W;N137D;C140L;W264F;A305P;N312D	0	none	231/53aa	113	0
+NK1R	active	8U26	8U26_5	R	418	Substance-P receptor		Homo sapiens	P25103	yes	407	407	1-407	11	134	284	23-320	0		0	none	none	11	0
+NK1R	inactive	6E59	6E59_1	A	542	Substance-P receptor, GlgA glycogen synthase, Substance-P receptor chimera		Homo sapiens;Pyrococcus abyssi GE5;Homo sapiens	P25103;Q9V2J8	yes	407	336	1-346	206	63	283	28-320	0		0	none	227/196aa	0	10
+NPY1R	active	7X9A	7X9A_1	R	378	Neuropeptide Y receptor type 1		Homo sapiens	P25929	yes	384	340	1-340	38	69	309	28-336	0		0	none	none	0	38
+NPY1R	inactive	5ZBQ	5ZBQ_1	A	525	Neuropeptide Y receptor type 1,T4 Lysozyme	F129W,C1053T, C1096A	Homo sapiens;Enterobacteria phage RB55	P00720;P25929	yes	384	357	2-358	168	62	306	18-337	1	F129W	0	none	none	0	168
+NPY2R	active	8K6N	8K6N_5	E	341	Neuropeptide Y receptor type 2		Homo sapiens	P49146	yes	381	341	1-341	0	40	301	39-339	0		0	none	none	0	0
+NPY2R	inactive	7DDZ	7DDZ_1	A	665	Human Neuropeptide Y Y2 Receptor fusion protein		Enterobacteria phage RB59;Homo sapiens;Nitratidesulfovibrio vulgaris str. Hildenborough;Homo sapiens	P49146	yes	381	347	1-353	318	228	290	48-343	2	H149Y;S280C	0	none	250/147aa	163	8
+NTR1	active	8JPF	8JPF_2	R	418	Neurotensin receptor type 1		Homo sapiens	P30989	yes	418	418	1-418	0	120	298	51-378	0		0	none	none	0	0
+NTR1	inactive	7UL2	7UL2_1	R	419	Neurotensin receptor 1		Homo sapiens;Homo sapiens;Homo sapiens	P30989;P41145	yes	418	348	20-418	71	132	255	60-379	1	A85L	0	none	255/32aa	39	0
+OPRD	active	6PT2	6PT2_1	A	454	Delta opioid receptor		Homo sapiens	P41143	yes	372	298	41-338	156	57	289	41-329	9	G73V;N90S;D95G;K108D;N131S;S143C;G268V;A309I;E323K	0	none	none	156	0
+OPRD	inactive	4N6H	4N6H_1	A	414	Soluble cytochrome b562, Delta-type opioid receptor chimeric protein	M1007W, H1102I, R1106L, P37S	Escherichia coli;Homo sapiens	P0ABE7;P41143	yes	372	301	38-338	113	6	301	38-338	0		0	none	none	113	0
+OPRK	active	8FEG	8FEG_5	B	308	Kappa-type opioid receptor		Homo sapiens	P41145	yes	380	305	54-358	3	30	278	56-339	2	I135L;S324C	0	none	none	3	0
+OPRK	inactive	6VI4	6VI4_1	A	307	Kappa opioid receptor	I135L	Homo sapiens	P41145	yes	380	305	54-358	2	24	283	60-348	1	I135L	0	none	none	2	0
+OPRM	active	5C1M	5C1M_1	A	296	Mu-type opioid receptor		Mus musculus	P42866	yes	398	296	52-347	0	0	296	52-347	0		0	none	none	0	0
+OPRM	inactive	7UL4	7UL4_1	A	426	Mu-type opioid receptor		Mus musculus	P42866	yes	398	393	6-398	33	140	286	65-352	2	M264L;K269R	0	none	none	25	8
+OPRX	active	8F7X	8F7X_1	R	369	Nociceptin receptor		Homo sapiens	P41146	yes	370	369	2-370	0	84	285	49-333	0		0	none	none	0	0
+OPRX	inactive	5DHH	5DHH_1	B	424	Soluble cytochrome b562,Nociceptin receptor	M1007W, H1102I, R1106L	Escherichia coli;Homo sapiens	P0ABE7;P41146	yes	370	297	43-339	127	37	283	44-334	0		0	none	none	116	11
+OPSD	active	4X1H	4X1H_1	A	348	Rhodopsin		Bos taurus	P02699	yes	348	348	1-348	0	22	326	1-326	0		0	none	none	0	0
+OPSD	inactive	7ZBC	7ZBC_1	B	348	Rhodopsin		Bos taurus	P02699	yes	348	348	1-348	0	44	304	1-322	0		0	none	none	0	0
+OX2R	active	7L1V	7L1V_5	R	374	Hypocretin receptor type 2		Homo sapiens	O43614	yes	444	356	3-389	18	90	284	55-378	1	I308V	0	none	none	8	10
+OX2R	inactive	7XRR	7XRR_1	A	341	Orexin receptor type 2		Homo sapiens	O43614	yes	444	331	33-394	10	32	309	37-384	4	D100A;L143W;C147A;N202Q	0	none	none	4	6
+OXYR	active	7RYC	7RYC_2	O	450	Oxytocin receptor		Homo sapiens	P30559	yes	389	389	1-389	61	165	285	31-345	0		0	none	none	55	6
+OXYR	inactive	6TPK	6TPK_1	A	502	Oxytocin receptor		Homo sapiens	P30559	yes	389	287	35-321	215	41	248	35-321	7	R65H;V120L;D153A;A167V;Q193R;A218T;S224A	0	none	none	0	215
+PD2R2	active	8XXV	8XXV_1	A	348	Prostaglandin D2 receptor 2		Homo sapiens	Q9Y5Y4	yes	395	348	1-348	0	46	302	10-322	0		0	none	none	0	0
+PD2R2	inactive	7M8W	7M8W_1	A	470	Prostaglandin D2 receptor 2, Endolysin chimera		Homo sapiens;Tequatrovirus T4;Tequatrovirus T4;Homo sapiens	D9IEF7;Q9Y5Y4	yes	395	338	1-339	132	33	327	3-330	2	N25A;V204A	0	none	236/125aa	1	6
+PE2R4	active	8GDB	8GDB_5	R	488	Prostaglandin E2 receptor EP4 subtype		Homo sapiens	P35408	yes	488	488	1-488	0	205	283	19-344	0		0	none	none	0	0
+PE2R4	inactive	5YHL	5YHL_1	A	332	Prostaglandin E2 receptor EP4 subtype	N7Q, A62L, G106R, N177Q, 218-259 deletion	Homo sapiens	P35408	yes	488	317	8-366	15	52	280	18-346	3	A62L;G106R;N177Q	0	none	none	7	8
+S1PR1	active	7TD4	7TD4_4	R	392	Sphingosine 1-phosphate receptor 1		Homo sapiens	P21453	yes	382	381	2-382	11	102	290	18-323	0		0	none	none	11	0
+S1PR1	inactive	3V2Y	3V2Y_1	A	520	Sphingosine 1-phosphate receptor 1, Lysozyme chimera (E.C.3.2.1.17)	C1054T, C1097A	Homo sapiens;Tequatrovirus T4;Homo sapiens	P00720;P21453	yes	382	304	2-326	216	65	283	16-326	0		0	none	231/168aa	19	29
+S1PR5	active	7EW1	7EW1_5	A	394	Sphingosine 1-phosphate receptor 5		Homo sapiens	Q9H228	yes	398	344	1-344	50	125	269	14-310	0		0	none	none	33	17
+S1PR5	inactive	7YXA	7YXA_1	A	458	Sphingosine 1-phosphate receptor 5,Soluble cytochrome b562		Homo sapiens;Homo sapiens;Homo sapiens	P0ABE7;Q9H228	yes	398	304	1-321	154	83	285	6-321	0		0	none	223/106aa	27	21
+SSR2	active	7T10	7T10_1	R	408	Somatostatin receptor type 2,Kappa-type opioid receptor		Homo sapiens;Homo sapiens;Homo sapiens	P30874;P41145	yes	369	369	1-369	39	121	287	40-327	0		13	238-242;245-252	none	39	0
+SSR2	inactive	7XN9	7XN9_1	A	589	Somatostatin receptor type 2,Endo-1,4-beta-xylanase		Homo sapiens;Niallia circulans;Homo sapiens	P09850;P30874	yes	369	355	2-359	234	113	292	37-331	2	V106E;S316D	0	none	239/185aa	26	23
+TA2R	active	8XJN	8XJN_5	R	559	Fusion tag,Thromboxane A2 receptor,LgBiT		synthetic construct;Homo sapiens;synthetic construct	P21731	yes	343	331	1-331	228	249	310	11-320	0		0	none	none	53	175
+TA2R	inactive	6IIU	6IIU_1	A	484	Soluble cytochrome b562,Thromboxane A2 receptor,Rubredoxin,Thromboxane A2 receptor	M1007W/H1102I/R1106L/L247A	Escherichia coli;Homo sapiens;Clostridium pasteurianum;Homo sapiens	P00268;P0ABE7;P21731	yes	343	306	10-323	178	24	300	10-323	1	L247A	0	none	228/54aa	116	8
+TSHR	active	7UTZ	7UTZ_4	R	701	Thyrotropin receptor		Homo sapiens	P16473	yes	764	694	21-764	7	101	600	21-698	0		0	none	none	7	0
+TSHR	inactive	7T9M	7T9M_3	R	702	Thyrotropin receptor		Homo sapiens	P16473	yes	764	693	22-764	9	137	565	29-700	0		0	none	none	9	0
