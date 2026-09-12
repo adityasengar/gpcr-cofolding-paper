@@ -129,7 +129,19 @@ whoever recomputes should know before they start.*
    F-11's rule, now a measurement (`RET` resolves to all-trans through the CCD while
    two of our rows mean 11-cis).
 
-### 3.4 The pool is BUILT and the selection has RUN — 2026-09-12
+### 3.4 The pool is BUILT, the selection has RUN, and the arm is FROZEN — 2026-09-12
+
+> **FROZEN 2026-09-12.** The rule parameters, the 11 accepted receptors, the 5 refused
+> receptors *with their two distinct refusal classes*, and the 33 accepted molecules under
+> **three digests** — the ChEMBL-id set, the InChIKey set, and the `receptor:molecule`
+> **assignment** — are asserted by `redo/gates/drule.py`, **26 checks, 26 proved by
+> planting**. The digests are the point: every count in this section survives a re-run
+> that quietly draws a different molecule, or scores the right molecules against the wrong
+> receptors, and the digests do not. Prediction totals are **not** frozen — the `R7_full`
+> `pi_choice` and `n = 10/50` are open decisions, so the freeze pins cell counts and
+> leaves the totals to `g2_preflight` G-10. Changing any of it is
+> allowed — **by changing `DECISIONS.md` D-2026-09-12-h first.** A failure here means the
+> record and the data have diverged, not that the gate is broken.
 
 > **SUPERSEDED. This section was titled "Until the pool exists" and described the arm as
 > wholly blocked. That was true when written and false within the day.** The original

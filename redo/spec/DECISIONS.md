@@ -850,6 +850,70 @@ the useful part.
    **One sentence stating this belongs wherever the arm is reported**, and it is not
    discharged by quoting MDE 0.367.
 
+### FROZEN 2026-09-12 — the arm is locked
+
+**Aditya locked the decoy plan as it stands.** Frozen means asserted by a gate that
+fails when it changes and proved by planting — not a banner. The frozen object is the
+**selection**, because `g2_preflight` re-derives dispatch from `drule_selected.tsv`, so
+pinning the selection pins the arm.
+
+| frozen | value |
+|---|---|
+| release | **ChEMBL_37**, sha256 `33c20374…`, scope `within_panel` |
+| rule | cLogP window `absolute:1.0`, diversity cap `0.30`, `k = 3`, draw seed `20260912` |
+| accepted | **11 receptors / 11 clusters** — `5HT5A ACM4 ADRB1 CCKAR CNR2 DRD3 GHSR LT4R1 OPRD OPSD S1PR1` |
+| refused | **5** — `AA1R AA2AR HRH3 LPAR1` as `fewer_than_k_accepted`, **B1B1U5 separately** as `eligibility_unestablishable_no_chembl_target` |
+| molecules | **33, all distinct across receptors**; ChEMBL-id set sha256 `9d363f1f…`, InChIKey set sha256 `a694022d…` |
+| dispatch | 33 READY / 15 BLOCKED, **396 pooled / 2,112 per-cell** |
+| power | `MDE = 1.218/√k` **recomputed from the observed cluster count**, not stored — 0.367 at k = 11 |
+
+**THREE digests, not two, and the third exists because my first plant proved nothing.**
+I specified the assignment plant as "permute one receptor's three molecules onto
+another's" and it is **completely inert**: both digests are over *sorted* values, so
+permuting which receptor a molecule is scored against leaves them byte-identical and moves
+no count. **The same 33 molecules against the wrong reference ligands would have passed the
+entire freeze.** Closed by a third digest over the sorted `receptor:molecule` **pairs**
+(`e60eb91c…`), whose plant is that permutation. The three do three different jobs:
+
+| digest | catches |
+|---|---|
+| ChEMBL-id set `9d363f1f…` | a different molecule drawn |
+| InChIKey set `a694022d…` | the chemistry moved under a stable accession |
+| **assignment pairs `e60eb91c…`** | **the right molecules against the wrong receptors** |
+
+It surfaced only because the harness *runs* its plants instead of asserting they work —
+the same reason `g0_preflight`'s dead harness was found. **Every count above survives a
+re-run that silently draws or misassigns a molecule; the digests do not.**
+
+**Prediction totals are deliberately NOT frozen, and that is a choice rather than an
+omission.** 132 of the 396 pooled predictions are `G6fd(option)` at `R7_full`, behind an
+**open** `pi_choice` on the cognate rung, and `n = 10/50` is a separate open decision. So
+the freeze pins the **cell counts** — 33 READY / 15 BLOCKED, a property of the selection —
+and leaves the totals to `g2_preflight` G-10, which re-derives them from backbones × n.
+Freezing them would make this gate fire on decisions Aditya is entitled to take: friction
+dressed as safety.
+
+**Known behaviour, recorded so it is not mistaken for a fault: a ChEMBL_38 bump will fire
+NINE freeze checks at once**, because a new release changes the pool, the eligibility sets
+and therefore the draw. That is correct, but it presents as a broken gate rather than one
+decision. If a release bump is coming, the first move is to key the outcome checks off a
+single `release_epoch` so it fails once, with one message. And **the MDE is recomputed, never typed**, so if the accepted set ever changes the
+power assertion moves with it and fails rather than going quietly stale — which is what
+happened to four counts on this project already
+(see `[[a-header-count-is-a-claim-nobody-checks]]`).
+
+**B1B1U5's refusal class is frozen separately from the other four on purpose.** Its
+eligibility was never establishable — no ChEMBL target, therefore no exclusion rows,
+therefore a naive implementation calls all 120,973 molecules eligible for it. Flattening
+it into `fewer_than_k_accepted` would hide the one failure mode that is a *hole in the
+evidence* rather than a fact about chemistry.
+
+**What the freeze does NOT forbid.** Changing any of it is allowed — by changing the
+decision first. The freeze exists so that a third amendment to the chemistry, or a
+re-run under different parameters, cannot happen *silently* after two amendments already
+have. A gate failure here is not a broken gate; it means the decision record and the
+data have diverged, and the record is what gets updated first.
+
 ### Where it is enforced
 
 The exploratory status is carried in `g2_systems.csv` on every decoy row, not only in

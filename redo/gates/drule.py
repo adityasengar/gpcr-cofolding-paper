@@ -27,6 +27,7 @@ are written against the three ways this particular rule can go quietly wrong:
 """
 
 import csv
+import hashlib
 import io
 import os
 import shutil
@@ -38,6 +39,94 @@ from paths import INPUTS, BUILD  # noqa: E402
 
 sys.path.insert(0, BUILD)
 import drule_select as DS  # noqa: E402
+
+# ---------------------------------------------------------------------------
+# THE FREEZE.  D-2026-09-12-g (the rule's parameters) and -h (its outcome).
+#
+# What "locked" means in this directory: a constant that a gate asserts and that
+# fails when it changes.  A FROZEN banner with nothing executable behind it is the
+# defect, not the freeze -- layout.py carried a docstring claiming every check was
+# proved by planting with no harness in the file until today, and g0_preflight's
+# harness was dead for a day while three documents said otherwise.  So every number
+# below is compared against a recomputation, and every one is proved by planting the
+# change it exists to catch.
+#
+# The TWO SET-HASHES are the load-bearing entries.  Every count here survives a
+# re-run that silently draws a different molecule for one receptor; the hashes do
+# not.  They are sha256 over the "|"-joined SORTED values, so they are invariant to
+# row order and to which receptor a molecule was drawn for -- which is the point:
+# they pin the molecular identity of the arm and nothing else.
+#
+# MDE is NOT in here.  It is recomputed from the observed cluster count and then
+# compared, so that changing the accepted set moves the assertion instead of
+# leaving a stale 0.367 behind.
+# ---------------------------------------------------------------------------
+FROZEN = {
+    # -- D-2026-09-12-g, the rule's enacted parameters
+    "clogp_window": "absolute:1.0",
+    "diversity_max": "0.3",
+    "k_requested": "3",
+    "chembl_release": "ChEMBL_37",
+    "pool_scope": "within_panel",
+    "draw_seed": "20260912",
+    "chembl_sha256":
+        "33c203740555f96067710cdfc1c3c55d890660e5908ec5cbf5817492c290d281",
+    # -- D-2026-09-12-h, the outcome
+    "n_accepted_receptors": 11,
+    "accepted_receptors": ("5HT5A", "ACM4", "ADRB1", "CCKAR", "CNR2", "DRD3",
+                           "GHSR", "LT4R1", "OPRD", "OPSD", "S1PR1"),
+    "n_accepted_clusters": 11,
+    "n_refused_receptors": 5,
+    "refused_receptors": ("AA1R", "AA2AR", "B1B1U5", "HRH3", "LPAR1"),
+    # frozen SEPARATELY from the refused set, because flattening B1B1U5's
+    # refusal into the other four is the specific error this guards
+    "refusal_classes": {
+        "B1B1U5": "eligibility_unestablishable_no_chembl_target",
+        "AA1R": "fewer_than_k_accepted",
+        "AA2AR": "fewer_than_k_accepted",
+        "HRH3": "fewer_than_k_accepted",
+        "LPAR1": "fewer_than_k_accepted",
+    },
+    "n_accepted_molecules": 33,
+    "chembl_id_set_sha256":
+        "9d363f1f600796b5ef92b07c5457bb4e2a4f5acd0623c64fa89a6d318e84114b",
+    "inchikey_set_sha256":
+        "a694022dc0b56c96d199cf2eddb048ecadd963666778b0c7ab9bbfd3416c4fe1",
+    # ADDED here, not handed down, because the two set-hashes above have a hole:
+    # being over the SORTED values they are invariant to which receptor drew which
+    # molecule, so PERMUTING the assignment -- the same 33 molecules against the
+    # wrong references -- leaves both of them matching.  Measured, not assumed:
+    # swapping one DRD3 decoy with one GHSR decoy keeps both digests and neither
+    # molecule acquires an exclusion row, so D-9 stays quiet too.  This third
+    # digest, over the sorted "slug:chembl_id" PAIRS, is what pins the assignment.
+    "assignment_sha256":
+        "e60eb91c8b6ea48c2f654d02dc1ac1031f6654a914cdb9114995aa4f55a04eff",
+    # -- the dispatch consequence in g2_systems.csv
+    #
+    # CELL counts are frozen; PREDICTION totals deliberately are NOT.  The cell
+    # counts are a property of the selection -- 11 receptors x 3 partner levels
+    # READY, 5 x 3 BLOCKED -- and change only if the selection changes, which is
+    # what this freeze is for.  The prediction totals are not: 132 of the 396
+    # pooled predictions are `G6fd(option)` at R7_full, which sits behind an OPEN
+    # pi_choice on the cognate rung, and n = 10/50 is a separate open decision on
+    # the pooled claim.  Freezing them would make the freeze fire on decisions
+    # Aditya is entitled to take -- friction dressed as safety.  g2_preflight's
+    # G-10 already re-derives the totals from backbones x n, which is the right
+    # place for them.  Recorded so this is legible as a choice, not an omission.
+    "ready_cells": 33,
+    "blocked_cells": 15,
+    # the pre-registered bar the arm runs below, for the MDE comparison
+    "prereg_k": 12,
+    "mde_3dp": "0.367",
+    "mde_loss_pct_1dp": "4.4",
+}
+
+FREEZE_NOTE = (
+    "FROZEN by D-2026-09-12-g/h. Re-running redo/build/drule_select.py is NOT the "
+    "fix -- it will reproduce this value, and if it does not, the inputs or the rule "
+    "have moved underneath a locked decision. The fix is to change the DECISION "
+    "first (redo/spec/DECISIONS.md), then FROZEN in redo/gates/drule.py, then "
+    "regenerate. This gate is not broken when it says this.")
 
 TARGETS = "drule_targets.tsv"
 POOL = "drule_pool_molecules.tsv"
@@ -384,6 +473,9 @@ def selection_checks(root, chk, blocking):
         if not tg.get(s, {}).get("chembl_target_id"):
             continue                       # D-8's case: no eligible set to conserve
         rows = by.get(s, [])
+        if not rows:
+            continue          # D-7 owns "a receptor with no row at all"; do not
+            #                   crash here and take the rest of the gate with us
         n_elig = int(rows[0]["n_eligible"] or 0)
         n_acc = int(rows[0]["n_accepted"] or 0)
         if n_elig != n_acc + per_rec.get(s, 0):
@@ -393,6 +485,203 @@ def selection_checks(root, chk, blocking):
         "silently dropped", not lost, "; ".join(lost[:4]) if lost else
         f"conserved over {len([s for s in scope if tg.get(s, {}).get('chembl_target_id')])}"
         f" receptors with a resolved target")
+
+    freeze_checks(root, chk, sel, acc_rows, by, want_ref=want_ref_of(sel))
+
+
+def want_ref_of(sel):
+    """receptor -> its recorded refusal, with the class DERIVED from n_eligible.
+
+    Same derivation g2_systems.py uses, and for the same reason: a refused receptor
+    with ZERO eligible candidates was refused because eligibility could not be
+    established at all, one with a nonzero eligible set because too few of them
+    passed.  Reading the class out of the prose would make the freeze a check on a
+    sentence.
+    """
+    out = {}
+    for r in sel:
+        if r["decoy_status"] == "decoy-unavailable":
+            n = int(r["n_eligible"] or 0)
+            out[r["receptor_slug"]] = dict(
+                reason=r["reason"], n_eligible=n,
+                cls=("eligibility_unestablishable_no_chembl_target" if n == 0
+                     else "fewer_than_k_accepted"))
+    return out
+
+
+def set_sha256(values):
+    """sha256 over the "|"-joined SORTED values.
+
+    Sorted, so the digest is invariant to row order and to which receptor a molecule
+    was drawn for -- it pins the arm's molecular identity and nothing else.  That is
+    what makes it catch the one failure no count can: a re-run that swaps one decoy
+    for another eligible candidate.
+    """
+    return hashlib.sha256("|".join(sorted(values)).encode()).hexdigest()
+
+
+# ==========================================================================
+# THE FREEZE -- D-17 .. D-24
+# ==========================================================================
+def freeze_checks(root, chk, sel, acc_rows, by, want_ref):
+    def frz(label, ok, got, want, held=""):
+        """Report a frozen constant.  `held` is what to say when it still holds."""
+        chk(label, ok, held if ok else
+            f"got {got}, D-2026-09-12 froze {want}.  {FREEZE_NOTE}")
+
+    # -- D-17  the rule's enacted parameters --------------------------------
+    params, bad = {}, []
+    for col in ("clogp_window", "diversity_max", "k_requested", "chembl_release",
+                "pool_scope", "draw_seed"):
+        vals = sorted({r[col] for r in sel})
+        params[col] = vals
+        if vals != [FROZEN[col]]:
+            bad.append(f"{col}={vals} not [{FROZEN[col]!r}]")
+    frz("D-17  the rule's parameters are the frozen ones, on every row",
+        not bad, "; ".join(bad),
+        f"clogp_window={FROZEN['clogp_window']}, "
+        f"diversity_max={FROZEN['diversity_max']}, k={FROZEN['k_requested']}, "
+        f"{FROZEN['chembl_release']}/{FROZEN['pool_scope']}, "
+        f"draw_seed={FROZEN['draw_seed']} (D-2026-09-12-g)",
+        held=f"clogp_window {FROZEN['clogp_window']}, diversity_max "
+             f"{FROZEN['diversity_max']}, k {FROZEN['k_requested']}, draw_seed "
+             f"{FROZEN['draw_seed']}, {FROZEN['chembl_release']} / "
+             f"{FROZEN['pool_scope']}")
+
+    # -- D-18  the pool digest ----------------------------------------------
+    # The release NAME is not the release.  DRULE_CHEMBL_SCOPE.md pins by version
+    # AND download checksum, because an unpinned pull is paper_af3's ColabFold
+    # problem in another costume; freezing only the name would leave exactly that
+    # hole open.
+    digests = sorted({r["chembl_sha256"] for r in tsv(POOL, root)})
+    frz("D-18  the pool came from the frozen ChEMBL download, by DIGEST not by name",
+        digests == [FROZEN["chembl_sha256"]],
+        f"{[d[:16] + '...' for d in digests]}",
+        f"[{FROZEN['chembl_sha256'][:16]}...] (D-2026-09-12-g)")
+
+    # -- D-19  the accepted and refused SETS --------------------------------
+    got_acc = tuple(sorted({r["receptor_slug"] for r in acc_rows}))
+    got_ref = tuple(sorted(want_ref))
+    got_clu = len({r["cluster"] for r in acc_rows})
+    ok = (got_acc == tuple(sorted(FROZEN["accepted_receptors"]))
+          and len(got_acc) == FROZEN["n_accepted_receptors"]
+          and got_ref == tuple(sorted(FROZEN["refused_receptors"]))
+          and len(got_ref) == FROZEN["n_refused_receptors"]
+          and got_clu == FROZEN["n_accepted_clusters"])
+    frz("D-19  exactly 11 receptors / 11 clusters accepted and 5 refused, and "
+        "exactly WHICH", ok,
+        f"{len(got_acc)} accepted {list(got_acc)} in {got_clu} clusters, "
+        f"{len(got_ref)} refused {list(got_ref)}",
+        f"{FROZEN['n_accepted_receptors']} accepted "
+        f"{list(FROZEN['accepted_receptors'])} in "
+        f"{FROZEN['n_accepted_clusters']} clusters, "
+        f"{FROZEN['n_refused_receptors']} refused "
+        f"{list(FROZEN['refused_receptors'])} (D-2026-09-12-h)")
+
+    # -- D-20  the refusal CLASSES, frozen per receptor ---------------------
+    got_cls = {s: w["cls"] for s, w in want_ref.items()}
+    frz("D-20  B1B1U5 is refused because eligibility is UNESTABLISHABLE and the "
+        "other four because too few candidates passed -- separately frozen",
+        got_cls == FROZEN["refusal_classes"],
+        f"{got_cls}",
+        f"{FROZEN['refusal_classes']} (D-2026-09-12-h).  These are different facts: "
+        f"B1B1U5 has no ChEMBL target, so the pool holds NO exclusion rows for it "
+        f"and its eligibility was never establishable; the other four had 111k-120k "
+        f"eligible candidates and too few passed the eight axes.  Flattening them "
+        f"into one 'no decoy' is the error this check exists for")
+
+    # -- D-21  the molecular identity of the arm ----------------------------
+    ids = [r["candidate_chembl_id"] for r in acc_rows]
+    iks = [r["inchikey"] for r in acc_rows]
+    reused = sorted({i for i in ids if ids.count(i) > 1})
+    ok = (len(ids) == FROZEN["n_accepted_molecules"]
+          and len(set(ids)) == FROZEN["n_accepted_molecules"] and not reused)
+    frz("D-21  33 accepted decoys, and no molecule is reused across receptors", ok,
+        f"{len(ids)} rows, {len(set(ids))} distinct ids"
+        + (f", reused: {reused}" if reused else ""),
+        f"{FROZEN['n_accepted_molecules']} rows, all distinct (D-2026-09-12-h).  A "
+        f"molecule serving as the decoy for two receptors makes 'decoy' and 'that "
+        f"molecule' partly the same term across cells, which is the collision k=3 "
+        f"exists to break")
+
+    # -- D-22  THE SET-HASHES.  The load-bearing pair. ----------------------
+    # Every count above survives a re-run that swaps one decoy for another eligible
+    # candidate of the same receptor: 33 rows, 33 distinct ids, 11 receptors, 11
+    # clusters, all still true.  These two do not survive it.
+    got_h, got_k = set_sha256(ids), set_sha256(iks)
+    frz("D-22  the SET of 33 ChEMBL ids hashes to the frozen digest",
+        got_h == FROZEN["chembl_id_set_sha256"],
+        f"{got_h}", f"{FROZEN['chembl_id_set_sha256']} (D-2026-09-12-h).  sha256 of "
+        f"the '|'-joined SORTED candidate_chembl_id values, so it is invariant to "
+        f"row order and to which receptor drew which molecule.  If this is the only "
+        f"failing check, the arm has silently drawn a DIFFERENT molecule -- which no "
+        f"count in this gate can see")
+    frz("D-23  the SET of 33 InChIKeys hashes to the frozen digest",
+        got_k == FROZEN["inchikey_set_sha256"],
+        f"{got_k}", f"{FROZEN['inchikey_set_sha256']} (D-2026-09-12-h).  The same "
+        f"pin on the CHEMISTRY rather than on the accession: a ChEMBL id can be "
+        f"merged or withdrawn upstream, and an InChIKey cannot")
+
+    # -- D-26  the ASSIGNMENT, not just the set -----------------------------
+    got_a = set_sha256(f"{r['receptor_slug']}:{r['candidate_chembl_id']}"
+                       for r in acc_rows)
+    frz("D-26  each of the 33 decoys is frozen TO ITS RECEPTOR, not merely to the "
+        "panel", got_a == FROZEN["assignment_sha256"],
+        f"{got_a}", f"{FROZEN['assignment_sha256']} (added 2026-09-12).  sha256 of "
+        f"the sorted 'slug:chembl_id' pairs.  D-22 and D-23 are over the sorted "
+        f"VALUES, so they are blind to a permutation of the assignment -- the same "
+        f"33 molecules scored against the wrong references keeps both of those "
+        f"digests. This is the check that sees it")
+
+    # -- D-24  MDE, RECOMPUTED from the observed clusters -------------------
+    # Never a hardcoded 0.367.  Computed from what is in the file and then compared,
+    # so that changing the accepted set MOVES the assertion rather than leaving a
+    # stale number standing next to new data.
+    k = len({r["cluster"] for r in acc_rows})
+    mde = 1.218 / k ** 0.5 if k else float("inf")
+    target = 1.218 / FROZEN["prereg_k"] ** 0.5
+    loss = 100.0 * (mde / target - 1.0)
+    ok = (f"{mde:.3f}" == FROZEN["mde_3dp"]
+          and f"{loss:.1f}" == FROZEN["mde_loss_pct_1dp"])
+    frz("D-24  the MDE recomputed from the observed cluster count is the frozen one",
+        ok,
+        f"k={k} -> MDE 1.218/sqrt({k}) = {mde:.3f}, {loss:+.1f}% against "
+        f"k={FROZEN['prereg_k']}",
+        f"MDE {FROZEN['mde_3dp']} and +{FROZEN['mde_loss_pct_1dp']}% "
+        f"(D-2026-09-12-h).  This is RECOMPUTED, not stored: if the accepted set "
+        f"changes, this check moves with it and fails, which is how the decision "
+        f"record and the data are kept from drifting apart",
+        held=f"k={k} clusters -> 1.218/sqrt({k}) = {mde:.3f} against "
+             f"{target:.3f} at the pre-registered k={FROZEN['prereg_k']}, "
+             f"+{loss:.1f}% -- recomputed here, not read from a cell")
+
+    # -- D-25  the dispatch consequence in g2_systems.csv -------------------
+    # The freeze has to reach the table that actually dispatches, or it freezes a
+    # selection nobody runs.  g2_preflight re-derives the identity of every decoy
+    # cell from drule_selected.tsv; what it does NOT pin is the totals, so they are
+    # pinned here, where the decision lives.
+    g2p = os.path.join(root, G2)
+    if not os.path.exists(g2p):
+        chk("D-25  the frozen selection reaches g2_systems.csv at the frozen totals",
+            False, f"{G2} is ABSENT -- run redo/build/g2_systems.py")
+        return
+    with open(g2p) as fh:
+        g2 = [r for r in csv.DictReader(fh) if r["ligand"] == "decoy_lig"]
+    ready = [r for r in g2 if r["dispatch_status"] == "READY"]
+    blk = [r for r in g2 if r["dispatch_status"] != "READY"]
+    pooled = sum(int(r["predictions_pooled"]) for r in ready)
+    percell = sum(int(r["predictions_percell"]) for r in ready)
+    ok = (len(ready) == FROZEN["ready_cells"]
+          and len(blk) == FROZEN["blocked_cells"])
+    frz("D-25  the frozen selection reaches g2_systems.csv at the frozen cell counts",
+        ok,
+        f"{len(ready)} READY / {len(blk)} BLOCKED cells "
+        f"(totals {pooled} pooled / {percell} per-cell, NOT frozen -- "
+        f"the R7_full pi_choice and n=10/50 are open decisions)",
+        f"{FROZEN['ready_cells']} READY / {FROZEN['blocked_cells']} BLOCKED "
+        f"decoy cells (D-2026-09-12-h)",
+        held=f"{len(ready)} READY / {len(blk)} BLOCKED decoy cells; prediction "
+             f"totals are re-derived by g2_preflight G-10, not frozen here")
 
 
 def report(blocking, passed, pending):
@@ -535,6 +824,139 @@ def _revert_to_getformalcharge():
 # (check, what is planted, the ONE input file it touches (None = a code plant),
 #  the mutation).  A plant that touches no file still has to be proved, so D-13 is
 #  planted in code -- reverting the charge rule to the frozen campaign's.
+def _col_csv(path, row_match, col, val):
+    """_col, for a comma-delimited file.  g2_systems.csv is the only one here."""
+    rows = list(csv.DictReader(open(path)))
+    cols = list(rows[0].keys())
+    for r in rows:
+        if row_match is None or all(r[k] == v for k, v in row_match.items()):
+            r[col] = val
+            break
+    with open(path, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols)
+        w.writeheader()
+        w.writerows(rows)
+
+
+def _drop_receptor_decoys(path, slug):
+    rows = list(csv.DictReader(open(path), delimiter="\t"))
+    cols = list(rows[0].keys())
+    out = [r for r in rows if not (r["receptor_slug"] == slug
+                                   and r["decoy_status"] == "accepted")]
+    assert len(out) < len(rows), f"{slug} has no accepted decoys to drop"
+    with open(path, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t")
+        w.writeheader()
+        w.writerows(out)
+
+
+def _accepted_rows_all(path, slug, col, val):
+    """Set one column on EVERY accepted row of `slug`.
+
+    `_accepted_row` touches only the first match, which for a per-receptor property
+    like `cluster` produces a plant that applies (the bytes change) and is still
+    inert (the receptor keeps its old cluster through its other two rows, so the
+    cluster COUNT never moves).  A plant that applies but changes nothing observable
+    is the same failure as one that does not apply -- it scores `MISS` here, which is
+    how this one was found.
+    """
+    rows = list(csv.DictReader(open(path), delimiter="\t"))
+    cols = list(rows[0].keys())
+    n = 0
+    for r in rows:
+        if r["receptor_slug"] == slug and r["decoy_status"] == "accepted":
+            r[col] = val
+            n += 1
+    assert n, f"no accepted rows for {slug}"
+    with open(path, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t")
+        w.writeheader()
+        w.writerows(rows)
+
+
+def _alt_candidate(d, slug):
+    """A molecule the rule ACCEPTED for `slug` and did not draw.
+
+    Derived, not picked: it is in the pool, carries no exclusion row for `slug`,
+    appears in no rejection row for `slug`, and is not among the 33 drawn.  By
+    D-14's conservation law (accepted + rejected == eligible) that is exactly the
+    accepted-but-undrawn set.  So substituting it is a substitution the rule itself
+    would have permitted -- which is what makes it the right plant for a set-hash:
+    every count in the gate stays true and only the digest moves.
+    """
+    drawn = {r["candidate_chembl_id"] for r in tsv(SEL, d)
+             if r["decoy_status"] == "accepted"}
+    excl = set()
+    with open(os.path.join(d, EXCL)) as fh:
+        for r in csv.DictReader(fh, delimiter="\t"):
+            if r["receptor_slug"] == slug:
+                excl.add(r["candidate_chembl_id"])
+    rej = set()
+    with DS.open_rejections(os.path.join(d, REJ)) as fh:
+        fh.readline()
+        for line in fh:
+            f = line.split("\t", 2)
+            if f[0] == slug:
+                rej.add(f[1])
+    for r in tsv(POOL, d):
+        cid = r["candidate_chembl_id"]
+        if cid in drawn or cid in excl or cid in rej:
+            continue
+        a = DS.axes(r["smiles"])
+        if a is not None:
+            return cid, a["_inchikey"]
+    raise AssertionError(f"no accepted-but-undrawn candidate found for {slug}")
+
+
+def _swap_one_id(d):
+    """THE SET-HASH PLANT.  Swap one drawn decoy's ChEMBL id for an undrawn one.
+
+    Leaves intact: 33 rows, 33 DISTINCT ids, 11 accepted receptors, 11 clusters,
+    5 refused, every refusal class, every rule parameter, the pool digest, the
+    recomputed MDE, both g2_systems.csv totals, and the InChIKey set-hash.  D-22 is
+    the only check in the gate that can see it.
+    """
+    cid, _ik = _alt_candidate(d, "OPSD")
+    p = os.path.join(d, SEL)
+    _accepted_row(p, "candidate_chembl_id", cid, slug="OPSD")
+
+
+def _swap_one_inchikey(d):
+    """THE OTHER SET-HASH PLANT.  The chemistry moves under a stable accession.
+
+    Leaves intact: everything above, AND the ChEMBL id set-hash -- the accession
+    is untouched, so nothing that keys on `candidate_chembl_id` notices.  D-23 is
+    the only check in the gate that can see it.
+    """
+    _cid, ik = _alt_candidate(d, "OPSD")
+    _accepted_row(os.path.join(d, SEL), "inchikey", ik, slug="OPSD")
+
+
+def _permute_assignment(d):
+    """THE PLANT THE SET-HASHES CANNOT SEE.  Swap one DRD3 decoy with one GHSR one.
+
+    This is the plant the freeze was first specified with, and it proves the
+    opposite of what it looks like: the sorted SET of 33 ChEMBL ids is unchanged, so
+    D-22 passes; the sorted set of InChIKeys is unchanged, so D-23 passes; 33 rows,
+    33 distinct ids, 11 receptors, 11 clusters, every count intact.  Neither
+    molecule carries an exclusion row for its new receptor, so D-9 stays quiet, and
+    `smiles` is untouched so D-12 still recomputes clean.  Only D-26 sees it.
+    """
+    p = os.path.join(d, SEL)
+    rows = list(csv.DictReader(open(p), delimiter="\t"))
+    cols = list(rows[0].keys())
+    a = next(r for r in rows if r["receptor_slug"] == "DRD3"
+             and r["decoy_status"] == "accepted")
+    b = next(r for r in rows if r["receptor_slug"] == "GHSR"
+             and r["decoy_status"] == "accepted")
+    a["candidate_chembl_id"], b["candidate_chembl_id"] = (b["candidate_chembl_id"],
+                                                          a["candidate_chembl_id"])
+    with open(p, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t")
+        w.writeheader()
+        w.writerows(rows)
+
+
 PLANTS = [
     ("D-1", "delete the target mapping", TARGETS,
      lambda d: os.remove(os.path.join(d, TARGETS))),
@@ -572,6 +994,43 @@ PLANTS = [
      lambda d: _accepted_row(os.path.join(d, SEL), "clogp_window", "")),
     ("D-16", "make two of a receptor's three decoys the same molecule", SEL,
      lambda d: _twin_the_draw(os.path.join(d, SEL))),
+    # ---- the freeze, D-2026-09-12-g/h -----------------------------------
+    ("D-17", "change the enacted cLogP window back to the relative form", SEL,
+     lambda d: _accepted_row(os.path.join(d, SEL), "clogp_window", "relative:0.2")),
+    ("D-18", "swap the pinned ChEMBL download digest", POOL,
+     lambda d: _col(os.path.join(d, POOL), None, "chembl_sha256", "0" * 64)),
+    ("D-19", "drop a passing receptor out of the accepted set", SEL,
+     lambda d: _drop_receptor_decoys(os.path.join(d, SEL), "OPSD")),
+    ("D-20", "flatten B1B1U5's refusal into the other four receptors' class", SEL,
+     lambda d: _col(os.path.join(d, SEL), {"receptor_slug": "B1B1U5"},
+                    "n_eligible", "120973")),
+    ("D-21", "reuse one receptor's decoy as another receptor's", SEL,
+     lambda d: _accepted_row(os.path.join(d, SEL), "candidate_chembl_id",
+                             next(r["candidate_chembl_id"] for r in tsv(SEL, d)
+                                  if r["receptor_slug"] == "DRD3"
+                                  and r["decoy_status"] == "accepted"),
+                             slug="OPSD")),
+    ("D-22", "swap one drawn decoy for an undrawn one the rule also accepted "
+             "(no count in the gate changes)", SEL, _swap_one_id),
+    ("D-23", "move the chemistry under a stable accession (the ChEMBL id set-hash "
+             "still matches)", SEL, _swap_one_inchikey),
+    ("D-24", "collapse two accepted receptors into one cluster, so k and the MDE "
+             "move", SEL,
+     lambda d: _accepted_rows_all(os.path.join(d, SEL), "OPSD", "cluster",
+                                  next(r["cluster"] for r in tsv(SEL, d)
+                                       if r["receptor_slug"] == "DRD3"))),
+    ("D-26", "permute the assignment: the same 33 molecules against the wrong "
+             "receptors (BOTH set-hashes still match)", SEL, _permute_assignment),
+    # The plant must move what the check READS.  It used to set predictions_pooled
+    # to 999, which D-25 no longer looks at now that the prediction totals are
+    # deliberately unfrozen -- so it would have applied, changed bytes, and been
+    # inert.  Flipping one READY decoy cell to BLOCKED moves the cell counts,
+    # which is the frozen quantity.
+    ("D-25", "flip one READY decoy cell to BLOCKED, moving the frozen cell counts",
+     G2,
+     lambda d: _col_csv(os.path.join(d, G2),
+                        {"ligand": "decoy_lig", "dispatch_status": "READY"},
+                        "dispatch_status", "BLOCKED_DECOY_UNAVAILABLE")),
 ]
 
 
