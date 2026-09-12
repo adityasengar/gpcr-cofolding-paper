@@ -268,7 +268,8 @@ report already is.
 ### The bridge
 
 `~/.ntfy-bridge/` — **session-local, dies with the session.** Re-arm exactly ONE
-`recv.sh` and ONE `sweep.sh`, then `pgrep` to confirm: one receiver chain is 3
+`recv.sh` and ONE `sweep.sh`, then confirm with the check below — **not with a bare
+`pgrep -f recv.sh`, which counts itself.** One receiver chain is 3
 processes, one sweep is 2. More than that and messages can be silently swallowed —
 every instance shares `.seen`.
 
@@ -290,8 +291,28 @@ and `.seen` dedupes what it re-reads. `sweep.sh` is the 5-minute backstop.
 
 **The one real risk is the watcher, not the bridge.** A Monitor that emits enough
 events gets stopped automatically, and a stopped receiver looks exactly like a quiet
-channel. If the bridge matters for what you are doing, `pgrep -f recv.sh` should
-print **3** and `pgrep -f sweep.sh` **2** — check that rather than trusting silence.
+channel. If the bridge matters for what you are doing, check it — but **do not use a
+bare `pgrep -f recv.sh`**. It matches the shell running it, because that shell's own
+command line contains the pattern, so it prints **4** where 3 is healthy and **3** for
+sweep where 2 is. That instruction used to be in this file and it produced a false
+duplicate-receiver alarm on 2026-09-12.
+
+**Count top-level instances instead** — a duplicate is only a duplicate if it is not a
+child of the real one, and what matters is that exactly one receiver owns `.seen`:
+
+```bash
+for n in recv sweep; do
+  top=$(pgrep -f "/bin/bash.*$n\.sh" | while read p; do
+    pp=$(ps -o ppid= -p $p | tr -d ' ')
+    pgrep -f "/bin/bash.*$n\.sh" | grep -qx "$pp" || echo $p
+  done | wc -l | tr -d ' ')
+  echo "$n.sh top-level instances: $top  (1 = healthy)"
+done
+```
+
+**Expect 1 and 1.** A healthy receiver legitimately shows extra `recv.sh` PIDs — the
+zsh wrapper, and a child subshell that turns over on every reconnect — and counting
+those as duplicates is the mistake. Check this rather than trusting silence.
 
 ## How the sessions work
 
