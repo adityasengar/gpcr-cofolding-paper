@@ -242,6 +242,73 @@ must not inherit this one.**
 
 ---
 
+## D-2026-09-12-d · SCOPE CLOSED — the redo is a Class A paper
+
+**Aditya, 2026-09-12**, asked directly: does the redo claim Class A only, or all
+classes? **Answer: Class A only.** This closes `E0.5` at option (a) — "drop B and F
+and say the work is Class A" — and it is the scope `D-2026-09-12-c` was already
+written against.
+
+### What it ratifies — the artefacts were already there
+
+Verified rather than assumed:
+
+| artefact | composition |
+|---|---|
+| `g1_receptors.tsv` — the frozen G1 panel | **64 receptors, every one `gclass = A`**, 32 core-32 provisional |
+| `g0_calibration_structures.csv` | **1,357 rows, one class present: Class A (Rhodopsin)** |
+| its scored split | 965 Active + 371 Inactive = 1,336 → **726 calibration / 610 application**, matching gate G0-2; the 21 excluded rows are the Class A Intermediates |
+
+**So the decision costs the primary campaign nothing.** Both the instrument's
+calibration population and the panel it is applied to were already Class A by
+construction. What changes is that the scope is now *claimed* rather than
+*incidental*, and several open items close because of it.
+
+### What it closes
+
+- **`E0.5` — "decide the class B and class F instrument"** — resolved as option (a).
+  It was a decision, never an experiment.
+- **The G0 gate's `class F atom pair` WAIT** — "measure class F tilt on 2×44–6×31 or
+  drop the class F arm". The arm is dropped; the WAIT is answered by scope, not by
+  measurement.
+- **The Class B and Class F instrument decisions** carried as Tier 3 open items.
+  F-13 is no longer an open problem; it becomes the *stated reason* for the scope.
+
+### Why F-13 is the justification rather than a casualty
+
+The scope is not a convenience — we have measurement behind it, from the apo arm:
+
+- **Class B:** Boltz and Protenix put apo at ~12 Å, Chai and OF3 at ~20 Å — a **9 Å
+  disagreement about the same receptors with no partner**, larger than the
+  separation the threshold is meant to detect.
+- **Class F:** apo medians **14.20–16.12 straddle the 14.932 cut on every
+  backbone** — no discriminating power at all.
+
+A paper that says "we restrict to Class A because our instrument demonstrably does
+not transfer, and here is the measurement" is stronger than one that reports
+B and F rates it cannot defend.
+
+### What it costs — stated, and PARKED rather than deleted
+
+- **`E7.2` — the class B length ladder.** This is the real loss.
+  `hilger2020gcgr` on GCGR: in class B the agonist produces no TM6 opening at all,
+  so class B is **the sharpest venue for a partner-length ladder** — if the α5-CT
+  ladder means what we think, class B should show the *larger* step. lit rated
+  cross-class transfer **"ADJACENT on coverage, OPEN as transfer"**: several papers
+  span classes, none holds a class out and tests transfer.
+- **`G15` / tier `E-B1`** (class B transfer, 5 proposed → 4 receptors) — depended on
+  `E0.5` and drops with it.
+- **Tier `E-scope`** — the class F/B2 carry-over (AGRE5, FZD4, FZD6, FZD7, SMO),
+  already "declared scope, no claim", now formally out. SMO was the receptor that
+  got *less* open when the partner was added (−2.14 Å, F-13c).
+
+**`E7.2` is parked, not killed.** It needs a class B instrument, which needs its own
+calibration; that is a second paper's worth of work and it is the obvious follow-on.
+Recorded here so the reason it is absent is legible rather than looking like an
+oversight.
+
+---
+
 ## F-1 · **RETRACTED 2026-09-12. I was wrong. The two-instrument predicate IS what ran.**
 
 **What I claimed** (and told Aditya, and told `paper_af3`): that the manuscript's

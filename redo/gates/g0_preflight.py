@@ -71,9 +71,9 @@ def path(*p):
     return os.path.join(ROOT, *p)
 
 
-def read_csv(p):
+def read_csv(p, delim=","):
     with open(p) as fh:
-        return list(csv.DictReader(fh))
+        return list(csv.DictReader(fh, delimiter=delim))
 
 
 def main(argv):
@@ -96,6 +96,8 @@ def main(argv):
         "g0_intermediates.csv", "g0_label_conflicts.csv",
         "g0_panel_exclusions.csv", "g0_activation_degree.csv",
         "g0_selftest.txt",
+        # read by G0-13, which checks the Class A scope across BOTH populations.
+        "g1_receptors.tsv",
     ]
     # The generators are code and live in build/; the artefacts they write are
     # generated and live in inputs/.  This check used to look for both in one
@@ -264,9 +266,11 @@ def main(argv):
          "boundary. Needs the measurement pass, then both thresholds recomputed with "
          "F3 on and off. The pass must ALSO measure the F3-REMOVED structures, or the "
          "filter's effect stays unauditable. DECISIONS.md F-12.")
-    wait("class F atom pair",
-         "The redo must measure class F tilt on 2x44-6x31, not 2x46-6x37, or "
-         "drop the class F arm. sec.10.")
+    # The "class F atom pair" WAIT stood here until 2026-09-12: measure class F
+    # tilt on 2x44-6x31 or drop the class F arm.  Aditya chose the scope --
+    # DECISIONS.md D-2026-09-12-d, the redo is a Class A paper -- so the arm is
+    # dropped and the dependency is answered rather than discharged.  What
+    # replaces it is G0-13, which guards the scope instead of waiting on it.
     # -- G0-12  the regenerable mmCIF cache is excluded from git ------------
     # This was a wait() until 2026-09-11, which is a check that can never clear:
     # the work is the orchestrator's and the gate had no way to see it land.
@@ -280,6 +284,21 @@ def main(argv):
     chk("G0-12  the 1-3 GB mmCIF cache is gitignored", want in rules,
         f"{want} present in .gitignore" if want in rules
         else f"{want} NOT in .gitignore -- the cache will be committed")
+
+    # -- G0-13  the scope is Class A, and stays Class A ----------------------
+    # D-2026-09-12-d closed E0.5 at "drop B and F and say the work is Class A",
+    # on measured grounds: F-13 found a 9 A inter-backbone disagreement on class
+    # B apo and no discriminating power at all on class F.  Both populations were
+    # already Class A by construction, which is exactly why this needs a guard --
+    # nothing would have complained if another class drifted back in.
+    calib_classes = sorted({r["gpcr_class"] for r in rows})
+    rec = read_csv(os.path.join(INPUTS, "g1_receptors.tsv"), delim="\t")
+    panel_classes = sorted({r["gclass"] for r in rec})
+    ok = calib_classes == ["Class A (Rhodopsin)"] and panel_classes == ["A"]
+    chk("G0-13  the redo is Class A only, in both populations", ok,
+        f"calibration {len(rows)} rows all Class A, panel {len(rec)} receptors all A"
+        if ok else
+        f"calibration classes {calib_classes}, panel classes {panel_classes}")
 
     return report(blocking, pending, passed)
 
@@ -343,6 +362,9 @@ PLANTS = [
     ("G0-11", "turn a self-test MATCH into a MISMATCH",
      lambda d: _sub(os.path.join(d, "redo/inputs/g0_selftest.txt"),
                     "MATCH", "MISMATCH", 1)),
+    ("G0-13", "let a class B receptor drift back into the panel",
+     lambda d: _sub(os.path.join(d, "redo/inputs/g1_receptors.tsv"),
+                    "\tA\t", "\tB1\t", 1)),
 ]
 
 
@@ -377,21 +399,30 @@ def selftest():
     return 1 if bad else 0
 
 
+# The gate reads redo/inputs/ and redo/build/ and RUNS from redo/gates/, so the
+# scratch clone must recurse.  It did not: until 2026-09-12 this copied only the
+# TOP-LEVEL files of each directory, which was correct while redo/ was flat and
+# silently wrong from the moment the campaign moved to the guarded layout on
+# 2026-09-11.  Every plant then failed to apply, every check reported MISS, and
+# the harness still printed a tidy tally -- so "proved by planting" was asserted
+# in three documents while 0 of 11 checks were actually being proved.
+# Directories that are large and that no plant touches are skipped by name.
+_CLONE_SKIP = {"cache", "protocol", "runs", "__pycache__", ".git"}
+
+
 def _clone(src, dst):
-    """Copy only what the gate reads.  Cheap, and keeps the plant surface small."""
+    """Copy what the gate reads AND what it runs.  Recurses; skips the bulk."""
     for rel in ("redo", "data/block_b/09_references",
                 "data/block_a/01_rows"):
         s, d = os.path.join(src, rel), os.path.join(dst, rel)
-        os.makedirs(d, exist_ok=True)
-        for f in os.listdir(s):
-            fp = os.path.join(s, f)
-            if os.path.isfile(fp):
-                out = os.path.join(d, f)
-                shutil.copy2(fp, out)
-                # data/block_* is read-only in the real tree and copy2 preserves
-                # that, which stopped the G0-9 plant from being written.  Make
-                # the SCRATCH copy writable; the drop itself is never touched.
-                os.chmod(out, 0o644)
+        shutil.copytree(s, d, dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns(*_CLONE_SKIP))
+        # data/block_* is read-only in the real tree and copy2 preserves that,
+        # which stopped the G0-9 plant from being written.  Make the SCRATCH
+        # copy writable; the drop itself is never touched.
+        for root, _, files in os.walk(d):
+            for f in files:
+                os.chmod(os.path.join(root, f), 0o644)
 
 
 def _rows(p):

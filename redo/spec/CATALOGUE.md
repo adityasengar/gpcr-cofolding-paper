@@ -526,6 +526,14 @@ Worth reading before the depth rows are quoted in a paper.
 - **Novelty.** Not a novelty claim; a robustness one.
 
 ### E0.5 — Decide the class B and class F instrument
+
+> **CLOSED 2026-09-12 at option (a) — drop B and F; the work is Class A.**
+> Aditya's scope decision, `DECISIONS.md` D-2026-09-12-d. The grounds are measured,
+> not economic: F-13's apo arm found a **9 Å inter-backbone disagreement** on class B
+> and **no discriminating power at all** on class F (medians 14.20–16.12 straddling
+> the 14.932 cut on every backbone). The options below are left legible so the
+> choice can be audited; `g0_preflight.py` **G0-13** now guards the scope.
+
 - **Question.** Is there a predicate for these, or are they scope decoration?
 - **State.** For 4 class B receptors rule (2) is replaced by a TM6 kink angle below
   159.95°; for 4 class F both substitutions are unestablished and tilt is used alone
@@ -1155,6 +1163,14 @@ Worth reading before the depth rows are quoted in a paper.
 - **Novelty.** OPEN, per E4.4.
 
 ### E7.2 — Cross-class transfer: the class B ladder
+
+> **PARKED 2026-09-12, not killed.** It depends on E0.5, which closed at "drop B and
+> F" (`DECISIONS.md` D-2026-09-12-d). This is the acknowledged cost of that scope:
+> the biology below makes class B the sharpest venue for a length ladder, and lit
+> rates cross-class transfer OPEN. It needs a calibrated class B instrument first,
+> which is a second paper's work. Kept here so its absence reads as a decision
+> rather than an oversight.
+
 - **Question.** Does partner length behave the same way where the biology says the partner
   matters *more*?
 - **Why class B is the sharpest venue.** `hilger2020gcgr`, on GCGR: "TM6 activation is only
