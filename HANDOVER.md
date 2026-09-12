@@ -146,6 +146,60 @@ candidate is native. (e′) builds free but stops at 18 residues.
 **Affinity is not needed** for the seven ligand picks. Ligand identity is evidenced
 structurally; the decoy side still needs ChEMBL for presence/absence only.
 
+### WAITING ON ADITYA — 2026-09-12, end of session
+
+**1. ChEMBL extraction is staged and deliberately not run.**
+`/Users/aditya/chembl_37/chembl_37_sqlite.tar.gz` — **5.76 GB, downloaded, sha256
+verified against the published `33c20374…`**. Extraction needs **~25 GB against
+32 GB free (93% used)**, which would leave ~7 GB on the machine that holds this
+project. Aditya approved the download; he left before seeing the extraction
+numbers, and filling a disk unattended is not a thing to do on someone's behalf.
+**To finish it:**
+```
+cd /Users/aditya/chembl_37 && tar xzf chembl_37_sqlite.tar.gz && rm chembl_37_sqlite.tar.gz
+python3 redo/build/drule_pool.py --db /Users/aditya/chembl_37/<the .db> \
+        --release ChEMBL_37 --sha256 33c203740555f96067710cdfc1c3c55d890660e5908ec5cbf5817492c290d281
+# then DELETE the .db — the pool and the digest are what we keep
+```
+Deleting the tarball right after extraction keeps the trough at ~7 GB rather than
+~1 GB. **Check `drule_pool.py`'s candidate count before trusting it**: its query asks
+for a qualifying activity *anywhere* in 24.5 M activities, which may return an
+unusable pool. The within-panel restriction (activity at another PANEL receptor, none
+at this one or its cluster-mates) is the fallback and is arguably better science.
+
+**2. Three Group 2 decisions**, enumerated and costed in `spec/GROUP2_LIGANDS.md` §6:
+the cognate rung for the crossing (`R3_ct21` vs `R7_full`; the apo half is shared, so
+both costs +1,920/+9,600 rather than double), whether the antagonist level may be
+heterogeneous (restricting it costs 3 clusters, MDE 0.314 → 0.352), and the download
+above.
+
+**3. The measurement pass** — still never started, still the largest dependency, and
+still explicitly not to begin without his word.
+
+**4. The subsampling decision** — `spec/MSA_SUBSAMPLING.md`, 1,162 lines, discussion
+deferred by him. Its strongest argument: **G5 would remove a confound in the
+literature's best answer to our competing explanation**, because
+`ye2026multistatebias` ran subsampling on AF2 and the co-input on AF3-lineage models.
+
+### The route, decided 2026-09-12
+
+**Two of three title clauses are reachable with ZERO new compute**, and the redo's
+expensive arm serves only the third. Order accordingly:
+
+1. **Mine `rows.tier3.v2.csv`** — free, weeks. Steps 1 and 2 are DONE (see
+   `analysis/block_c/received_2026_09_12/`): the arm parse is cross-validated exactly
+   against the g4 census, and **the partner effect survives per backbone on all four**
+   (agonist apo→cognate 0.094→0.806, 0.259→0.634, 0.166→0.738, 0.052→0.879). Steps
+   3–5 remain: cluster unit, continuous readout, seeds.
+2. **The measurement pass** — no GPU, ~1–3 GB of mmCIF. Makes step 1's numbers rest
+   on a calibrated instrument instead of an inherited one.
+3. **The decoy rule** — because antagonist ≈ decoy on every backbone, so the frozen
+   arm was not discriminating.
+4. **Group 1, the ladder** — GPU, months, and the only path to clause C6.
+
+**Steps 1 and 2 together could produce a publishable result without a single new
+prediction.**
+
 ### What is still open — 2026-09-12, after the scope decision
 
 1. **The measurement pass** — Group 0's largest outstanding dependency; the gate
