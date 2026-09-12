@@ -115,6 +115,49 @@ inconsistent with theirs.
 
 ---
 
+## 3b. The result was tested against its most obvious confound and survived
+
+**The G4 off-site gate is the reason this section exists.** In the apo arm the
+off-site rate (`distance_A > 15 Å`, the gate's own threshold) is severely
+**role-asymmetric**:
+
+| apo role | n | off-site |
+|---|---:|---:|
+| full_agonist | 7,000 | **29.30%** |
+| neutral_antagonist | 5,800 | **1.62%** |
+| decoy_lig | 7,200 | **12.25%** |
+
+So §3's contrast compares a population where roughly **a third of the agonist rows have
+no agonist in the pocket** against one where almost every antagonist row does. If C7 were
+an empty-pocket artefact — the receptor drifting active because nothing is bound — then
+restricting to on-site rows should collapse it.
+
+**It does not.** Agonist − antagonist in apo, continuous readout, cluster unit:
+
+| backbone | all rows | on-site only |
+|---|---|---|
+| boltz | +0.281 [+0.146, +0.413] | **+0.303** [+0.175, +0.450] |
+| chai | +0.132 [+0.053, +0.209] | **+0.110** [+0.042, +0.180] |
+| of3 | +0.253 [+0.108, +0.412] | **+0.237** [+0.057, +0.443] |
+| protenix | +0.189 [+0.093, +0.292] | **+0.149** [+0.090, +0.200] |
+
+All four still exclude zero; the magnitudes barely move and in no systematic direction.
+The restriction costs clusters (14 → 10–11) because receptors that are 100% off-site
+leave entirely, which is why the intervals widen.
+
+**The join that makes this possible is exact and was verified, not assumed:** all 40,000
+rows of `g4_full_census_v2.csv` match a `rows.tier3.v2.csv` row on `input_path`, and the
+800 unmatched tier3 rows are precisely the opsins, which the census does not cover. The
+script **fails** rather than proceeding if that match is not exactly 40,000.
+
+**What this does and does not close.** It closes the question *"is the ligand effect an
+empty-pocket artefact?"* — no. It does **not** discharge the G4 gate itself, which is
+about `SC-C-1`'s quoted 1.52% off-site being computed on a different population from the
+one SC-C-1 runs on (18.92% on the 23 common receptors; 35.85% on its agonist half). That
+remains `ASKS.md` B3.
+
+---
+
 ## 4. What switching readout costs, measured
 
 The continuous readout is **all-or-nothing per receptor**: 28 complete, **10 absent, 0

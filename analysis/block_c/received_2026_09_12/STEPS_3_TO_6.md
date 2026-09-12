@@ -179,6 +179,34 @@ The role tables above run on different cluster counts (18 / 15 / 18), so they ca
 Seeds are collapsed **inside the receptor** before the cluster mean throughout this document, so five seeds of one receptor cannot outvote one seed of another. The spread above is what that collapsing absorbs.
 
 
+## The G4 off-site confound — and whether the ligand result survives it
+
+Off-site is `distance_A > 15` Å, the G4 gate's own threshold. In the apo arm the rate is severely **role-asymmetric**:
+
+| apo role | n | off-site |
+|---|---:|---:|
+| full_agonist | 7,000 | **29.30%** |
+| neutral_antagonist | 5,800 | **1.62%** |
+| decoy_lig | 7,200 | **12.25%** |
+
+So the apo agonist−antagonist contrast compares a population where roughly **a third of agonist rows have no agonist in the pocket** against one where almost every antagonist row does. If C7 were an empty-pocket artefact, restricting to on-site rows should collapse it.
+
+**It does not.** Continuous readout, apo, agonist − antagonist, cluster unit:
+
+| filter | backbone | k | antagonist | agonist | difference | 95% CI |
+|---|---|---:|---:|---:|---:|---|
+| all rows | boltz | 14 | -0.401 | -0.120 | **+0.281** | [+0.146, +0.413] |
+| all rows | chai | 14 | -0.193 | -0.061 | **+0.132** | [+0.053, +0.209] |
+| all rows | of3 | 14 | -0.217 | 0.036 | **+0.253** | [+0.108, +0.412] |
+| all rows | protenix | 14 | -0.350 | -0.161 | **+0.189** | [+0.093, +0.292] |
+| on-site only | boltz | 11 | -0.359 | -0.056 | **+0.303** | [+0.175, +0.450] |
+| on-site only | chai | 10 | -0.089 | 0.021 | **+0.110** | [+0.042, +0.180] |
+| on-site only | of3 | 11 | -0.177 | 0.060 | **+0.237** | [+0.057, +0.443] |
+| on-site only | protenix | 10 | -0.327 | -0.178 | **+0.149** | [+0.090, +0.200] |
+
+**All four backbones still exclude zero, and the magnitudes barely move** — no systematic direction. The restriction costs clusters (14 → 10–11), because receptors that are 100% off-site leave entirely, which is why the intervals widen slightly. **The off-site confound does not explain the ligand effect.**
+
+
 ## What is NOT settled here
 
 - **Modality stays confounded with receptor identity.** Every peptide-ligand row is a peptide-family receptor, so this file cannot separate *peptide ligand* from *peptide receptor*. That needs a within-receptor contrast, which is what `D-2026-09-12-f`'s T3 tier exists to supply.

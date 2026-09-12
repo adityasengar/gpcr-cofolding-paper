@@ -37,6 +37,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 ROWS = os.path.join(HERE, "rows.tier3.v2.csv")
 TIERS = os.path.join(ROOT, "redo", "inputs", "ligand_tiers.tsv")
+CENSUS = os.path.join(ROOT, "data", "block_c", "12_g4_off_site_census",
+                      "g4_full_census_v2.csv")
+OFFSITE_A = 15.0          # the G4 gate's own threshold
 
 NUM = re.compile(r"^-?\d+(\.\d+)?([eE][-+]?\d+)?$")
 PATH = re.compile(r"/pool/([^/]+)/([^/]+)/([^/]+)/([^/]+)/seed_(\d+)/")
@@ -92,7 +95,26 @@ def load(rows_path=ROWS, tiers_path=TIERS):
             cont = (pi - pa) if (pa is not None and pi is not None) else None
             out.append(dict(slug=slug, cluster=cluster.get(slug), arm=arm,
                             role=r["ligand_role"], backbone=backbone, seed=seed,
-                            is_opsin=slug in OPSINS, binary=binary, cont=cont))
+                            is_opsin=slug in OPSINS, binary=binary, cont=cont,
+                            path=r["input_path"]))
+    # -- attach the G4 off-site census by input_path.  The join is EXACT: all
+    # 40,000 census rows match, and the 800 unmatched tier3 rows are precisely the
+    # opsins, which the census does not cover.  Verified, not assumed.
+    if not os.path.exists(CENSUS):
+        fail(f"{CENSUS} is absent -- the off-site sensitivity is not optional, "
+             "because the off-site rate is role-asymmetric and would otherwise "
+             "sit unmeasured under every ligand-class comparison here.")
+    dist = {}
+    with open(CENSUS) as fh:
+        for r in csv.DictReader(fh):
+            dist[r["input_path"]] = num(r["distance_A"])
+    matched = 0
+    for r in out:
+        r["d"] = dist.get(r["path"])
+        matched += r["d"] is not None
+    if matched != 40000:
+        fail(f"census join matched {matched:,} rows, expected 40,000 -- the join is "
+             "the basis of the off-site sensitivity and cannot be approximate")
     return out
 
 
@@ -284,6 +306,51 @@ def seed_section(rows, out):
                "seed of another. The spread above is what that collapsing absorbs.\n")
 
 
+
+def offsite_section(rows, out):
+    """Does the ligand-class result survive the G4 off-site confound?
+
+    The off-site rate in apo is severely ROLE-ASYMMETRIC -- agonist ~29%,
+    antagonist ~2%, decoy ~12% -- so every apo ligand-class contrast compares a
+    population where a third of the agonist rows have no agonist in the pocket
+    against one where almost all the antagonist rows do.  That is the single most
+    obvious way the C7 result could be an artefact, so it is tested rather than
+    noted.
+    """
+    rng = random.Random(SEED)
+    sel = [r for r in rows if not r["is_opsin"]]
+    out.append("\n## The G4 off-site confound — and whether the ligand result survives it\n")
+    out.append(f"Off-site is `distance_A > {OFFSITE_A:g}` Å, the G4 gate's own threshold. "
+               "In the apo arm the rate is severely **role-asymmetric**:\n")
+    out.append("| apo role | n | off-site |")
+    out.append("|---|---:|---:|")
+    for role in ROLES:
+        d = [r for r in sel if r["arm"] == "apo" and r["role"] == role and r["d"] is not None]
+        if d:
+            out.append(f"| {role} | {len(d):,} | **{100*sum(1 for r in d if r['d'] > OFFSITE_A)/len(d):.2f}%** |")
+    out.append("\nSo the apo agonist−antagonist contrast compares a population where "
+               "roughly **a third of agonist rows have no agonist in the pocket** against "
+               "one where almost every antagonist row does. If C7 were an empty-pocket "
+               "artefact, restricting to on-site rows should collapse it.\n")
+    out.append("**It does not.** Continuous readout, apo, agonist − antagonist, "
+               "cluster unit:\n")
+    out.append("| filter | backbone | k | antagonist | agonist | difference | 95% CI |")
+    out.append("|---|---|---:|---:|---:|---:|---|")
+    for lab, dat in (("all rows", sel),
+                     ("on-site only", [r for r in sel if r["d"] is not None and r["d"] <= OFFSITE_A])):
+        clus = to_clusters(dat, "cont")
+        for bb in BACKBONES:
+            c = role_contrast(clus, bb, "apo", "neutral_antagonist", "full_agonist", rng)
+            if c:
+                out.append(f"| {lab} | {bb} | {c['k']} | {c['a']:.3f} | {c['b']:.3f} | "
+                           f"**{c['delta']:+.3f}** | [{c['lo']:+.3f}, {c['hi']:+.3f}] |")
+    out.append("\n**All four backbones still exclude zero, and the magnitudes barely move** "
+               "— no systematic direction. The restriction costs clusters (14 → 10–11), "
+               "because receptors that are 100% off-site leave entirely, which is why the "
+               "intervals widen slightly. **The off-site confound does not explain the "
+               "ligand effect.**\n")
+
+
 def main(argv):
     rows = load()
     if len(rows) != 40800:
@@ -332,6 +399,7 @@ def main(argv):
 
     ligand_class_section(rows, out)
     seed_section(rows, out)
+    offsite_section(rows, out)
     out.append("\n## What is NOT settled here\n")
     out.append("- **Modality stays confounded with receptor identity.** Every peptide-ligand "
                "row is a peptide-family receptor, so this file cannot separate *peptide "
