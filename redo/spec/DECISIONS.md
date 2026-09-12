@@ -309,6 +309,109 @@ oversight.
 
 ---
 
+## D-2026-09-12-e · D2 RESOLVED — the split, and two corrections to the option it was chosen from
+
+**Aditya, 2026-09-12: "go with (c) for D2"** — expand onto the actives-rich
+expansion receptors, reserve the inactive-rich ones for calibration. The decision
+stands. **Two things in the option text it was chosen from are wrong**, and both
+change what (c) delivers, so they are recorded before any regeneration.
+
+### Correction 1 — the expansion set is 25 receptors, not 32
+
+Asserted as "the 32 E-scope/E-B1 receptors" in `GROUP0_SYSTEMS.md` at the summary
+table (§ *Decisions still with the PI*), in §0.3's body sentence, and in §6.3's
+decision table. Counted from `g0_calibration_structures.csv` — `on_panel75` and not
+`on_panel48` — it is **25**, of which **20 survive to the F4 pool**. The body
+figures underneath were always right and reproduce exactly: **41 of the 61 F4
+inactives come from 17 expansion receptors.**
+
+The label is also loose: "E-scope/E-B1" names the class F/B2 and class B1 tiers,
+which are **5 receptors each and are now out of scope entirely** under
+D-2026-09-12-d. The 25 are Class A receptors on the expanded panel-75 and not on
+panel-48. Nothing in the arithmetic depended on the label, but a reader chasing it
+would land in the wrong tier.
+
+### Correction 2 — the ranked reserve list was computed on the wrong pool
+
+§6.3 recommends reserving `nk1r 6, oprm 4, ntr1 4, 5ht2a 4, c5ar1 3, acm3 3,
+pd2r2 3, ccr2 3, drd4 3`. Recomputed on the **F4 pool** — the population the
+calibration is actually fitted on — **`ntr1` and `pd2r2` contribute zero
+inactives.** Their inactives (9 and 3 raw) are removed by F0b/F2/F3 before F4.
+**Reserving them buys nothing.** The rest of the list reproduces.
+
+### The real shape of the choice: it is a curve, and it has almost no free stretch
+
+**Every one of the 17 expansion receptors that carries an F4 inactive is also a
+both-state receptor, and all 17 both-state receptors in the pool are expansion
+receptors.** Non-expansion contributes 269 actives, 20 inactives and **zero**
+both-state receptors. So "expand onto the actives-rich" has far less room than the
+option implies — the actives-rich expansion receptors (`oprm` A=21, `s1pr1` A=15,
+`ssr2` A=13) each carry inactives and both-state pairing too.
+
+| receptor | F4 inactives | F4 actives | cumulative inactives lost |
+|---|---:|---:|---:|
+| `nk1r` | 6 | 6 | 6 |
+| `oprm` | 4 | 21 | 10 |
+| `5ht2a` | 4 | 4 | 14 |
+| `c5ar1` | 3 | 8 | 17 |
+| `acm3` | 3 | 4 | 20 |
+| `ccr2` | 3 | 1 | 23 |
+| `drd4` | 3 | 1 | 26 |
+| `s1pr1` | 2 | 15 | 28 |
+| `ssr2` | 2 | 13 | 30 |
+| `ada1a` | 2 | 3 | 32 |
+| `ccr6` | 2 | 1 | 34 |
+| `gpr6` | 2 | 1 | 36 |
+| `ccr8` | 1 | 5 | 37 |
+| `tshr` | 1 | 5 | 38 |
+| `hrh2` | 1 | 4 | 39 |
+| `oxyr` | 1 | 2 | 40 |
+| `s1pr5` | 1 | 1 | 41 |
+
+Every row is a both-state receptor. **Three expansion receptors carry no F4
+inactive at all: `cxcr3`, `mtr1a`, `mtr1b`.**
+
+### THE CUT — where (c) lands, and why there
+
+**Expand onto `cxcr3`, `mtr1a` and `mtr1b`. Reserve the other 17.**
+
+This is the only cut that costs the calibration nothing, and it is the faithful
+reading of (c) once the pool is corrected:
+
+| | before | after |
+|---|---:|---:|
+| F4 calibration pool | 433 | **425** |
+| inactives | 61 | **61** |
+| both-state receptors | 17 | **17** |
+| calibration receptors | 106 | 103 |
+
+The price is **8 actives out of 372**, against a 6.1:1 actives-to-inactives ratio —
+the abundant class. The inactive pole, which is the binding constraint everywhere in
+Group 0, is untouched.
+
+**Stated plainly: (c) buys three panel receptors, not a tier.** The option text
+implied a substantial actives-rich expansion, and after the filters that population
+does not exist. If more panel breadth is wanted it has to be bought from the table
+above at a known price in inactives and in both-state pairs — and the first rung,
+`ccr8`/`tshr`/`hrh2`/`oxyr`/`s1pr5`, costs 1 inactive and 1 both-state receptor
+each. **That further purchase is not made here.** It is the kind of trade that
+should be made against a measured threshold shift, which is what the measurement
+pass produces.
+
+### What it implies mechanically — NOT executed
+
+Moving three receptors across the calibration/application line changes
+`on_panel48`, which changes the frozen constants three gate checks assert: G0-2's
+726/610 split, G0-5's F4 = 433 ladder row, and G0-7's independence ladder. Those are
+**deliberate freezes** and updating them is a generator re-run plus a manifest
+restamp, not an edit. `redo/inputs/` is code-only and stays that way.
+
+**Held until the measurement pass is authorised**, so the population is frozen once
+rather than twice. The decision is recorded; the regeneration is one step of the
+pass, not a separate change.
+
+---
+
 ## F-1 · **RETRACTED 2026-09-12. I was wrong. The two-instrument predicate IS what ran.**
 
 **What I claimed** (and told Aditya, and told `paper_af3`): that the manuscript's

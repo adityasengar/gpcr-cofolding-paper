@@ -47,7 +47,7 @@ should be started as though any of them were settled.
 
 | # | decision | consequence of each option |
 |---|---|---|
-| **D2** | **expand the panel to the 32 E-scope/E-B1 receptors, or reserve them for calibration.** They cannot both happen. | **Expand:** calibration inactives fall 61 → 20 and paired receptors fall to **zero** — E0.1 becomes a between-receptor fit with no within-receptor evidence. **Reserve:** the expansion in `PANEL_EXPANSION_CLASS_A.md` does not happen. **Split** (recommended): expand onto the actives-rich expansion receptors and reserve the inactive-rich ones — the ranked list is printed by `g0_calibration_set.py`. Must be decided **before** either job starts. |
+| **D2** | **expand the panel to the 32 E-scope/E-B1 receptors [**25**, corrected 2026-09-12 — see D-2026-09-12-e], or reserve them for calibration.** They cannot both happen. | **Expand:** calibration inactives fall 61 → 20 and paired receptors fall to **zero** — E0.1 becomes a between-receptor fit with no within-receptor evidence. **Reserve:** the expansion in `PANEL_EXPANSION_CLASS_A.md` does not happen. **Split** (recommended): expand onto the actives-rich expansion receptors and reserve the inactive-rich ones — the ranked list is printed by `g0_calibration_set.py`. Must be decided **before** either job starts. |
 | **D3** | **do agonist-only, transducer-free structures count as Active?** Reopened — GPCRdb's degree cannot settle it, because that number *is* partner presence. | **Admit** (81 structures): "active" means two things inside one class, and `paajanen2026activation` p.1 says agonist-bound structures are bimodal on this coordinate. **Exclude:** 7 receptors lose their entire active class. **Admit, flag, report both ways** (recommended). It may not be decided by appeal to our own thesis. |
 | **D4** | **the balancing rule for the reported cut.** The anchors and the unsupervised fit are settled; the reweighting is not. | Prevalence-weight inherits the PDB's deposition history as if it were a prior on activation. Equal-weight makes calibration and application comparable, since their priors differ (6.1:1 vs 1.4:1). Matched sampling attacks the resolution confound but leaves ~122 structures. Recommended: **equal-weight headline, the others reported**. |
 
@@ -178,7 +178,11 @@ has priced. `g0_independence_ladder.csv`, all rows after the pre-declared filter
 | I4 · I2 and I3 | 193 | 192 | **1** | 192:1 | 55 | 0 |
 
 The inactive class is the binding constraint, and **the inactive signal lives almost
-entirely in the 32 receptors `PANEL.md` proposes to add to the panel.** Of the
+entirely in the 32 receptors `PANEL.md` proposes to add to the panel.**
+> **CORRECTION 2026-09-12: it is 25 receptors, not 32** (`on_panel75` and not
+> `on_panel48`, counted from `g0_calibration_structures.csv`); 20 of them survive to
+> the F4 pool. The body figures beneath — 41 inactives from 17 expansion receptors —
+> are correct and reproduce exactly. D-2026-09-12-e. Of the
 61 inactives surviving every rule in §5, **41 come from 17 expansion receptors**; of the 20
 that do not, **14 are OX1R alone**, and OX1R sits in the same GPCRdb level-3 family
 (`001_002_023`) as OX2R, which is already on the panel. The remaining six — ACM5, ADA1B,
@@ -881,7 +885,7 @@ in the Methods.**
 | **D1** *(deferred — Aditya, 2026-09-11: does not block, resolve when the calibration is actually built; do not spend on it now)* | keep `d(Y5.58 OH, Y7.53 OH)`, or switch the NPxxY axis to the CA–CA variant | (a) keep OH — 42 of 199 Class A receptors are unevaluable, calibration set 726 → 514 | the instrument stays as published and as already measured on 64 rows, and the Methods must state the domain of definition |
 | | | (b) switch to `d_npxxy_ca` — defined on all 199 | the axis becomes class-wide, the calibration set recovers 212 structures, and **every published number on this axis changes**; the column already exists on references (`d_npxxy_ca_ref`) and on Block B prediction rows (`d_npxxy_y558_y753_ca`) |
 | | | (c) report both, headline OH, CA as the coverage arm | costs one extra column and no inference; my recommendation |
-| **D2** | expand the panel to the 32 E-scope/E-B1 receptors, or reserve them for calibration | (a) expand — calibration inactives fall 61 → 20 and **both-state receptors fall to zero** | E0.1 becomes a between-receptor fit with no paired evidence |
+| **D2** | expand the panel to the 32 E-scope/E-B1 receptors [**25**, corrected 2026-09-12 — see D-2026-09-12-e], or reserve them for calibration | (a) expand — calibration inactives fall 61 → 20 and **both-state receptors fall to zero** | E0.1 becomes a between-receptor fit with no paired evidence |
 | | | (b) reserve them — the panel stays at 48 | the expansion in `PANEL_EXPANSION_CLASS_A.md` does not happen |
 | | | (c) split: expand onto the actives-rich expansion receptors, reserve the inactive-rich ones (`nk1r` 6, `oprm` 4, `ntr1` 4, `5ht2a` 4, `c5ar1` 3, `acm3` 3, `pd2r2` 3, `ccr2` 3, `drd4` 3) | the list is in `g0_calibration_set.py`'s "inactive contributors" output; recommended, and it has to be decided **before** either job starts |
 | **D3** *(reopened — the rule that briefly closed it is retracted, §5.1)* | admit agonist-only, no-transducer structures as Active | (a) admit — status quo, 81 structures | "active" means two different things inside one class, and `paajanen2026activation` p.1 says agonist-bound structures are bimodal on this very coordinate |
