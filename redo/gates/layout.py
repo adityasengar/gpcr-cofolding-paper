@@ -16,7 +16,15 @@ directory: **may I edit this file, and has anyone already?**
     L6  every run names input hashes we actually hold
     L7  the regenerable bulk is gitignored, and nothing else is
 
-Each check was proved by planting the defect it is meant to catch.
+Every check here was proved by planting the defect it catches -- but only **L2 has a
+RUNNABLE harness**: `python3 redo/gates/layout.py --selftest` plants six wrong file
+kinds into a temporary directory and asserts L2 fires on each.  **L1 and L3-L7 were
+proved by hand at the time they were written and cannot be re-proved by running
+anything**, which means an edit to one of them can silently stop it refusing.  That is
+a known gap, recorded rather than papered over: on 2026-09-12 this docstring claimed
+all seven were proved and `--selftest` was silently ignored by `main`, so the sentence
+read as a guarantee and nothing behind it ran.  Converting L1 and L3-L7 to plants is
+outstanding work, not a completed claim.
 """
 
 import json
@@ -135,7 +143,11 @@ def selftest():
     sys.stdout.write(f"  {'ok  ' if dir_caught else 'MISS'} planted a subdirectory  "
                      f"-> {'L2 fires' if dir_caught else 'L2 DID NOT FIRE'}\n")
     n = len(allowed) + len(disallowed) + 1
-    sys.stdout.write(f"\n  {n - bad}/{n} -- .gz is admitted and nothing else new "
+    # "n/n" here counts PLANTS AGAINST L2, not the guard's seven checks.  Saying
+    # "7/7" beside a seven-check guard is how a one-check self-test comes to read as
+    # a whole-guard one -- the header-count failure class, in a test harness.
+    sys.stdout.write(f"\n  L2: {n - bad}/{n} plants fire -- .gz is admitted and nothing "
+                     f"else new "
                      f"is.\n\n")
     return 1 if bad else 0
 

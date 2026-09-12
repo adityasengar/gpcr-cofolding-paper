@@ -105,14 +105,38 @@ Four rules, and `redo/gates/layout.py` enforces the first three:
 
 `verify.sh` runs the layout guard, the manifest check, the run receipt, the ligand
 gate, the decoy gate and all three preflight gates (Group 0, 1 and **2 — the
-ligand arm, added 2026-09-12**). Every check in all six was proved by planting the
-defect it catches — **and on 2026-09-12 that claim was found to have been false for
-a day.** `g0_preflight.py`'s self-test harness copied only the *top-level* files of
-`redo/`, which was correct while `redo/` was flat and silently wrong from the moment
-the campaign moved to the guarded layout. Every plant failed to apply, every check
-reported MISS, and the harness still printed a tidy tally. **Run the self-tests, do
-not trust the sentence**: `python3 redo/gates/g0_preflight.py --selftest`, and the
-same flag on `g1_preflight.py` and `ligands.py`.
+ligand arm, added 2026-09-12**).
+
+**Which of those have RUNNABLE self-tests, as of 2026-09-12 — this list is the
+honest one and the prose around it has been wrong twice:**
+
+| gate | `--selftest` | covers |
+|---|---|---|
+| `g0_preflight.py` | yes | 12/12 checks |
+| `g1_preflight.py` | yes | all blocking checks |
+| `g2_preflight.py` | yes | 14 checks, 15 plants |
+| `ligands.py` | yes | 10/10 |
+| `drule.py` | yes | 16+ checks |
+| `layout.py` | **L2 only** | 7 plants against **one** of its seven checks |
+| `run_receipt.py`, `panel_verify.py` | **none** | — |
+| `seqrec_verify.py` | `--plant` *(different flag)* | a roster defect |
+
+**Do not read a gate's tally as coverage of the gate.** `layout.py --selftest`
+prints a 7/7 that counts plants against L2; **L1 and L3–L7 were proved by hand and
+cannot be re-proved by running anything**, so an edit to one of them can silently
+stop it refusing. That gap is recorded, not fixed.
+
+**And run the self-tests rather than trusting the sentence.** On 2026-09-12 this
+paragraph claimed every check in all six was proved by planting, and that had been
+false for a day: `g0_preflight.py`'s harness copied only the *top-level* files of
+`redo/`, correct while `redo/` was flat and silently wrong from the moment the
+campaign moved to the guarded layout. Every plant failed to apply, every check
+reported MISS, and the harness printed a tidy tally. The same extension-filter bug
+recurred **twice more the same day** in two other harnesses — a hand-written
+`(".tsv", ".csv")` list that silently dropped a `.gz` from every planted copy, which
+scored one check as fired for the wrong reason and skipped eight others entirely.
+**The fix that works is an assertion that the staged copy reproduces the real
+directory, and that each plant actually changed bytes** — not a longer list.
 
 **`redo/gates/run_receipt.py` is the one the old campaign never had.** It asks
 whether a delivery matches what was requested — chain count, partner identity,
