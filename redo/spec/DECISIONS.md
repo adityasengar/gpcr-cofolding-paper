@@ -962,12 +962,33 @@ neutral decoys)"* — so across the aminergic panel the decoy arm differs from t
 arms **systematically in net charge**, and nothing downstream corrects or stratifies for
 it. See `MAP_LIGANDS_AND_ANALYSIS.md` §2.2–§2.4.
 
-**Consequence for a result we hold.** On `rows.tier3.v2.csv` the decoy is
-indistinguishable from the antagonist on every backbone — **+0.011, −0.004, −0.016,
-−0.004**. That admitted two readings: the models are indifferent to pocket occupancy, or
-the decoys were never decoy-like. **F-19 is evidence for the second.** The decoys were
-off-window on most axes and systematically mischarged, and a properly-constructed decoy
-is provably unavailable for a third of the panel.
+**Consequence for a result we hold — and this paragraph is CORRECTED, later the same
+day.** It previously read: *"the decoy is indistinguishable from the antagonist on every
+backbone (+0.011, −0.004, −0.016, −0.004) … F-19 is evidence for the second reading."*
+
+**Steps 3–6 overturn the citation, though not F-19 itself.** See
+`analysis/block_c/received_2026_09_12/WHAT_IT_MEANS.md` §2. Two things were conflated:
+
+- The **apo→cognate SHIFT** genuinely is ligand-independent — all three classes move by
+  the same amount when the partner arrives. That stands, and it is a result in its own
+  right: **the partner effect does not depend on what is in the pocket.**
+- The **LEVEL** is not. On the continuous `pocket_ca_rmsd` readout — the one `SC-C-6`
+  tells us to prefer, because the binary predicate is floor-pinned in apo at rates of
+  0.01–0.35 — the three classes separate significantly and consistently:
+  **agonist > decoy > antagonist**, nearest-active first (apo/boltz: −0.120 / −0.289 /
+  −0.401). `antagonist − decoy` excludes zero on **7 of 8** arm × backbone cells on the
+  continuous readout against **2 of 8** on the binary one.
+
+**So "decoy ≈ antagonist" may no longer be cited in support of F-19.** On the readout the
+drop itself prefers, the decoy is *not* the antagonist — it sits between the agonist and
+the antagonist, which is what the biology predicts of an inert molecule against one that
+actively stabilises the inactive state.
+
+**F-19 is unaffected and rests where its evidence actually is: the chemistry.** The
+frozen decoys fail their own ±20% property window on three to five of six axes and are
+systematically uncharged where the reference ligands are cationic, and a
+properly-constructed decoy is provably unavailable for a third of the panel. None of
+that depended on the contrast above.
 
 **So the Block C decoy result must be re-scoped from a claim about the predictors to a
 finding about the decoy set.** That is a withdrawal, and it is the kind that makes the
