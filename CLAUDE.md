@@ -40,19 +40,21 @@ does not claim. **Block D shipped no row-level data at all** — its three corpo
 42,180 predictions, are absent — so its verifier carries a third evidential class,
 PROSE-ONLY, and a pass count there is not a claim count.
 
-**ONE of the paper's three title clauses still has no result behind it** — this
-said "two" until 2026-09-12. No arm in any block supplies a **peptide** of any
+**TWO of the paper's three title clauses still have no result behind them.** This
+briefly said "one" on 2026-09-12, on a C7 claim retracted the same day (F-23). No arm in any block supplies a **peptide** of any
 length: every partner arm is a complete Gα subunit or a nanobody, and the segment
 this work actually manipulates is **eleven** residues, not 21. Until that is
 resolved, no sentence may imply it.
 
-**The agonist clause (C7) is ANSWERED as of 2026-09-12**, from
-`rows.tier3.v2.csv` — see `analysis/block_c/received_2026_09_12/WHAT_IT_MEANS.md`.
-Agonist-alone does not reproduce the partner effect on any backbone, **but it is
-not inert**: on the continuous pocket readout it accounts for roughly a third of
-the partner's shift, intervals excluding zero on all four backbones, and it
-survives restriction to on-site rows. **Quote the continuous readout, never both** —
-the binary predicate is floor-pinned in apo and puts the same effect at ~8%.
+**The agonist clause (C7) is NOT answered — I claimed it was on 2026-09-12 and
+retracted it the same day (`DECISIONS.md` F-23).** **All 40,800 rows of
+`rows.tier3.v2.csv` carry a ligand**; "apo" there means no PARTNER, not no ligand,
+so the agonist *alone* was never predicted. What Block C measured is **agonist
+versus neutral antagonist at a fixed partner condition** — real, and not C7.
+**C7 is answerable at ZERO marginal cost**: `g2_systems.csv` already carries 98
+READY ligand-free rows and **20 receptors / 19 clusters with the complete 2×2**
+(MDE 0.279). It must be **named as the C7 instrument and pre-registered before
+dispatch**, or it becomes a post-hoc contrast.
 
 **A heading is not exempt from the evidence rule.** Scope gets asserted where it
 is most read and qualified where it is least read: on 2026-09-11 a section

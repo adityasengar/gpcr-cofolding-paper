@@ -87,9 +87,13 @@ Each is a real decision nobody has taken, with its cost:
 
 # B. `paper_af3` — files and answers
 
-### B0. Nothing new is needed to finish Pillar 0 — this is the good news
-`rows.tier3.v2.csv` arrived and has now answered steps 1–6. **C7 is answered from it.**
-No further ask blocks the free work.
+### B0. Nothing new is needed to finish Pillar 0 — but C7 is NOT answered from it
+`rows.tier3.v2.csv` arrived and steps 1–6 are done. **I claimed C7 was answered from it
+and retracted that the same day (`DECISIONS.md` F-23): every one of its 40,800 rows
+carries a ligand, so the agonist alone was never predicted.** No further ask blocks the
+free work, and **C7 is answerable at zero marginal cost inside the redo** — 20 receptors
+/ 19 clusters already READY in `g2_systems.csv`, needing only to be named and
+pre-registered before dispatch.
 
 ### B1. Block D's row-level data — **free, and the largest hole**
 All three corpora its claim sheet names, **42,180 predictions**, are absent from the

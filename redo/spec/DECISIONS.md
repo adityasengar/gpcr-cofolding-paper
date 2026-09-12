@@ -1020,6 +1020,86 @@ that refuses in each case.
 
 ---
 
+## F-23 · **C7 IS NOT ANSWERED. I retract it.** There is no ligand-free row in `rows.tier3.v2.csv`
+
+**Retracted 2026-09-12, hours after asserting it, by an adversarial audit I commissioned
+and then verified myself. It is the largest error I have made on this project.**
+
+### The fact
+
+**All 40,800 rows of `rows.tier3.v2.csv` carry a ligand.** `ligand_role` is
+`full_agonist` 14,800 / `neutral_antagonist` 11,600 / `decoy_lig` 14,400 — which sums to
+40,800 with **no `none` level**. `ligand_type` is populated on 40,800 of 40,800. **Zero**
+rows lack both a SMILES and a sequence.
+
+**So "apo" in that file means NO PARTNER, not no ligand.** The agonist *alone* — agonist
+with no partner **and no comparator ligand** — was never predicted. **C7 asks a question
+this file cannot answer**, and I said four times today that it had answered it.
+
+### How I missed it
+
+**I printed the evidence and did not read it.** Hours before the claim, I ran a
+completeness check whose output was `roles: {'full_agonist': 14800,
+'neutral_antagonist': 11600, 'decoy_lig': 14400}`. Three roles summing to the full file,
+with no ligand-free level, is the whole of F-23 — and I was looking for missing values,
+so I read it as "no nulls" and moved on.
+
+**And the flag that exists to say so is dead.** `A_LIGAND_PRESENT` is **empty on all
+40,800 rows** — the *third* dead flag in this file. I caught `A_RECEPTOR_SLUG_MISSING`
+being empty on the 800 opsin rows, wrote it up as Block A's `matches_claim_sheet` defect
+in another costume, and **did not check the flag sitting next to it** that would have
+stopped the error outright.
+
+### What was actually measured, and it is a real result
+
+**Agonist versus neutral antagonist at a fixed partner condition.** That is worth having.
+It is not C7, and it must not be worded as C7.
+
+### Three further corrections that travel with it
+
+1. **"Does not reproduce the partner effect on ANY backbone" is false on the readout we
+   elected.** Partner-minus-ligand, continuous readout, paired within cluster, k = 14:
+   boltz **+0.373 [+0.111, +0.629]** and protenix **+0.487 [+0.255, +0.730]** exclude
+   zero; **chai +0.143 [−0.029, +0.399]** and **of3 +0.106 [−0.047, +0.267]** do not.
+   "On no backbone" holds **only on the binary predicate** — the instrument the same
+   document forbids quoting. Correct form: **two of four backbones.**
+2. **"Roughly a third" must not be quoted at all.** It is the largest of five available
+   readouts (pocket-Cα 27–67%, TM6 tilt 5–17%, NPxxY-OH 3–16%, normalised TM6 index
+   4–10%, binary 5–9%), and the elected readout is **agonist-biased by construction**:
+   `pocket_ca_rmsd_active` scores the pocket against a deposited **active** reference,
+   which for these receptors is agonist-bound. The ligand's "share of the partner effect"
+   is a property of the readout, not of the ligand. Report the ligand effect on its own
+   scale, per backbone per readout, with the partner effect printed beside it.
+3. **"Survives both opsin variants" was VACUOUS.** All **800 of 800** opsin rows are NaN
+   on all four axes, so the two variants are byte-identical. Nothing survived an axis that
+   was never exercised. The numeric core — 24 contrasts excluding zero — stands; the list
+   of things it survives does not.
+
+### Where C7 CAN be answered, and it costs nothing
+
+**The redo already enumerates the experiment.** `g2_systems.csv` carries **98
+`ligand_role_actual = none` rows, all READY** — 41 apo, 57 cognate — and **20 receptors
+in 19 distinct clusters carry the complete 2×2**: apo/none, apo/agonist, cognate/none,
+cognate/agonist. **MDE at k = 19 is 0.279**, better than the decoy arm's 0.367.
+
+**Marginal cost: zero predictions.** Group 2 dispatches these rows already. What is
+missing is that **nobody has named this arm as the C7 instrument or pre-registered it**,
+and until 2026-09-12 nobody had noticed it was there. **Name it and pre-register it
+before dispatch** — after dispatch it is an unregistered post-hoc contrast.
+
+### The lesson, which is not the one I would have guessed
+
+Every guard I built today worked. The gates caught what they were built to catch, the
+plants fired, the manifest held. **None of them could catch this, because it is not a
+defect in the machinery — it is a defect in what I believed the data was**, and I never
+wrote a check that asserted the population matched the question. `WHAT_IT_MEANS.md`'s
+own §7 lists what is unsettled and does not list "the arm exists".
+
+**The check that would have caught it is one line**: assert the design has a ligand-free
+level before claiming a ligand-free result. It did not exist because I never doubted the
+premise. **Prove the population, not only the plumbing.**
+
+---
 ## F-22 · "inputs/ is code only" is half true, and 31 of 64 files are regenerable only by memory
 
 **Found 2026-09-12 while trying to add two columns to `g1_recording_spec.tsv` and

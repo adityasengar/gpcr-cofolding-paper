@@ -12,8 +12,8 @@ uncommitted files belong to lit.
 
 | | |
 |---|---|
-| **C7 is ANSWERED** | from `rows.tier3.v2.csv`. Pillar 0's mining is **complete** — steps 1–6. `analysis/block_c/received_2026_09_12/WHAT_IT_MEANS.md` is the reading; `STEPS_3_TO_6.md` is generated and re-derivable |
-| **The headline survives everything** | 24 of 24 partner contrasts — 3 roles × 4 backbones × 2 readouts — exclude zero, under both opsin variants |
+| **C7 is NOT answered — RETRACTED** | I claimed it and withdrew it the same day. **Every row in `rows.tier3.v2.csv` carries a ligand**; "apo" means no PARTNER. `DECISIONS.md` **F-23**. Pillar 0's mining is still complete and its partner result stands |
+| **The headline survives everything** | 24 of 24 partner contrasts — 3 roles × 4 backbones × 2 readouts — exclude zero. *(The "both opsin variants" clause was vacuous: all 800 opsin rows are NaN on every axis. F-23.)* |
 | **"Decoy ≈ antagonist" is WITHDRAWN** | it conflated *shift* (ligand-independent, stands) with *level* (not — **agonist > decoy > antagonist** on the continuous readout). F-19 corrected |
 | **The decoy arm is FROZEN** | runs EXPLORATORY at k = 11, 33 cells, 396 pooled predictions. `drule.py` 26 checks, 26 proved, three digests |
 | **The campaign has a plan** | `redo/spec/PLAN.md`, five pillars, **and its own §"what this plan MISSED"** written the same day by the registry triage |
@@ -95,7 +95,7 @@ No arm in any block supplies a **peptide**; the manipulated segment is **eleven*
 residues, not 21. So the narrowed title is about a Gα co-input and its C-terminal
 determinant. The alternative is to run the arm.
 
-**The agonist clause is ANSWERED as of 2026-09-12 — the file arrived.** *(This paragraph said "blocked on one file" until then.)* Block C's
+**The agonist clause is NOT answered.** *(This said "blocked on one file", then "ANSWERED", both on 2026-09-12. The file arrived and does not contain a ligand-free arm — `DECISIONS.md` F-23. The redo does: `g2_systems.csv`, 20 receptors / 19 clusters, zero marginal cost, needs pre-registering.)* Block C's
 2×2 has **ligand class × reference state** as its factors — the partner arm is
 *not* a factor in it, and apo-only was meant to be a row filter that was never
 applied. But the design grid is 50 predictions per (receptor × backbone × role ×
