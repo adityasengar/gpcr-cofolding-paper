@@ -17,6 +17,7 @@ the WAIT had not said.
 | **the three coupling reversals** | **CLOSED** — F-14, on stronger grounds than the existing basis |
 | **D-C's ligand picks** | **ENACTED** — F-15, six of seven; ADRB1 turns out to be blocked |
 | **the costing gap** | **CLOSED** — B18; the WAIT named two arms, the check found twelve |
+| **the decoy rule** | DRULE deliverables **1 and 3 built and proved**; the pool waits on a pinned release |
 | **two maps** | written: the frozen campaign end to end, and what the redo runs |
 
 Gates went from **12 pass / 9 wait** and **16 / 7** to **13 / 8** and **18 / 5**, plus
@@ -107,6 +108,31 @@ nowhere at all.
    session's. Nothing was swept because no other session had edits in flight. That
    was luck, not discipline. **Explicit paths, always.**
 
+## The decoy rule — built, and deliberately not run
+
+`drule_targets.py` resolves **63 of 64 receptors** to a ChEMBL SINGLE PROTEIN
+target against **ChEMBL_37 (2026-05-01)**, covering **31 of 32 clusters**. The one
+unresolved is **B1B1U5**, the jumping-spider opsin, which has no ChEMBL target at
+all — recorded with an empty target rather than dropped, because a receptor that
+vanishes from a pool looks exactly like one that had no decoys.
+
+`drule_pool.py` implements the absence rule and is **proved on a fixture**: a
+four-molecule world exercising every branch — active at the receptor, at a
+cluster-mate only, only elsewhere (the decoy case), and only in a confidence-7
+assay, which must not be a candidate at all. 4/4.
+
+**It refuses to run against the live web API, and that refusal is the spec's own
+rule enforced in code.** `DRULE_CHEMBL_SCOPE.md` says an unpinned pull is
+`paper_af3`'s ColabFold problem in another costume; building the pool off the API
+would have reproduced exactly the defect the document warns about. It needs a
+downloaded release with `--release` and `--sha256` written into every row, and
+**that download is Aditya's decision, not the script's.**
+
+`redo/gates/drule.py` gates what exists and **announces the unbuilt pool on every
+run**. That is the distinction the project's missing-input rule turns on: a
+deliverable not yet produced is reported loudly; an input that has disappeared is a
+failure. Reporting the first one *silently* is the thing that is forbidden.
+
 ## What the next session should not redo
 
 - **Do not re-open the scope, D2, D-A or D-H.** All four are decided with reasons in
@@ -121,5 +147,7 @@ nowhere at all.
 - **Do not start the measurement pass without Aditya's word.** It is still the
   largest outstanding dependency, and it must record axis values for the F3-**removed**
   structures too (F-12).
+- **Do not build the decoy pool off the ChEMBL web API.** The script refuses, and
+  that refusal is deliberate. It needs a pinned download.
 - **Amendment C-1 is the open question worth his time**: reopening it unblocks both
   ADRB1 and B1B1U5, taking the ligand arm from 6 picks to 8 and k from 12 to 14.
