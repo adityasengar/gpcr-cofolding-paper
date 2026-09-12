@@ -35,7 +35,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from paths import INPUTS, CACHE  # noqa: E402
 
-CENSUS = os.path.join(CACHE, "ligand_census_records.tsv")
+CENSUS = os.path.join(INPUTS, "ligand_census_records.tsv")
 OUT = os.path.join(INPUTS, "ligand_tiers.tsv")
 
 AGONIST_SIDE = {"agonist", "partial_agonist"}
