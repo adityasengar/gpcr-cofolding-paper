@@ -164,6 +164,7 @@ def main():
                 "ligand_name": lg.get("name") or "",
                 "ligand_ccd": lg.get("PDB") or "",
                 "has_smiles": "1" if (lg.get("SMILES") or "").strip() else "0",
+                "smiles": (lg.get("SMILES") or "").strip(),
                 "is_chain_coinput": "1" if mod in CHAIN_MODALITIES else "0",
             })
 
@@ -173,7 +174,7 @@ def main():
     reccols = ["receptor", "gpcrdb_protein", "structure_species", "pdb",
                "structure_state", "resolution", "role", "modality", "site",
                "function_raw", "type_raw", "ligand_name", "ligand_ccd",
-               "has_smiles", "is_chain_coinput"]
+               "has_smiles", "smiles", "is_chain_coinput"]
     p1 = os.path.join(outdir, "ligand_census_records.tsv")
     with open(p1, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=reccols, delimiter="\t")

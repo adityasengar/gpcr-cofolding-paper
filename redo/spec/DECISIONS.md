@@ -520,6 +520,82 @@ in the table itself. Wired into `verify.sh`.
 
 ---
 
+## D-2026-09-12-f · The ligand arm is TIERED, C-1 is relaxed, and one pick was refused
+
+**Aditya, 2026-09-12.** Three instructions, taken together: **T1** is receptors with
+both a small-molecule agonist and antagonist; **peptide receptors are kept but
+treated separately**; receptors with **a ligand in one state and a peptide in the
+other become T3**; **PAM, NAM and antibody/nanobody ligands are skipped
+completely**; and **amendment C-1 is relaxed** so an inverse agonist is an
+admissible off-state ligand.
+
+### The axis is chain-ness, not the database's type string
+
+A ligand that enters as a **separate polymer chain** is the thing this campaign is
+about; a ligand carrying a **CCD code is a HETATM component** and is not a chain,
+whatever its `type` says. Exactly **one record in 872** is typed `peptide` and
+carries a CCD — EDNRB's `IRL 2500` (`D2U`), a peptidomimetic — and it was the only
+thing making EDNRB look like a matched-peptide receptor. Its real antagonists
+(bosentan, K-8794) are small molecules, so **EDNRB is T3, not T2.** That also
+retires the hazard where endothelin-1, at exactly 21 residues, would have shared a
+prediction with `ct21`.
+
+### The tiers, on the frozen primary panel (30 receptors / 29 clusters)
+
+| tier | rule | receptors | clusters | MDE |
+|---|---|---:|---:|---:|
+| **T1** | both arms chain-free | 17 eligible, **16 curated** | **15** | **0.314** |
+| **T2** | both arms a chain | 2 (`C5AR1`, `SSR2`) | 2 | — |
+| **T3** | one arm a chain, one not | 7 | 7 | — |
+| X | one side has no ligand at all | 4 | 4 | — |
+
+T1 + T2 = 17 clusters (0.295); all three tiers = 24 (0.249). **T2 and T3 are
+reported apart and never pooled into T1**; at 2 and 7 clusters neither can carry
+the headline contrast, and saying so is the point of tiering them.
+
+### C-1 relaxed unblocked THREE, not two
+
+`ADRB1` and `B1B1U5` were the known cases. **`OPSD` was a C-1 case too** — it has no
+plain antagonist either, only an inverse agonist — and its second blocker dissolved
+on inspection: its three `RET` records are **three different molecules**, same
+skeleton, different stereo layer. `inverse_agonist` is recorded as **its own role**,
+never relabelled `neutral_antagonist`.
+
+### The isomer hazard, now demonstrated rather than asserted
+
+**RCSB's canonical `RET` is ALL-TRANS retinal** (`…-OVSJKPMPSA-N`) — the *agonist*
+form. Both our inverse-agonist picks are **11-cis** (`…-IOUUIBBYSA-N`). So **any
+pipeline resolving `RET` through the CCD silently gets the agonist where the row
+says inverse agonist.** F-11's "curate by ISOMER, never by CCD" is now a measurement.
+It bites `B1B1U5` as well as `OPSD`, which a within-receptor shared-CCD test misses,
+so both rows carry `must_key_by=inchikey` and `ccd_resolves_to_other_isomer`.
+
+### PD2R2 is REFUSED, and this is the finding that justifies the whole check
+
+`PD2R2` is tier-eligible and was never curated by anyone. Enacting it would have
+supplied **a membrane lipid as the agonist**: the snapshot's record for `9IYB` reads
+`{name: PGD2, type: lipid, function: Agonist, PDB: A1D5Q}` — but **CCD `A1D5Q` is
+C43 H81 O13 P, a phosphatidylinositol**, while PGD2 is C20 H32 O5. Two different
+molecules in one record, with **no SMILES to arbitrate**. It stays tier-eligible and
+uncurated until the deposition itself settles it.
+
+**`redo/build/ligand_ccd_verify.py` rebuilds the check that catches this class** —
+the frozen campaign's own gate, whose stated reason was a measured **40–46%
+curation-error rate on name-sourced SMILES**. Every CCD-sourced pick is now compared
+to RCSB: 10 verified, 2 isomer mismatches flagged, 4 chains n/a. Gate `L-10`.
+
+### What is inherited and cannot be audited here
+
+**9 of T1's 16 curated receptors** — `5HT5A AA1R AA2AR ACM4 CNR2 DRD3 LPAR1 LT4R1
+OPRD` — carry ligand rows from `paper_af3`'s `ligand_set.csv` / `ligand_set_tier3.csv`,
+**which we do not hold**. Their *tier eligibility* is independently derived here from
+the GPCRdb snapshot, but their actual SMILES and roles are not inspectable on our
+side. Given what the PD2R2 check just found, **those nine rows are the largest
+remaining unverified surface in the ligand arm**, and requesting the two files is
+now a substantive ask rather than a tidiness one.
+
+---
+
 ## F-1 · **RETRACTED 2026-09-12. I was wrong. The two-instrument predicate IS what ran.**
 
 **What I claimed** (and told Aditya, and told `paper_af3`): that the manuscript's

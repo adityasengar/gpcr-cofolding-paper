@@ -186,7 +186,7 @@ construct whose bytes we do not hold.
 the molecule is co-crystallised in an active or inactive receptor — which is a
 stronger claim than an assay number. Aditya, 2026-09-12.
 
-**ENACTED** — `ligand_set_redo.tsv` holds **12 picks across 7 receptors**, **9 of them on one of our own reference structures**, plus **0 blocked** receptors each carrying its reason. Gated by `redo/gates/ligands.py`, 5 checks, each proved by planting.
+**ENACTED** — `ligand_set_redo.tsv` holds **16 picks across 9 receptors**, **12 of them on one of our own reference structures**, plus **1 blocked** receptors each carrying its reason. Gated by `redo/gates/ligands.py`, 5 checks, each proved by planting.
 
 | receptor | role | ligand | CCD | structure | Å | on our reference |
 |---|---|---|---|---|---:|:-:|
@@ -201,12 +201,17 @@ stronger claim than an assay number. Aditya, 2026-09-12.
 | **B1B1U5** | inverse_agonist | Retinal (11-cis) | `RET` | 6I9K | 2.15 | ● |
 | **OPSD** | full_agonist | Retinal (all-trans) | `RET` | 5DYS | 2.3 | · |
 | **OPSD** | inverse_agonist | Retinal (11-cis) | `RET` | 7ZBC | 1.8 | ● |
+| **C5AR1** | full_agonist | BM213 | `` | 7Y66 | 2.9 | ● |
+| **C5AR1** | neutral_antagonist | PMX53 | `` | 6C1R | 2.2 | ● |
+| **SSR2** | full_agonist | SOMATOSTATIN | `` | 7T10 | 2.5 | ● |
+| **SSR2** | neutral_antagonist | CYN 154806 | `` | 7XNA | 2.65 | · |
 | **CCKAR** | full_agonist | SR146131 | `IA1` | 7XOV | 3.0 | · |
 
 **Blocked, with the reason in the table itself:**
 
 | receptor | role | why |
 |---|---|---|
+| **PD2R2** | full_agonist | LIGAND IDENTITY CONFLICT. The GPCRdb snapshot's record for 9IYB reads {name: PGD2, type: lipid, function: Agonist, PDB: A1D5Q} -- but CCD A1D5Q is C43 H81 O13 P, a phosphatidylinositol, while PGD2 (prostaglandin D2) is C20 H32 O5. The name and the CCD are different molecules, there is no SMILES in the snapshot to arbitrate, and enacting it would have supplied a membrane lipid as the agonist. PD2R2 stays TIER-ELIGIBLE and UNCURATED until the agonist's identity is resolved from the deposition itself. This is the failure class that gave the frozen campaign a measured 40-46% curation error rate on name-sourced ligands. |
 
 `ligand_curation_candidates.tsv` holds the **59 candidate rows across 7 receptors** these were chosen from:
 
@@ -245,6 +250,20 @@ The replacement is specified in `DRULE_CHEMBL_SCOPE.md` and is **not yet built**
 | 4 | a pool report **before** any threshold is fixed | how many clusters yield ≥3 accepted decoys. D-D withdrew the ≥12 figure precisely because it was set before this number existed |
 
 ChEMBL is needed for **presence/absence of activity only** — not for affinity.
+
+### 4.1 The ligand tiers (D-2026-09-12-f)
+
+| tier | receptors | clusters | who |
+|---|---:|---:|---|
+| T1 · both arms chain-free | 17 | 16 | 5HT5A, AA1R, AA2AR, ACM4, ADRB1, B1B1U5, CCKAR, CNR2, DRD3, GHSR, HRH3, LPAR1, LT4R1, OPRD, OPSD, PD2R2, S1PR1 |
+| T2 · both arms a chain, reported apart | 2 | 2 | C5AR1, SSR2 |
+| T3 · one arm a chain, reported apart | 7 | 7 | AGTR1, CCR2, EDNRB, MCHR1, NK1R, NPY1R, NTR1 |
+| X · one side has no ligand at all | 4 | 4 | APJ, GPR52, MTR1A, TSHR |
+
+**The axis is chain-ness, not the type string.** A ligand with a CCD is a
+HETATM component, not a chain. One record in 872 is typed `peptide` *and*
+carries a CCD — EDNRB's IRL 2500 — and it was the only thing making EDNRB
+look like a matched-peptide receptor. **T2 and T3 are never pooled into T1.**
 
 **Status: 1 and 3 are built, 2 and 4 are not.** `drule_targets.tsv` resolves
 **63 of 64 receptors** to a ChEMBL SINGLE PROTEIN target against

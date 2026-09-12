@@ -60,18 +60,29 @@ def main(argv, root=None):
 
     rows = tsv(TABLE, root)
     cands = tsv(CANDIDATES, root)
+    # CANDIDATES only ever covered a hard-coded 7-receptor worklist; the census
+    # covers all 64. Picks outside the worklist trace against the census, with
+    # the same identity test, exactly as the generator does.
+    census = [{"receptor": r["receptor"], "ligand_ccd": r["ligand_ccd"],
+               "bound_pdb": r["pdb"], "function_raw": r["function_raw"],
+               "is_chain": r["is_chain_coinput"]}
+              for r in tsv("ligand_census_records.tsv", root)]
+
+    def pool_for(rec):
+        return cands if any(c["receptor"] == rec for c in cands) else census
     enacted = [r for r in rows if r["status"] == "enacted"]
     blocked = [r for r in rows if r["status"] == "BLOCKED"]
 
     # -- L-2  every enacted pick traces to a candidate row -------------------
     miss = []
     for r in enacted:
-        hits = [c for c in cands if c["receptor"] == r["receptor_slug"]
+        hits = [c for c in pool_for(r["receptor_slug"])
+                if c["receptor"] == r["receptor_slug"]
                 and c["ligand_ccd"] == r["ligand_ccd"]
                 and c["bound_pdb"] == r["bound_pdb"]]
         if len(hits) != 1:
-            miss.append(f"{r['receptor_slug']}/{r['ligand_ccd']}@{r['bound_pdb']}"
-                        f" -> {len(hits)} candidates")
+            miss.append(f"{r['receptor_slug']}/{r['ligand_ccd'] or '(chain)'}"
+                        f"@{r['bound_pdb']} -> {len(hits)} candidates")
     chk("L-2  every enacted pick traces to exactly one candidate row",
         not miss, "; ".join(miss) or f"{len(enacted)} picks all resolve")
 
@@ -80,7 +91,8 @@ def main(argv, root=None):
     # antagonist silently reopens amendment C-1 without anyone deciding to.
     wrong = []
     for r in enacted:
-        hits = [c for c in cands if c["receptor"] == r["receptor_slug"]
+        hits = [c for c in pool_for(r["receptor_slug"])
+                if c["receptor"] == r["receptor_slug"]
                 and c["ligand_ccd"] == r["ligand_ccd"]
                 and c["bound_pdb"] == r["bound_pdb"]]
         if not hits:
@@ -101,9 +113,14 @@ def main(argv, root=None):
     bad = []
     byrec = {}
     for r in enacted:
+        # a chain ligand is supplied as a SEQUENCE and has no SMILES by design;
+        # requiring one would force a peptide through a small-molecule path
+        if r.get("is_peptide") == "1":
+            continue
         if not r["canonical_smiles"]:
             bad.append(f"{r['receptor_slug']}/{r['ligand_ccd']}: SMILES did not parse")
-        byrec.setdefault(r["receptor_slug"], []).append(r)
+        if r.get("is_peptide") != "1":
+            byrec.setdefault(r["receptor_slug"], []).append(r)
     for rec, rs in byrec.items():
         keys = [r["inchikey"] for r in rs if r["inchikey"]]
         if len(keys) != len(set(keys)):
@@ -132,6 +149,33 @@ def main(argv, root=None):
          f"across roles and are flagged: "
          f"{', '.join(sorted({r['receptor_slug'] for r in dup}))}"
          if dup else "no receptor's two roles share a CCD"))
+
+    # -- L-10  every CCD-sourced pick is verified against RCSB ---------------
+    vpath = os.path.join(root, "ligand_ccd_verification.tsv")
+    if not os.path.exists(vpath):
+        chk("L-10  every CCD-sourced pick is verified against the RCSB "
+            "dictionary", False,
+            "ligand_ccd_verification.tsv is ABSENT -- run "
+            "redo/build/ligand_ccd_verify.py")
+    else:
+        ver = tsv("ligand_ccd_verification.tsv", root)
+        fails = [f"{v['receptor_slug']}/{v['ligand_ccd']}={v['verdict']}"
+                 for v in ver if v["verdict"].startswith("FAIL")]
+        # a pick whose CCD resolves to a different isomer MUST be keyed by
+        # InChIKey -- RCSB's canonical RET is all-trans, the agonist form
+        bykey = {(r["receptor_slug"], r["ligand_role"]): r for r in rows}
+        unflagged = [f"{v['receptor_slug']}/{v['ligand_role']}"
+                     for v in ver if v["verdict"] == "STEREO_DIFFERS"
+                     and bykey.get((v["receptor_slug"], v["ligand_role"]), {})
+                     .get("must_key_by") != "inchikey"]
+        ok = not fails and not unflagged
+        chk("L-10  every CCD-sourced pick matches RCSB, and isomer mismatches "
+            "are flagged to key by InChIKey", ok,
+            "; ".join(fails + unflagged) or
+            f"{sum(1 for v in ver if v['verdict'] == 'ok')} verified, "
+            f"{sum(1 for v in ver if v['verdict'] == 'STEREO_DIFFERS')} isomer "
+            f"mismatches flagged, "
+            f"{sum(1 for v in ver if v['verdict'].startswith('n/a'))} n/a")
 
     # -- L-6..L-8  the tier table's three load-bearing rules -----------------
     tpath = os.path.join(root, TIERS)
@@ -242,6 +286,10 @@ PLANTS = [
     ("L-7", "swap a pick to a structure from another species",
      lambda d: _col(os.path.join(d, TIERS), {"receptor_slug": "CCKAR"},
                     "agonist_species", "Rattus norvegicus")),
+    ("L-10", "let an isomer mismatch through unflagged",
+     lambda d: _col(os.path.join(d, TABLE), {"receptor_slug": "B1B1U5",
+                                             "ligand_role": "inverse_agonist"},
+                    "must_key_by", "ccd")),
     ("L-9", "unflag a shared-CCD pair",
      lambda d: _col(os.path.join(d, TABLE), {"receptor_slug": "OPSD"},
                     "must_key_by", "ccd")),

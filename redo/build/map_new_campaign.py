@@ -284,6 +284,25 @@ def main():
     w("")
     w("ChEMBL is needed for **presence/absence of activity only** — not for affinity.")
     w("")
+    w("### 4.1 The ligand tiers (D-2026-09-12-f)")
+    w("")
+    tiers = [r for r in read("ligand_tiers.tsv") if r["panel_tier"] == "PRIMARY"]
+    lab = {"T1_small_molecule": "T1 · both arms chain-free",
+           "T2_peptide": "T2 · both arms a chain, reported apart",
+           "T3_mixed": "T3 · one arm a chain, reported apart",
+           "X_single_sided": "X · one side has no ligand at all"}
+    w("| tier | receptors | clusters | who |")
+    w("|---|---:|---:|---|")
+    for key in ("T1_small_molecule", "T2_peptide", "T3_mixed", "X_single_sided"):
+        rs = [r for r in tiers if r["ligand_tier"] == key]
+        w(f"| {lab[key]} | {len(rs)} | {len({r['cluster'] for r in rs})} | "
+          f"{', '.join(sorted(r['receptor_slug'] for r in rs))} |")
+    w("")
+    w("**The axis is chain-ness, not the type string.** A ligand with a CCD is a")
+    w("HETATM component, not a chain. One record in 872 is typed `peptide` *and*")
+    w("carries a CCD — EDNRB's IRL 2500 — and it was the only thing making EDNRB")
+    w("look like a matched-peptide receptor. **T2 and T3 are never pooled into T1.**")
+    w("")
     tg = read("drule_targets.tsv")
     res = [r for r in tg if r["chembl_target_id"]]
     rel = sorted({r["chembl_release"] for r in tg})
