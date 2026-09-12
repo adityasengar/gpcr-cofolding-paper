@@ -207,6 +207,39 @@ So the apo agonist−antagonist contrast compares a population where roughly **a
 **All four backbones still exclude zero, and the magnitudes barely move** — no systematic direction. The restriction costs clusters (14 → 10–11), because receptors that are 100% off-site leave entirely, which is why the intervals widen slightly. **The off-site confound does not explain the ligand effect.**
 
 
+## The two instruments, compared unit-free
+
+| instrument | backbone | partner Δ | ligand Δ | between-cluster SD | partner/SD | **ligand as % of partner** |
+|---|---|---:|---:|---:|---:|---:|
+| binary | boltz | +0.785 | +0.066 | 0.205 | 3.83 | **8.4%** |
+| binary | chai | +0.343 | +0.029 | 0.421 | 0.81 | **8.4%** |
+| binary | of3 | +0.599 | +0.054 | 0.194 | 3.09 | **9.0%** |
+| binary | protenix | +0.922 | +0.044 | 0.073 | 12.60 | **4.8%** |
+| continuous | boltz | +0.615 | +0.281 | 0.541 | 1.14 | **45.7%** |
+| continuous | chai | +0.269 | +0.132 | 0.604 | 0.45 | **49.1%** |
+| continuous | of3 | +0.356 | +0.253 | 0.503 | 0.71 | **71.2%** |
+| continuous | protenix | +0.640 | +0.189 | 0.487 | 1.31 | **29.5%** |
+
+**The ligand effect as a share of the partner effect changes by roughly
+3–15× between the two instruments** —
+4.8–9.0% on the binary predicate against
+29.5–71.2% on the continuous readout — and it does so
+**consistently on all four backbones**. The partner effect is the denominator of
+both, so this comparison is unit-free; comparing the raw Δs is not, because one is
+a change in fraction-active and the other is Ångström.
+
+**And the binary predicate does something worse than compress small effects — it
+destroys the variance structure any interval rests on, unevenly across backbones.**
+Between-cluster SD in the apo arm runs **0.073–0.421** on the binary
+predicate — a 6× spread, with protenix at the bottom because it
+is pinned near 0.01 apo and 0.99 cognate — against **0.487–0.604** on
+the continuous readout, a 1.2× spread. Standardised by their own
+SD, the partner effect reads 
+0.8–12.6 SD on the binary instrument and 0.5–1.3 SD on the continuous one.
+**So the binary predicate makes the backbones incomparable with each other, not
+merely the effects smaller.**
+
+
 ## What is NOT settled here
 
 - **Modality stays confounded with receptor identity.** Every peptide-ligand row is a peptide-family receptor, so this file cannot separate *peptide ligand* from *peptide receptor*. That needs a within-receptor contrast, which is what `D-2026-09-12-f`'s T3 tier exists to supply.
