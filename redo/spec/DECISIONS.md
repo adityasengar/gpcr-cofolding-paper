@@ -1038,8 +1038,8 @@ hash was taken from the hand-made bytes. **Nothing has ever checked that a file 
 
 `MANIFEST.tsv` has a `generator` column, and **nothing read it until today**:
 
-- **31 of 64 inputs name no generator.** Most of those do have one and are merely
-  unattributed — `drule_pool.py` writes `drule_pool_molecules.tsv`, `seqrec_refs.py`
+- **31 of 64 inputs named no generator** when this was found — **now 14**, see below.
+  Most did have one and were merely unattributed — `drule_pool.py` writes `drule_pool_molecules.tsv`, `seqrec_refs.py`
   writes `seqrec_scoreable.tsv`, `g1_receptors.py` writes `g1_receptors.tsv`.
 - **At least two have no writer anywhere in `redo/build/`.**
   **`g1_recording_spec.tsv`** — 47 columns, the recording contract the whole campaign
@@ -1095,14 +1095,34 @@ have — the difference between a paper that *asserts* the field does not verify
 instruments and one that *demonstrates the failure mode on itself and says so*. It
 belongs in Methods, not only here.
 
+### The weak error halved, 2026-09-12 — and the fix was the detector, not the data
+
+**31 unattributed → 14.** `manifest.py` already derived the generator by static
+reference and correctly refused to guess; it simply could not see three write forms
+this codebase uses — a lowercase local, a constant reaching `open()` through a tuple
+loop, and **a rebound name** (`g0_calibration_set.py` rebinds `out` once per output, so
+a name→literal dict keeps only the last and loses eight). Replaced with an AST walk that
+matches each write to the nearest binding **above it in source order**.
+
+**And it caught a false positive of its own kind:** the first AST version recorded
+`layout.py` as a generator of `ligand_tiers.tsv`, because layout's L3 plant appends to
+it — **in a staged copy, which is statically indistinguishable from the real file.**
+**Test scaffolding is not authorship**, and writes inside a `selftest`/`plant`/`stage`
+function are now excluded. It was caught by diffing the attributions, not by reading the
+output.
+
+Verified rather than assumed: **zero existing attributions changed**, and all 16 new
+ones name their file and perform a write. The remaining 14 stay blank.
+
 **Two things this closure does NOT license, both easy to slip into:**
 
 1. **A generator is not correctness.** `--check` proves the file is *reproducible*, not
    *right*. A reproducibly generated file can still be stale against its inputs — which
    is exactly **F-21**, open and unfixed. The two are close enough in shape that a
    reader will elide them if we let them.
-2. **30 of 64 inputs still name no generator.** One instance closed is one instance.
-   Give the count as a count; L8 prints it on every run.
+2. **14 of 64 inputs still name no generator** (31 when found; 16 recovered by fixing
+   the detector, see below). One instance closed is one instance. Give the count as a
+   count; L8 prints it on every run.
 
 ---
 ## F-20 · `rows.tier3.v2.csv` landed, and nothing recorded that it had

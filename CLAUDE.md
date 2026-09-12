@@ -108,7 +108,7 @@ Four rules, and `redo/gates/layout.py` enforces the first three:
    compares a file to its **own** recorded hash, so it catches an edit made
    *after* stamping and is blind both to a file **created by hand** and then
    stamped, and to a file that has gone **stale** against the inputs it derives
-   from. **31 of 64 inputs name no generator**, and at least two — including
+   from. **14 of 64 inputs name no generator** (31 before the detector was fixed), and at least two — including
    `g1_recording_spec.tsv`, the campaign's own recording contract — have no
    writer anywhere in `redo/build/`. L8 reports the count on every run.
 2. **Never compute a path from `__file__`** — import it from `redo/paths.py`.
