@@ -1,4 +1,7 @@
 # SESSIONS.md — index
+- [2026-09-12 (overnight) — autonomous curation, P7 computed, and three retractions](sessions/2026-09-12_autonomous-curation-and-three-retractions.md)
+- [2026-09-11 (evening) — protocol extraction, the `redo/` layout, and a pre-flight that changed the design](sessions/2026-09-11b_protocol-extraction-and-campaign.md)
+- [2026-09-11 (pm) — the redo is designed, and a live bridge to the pipeline](sessions/2026-09-11_redo-design-and-pipeline-bridge.md) — manuscript frozen as the record; Group 0 and Group 1 frozen with gates; 28 files extracted from `paper_af3`.
 - [2026-09-10/11 — Block D, three re-verifications, and the document getting wired](sessions/2026-09-10_block-d-and-four-reverifications.md) — four blocks landed; every re-verification defect was claim-side; seven of my own corrections, all in checks rather than data.
 - [2026-09-10 lit: panels, a falsified novelty claim, four blocks re-verified](sessions/2026-09-10_lit-panels-verification-and-novelty-boundary.md) — 613 verified panel rows; schema v3.2; 19 BLOCKING findings, all claim-side; the title claim is untestable on A–D. Then: SI built end-to-end, 18→44 pages, 37 figures, 30 of 32 panels placed.
 
@@ -11,6 +14,7 @@ should not redo.
 
 | session | what it did |
 |---|---|
+| [2026-09-11 — figure merge and scope corrections](sessions/2026-09-11_figure-merge-and-scope-corrections.md) | BB-1+BB-2 merged into BB-12 (main sequence now 4 figures); Figure 1 top half cleaned; `xr` installed and 8 `??` cross-references fixed; build.sh now reports undefined REFERENCES, proved by planting one; three false scopes corrected in a heading, a caption title and a comment. Six BA-1a backdrop variants built and all rejected. |
 | [2026-09-10 lit](sessions/2026-09-10_lit-corpus-completion-and-page-audit.md) | corpus completed 66→79 and fully quote-verified; SCHEMA v3.1; intro written; page-convention audit found 7 papers and 11 bad locators; render conventions surveyed |
 | [2026-09-10 — figures and audit](sessions/2026-09-10_figures-and-block-a-audit.md) | Block A audited against the corpus and rewritten; old export retired; renders rebuilt with depth of field; four abstract candidates. 23 discrepancy groups. |
 | [2026-09-09/10 — Block A](sessions/2026-09-09_to_09-10_block-a.md) | Block A landed and was written: Results, Methods, 5 main figures, 16 SI, 8 tables, 22 discrepancy groups. The pre-Block-A export was retired. |
