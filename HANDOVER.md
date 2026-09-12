@@ -163,8 +163,13 @@ structurally; the decoy side still needs ChEMBL for presence/absence only.
    `neutral_antagonist` slot. It blocks **ADRB1** and **B1B1U5**, and it is the
    only thing standing between the ligand arm and 8 picks instead of 6. Aditya's
    call, not a curation judgement (F-15).
-5. **The decoy pool** — four deliverables in `DRULE_CHEMBL_SCOPE.md`, none built.
-   ChEMBL for presence/absence of activity only; affinity is not needed.
+5. **The decoy pool** — deliverables 1 and 3 are **built and proved**; 2 and 4
+   are not. `drule_targets.tsv` resolves **63 of 64 receptors** to a ChEMBL target
+   against **ChEMBL_37**, 31 of 32 clusters; B1B1U5 has no ChEMBL target and is
+   recorded rather than dropped. `drule_pool.py` is written and its rule is proved
+   on a fixture, and it **refuses the live API by design** — it needs a downloaded
+   release with `--release` and `--sha256`. **That download is your decision**, and
+   it is the only thing between here and a pool report.
 6. **`lit/corpus_check.sh`** — proposed fix below, not actioned; it is lit's file.
 
 **Closed since the last handover:** the redo's scope (Class A only,

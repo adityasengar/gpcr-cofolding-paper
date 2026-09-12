@@ -1,0 +1,65 @@
+receptor_slug	uniprot	receptor_organism	cluster	core32_provisional	chembl_target_id	chembl_pref_name	chembl_organism	n_targets_matched	chembl_release
+5HT1B	P28222	Homo sapiens (Human)	001_001_001	no	CHEMBL1898	5-hydroxytryptamine receptor 1B	Homo sapiens	1	ChEMBL_37
+5HT2A	P28223	Homo sapiens (Human)	001_001_001	yes	CHEMBL224	5-hydroxytryptamine receptor 2A	Homo sapiens	1	ChEMBL_37
+5HT2C	P28335	Homo sapiens (Human)	001_001_001	no	CHEMBL225	5-hydroxytryptamine receptor 2C	Homo sapiens	1	ChEMBL_37
+5HT5A	P47898	Homo sapiens (Human)	001_001_001	no	CHEMBL3426	5-hydroxytryptamine receptor 5A	Homo sapiens	1	ChEMBL_37
+AA1R	P30542	Homo sapiens (Human)	001_006_001	yes	CHEMBL226	Adenosine receptor A1	Homo sapiens	1	ChEMBL_37
+AA2AR	P29274	Homo sapiens (Human)	001_006_001	no	CHEMBL251	Adenosine receptor A2a	Homo sapiens	1	ChEMBL_37
+ACM1	P11229	Homo sapiens (Human)	001_001_002	no	CHEMBL216	Muscarinic acetylcholine receptor M1	Homo sapiens	1	ChEMBL_37
+ACM2	P08172	Homo sapiens (Human)	001_001_002	no	CHEMBL211	Muscarinic acetylcholine receptor M2	Homo sapiens	1	ChEMBL_37
+ACM4	P08173	Homo sapiens (Human)	001_001_002	yes	CHEMBL1821	Muscarinic acetylcholine receptor M4	Homo sapiens	1	ChEMBL_37
+ADA1A	P35348	Homo sapiens (Human)	001_001_003	no	CHEMBL229	Alpha-1A adrenergic receptor	Homo sapiens	1	ChEMBL_37
+ADA2A	P08913	Homo sapiens (Human)	001_001_003	no	CHEMBL1867	Alpha-2A adrenergic receptor	Homo sapiens	1	ChEMBL_37
+ADRB1	P08588	Homo sapiens (Human)	001_001_003	yes	CHEMBL213	Beta-1 adrenergic receptor	Homo sapiens	1	ChEMBL_37
+ADRB2	P07550	Homo sapiens (Human)	001_001_003	no	CHEMBL210	Beta-2 adrenergic receptor	Homo sapiens	1	ChEMBL_37
+AGTR1	P30556	Homo sapiens (Human)	001_002_001	yes	CHEMBL227	Type-1 angiotensin II receptor	Homo sapiens	1	ChEMBL_37
+APJ	P35414	Homo sapiens (Human)	001_002_002	yes	CHEMBL1628481	Apelin receptor	Homo sapiens	1	ChEMBL_37
+B1B1U5	B1B1U5	Hasarius adansoni	001_009_001_inv	yes				0	ChEMBL_37
+C5AR1	P21730	Homo sapiens (Human)	001_002_006	yes	CHEMBL2373	C5a anaphylatoxin chemotactic receptor 1	Homo sapiens	1	ChEMBL_37
+CCKAR	P32238	Homo sapiens (Human)	001_002_005	yes	CHEMBL1901	Cholecystokinin receptor type A	Homo sapiens	1	ChEMBL_37
+CCR2	P41597	Homo sapiens (Human)	001_003_002	yes	CHEMBL4015	C-C chemokine receptor type 2	Homo sapiens	1	ChEMBL_37
+CCR5	P51681	Homo sapiens (Human)	001_003_002	no	CHEMBL274	C-C chemokine receptor type 5	Homo sapiens	1	ChEMBL_37
+CCR6	P51684	Homo sapiens (Human)	001_003_002	no	CHEMBL4423	C-C chemokine receptor type 6	Homo sapiens	1	ChEMBL_37
+CCR8	P51685	Homo sapiens (Human)	001_003_002	no	CHEMBL4596	C-C chemokine receptor type 8	Homo sapiens	1	ChEMBL_37
+CNR1	P21554	Homo sapiens (Human)	001_004_005	no	CHEMBL218	Cannabinoid receptor 1	Homo sapiens	1	ChEMBL_37
+CNR2	P34972	Homo sapiens (Human)	001_004_005	yes	CHEMBL253	Cannabinoid receptor 2	Homo sapiens	1	ChEMBL_37
+CXCR2	P25025	Homo sapiens (Human)	001_003_002	no	CHEMBL2434	C-X-C chemokine receptor type 2	Homo sapiens	1	ChEMBL_37
+CXCR3	P49682	Homo sapiens (Human)	001_003_002	no	CHEMBL4441	C-X-C chemokine receptor type 3	Homo sapiens	1	ChEMBL_37
+CXCR4	P61073	Homo sapiens (Human)	001_003_002	no	CHEMBL2107	C-X-C chemokine receptor type 4	Homo sapiens	1	ChEMBL_37
+DRD2	P14416	Homo sapiens (Human)	001_001_004	no	CHEMBL217	D(2) dopamine receptor	Homo sapiens	1	ChEMBL_37
+DRD3	P35462	Homo sapiens (Human)	001_001_004	yes	CHEMBL234	D(3) dopamine receptor	Homo sapiens	1	ChEMBL_37
+DRD4	P21917	Homo sapiens (Human)	001_001_004	no	CHEMBL219	D(4) dopamine receptor	Homo sapiens	1	ChEMBL_37
+EDNRA	P25101	Homo sapiens (Human)	001_002_007	no	CHEMBL252	Endothelin-1 receptor	Homo sapiens	1	ChEMBL_37
+EDNRB	P24530	Homo sapiens (Human)	001_002_007	yes	CHEMBL1785	Endothelin receptor type B	Homo sapiens	1	ChEMBL_37
+FSHR	P23945	Homo sapiens (Human)	001_003_003	no	CHEMBL2024	Follicle-stimulating hormone receptor	Homo sapiens	1	ChEMBL_37
+GHSR	Q92847	Homo sapiens (Human)	001_002_010	yes	CHEMBL4616	Growth hormone secretagogue receptor type 1	Homo sapiens	1	ChEMBL_37
+GPR52	Q9Y2T5	Homo sapiens (Human)	001_010_001	yes	CHEMBL3297639	G-protein coupled receptor 52	Homo sapiens	1	ChEMBL_37
+GPR6	P46095	Homo sapiens (Human)	001_010_001	no	CHEMBL3714130	G-protein coupled receptor 6	Homo sapiens	1	ChEMBL_37
+GRPR	P30550	Homo sapiens (Human)	001_002_003	yes	CHEMBL4959	Gastrin-releasing peptide receptor	Homo sapiens	1	ChEMBL_37
+HRH1	P35367	Homo sapiens (Human)	001_001_005	no	CHEMBL231	Histamine H1 receptor	Homo sapiens	1	ChEMBL_37
+HRH2	P25021	Homo sapiens (Human)	001_001_005	no	CHEMBL1941	Histamine H2 receptor	Homo sapiens	1	ChEMBL_37
+HRH3	Q9Y5N1	Homo sapiens (Human)	001_001_005	yes	CHEMBL264	Histamine H3 receptor	Homo sapiens	1	ChEMBL_37
+LPAR1	Q92633	Homo sapiens (Human)	001_004_003	yes	CHEMBL3819	Lysophosphatidic acid receptor 1	Homo sapiens	1	ChEMBL_37
+LSHR	P22888	Homo sapiens (Human)	001_003_003	no	CHEMBL1854	Lutropin-choriogonadotropic hormone receptor	Homo sapiens	1	ChEMBL_37
+LT4R1	Q15722	Homo sapiens (Human)	001_004_002	yes	CHEMBL3911	Leukotriene B4 receptor 1	Homo sapiens	1	ChEMBL_37
+MCHR1	Q99705	Homo sapiens (Human)	001_002_013	yes	CHEMBL344	Melanin-concentrating hormone receptor 1	Homo sapiens	1	ChEMBL_37
+MTR1A	P48039	Homo sapiens (Human)	001_005_001	yes	CHEMBL1945	Melatonin receptor type 1A	Homo sapiens	1	ChEMBL_37
+MTR1B	P49286	Homo sapiens (Human)	001_005_001	no	CHEMBL1946	Melatonin receptor type 1B	Homo sapiens	1	ChEMBL_37
+NK1R	P25103	Homo sapiens (Human)	001_002_029	yes	CHEMBL249	Substance-P receptor	Homo sapiens	1	ChEMBL_37
+NPY1R	P25929	Homo sapiens (Human)	001_002_020	yes	CHEMBL4777	Neuropeptide Y receptor type 1	Homo sapiens	1	ChEMBL_37
+NPY2R	P49146	Homo sapiens (Human)	001_002_020	no	CHEMBL4018	Neuropeptide Y receptor type 2	Homo sapiens	1	ChEMBL_37
+NTR1	P30989	Homo sapiens (Human)	001_002_021	yes	CHEMBL4123	Neurotensin receptor type 1	Homo sapiens	1	ChEMBL_37
+OPRD	P41143	Homo sapiens (Human)	001_002_022	yes	CHEMBL236	Delta-type opioid receptor	Homo sapiens	1	ChEMBL_37
+OPRK	P41145	Homo sapiens (Human)	001_002_022	no	CHEMBL237	Kappa-type opioid receptor	Homo sapiens	1	ChEMBL_37
+OPRM	P42866	Mus musculus (Mouse)	001_002_022	no	CHEMBL2858	Mu-type opioid receptor	Mus musculus	1	ChEMBL_37
+OPRX	P41146	Homo sapiens (Human)	001_002_022	no	CHEMBL2014	Nociceptin receptor	Homo sapiens	1	ChEMBL_37
+OPSD	P02699	Bos taurus (Bovine)	001_009_001_vert	yes	CHEMBL5739	Rhodopsin	Bos taurus	1	ChEMBL_37
+OX2R	O43614	Homo sapiens (Human)	001_002_023	yes	CHEMBL4792	Orexin receptor type 2	Homo sapiens	1	ChEMBL_37
+OXYR	P30559	Homo sapiens (Human)	001_002_032	yes	CHEMBL2049	Oxytocin receptor	Homo sapiens	1	ChEMBL_37
+PD2R2	Q9Y5Y4	Homo sapiens (Human)	001_004_008	yes	CHEMBL5071	Prostaglandin D2 receptor 2	Homo sapiens	1	ChEMBL_37
+PE2R4	P35408	Homo sapiens (Human)	001_004_008	no	CHEMBL1836	Prostaglandin E2 receptor EP4 subtype	Homo sapiens	1	ChEMBL_37
+S1PR1	P21453	Homo sapiens (Human)	001_004_004	yes	CHEMBL4333	Sphingosine 1-phosphate receptor 1	Homo sapiens	1	ChEMBL_37
+S1PR5	Q9H228	Homo sapiens (Human)	001_004_004	no	CHEMBL2274	Sphingosine 1-phosphate receptor 5	Homo sapiens	1	ChEMBL_37
+SSR2	P30874	Homo sapiens (Human)	001_002_028	yes	CHEMBL1804	Somatostatin receptor type 2	Homo sapiens	1	ChEMBL_37
+TA2R	P21731	Homo sapiens (Human)	001_004_008	no	CHEMBL2069	Thromboxane A2 receptor	Homo sapiens	1	ChEMBL_37
+TSHR	P16473	Homo sapiens (Human)	001_003_003	yes	CHEMBL1963	Thyrotropin receptor	Homo sapiens	1	ChEMBL_37

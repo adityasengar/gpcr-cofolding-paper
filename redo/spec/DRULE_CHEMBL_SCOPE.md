@@ -48,6 +48,31 @@ keep the **paralog-cluster** exclusion rather than the receptor-only one: a
 molecule untested at the receptor but inactive across its whole cluster is a
 better-evidenced decoy than one merely untested.
 
+> **STATUS 2026-09-12 — deliverables 1 and 3 are BUILT; the pool is not, and that
+> is deliberate.** `drule_targets.py` has resolved **63 of 64 receptors** to a
+> ChEMBL SINGLE PROTEIN target against **ChEMBL_37 (2026-05-01)** —
+> `inputs/drule_targets.tsv`, covering **31 of 32 clusters**. The one unresolved is
+> **B1B1U5**, the jumping-spider opsin, which has no ChEMBL target at all; it is
+> recorded with an empty target rather than dropped, because a receptor that
+> vanishes from a pool looks exactly like one that had no decoys.
+>
+> `drule_pool.py` is written and its rule is **proved on a fixture** — a
+> four-molecule world exercising every branch: active at the receptor, active at a
+> cluster-mate only, active only elsewhere (the decoy case), and active only in a
+> confidence-7 assay (not a candidate at all). `--selftest` runs it, 4/4.
+>
+> **It refuses to run against the live web API**, and that refusal is this
+> document's own rule enforced in code: an unpinned pull is `paper_af3`'s ColabFold
+> problem in another costume. It needs `--db` pointing at a downloaded release plus
+> `--release` and `--sha256`, both recorded into every output row. **Downloading a
+> ChEMBL release is a decision with a cost and it is Aditya's, not the script's.**
+>
+> `redo/gates/drule.py` gates what exists — 4 checks, each proved by planting — and
+> **announces the unbuilt pool loudly on every run** rather than falling silent
+> about it. D-5 and D-6, which check that no eligible candidate has activity at its
+> receptor or a cluster-mate and that every row carries its provenance, activate
+> the moment the pool appears.
+
 ## Deliverables, in order
 
 1. `redo/build/drule_pool.py` — extraction. Writes

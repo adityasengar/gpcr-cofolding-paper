@@ -243,6 +243,19 @@ The replacement is specified in `DRULE_CHEMBL_SCOPE.md` and is **not yet built**
 
 ChEMBL is needed for **presence/absence of activity only** — not for affinity.
 
+**Status: 1 and 3 are built, 2 and 4 are not.** `drule_targets.tsv` resolves
+**63 of 64 receptors** to a ChEMBL SINGLE PROTEIN target against
+**ChEMBL_37**, covering **31 of 32 clusters**. The one unresolved is **B1B1U5**, which has
+no ChEMBL target at all — recorded with an empty target, never dropped.
+
+`drule_pool.py` is written and its rule is **proved on a fixture** (4/4 branches:
+active at the receptor, at a cluster-mate only, only elsewhere, and only in a
+low-confidence assay). **It refuses to run against the live API** — an unpinned
+pull is `paper_af3`'s ColabFold problem in another costume — so it needs a
+downloaded release with `--release` and `--sha256` recorded into every row.
+**That download is Aditya's decision.** `redo/gates/drule.py` gates what exists,
+4 checks each proved by planting, and announces the unbuilt pool on every run.
+
 ---
 
 ## 6. The arms, and what they cost
@@ -321,7 +334,9 @@ proved by planting the defect each catches; `layout.py` 7; `run_receipt.py` 4.
 5. ~~Ligand curation~~ — **DONE** (F-15): 6 picks enacted across 4 receptors.
    Open: whether to reopen amendment C-1 so ADRB1 and B1B1U5 can use an
    inverse agonist. Aditya's call, not curation.
-6. **The decoy pool** — four deliverables above, none built.
+6. **The decoy pool** — the extraction and its gate are built and proved;
+   the pool itself waits on a pinned ChEMBL release being downloaded, which
+   is a decision with a cost and is Aditya's.
 
 **Decided and not to be re-opened:** D-A (the conjunction, NPxxY calibrated, tilt
 inherited and validated — every ground truth for that axis is circular), D-H
