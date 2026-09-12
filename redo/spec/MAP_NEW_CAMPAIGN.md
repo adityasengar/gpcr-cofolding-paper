@@ -186,7 +186,7 @@ construct whose bytes we do not hold.
 the molecule is co-crystallised in an active or inactive receptor — which is a
 stronger claim than an assay number. Aditya, 2026-09-12.
 
-**ENACTED** — `ligand_set_redo.tsv` holds **6 picks across 4 receptors**, **4 of them on one of our own reference structures**, plus **3 blocked** receptors each carrying its reason. Gated by `redo/gates/ligands.py`, 5 checks, each proved by planting.
+**ENACTED** — `ligand_set_redo.tsv` holds **12 picks across 7 receptors**, **9 of them on one of our own reference structures**, plus **0 blocked** receptors each carrying its reason. Gated by `redo/gates/ligands.py`, 5 checks, each proved by planting.
 
 | receptor | role | ligand | CCD | structure | Å | on our reference |
 |---|---|---|---|---|---:|:-:|
@@ -195,15 +195,18 @@ stronger claim than an assay number. Aditya, 2026-09-12.
 | **HRH3** | full_agonist | histamine | `HSM` | 8YN5 | 2.7 | ● |
 | **GHSR** | full_agonist | ibutamoren | `1KD` | 7NA8 | 2.7 | · |
 | **GHSR** | neutral_antagonist | CHEMBL1956994 | `8QX` | 6KO5 | 3.3 | ● |
+| **ADRB1** | full_agonist | CHEMBL1615159 | `P0G` | 7BU7 | 2.6 | ● |
+| **ADRB1** | inverse_agonist | Carazolol | `CAU` | 7BVQ | 2.5 | ● |
+| **B1B1U5** | full_agonist | 11,20-Ethanoretinal | `A1H6M` | 9EPP | 4.06 | ● |
+| **B1B1U5** | inverse_agonist | Retinal (11-cis) | `RET` | 6I9K | 2.15 | ● |
+| **OPSD** | full_agonist | Retinal (all-trans) | `RET` | 5DYS | 2.3 | · |
+| **OPSD** | inverse_agonist | Retinal (11-cis) | `RET` | 7ZBC | 1.8 | ● |
 | **CCKAR** | full_agonist | SR146131 | `IA1` | 7XOV | 3.0 | · |
 
 **Blocked, with the reason in the table itself:**
 
 | receptor | role | why |
 |---|---|---|
-| **ADRB1** | neutral_antagonist | POLICY, the same blocker as B1B1U5 -- and LIGAND_CURATION_PROPOSAL.md listed this among the straightforward picks, which was wrong. Carazolol (CAU, 7BVQ, 2.5 A) is on our own inactive reference and is human, but GPCRdb types it 'Inverse agonist', not a neutral antagonist, and amendment C-1 dropped inverse_agonist from Tier 3. Every candidate GPCRdb types a true 'Antagonist' -- P32 4BVN 2.1 A, 3WC 3ZPR, XF5 3ZPQ, I32 2YCZ -- is Meleagris gallopavo, and our ADRB1 is human (P08588); the standing rule is that species follows the panel. So the choice is reopen C-1 for an inverse agonist, or accept a cross-species antagonist. Aditya's call, not a curation judgement. |
-| **OPSD** | both | CHEMISTRY. Agonist and antagonist are the same molecule -- retinal, CCD RET -- in different isomers, covalently bound through a Schiff base. One code carries two opposite pharmacologies (F-11). Separately, the active reference 4X1H carries a DETERGENT (BNG) and no agonist at all. |
-| **B1B1U5** | antagonist | POLICY, not chemistry. F-11's one-CCD trap does NOT bite this pair: 9EPP's agonist is 11,20-ethanoretinal (A1H6M), a different CCD from the 11-cis retinal (RET) inverse agonist on our inactive reference 6I9K. The blocker is that amendment C-1 dropped inverse_agonist from Tier 3 and this receptor has no neutral antagonist. Reopening C-1 here is Aditya's call, not curation. |
 
 `ligand_curation_candidates.tsv` holds the **59 candidate rows across 7 receptors** these were chosen from:
 

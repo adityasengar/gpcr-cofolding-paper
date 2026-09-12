@@ -42,6 +42,31 @@ PICKS = [
      "ibutamoren, same deposition as our active reference 7NA7"),
     ("GHSR", "neutral_antagonist", "8QX", "6KO5",
      "our INACTIVE reference"),
+    # --- C-1 RELAXED 2026-09-12: these three were blocked solely because their
+    # --- off-state ligand is an inverse agonist and amendment C-1 excluded those.
+    ("ADRB1", "full_agonist", "P0G", "7BU7",
+     "our ACTIVE reference; human. ADRB1 has no plain antagonist at all, only "
+     "inverse agonists -- that is why C-1 blocked it, and why relaxing C-1 is "
+     "the only thing that could have unblocked it"),
+    ("ADRB1", "inverse_agonist", "CAU", "7BVQ",
+     "our INACTIVE reference; carazolol, human. Every candidate GPCRdb types a "
+     "true 'Antagonist' for ADRB1 is Meleagris gallopavo, so the alternative to "
+     "C-1 relaxation was a cross-species pick"),
+    ("B1B1U5", "full_agonist", "A1H6M", "9EPP",
+     "our ACTIVE reference; 11,20-ethanoretinal, a ring-locked analogue"),
+    ("B1B1U5", "inverse_agonist", "RET", "6I9K",
+     "our INACTIVE reference; 11-cis retinal. Different CCD from the agonist, so "
+     "F-11's one-CCD trap does not bite this pair"),
+    ("OPSD", "full_agonist", "RET", "5DYS",
+     "all-trans retinal. OFF-REFERENCE by necessity: our active reference 4X1H "
+     "carries a detergent (BNG) and no agonist at all. SHARES THE CCD 'RET' with "
+     "the inverse agonist and is a DIFFERENT MOLECULE -- key by InChIKey, never "
+     "by CCD (F-11)"),
+    ("OPSD", "inverse_agonist", "RET", "7ZBC",
+     "our INACTIVE reference; 11-cis retinal. Same CCD as the agonist, different "
+     "isomer, different InChIKey. GPCRdb also labels this exact molecule "
+     "'Agonist' at 8A6D -- one molecule, two opposite labels, so the ROLE must "
+     "come from this row and never from the ligand name"),
     ("CCKAR", "full_agonist", "IA1", "7XOV",
      "OFF-REFERENCE and the only small-molecule agonist candidate on the panel's "
      "receptor. 7MBX's ligand is typed protein by GPCRdb (the CCK-8 peptide), so "
@@ -50,27 +75,6 @@ PICKS = [
 
 # Not enacted, and why.  Carried in the output so the absence is legible.
 BLOCKED = [
-    ("ADRB1", "neutral_antagonist",
-     "POLICY, the same blocker as B1B1U5 -- and LIGAND_CURATION_PROPOSAL.md listed "
-     "this among the straightforward picks, which was wrong. Carazolol (CAU, 7BVQ, "
-     "2.5 A) is on our own inactive reference and is human, but GPCRdb types it "
-     "'Inverse agonist', not a neutral antagonist, and amendment C-1 dropped "
-     "inverse_agonist from Tier 3. Every candidate GPCRdb types a true 'Antagonist' "
-     "-- P32 4BVN 2.1 A, 3WC 3ZPR, XF5 3ZPQ, I32 2YCZ -- is Meleagris gallopavo, "
-     "and our ADRB1 is human (P08588); the standing rule is that species follows "
-     "the panel. So the choice is reopen C-1 for an inverse agonist, or accept a "
-     "cross-species antagonist. Aditya's call, not a curation judgement."),
-    ("OPSD", "both",
-     "CHEMISTRY. Agonist and antagonist are the same molecule -- retinal, CCD RET "
-     "-- in different isomers, covalently bound through a Schiff base. One code "
-     "carries two opposite pharmacologies (F-11). Separately, the active reference "
-     "4X1H carries a DETERGENT (BNG) and no agonist at all."),
-    ("B1B1U5", "antagonist",
-     "POLICY, not chemistry. F-11's one-CCD trap does NOT bite this pair: 9EPP's "
-     "agonist is 11,20-ethanoretinal (A1H6M), a different CCD from the 11-cis "
-     "retinal (RET) inverse agonist on our inactive reference 6I9K. The blocker is "
-     "that amendment C-1 dropped inverse_agonist from Tier 3 and this receptor has "
-     "no neutral antagonist. Reopening C-1 here is Aditya's call, not curation."),
 ]
 
 
@@ -101,7 +105,12 @@ def main():
         # GPCRdb calls it an inverse agonist.  Refuse it rather than record it.
         fn = c["function_raw"].strip().lower()
         want = {"full_agonist": ("agonist",),
-                "neutral_antagonist": ("antagonist",)}[role]
+                "neutral_antagonist": ("antagonist",),
+                # C-1 RELAXED 2026-09-12 (Aditya). An inverse agonist is now an
+                # admissible off-state ligand. It is recorded as its own role,
+                # never relabelled "neutral_antagonist" -- they are different
+                # pharmacology and the distinction has to survive into analysis.
+                "inverse_agonist": ("inverse agonist",)}[role]
         if fn not in want:
             problems.append(
                 f"{rec}/{ccd}@{pdb}: assigned {role} but GPCRdb function_raw is "
@@ -151,6 +160,19 @@ def main():
             "smiles_source": "", "evidence": "", "affinity_required": "no",
             "status": "BLOCKED", "why": why,
         })
+
+    # A receptor whose two roles share a CCD is the F-11 trap: anything keying on
+    # the CCD resolves both arms to one molecule. Flag it so nothing downstream
+    # has to notice on its own.
+    byrec = {}
+    for r in rows:
+        byrec.setdefault(r["receptor_slug"], []).append(r)
+    for rec, rs in byrec.items():
+        ccds = [x["ligand_ccd"] for x in rs if x["ligand_ccd"]]
+        for x in rs:
+            dup = x["ligand_ccd"] and ccds.count(x["ligand_ccd"]) > 1
+            x["shares_ccd_with_other_role"] = "1" if dup else "0"
+            x["must_key_by"] = "inchikey" if dup else "ccd"
 
     if problems:
         for p in problems:

@@ -136,15 +136,21 @@ def main():
         elif (sm_ag or ch_ag) and (sm_an or ch_an):
             ag = sm_ag or ch_ag
             an = sm_an or ch_an
-            tier = "X_mismatched"
+            # Aditya, 2026-09-12: these are KEPT as their own tier rather than
+            # excluded -- a ligand in one state and a peptide in the other is a
+            # real and common shape (it is the pharmaceutical pattern: peptide
+            # receptors get small-molecule blockers).  It carries a chain-count
+            # difference BETWEEN the two ligand arms, so it is never pooled with
+            # T1 or T2 and cannot carry the headline contrast.
+            tier = "T3_mixed"
             why = ("agonist %s a chain but antagonist %s -- chain count differs "
-                   "between the two ligand arms, the one confound this arm "
-                   "cannot absorb" % ("IS" if is_chain(ag) else "is NOT",
-                                      "IS" if is_chain(an) else "is NOT"))
+                   "between the two ligand arms, so this tier is reported on its "
+                   "own and never pooled" % ("IS" if is_chain(ag) else "is NOT",
+                                             "IS" if is_chain(an) else "is NOT"))
         else:
             ag = sm_ag or ch_ag
             an = sm_an or ch_an
-            tier = "T3_single_sided"
+            tier = "X_single_sided"
             why = ("no %s side available after skipping allosteric and "
                    "antibody ligands" % ("agonist" if ag is None else "antagonist"))
 
@@ -190,15 +196,18 @@ def main():
         print(f"  {label:<26} {len(rs):>2} receptors  {k:>2} clusters   MDE {mde:.3f}")
         return k
     print("  ON THE FROZEN PRIMARY PANEL (30 receptors / 29 clusters):")
-    for t in ("T1_small_molecule", "T2_peptide", "X_mismatched", "T3_single_sided"):
+    for t in ("T1_small_molecule", "T2_peptide", "T3_mixed", "X_single_sided"):
         rep([r for r in prim if r["ligand_tier"] == t], t)
     print()
     t1 = [r for r in prim if r["ligand_tier"] == "T1_small_molecule"]
     t12 = [r for r in prim if r["ligand_tier"] in ("T1_small_molecule", "T2_peptide")]
     rep(t1, "T1 alone (headline)")
     rep(t12, "T1 + T2 (reported apart)")
+    t123 = [r for r in prim if r["ligand_tier"] in
+            ("T1_small_molecule", "T2_peptide", "T3_mixed")]
+    rep(t123, "T1 + T2 + T3 (all reported apart)")
     print()
-    for t in ("T1_small_molecule", "T2_peptide", "X_mismatched"):
+    for t in ("T1_small_molecule", "T2_peptide", "T3_mixed", "X_single_sided"):
         rs = sorted(r["receptor_slug"] for r in prim if r["ligand_tier"] == t)
         print(f"  {t}: {', '.join(rs)}")
     ab = [r for r in prim if int(r["n_antibody_skipped"]) > 0]

@@ -29,7 +29,11 @@ CANDIDATES = "ligand_curation_candidates.tsv"
 
 # GPCRdb's own function vocabulary, per role we assign.
 ROLE_FUNCTION = {"full_agonist": {"agonist"},
-                 "neutral_antagonist": {"antagonist"}}
+                 "neutral_antagonist": {"antagonist"},
+                 # C-1 relaxed 2026-09-12: an inverse agonist is an admissible
+                 # off-state ligand, recorded as its own role and never
+                 # relabelled a neutral antagonist -- different pharmacology.
+                 "inverse_agonist": {"inverse agonist"}}
 
 
 def tsv(name, root=None):
@@ -115,6 +119,20 @@ def main(argv, root=None):
         not silent, ", ".join(silent) or
         f"{len(blocked)} blocked: " + ", ".join(r["receptor_slug"] for r in blocked))
 
+    # -- L-9  a shared CCD must be flagged AND resolved by InChIKey ----------
+    # OPSD's agonist and inverse agonist are both CCD "RET" and are different
+    # molecules (all-trans vs 11-cis). Anything keying on the CCD collapses the
+    # two arms into one. L-4 already proves they are chemically distinct; this
+    # proves the table SAYS SO, so no downstream step has to rediscover it.
+    dup = [r for r in rows if r.get("shares_ccd_with_other_role") == "1"]
+    badkey = [r["receptor_slug"] for r in dup if r.get("must_key_by") != "inchikey"]
+    chk("L-9  any pair sharing a CCD is flagged to key by InChIKey",
+        not badkey, ", ".join(badkey) or
+        (f"{len({r['receptor_slug'] for r in dup})} receptor(s) share a CCD "
+         f"across roles and are flagged: "
+         f"{', '.join(sorted({r['receptor_slug'] for r in dup}))}"
+         if dup else "no receptor's two roles share a CCD"))
+
     # -- L-6..L-8  the tier table's three load-bearing rules -----------------
     tpath = os.path.join(root, TIERS)
     if not os.path.exists(tpath):
@@ -176,6 +194,16 @@ def report(blocking, passed):
 
 
 # --------------------------------------------------------------------------
+def _append_row(path, fields):
+    rows = list(csv.DictReader(open(path), delimiter="\t"))
+    cols = list(rows[0].keys())
+    rows.append({c: fields.get(c, "") for c in cols})
+    with open(path, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t")
+        w.writeheader()
+        w.writerows(rows)
+
+
 def _col(path, row_match, col, val):
     rows = list(csv.DictReader(open(path), delimiter="\t"))
     cols = list(rows[0].keys())
@@ -199,14 +227,24 @@ PLANTS = [
     ("L-4", "give one receptor the same molecule in both roles",
      lambda d: _col(os.path.join(d, TABLE), {"ligand_ccd": "ML5"}, "inchikey",
                     "KIHYPELVXPAIDH-HNSNBQBZSA-N")),
-    ("L-5", "blank a blocked receptor's reason",
-     lambda d: _col(os.path.join(d, TABLE), {"receptor_slug": "OPSD"}, "why", "")),
+    # C-1's relaxation left ZERO blocked receptors, so a plant that edits an
+    # existing blocked row cannot apply and L-5 passed vacuously -- a check that
+    # quietly does nothing is the defect this project keeps rediscovering. The
+    # plant now CREATES the condition instead of assuming it, so L-5 stays proved
+    # whether or not anything is blocked today.
+    ("L-5", "add a blocked receptor with no stated reason",
+     lambda d: _append_row(os.path.join(d, TABLE),
+                           {"receptor_slug": "PLANTED", "status": "BLOCKED",
+                            "why": ""})),
     ("L-6", "let a chain ligand into T1",
      lambda d: _col(os.path.join(d, TIERS), {"receptor_slug": "CCKAR"},
                     "agonist_is_chain", "1")),
     ("L-7", "swap a pick to a structure from another species",
      lambda d: _col(os.path.join(d, TIERS), {"receptor_slug": "CCKAR"},
                     "agonist_species", "Rattus norvegicus")),
+    ("L-9", "unflag a shared-CCD pair",
+     lambda d: _col(os.path.join(d, TABLE), {"receptor_slug": "OPSD"},
+                    "must_key_by", "ccd")),
     ("L-8", "let a PAM through as the agonist",
      lambda d: _col(os.path.join(d, TIERS), {"receptor_slug": "CCKAR"},
                     "agonist_site", "allosteric")),
