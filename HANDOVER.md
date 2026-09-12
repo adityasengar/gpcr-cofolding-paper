@@ -60,7 +60,7 @@ No arm in any block supplies a **peptide**; the manipulated segment is **eleven*
 residues, not 21. So the narrowed title is about a Gα co-input and its C-terminal
 determinant. The alternative is to run the arm.
 
-**The agonist clause is closer than it looks and blocked on one file.** Block C's
+**The agonist clause is ANSWERED as of 2026-09-12 — the file arrived.** *(This paragraph said "blocked on one file" until then.)* Block C's
 2×2 has **ligand class × reference state** as its factors — the partner arm is
 *not* a factor in it, and apo-only was meant to be a row filter that was never
 applied. But the design grid is 50 predictions per (receptor × backbone × role ×

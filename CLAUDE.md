@@ -40,14 +40,19 @@ does not claim. **Block D shipped no row-level data at all** — its three corpo
 42,180 predictions, are absent — so its verifier carries a third evidential class,
 PROSE-ONLY, and a pass count there is not a claim count.
 
-**Two of the paper's three title clauses still have no result behind them.**
-No arm in any block supplies a **peptide** of any length — every partner arm is a
-complete Gα subunit or a nanobody — and the segment this work actually
-manipulates is **eleven** residues, not 21. The agonist clause is closer: Block C
-does vary the ligand, but it reports no state result on its 7,000 apo × agonist
-predictions, and its 2×2 has **ligand class × reference state** as its factors,
-not presence/absence of partner. Recorded at the top of `CLAIMS.md`. Until those
-are resolved, no sentence may imply either result.
+**ONE of the paper's three title clauses still has no result behind it** — this
+said "two" until 2026-09-12. No arm in any block supplies a **peptide** of any
+length: every partner arm is a complete Gα subunit or a nanobody, and the segment
+this work actually manipulates is **eleven** residues, not 21. Until that is
+resolved, no sentence may imply it.
+
+**The agonist clause (C7) is ANSWERED as of 2026-09-12**, from
+`rows.tier3.v2.csv` — see `analysis/block_c/received_2026_09_12/WHAT_IT_MEANS.md`.
+Agonist-alone does not reproduce the partner effect on any backbone, **but it is
+not inert**: on the continuous pocket readout it accounts for roughly a third of
+the partner's shift, intervals excluding zero on all four backbones, and it
+survives restriction to on-site rows. **Quote the continuous readout, never both** —
+the binary predicate is floor-pinned in apo and puts the same effect at ~8%.
 
 **A heading is not exempt from the evidence rule.** Scope gets asserted where it
 is most read and qualified where it is least read: on 2026-09-11 a section
@@ -117,14 +122,16 @@ honest one and the prose around it has been wrong twice:**
 | `g2_preflight.py` | yes | 14 checks, 15 plants |
 | `ligands.py` | yes | 10/10 |
 | `drule.py` | yes | 16+ checks |
-| `layout.py` | **L2 only** | 7 plants against **one** of its seven checks |
+| `layout.py` | yes — **two flags** | `--selftest` L2 (6 plants); `--selftest-all` L1 and L3–L7 (6 plants) |
 | `run_receipt.py`, `panel_verify.py` | **none** | — |
 | `seqrec_verify.py` | `--plant` *(different flag)* | a roster defect |
 
 **Do not read a gate's tally as coverage of the gate.** `layout.py --selftest`
-prints a 7/7 that counts plants against L2; **L1 and L3–L7 were proved by hand and
-cannot be re-proved by running anything**, so an edit to one of them can silently
-stop it refusing. That gap is recorded, not fixed.
+prints a tally over plants against **L2 alone**; the other six live behind
+`--selftest-all`, which also subtracts a baseline run, because a check already
+failing on the unplanted tree cannot be proved by planting it. *(Until 2026-09-12
+L1 and L3–L7 had no runnable plants at all while the docstring claimed otherwise.
+Closed the same day.)*
 
 **And run the self-tests rather than trusting the sentence.** On 2026-09-12 this
 paragraph claimed every check in all six was proved by planting, and that had been
