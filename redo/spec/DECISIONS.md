@@ -726,6 +726,75 @@ arm needs (D-2026-09-12-f).
 
 ---
 
+## F-18 · The approved files landed by hand — what they settle, and one malformed row
+
+**Arrived 2026-09-12 as `paper6f_approved_2026_09_12.zip`** (sha256 `7bafbbc9…`),
+by hand because `paper_af3`'s classifier refused every outbound file after Aditya
+approved all four asks. Landed read-only at
+`redo/protocol/received/approved_2026_09_12/` with `SHA256SUMS`. **Nobody looked
+for a way around that classifier.**
+
+Counts match their description exactly: `ligand_set.csv` **40 rows**,
+`ligand_set_tier3.csv` **64**. `reference_set.csv` is **byte-identical** to the copy
+we already held — which confirms our copy is the threshold fit input.
+
+### Ask 2 is ANSWERED and the nine inherited receptors verify
+
+**All nine T1 receptors we inherit — `5HT5A AA1R AA2AR ACM4 CNR2 DRD3 LPAR1 LT4R1
+OPRD` — carry both roles, `is_peptide=FALSE`, with non-empty SMILES.** So the tier
+eligibility we derived independently from the GPCRdb snapshot is confirmed against
+their actual curation. That was the point of the ask and it holds.
+
+*(My first run said all nine FAILED. `is_peptide` is `FALSE`/`TRUE` in upper case
+and my test matched `'false'`. My checker, not their data.)*
+
+### Ask 4 is HALF answered — the rule is confirmed, the fit set is still not
+
+The script's own docstring states the prose answer verbatim: Class A thresholds
+*"derived from the 32-receptor Class A panel by midpoint(active_mean,
+inactive_mean)"*, mean of PDBs per receptor per role first, tilt `active_gt`, kink
+`active_lt`, NPxxY-OH `active_lt`.
+
+**But it does not derive them.** There is no `CLASS_A_SLUGS` in the file — only
+`CLASS_B_SLUGS = {GLP1R, GCGR, PTH1R, CRHR1}` and `CLASS_F_SLUGS = {SMO, FZD4,
+FZD6, FZD7}`. **So 9.08 and 14.932 remain unreproducible exactly**, and the
+fit-set half of `MAP_FROZEN_CAMPAIGN.md`'s first hole stays open.
+
+### Running it produces something worth having
+
+| metric | derived from its OWN class | applied in the campaign | gap |
+|---|---:|---:|---:|
+| Class B tilt | 17.781 Å | 14.932 Å | 2.85 Å |
+| **Class B kink** | **124.240°** | **159.95°** | **35.7°** |
+| Class F tilt | 15.802 Å | 14.932 Å | 0.87 Å |
+
+**The applied Class B kink threshold is 36° away from what the Class B reference
+pairs themselves imply.** That is far worse than "saturation" conveys, and it is now
+reproducible on our side rather than asserted.
+
+**And Class F does not rescue itself.** Even its own correctly-derived threshold,
+15.802, sits **inside** the apo distribution we measured (medians 14.20–16.12). So
+the Class F axis fails on its own terms, not merely on borrowed ones —
+**a fourth independent route to D-2026-09-12-d.**
+
+**Do not quote the 8/8 self-accuracy as validation.** A midpoint fitted on 4+4
+points and then tested on those same 8 is guaranteed to score well; it is fitting,
+not evidence. Their docstring says the same thing in different words.
+
+### One malformed row in 104
+
+`ligand_set_tier3.csv` line 47, **`LPAR1 full_agonist`**: an unescaped comma inside
+`protonation_ph74_note` (*"pKa1 ~1, pKa2 ~7"*) splits the field and **shifts every
+column after it by two**. The result is that `ccd_code` holds prose, `ccd_smiles`
+holds `NKP` (the actual CCD), and `smiles_source` holds the SMILES.
+
+**The chemistry is unaffected** — `smiles`, `inchi` and `is_peptide` all sit in the
+right columns, so LPAR1's T1 status stands. **The provenance is not**: LPAR1's CCD
+cannot be verified against RCSB from this file, because the field that should name
+it contains a sentence. One row of 104, and it is the only one.
+
+---
+
 ## F-1 · **RETRACTED 2026-09-12. I was wrong. The two-instrument predicate IS what ran.**
 
 **What I claimed** (and told Aditya, and told `paper_af3`): that the manuscript's
