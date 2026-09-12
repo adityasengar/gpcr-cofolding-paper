@@ -1,0 +1,23 @@
+receptor_slug	pdb	is_rule_r	ga_entity	ga_accessions	ga_family	ga_len	canonical_len	construct_class	ga_description	entry_title
+CCKAR	7MBX	yes	7MBX_1	P63092	Gs	394	394	native	Guanine nucleotide-binding protein G(s) subunit alpha isoforms short	Human Cholecystokinin 1 receptor (CCK1R) Gs complex
+CCKAR	7MBY	no	7MBY_5	P63092;P63096	Gi1;Gs	253	394	engineered	Guanine nucleotide-binding protein G(i) subunit alpha-1,Guanine nucleotide-binding protein G(s) subunit alpha isoforms short,with certain residues mutated to match Guanine nucleotide-binding protein G(q) subunit	Human Cholecystokinin 1 receptor (CCK1R) Gq chimera (mGsqi) complex
+CCKAR	9BKK	no	9BKK_1	Q5JWF2	Gs(XLas)	253	394	engineered	Guanine nucleotide-binding protein G(s) subunit alpha isoforms XLas	Cholecystokinin 1 receptor (CCK1R) sterol 7M mutant, Gq chimera (mGsqi) complex
+CCKAR	9BKJ	no	9BKJ_5	P63092;P63096	Gi1;Gs	253	394	engineered	Guanine nucleotide-binding protein G(i) subunit alpha-1,Guanine nucleotide-binding protein G(s) subunit alpha isoforms short	Cholecystokinin 1 receptor (CCK1R) Y140A mutant, Gq chimera (mGsqi) complex
+CCKAR	7EZM	no	7EZM_1	P50148;P63096	Gi1;Gq	353	359	engineered	fusion protein of Guanine nucleotide-binding protein G(i) subunit alpha-1 and Guanine nucleotide-binding protein G(q) subunit alpha-q	Cryo-EM structure of an activated Cholecystokinin A receptor (CCKAR)-Gq complex
+CCKAR	7XOV	no	7XOV_1	P63092	Gs	380	394	native	Isoform Gnas-2 of Guanine nucleotide-binding protein G(s) subunit alpha isoforms short	Structural insights into human brain gut peptide cholecystokinin receptors
+CCKAR	7EZK	no	7EZK_1	P63092;P63096	Gi1;Gs	361	394	engineered	Chimera of Guanine nucleotide-binding protein G(i) subunit alpha-1 and Guanine nucleotide-binding protein G(s) subunit alpha isoforms short	Cryo-EM structure of an activated Cholecystokinin A receptor (CCKAR)-Gs complex
+CCKAR	7EZH	no	7EZH_1	P63096	Gi1	354	354	native	Guanine nucleotide-binding protein G(i) subunit alpha-1	Cryo-EM structure of an activated Cholecystokinin A receptor (CCKAR)-Gi complex
+CCKAR	7XOU	no	7XOU_2	P63092	Gs	380	394	native	Isoform Gnas-2 of Guanine nucleotide-binding protein G(s) subunit alpha isoforms short	Structural insights into human brain gut peptide cholecystokinin receptors
+EDNRB	8IY5	yes	8IY5_1	P63096	Gi1	354	354	native	Guanine nucleotide-binding protein G(i) subunit alpha-1	ETB-Gi complex bound to endothelin-1
+EDNRB	8HBD	no	8HBD_1	P63096	Gi1	354	354	native	Guanine nucleotide-binding protein G(i) subunit alpha-1	Cryo-EM structure of IRL1620-bound ETBR-Gi complex
+EDNRB	8XVE	no	8XVE_1	P63092	Gs	261	394	truncated_or_mini	Isoform Gnas-2 of Guanine nucleotide-binding protein G(s) subunit alpha isoforms short	Cryo-EM structure of ETBR bound with BQ3020
+EDNRB	8XGR	no			NONE_RESOLVED			no_galpha_entity_matched		ETB-eGt complex bound to endothelin-1
+EDNRB	8XWP	no	8XWP_3	P63096	Gi1	354	354	engineered	Guanine nucleotide-binding protein G(i) subunit alpha-1	Cryo-EM structure of ET-1 bound ETBR-DNGI complex
+EDNRB	8XVH	no	8XVH_1	P63092	Gs	261	394	truncated_or_mini	Isoform Gnas-2 of Guanine nucleotide-binding protein G(s) subunit alpha isoforms short	Cryo-EM structure of ETBR bound with Endothelin1
+EDNRB	8HCX	no	8HCX_1	NONE	UNASSIGNED	246		truncated_or_mini	Guanine nucleotide-binding protein G(q) subunit alpha-1	Cryo-EM structure of Endothelin1-bound ETBR-Gq complex
+EDNRB	8XWQ	no	8XWQ_3	P63096	Gi1	354	354	engineered	Guanine nucleotide-binding protein G(i) subunit alpha-1	Cryo-EM structure of ET-1 bound ETBR-DNGI complex
+GHSR	7NA7	yes	7NA7_1	P63096	Gi1	354	354	native	Guanine nucleotide-binding protein G(i) subunit alpha-1	Structures of human ghrelin receptor-Gi complexes with ghrelin and a synthetic agonist
+GHSR	7NA8	no	7NA8_1	P63096	Gi1	354	354	native	Guanine nucleotide-binding protein G(i) subunit alpha-1	Structures of human ghrelin receptor-Gi complexes with ghrelin and a synthetic agonist
+GHSR	7W2Z	no	7W2Z_1	A0A1W2PS82;P09471	A0A1W2PS82;GoA	236	354	engineered	Guanine nucleotide-binding protein G(o) subunit alpha	Cryo-EM structure of the ghrelin-bound human ghrelin receptor-Go complex
+GHSR	7F9Y	no	7F9Y_1	NONE	UNASSIGNED	362		engineered	Engineered G-alpha-q subunit	ghrelin-bound ghrelin receptor in complex with Gq
+GHSR	7F9Z	no	7F9Z_1	NONE	UNASSIGNED	362		engineered	Engineered G-alpha-q	GHRP-6-bound ghrelin receptor in complex with Gq

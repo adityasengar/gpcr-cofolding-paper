@@ -1,0 +1,1082 @@
+{
+ "7EZH": {
+  "entities": [
+   {
+    "acc": [
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1",
+    "id": "1",
+    "len": 354
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 351
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "3",
+    "len": 428
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "4",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "scFv16",
+    "id": "5",
+    "len": 247
+   },
+   {
+    "acc": [
+     "P06307"
+    ],
+    "desc": "Cholecystokinin-8",
+    "id": "6",
+    "len": 9
+   }
+  ],
+  "title": "Cryo-EM structure of an activated Cholecystokinin A receptor (CCKAR)-Gi complex"
+ },
+ "7EZK": {
+  "entities": [
+   {
+    "acc": [
+     "P63092",
+     "P63096"
+    ],
+    "desc": "Chimera of Guanine nucleotide-binding protein G(i) subunit alpha-1 and Guanine nucleotide-binding protein G(s) subunit alpha isoforms short",
+    "id": "1",
+    "len": 361
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 351
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "3",
+    "len": 428
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "4",
+    "len": 71
+   },
+   {
+    "acc": [
+     "P06307"
+    ],
+    "desc": "Cholecystokinin-8",
+    "id": "5",
+    "len": 9
+   }
+  ],
+  "title": "Cryo-EM structure of an activated Cholecystokinin A receptor (CCKAR)-Gs complex"
+ },
+ "7EZM": {
+  "entities": [
+   {
+    "acc": [
+     "P50148",
+     "P63096"
+    ],
+    "desc": "fusion protein of Guanine nucleotide-binding protein G(i) subunit alpha-1 and Guanine nucleotide-binding protein G(q) subunit alpha-q",
+    "id": "1",
+    "len": 353
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 351
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "3",
+    "len": 428
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "4",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "scFv16",
+    "id": "5",
+    "len": 247
+   },
+   {
+    "acc": [
+     "P06307"
+    ],
+    "desc": "Cholecystokinin-8",
+    "id": "6",
+    "len": 9
+   }
+  ],
+  "title": "Cryo-EM structure of an activated Cholecystokinin A receptor (CCKAR)-Gq complex"
+ },
+ "7F9Y": {
+  "entities": [
+   {
+    "acc": [],
+    "desc": "Engineered G-alpha-q subunit",
+    "id": "1",
+    "len": 362
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 371
+   },
+   {
+    "acc": [
+     "Q9UBU3"
+    ],
+    "desc": "Ghrelin-28",
+    "id": "3",
+    "len": 28
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "4",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "NB35",
+    "id": "5",
+    "len": 140
+   },
+   {
+    "acc": [
+     "P0ABE7",
+     "Q92847"
+    ],
+    "desc": "Soluble cytochrome b562",
+    "id": "6",
+    "len": 661
+   }
+  ],
+  "title": "ghrelin-bound ghrelin receptor in complex with Gq"
+ },
+ "7F9Z": {
+  "entities": [
+   {
+    "acc": [],
+    "desc": "Engineered G-alpha-q",
+    "id": "1",
+    "len": 362
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 371
+   },
+   {
+    "acc": [],
+    "desc": "3-PYRIDIN-4-YL-2,4-DIHYDRO-INDENO[1,2-.C.]PYRAZOLE",
+    "id": "3",
+    "len": 7
+   },
+   {
+    "acc": [],
+    "desc": "scFv16",
+    "id": "4",
+    "len": 304
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "5",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "Nb35",
+    "id": "6",
+    "len": 140
+   },
+   {
+    "acc": [
+     "P0ABE7",
+     "Q92847"
+    ],
+    "desc": "human ghrelin receptor",
+    "id": "7",
+    "len": 661
+   }
+  ],
+  "title": "GHRP-6-bound ghrelin receptor in complex with Gq"
+ },
+ "7MBX": {
+  "entities": [
+   {
+    "acc": [
+     "P63092"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(s) subunit alpha isoforms short",
+    "id": "1",
+    "len": 394
+   },
+   {
+    "acc": [
+     "P54311"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 340
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "Nanobody35",
+    "id": "4",
+    "len": 138
+   },
+   {
+    "acc": [
+     "P06307"
+    ],
+    "desc": "Cholecystokinin-8",
+    "id": "5",
+    "len": 9
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "6",
+    "len": 435
+   }
+  ],
+  "title": "Human Cholecystokinin 1 receptor (CCK1R) Gs complex"
+ },
+ "7MBY": {
+  "entities": [
+   {
+    "acc": [
+     "P54311"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "1",
+    "len": 340
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "2",
+    "len": 71
+   },
+   {
+    "acc": [
+     "P06307"
+    ],
+    "desc": "Cholecystokinin-8",
+    "id": "3",
+    "len": 9
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "4",
+    "len": 427
+   },
+   {
+    "acc": [
+     "P63092",
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1,Guanine nucleotide-binding protein G(s) subunit alpha isoforms short,with certain residues mutated to match Guanine nucleotide-binding protein G(q) subunit",
+    "id": "5",
+    "len": 253
+   }
+  ],
+  "title": "Human Cholecystokinin 1 receptor (CCK1R) Gq chimera (mGsqi) complex"
+ },
+ "7NA7": {
+  "entities": [
+   {
+    "acc": [
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1",
+    "id": "1",
+    "len": 354
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 340
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "Antibody fragment",
+    "id": "4",
+    "len": 246
+   },
+   {
+    "acc": [
+     "Q92847"
+    ],
+    "desc": "Growth hormone secretagogue receptor type 1",
+    "id": "5",
+    "len": 366
+   },
+   {
+    "acc": [
+     "Q9UBU3"
+    ],
+    "desc": "Ghrelin-27",
+    "id": "6",
+    "len": 12
+   }
+  ],
+  "title": "Structures of human ghrelin receptor-Gi complexes with ghrelin and a synthetic agonist"
+ },
+ "7NA8": {
+  "entities": [
+   {
+    "acc": [
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1",
+    "id": "1",
+    "len": 354
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 340
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "Antibody fragment",
+    "id": "4",
+    "len": 246
+   },
+   {
+    "acc": [
+     "Q92847"
+    ],
+    "desc": "Growth hormone secretagogue receptor type 1",
+    "id": "5",
+    "len": 366
+   }
+  ],
+  "title": "Structures of human ghrelin receptor-Gi complexes with ghrelin and a synthetic agonist"
+ },
+ "7W2Z": {
+  "entities": [
+   {
+    "acc": [
+     "A0A1W2PS82",
+     "P09471"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(o) subunit alpha",
+    "id": "1",
+    "len": 236
+   },
+   {
+    "acc": [
+     "Q92847"
+    ],
+    "desc": "Growth hormone secretagogue receptor type 1",
+    "id": "2",
+    "len": 366
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "ScFv16",
+    "id": "4",
+    "len": 250
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "5",
+    "len": 339
+   },
+   {
+    "acc": [
+     "Q9UBU3"
+    ],
+    "desc": "Appetite-regulating hormone",
+    "id": "6",
+    "len": 16
+   }
+  ],
+  "title": "Cryo-EM structure of the ghrelin-bound human ghrelin receptor-Go complex"
+ },
+ "7XOU": {
+  "entities": [
+   {
+    "acc": [
+     "P06307"
+    ],
+    "desc": "CCK-8",
+    "id": "1",
+    "len": 9
+   },
+   {
+    "acc": [
+     "P63092"
+    ],
+    "desc": "Isoform Gnas-2 of Guanine nucleotide-binding protein G(s) subunit alpha isoforms short",
+    "id": "2",
+    "len": 380
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "3",
+    "len": 384
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "4",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "Nanobody 35",
+    "id": "5",
+    "len": 126
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "6",
+    "len": 428
+   }
+  ],
+  "title": "Structural insights into human brain gut peptide cholecystokinin receptors"
+ },
+ "7XOV": {
+  "entities": [
+   {
+    "acc": [
+     "P63092"
+    ],
+    "desc": "Isoform Gnas-2 of Guanine nucleotide-binding protein G(s) subunit alpha isoforms short",
+    "id": "1",
+    "len": 380
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 338
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "Nanobody 35",
+    "id": "4",
+    "len": 126
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "5",
+    "len": 428
+   }
+  ],
+  "title": "Structural insights into human brain gut peptide cholecystokinin receptors"
+ },
+ "8HBD": {
+  "entities": [
+   {
+    "acc": [
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1",
+    "id": "1",
+    "len": 354
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 377
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "scFv16",
+    "id": "4",
+    "len": 285
+   },
+   {
+    "acc": [],
+    "desc": "IRL1620",
+    "id": "5",
+    "len": 15
+   },
+   {
+    "acc": [
+     "P24530"
+    ],
+    "desc": "Endothelin receptor type B,Endothelin receptor type B,Oplophorus-luciferin 2-monooxygenase catalytic subunit chimera",
+    "id": "6",
+    "len": 603
+   }
+  ],
+  "title": "Cryo-EM structure of IRL1620-bound ETBR-Gi complex"
+ },
+ "8HCX": {
+  "entities": [
+   {
+    "acc": [],
+    "desc": "Guanine nucleotide-binding protein G(q) subunit alpha-1",
+    "id": "1",
+    "len": 246
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 377
+   },
+   {
+    "acc": [
+     "Q9GV45"
+    ],
+    "desc": "Endothelin receptor type B,Oplophorus-luciferin 2-monooxygenase catalytic subunit chimera",
+    "id": "3",
+    "len": 603
+   },
+   {
+    "acc": [
+     "P05305"
+    ],
+    "desc": "Endothelin-1",
+    "id": "4",
+    "len": 21
+   },
+   {
+    "acc": [],
+    "desc": "scFv16",
+    "id": "5",
+    "len": 285
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "6",
+    "len": 71
+   }
+  ],
+  "title": "Cryo-EM structure of Endothelin1-bound ETBR-Gq complex"
+ },
+ "8IY5": {
+  "entities": [
+   {
+    "acc": [
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1",
+    "id": "1",
+    "len": 354
+   },
+   {
+    "acc": [
+     "P54311"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 374
+   },
+   {
+    "acc": [
+     "P63212"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 68
+   },
+   {
+    "acc": [],
+    "desc": "scFv16",
+    "id": "4",
+    "len": 260
+   },
+   {
+    "acc": [
+     "P24530"
+    ],
+    "desc": "Endothelin type B receptor",
+    "id": "5",
+    "len": 609
+   },
+   {
+    "acc": [
+     "P05305"
+    ],
+    "desc": "Endothelin-1",
+    "id": "6",
+    "len": 21
+   }
+  ],
+  "title": "ETB-Gi complex bound to endothelin-1"
+ },
+ "8XGR": {
+  "entities": [
+   {
+    "acc": [
+     "P04695",
+     "P63212"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2,eGt-alpha",
+    "id": "1",
+    "len": 434
+   },
+   {
+    "acc": [
+     "P54311"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 374
+   },
+   {
+    "acc": [],
+    "desc": "Camelid antibody VHH fragment",
+    "id": "3",
+    "len": 161
+   },
+   {
+    "acc": [
+     "P24530"
+    ],
+    "desc": "Endothelin receptor type B",
+    "id": "4",
+    "len": 609
+   },
+   {
+    "acc": [
+     "P05305"
+    ],
+    "desc": "Endothelin-1",
+    "id": "5",
+    "len": 21
+   }
+  ],
+  "title": "ETB-eGt complex bound to endothelin-1"
+ },
+ "8XVE": {
+  "entities": [
+   {
+    "acc": [
+     "P63092"
+    ],
+    "desc": "Isoform Gnas-2 of Guanine nucleotide-binding protein G(s) subunit alpha isoforms short",
+    "id": "1",
+    "len": 261
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 346
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "Nanobody 35",
+    "id": "4",
+    "len": 157
+   },
+   {
+    "acc": [
+     "P05305"
+    ],
+    "desc": "BQ3020",
+    "id": "5",
+    "len": 16
+   },
+   {
+    "acc": [
+     "P24530",
+     "Q59310"
+    ],
+    "desc": "Exo-alpha-sialidase,Endothelin receptor type B",
+    "id": "6",
+    "len": 837
+   }
+  ],
+  "title": "Cryo-EM structure of ETBR bound with BQ3020"
+ },
+ "8XVH": {
+  "entities": [
+   {
+    "acc": [
+     "P63092"
+    ],
+    "desc": "Isoform Gnas-2 of Guanine nucleotide-binding protein G(s) subunit alpha isoforms short",
+    "id": "1",
+    "len": 261
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 346
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "Nanobody 35",
+    "id": "4",
+    "len": 157
+   },
+   {
+    "acc": [
+     "P05305"
+    ],
+    "desc": "Endothelin-1",
+    "id": "5",
+    "len": 21
+   },
+   {
+    "acc": [
+     "P24530",
+     "Q59310"
+    ],
+    "desc": "Exo-alpha-sialidase,Endothelin receptor type B",
+    "id": "6",
+    "len": 837
+   }
+  ],
+  "title": "Cryo-EM structure of ETBR bound with Endothelin1"
+ },
+ "8XWP": {
+  "entities": [
+   {
+    "acc": [
+     "P24530"
+    ],
+    "desc": "Endothelin receptor type B",
+    "id": "1",
+    "len": 346
+   },
+   {
+    "acc": [
+     "P05305"
+    ],
+    "desc": "Endothelin-1",
+    "id": "2",
+    "len": 21
+   },
+   {
+    "acc": [
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1",
+    "id": "3",
+    "len": 354
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "4",
+    "len": 344
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "5",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "SCFV16",
+    "id": "6",
+    "len": 277
+   }
+  ],
+  "title": "Cryo-EM structure of ET-1 bound ETBR-DNGI complex"
+ },
+ "8XWQ": {
+  "entities": [
+   {
+    "acc": [
+     "P24530"
+    ],
+    "desc": "Endothelin receptor type B",
+    "id": "1",
+    "len": 346
+   },
+   {
+    "acc": [
+     "P05305"
+    ],
+    "desc": "Endothelin-1",
+    "id": "2",
+    "len": 21
+   },
+   {
+    "acc": [
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1",
+    "id": "3",
+    "len": 354
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "4",
+    "len": 344
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "5",
+    "len": 71
+   },
+   {
+    "acc": [],
+    "desc": "SCFV16",
+    "id": "6",
+    "len": 277
+   }
+  ],
+  "title": "Cryo-EM structure of ET-1 bound ETBR-DNGI complex"
+ },
+ "9BKJ": {
+  "entities": [
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "1",
+    "len": 340
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "2",
+    "len": 58
+   },
+   {
+    "acc": [
+     "P06307"
+    ],
+    "desc": "Cholecystokinin-8",
+    "id": "3",
+    "len": 8
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "4",
+    "len": 427
+   },
+   {
+    "acc": [
+     "P63092",
+     "P63096"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(i) subunit alpha-1,Guanine nucleotide-binding protein G(s) subunit alpha isoforms short",
+    "id": "5",
+    "len": 253
+   }
+  ],
+  "title": "Cholecystokinin 1 receptor (CCK1R) Y140A mutant, Gq chimera (mGsqi) complex"
+ },
+ "9BKK": {
+  "entities": [
+   {
+    "acc": [
+     "Q5JWF2"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(s) subunit alpha isoforms XLas",
+    "id": "1",
+    "len": 253
+   },
+   {
+    "acc": [
+     "P62873"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(T) subunit beta-1",
+    "id": "2",
+    "len": 340
+   },
+   {
+    "acc": [
+     "P59768"
+    ],
+    "desc": "Guanine nucleotide-binding protein G(I)/G(S)/G(O) subunit gamma-2",
+    "id": "3",
+    "len": 71
+   },
+   {
+    "acc": [
+     "P06307"
+    ],
+    "desc": "Cholecystokinin-8",
+    "id": "4",
+    "len": 9
+   },
+   {
+    "acc": [
+     "P32238"
+    ],
+    "desc": "Cholecystokinin receptor type A",
+    "id": "5",
+    "len": 427
+   }
+  ],
+  "title": "Cholecystokinin 1 receptor (CCK1R) sterol 7M mutant, Gq chimera (mGsqi) complex"
+ }
+}

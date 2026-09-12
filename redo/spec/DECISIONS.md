@@ -412,6 +412,53 @@ pass, not a separate change.
 
 ---
 
+## F-14 · The three open coupling reversals are closed — the competing family has no native structure
+
+**CCKAR, EDNRB and GHSR** all carried Block B prior **Gq** against a Rule-R structural
+cognate that reads otherwise. They stayed open because most annotation authorities also
+say Gq/11, so preferring the structure looked like preferring one source over four.
+
+**It is not.** Enumerating the Gα entity in **every** active structure of each receptor —
+not only the chosen reference — and classifying it by the deposition's own description,
+its accessions and its length:
+
+| receptor | actives | families present **natively** | Block B's Gq appears as |
+|---|---:|---|---|
+| CCKAR | 9 | Gs (394, 380, 380), Gi1 (354) | mGsqi chimera ×3, Gi/Gq fusion ×1 — **never native** |
+| EDNRB | 10 | **Gi1 only** (354 ×2) | a 246 aa mini with no accession |
+| GHSR | 5 | **Gi1 only** (354 ×2) | *"Engineered G-alpha-q"*, the depositors' own word |
+
+**In all three, the family the Rule-R structure reads is the only family with a native,
+full-length, non-engineered Gα anywhere in that receptor's active structures.**
+
+**Resolution: CCKAR = Gs, EDNRB = Gi/o, GHSR = Gi/o** — all three unchanged in outcome,
+**changed in basis.** Not "the structure beats four authorities", but "the family those
+authorities name has no native structural representative, and the one we supply does".
+EDNRB carries a second independent ground: Gi/o is the only family compatible with all
+five authorities. Full evidence in `COUPLING_REVERSALS.md`; reproduce with
+`redo/build/coupling_reversal_evidence.py` → `inputs/coupling_reversal_evidence.tsv`.
+
+**This is the same shape as the Block C "cognate disagreements"** that turned out to sit
+in a *secondary* coupling column: what a receptor couples to in an assay and what anyone
+has deposited it bound to are different questions. And it aligns the three with the
+standing chimera policy — Block B's Gq would have meant a chimeric partner at three of
+thirty-two core receptors.
+
+**What I got wrong on the way, recorded because the fix is the finding.** My first
+classifier tested only the entity *description* and called four engineered constructs
+native — `9BKK`, whose description says *"G(s) subunit alpha isoforms XLas"* while its
+**title** says *"Gq chimera (mGsqi)"*, and three mini-G entries of 246–261 residues that
+carry no engineering word anywhere. **Length was the discriminator I had left out.** The
+classifier now tests description **and** title, family-mixing, and length against the
+canonical value read from `seq_constructs.tsv`.
+
+**Limit, stated:** structural availability is a publication artefact — mGsqi exists
+because native Gq complexes are hard to resolve. A native Gq–CCKAR structure appearing
+later reopens this, and re-running the generator against a newer snapshot is how that
+gets noticed.
+
+---
+
 ## F-1 · **RETRACTED 2026-09-12. I was wrong. The two-instrument predicate IS what ran.**
 
 **What I claimed** (and told Aditya, and told `paper_af3`): that the manuscript's

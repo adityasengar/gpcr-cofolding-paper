@@ -308,18 +308,59 @@ def main(argv):
                        f"-- {conv}. OPRM has no active reference containing a "
                        f"Galpha at all; NTR1's fallback rests on a non-Rule-R "
                        f"structure against a unanimous Gq/11 annotation")
+    # -- B17  the reversals stay resolved -----------------------------------
+    # This was a wait() until 2026-09-12.  All four assignments that reverse
+    # Block B's prior are now closed: B1B1U5 by D-H (reference 9EPP, a
+    # spider-Gq-tipped chimera with no native alternative), and CCKAR, EDNRB and
+    # GHSR by F-14 -- in each of those three the family the Rule-R structure
+    # reads is the ONLY family with a native, full-length, non-engineered Ga
+    # anywhere in that receptor's active structures.  Block B's Gq prior exists
+    # for all three only as a chimera, a mini-G or a subunit the depositors
+    # themselves label "engineered".
+    #
+    # So the check is: for every reversal receptor we have evidence for, the
+    # cognate family we supply must be one that HAS a native representative.
+    # A future snapshot carrying a native Gq-CCKAR structure reopens F-14, and
+    # this is what would notice.
     rev = sorted({r["receptor_slug"] for r in cogm
                   if r["reverses_blockb_prior"] == "yes"})
-    if rev:
-        pending.append(f"P: {len(rev)} assignments REVERSE Block B's prior -- {rev}. "
-                       f"B1B1U5's half of this is CLOSED: D-H was decided on "
-                       f"2026-09-12 as option (c') -- reference 9EPP, cognate Gq, "
-                       f"recorded as a spider-Gq-tipped chimera with no native "
-                       f"alternative (PANEL.md Rule 4 is inapplicable, not just "
-                       f"unimplemented). The row is still read from the map every "
-                       f"run and never hard-coded here. What is still pending is "
-                       f"the other three, and that Block B's Gi prior for B1B1U5 "
-                       f"came from a reference (9EPR) the panel no longer uses")
+    ev_name = "coupling_reversal_evidence.tsv"
+    ev_path = os.path.join(INPUTS, ev_name)
+    if not os.path.exists(ev_path):
+        # A missing input is a FAILURE, not a skip.  A check that quietly does
+        # nothing when its evidence is absent is the defect it exists to catch.
+        B(False, "B17 every Block-B reversal supplies a natively-represented "
+                 "Ga family",
+          "coupling_reversal_evidence.tsv is ABSENT -- run "
+          "redo/build/coupling_reversal_evidence.py")
+    else:
+        ev = tsv(ev_name)
+        native_fams = {}
+        for r in ev:
+            if r["construct_class"] == "native":
+                native_fams.setdefault(r["receptor_slug"], set()).update(
+                    r["ga_family"].split(";"))
+        bad = []
+        for slug in sorted(native_fams):
+            row = next((r for r in cogm if r["receptor_slug"] == slug), None)
+            if row is None:
+                bad.append(f"{slug}: in the evidence table, absent from the map")
+                continue
+            # the map records a FAMILY (Gi/o, Gs, Gq/11); the evidence records a
+            # SUBTYPE accession (Gi1, Gs, Gq).  Compare on the family prefix.
+            fam = row["cognate_family"]
+            want = {f.split("(")[0] for f in native_fams[slug]}
+            hit = any(w in fam or fam.split("/")[0] in w for w in want)
+            if not hit:
+                bad.append(f"{slug}: supplies {fam}, natively represented "
+                           f"families are {sorted(want)}")
+        covered = sorted(native_fams)
+        B(not bad, "B17 every Block-B reversal supplies a natively-represented "
+                   "Ga family", "; ".join(bad))
+        if not bad:
+            passed[-1] += (f"  [{len(covered)} of {len(rev)} reversal receptors "
+                           f"have structural evidence: {', '.join(covered)}; "
+                           f"B1B1U5 is closed by D-H, not by this check]")
     sub = [r for r in reg if r["construct_class"] == "a5null_substitute_rule"]
     if sub:
         pending.append(f"P: {len(sub)} alpha5-null constructs were built under a "
@@ -413,6 +454,10 @@ def selftest():
                 lambda t: _retag(t, "R6b_a5perm", "Gi3")),
         "B16": ("g1_systems.csv",
                 lambda t: _col(t, "reference_tip_subtype", "")),
+        # flip GHSR back to Block B's Gq -- a family present only as an
+        # "Engineered G-alpha-q" subunit in both structures that carry it
+        "B17": ("g1_cognate.tsv",
+                lambda t: _retag_cognate(t, "GHSR", "Gq/11")),
     }
     ok = True
     for name, (fn, corrupt) in cases.items():
@@ -439,6 +484,22 @@ def selftest():
     sys.stdout.write("\nall blocking checks proved\n" if ok
                      else "\nSOME CHECKS DID NOT FIRE -- they cannot be trusted\n")
     return 0 if ok else 1
+
+
+def _retag_cognate(path, slug, family):
+    """Rewrite one receptor's cognate_family in the cognate map."""
+    lines = open(path).read().split("\n")
+    hdr = lines[0].split("\t")
+    i_slug, i_fam = hdr.index("receptor_slug"), hdr.index("cognate_family")
+    for n, ln in enumerate(lines[1:], 1):
+        if not ln.strip():
+            continue
+        f = ln.split("\t")
+        if f[i_slug] == slug:
+            f[i_fam] = family
+            lines[n] = "\t".join(f)
+            break
+    open(path, "w").write("\n".join(lines))
 
 
 def _sub(path, old, new, n):
