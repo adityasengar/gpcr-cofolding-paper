@@ -324,6 +324,40 @@ def main(argv, root=None):
     B(not msa, "G-11  every cognate row runs the partner MSA-free, every apo row n/a",
       f"{msa[:4]}")
 
+    # -- G-15  the C7 arm exists: the ligand-free 2x2, and it has not shrunk ---
+    # WHY THIS CHECK EXISTS, and it is the most expensive lesson on this project.
+    # On 2026-09-12 I claimed title clause C7 ("the agonist alone does not drive the
+    # active state") was ANSWERED from rows.tier3.v2.csv, and propagated it into five
+    # documents and a peer's argument spine.  It was not: ALL 40,800 rows of that
+    # file carry a ligand, so "apo" there means no PARTNER, not no ligand, and the
+    # agonist alone was never predicted.  DECISIONS.md F-23.
+    #
+    # Every guard in this repository was sound and none could catch it, because it
+    # was not a defect in the machinery -- it was a wrong belief about what the
+    # population WAS.  I wrote at the time that the check which would have caught it
+    # is one line: assert the design contains the arm the claim needs, BEFORE
+    # claiming it.  This is that line.
+    #
+    # It guards the redo's own C7 arm, which exists, is READY, and costs zero
+    # marginal predictions -- and which nobody had noticed until F-23 went looking.
+    # It fails if the arm SHRINKS, because an arm that quietly loses receptors
+    # between registration and dispatch is how a pre-registration becomes decoration.
+    C7_CELLS = {("apo", "none"), ("apo", "full_agonist"),
+                ("cognate", "none"), ("cognate", "full_agonist")}
+    ready = defaultdict(set)
+    for r in rows:
+        if r["dispatch_status"] == "READY":
+            ready[r["receptor_slug"]].add((r["partner_level"], r["ligand_role_actual"]))
+    c7_recs = sorted(sl for sl, cells in ready.items() if C7_CELLS <= cells)
+    c7_clusters = {r["receptor_cluster"] for r in rows if r["receptor_slug"] in set(c7_recs)}
+    n_free = sum(1 for r in rows
+                 if r["ligand_role_actual"] == "none" and r["dispatch_status"] == "READY")
+    mde = f"{1.218 / (len(c7_clusters) ** 0.5):.3f}" if c7_clusters else "n/a"
+    B(len(c7_recs) >= 20 and len(c7_clusters) >= 19 and n_free >= 98,
+      "G-15  the C7 arm is present and READY: the ligand-free 2x2 has not shrunk",
+      f"{len(c7_recs)} receptors / {len(c7_clusters)} clusters carry all four cells "
+      f"(need 20/19); {n_free} ligand-free READY rows (need 98); MDE {mde}")
+
     # ------------------------------------------------------------- PENDING
     if dec:
         # Every quantity here is DERIVED from the two files, never asserted.  This
@@ -352,6 +386,19 @@ def main(argv, root=None):
           f"{len(blk)} cells stay blocked, "
           + "; ".join(f"{', '.join(v)} -- {k}" for k, v in sorted(by_class.items()))
           + ". NOT a defect and NOT confirmatory: no claim may rest on this arm.")
+    if not os.path.exists(os.path.join(os.path.dirname(INPUTS), "spec",
+                                       "C7_PREREGISTRATION.md")):
+        W("the C7 pre-registration is missing entirely",
+          "redo/spec/C7_PREREGISTRATION.md is absent -- G-15 guards an arm nobody has "
+          "registered")
+    else:
+        W("the C7 arm is READY but NOT PRE-REGISTERED",
+          f"{len(c7_recs)} receptors / {len(c7_clusters)} clusters carry the complete "
+          f"ligand-free 2x2 at zero marginal cost, and "
+          f"redo/spec/C7_PREREGISTRATION.md is DRAFTED AND NOT ENACTED. It needs a "
+          f"dated D- entry in DECISIONS.md. **This expires at dispatch**: afterwards "
+          f"the same analysis is an unregistered post-hoc contrast. DECISIONS.md F-23")
+
     chain = sorted({(r["receptor_slug"], r["ligand_role_actual"]) for r in rows
                     if r["ligand_identity_status"] == "UNRESOLVED_CHAIN_NO_SEQUENCE"})
     if chain:
@@ -509,6 +556,11 @@ CASES = {
     ],
     # the exploratory marker stripped from one row, so the arm could be read as
     # confirmatory by someone doing nothing wrong
+    # shrink the C7 arm: one receptor loses its ligand-free cognate cell, so the
+    # 2x2 is no longer complete for it -- exactly the silent-attrition case G-15
+    # exists to catch, and it moves no other count the gate checks.
+    "G-15": (SYSTEMS, lambda p: _drop(p, {"ligand_role_actual": "none",
+                                          "partner_level": "cognate"}, limit=3)),
     "G-14": (SYSTEMS, lambda p: _set(p, {"ligand": "decoy_lig"},
                                      "ligand_flag", "", limit=1)),
 }
