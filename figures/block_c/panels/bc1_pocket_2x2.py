@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
-"""BC-1 — agonist and antagonist pockets separate, in the apo arm alone.
+"""BC-1 — agonist and antagonist pockets separate. INTENDED apo arm only.
+
+The apo-only scope was the design intent and is NOT what shipped: the row counts
+in stage3_2x2_ligand_state_specificity.json are 2,800 and 2,300 per backbone
+against an apo-only expectation of 28x50=1,400 and 23x50=1,150, at a grid the
+placement census fixes at exactly 50 rows per receptor x backbone x role x arm
+(800 cells, unique size 50). Both arms are pooled. Pinned by check C60.
 
 Spec: analysis/block_c/panels/BC-1_pocket_2x2.md   Claim: SC-C-1.
 Standalone, spec ID only, no manuscript figure number, no composite.

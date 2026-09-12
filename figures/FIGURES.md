@@ -222,6 +222,14 @@ status  ready — it must imply NOTHING about magnitude, and it carries no arrow
         claim from launcher static analysis and a propagation test with NO
         row-level echo, and that no MSA setting appears in the drop at all;
         neither may be upgraded to a plain assertion
+        REVISED 2026-09-11: panel headings sentence-cased; the census line
+        broken over two lines because it overran its box; constrained_layout
+        replaced with explicit gridspec geometry (it reported "at least one
+        axes collapsed" on EVERY hspace including the shipped one, so the pads
+        were a no-op and b's x-label ran into d's heading); and panel c now
+        says this is THE FIRST OF FOUR CAMPAIGNS. That label is on c, not on
+        the figure title, because a and b are the instrument and its
+        calibration and are shared by all four. No number changed
 ```
 
 ### GA-1 — the graphical abstract: one co-input, one state change
@@ -502,7 +510,42 @@ Panels built from `data/block_b/` and `data/block_b_structures/`. The loader is
    the untruncated NPxxY threshold 9.082 while every row carries 9.08, which
    differs on five rows of 32,000 and moves AA2AR/chai/decoy from 0.90 to 0.88.
 
-### BB-1 — the four-arm ladder
+### BB-12 — the ladder AND its decomposition (MAIN-TEXT FIGURE 3)
+```
+claim   SC-B-1 and its decomposition, restated
+shows   a: the four-arm ladder, four backbones plus panel with cluster-boot
+        CIs, with the two clean steps bracketed in a band below the data;
+        b: the same fractions on the logit scale; c: what each contrast
+        actually varies, including the shipped one, named CONFOUNDED
+data    01_rows/rows_tidy.csv (per-backbone rates, predicate recomputed per
+        row) AND 04_ladder/ladder_per_receptor.csv (decomposition terms).
+        Checked against 04_ladder/ladder_four_scorings.csv and
+        05_decomposition/ladder_decomposition.csv
+build   python3 block_b/panels/bb12_ladder_decomposition.py
+status  ready — MERGED FROM BB-1 AND BB-2 on 2026-09-11, Aditya's call. They
+        drew the SAME LADDER TWICE: BB-2's left panel was titled "the ladder,
+        and the two steps that telescope" and redrew the four rungs BB-1 had
+        already drawn, 45 lines earlier in the prose.
+        THE MERGE REMOVES THE DUPLICATION RATHER THAN CARRYING IT INSIDE ONE
+        FLOAT. A 2x2 of BB-1's two panels beside BB-2's two would have put two
+        ladders in one figure. The ladder is drawn ONCE and the steps are
+        bracketed on it.
+        ONE THING WAS DROPPED IN THE MERGE AND IT WAS RIGHT TO DROP IT. BB-2
+        drew the panel line apo->decoy->cognate with a grey dashed detour
+        through shuffled. That geometry cannot survive: BB-1's ladder runs
+        THROUGH all four arms, so the "route not taken" lies exactly under the
+        panel line and is invisible while the legend claims it is drawn — the
+        same defect class as a check that never runs. The legend entry went
+        with it; panel c carries the argument in words instead.
+        TWO ROUTES, CHECKED AGAINST EACH OTHER. The rates and the terms come
+        from different files. The script asserts they agree on all four rungs
+        (max gap 1.4e-4) before drawing one ladder that claims to be both, and
+        refuses rather than picking a winner.
+        Both original guards kept. U+2192 is MISSING FROM THE HOUSE FONT and
+        renders as a blank box — use "->" in fig.text, mathtext in labels
+```
+
+### BB-1 — the four-arm ladder (SI; superseded in the main text by BB-12)
 ```
 claim   SC-B-1 — the ladder is monotonic across apo < decoy < shuffled < cognate
 shows   the two-instrument active-call fraction on all four arms, four
@@ -520,7 +563,8 @@ status  ready — DEPARTS FROM ITS SPEC IN ONE PLACE, deliberately. The spec say
         the panel says so in red.
 ```
 
-### BB-2 — the decomposition, on both scales
+### BB-2 — the decomposition, on both scales (SUPERSEDED by BB-12, and now
+### placed NOWHERE: si.tex never carried it. Still renders; do not delete)
 ```
 claim   SC-B-2 — occupancy 55%, α5-CT sequence 34%, correct family 11% on the
         probability scale and 17.4% on the logit scale
@@ -533,6 +577,37 @@ status  ready — panel b exists BECAUSE the claim does not reproduce. SC-B-2 sa
         "all four backbones agree, 17-21%"; the file says 14.2 / 22.9 / 23.6 /
         10.9. The claimed values are drawn as dashes over the real bars rather
         than quietly replaced. Three of four intervals span zero (D-B-6, D-B-7)
+```
+
+### BB-7 — the per-backbone family term (SI)
+```
+claim   SC-B-2's per-backbone half, which reproduces nowhere
+shows   the four per-backbone family terms plus the panel estimate, logit
+        scale, zero marked. Signed on OpenFold-3 alone: +0.939
+        [+0.459, +1.631]. Boltz +0.586 [-0.074, +1.595], Chai +0.519
+        [-0.235, +1.523], Protenix +0.674 [-0.047, +5.148]. Panel +0.656
+        [+0.389, +1.094], signed only because pooling narrows it
+data    05_decomposition/ladder_decomposition.csv, frame reproduction_36
+build   python3 block_b/panels/bb7_family_term.py
+status  ready — BUILT BY THE LIT SESSION 2026-09-11 to close an orphan. The
+        prose had this result and NO figure carried it: BB-2's ledger entry
+        promised a per-backbone panel, the 2026-09-10 rebuild replaced the
+        figure entirely, and the entry was never updated. The claim was in
+        the paper with nothing behind it for a day.
+        WHAT IT CAUGHT, verified independently by the orchestrator. The claim
+        sheet reads "Per-backbone logit family share (all four backbones
+        agree, 17-21%): boltz 17.4%, chai 17.5%, of3 20.9%, protenix 17.5%".
+        Shipped: 14.2 / 22.9 / 23.6 / 10.9. THREE OF THE FOUR CLAIMED VALUES
+        MATCH NOTHING IN THE FILE on either scale or either frame. The fourth,
+        boltz 17.4%, matches exactly one row -- `reproduction_36 / panel /
+        logit`, the POOLED estimate. Boltz is never 17.4% anywhere. That the
+        panel value was copied into the boltz slot is the obvious reading and
+        is an INFERENCE, not established; what is established is that one
+        entry of a four-value per-backbone list is the pooled number.
+        Protenix's upper bound of 5.15 flattens the others, so the VIEW is
+        clipped at 2.0 and the clip is annotated. No interval is truncated.
+        DOES NOT PRE-EMPT SC-B-2, which is Aditya's decision: the panel shows
+        what the data says, the decision is about what the paper claims
 ```
 
 ### BB-3 — engagement and activation are separable

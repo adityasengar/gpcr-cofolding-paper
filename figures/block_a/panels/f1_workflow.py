@@ -68,7 +68,7 @@ def panel_a(ax):
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title(u"a   the two predicates, and the atoms they are measured "
+    ax.set_title(u"a   The two predicates, and the atoms they are measured "
                  u"between", fontsize=7, loc="left", fontweight="bold")
 
     box(ax, 0.02, 0.70, 0.96, 0.28,
@@ -136,8 +136,9 @@ def panel_c(ax, df):
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.text(0.0, 1.0, u"c   what was run", fontsize=7, ha="left", va="top",
-            fontweight="bold", transform=ax.transAxes)
+    ax.text(0.0, 1.0, u"c   What was run \u2014 the first of four campaigns",
+            fontsize=7, ha="left", va="top", fontweight="bold",
+            transform=ax.transAxes)
     n_rec = df["receptor"].nunique()
     cls = df.groupby("gpcr_class")["receptor"].nunique().to_dict()
     cells = df["cell_id"].nunique()
@@ -155,14 +156,19 @@ def panel_c(ax, df):
     for x in (0.22, 0.48, 0.74):
         flow(ax, x, 0.74, x + 0.05, 0.74)
 
-    box(ax, 0.01, 0.30, 0.98, 0.20,
-        u"%d nominal cells,  %d run  (4 absent: FZD4 cognate on all four "
-        u"backbones),  %s rows of a nominal %s"
+    box(ax, 0.01, 0.28, 0.98, 0.22,
+        u"%d nominal cells,   %d run   (4 absent: FZD4 cognate on all four "
+        u"backbones)\n%s rows of a nominal %s"
         % (n_rec * 2 * 4, cells,
            "{:,}".format(len(df)), "{:,}".format(n_rec * 2 * 4 * 25)),
         fc="white", ec=fs.BLACK, fontsize=5.4, weight="bold")
 
     ax.text(0.01, 0.22,
+            u"This is the FIRST of the paper's four campaigns: it varies "
+            u"partner presence and supplies no ligand. The second varies "
+            u"partner\ncomposition, the third ligand class, the fourth "
+            u"directs generation. Panels a and b are the instrument and its "
+            u"calibration, and are\nshared by all four. "
             u"Recorded per row and used here: input SHA-256, the launcher and "
             u"inner seed, the scorer's git SHA and version, and the A1–A6\n"
             u"identity gates. NOT recorded per row: template usage — the "
@@ -178,7 +184,7 @@ def panel_d(ax, df):
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.text(0.0, 1.0, u"d   where every row goes", fontsize=7, ha="left",
+    ax.text(0.0, 1.0, u"d   Where every row goes", fontsize=7, ha="left",
             va="top", fontweight="bold", transform=ax.transAxes)
     n = len(df)
     e1 = int(df["excl_E1"].sum())
@@ -241,10 +247,11 @@ def main():
     df = B.rows()
     rp = B.load("02_references/reference_predicates.csv")
 
-    fig = plt.figure(figsize=(fs.W2, 172 * fs.MM), constrained_layout=True)
-    fig.set_constrained_layout_pads(h_pad=0.05, hspace=0.06)
-    gs = fig.add_gridspec(3, 3, height_ratios=[0.84, 1.05, 1.02],
-                          width_ratios=[1.0, 1.0, 1.0])
+    fig = plt.figure(figsize=(fs.W2, 172 * fs.MM))
+    gs = fig.add_gridspec(3, 3, height_ratios=[0.70, 1.05, 1.02],
+                          width_ratios=[1.0, 1.0, 1.0],
+                          left=0.075, right=0.985, top=0.962, bottom=0.028,
+                          hspace=0.24, wspace=0.30)
 
     panel_a(fig.add_subplot(gs[0, :]))
     nb = panel_b(fig.add_subplot(gs[1, 0]), rp)
