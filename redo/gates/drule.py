@@ -24,7 +24,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from paths import INPUTS  # noqa: E402
 
 TARGETS = "drule_targets.tsv"
-POOL = "drule_candidate_pool.tsv"
+POOL = "drule_pool_molecules.tsv"
+EXCL = "drule_pool_exclusions.tsv"
 PANEL = "g1_receptors.tsv"
 
 
@@ -83,19 +84,35 @@ def main(argv=(), root=None):
             "plus --release and --sha256. Downloading one is Aditya's decision. "
             "The rule itself is proved meanwhile: drule_pool.py --selftest")
     else:
+        # The pool is stored NORMALISED -- the molecule set once, plus only the
+        # excluded (receptor, molecule) pairs. Flattened it is 7.6 M rows / 2.0 GB
+        # and 95% redundant, because the absence rule excludes just 4.8%.
         pool = tsv(POOL, root)
-        leak = [r for r in pool if r["eligible"] == "yes"
-                and (r["active_at_receptor"] == "yes"
-                     or r["active_at_cluster_mate"] == "yes")]
-        chk("D-5  no eligible candidate has measured activity at its receptor "
-            "or a cluster-mate", not leak,
-            f"{len(leak)} leaked rows, e.g. {leak[0]['candidate_chembl_id']}"
-            if leak else f"{len(pool):,} rows, "
-            f"{sum(1 for r in pool if r['eligible'] == 'yes'):,} eligible")
+        excl = tsv(EXCL, root) if os.path.exists(os.path.join(root, EXCL)) else None
+        if excl is None:
+            chk("D-5  the exclusion table is present", False,
+                f"{EXCL} is ABSENT -- the molecule table alone cannot say who is "
+                "ineligible, which is the auditability the rule turns on")
+        else:
+            # eligibility = in the molecule table, not excluded for this receptor.
+            # So the leak test is that every exclusion names a real molecule and a
+            # reason; an exclusion with neither silently becomes an eligibility.
+            ids = {r["candidate_chembl_id"] for r in pool}
+            orphan = [r for r in excl if r["candidate_chembl_id"] not in ids]
+            silent = [r for r in excl if not r["ineligible_because"].strip()]
+            chk("D-5  every exclusion names a molecule in the pool AND the axis "
+                "that excluded it", not orphan and not silent,
+                f"{len(orphan)} orphaned, {len(silent)} without a reason"
+                if (orphan or silent) else
+                f"{len(pool):,} molecules, {len(excl):,} exclusions, all resolved")
         norel = [r for r in pool if not r["chembl_release"] or not r["chembl_sha256"]]
-        chk("D-6  every pool row records the release and its digest",
-            not norel, f"{len(norel)} rows without provenance" if norel
-            else f"release {sorted({r['chembl_release'] for r in pool})}")
+        noscope = [r for r in pool if not r.get("pool_scope")]
+        chk("D-6  every pool row records the release, its digest and the scope",
+            not norel and not noscope,
+            f"{len(norel)} without release/digest, {len(noscope)} without scope"
+            if (norel or noscope) else
+            f"release {sorted({r['chembl_release'] for r in pool})}, "
+            f"scope {sorted({r['pool_scope'] for r in pool})}")
 
     return report(blocking, passed, pending)
 
@@ -126,6 +143,20 @@ def _sub(path, old, new, n=1):
     open(path, "w").write(s.replace(old, new, n))
 
 
+def _col(path, row_match, col, val):
+    """Set one column on the first matching row (row_match=None -> first row)."""
+    rows = list(csv.DictReader(open(path), delimiter="\t"))
+    cols = list(rows[0].keys())
+    for r in rows:
+        if row_match is None or all(r[k] == v for k, v in row_match.items()):
+            r[col] = val
+            break
+    with open(path, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t")
+        w.writeheader()
+        w.writerows(rows)
+
+
 def _drop_row(path, slug):
     rows = list(csv.DictReader(open(path), delimiter="\t"))
     cols = list(rows[0].keys())
@@ -141,6 +172,10 @@ PLANTS = [
      lambda d: os.remove(os.path.join(d, TARGETS))),
     ("D-2", "drop a panel receptor from the mapping",
      lambda d: _drop_row(os.path.join(d, TARGETS), "CCKAR")),
+    ("D-5", "strip the reason from an exclusion",
+     lambda d: _col(os.path.join(d, EXCL), None, "ineligible_because", "")),
+    ("D-6", "blank the release on a pool row",
+     lambda d: _col(os.path.join(d, POOL), None, "chembl_release", "")),
     ("D-4", "make one accession map to two targets",
      lambda d: _sub(os.path.join(d, TARGETS), "\t1\tChEMBL_37", "\t2\tChEMBL_37")),
 ]
@@ -171,7 +206,7 @@ def selftest():
         sys.stdout.write(f"  {'ok  ' if good else 'MISS'} {name}: {what}"
                          f" -> {'fired' if fired else 'DID NOT FIRE'}\n")
     sys.stdout.write(f"\n  {len(PLANTS) - bad}/{len(PLANTS)} checks proved by "
-                     f"planting. D-5 and D-6 activate when the pool is built.\n\n")
+                     f"planting. The pool is BUILT: D-5 and D-6 are live.\n\n")
     return 1 if bad else 0
 
 

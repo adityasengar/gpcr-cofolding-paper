@@ -58,7 +58,7 @@ python3 redo/gates/run_receipt.py >/dev/null 2>&1 \
 python3 redo/gates/ligands.py >/dev/null 2>&1 \
   && ok "redo ligand table" "5 checks clean" || bad "redo ligand table" "FAILED — run redo/gates/ligands.py"
 python3 redo/gates/drule.py >/dev/null 2>&1 \
-  && ok "redo decoy rule" "4 checks clean; pool not built" || bad "redo decoy rule" "FAILED — run redo/gates/drule.py"
+  && ok "redo decoy rule" "6 checks clean; pool built" || bad "redo decoy rule" "FAILED — run redo/gates/drule.py"
 G0=$(python3 redo/gates/g0_preflight.py 2>/dev/null | grep -E "FROZEN|NOT FROZEN" | tail -1 | sed 's/^ *//')
 G1=$(python3 redo/gates/g1_preflight.py 2>/dev/null | grep -E "^[0-9]+ passed" | tail -1)
 case "$G0" in "FROZEN"*) ok "redo group 0 gate" "$G0" ;; *) bad "redo group 0 gate" "${G0:-did not run}" ;; esac
