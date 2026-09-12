@@ -146,28 +146,25 @@ candidate is native. (e′) builds free but stops at 18 residues.
 **Affinity is not needed** for the seven ligand picks. Ligand identity is evidenced
 structurally; the decoy side still needs ChEMBL for presence/absence only.
 
-### IN FLIGHT — check this FIRST
+### The decoy pool is BUILT — 2026-09-12
 
-**The ChEMBL pool extraction may still be running.** `redo/build/drule_pool.py`
-against `/Users/aditya/chembl_37/chembl_37/chembl_37_sqlite/chembl_37.db`, log at
-`/tmp/drule_run2.log`, writing `inputs/drule_pool_molecules.tsv` and
-`inputs/drule_pool_exclusions.tsv`.
+`inputs/drule_pool_molecules.tsv` **120,973 molecules** and
+`inputs/drule_pool_exclusions.tsv` **363,367 exclusions**, 53 MB together, every
+row stamped `ChEMBL_37` / `33c20374…` / `within_panel`. The 28 GB database is
+deleted; no provenance was lost with it. `gates/drule.py` is 6 checks, 5 proved
+by planting, and **D-5 and D-6 are now live** rather than waiting.
 
-```bash
-pgrep -f drule_pool.py            # still going?
-tail -5 /tmp/drule_run2.log
-ls -lh redo/inputs/drule_pool_*.tsv
-```
+**Measured, not assumed:** the spec's "activity anywhere" rule yields **1,203,741
+candidates per receptor** — a copy of ChEMBL, not a candidate table. `within_panel`
+yields **120,973**, and the **paralog-cluster exclusion removes more than the
+receptor exclusion** (192,630 vs 170,737), which the spec argued on principle.
 
-**When it has finished:**
-```bash
-python3 redo/build/manifest.py            # the two tables are new inputs
-python3 redo/gates/drule.py               # should stop announcing an unbuilt pool
-rm -rf /Users/aditya/chembl_37            # 28 GB back; the pool + digest are what we keep
-```
-The release and its sha256 are written into every output row, so deleting the
-database loses no provenance. **If it produced nothing, suspect the wiring before
-the data** — that failure already happened once here.
+**Deliverable 2 is the next step and does not exist:** `drule_select.py` must apply
+`CAMPAIGN.md` §5.3's eight axes and the similarity gate to turn ~115,000 eligible
+candidates per receptor into a handful, recording **which axis rejected each
+rejection**. Until it runs, `g2_systems.csv`'s decoy rows stay
+`BLOCKED_UNRESOLVED_DECOY_POOL` — and check **G-6 fails both if a decoy acquires a
+molecule and if the decoy arm disappears.**
 
 ### WAITING ON ADITYA — 2026-09-12, end of session
 
