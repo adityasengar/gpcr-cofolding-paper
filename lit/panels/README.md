@@ -178,3 +178,36 @@ in `cache/` and is re-runnable, but no rule depends on it — do not "correct" t
 2. Once Block B's receptor list exists, join it against `panels.csv` — the union of 175
    verified receptors is the denominator for "how much of this panel is new", and the
    nine-receptor three-panel core is the natural overlap set to include deliberately.
+
+## Inherited references need auditing entry by entry (added 2026-09-11)
+
+`panels.csv` records what each paper chose, not what is defensible. Three cases found
+while answering a panel question, all in `lee2026confornets`'s pairs:
+
+- **`opsd_bovin` active = 4X1H** — rhodopsin with an **engineered 11-mer** Gαt1-derived
+  peptide (differs from native Gαt1 at 4 of 11 positions), not a native transducin complex.
+  GPCRdb's only annotated ligand for it is β-nonylglucoside, a detergent.
+- **`opsd_bovin` inactive = 8A6E** — RCSB title: *"**100 picosecond** light activated crystal
+  structure of bovine rhodopsin in Lipidic Cubic Phase (SACLA)"*, from *"Ultrafast structural
+  changes direct the first molecular events of vision"*, Nature 2023. **A time-resolved XFEL
+  photo-intermediate, not a dark state.** Its siblings 8A6C (1 ps) and 8A6D (10 ps) are in
+  GPCRdb too. GPCRdb annotates its ligand **Agonist on an Inactive structure**, which is the
+  tell. The backbone has barely moved at 100 ps — the paper's own point — so it *scores*
+  inactive without *being* a dark state.
+- **`b1b1u5_9arac` active = 9EPP** — a chimera: human Gαi1 scaffold carrying the
+  **jumping-spider Gαq1** α5/C-hook (`tejero2024opsin` Methods p10), with human Gβ1γ2.
+  GPCRdb annotates its Gα as `gnai1_human` — **the accession names the backbone, not the
+  C-terminus**, so the chimera is invisible in the annotation.
+
+**The rule this produces:** a reference set inherited from a published benchmark is fit for
+that benchmark's task, not necessarily for ours. `lee2026confornets` does conformation
+transfer, where a consistent pair suffices; a *state predicate* calibrated on the same pairs
+inherits engineered peptides, photo-intermediates and chimeras. **Audit every inherited
+reference against RCSB titles and the deposition paper before it calibrates anything.**
+
+Retinal is the worked example of a related trap: **CCD `RET` carries three isomers** — GPCRdb
+distinguishes them by name and SMILES per entry (11-cis, 9-cis, all-trans across 41 entries in
+the snapshot), but **11-cis is the inverse agonist in 16 entries and all-trans the agonist in
+14**. Curate retinal by isomer, never by CCD code. One entry, **9EPR**, is annotated 11-cis
+while `tejero2024opsin` p2 states it was reconstituted with 9-cis and illuminated to
+all-trans — a per-entry error, not a systemic one.

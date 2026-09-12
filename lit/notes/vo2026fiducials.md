@@ -121,6 +121,23 @@ Seven routes, answered separately. Framing note: this is largely a wet-lab paper
 3. **What actually directs the β2AR state is the ligand, and secondarily the transducer.** The named handles are: antagonist (propranolol), high-efficacy agonist (BI-167107), Gi-biased agonist (LM-189), and wildtype Gs heterotrimer (p7). No mimetic and no nanobody is used for β2AR.
 4. **On the computational side there is essentially no directional control, by design.** AF2 dropout sampling is seed-driven with no state handle. The single exception is GIPR, where AlphaFold-Multistate supplied "an inactive-GPCR bias" (p17) — a state-annotated template handle, used to force the inactive TM6 conformation the design required.
 
+### `input_factor_design`
+
+**New in v3.2. HELD — the two MSA regimes never meet the co-input arms.**
+
+- **MSA**: full for production design (ColabFold, dropout, 3 seeds); subsampled 16:32–256:512
+  **in the benchmark sweep only** (p17). The paper rejects deep subsampling outright — "overly
+  limiting the MSA component risked producing unlikely if not completely misfolded structures" (p4).
+- **templates**: **NOT REPORTED** for the AF2/ColabFold runs and for the co-folding comparators;
+  state-annotated for one case only (AlphaFold-Multistate with an inactive-GPCR bias, GIPR, p17).
+- **ligand**: present. **partner**: present.
+
+`crossings:` **MSA × ligand and MSA × partner both HELD.** Subsampling lives in the benchmark arm,
+the co-inputs live in the production arm, and the note records that the two are "not collapsed".
+Despite carrying `msa-subsample`, `ligand-driven` and `partner-driven` together, this paper crosses
+none of them — it is the clearest demonstration that a tag combination in `INDEX.md` must not be
+read as a crossing.
+
 ### `anti_memorization_design`
 
 **Present in substance, absent in framing — the paper never uses the concept.**

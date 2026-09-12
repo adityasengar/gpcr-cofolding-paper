@@ -1,6 +1,6 @@
 # INDEX.md — the paper_af3 literature corpus, one block per paper
 
-**79 papers extracted** (83 bibliography entries; 4 bibliography-only). All against `SCHEMA.md` v3, except
+**81 papers extracted** (85 bibliography entries; 4 bibliography-only). All against `SCHEMA.md` v3, except
 `ingraham2023chroma`, which is `v3-partial`. Full extractions live in
 `notes/<citekey>.md`; PDFs in `pdfs/<citekey>.pdf`; bibliography in `refs.bib`.
 
@@ -91,6 +91,24 @@ figs: 36 panel-group rows
 tags: kinase transporter general-protein cofolding benchmark-only ensemble single-state continuous-metric binary-predicate visual-metric saturating-metric design-level-oracle prospective anti-memorization unpowered confidence-as-discriminator experimental-validation ligand-driven orthosteric allosteric-site cryptic-pocket preprint precedent contrast negative-result comparator-numbers
 stance: precedent on findings + contrast on rigour — no matched pre-cutoff control arm
 
+### cheng2026af3cluster — 2026, GEM workshop @ ICLR (workshop track, CC BY 4.0)
+claim: MSA clustering combined with AlphaFold3's co-folding recovers alternative conformations on ten multi-state proteins, and does so *best* for binder-mediated transitions where single-chain methods fail.
+system/method: general protein (10 multi-state proteins; per subagent, 4 protein-binder + 3 ligand-binder systems) | MSA clustering + AF3 co-folding (AF3-Cluster) + an evolutionary design loop (AF3-MSD) | AlphaFold3
+states: ensemble over MSA clusters + two end states | metric: recovery of alternative conformations, per subagent minimum RMSD to apo and holo targets | prospective: no
+oracle: NOT ASSESSED — abstract-only note
+figs: NOT EXTRACTED (PDF not retrieved)
+tags: general-protein cofolding msa-subsample af-cluster ensemble two-state preprint contrast
+stance: **contrast — the novelty-boundary paper for any "ligand co-input + MSA manipulation on AF3, measured on state" claim.** The abstract alone puts that combination in print with binder-mediated transitions as its strongest case. **`v3.2-abstract-only`: the PDF is NOT held** (OpenReview 403s to curl, viewer blank, download link inert). Do not quote body-level detail; do not use for figure design. See `notes/cheng2026af3cluster.md` for what is verified vs unverified.
+
+### xing2025purified — 2025, arXiv:2506.00147 (preprint, no journal version)
+claim: AF-ClaSeq-purified MSA subsets, transferred from AF2 into AF3 alongside a ligand SMILES, correct AF3 predictions that otherwise place both the ligand and the receptor state wrongly.
+system/method: kinase (EGFR) + IL-1beta, NO GPCR | sequence purification (composition-selected MSA subsets, not depth reduction) transferred AF2 -> AF3 | AF2 + AF3
+states: two-state (EGFR active 2ITP vs Src-like inactive 2GS7) + 50 structures per condition | metric: ligand RMSD to deposited AND receptor-state RMSD over alphaC helix + A-loop (756-769, 857-863); no operationalised predicate | prospective: no
+oracle: route 2 heavy (sequences selected by how they score against deposited state references), route 5 definitional, route 7 design-level
+figs: NOT EXTRACTED (section E and F not done)
+tags: kinase cofolding msa-subsample two-state rmsd-only continuous-metric oracle-leak ligand-driven orthosteric preprint contrast
+stance: **contrast — falsified a novelty claim this project was about to make.** AF3 + ligand SMILES co-input + subsetted MSA + receptor-state readout, all four in one paper. Narrowing survives (kinase not GPCR, not peer-reviewed, and its two legs sit in different models: protein-alone is AF2, ligand is AF3). **p.3 is load-bearing for any MSA-depth arm:** "the successful sampling of alternative states depends not on MSA depth but on sequence purity."
+
 ### chiesa2025templatebias — 2025, J. Chem. Inf. Model. 65(12):6298-6309, peer-reviewed
 claim: Co-folding the receptor WITH its G protein reproduces the active-state intracellular rearrangement better than operator-supplied active-state templates, and the advantage survives on receptors absent from templates and training.
 system/method: GPCR class A, human receptors + human Gas; 63 unique pairs / 145 structures / 55 receptors / 31 families | benchmark-only over 6 protocols spanning template-state-bias, MSA-state-filter and co-folding | AF2 + AlphaFold-Multimer. NO AF3-lineage backbone
@@ -127,6 +145,16 @@ figs: 11 panel-group rows; ND licence
 tags: gpcr benchmark-only cofolding multi-backbone state-annotated-input single-state continuous-metric saturating-metric prospective anti-memorization unpowered confidence-as-discriminator peptide-driven apo-sampling orthosteric preprint precedent background comparator-numbers
 stance: precedent + background — the corpus's only blind, prospective GPCR-ligand assessment
 
+### eddy2018extrinsictrp — 2018, J. Am. Chem. Soc. 140(26):8228-8235, peer-reviewed
+claim: Extrinsic tryptophans at the intracellular tips of TM V/VI/VII report drug efficacy by NMR, and a 21-residue Gαs C-terminal peptide added to the agonist complex collapses the two W233(6.35) signals to one, intracellularly only.
+system/method: GPCR (human A2AAR, 1 receptor, 3 single-Trp variants) | other — solution-state NMR (800 MHz 2D [15N,1H]-TROSY) + radioligand binding | n/a, no predictor
+states: NOT APPLICABLE — nothing generated; state is read as indole line multiplicity (1 vs 2 signals) | metric: discrete NMR line count + chemical-shift displacement (ppm), no threshold | prospective: NOT APPLICABLE
+oracle: NOT APPLICABLE as pipeline leakage; route 7 only — reporter sites chosen from crystal structures known to differ by ligand efficacy (3EML vs 3QAK)
+figs: 5 figure rows, built from XML captions, panels NOT VIEWED; ACS, check reuse. NO PDF HELD — section locators only
+tags: gpcr experimental two-state continuous-metric orthosteric partner-driven peptide-driven ligand-driven induced-fit peer-reviewed precedent background comparator-numbers
+provenance: **NO PDF.** Extracted 2026-09-11 from PMC6192543 full-text XML; text at `source/pending_text/eddy2018extrinsictrp.txt` (not in git). All 7 quoted spans machine-verified (`validate/quotecheck_plaintext.py`, 7/7, self-tested both directions). Cite as `[eddy2018extrinsictrp, Results]`.
+stance: precedent + background — **the primary source for the manuscript's own number 21**: residues 374-394 of GαS at 10-fold molar excess, read at the cytoplasmic end of TM6. Found only by disproving `georgiou2025heterogeneity`'s misattribution of it to that review's ref 155. Not a contrast paper: runs no predictor, claims no priority. Silent on NPxxY (W290/7.55 gives no agonist-complex signal). Its own ref 14, `mazzoni2000gsctpeptide`, reports the same peptide ABOLISHES Gs signalling.
+
 ### ekstromkelvinius2024discriminator — 2024, AISTATS (PMLR 238:3403-3411), peer-reviewed
 claim: Discriminator guidance transfers to discrete autoregressive diffusion; an optimal discriminator gives exact sampling, and SMC variants handle a suboptimal one.
 system/method: 2-D molecular graphs, QM9 + MOSES (NOT protein, NOT 3-D) | inference-time discriminator guidance + SMC | ARDM; DiGress comparator
@@ -161,6 +189,7 @@ states: NOT APPLICABLE (review); asserts multistate ensemble/continuum, S1/S2/I1
 oracle: NOT APPLICABLE — no pipeline, no prediction, no scored outcome; all seven routes inapplicable
 figs: 6 panel-group rows
 tags: gpcr experimental ensemble continuum ligand-driven partner-driven g-protein-mimetic nanobody orthosteric allosteric-site peer-reviewed background comparator-numbers pre-coupled
+corrections: **The 21-residue Gαs peptide result attributed here to "Eddy and collaborators in 2021" (its ref 155) is NOT in that paper.** Verified 2026-09-11 against the complete full text of Eddy/Martin/Wüthrich, Structure 2021, 29(2):170–176 (PMC7867584): "Gs", "Gα", "mini-G", "21-residue", "6.35", "5.62" and "7.55" all occur ZERO times in its body. The real source is Eddy, Gao, Mannes, Patel, Jacobson, Katritch, Stevens, Wüthrich, **J. Am. Chem. Soc. 2018, 140(26):8228–8235, DOI 10.1021/jacs.8b03805** (PMC6192543), which supplies residues 374–394 of GαS at 10-fold molar excess. That paper also does NOT call the 21-mer a "mini-Gαs" — it reserves "engineered 'mini GαS' protein" for the construct in 5G53, so the mini-G conflation is this review's, not the field's. Cite the JACS paper, never this review, for the 21-mer. See lit/analysis_review/EDDY_PRIMARY_SOURCE.md.
 stance: background — authoritative reference for state definitions and state-calling criteria
 ### gilson2025casp16 — 2025 (issued 2026), Proteins: Structure, Function, and Bioinformatics (Wiley), peer-reviewed
 claim: best blind pose predictions were template-based; a non-blind AF3 baseline beat every blind entry; affinity stayed modest and structure-independent.
@@ -403,6 +432,16 @@ figs: 13 panel-group rows
 tags: general-protein kinase gpcr benchmark-only continuous-metric saturating-metric anti-memorization design-level-oracle preprint threat precedent negative-result comparator-numbers
 stance: threat + precedent — our split-based generalisation claims are directly exposed
 
+### mazzoni2000gsctpeptide — 2000, Mol. Pharmacol. 58(1):226-236, peer-reviewed
+claim: Gαs C-terminal peptides of 17-21 residues stimulate agonist binding to rat A2A adenosine receptors and abolish receptor-stimulated adenylyl cyclase activity; shorter Gαs peptides and Gαi1/2 peptides do not, and the requirement is attributed to α-helical propensity.
+system/method: GPCR (A2A adenosine receptor, **RAT striatal membranes**) | other — experimental pharmacology: radioligand binding + adenylyl cyclase assay + solution NMR **of the peptides** | n/a, no predictor
+states: NOT APPLICABLE — nothing generated. Measures receptor **affinity** states (competition-curve slope/shift, one-site fits) and **peptide** secondary structure. **NEVER measures receptor geometry.** | metric: curve slope/shift + enzyme activity, no threshold | prospective: NOT APPLICABLE
+oracle: NOT APPLICABLE — no prediction pipeline
+figs: NOT EXTRACTED (abstract-only; no figure was seen). Do not use for figure design.
+tags: gpcr experimental peptide-driven partner-driven g-protein-mimetic orthosteric peer-reviewed background threat comparator-numbers negative-result
+provenance: **`v3.2-abstract-only`. The PDF is NOT held** — closed access, no OA copy (Unpaywall `closed`, S2 `CLOSED`, EPMC `fullTextXML` 404), publisher behind a Cloudflare bot-wall (403). **Driving a browser past bot detection was deliberately not attempted**; this needs a library route. Abstract is the publisher's own via Europe PMC, preserved at `source/pending_text/mazzoni2000gsctpeptide.abstract.txt` (not in git). All 7 quoted spans machine-verified 7/7 (`validate/quotecheck_plaintext.py`). Cite as `[mazzoni2000gsctpeptide, Abstract]`. **Fields the abstract cannot settle say `UNRESOLVED (abstract-only)` — do not read them as the paper being silent.**
+stance: **background + threat, and it is load-bearing twice.** (1) **The corpus's only wet-lab LENGTH SERIES of a Gα C-terminal peptide**: 21, 19 and 17 residues (Gαs 374-394, 376-394, 378-394, all C379A) "were the most effective"; "shorter peptides ... were not effective". So **≥17 works** — an 11-mer rung is predicted negative and a 15-mer sits in the transition. (2) **The functional counterweight to `eddy2018extrinsictrp`**: the same 21-mer that collapses the W233(6.35) signals there abolishes Gs signalling here, by a direct cyclase assay with basal and forskolin controls. **Different observables, different species (rat vs human), so neither contradicts the other — but no sentence may imply the peptide is functionally activating**, and it "did not stabilize the high-affinity state" with one-site fits, so it does not reconstitute the ternary complex either. Helicity as the stated mechanism here + `tran2026nanogs`'s dead unstapled peptide = the same conclusion 25 years apart.
+
 ### miglionico2026atlas — 2026, bioRxiv preprint
 claim: Ligand-free AF3 co-folding of the whole GPCRome with all Gα subunits yields interfaces (median DockQ 0.73) that predict coupling.
 system/method: GPCR + heterotrimeric G protein | co-folding + supervised ML (TabPFN "Precog3D") | AF3 v3.0.1
@@ -427,8 +466,8 @@ system/method: GPCR class A | other — targeted MSA column masking + retrospect
 states: two (receptor-alone inactive vs G-protein active) + ensemble pooled over 0/10/20/30% masking | metric: binding-site RMSD-to-reference, thresholds 1.0–2.0 Å | prospective: no
 oracle: routes 1,4,5,7 — docking sites transferred from holo references, operating point tuned on evaluation set
 figs: 10 panel-group rows
-tags: gpcr msa-subsample two-state ensemble rmsd-only continuous-metric saturating-metric oracle-leak design-level-oracle no-anti-memorization unpowered directed-state partner-driven apo-sampling orthosteric peer-reviewed precedent contrast comparator-numbers
-stance: precedent + contrast — closest spatially-targeted MSA masking precedent; operating point tuned on evaluation set
+tags: gpcr msa-subsample two-state ensemble rmsd-only continuous-metric saturating-metric oracle-leak design-level-oracle no-anti-memorization unpowered directed-state partner-driven apo-sampling orthosteric factors-crossed peer-reviewed precedent contrast comparator-numbers
+stance: precedent + contrast — closest spatially-targeted MSA masking precedent; operating point tuned on evaluation set. **The only `factors-crossed` paper in the corpus:** masking level (0/10/20/30%) x partner presence, balanced 250 models per cell. Ligand is docked post hoc, never a co-input.
 
 ### nittinger2025cofolding — 2025, Artificial Intelligence in the Life Sciences 8:100136, peer-reviewed (CC BY-NC-ND)
 claim: On a deliberately balanced set of matched orthosteric and allosteric ligands, co-folding places orthosteric ligands well and allosteric ones poorly, across three independent backbones.
@@ -614,7 +653,8 @@ system/method: general protein + transporter | other (distogram-gradient MSA-fea
 states: ensemble + two (420 per target) | metric: TM/RMSD to reference + distance-PCA; predicate TM>0.85 AND RMSD<3.0 Å | prospective: partial
 oracle: routes 4,5,6,7 — hyperparameters swept on eval set, best-of-N scored to held references; routes 1-3 clean
 figs: 23 panel-group rows; ND licence
-tags: transporter fold-switching general-protein gpcr latent-steering md templates-on ensemble two-state continuous-metric binary-predicate saturating-metric oracle-leak design-level-oracle no-anti-memorization multi-backbone preprint threat contrast comparator-numbers
+tags: transporter fold-switching general-protein latent-steering md ensemble two-state continuous-metric binary-predicate saturating-metric oracle-leak design-level-oracle no-anti-memorization multi-backbone preprint threat contrast comparator-numbers
+corrections: `gpcr` and `templates-on` REMOVED 2026-09-10 — the note's `system` reads "General protein + transporter" and its `templates` reads "off, explicitly" (p17: "our method does not use template information"). The two wrong tags had produced false positives in GPCR-steering reverse lookups twice during drafting.
 stance: threat + contrast — adjacent competitor steering the distogram; rigour weak
 
 ### tejero2024opsin — 2024, Nature Communications 15:8928

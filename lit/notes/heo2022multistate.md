@@ -356,6 +356,7 @@ PDF. See `si_in_scope`.
     directed coordinate but the outputs snap to basins (p6–7), so it does not deliver
     controllable intermediates.
 
+- **input_factor_design**: **New in v3.2. CONFOUNDED by construction — the method IS two factors changed together.** **MSA**: total deletion. **templates**: state-annotated GPCRdb templates, on. **ligand**: not an input (AF2 lineage). **partner**: not an input. <br>`crossings:` **templates x MSA CONFOUNDED.** The protocol is state-annotated templates *plus* total MSA deletion applied together, so the paper cannot say whether the template or the alignment removal produced the state control. That is not a criticism of its result, which is strong, but it bounds what can be attributed. Note `chiesa2025templatebias` later beats this protocol with a partner co-input on the large rearrangements.
 - **anti_memorization_design**: **PRESENT and explicit — a post-cutoff benchmark set, n = 68.**
   p10: "The set was composed of human GPCRs that were experimentally first determined after
   May 01, 2018 and before January 05, 2022. Since AF25 was trained protein structures

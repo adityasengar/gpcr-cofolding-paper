@@ -105,6 +105,24 @@ pagination runs 6045–6056, i.e. PDF p.1 = journal p.6045.
   - Secondary handles: masking probability (0/10/20/30/50%) tunes the *degree* of local variability — "The masking probability level controls the degree of binding-site variability. A higher masking level introduces more extensive sampling by releasing evolutionary restraints." (p.2) — and inference-stage dropout (p.2). Seeds are not discussed.
   **Bottom line: the method improves binding-site sampling and screening enrichment; it cannot be instructed to produce a named conformational state.**
 
+- **input_factor_design**: **New in v3.2. CROSSED — and this is the only paper found so far that
+  crosses an MSA manipulation with a partner co-input.** Tag `factors-crossed`.
+  - **MSA**: varied — targeted column masking at 0 / 10 / 20 / 30% (50% in the sweep), applied only
+    inside a binding-site window; depth never reduced, never state-filtered.
+  - **templates**: not varied (default AF2 protocol).
+  - **ligand**: **not an input.** AF2 has no ligand channel; ligands are docked retrospectively and
+    apo binding sites are defined by transferring ligand coordinates from a deposited holo
+    structure of the same receptor (p.8).
+  - **partner**: varied — the state toggle *is* the partner: "The inactive receptor state was
+    predicted using only the receptor sequence. The active state was modeled by using the
+    sequences of the receptor and heterotrimeric G protein" (p.2).
+  - `crossings:` **MSA x partner CROSSED and balanced** — "For each masking probability, 250
+    structures were generated, with equal numbers of active and inactive receptors" (p.8), with
+    grouping "by masking level and by G-protein presence only" (p.8). The masking x state
+    interaction is therefore estimable here, which is rare.
+    **MSA x ligand NOT CROSSED** — the ligand is never an input, so the interaction that a
+    co-folding model could test does not exist in this design.
+
 - **anti_memorization_design**: **NONE.** No held-out set, no post-cutoff set, no train/test split, no cutoff date defined anywhere. The opposite is stated: "it should also be noted that structures of 4 out of the 10 GPCRs in our benchmarking set were used in the training of AF2, and our approach may therefore not perform equally well for receptors of unknown structure." (p.8) — 4 of 10 targets are known to be inside AF2's training data, and which four is not stated in the main text.
 
 - **anti_memorization_control**: **NONE RUN, and `UNPOWERED` even if it had been.** The 4-in-training / 6-not split is acknowledged (p.8) but never analysed: no arm splits AUC, RMSF, volume or enrichment by training membership, and no per-target training-status column appears in Table 1 (p.6) or Table 2 (p.7). n = 10 targets total (4 known-contaminated), well below the ~10 clean-target threshold. Ref 60 in the reference list is Lazou et al., "AlphaFold2 May Remember Too Much" (p.11), cited only in passing (p.7) and not acted on.

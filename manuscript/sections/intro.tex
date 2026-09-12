@@ -375,8 +375,21 @@ supplied and only by measuring distance to the deposited answer. What the corpus
 is a study in which the co-input is reduced to the minimal contact that carries activation, in
 which its contribution is separated from mere occupancy of the cleft by a graded series of decoy
 and sequence-scrambled controls, and in which the resulting state is called by a predicate fixed
-in advance rather than by proximity to a structure that must already exist. That is the gap this
-work addresses.
+in advance rather than by proximity to a structure that must already exist.
+
+That gap has three parts and this work closes two of them. The graded decoy and sequence-scrambled
+series is run, and the state is called by a predicate fixed in advance and cross-checked against a
+second instrument. The third part -- reducing the co-input to the minimal contact that carries
+activation -- is motivated here but \emph{not} delivered: every arm reported below supplies a whole
+G$\alpha$ subunit or a nanobody, and no arm supplies a peptide of any length.
+
+\textbf{[PI: this is the decision that sets the title, and it has two parts. First, the segment
+actually manipulated is \emph{eleven} residues, not twenty-one --- the decoy tail is eleven, the
+drop's varied quantity is the eleven-residue tail helicity, and 4X1H, the only peptide-bound entry
+in the reference set, is an engineered eleven-mer. Second, no arm supplies a peptide at all, so a
+narrowed title is not about a peptide of any length: it is about a G$\alpha$ co-input and its
+C-terminal determinant. That is a smaller claim than the current title and a much better supported
+one. The alternative is to run a peptide arm. See \texttt{../CLAIMS.md} C6 and C7.]}
 
 
 \subsection{What we do}
@@ -386,17 +399,26 @@ work addresses.
 export is complete. See \texttt{../STATUS.md} for what has landed and what has not.
 \end{quote}
 
-We treat the G$\alpha$ $\alpha_5$ C-terminal peptide as a co-input to a frozen co-folding model and ask
-what the receptor does in response, holding the model weights, the alignment and the template
-settings unchanged and varying only what is supplied alongside the receptor sequence. Predictions
-are run across a panel of class A receptors on four independent co-folding backbones, and the
-receptor's conformational state is called by a predicate defined in advance rather than by eye.
-Three arms have landed. The first compares apo receptors against receptors given their cognate
-partner. The second places apo, decoy, sequence-shuffled and cognate co-inputs on a common scale,
-which lets the effect be decomposed into a contribution from occupancy of the cytoplasmic cleft, a
-contribution from the $\alpha_5$ C-terminal sequence itself, and a contribution from that sequence
-belonging to the correct G$\alpha$ family. The third asks whether the orthosteric pocket, as distinct
-from the cytoplasmic face, separates by ligand class. Alongside these we report a census of
+We treat a G$\alpha$ transducer supplied alongside the receptor as a co-input to a frozen co-folding
+model and ask what the receptor does in response, holding the model weights, the alignment and the
+template settings unchanged and varying only what is supplied alongside the receptor sequence.
+\textbf{What is supplied is the whole G$\alpha$ subunit, or a nanobody, not the 21-residue
+$\alpha_5$ C-terminal peptide of the title; no arm in any landed block supplies a peptide.}
+Predictions are run across a panel of class A receptors on four independent co-folding backbones,
+and the receptor's conformational state is called by a predicate defined in advance rather than by
+eye. Four blocks have landed. The first compares apo receptors against receptors given their cognate
+partner. The second places apo, decoy, sequence-shuffled and cognate co-inputs on a common scale. The decoy
+shares the cognate subunit's entire scaffold and differs from it only in the eleven C-terminal
+residues, which are permuted rather than replaced, so composition is held constant and only the tail
+moves. That construction gives a decomposition in two steps that telescope exactly: supplying the
+subunit at all, with its C-terminal sequence scrambled, and then restoring that sequence. The second
+step is the contribution of the $\alpha_5$ C terminus itself, isolated against an otherwise
+identical partner. Whether the sequence must additionally belong to the \emph{correct} G$\alpha$
+family is a separate and weaker question, and the shuffled arm is where it is asked. The third asks whether the orthosteric pocket, as distinct
+from the cytoplasmic face, separates by ligand class. The fourth varies the depth of the sequence
+alignment itself, asking whether starving the model of homologue data moves the same predicate --
+and, on a second and finer measure, whether a predicate that clears under shallow alignments
+corresponds to a structure that has actually reached the target state. Alongside these we report a census of
 intermediate conformations produced under partner variation, and an observation about model
 confidence made across backbones on a single receptor.
 
@@ -410,6 +432,6 @@ The wording will change with the final result set; the framing is intended to su
 \begin{enumerate}
   \item A biological co-input, supplied the way a user of these models would supply it, moves the predicted conformational state of a receptor. Falsified if the state distribution under the cognate co-input is indistinguishable from the apo distribution.
   \item The effect is attributable to the co-input rather than to steric occupancy alone, because the decoy and sequence-shuffled arms sit between the two extremes. Falsified if a decoy of matched size reproduces the cognate effect.
-  \item The state is verified rather than assumed, by a predicate defined in advance and reported with its threshold, applied identically to every arm and cross-checked against a second instrument. Falsified if the two instruments disagree on the ordering of the arms.
+  \item The state is verified rather than assumed, by a predicate defined in advance and reported with its threshold, applied identically to every arm and cross-checked against a second instrument. Falsified if the two instruments disagree on which arms the co-input separates --- that is, on the ordering of apo, decoy and the partner-bearing arms. The two rank \emph{shuffled} against \emph{cognate} differently, and that is not a falsification: those two arms sit about 0.1~\AA{} apart on the tilt axis, which is inside the instrument's resolution, and both instruments agree on apo $<$ decoy $<$ \{shuffled, cognate\} on every backbone.
   \item Model confidence does not track conformational correctness on this axis, so it cannot be used to select a state. Falsified if confidence separates correct from incorrect state calls at matched partner composition.
 \end{enumerate}

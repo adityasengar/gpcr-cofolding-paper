@@ -62,6 +62,7 @@ These are the axes the paper's novelty claim is measured against. Be strict here
 | `directional_control` | Can the method be *instructed* which state to produce, or does it only sample? Name the handle (partner, ligand, nanobody, peptide, state-annotated template, state-filtered MSA, seed, subsample depth). |
 | `coinput_composition` | **New in v3.1, and required for every paper that supplies anything alongside the receptor.** List *every* molecule handed to the model or added to the system in each arm, and then answer the attribution question explicitly: **can the paper separate the contribution of one co-input from another, or were they supplied together?** Write it as one line per arm, e.g. `arm 2: receptor + agonist + Ga-b-g (together, never separated)`. This field exists because the same confound was found independently in three of the strongest partner papers in the corpus and none of them flags it: `ye2026multistatebias` and `zhang2026generalization` both supply agonist and transducer in a single condition and have no partner-alone arm, and `chiesa2025templatebias` has no decoy or scrambled-partner arm. `directional_control` records *that* there is a handle; this field records **what else was in the tube at the same time**, which is what decides whether a causal claim survives. Where a paper truly varies one co-input at a time, say so — that is the rare and citable case. |
 | `binding_order` | **New in v3.1.** Which mechanistic route to the ternary complex the paper assumes, tests or supports, and with what evidence. GPCR activation is not a single sequence: agonist may bind first and the transducer engage a receptor already shifted toward active (**conformational selection at the ligand level, induced fit at the transducer level**), or receptor and G protein may be **pre-coupled** before agonist arrives, with the complex sitting in an activation intermediate until agonist and nucleotide release drive it on. Most papers in this corpus never state which they assume, and that silence is itself the answer — write `NOT ADDRESSED` rather than inferring one. For prediction papers, note additionally that co-folding has **no notion of order at all**: everything is supplied simultaneously, so any predicted complex is order-agnostic by construction and cannot adjudicate between the routes. Say that explicitly where it applies, because it bounds what a prediction result can claim about mechanism. |
+| `input_factor_design` | **New in v3.2, and required for every paper that runs a prediction.** Record which *input* factors the paper varied and, for each pair, whether they were **CROSSED** (both varied independently, so their interaction is estimable), **HELD** (one varied while the other stayed fixed), or **CONFOUNDED** (changed together in a single condition, so neither is attributable). The four factors that matter in this literature are **MSA** (full / subsampled / masked / clustered / absent / state-filtered), **templates** (off / on / state-annotated), **ligand** (absent / present / varied), **partner** (absent / present / truncated / decoy / scrambled). Write one line per factor, then a `crossings:` line naming only the non-obvious pairs, e.g. `crossings: MSA x ligand HELD (ligand present in every arm, never removed); partner x ligand CONFOUNDED`. <br><br>**Why this is separate from `coinput_composition`.** That field answers *what else was in the tube*; this one answers *what was turned independently*. The distinction is not cosmetic: answering "has anyone crossed a ligand co-input with MSA subsampling?" required opening sixty notes and reading two fields against each other, because a paper can supply a ligand in every arm (so `coinput_composition` looks rich) while never varying it (so no interaction is estimable). `jung2026boltzperturb` is the worked example — ligand present throughout, MSA masked and subsampled in baseline arms, and therefore **MSA x ligand HELD, not crossed**, which is exactly why its negative result does not settle the question it appears to settle. Where a paper genuinely crosses two input factors, tag it `factors-crossed`; that is rare and citable. **Note for anyone backfilling in bulk: notes use three different field styles** — a markdown table row, a `- **field**:` bullet, and a `### \`field\`` heading. A script that anchors on only one will silently skip the others. |
 | `anti_memorization_design` | Is there a held-out or post-cutoff set at all? Give n and how the cutoff was defined. `NONE` if absent. |
 | `anti_memorization_control` | Was a control **arm actually run and analysed**, as opposed to a held-out set merely existing? `NONE RUN` is a distinct and common answer. Mark `UNPOWERED` if n < ~10 or the held-out set overlaps training. These two fields were one field in v1, which made "they had recent structures but never used them as a control" unrecordable. |
 | `controls_run` | **New in v3.** A short table of every control arm the paper actually ran, with what each rules out: columns `control` \| `what it rules out` \| `page`. For prediction papers this is decoys, shuffles, apo arms, scrambled partners. For wet-lab papers it is unstapled peptide, scrambled sequence, no-peptide, off-target receptor. v2 had nowhere to put these and an extractor smuggled a twelve-row control table into `stated_limits`; that table was the most reusable content in the note. |
@@ -198,7 +199,7 @@ in two rows; say so in `panels` rather than distorting the split.
 | Field | Notes |
 |---|---|
 | `extracted_on`, `extractor` | Date and which model/session. |
-| `schema_version` | `v3`. Notes written against an older schema are stale and must be re-extracted. |
+| `schema_version` | `v3.2` for notes written or re-passed after 2026-09-10. Notes reading `v3` or `v3.1` are current on A–E content but predate `input_factor_design`; notes reading `v2` are **partially stale** and must be re-extracted. Absence of `input_factor_design` on a v3/v3.1 note means *not yet backfilled*, never `NOT ADDRESSED`. |
 | `confidence` | high / medium / low, with what was hard to read. |
 | `unresolved` | Anything the extractor could not determine. Do not silently drop these. |
 | `why_it_matters` | **Left empty by the extractor.** This is the user's call. |
@@ -257,6 +258,13 @@ lab (NMR, cryo-EM, an assay) — rare, and a strong distinguishing feature.
 
 **Control:** `directed-state` `partner-driven` `ligand-driven` `peptide-driven`
 `g-protein-mimetic` `nanobody` `apo-sampling` `seed-only` `coinput-confounded`
+`factors-crossed`
+
+`factors-crossed` is new in v3.2 and marks a paper that varies **two input factors
+independently** — MSA, templates, ligand or partner — so that their interaction is estimable.
+It is the positive counterpart to `coinput-confounded` and is expected to be rare: the common
+pattern in this literature is to vary one factor and hold the rest, which looks like a control
+arm and is not one. Grep this tag to ask whether an interaction has ever been measured.
 
 `coinput-confounded` is new in v3.1 and marks a paper that supplies two or more co-inputs
 together in the same arm and never separates them, so no single co-input can be credited with
@@ -408,3 +416,43 @@ corpus**. `coinput_composition` applies to the 21 prediction papers that supply 
 `binding_order` applies to all 78 but will be `NOT ADDRESSED` or `order-agnostic` for most.
 Until that pass is run, a reverse lookup on either field is incomplete and must not be used to
 support a "no paper does X" claim.
+
+## Changelog: v3.1 → v3.2
+
+1. **`input_factor_design` added.** The corpus was asked a question it should have been able to
+   answer by grep — *has anyone supplied a ligand co-input to an AF3-lineage model while also
+   subsampling the MSA, and measured receptor state?* — and answering it took a mechanical sweep
+   of sixty notes plus an external search, because the two halves live in different fields
+   (`msa_handling`, `coinput_composition`) and neither records whether the factors were varied
+   **together, independently, or not at all**. A paper can look rich on co-inputs and still hold
+   every one of them fixed.
+
+   The answer that sweep produced is the field's justification. `jung2026boltzperturb` runs
+   Boltz-2 with a ligand present in every arm and degrades the MSA in two baseline arms (masking
+   at rate 0.1 → SR_O 10.53%; depth reduced to 4,086 rows → SR_O 12.28%, both below vanilla,
+   p.7, p.15). That reads as a settled negative until you notice the ligand is never removed:
+   **MSA x ligand is HELD, not CROSSED**, so the interaction was never estimated, and the
+   masking rate is far below the 40% `kalakoti2026afsample3` finds optimal for AF3. A field that
+   recorded the crossing would have made that visible in one line.
+
+2. **Tag `factors-crossed` added**, for the rare paper that varies two input factors
+   independently. **It fires on exactly one paper in 81**: `mitjavila2026afsample2t`, which crosses
+   masking level (0/10/20/30%) with partner presence, balanced at 250 models per cell (p.8). `coinput-confounded` already marks the opposite case at the co-input level;
+   this marks the positive case across factor types, and is the tag to grep when asking whether
+   an interaction has ever been measured.
+
+**Backfill status as of 2026-09-10: populated on 11 of 81 notes** — `cheng2026af3cluster`, `chiesa2025templatebias`, `heo2022multistate`, `jung2026boltzperturb`, `lazou2026cryptic`, `mitjavila2026afsample2t`, `vo2026fiducials`, `xing2025purified`, `ye2026multistatebias`, `yu2026domainmotion`, `zhang2026generalization`. Do not treat its absence on the other 70 as
+`NOT ADDRESSED`. The cheapest useful backfill is the 21 prediction papers that supply a
+co-input, since those are the only ones where a crossing is possible at all; the rest can be
+filled opportunistically as notes are next touched. Until then, any query about factor
+interactions must be answered by reading `msa_handling` and `coinput_composition` together,
+not by grepping this field and finding it empty.
+
+**What the first nine backfills already show.** Two papers bracket the same open question from
+opposite sides and neither closes it: `jung2026boltzperturb` varies the MSA with the ligand present
+in every arm, and `lazou2026cryptic` varies the ligand with the MSA explicitly held constant
+("the same MSAs can be used to predict different conformations depending on the presence of a
+ligand", p6). `ye2026multistatebias` and `xing2025purified` both run the two legs but in *different
+models*, so neither crosses them either. `heo2022multistate` is confounded by construction — its
+method is state-annotated templates **plus** total MSA deletion applied together. That pattern was
+invisible before this field existed and is the clearest evidence that it earns its place.

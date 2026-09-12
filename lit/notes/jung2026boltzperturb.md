@@ -299,6 +299,21 @@ deposited structures.
   noise can shift predicted ligand positions outside the conventional binding pocket, implying the
   potential to discover alternative binding sites." No alternative-site result is reported.
 
+- **input_factor_design**: **New in v3.2. HELD, not crossed — and this is the worked example in
+  SCHEMA.md for why the distinction matters.**
+  - **MSA**: varied, but in baseline arms only — masking at rate 0.1 and depth reduced to 4,086
+    rows (p.15, SS B.3). Method arms leave the input pipeline untouched (p3).
+  - **templates**: not reported.
+  - **ligand**: **present in every arm and never removed** — the benchmark is ligand-pose
+    prediction, scored by ligand RMSD to deposited with binary success < 2 A.
+  - **partner**: not applicable (57 post-cutoff general-protein targets).
+  - `crossings:` **MSA x ligand HELD.** Because the ligand is never varied, the MSA-degradation
+    result (SR_O 10.53% masked, 12.28% subsampled, both below vanilla, p.7) measures what MSA
+    perturbation does *in the presence of* a ligand, not whether the ligand and the alignment
+    carry redundant information. It reads as a settled negative and is not one. Note also that
+    the masking rate 0.1 sits far below the 40% `kalakoti2026afsample3` reports optimal for AF3,
+    and 4,086 rows is a mild depth reduction against the 16:32-256:512 range used elsewhere.
+
 - **anti_memorization_design**: **YES, and it is the whole evaluation, n = 62.**
   - Diagnostic five: "five recent PDB complexes absent from the Boltz-2 training data set" (p5);
     "The 5 complexes were selected from PDB depositions after the RnP benchmark curation date and

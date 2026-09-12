@@ -315,6 +315,7 @@ per-series number lives in Table S1, Table S2 and Figs. S1–S6, none of which a
 
 - **binding_order**: **ORDER-AGNOSTIC by construction.** All inputs supplied at once to Boltz; no sequence is represented. The paper does, however, motivate its partner arm with an order-flavoured hypothesis (p.2: co-folding "tend[s] to predict inactive receptor structures, while most of our dataset comprises agonists"), i.e. it treats the missing transducer as the reason the agonist alone did not produce an active receptor. That is a mechanistic reading the method itself cannot test.
 
+- **input_factor_design**: **New in v3.2. HELD throughout — no factor is crossed with any other.** **MSA**: full default server, **never varied** (not subsampled, not clustered, not state-filtered). **templates**: NOT REPORTED. **ligand**: a small-molecule ligand is required of every one of the 253 entries and is **never removed**. **partner**: **VARIED** — the 201-pair G-protein co-folding arm against the main arm. <br>`crossings:` **partner x ligand HELD** (ligand present in every arm); **MSA x anything impossible** because the MSA is fixed by design. So its partner result cannot be separated from ligand occupancy, and the alignment plays no experimental role at all.
 - **anti_memorization_design**: **YES, and it is the paper's design centrepiece — a
   family-level, date-based holdout, n = 253.** Cutoff definition, p4 verbatim: "We enumerated all
   human GPCR structures in GPCRdb41 that were initially released in the RCSB Protein Data Bank

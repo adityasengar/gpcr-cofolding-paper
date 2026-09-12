@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \graphicspath{{../figures/out/}}
 \usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{authblk}
 \usepackage[hidelinks]{hyperref}
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -39,26 +40,25 @@ Discrepancies between the internal claim sheet and the shipped data are recorded
 in full in \texttt{analysis/block\_a/DISCREPANCY\_REPORT.md}; the ones that
 change a reported number are noted in the relevant caption below.
 
+\paragraph{What was supplied, and what was not.}
+\textbf{Every co-input arm reported in this work supplies a complete G$\alpha$
+subunit of 350--394 residues, or a nanobody. No arm supplies a peptide of any
+length.} The quantity actually varied between the decoy and cognate arms is the
+\textbf{eleven} C-terminal residues of the $\alpha$5 helix, permuted rather than
+replaced, so composition is held constant. Readers should hold that against the
+title, which names a 21-residue peptide: the reduction to an isolated peptide is
+motivated by this work and is not tested by it. This is flagged in the main text
+as an open decision \textbf{[PI]} and is not resolved here.
+
 \clearpage
 \section{Supplementary figures}
 
 \subsection{How the instrument and the panel were built}
 
-\begin{figure}[htbp]\centering
-\includegraphics[width=0.49\textwidth]{ba1a_instrument_side.png}
-\includegraphics[width=0.49\textwidth]{ba1a_instrument_cyto.png}
-\caption{\textbf{What the two measurements measure.}
-The active reference (4LDE) superposed on the inactive reference (2RH1) for
-ADRB2, viewed along the membrane normal (left) and from the cytoplasm (right).
-The invariant bundle is grey; only the elements carrying the measurement are
-coloured. Both distances are annotated with their values and the atom pair each
-was measured between, and every value is reproduced from the coordinates and
-checked against \texttt{reference\_predicates.csv} before drawing.
-\textit{Filter:} two deposited structures; no prediction rows.}
-\end{figure}
+
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba1_reference_landscape.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{ba1_reference_landscape.pdf}
 \caption{\textbf{The reference set scored in full.}
 All 167 deposited reference entries on both predicate axes, coloured by
 annotated state, with both thresholds drawn; faceted by receptor class, and with
@@ -68,10 +68,11 @@ Class~A. Deviating entries are labelled with their receptor and marked by
 deviation class; five of the nine deviations are unclassified as to cause and
 carry a neutral marker.
 \textit{Filter:} references as shipped; $n = 167$ entries, 98 on the panel.}
+\label{sfig:reflandscape}
 \end{figure}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s2_reference_audit.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s2_reference_audit.pdf}
 \caption{\textbf{Reference-set audit.} Method, resolution, deposition date and
 construct engineering across the reference entries, with entries whose
 engineering falls inside a predicate window marked. Three metadata columns
@@ -80,34 +81,41 @@ engineering falls inside a predicate window marked. Three metadata columns
 archive; the panel states this rather than drawing a zero, which would read as a
 measured absence.
 \textit{Filter:} references as shipped; $n = 167$ entries.}
+\label{sfig:refaudit}
 \end{figure}
+\clearpage
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s6_predicate_calibration.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s6_predicate_calibration.pdf}
 \caption{\textbf{Predicate calibration.} Distance from the active reference for
 predicate-active predictions. Two of 4{,}256 testable rows lie beyond 3~\AA.
 Note the denominator: of 4{,}866 predicate-active rows, 610 carry no active
 reference and cannot be tested at all; they are shown separately rather than
 counted as successes.
 \textit{Filter:} E1+E2; $n = 4{,}256$ testable of 4{,}866 predicate-active.}
+\label{sfig:calibration}
 \end{figure}
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s9_fold_integrity.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s9_fold_integrity.pdf}
 \caption{\textbf{Fold integrity.} TM6 helicity pass rates, drawn as per-cell
 distributions rather than as bars, with one axis per receptor class so that a
 percentage is never shown against a denominator from a different class.
 \textit{Filter:} E1+E2; $n = 9{,}461$ rows. Overall pass rate 96.3\%.}
+\label{sfig:fold}
 \end{figure}
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s7_clusters_holdout.pdf}
+\clearpage
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s7_clusters_holdout.pdf}
 \caption{\textbf{Paralog clusters and date-stratified holdout.} Cluster
 composition and holdout membership. The cluster map as shipped resolves to 29
 clusters with 16 singletons (55\%), against the 26 and 42\% used for the
 bootstrap convention; the panel draws what the file contains and says so. The
 extended holdout stratum is underpowered and is descriptive only.
 \textit{Filter:} cluster map as shipped; $n = 48$ receptors.}
+\label{sfig:clusters}
 \end{figure}
+\clearpage
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s3_bootstrap_comparison.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s3_bootstrap_comparison.pdf}
 \caption{\textbf{Cluster versus receptor bootstrap.} The cluster bootstrap over
 26 paralog clusters is authoritative; the receptor bootstrap is shown here only.
 The cluster interval is equal to or wider on every headline statistic, by a
@@ -117,62 +125,61 @@ multi-member clusters. The shipped cluster map resolves to 29 clusters and 16
 singletons instead; the intervals here are the 26-cluster ones, and Fig.~S7
 draws the disagreement.
 \textit{Filter:} E1+E2; 1{,}000 resamples, seed 20260909.}
+\label{sfig:bootstrap}
 \end{figure}
 
 \subsection{Robustness to analysis choices}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s10_broken_cell.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s10_broken_cell.pdf}
 \caption{\textbf{What exclusion E1 removes.}
 The one cell whose mean pLDDT falls below 50, beside a healthy comparator under
 a single camera rule, with the pLDDT distribution and the E1 threshold drawn.
 All 25 rows in this cell carry \texttt{passed = True}: the verification suite has
 no pLDDT floor, which is why the cell survived every assertion.
 \textit{Filter:} the E1 cell ($n = 25$ rows) and its comparator.}
+\label{sfig:e1cell}
 \end{figure}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s1_exclusions.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s1_exclusions.pdf}
 \caption{\textbf{The exclusion sets, and why they are not one filter.}
 Coverage of each flag, and every headline statistic under every exclusion
 combination as a percentage shift from baseline. No sign flip occurs anywhere and
 no statistic moves by more than 0.5\%. This panel is about the filters, not about
 the values: what is plotted is stability, not magnitude.
 \textit{Filter:} the sweep is the filter; each cell states its own set.}
+\label{sfig:exclusions}
 \end{figure}
+\clearpage
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s5_inclusion_sets.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s5_inclusion_sets.pdf}
 \caption{\textbf{Amplitude under all three inclusion sets.} Slopes on both axes
 for \texttt{baseline}, \texttt{class\_a\_only} and \texttt{class\_a\_no\_holds},
 with zero and unity marked. Protenix2 on NPxxY excludes zero in all three, so
 that result is not an artefact of the restriction choice. On NPxxY,
 \texttt{baseline} and \texttt{class\_a\_only} are identical.
 \textit{Filter:} per-axis E3 as labelled; $n$ per fit on the panel.}
+\label{sfig:inclusion}
 \end{figure}
 
 \subsection{Extended results}
 
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba2_arm_shift.pdf}
-\caption{\textbf{The main effect, by magnitude rather than by call.}
-Distributions of both axes by arm and backbone with the threshold overlaid;
-per-receptor slopegraphs from apo to cognate; headline shift with
-cluster-bootstrap intervals and zero marked; and two-instrument agreement drawn
-as a per-cell distribution.
-\textit{Filter:} E1+E2 only, $n = 9{,}461$ of 9{,}490 rows.}
-\end{figure}
+
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba6_state_plane.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{ba6_state_plane.pdf}
 \caption{\textbf{Predictions on the predicate plane.}
 Apo and cognate arms as separated populations on the two measurement axes, with
 identical limits across all four backbone facets and a quadrant census. Apo:
 2{,}611 firing neither predicate, 577 firing both. Cognate: 157 and 3{,}162.
 \textit{Filter:} E1+E2, Class~A.}
+\label{sfig:stateplane}
 \end{figure}
+\clearpage
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba8_alpha5.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{ba8_alpha5.pdf}
 \caption{\textbf{The $\alpha$5 C-terminus of the supplied G$\alpha$, in the
 intracellular cavity.}
 The receptor drawn as a surface rather than a cartoon, so the cavity is visible.
@@ -183,10 +190,12 @@ it, the whole 25-seed cell on both axes with the rendered row ringed, so the
 render can be located within the population it came from.
 \textit{Filter:} one receptor $\times$ backbone $\times$ arm cell, $n = 25$
 seeds; the rendered row and its selection rule are stated on the panel.}
+\label{sfig:alpha5}
 \end{figure}
 
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{ba3_connector.pdf}
+\clearpage
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{ba3_connector.pdf}
 \caption{\textbf{An orthogonal signature corroborates the direction.}
 The P5.50--F6.44 PIF connector was never used to set a threshold or to call any
 prediction. \textbf{a}, connector distance in the references (active versus
@@ -195,16 +204,19 @@ inactive) beside the predictions (predicate-active versus predicate-inactive).
 every interval crosses it}. \textbf{c}, row-level agreement, which is the strong
 part of this analysis and is given the most visual weight.
 \textit{Filter:} E1+E2; $n = 77$ reference and 512 prediction rows.}
+\label{sfig:connector}
 \end{figure}
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s4_per_receptor.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s4_per_receptor.pdf}
 \caption{\textbf{Per-receptor results.} Apo and cognate medians on both axes for
 every receptor and backbone, with the receptors that carry no active reference
 marked rather than omitted.
 \textit{Filter:} E1+E2; $n = 48$ receptors $\times$ 4 backbones.}
+\label{sfig:perreceptor}
 \end{figure}
+\clearpage
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{s8_aa2ar_case.pdf}
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{s8_aa2ar_case.pdf}
 \caption{\textbf{AA2AR case study.} Anchor pLDDT and geometry across arms and
 backbones for a single receptor, with the specific row shown in the structural
 companion marked. \textbf{This row is a high-confidence \emph{apo} prediction
@@ -212,12 +224,371 @@ sitting within 1~\AA{} of the inactive reference} --- that is, a confident and
 \emph{correct} prediction, not a high-confidence failure. It is included as a
 supporting observation for the confidence result, not as a counterexample.
 \textit{Filter:} AA2AR only; $n$ per cell on the panel.}
+\label{sfig:aa2ar}
+\end{figure}
+
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{ba7_switch_not_dial.pdf}
+\caption{\textbf{The co-input flips a switch rather than turning a dial.}
+Within a receptor $\times$ backbone cell the 25 seeds almost always agree:
+\textbf{111 of 160 apo cells never fire the predicate on any seed, and 108 of 159
+cognate cells fire on every seed}. The graded minority --- 39 apo and 24 cognate
+cells --- is drawn rather than averaged away, because a mean over a bimodal cell
+would describe a population that does not exist. Histogram over a fixed seed
+budget on a shared vertical scale, with $n$ stated on each facet.
+\textit{Filter:} E1+E2; 25 seeds per cell.}
+\label{sfig:switch}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{ba4_amplitude.pdf}
+\caption{\textbf{Amplitude: does a receptor with further to travel travel
+further?} Regression of achieved shift on available distance, with \textbf{unity
+marked on every panel because the null under test is slope $= 1$}, not slope
+$= 0$. On NPxxY, Protenix gives $+0.257$ [0.074, 0.552] and does not cross zero.
+\textbf{The tilt axis is uninformative for amplitude and should not be read as a
+result:} its predictor standard deviation is 1.17~\AA{} against NPxxY's
+5.22~\AA{}, so the tilt slopes (Boltz-2 $-0.298$, Chai-1 $-0.659$) are an
+instrument property, not a finding. This figure is reported because the
+pre-specified amplitude analysis was run; it is largely a null, and it is placed
+here at the same weight it would have received had it been positive.
+\textit{Filter:} per-axis E3 as labelled; $n$ per fit on the panel.}
+\label{sfig:amplitude}
 \end{figure}
 \clearpage
+\section{The co-input ladder: apo, decoy, shuffled, cognate}
+
+Every arm in this block supplies a \textbf{complete G$\alpha$ subunit of 350--394
+residues}. No arm supplies a peptide. The decoy arm supplies the \emph{correct}
+subunit whose eleven C-terminal residues have been permuted --- composition held
+constant, only the tail moved; the shuffled arm supplies a \emph{different}
+G$\alpha$ class carrying its own native $\alpha$5 C-terminus.
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bb1_ladder.pdf}
+\caption{\textbf{The four-arm ladder.} Two-instrument active-call fraction across
+apo, decoy, shuffled and cognate on all four backbones drawn individually, with
+the panel drawn bold and cluster-bootstrap intervals; a logit companion beside it
+because the probability scale saturates at cognate.
+\textbf{The ladder is monotonic on the predicate but not on every underlying
+axis:} on the TM6 tilt axis the shuffled arm opens \emph{further} than cognate on
+all four backbones. That is drawn rather than smoothed, and it is the reason the
+headline is stated on the predicate and not on tilt alone.
+\textit{Filter:} as stated on the panel; the four ladder rungs reproduce at
+0.158, 0.558, 0.809, 0.891.}
+\label{sfig:ladder}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bb6_per_receptor.pdf}
+\caption{\textbf{The ladder at receptor grain.} \textbf{a}, every receptor's own
+ladder drawn under the median, so a monotone median is not mistaken for a
+monotone population. \textbf{b}, the distribution at each rung with the ceiling
+drawn --- the cognate rung is pinned against it, which is why the panel-level
+mean understates the spread.
+\textit{Filter:} as stated on the panel; 40 receptors.}
+\label{sfig:ladderreceptor}
+\end{figure}
+\clearpage
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bb3_engagement.pdf}
+\caption{\textbf{Engagement and activation are separable.} \textbf{a}, the three
+partner arms on the engagement $\times$ activation plane. \textbf{b}, the full
+cutoff sweep, drawn because 20~\AA{} is a choice: the decoy arm moves from 0.53
+to 0.66 across it while cognate barely moves. \textbf{c}, the
+engaged-but-inactive decoy cell, populated on every backbone at 278--540 rows.
+Apo is absent from \textbf{a} and \textbf{b} by construction, not by omission:
+with no partner supplied there is no engagement axis to place it on.
+\textit{Filter:} as stated on the panel.}
+\label{sfig:engagement}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bb4_connector.pdf}
+\caption{\textbf{The engaged-but-inactive cells sit at apo geometry.}
+\textbf{a}, five subsets as distributions with every cell drawn. \textbf{b}, the
+per-backbone companion. The axis here is the PIF connector, which the predicate
+never reads --- so this is an independent check, not a restatement.
+\textit{Filter:} as stated on the panel; all five medians and all five cell
+counts reproduce exactly.}
+\label{sfig:bbconnector}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bb5_residuals.pdf}
+\caption{\textbf{Donor residuals: a pre-registered alternative that is signed
+nowhere.} \textbf{a}, the three donor strata at their true widths, all receptors
+against native-referenced only, with open markers where the interval spans zero.
+\textbf{b}, \textbf{0 of 9} stratum $\times$ axis combinations sign the
+pre-registered alternative. This panel exists because the result is null, and a
+null pre-registered outcome is reported here at the same weight it would have
+received had it been positive.
+\textit{Filter:} as stated on the panel.}
+\label{sfig:residuals}
+\end{figure}
+
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bb7_family_term.pdf}
+\caption{\textbf{The correct-family term, per backbone, with its intervals.}
+The third contrast in the ladder --- shuffled $\rightarrow$ cognate, which asks
+whether the $\alpha$5 C-terminal sequence must additionally belong to the
+\emph{correct} G$\alpha$ family. Grey marks an interval that crosses zero, green
+one that excludes it. \textbf{The term is signed on OpenFold-3 alone}; the other
+three backbones cross zero, and the panel-level estimate is signed only because
+pooling narrows the interval. Protenix's upper bound of 5.15 lies beyond the
+axis, which is clipped for legibility and marked; no interval is truncated in the
+data. This panel exists because the per-backbone shares are reported in prose and, after
+the ladder and decomposition figures were merged, appeared in no figure in either
+document. It also corrects a reading: the internal claim sheet lists shares of
+17.4 / 17.5 / 20.9 / 17.5 and describes them as agreeing. The shipped shares are
+\textbf{14.2 / 22.9 / 23.6 / 10.9}, and 17.4 is the \emph{panel} share, not
+Boltz-2's.
+\textit{Filter:} frame \texttt{reproduction\_36}, logit scale, 24 paralog
+clusters; 1{,}000-resample cluster bootstrap.}
+\label{sfig:familyterm}
+\end{figure}
+\clearpage
+\section{Ligand class and the orthosteric pocket}
+
+
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bc3_classifier.pdf}
+\caption{\textbf{Leave-one-receptor-out classification of ligand class.} AUROC
+per backbone with cluster-bootstrap 95\% intervals over 12 clusters, against the
+permutation null. Boltz-2 0.852 [0.560, 0.974] and Protenix 0.825 [0.528, 0.960];
+\textbf{Chai-1 at 0.706 and OpenFold-3 at 0.656 both span 0.5} and are not
+evidence of separation. The split is by receptor, verified: a held-out receptor
+scoring AUROC 0.000 is impossible under a structure-level split. The residual
+concern is narrower --- paralogs are divided across folds while the interval
+treats the paralog cluster as the independent unit, and AA1R/AA2AR score exactly
+1.000 on all four backbones.
+\textit{Filter:} as stated on the panel; 12 clusters.}
+\label{sfig:classifier}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bc4_ligand_placement.pdf}
+\caption{\textbf{Where the ligand actually goes.} A three-band census over the
+full corpus --- in-pocket, entrance-bound, off-site --- split by ligand source
+and by arm. Apo 15.1\% off-site [14.6, 15.6]; cognate 20.3\% [19.8, 20.9]. The
+earlier pooled figure of 25.6\% is \textbf{retracted}. This panel exists to
+prevent a pocket-geometry claim being read over predictions whose ligand is not
+in the pocket.
+\textit{Filter:} full census, 40{,}000 rows at exactly 50 per receptor $\times$
+backbone $\times$ role $\times$ arm.}
+\label{sfig:placement}
+\end{figure}
+\clearpage
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bc1_pocket_2x2.pdf}
+\caption{\textbf{Ligand class in pocket geometry. SCOPE CAVEAT, READ BEFORE
+USE.} The $2\times2$ of ligand role (agonist,
+antagonist) by \textbf{reference state} --- RMSD to the active reference against
+RMSD to the inactive one --- on pocket-C$\alpha$ geometry, per backbone, with the
+interaction interval. \textbf{The partner arm is not a factor here.} Apo-only was
+intended as a \emph{filter} over rows, not as an axis of the design, and it is
+that filter which was not applied. \textbf{This figure is described
+elsewhere as holding ``in the apo arm alone'', and the shipped counts contradict
+that.} The design grid is exactly \textbf{50} rows per receptor $\times$ backbone
+$\times$ ligand role $\times$ arm --- verified across all 40{,}000 rows of the
+placement census, with no cell of any other size. An apo-only analysis would
+therefore give $28\times50 = 1{,}400$ agonist and $23\times50 = 1{,}150$
+antagonist rows per backbone. The shipped counts are \textbf{2{,}800} and
+\textbf{2{,}300}, on every backbone --- exactly twice, which is both arms
+pooled. The interaction term itself was properly estimated and bootstrapped; the
+four cell means shipped beside it are on different receptor sets and do not
+reconstruct it ($-0.340$ against $-0.306$). A second, independent caveat: the
+pre-specified gate requiring G1 and G2 to be restated on the on-site subset when
+off-site fraction exceeds 5\% \textbf{fired on 8 of 12 cells} (agonist off-site
+27.9--34.9\% on every backbone) and the restatement was not performed, because
+the corpus it requires did not ship.
+\textit{Filter:} both arms, contrary to the stated scope; see the caveat above
+before quoting any number from this panel. The corpus that would allow the
+analysis to be restated on the apo arm alone was not delivered with the
+campaign.}
+\label{sfig:pocket2x2}
+\end{figure}
+
+\clearpage
+\section{Directed inactive states, and alignment depth}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bd1_apo_landscape.pdf}
+\caption{\textbf{The apo landscape, and a cross-corpus reproduction.}
+\textbf{a}, \textbf{b}, seven receptors $\times$ four backbones on the predicate
+and on sub-\AA{}-to-active, apo only, 500 samples per cell. \textbf{c}, the four
+active-outlier cells drawn twice --- once on this block and once on the
+independent Block~A corpus at $n = 25$. Panel \textbf{c} is the strongest part of
+the figure: an outlier that survives on two corpora built at different times is
+not a sampling artefact.
+\textit{Filter:} apo arm only; 500 samples per cell.}
+\label{sfig:apolandscape}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bd2_direction_asymmetry.pdf}
+\caption{\textbf{Direction is asymmetric --- and the caveat here is
+load-bearing.} \textbf{a}, ACM2 from apo to an active-state nanobody per
+backbone, with the G$\alpha$ positive-control band. \textbf{b}, the two
+inactive-nanobody receptors from apo, with exact binomial intervals.
+\textbf{This figure does not show that directed inactive generation is
+impossible.} It shows that these two receptors, with these two nanobodies, on
+these backbones, did not move --- and both receptors are ones whose databank
+entries are dominated by one state, so a memorisation account is not excluded by
+this evidence. Read as a bound on what was tested, not as a general claim.
+\textit{Filter:} as stated on the panel; exact binomial intervals at $n = 50$.}
+\label{sfig:direction}
+\end{figure}
+\clearpage
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bd3_depth_ladder.pdf}
+\caption{\textbf{Alignment depth moves the predicate, and on two of four
+backbones the structure degrades while it does so.} \textbf{a}--\textbf{d}, one
+panel per backbone: predicate-active and sub-\AA{}-to-active against alignment
+depth on a log axis, with the two degradation regimes shaded. \textbf{e},
+matched-seed 7TM~C$\alpha$ deviation. \textbf{f}, the sub-\AA{} and pLDDT deltas.
+The figure \emph{is} the gap between the two lines. Where they track, depth is
+plausibly a lever; where they separate, a coarse predicate is clearing while the
+structure moves away from the target. Boltz-2 is the one backbone where the
+lever reading survives both measures. Chai-1's slope is negative as a point
+estimate and \textbf{unsigned under the cluster bootstrap}; the interval is
+reported rather than the flag.
+\textit{Filter:} apo arm only --- depth is not crossed with any co-input in this
+design; 25{,}810 predictions over 26 receptors at five depths.}
+\label{sfig:depth}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bd5_lever_vs_degradation.pdf}
+\caption{\textbf{Lever or degradation, on one pair of cases.} Boltz-2/OPSD
+against Protenix/AGTR1, from full depth to depth 8, on the pocket axis (which
+disagrees between them) and the NPxxY axis (which agrees). This is the clearest
+single argument in the block and it needs no statistics: two cells that look
+identical on the coarse predicate separate completely once a second measure is
+applied.
+\textit{Filter:} two receptor $\times$ backbone cells, full depth and depth 8.}
+\label{sfig:levervsdeg}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{bd4_nb_structures.pdf}
+\caption{\textbf{Four measured structures on the NPxxY axis.} Four nanobody-arm
+structures placed against the 9.08~\AA{} threshold, each carrying its one-line
+verdict. Deliberately \emph{not} a render: the quantity that decides each case is
+a distance, and a distance is better read off an axis than off a picture. Every
+value was measured from the deposited coordinates, with Tyr\,7.53 located
+independently from each file's own NPxxY motif --- agreeing with the
+database-mapped position on all fifteen structures measured.
+\textit{Filter:} four structures, measured from coordinates.}
+\label{sfig:nbstructures}
+\end{figure}
+
+\clearpage
+\section{What the prior literature does, and does not, do}
+
+These five panels summarise the 81-paper corpus assembled for this work. They
+report properties of the published record, not results of this study.
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{lit1_state_metrics.pdf}
+\caption{\textbf{How prior work measures conformational state.} Metric type
+across the corpus. The relevant absence: \textbf{no paper requires a TM6 measure
+and an NPxxY measure jointly}, and none measures the Tyr\,5.58--Tyr\,7.53
+distance at all. The two-instrument predicate used here has no precedent in the
+corpus, which is why it is calibrated against structures of known state in the main text
+rather than asserted here.
+\textit{Source:} corpus notes; every assignment carries the note text it was read
+from.}
+\label{sfig:litmetrics}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{lit2_rigour_landscape.pdf}
+\caption{\textbf{Where the target state comes from.} Papers classified by whether
+the state is supplied to the model or induced in it. The dominant pattern is that
+the answer is available at input, as a state-annotated template, a state-filtered
+alignment, or supervision against a deposited structure of the target state.
+\textit{Source:} corpus notes; classification from each field's opening verdict.}
+\label{sfig:litrigour}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{lit3_antimemorization.pdf}
+\caption{\textbf{Anti-memorisation design across the corpus.} Whether a held-out
+or post-cutoff set exists, and separately whether a control arm was actually run
+and analysed. These are distinct and are counted separately: a paper can hold out
+recent structures and never use them as a control.
+\textit{Source:} corpus notes.}
+\label{sfig:litantimem}
+\end{figure}
+\clearpage
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{lit5_control_handles.pdf}
+\caption{\textbf{Control arms in the published record.} Which control handles
+appear, and how often. Decoy and sequence-scrambled partner arms are the ones
+this work depends on, and they are the ones the corpus most often lacks: the
+three nearest published neighbours on this axis run neither.
+\textit{Source:} corpus notes; tags overlap, so cells do not sum to the corpus
+size and the panel states so.}
+\label{sfig:lithandles}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{lit4_figure_defects.pdf}
+\caption{\textbf{Recurring figure defects in this literature.} Pooling over
+per-system variation, bars drawn over distributions, and axes pinned at a
+ceiling. This panel is the evidence base for the drawing rules used throughout
+this Supplementary Information --- in particular the rule that a per-system
+result is drawn per system, which is why
+Figs.~\ref{sfig:ladderreceptor} and \ref{sfig:perreceptor}, and the per-receptor
+ordinal panel in the main text, exist in the form they do.
+\textit{Source:} corpus figure tables.}
+\label{sfig:litdefects}
+\end{figure}
+
+\clearpage
 \section{Supplementary tables}
+
+Tables S1--S3 describe the reference set and the panel; S4--S7 report the co-input
+ladder, its decomposition, the ligand-class classifier, and the coverage of the
+alignment-depth block. Tables S1--S3 are generated by
+\texttt{analysis/block\_a/make\_tables.py} and S4--S7 by
+\texttt{manuscript/tables/make\_si\_tables.py}; both read the shipped archives
+read-only, and neither is hand-edited.
+
+Two conventions are worth stating once. Where a shipped value and a recomputed
+value disagree, \textbf{both are printed} and the disagreement is the content of
+the row --- Table~\ref{tab:s_t3_denominators} is the clearest case. And where a
+statistic depends on the resampling unit, \textbf{every available interval is
+printed rather than one}: the choice between row, receptor and cluster bootstraps
+has been mis-stated more than once during this work, and a table showing a single
+interval invites the reader to assume the convention rather than read it.
 
 \input{tables/S-T1_reference_set}
 \input{tables/S-T2_per_receptor}
 \input{tables/S-T3_denominators}
+
+\clearpage
+\subsection{The co-input ladder}
+
+\input{tables/S-T4_ladder}
+\input{tables/S-T5_decomposition}
+
+\clearpage
+\subsection{Ligand class}
+
+\input{tables/S-T6_classifier}
+
+\clearpage
+\subsection{Alignment depth: what is and is not recomputable}
+
+\input{tables/S-T7_blockd_coverage}
 
 \end{document}

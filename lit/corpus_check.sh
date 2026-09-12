@@ -37,4 +37,16 @@ report "INDEX block with no note"          "$t/index" "$t/note" hard
 report "note missing from refs.bib"        "$t/note"  "$t/bib" hard
 report "refs.bib entry with NO paper behind it (unread — do not cite)" "$t/bib" "$t/note" hard
 [ $fail -eq 0 ] && echo "  all four sets agree"
+
+# GAPS.md is generated, not hand-written. It was hand-built at 66 notes and reported a stale
+# count for two days before anyone noticed, so staleness is now a check rather than a habit.
+if [ -f build_gaps.py ]; then
+  if python3 build_gaps.py --check 2>/dev/null; then
+    echo "  GAPS.md                                    up to date"
+  else
+    echo "  !! GAPS.md is STALE — run: python3 lit/build_gaps.py"
+    fail=1
+  fi
+fi
+
 exit $fail
