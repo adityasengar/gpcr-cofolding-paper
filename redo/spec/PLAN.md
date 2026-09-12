@@ -11,6 +11,62 @@
 
 ---
 
+## 0a. THE ROUTE, DECIDED 2026-09-12 after an adversarial audit
+
+**Four of seven load-bearing claims were contested by an audit commissioned for the
+purpose, and the contests held.** The largest is `DECISIONS.md` **F-23**: C7 was not
+answered, because `rows.tier3.v2.csv` has no ligand-free row. **Read F-23 before this
+plan.** The route below is the post-audit one.
+
+**Run "option-invariant first": do everything that does not depend on an open decision,
+so the open decisions stop blocking.** Order, with three grafts taken from the
+runner-up strategies:
+
+| step | what | cost |
+|---|---|---|
+| 0 | strike the dead scope language; stage the C7 pre-registration | **free** |
+| 1 | the **four-item** decision message (`ASKS.md` head), not nine | free |
+| 2 | fix the adaptation band **before** it is stamped | free |
+| 3 | seed pairing + the recording columns into `runs/README.md`, then send it | free |
+| 4 | the free registry items, **E7.4 first** — it must precede the ligand arm | free |
+| 5 | `ladder_pilot` as a **contract proof**, not science | 2,100 |
+| 6 | the ladder **plus `wetlab_length_series`** as ONE curve — **graft 1** | 8,400 + **3,600** |
+| 7 | apply the band mechanically, under a gate | free |
+| 8 | nulls, bulk, composition controls and **G17** at the selected rung | 15,480 |
+| 9 | all 313 READY Group 2 rows, **C7 arm named and pre-registered** — **graft 2** | 8,716 |
+
+**≈38,300 pooled predictions in the first pass.** Hold the n=10→50 uplift in reserve,
+with `ala_scan` (4,200) as its **first** call rather than a uniform increase.
+
+**Graft 1 — the 13/17/19-mers exist.** Verified: `g1_partner_registry.tsv` carries
+`R1b_ct13`, `R2b_ct17` and `R2c_ct19` for **16 Gα families, 50 rows, all `held=yes`,
+all with a sha256**, and `g1_systems.csv` already enumerates them as 90
+`wetlab_length_series` rows over the same 30 receptors at **3,600 pooled**. They are
+missing only from `seq_rungs.tsv`. **For +3,600 the ladder's 11–21 window goes from
+three points (11/15/21) to six (11/13/15/17/19/21)** — and §"analyse as a continuous
+covariate" is the reason that matters: lit confirmed the mechanism predicts a **smooth
+graded curve**, and three points cannot resolve a curve.
+
+**Graft 2 — the C7 arm costs nothing.** `g2_systems.csv` already has 98 READY
+ligand-free rows and **20 receptors / 19 clusters** with the complete 2×2, MDE **0.279**.
+Pre-registration drafted at `redo/spec/C7_PREREGISTRATION.md`; it is **worthless after
+dispatch**.
+
+**Graft 3 — the memorisation defence is free.** `PANEL.md` §8 recommendation 1: use
+**Protenix's 2021-09-30** as the primary date stratification — 32/32 receptors, 23 vs 20
+clusters, **zero panel change** — with Boltz-2's 12/52 as the explicitly under-powered
+secondary.
+
+**The title this commits to**, with the numeral withheld until step 6 returns:
+
+> *The Gα α5 C-terminus, supplied as a co-input, drives co-folding models into the active
+> GPCR state — and its effect is graded with length.*
+
+**If the band selects a rung shorter than 21, the title takes that number. That is the
+finding, not a failure.**
+
+---
+
 ## 0. The one-paragraph version
 
 Two of the paper's three title clauses are reachable with **zero GPU**, and the

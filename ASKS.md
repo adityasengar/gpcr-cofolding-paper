@@ -15,6 +15,28 @@ predictions, no new inference · **real** = new predictions.
 
 # A. Aditya — decisions
 
+## ► THE FOUR TO TAKE FIRST — everything else can wait
+
+Nine items follow. **Four of them are the message.** Three expire at dispatch; the
+fourth is what everything else is conditional on. Read these, answer these, and the
+rest can sit.
+
+| # | decision | why now | cost of yes |
+|---|---|---|---|
+| **1** | **Chain A's construct rule** — (a) full canonical, (b) remove the signal peptide *(recommended)*, (c) status quo *(indefensible)* | **Blocks EVERY dispatch.** And the built artefact is currently (c) | one generator re-run |
+| **2** | **Pair seeds across arms** (E6.4) | **Free now, IMPOSSIBLE after dispatch.** A and B both failed it | zero predictions |
+| **3** | **Pre-register the C7 arm** — `redo/spec/C7_PREREGISTRATION.md`, drafted and not enacted | **Free now, worthless after dispatch.** 20 receptors / 19 clusters, MDE 0.279, already READY | zero predictions |
+| **4** | **Authorise the measurement pass** | CPU only. Four of Group 0's eight dependencies sit behind it, and **every state call in the campaign is conditional on it** | no GPU, ~1,430 structures |
+
+**My recommendation on each: (b), yes, yes, yes.** The reasoning is in the entries
+below and in `DECISIONS.md`. Items 2 and 3 cost nothing and cannot be recovered later,
+so declining them should be a decision rather than a delay.
+
+**The fifth, when you have a moment:** the adaptation band (A3). It expires later — when
+the ladder returns — but it is equally worthless if taken after.
+
+---
+
 Ordered by what they block, not by when they arose.
 
 ### A1. Chain A's construct rule — **BLOCKS EVERY DISPATCH IN THE CAMPAIGN**
@@ -35,6 +57,20 @@ its shape: it costs nothing today and **cannot be done at all once Pillar 3 disp
 over 380 cells — so the same seed never ran the apo and cognate arms of a cell, and
 every interval in both blocks is wider than it needed to be. Saying yes tightens every
 interval in the ladder for zero predictions. **It appears in no pillar.** One word.
+
+### A2b. **Pre-register the C7 arm — `redo/spec/C7_PREREGISTRATION.md`**
+Drafted 2026-09-12 and **not enacted**. C7 was never tested by any block, and I wrongly
+claimed Block C had answered it (`DECISIONS.md` F-23). **The redo already contains the
+experiment**: 98 `ligand_role_actual = none` rows are READY in `g2_systems.csv`, and
+**20 receptors in 19 clusters carry the complete apo/none × apo/agonist × cognate/none ×
+cognate/agonist 2×2**. `MDE = 1.218/√19 = 0.279`, better than the decoy arm. **Zero
+marginal predictions** — Group 2 dispatches those rows already.
+
+The document pre-registers the contrast, the readout rule (**never as a share of the
+partner effect** — that share spans an order of magnitude across readouts), the
+declaration that pocket-Cα is biased for this contrast *by construction*, and **what
+counts as C7 failing**. It needs your yes, a dated `D-` entry, and a gate check that the
+arm has not shrunk before dispatch.
 
 ### A3. The adaptation band — **TIME-SENSITIVE, worthless if taken late**
 `DECISIONS.md` **D-2026-09-12-i**. The interior band that selects the cognate rung for
