@@ -1,0 +1,142 @@
+#!/usr/bin/env python3
+"""g1_recording_spec.py -- the per-prediction recording contract, as CODE.
+
+**Why this file exists, 2026-09-12.** `g1_recording_spec.tsv` is the 47-column
+contract every delivered run must satisfy, and it was a HAND-MADE file sitting in
+`inputs/`, which is declared code-only.  Three scripts read it and none wrote it.
+`DECISIONS.md` F-22 records the general form: `layout.py` L3 compares a file to its
+OWN recorded hash, so it catches an edit made after stamping and is blind to a file
+created by hand and then stamped.  The campaign's most load-bearing input was the
+clearest instance.
+
+This generator reproduces the existing 47 rows EXACTLY -- `--check` asserts it
+byte-for-byte against the file as it stood -- and then adds the two columns
+`PLAN.md` Pillar 0 calls blocking.
+
+**What the two new columns are for.**  `SC-C-6` records that the binary predicate is
+floor-pinned on apo and ceiling-pinned on cognate for ~65% of cells, and says to
+prefer the continuous pocket readout.  Measured on Block C's own rows, the choice of
+instrument changes the ligand effect 5.5-7.9x while leaving the partner effect's sign,
+direction and significance intact, and it inflates the apparent spread BETWEEN
+backbones about fivefold.  Without these two columns a depth sweep has no
+reference-free readout at all, because `kalakoti2025afsample2` [p.6] states confidences
+across masking levels are "not directly comparable".
+
+Run:    python3 redo/build/g1_recording_spec.py
+Check:  python3 redo/build/g1_recording_spec.py --check   (regenerate and diff)
+"""
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from paths import INPUTS                                     # noqa: E402
+
+OUT = os.path.join(INPUTS, "g1_recording_spec.tsv")
+HEADER = ["column", "grain", "dtype", "status", "required_for", "why"]
+
+# The 47 columns exactly as delivered, moved from a hand-made TSV into code on
+# 2026-09-12 (DECISIONS.md F-22).  Content is unchanged except that 10 rows
+# carried only 5 fields -- four tabs where there should be five, the trailing `why`
+# omitted rather than left empty -- and are padded to 6 here.  Nothing parsed the
+# file strictly enough to notice, which is the same story as the file having had no
+# generator at all.
+INHERITED = [
+    ['prediction_id', 'row', 'str', 'new', 'everything', "one row per prediction, not per cell. Block B's helicity and register columns live only in a 640-row cell-level file; a ladder cannot be argued from cell medians."],
+    ['item', 'row', 'str', 'new', 'everything', 'G1a, P1b, G3a ... the RUN_MATRIX item that dispatched the row'],
+    ['arm', 'row', 'str', 'new', 'everything', 'ladder, intermediate_nested, a5null, composition_controls ...'],
+    ['receptor_slug', 'row', 'str', 'exists', 'everything', ''],
+    ['receptor_uniprot_acc', 'row', 'str', 'new', 'chain identity', "which record; Block A's panel FASTA carries two sequences each for ADRB1, FSHR and MCHR1"],
+    ['receptor_seq_sha256', 'row', 'str', 'new', 'chain identity', 'settles which of two variant sequences a row consumed. SEQ_RECEPTORS.md owns the bytes'],
+    ['receptor_species', 'row', 'str', 'new', 'cross-species audit', "SEQUENCES.md 3.3; three of C1's 64 are non-human and two of them are in the provisional CORE-32"],
+    ['partner_species', 'row', 'str', 'new', 'cross-species audit', ''],
+    ['cross_species_partner', 'row', 'bool', 'new', 'cross-species audit', 'true wherever receptor_species != partner_species. No block has ever carried this column and the three mismatches were invisible as a result'],
+    ['partner_construct_id', 'row', 'str', 'new', 'everything', 'the g1_partner_registry.tsv key, e.g. R3_ct21 / ct21@scramble#2'],
+    ['partner_seq_sha256', 'row', 'str', 'new', 'everything', 'SEQUENCES.md 0.1. Block B hashed the FASTA; Block D hashed only the nanobody chains, which is why its three non-Gs cognate arms cannot be resolved from the drop'],
+    ['n_partner_aa', 'row', 'int', 'exists (cell)', 'every rung verifiable from data', 'promote to row. Makes every rung checkable against the dispatch note rather than trusting it'],
+    ['partner_ga_family', 'row', 'str', 'new', 'family contrasts', 'Gs/Gi1/Gq/G13/Gt1...; resolved from COUPLING.md at dispatch, recorded per row'],
+    ['partner_ga_accession', 'row', 'str', 'new', 'family contrasts', 'the UniProt record the rung was sliced from'],
+    ['chain_role_json', 'row', 'str', 'new', 'multi-peptide cells', "{chain_id: receptor|partner|peptide_ligand|gbeta|ggamma} with a sha256 each. A model handed two unlabelled 21-mers can place either in the intracellular crevice; endothelin1 is 21 aa, exactly ct21's length"],
+    ['n_chains', 'row', 'int', 'new', 'R8_hetero', ''],
+    ['partner_chain_order', 'row', 'str', 'new', 'R8_hetero', 'nothing in any block establishes that the backbones are order-invariant on three chains'],
+    ['partner_msa_mode', 'row', 'str', 'new', 'the whole ladder', 'off (primary) / on (E1.9 contrast). SEQUENCES.md 6.1'],
+    ['partner_msa_depth', 'row', 'int', 'new', 'the whole ladder', "the ladder is uninterpretable without it: a 21-aa conserved query pulled 732 homologs in this project's own cache while a designed 40-mer pulled 1"],
+    ['partner_msa_depth_uniref90', 'row', 'int', 'new', 'the whole ladder', ''],
+    ['receptor_msa_depth', 'row', 'int', 'exists', 'joins to Group 8', 'on in Group 1 everywhere; varying it is Group 8'],
+    ['partner_chain_helicity_frac', 'row', 'float', 'new', 'reach vs recognition', 'DSSP H/G/I over the WHOLE supplied chain. Generalises partner_tail11_helicity_frac, which is meaningless at the 11-mer rung where the tail is the chain. tran2026nanogs: an unstapled linear alpha5 peptide is a random coil and does nothing'],
+    ['partner_helix_span_len', 'row', 'int', 'new', 'the length hypothesis', 'number of residues in the LONGEST contiguous helical run on the supplied chain. A fraction cannot express the hypothesis: the 11-mer and the 21-mer are both reported helical, differing in helix LENGTH (a short helix near the C terminus vs a long one spanning most of the 21-mer). The predicted covariate is continuous and monotone in length, not a switch'],
+    ['partner_helix_span_start', 'row', 'int', 'new', 'the length hypothesis', "first residue of that run, numbered from the supplied chain's N terminus"],
+    ['partner_helix_span_end', 'row', 'int', 'new', 'the length hypothesis', "last residue of that run. Start and end together say WHERE the helix sits, which is what distinguishes 'a short helix at the tip' from 'a long helix along the chain'"],
+    ['partner_helix_span_uniprot_range', 'row', 'str', 'new', 'the length hypothesis', 'the same span mapped onto the parent Galpha numbering, so a predicted helix can be set against a reported one without re-deriving the offset'],
+    ['partner_tail11_helicity_frac', 'row', 'float', 'exists (cell)', 'continuity with Block B', 'promote to row'],
+    ['plddt_partner_chain_mean', 'row', 'float', 'new', 'reach vs recognition', "the closest in-silico analogue of tran's CD measurement. Block B has plddt_ga_alpha5 only"],
+    ['plddt_ga_alpha5', 'row', 'float', 'exists', 'per-rung comparability', ''],
+    ['n_interface_contacts_ga_receptor', 'row', 'int', 'exists', 'engagement, not presence', ''],
+    ['d_ga_alpha5_r350_ca', 'row', 'float', 'exists', 'engagement depth', ''],
+    ['interface_score_dockq_like', 'row', 'float', 'new', 'the intermediate rungs', 'junker2026peptidedesign p16: comparing an interface score across peptides of different lengths is unsound, and p5 reports PAE OVER-estimates exactly where a GPCR peptide is misplaced. A confidence metric will not catch the failure mode; a DockQ-like score will. Defined identically from 11 to 805 residues, or reported within-rung only'],
+    ['contact_register_last5_json', 'row', 'str', 'exists (cell)', 'the register question', 'which receptor positions the last five partner residues touch. 3SN6 puts Y391 on R131(3.50); 6E67 puts E392 there'],
+    ['ras_domain_ca_rmsd_to_R7', 'row', 'float', 'new', 'R6a/R6b/R6c and M5_dHD', 'a bulk control that arrives as a molten globule is not mass-matched to anything. Gate before G3b dispatches'],
+    ['axis_npxxy', 'row', 'float', 'exists', 'the predicate', 'shipped continuously, never only as a call'],
+    ['axis_tm6', 'row', 'float', 'exists', 'the predicate', 'shipped continuously, never only as a call'],
+    ['state_call', 'row', 'str', 'derived', 'the predicate', 'a derived call, recomputable from the two axes and a stated threshold'],
+    ['active_frac_deposited', 'row', 'float', 'new', 'E1.2 exposure stratification', "yu2026domainmotion's decisive covariate is training composition (40.3 points) not the co-input (11.9/9.1). A bulk control not stratified by deposited exposure is uninterpretable on their design. Median split declared BEFORE dispatch"],
+    ['n_deposited_active', 'row', 'int', 'new', 'E1.2 exposure stratification', ''],
+    ['n_deposited_inactive', 'row', 'int', 'new', 'E1.2 exposure stratification', ''],
+    ['worse_reference_res', 'row', 'float', 'new', 'covariate, not filter', 'RUN_MATRIX 10.1: keep the resolution rule as a covariate and report the headline with and without a 3.00 A restriction'],
+    ['backbone', 'row', 'str', 'exists', 'everything', ''],
+    ['seed', 'row', 'int', 'exists', 'seed pairing', "seeds are unpaired everywhere in A-D: 1,898 distinct seed_outer across Block A's 380 cells. Pair seeds across arms within a cell or no within-seed contrast is readable"],
+    ['sample_index', 'row', 'int', 'exists', 'sample vs seed grain', 'Block D\'s "256 of 319 unanimous" is a sample-grain number read as a seed-grain one'],
+    ['ref_alpha5_tip_identity', 'row', 'float', 'new', 'the alpha5 rungs', "fraction identity between the alpha5 tip of THIS receptor's active reference and the canonical tip of the family we supplied, at the rung's own length. 0.82 at ct11 and 0.62 at ct21 for the nine mini-Gs/q receptors; 0.64 at ct11 for OPSD"],
+    ['ref_alpha5_is_canonical', 'row', 'bool', 'new', 'the alpha5 rungs', "false wherever the active reference's alpha5 tip matches no canonical human Galpha. 12 of the 64 census receptors, 6 of the provisional CORE-32. Without this column the mismatch is invisible at exactly the residues the paper is about"],
+    ['ref_alpha5_pdb', 'row', 'str', 'new', 'the alpha5 rungs', 'which deposited entry the two columns above were read from'],
+]
+
+
+# The two columns PLAN.md Pillar 0 makes blocking.  Named to match the columns
+# rows.tier3.v2.csv already carries, so the redo and the frozen campaign can be read
+# with one vocabulary rather than two.
+ADDED = [
+    ["pocket_ca_rmsd_active", "row", "float", "new", "every arm",
+     "Ca RMSD of the orthosteric pocket to the ACTIVE reference. SC-C-6 prefers this "
+     "over the binary predicate, which is floor-pinned on apo and ceiling-pinned on "
+     "cognate for ~65% of cells. Measured on Block C's rows the instrument choice "
+     "moves the ligand effect 5.5-7.9x and inflates the apparent spread BETWEEN "
+     "backbones ~5x, while leaving the partner effect's sign, direction and "
+     "significance intact. Absent from the first 47 columns; PLAN.md Pillar 0 blocking."],
+    ["pocket_ca_rmsd_inactive", "row", "float", "new", "every arm",
+     "The same, to the INACTIVE reference. Both are required, not one: the readout "
+     "that behaves is the DIFFERENCE (inactive - active), and a single distance "
+     "cannot say whether a structure moved toward active or merely away from its "
+     "reference. rows.tier3.v2.csv carries both under these names."],
+]
+
+
+def build():
+    rows = [list(r) for r in INHERITED]
+    if len(rows) != 47:
+        sys.exit(f"FAIL: expected the 47 inherited columns, have {len(rows)}")
+    names = [r[0] for r in rows]
+    for add in ADDED:
+        if add[0] in names:
+            sys.exit(f"FAIL: {add[0]} is already in the frozen 47 -- this generator "
+                     f"would duplicate it. Remove it from ADDED.")
+    return rows + ADDED
+
+
+def main(argv):
+    rows = build()
+    body = "\t".join(HEADER) + "\n" + "\n".join("\t".join(r) for r in rows) + "\n"
+    if "--check" in argv:
+        have = open(OUT, encoding="utf-8").read() if os.path.exists(OUT) else ""
+        if have != body:
+            sys.exit("FAIL: g1_recording_spec.tsv does not match this generator. "
+                     "Re-run without --check, then restamp the manifest.")
+        print(f"OK  {len(rows)} columns, file matches the generator")
+        return 0
+    open(OUT, "w", encoding="utf-8").write(body)
+    print(f"wrote {OUT}  ({len(rows)} columns: {len(rows) - len(ADDED)} inherited "
+          f"+ {len(ADDED)} added)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
