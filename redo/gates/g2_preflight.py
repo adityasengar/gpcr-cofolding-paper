@@ -227,10 +227,21 @@ def main(argv, root=None):
     # ------------------------------------------------------------- PENDING
     nd = len({(r["receptor_slug"], r["chain_b_construct"]) for r in dec})
     if dec:
-        W("the decoy pool is not built",
+        # The pool IS built (ChEMBL_37, 2026-09-12); what is missing is the
+        # SELECTION.  Derive the pool's state rather than asserting it, so this
+        # line cannot go stale in either direction again.
+        pool_built = os.path.exists(os.path.join(INPUTS, "drule_pool_molecules.tsv"))
+        W("no decoy molecule is selected yet",
           f"{len(dec)} cells across {nd} (receptor, partner) pairs point at "
-          f"{DECOY_UNRESOLVED}; needs a pinned ChEMBL release download "
-          f"(DRULE_CHEMBL_SCOPE.md) -- Aditya's decision")
+          f"{DECOY_UNRESOLVED}. The candidate pool is "
+          + ("BUILT (inputs/drule_pool_molecules.tsv, ChEMBL_37); what is "
+             "missing is redo/build/drule_select.py -- CAMPAIGN.md sec.5.3's "
+             "eight axes plus the similarity gate, cutting ~115k eligible "
+             "candidates per receptor to a handful and recording which axis "
+             "rejected each rejection"
+             if pool_built else
+             "NOT built -- run redo/build/drule_pool.py against a pinned "
+             "ChEMBL release (DRULE_CHEMBL_SCOPE.md)"))
     chain = sorted({(r["receptor_slug"], r["ligand_role_actual"]) for r in rows
                     if r["ligand_identity_status"] == "UNRESOLVED_CHAIN_NO_SEQUENCE"})
     if chain:
