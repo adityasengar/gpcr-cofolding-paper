@@ -87,7 +87,17 @@ free work first, each a stopping point that buys a complete sentence. It sequenc
 does not decide — **where it disagrees with an enumerating spec or with `inputs/`, those
 win.** The decisions it sequences are in `DECISIONS.md`.
 
-**One `[PI]` is outstanding in it and it is time-sensitive:** the interior band for the
+**TWO decisions gate everything downstream of the plan:**
+
+**1. Chain A's construct rule (`D-OPEN-2026-09-12-j`) — nothing in Group 1 or Group 2
+dispatches without it.** `chain_a_source` is `PENDING:SEQ_RECEPTORS.md` on all 2,389
+rows. **Do not read that as drift and wire it** — I did, on 2026-09-12, and was wrong.
+The sequences exist for all 64 receptors, but *which* sequence to supply is an untaken
+PI decision (`SEQ_RECEPTORS.md` §3.1), and `seqrec_trimmed.fasta` as built is option
+(c), the one the spec calls indefensible — it leaves 29 of 32 signal residues on 5HT2C
+and 1 of 20 on EDNRA.
+
+**2. The `[PI]` band, and it is time-sensitive:** the interior band for the
 pre-registered adaptation rule (D-2026-09-12-i), which decides the cognate rung for the
 ligand crossing from the Group 1 ladder. **It must be recorded with its date BEFORE any
 ladder result exists** — a band written afterwards is not a pre-registration, whatever

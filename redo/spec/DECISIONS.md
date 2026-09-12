@@ -999,6 +999,66 @@ that refuses in each case.
 
 ---
 
+## D-OPEN-2026-09-12-j · Chain A's construct rule was never decided, and the built artefact silently enacts the option the spec calls indefensible
+
+**OPEN. Aditya's decision. Recorded here because it was invisible in this file, which
+is how it went un-taken for a day while everything downstream said `PENDING` and nobody
+read the PENDING as a question.**
+
+### What I got wrong, on 2026-09-12
+
+I told Aditya that `chain_a_source = PENDING:SEQ_RECEPTORS.md` on all 2,039 Group 1 and
+350 Group 2 rows was **a stale label** — that `seqrec_*.tsv` had since landed covering
+64 of 64 receptors, so the generator simply needed rewiring, no decision required.
+
+**That was wrong.** `SEQ_RECEPTORS.md` §3.1 states it plainly: *"it is a recommendation
+and not a decision … the choice belongs to the PI."* The sequences exist; **which
+sequence to supply does not.**
+
+### And the built artefact is currently option (c)
+
+§3.1 costs three options and names (c) — applying §4's terminal cap with no separate
+signal-peptide rule — as *"the worst option and the numbers say so"*. **That is what
+`seqrec_trimmed.fasta` currently is.** Measured from `seqrec_trim.tsv`:
+
+| receptor | signal | trim_start | signal residues surviving |
+|---|---|---:|---|
+| **5HT2C** | 1–32 | 4 | **29 of 32** |
+| **EDNRA** | 1–20 | 20 | **1 of 20** |
+| EDNRB | 1–26 | 41 | 0 |
+| FSHR | 1–17 | 312 | 0 |
+| LSHR | 1–26 | 309 | 0 |
+| TSHR | 1–20 | 364 | 0 |
+
+Four clean; **two left as fragments.** The spec's own words: *a fragment of a signal
+peptide is neither the leader nor its absence; it is an artefact of an unrelated rule.*
+
+**So wiring `chain_a_source` at the built fasta — exactly what I proposed doing — would
+have enacted the indefensible option across 2,389 rows with no decision recorded
+anywhere.** The PENDING label was doing real work and I read it as drift. This is the
+inverse of the failure class I have been chasing all day: not a stale label mistaken for
+a live guard, but **a live guard mistaken for a stale label.** Both are cured the same
+way — read what the label points at before believing it.
+
+### The decision
+
+| option | supplies | cost | risk |
+|---|---|---|---|
+| **(a) full canonical** | 1–L | zero; continues Blocks A–D | ~20–32 residues of hydrophobic leader in no reference structure; on TSHR it precedes a 394-residue ectodomain |
+| **(b) remove the annotated signal peptide, BEFORE the cap** — *the spec's recommendation* | `CHAIN` start–L | one line; hashes already computed in `seqrec_receptors.tsv:mature_sha256`; six core sequences change | four of the six boundaries are **predicted**, not observed — removing a predicted boundary is a judgement dressed as data |
+| **(c) status quo** | cap only | zero | **the two fragments above. Not defensible, per the spec.** |
+
+**Required either way, and independent of which is chosen:** record
+`signal_peptide_removed ∈ {true,false}` **per row**. No block has ever carried it and
+**the question cannot be answered afterwards from a length.**
+
+### Until it is taken
+
+`chain_a_source` stays `PENDING:SEQ_RECEPTORS.md` and **nothing in Group 1 or Group 2
+dispatches.** That is correct behaviour, not a bug, and this entry exists so the next
+session reads the PENDING as a question rather than as rot.
+
+---
 ## D-2026-09-12-i · The campaign has a plan of record, and ONE adaptive parameter with a pre-registered rule
 
 **Aditya, 2026-09-12.** The ordering lives in `redo/spec/PLAN.md` — five pillars, free
