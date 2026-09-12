@@ -16,6 +16,71 @@ requirement on the redo.
 
 ---
 
+## D-2026-09-12-b · D-H CLOSED — B1B1U5 stays, at 9EPP, as (c′); (e′) offered as an extension arm
+
+**Aditya, 2026-09-12.** On the recommendation of `spec/D_H_RESOLUTION.md` §7.
+
+**(c′).** B1B1U5 stays in the **PRIMARY** panel, which remains **30 receptors /
+29 clusters**. Its `cognate_family` is **Gq** — the deposited tip is genuinely
+jumping-spider Gαq1 (INSDC `LC799818`) and the experimenters' design intent was
+Gq. Its `reference_tip` is **9EPP**, recorded explicitly as a spider-Gq-tipped
+chimera on a human Gαi1 backbone.
+
+**Methods must state that no native complex exists for this receptor.** 9EPP is a
+chimera; 9EPR is human Gαi1 from *E. coli* reconstituted *in vitro* with **bovine**
+Gβ1γ1. **`PANEL.md` Rule 4 is therefore INAPPLICABLE here, not merely
+unimplemented** — its second clause requires a native option to demote to. Rule 4
+stays on the books, scoped, and still unimplemented in code for the cases where it
+*can* fire.
+
+**(e′)** — supply the **spider** Gαq1 α5-CT instead of the human one — is an
+EXTENSION arm, deliberately outside the primary ladder because it puts a
+non-human partner into a human-partner ladder. It is **constructible only to 17
+residues** (ceiling 18, the whole recorded segment): `tejero2024opsin` p10 records
+18 spider residues and we do not hold `LC799818` itself, so `ct19`, `ct21`,
+`a5helix`, `a5plus` and the full subunit are **not built and not invented**. In
+particular the deposited 21-mer is *not* a spider 21-mer — its first three
+residues are human backbone. `D_H_RESOLUTION.md` §9.2 has the rung table;
+`g1_partner_registry.tsv` has the constructs, `spidertip_*`.
+
+**Three statements this closes and corrects.**
+
+- ~~"Three documents say 9EPR; the frozen artefact says 9EPP"~~ — the artefact was
+  right. What said 9EPR was `PANEL.md`'s own prose contradicting its own §6.1
+  table, plus two documents repeating it.
+- ~~"the 0.86 tip is engineered"~~ — it is **species divergence**. RCSB's own
+  `pdbx_mutation` for `9EPP_2` reproduces the spider segment from human Gαi1
+  exactly, so this is checkable without the paper, and `gates/panel_verify.py`
+  now checks it.
+- ~~"invertebrate visual opsins are canonically Gq"~~ — **no locator**, and it
+  must not be used as evidence (D_H_RESOLUTION §6f).
+
+**A second defect found while implementing it.**
+`g1_panel_freeze.tsv:supplied_partner_independence` claimed **"annotation only —
+independent of the structure"** for **B1B1U5 and OPSD**, both PRIMARY. Neither has
+any non-structure coupling authority: `coupling_assignments.csv` gives both
+`n_authorities = 1`, and that authority is `authority_structure`. The column whose
+whole purpose is to keep biology and structure apart was asserting independence
+where the two are the same evidence. Fixed in the generator; both rows now say so.
+
+**What is unblocked, and what is not.** B1B1U5's ligand curation is no longer
+blocked on D-H, and F-11's shared-CCD trap turns out not to apply to it — 9EPP's
+agonist is `A1H6M` (11,20-ethanoretinal), the 6I9K inverse agonist is `RET`
+(11-cis retinal). What still blocks it is **amendment §C-1**, which dropped
+`inverse_agonist` from Tier 3, and the fact that the existing curated agonist row
+is keyed to 9EPR. Both are decisions, not chemistry. `LIGAND_CURATION_PROPOSAL.md`.
+
+**What still makes this uncomfortable, recorded rather than resolved.**
+`tejero2024opsin` reports that TM5/TM6 open **further** in the chimera complexes
+than in the hGi complex and argues the Gα subtype sets the extent of TM6
+movement — the axis our predicate measures. Both chimera models are also
+incomplete at the cytoplasmic end of TM6, at 4.06/4.15 Å against 9EPR's 4.9 Å.
+This does not argue for 9EPR, which is not native and worse-resolved; it means
+**B1B1U5's reference geometry is the least trustworthy in the primary panel**,
+and it deserves a per-receptor sensitivity check in the measurement pass.
+
+---
+
 ## D-2026-09-12 · Four campaign decisions, from `CAMPAIGN.md` §10
 
 **Aditya, 2026-09-12.** All four taken on the recommendation.
@@ -63,7 +128,7 @@ a SMILES string too.
 | **ADRB1** | `001_001_003` | antagonist | placeholder row |
 | **HRH3** | `001_001_005` | agonist | placeholder row |
 | **OPSD** | `001_009_001_vert` | antagonist | **may be impossible — see below** |
-| **B1B1U5** | `001_009_001_inv` | antagonist | **may be impossible — see below** |
+| **B1B1U5** | `001_009_001_inv` | antagonist | **not blocked by chemistry after all** — D-2026-09-12-b |
 
 Curate in that order; the first five carry the value.
 
@@ -74,11 +139,12 @@ through a Schiff base. `PANEL.md` §10 already records these two among four that
 Block C could not run, "and the reason is chemical, not operational."
 **If they fail, k = 13 and MDE = 0.338** — still worth curating the other five.
 
-**Coupling to D-H, not previously noted:** B1B1U5's curated agonist row is keyed to
-**9EPR** — the very structure D-H is deciding between. Resolving D-H toward 9EPP
-would leave the ligand curation and the cognate reference pointing at different
-structures for the same receptor. **Resolve D-H first**, then curate B1B1U5
-against whichever structure wins.
+**Coupling to D-H — now closed, see D-2026-09-12-b.** B1B1U5's curated agonist row
+is keyed to **9EPR**, and D-H resolved to **9EPP**, so that row now points at a
+structure the panel does not use. It must be re-keyed or explicitly marked
+off-reference before it is curated. The *antagonist* candidate on `6I9K` is clean
+and carries a different CCD from 9EPP's agonist, so the "both roles are `RET`"
+objection above is **true for OPSD and false for B1B1U5**. {ref-history}
 
 **D-D — build a defensible decoy rule, gate it, and run the arm only after the
 rule's own search has reported a pool size.** Reason: it bears on no title clause,
@@ -98,6 +164,81 @@ observed, with a stated fallback (six-axis rule, or k=2 decoys). For planning on
 **D-H — resolve the 9EPP/9EPR reference question rather than dropping B1B1U5.**
 Reason: the 1.8% interval penalty is not the issue; dropping it halves the Gq arm
 to n = 1, and a panel cannot be called a census with an unresolved member in it.
+**→ RESOLVED the same day; see D-2026-09-12-b above. Outcome: option (c′) —
+9EPP stays, cognate stays Gq, panel stays 30 / 29, and Rule 4 turns out to be
+inapplicable rather than unimplemented.**
+
+---
+
+## D-2026-09-12-c · D-A RESOLVED — the conjunction, one axis calibrated, one inherited and validated
+
+**Aditya, 2026-09-12**, re-decided on correct information after F-1 was retracted.
+This supersedes the earlier D-A entry, which was taken on the false premise that
+the two-instrument predicate never ran.
+
+**THE DECISION. Class A keeps the conjunction — `NPxxY-OH < 9.08 AND tilt >
+14.932` — which is what actually ran. Group 0 calibrates NPxxY and NOT the tilt.
+The tilt threshold is inherited from `paper_af3` with its provenance stated, and
+validated on the apo/cognate contrast rather than calibrated against any label.**
+
+### Why the tilt is not calibrated
+
+Every ground truth available to Group 0 for that axis is circular or retracted:
+
+| candidate truth | why it fails |
+|---|---|
+| `state` (GPCRdb) | **the label is defined using this same atom pair**, 2×46–6×37 ≤ 11.9 Å |
+| `transducer_type` | the Q0c circularity Aditya retracted; `G0-6` guards its return |
+| `activation_degree` | same retraction |
+| RMSD to a reference | calibration structures are off-panel and have **no reference pair**; and choosing which reference is "active" is itself a state label |
+
+**My earlier option (c) — "calibrate the tilt against RMSD-nearest-reference" — is
+withdrawn. It is circular one step removed**, and I proposed it before checking
+that the data existed. It does not.
+
+### What replaces calibration, and why it is stronger
+
+**F-13's apo table validates the threshold without any label entering.** On Class A
+the apo arm sits at tilt medians ~12 Å with only **3–15 of 40** cells above 14.932,
+while the cognate arm calls **83–94%** active. That separation comes from an
+**experimental manipulation — partner present or absent** — so no GPCRdb definition
+participates and no circularity is possible.
+
+**We can therefore say the threshold demonstrably separates apo from cognate on
+Class A, without claiming to have derived it.** Methods states plainly that we did
+not re-derive it because every available reference would have been defined using
+the same measurement.
+
+**The cost, stated rather than hidden:** we cannot claim a calibrated tilt.
+Claiming a clean calibration we cannot have would be worse.
+
+### Scope — Class A ONLY
+
+F-13 showed the tilt fails outside Class A:
+
+- **Class B** — Boltz and Protenix put apo at ~12 Å, Chai and OF3 at ~20 Å. A **9 Å
+  disagreement about the same receptors with no partner.** No pooled Class B rate.
+- **Class F** — apo medians 14.20–16.12 straddle the 14.932 cut on **every**
+  backbone. No discriminating power. Confirms the standing gate WAIT: re-measure on
+  2×44–6×31 or drop the arm.
+
+**So the conjunction is a Class A instrument. B and F are separate decisions and
+must not inherit this one.**
+
+### Consequences to carry
+
+- **`excl_npxxy_undefined` is set at DISPATCH from the anchor table, never
+  discovered at scoring time.** Under a conjunction a missing NPxxY forces
+  "inactive" on every row — which is how EDNRB and GRPR contributed 28% of the
+  frozen campaign's errors from 5% of its rows (F-10). The exclusion is an input,
+  not an outcome.
+- **EDNRB and HRH3** are NPxxY-blind on the frozen panel. They are excluded from
+  the binary rate, named in the figure caption, and **kept in every other arm** —
+  both continuous axes, ladder geometry, engagement depth, partner pLDDT. Only the
+  state call is withheld. **No tilt fallback for them**: calling 2 of 30 receptors
+  on a different instrument from the other 28 is the pooled-instrument defect the
+  frozen manuscript already carries.
+- **The Cα variant is the coverage arm**, applied to all 30 receptors or to none.
 
 ---
 
@@ -358,6 +499,75 @@ the wrong version.
 
 ---
 
+## F-13 · The apo arm: Class B is not saturated, but the backbones disagree by 9 Å — and the Class F threshold has no discriminating power at all
+
+`paper_af3` sent `two_instrument_state_calls_apo.csv` (sha256 `361ce5a2…`) after
+Aditya signed off in their session. It was requested to settle one question and
+answered three.
+
+**The question asked — is Class B saturated? No.** Cognate 1.000 against apo 0.250
+on Boltz and Protenix is a large, real separation. The Class B result is not an
+artefact of an instrument that calls everything active.
+
+**But two backbones show ZERO separation, on both B and F:**
+
+| class | backbone | cognate | apo | gap |
+|---|---|---:|---:|---:|
+| B | boltz | 1.000 | 0.250 | +0.750 |
+| B | chai | 1.000 | 0.750 | +0.250 |
+| **B** | **of3** | **1.000** | **1.000** | **0.000** |
+| B | protenix | 1.000 | 0.250 | +0.750 |
+| **F** | **of3** | **1.000** | **1.000** | **0.000** |
+
+### (a) Class B — the backbones disagree by 9 Å on the same input
+
+Apo tilt medians, same four receptors, same apo input, threshold 14.932:
+
+| backbone | median apo tilt | above threshold |
+|---|---:|---:|
+| boltz | **12.38** | 1/4 |
+| protenix | **12.53** | 1/4 |
+| chai | **21.47** | 3/4 |
+| of3 | **19.60** | 4/4 |
+
+**Boltz and Protenix predict Class B apo receptors CLOSED at ~12 Å; Chai and OF3
+predict them OPEN at ~20 Å.** That is an **8–9 Å disagreement about the same
+receptors with no partner supplied** — larger than the active/inactive separation
+the threshold was built to detect. This is not a threshold problem; it is two
+backbones and two backbones predicting different structures.
+
+**Requirement:** the redo cannot report a pooled Class B rate. A number averaged
+over backbones that disagree this violently describes nothing.
+
+### (b) Class F — the threshold sits inside the apo distribution, on every backbone
+
+Apo tilt medians run **14.20, 15.09, 16.10, 16.12** against a **14.932** cut. Every
+backbone straddles it. **The Class A-derived threshold has no discriminating power
+on Class F at all**, regardless of backbone.
+
+**This empirically confirms the standing `g0_preflight` WAIT** ("the redo must
+measure class F tilt on 2×44–6×31, not 2×46–6×37, or drop the class F arm"). That
+was a geometric argument; this is the measurement. **Class F as currently
+instrumented cannot distinguish apo from cognate.**
+
+### (c) SMO gets LESS open when the partner is added
+
+`SMO` apo tilt 18.38, cognate 16.24 — **−2.14 Å in the direction opposite to the
+hypothesis**. `FZD7` is also negative (−0.07, negligible). Two of three Class F
+receptors do not move the way the model predicts, which is consistent with (b):
+the axis is not measuring activation on this class.
+
+### Bearing on D-A
+
+The tilt is one of the two instruments in the conjunction. **On Class A it behaves
+well** — apo medians ~12 with only 3–15 of 40 above threshold, so the cut
+discriminates. **It is on B and F that it fails**, which is where it is used
+*alone* (B adds the kink post-fix; F is tilt-only). So D-A's choice about the Class
+A conjunction is not undermined by this — but any decision to extend the tilt to
+Class B or F is.
+
+---
+
 ## F-12 · F3 may be discarding the inactives nearest the decision boundary — PRELIMINARY, n = 4
 
 **Status: a signal worth testing, not a finding.** Stated with its n so it cannot be
@@ -430,9 +640,25 @@ carrying CCD `RET`, GPCRdb ships **three distinct isomer names**:
 **11-cis is the inverse agonist and all-trans is the agonist, and they share a CCD
 because they are isomers of one compound.** Any pipeline keyed on CCD alone sees one
 ligand where there are two pharmacological opposites. **Requirement: curate retinal
-by isomer name, never by CCD.** This is what my
-`ligand_curation_candidates.tsv` surfaced as OPSD and B1B1U5 having `RET` in both
-roles — real photochemistry, not a curation artefact.
+by isomer name, never by CCD.**
+
+**CORRECTED 2026-09-12 — I reported the candidate POOL's property as the reference
+PAIR's, and they differ.** I wrote that OPSD and B1B1U5 both carry `RET` in both
+roles. True of every structure of those receptors; **false of the pairs we actually
+score against**, which is the only scope curation cares about:
+
+| receptor | active ref | its ligand | inactive ref | its ligand |
+|---|---|---|---|---|
+| **B1B1U5** | `9EPP` | **11,20-ethanoretinal, `A1H6M`**, Agonist | `6I9K` | 11-*cis* retinal, `RET`, Inverse agonist |
+| OPSD | `4X1H` | β-nonylglucoside — a **detergent** | `7ZBC` | 11-*cis* retinal, `RET`, Inverse agonist |
+
+**B1B1U5 is therefore NOT blocked by the shared-CCD problem.** Its two reference
+ligands are chemically distinct and carry different codes. **OPSD is blocked, but
+for a different reason than I gave** — its active reference carries no agonist at
+all, only a detergent. A missing-ligand problem, not an isomer one.
+
+The general finding is untouched: across all 41 `RET` entries, 11-*cis* is the
+inverse agonist and all-*trans* the agonist.
 
 **(b) 9EPR's isomer name is wrong in GPCRdb.** `tejero2024opsin` p2 states 9EPR was
 reconstituted with **9-cis retinal and illuminated at 495 nm** to activate it, so

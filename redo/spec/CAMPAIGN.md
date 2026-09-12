@@ -1047,6 +1047,22 @@ Each with options, cost, a recommendation, and the reason. Ordered by what block
 | (b) Build a second instrument and justify it | days of Group 0 work | The only honest way to keep a conjunction. The tilt is the wrong candidate (no dynamic range; circular on the same atom pair as GPCRdb's inactive pole). A genuinely independent second axis would have to be new. |
 | (c) Keep the two-instrument description | free | Not available. It describes a predicate that produced no data. |
 
+> **SUPERSEDED 2026-09-12. This section's premise is false and the decision went the
+> other way.** It was written while F-1 claimed the two-instrument conjunction never
+> ran. **It ran** — Block A reproduces Class A as `npxxy AND tilt` at 100.0% on
+> 7,995 rows. Option (c) above ("keep the two-instrument description — not
+> available") was therefore wrong, and option (a) was chosen for a reason that no
+> longer exists.
+>
+> **The decision taken is: keep the conjunction for Class A, calibrate NPxxY,
+> inherit the tilt threshold with its provenance stated, and validate it on the
+> apo/cognate contrast instead of calibrating it** — because every ground truth
+> available to Group 0 for that axis is circular or retracted. Class A only: F-13
+> shows the tilt fails on Class B (9 Å inter-backbone disagreement) and has no
+> discriminating power on Class F.
+>
+> Authority: `DECISIONS.md` → **D-2026-09-12-c**.
+
 **Recommendation: (a).** Report both axes continuously, call the state from NPxxY-OH, and
 say in Methods why the tilt is reported and not conjoined. It is the defensible version of
 what actually ran, and E0.4 already carries the robustness sweep.
@@ -1128,22 +1144,30 @@ its recommendations**, and I restate them here only with what each costs *this* 
 non-pairing backbone and is therefore the F-5 falsification. At 0.03% of the core's cost
 this is not a budget question.
 
-### D-H. B1B1U5 — does it stay on the panel?
+### D-H. B1B1U5 — does it stay on the panel?  **RESOLVED 2026-09-12: yes, option (c′).**
 
-It is the jumping-spider opsin, sole member of cluster `001_009_001_inv`, and it has **no
-defensible cognate Gα**: Block B assigned Gi, invertebrate visual opsins are canonically
-Gq, and `COUPLING.md`'s structure-read rule gives **Gq via 9EPP** — but `PANEL.md`'s Rule R
-step 4 points at **9EPR**, which would flip it back to Gi1 and force the cognate map to be
-rebuilt. `GROUP1_SYSTEMS.md` D6 states it plainly: *resolve it, or the receptor leaves the
+It is the jumping-spider opsin, sole member of cluster `001_009_001_inv`. Its cognate Gα
+was contested: Block B assigned Gi and `COUPLING.md`'s structure-read rule gives **Gq via
+9EPP**. `GROUP1_SYSTEMS.md` D6 stated it plainly: *resolve it, or the receptor leaves the
 panel.*
 
 | option | cost | consequence |
 |---|---|---|
-| resolve the 9EPP / 9EPR reference question | free, panel session | Keeps 30 receptors / 29 clusters. |
-| **drop B1B1U5** | −1 receptor, −1 cluster; pooled half-widths × √(29/28) = 1.018 | Also removes one of the two Gq receptors, leaving Gq at n = 1. |
+| **resolve the reference question** ← **TAKEN** | free, panel session | Keeps 30 receptors / 29 clusters. |
+| drop B1B1U5 | −1 receptor, −1 cluster; pooled half-widths × √(29/28) = 1.018 | Also removes one of the two Gq receptors, leaving Gq at n = 1. |
 
 **Recommendation: resolve it.** A 1.8% interval penalty is not the issue; halving the Gq
 arm is. And the panel cannot be called a census with an unresolved member in it.
+
+**Outcome, and two things this framing got wrong.** Aditya chose **(c′)**: reference
+**9EPP**, `cognate_family` **Gq**, recorded as a spider-Gαq1-tipped chimera on a human
+Gαi1 backbone, with **(e′)** — supply the spider α5 instead of the human one — offered as
+an extension arm. Panel unchanged at 30 / 29. The two errors above, both corrected in
+`D_H_RESOLUTION.md`: (1) ~~Rule R step 4 points at 9EPR~~ — step 4 requires a native
+transducer to demote to, and **there is none**, so it never fires; (2) ~~invertebrate
+visual opsins are canonically Gq~~ — that claim has **no locator** in our corpus and must
+not be used as evidence. The Gq assignment rests on the deposited spider-Gq tip and the
+depositors' stated design intent, not on a canon. {ref-history}
 
 ### D-G. Do we ask `paper_af3` for `rows.tier3.v2.csv` at all?
 

@@ -106,6 +106,28 @@ measured-axis columns they can actually produce. Blocks A–D each cost a bespok
 verifier — 63, 116, 69 and 54 checks — because their shape was settled after the
 data existed. These runs do not exist yet.
 
+## PROPOSED FOR THE LIT SESSION — the corpus check can never pass
+
+**Not actioned: `lit/corpus_check.sh` is lit's file and the orchestrator does not
+write `lit/**`.** Recorded here so it is not lost.
+
+`verify.sh` has printed `corpus — drift reported` on every run since the four
+deliberately-unread `refs.bib` entries were added (`mafi2022precoupled`,
+`nobles2005precoupling`, `qin2011preassembly`, `youngyang2024tas2r5`).
+`corpus_check.sh` classifies "refs.bib entry with NO paper behind it" as **hard**
+drift, so it sets `fail=1` and the script can never exit 0.
+
+**The entries are correct and the guard is working** — they exist so that citing an
+unread paper fails loudly. The problem is that the check has no way to say
+"expected". Its own comment warns that reporting phantom problems "trains the
+reader to ignore this check", which is exactly what has happened: a permanently
+red line in `verify.sh` that everyone steps over.
+
+**Proposed fix, either would do:** exempt those four citekeys by name, or
+demote that one report from hard to soft (`report ... ` without the `hard`
+argument, as the "note with no PDF" report already does). The second is probably
+better — it keeps the list visible without failing the run.
+
 ## Overnight 2026-09-12 — what changed, and three retractions
 
 Autonomous curation run, no compute, no git. Full log:
@@ -118,8 +140,11 @@ Autonomous curation run, no compute, no git. Full log:
    *within* the motif instrument, five metrics to one — not a collapse of two
    instruments to one. `paper_af3` located the conjunction in
    `block_a_campaign_analysis.py::two_instrument_state_calls()`, on
-   per-receptor-backbone medians. **Decision D-A was taken on the false premise and
-   must be re-decided.**
+   per-receptor-backbone medians. **D-A has now been RE-DECIDED on correct
+   information — see `DECISIONS.md` D-2026-09-12-c: the conjunction is kept for
+   Class A, NPxxY is calibrated, the tilt threshold is inherited with its
+   provenance stated and validated on the apo/cognate contrast rather than
+   calibrated. Class A only.**
 2. **P7's first answer was wrong** — an unweighted mean over receptors with one
    error each. Corrected, the null holds.
 3. **28% of the campaign's errors are mechanical.** EDNRB and GRPR have no NPxxY
