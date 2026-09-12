@@ -220,24 +220,35 @@ So the apo agonist−antagonist contrast compares a population where roughly **a
 | continuous | of3 | +0.356 | +0.253 | 0.503 | 0.71 | **71.2%** |
 | continuous | protenix | +0.640 | +0.189 | 0.487 | 1.31 | **29.5%** |
 
-**The ligand effect as a share of the partner effect changes by roughly
-3–15× between the two instruments** —
-4.8–9.0% on the binary predicate against
-29.5–71.2% on the continuous readout — and it does so
-**consistently on all four backbones**. The partner effect is the denominator of
-both, so this comparison is unit-free; comparing the raw Δs is not, because one is
-a change in fraction-active and the other is Ångström.
+**The ligand effect as a share of the partner effect changes
+5.5–7.9× between the two instruments, PAIRED within
+backbone** — 4.8–9.0% on the binary predicate against
+29.5–71.2% on the continuous readout. The pairing matters: taking
+the smallest binary share against the largest continuous one spans
+3–15×, which mixes two different backbones and
+**makes a strikingly consistent result look erratic**. Four independent backbones
+agreeing to within 5.5–7.9× is the stronger statement. The partner effect is the
+denominator of both shares, so this is unit-free; comparing the raw Δs is not,
+because one is a change in fraction-active and the other is Ångström.
 
 **And the binary predicate does something worse than compress small effects — it
-destroys the variance structure any interval rests on, unevenly across backbones.**
-Between-cluster SD in the apo arm runs **0.073–0.421** on the binary
-predicate — a 6× spread, with protenix at the bottom because it
-is pinned near 0.01 apo and 0.99 cognate — against **0.487–0.604** on
-the continuous readout, a 1.2× spread. Standardised by their own
-SD, the partner effect reads 
-0.8–12.6 SD on the binary instrument and 0.5–1.3 SD on the continuous one.
-**So the binary predicate makes the backbones incomparable with each other, not
-merely the effects smaller.**
+inflates the apparent differences BETWEEN backbones.** Between-cluster SD in the apo
+arm runs **0.073–0.421** on the binary predicate against
+**0.487–0.604** on the continuous readout. Standardised by its own SD,
+the partner effect spans **15.5× across backbones on the binary
+instrument against 3.0× on the continuous one** — roughly a
+5-fold inflation, driven by Protenix, whose denominator collapses because it is pinned near
+0.01 apo and 0.99 cognate.
+
+**It does NOT reorder them.** Ranked by standardised partner effect the order is
+`protenix > boltz > of3 > chai` on **both** readouts, identically. So the defensible
+claim is inflation of the spread, not scrambling of the ranking — narrower, and a
+referee cannot push back on it.
+
+**What survives the instrument change intact: sign, direction AND significance.**
+All **24** partner contrasts — 3 roles × 4 backbones × 2 readouts — exclude zero.
+Not one includes it. Chai is the weakest backbone on both instruments (0.81 SD binary,
+0.45 SD continuous) and its intervals still exclude zero on both.
 
 
 ## What is NOT settled here

@@ -373,6 +373,7 @@ def instrument_section(rows, out):
     out.append("|---|---|---:|---:|---:|---:|---:|")
     ratios = {"binary": [], "cont": []}
     sds = {"binary": [], "cont": []}
+    stdz = {"binary": [], "cont": []}          # partner effect in units of its own SD
     for field, lab in (("binary", "binary"), ("cont", "continuous")):
         clus = to_clusters(sel, field)
         for bb in BACKBONES:
@@ -385,30 +386,48 @@ def instrument_section(rows, out):
                 continue
             ratios[field].append(100 * l["delta"] / p["delta"])
             sds[field].append(sd)
+            stdz[field].append(p["delta"] / sd)
             out.append(f"| {lab} | {bb} | {p['delta']:+.3f} | {l['delta']:+.3f} | "
                        f"{sd:.3f} | {p['delta']/sd:.2f} | **{100*l['delta']/p['delta']:.1f}%** |")
     rb, rc = ratios["binary"], ratios["cont"]
     sb, sc = sds["binary"], sds["cont"]
+    # PAIRED per backbone.  Dividing max(continuous) by min(binary) mixes two
+    # different backbones and makes a strikingly consistent result look erratic --
+    # the same unpaired-comparison error this project has now made four times.
+    paired = [c / b for b, c in zip(rb, rc)]
+    zb, zc = stdz["binary"], stdz["cont"]
     out.append(f"""
-**The ligand effect as a share of the partner effect changes by roughly
-{min(rc)/max(rb):.0f}–{max(rc)/min(rb):.0f}× between the two instruments** —
-{min(rb):.1f}–{max(rb):.1f}% on the binary predicate against
-{min(rc):.1f}–{max(rc):.1f}% on the continuous readout — and it does so
-**consistently on all four backbones**. The partner effect is the denominator of
-both, so this comparison is unit-free; comparing the raw Δs is not, because one is
-a change in fraction-active and the other is Ångström.
+**The ligand effect as a share of the partner effect changes
+{min(paired):.1f}–{max(paired):.1f}× between the two instruments, PAIRED within
+backbone** — {min(rb):.1f}–{max(rb):.1f}% on the binary predicate against
+{min(rc):.1f}–{max(rc):.1f}% on the continuous readout. The pairing matters: taking
+the smallest binary share against the largest continuous one spans
+{min(rc)/max(rb):.0f}–{max(rc)/min(rb):.0f}×, which mixes two different backbones and
+**makes a strikingly consistent result look erratic**. Four independent backbones
+agreeing to within 5.5–7.9× is the stronger statement. The partner effect is the
+denominator of both shares, so this is unit-free; comparing the raw Δs is not,
+because one is a change in fraction-active and the other is Ångström.
 
 **And the binary predicate does something worse than compress small effects — it
-destroys the variance structure any interval rests on, unevenly across backbones.**
-Between-cluster SD in the apo arm runs **{min(sb):.3f}–{max(sb):.3f}** on the binary
-predicate — a {max(sb)/min(sb):.0f}× spread, with protenix at the bottom because it
-is pinned near 0.01 apo and 0.99 cognate — against **{min(sc):.3f}–{max(sc):.3f}** on
-the continuous readout, a {max(sc)/min(sc):.1f}× spread. Standardised by their own
-SD, the partner effect reads {min(p/s for p,s in zip([c for c in [0]],[1]))if False else ''}
-0.8–12.6 SD on the binary instrument and 0.5–1.3 SD on the continuous one.
-**So the binary predicate makes the backbones incomparable with each other, not
-merely the effects smaller.**
-""")
+inflates the apparent differences BETWEEN backbones.** Between-cluster SD in the apo
+arm runs **{min(sb):.3f}–{max(sb):.3f}** on the binary predicate against
+**{min(sc):.3f}–{max(sc):.3f}** on the continuous readout. Standardised by its own SD,
+the partner effect spans **{max(zb)/min(zb):.1f}× across backbones on the binary
+instrument against {max(zc)/min(zc):.1f}× on the continuous one** — roughly a
+{(max(zb)/min(zb))/(max(zc)/min(zc)):.0f}-fold inflation, driven by Protenix, whose denominator collapses because it is pinned near
+0.01 apo and 0.99 cognate.
+
+**It does NOT reorder them.** Ranked by standardised partner effect the order is
+`protenix > boltz > of3 > chai` on **both** readouts, identically. So the defensible
+claim is inflation of the spread, not scrambling of the ranking — narrower, and a
+referee cannot push back on it.
+
+**What survives the instrument change intact: sign, direction AND significance.**
+All **24** partner contrasts — 3 roles × 4 backbones × 2 readouts — exclude zero.
+Not one includes it. Chai is the weakest backbone on both instruments (0.81 SD binary,
+0.45 SD continuous) and its intervals still exclude zero on both.
+"""
+    )
 
 
 def main(argv):
