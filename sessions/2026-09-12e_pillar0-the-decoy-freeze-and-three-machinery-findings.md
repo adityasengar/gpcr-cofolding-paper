@@ -1,15 +1,25 @@
-# 2026-09-12 (e) — C7 answered, the decoy arm frozen, and three findings about our own machinery
+# 2026-09-12 (e) — C7 CLAIMED AND RETRACTED, the decoy arm frozen, and four findings about our own machinery
+
+> **CORRECTED LATER THE SAME DAY.** This log was written titled *"C7 answered"* and
+> that claim is **withdrawn** — `DECISIONS.md` **F-23**. All 40,800 rows of
+> `rows.tier3.v2.csv` carry a ligand, so the agonist alone was never predicted and
+> that file cannot answer C7. The original headings are left visible below rather
+> than rewritten, because a session log that quietly corrects itself is worth less
+> than one that shows what was believed and when.
 
 Orchestrator session, continuing into an autonomous run while Aditya was away. No
-block landed and no compute was commissioned. **The scientific payload is that C7 —
-one of the paper's three title clauses — is answered from data we already held.**
+block landed and no compute was commissioned. **The payload I thought I had was that
+C7 was answered from data we already held. It was not** — see the banner. What the day
+actually produced: the partner result hardened through four corrections, an instrument
+comparison that survives the retraction, the decoy arm frozen, and **four** findings
+about our own machinery, the last of which is the retraction itself.
 
 ## What happened
 
 | | |
 |---|---|
 | **Pillar 0's mining** | **COMPLETE.** Steps 3–6 done: cluster unit, cluster bootstrap, continuous readout, seeds, opsins |
-| **C7** | **ANSWERED** — and the two instruments disagree about the effect's size by 5.5–7.9× |
+| ~~**C7**~~ | ~~ANSWERED~~ **RETRACTED, F-23.** What was measured is agonist vs neutral antagonist at fixed partner condition. The two-instrument finding survives and does not depend on C7 |
 | **The decoy arm** | rule amended twice, refused at 11 of 15 clusters, then run as **EXPLORATORY at k = 11** and **FROZEN** — 26 checks, 26 proved, three digests |
 | **The campaign** | got a plan of record (`PLAN.md`), one pre-registered adaptive parameter, and a triaged registry |
 | **`ASKS.md`** | new — the standing register of what is owed by Aditya, by `paper_af3`, by lit |
@@ -47,7 +57,7 @@ real peptide runs at, and **only the cognate rung is adaptive** — selected on
 
 - **The headline survives every correction asked of it.** 24 of 24 partner contrasts —
   3 roles × 4 backbones × 2 readouts — exclude zero, under both opsin variants.
-- **The C7 result survives its most obvious confound.** In apo the off-site rate is
+- **The agonist−antagonist contrast survives its most obvious confound** *(written as "the C7 result"; relabelled after F-23).* In apo the off-site rate is
   severely role-asymmetric (agonist 29.3%, antagonist 1.6%), so a third of agonist rows
   have no agonist in the pocket. Restricting to on-site rows: all four backbones still
   exclude zero, magnitudes barely move, no systematic direction.
@@ -56,7 +66,16 @@ real peptide runs at, and **only the cognate rung is adaptive** — selected on
 
 ## What I got wrong and corrected
 
-**Eight, and the pattern is more useful than any one of them.**
+**Nine, and the ninth is the largest error I have made on this project.**
+
+0. **"C7 is answered."** Retracted the same day by an adversarial audit I commissioned
+   and then verified myself. **All 40,800 rows carry a ligand** — I had *printed* those
+   three role counts hours earlier while checking for nulls and read "no missing values"
+   instead of "no ligand-free arm", and `A_LIGAND_PRESENT`, the flag that would have
+   said so, is empty on all 40,800. I caught the dead flag *beside* it and not this one.
+   **Every guard I built that day worked; none could catch a wrong belief about what the
+   data was.** F-23, and now G-15.
+
 
 1. **"Chain A is a stale label."** Wrong, and dangerously so. It is an untaken PI
    decision, and the built artefact already embodies the option the spec calls
@@ -104,6 +123,12 @@ dropped a file. **Every one was caught by running the thing rather than reading 
   indistinguishable from fitting.
 - **Do not re-derive Pillar 0.** Steps 1–6 are done and `STEPS_3_TO_6.md` regenerates.
 - **Do not build a 16-mer rung.** F-16, re-confirmed by lit with two further arguments.
-- **Do not quote both readouts for C7.** The continuous one; the binary is floor-pinned.
+- **Do not quote the agonist effect as a SHARE of the partner effect at all** — that
+  share spans an order of magnitude across five readouts on the same predictions, and
+  the elected readout is agonist-biased by construction. *(This line read "do not quote
+  both readouts for C7"; F-23 makes the stronger instruction the right one.)*
+- **Do not re-derive C7 from Block C.** The file has no ligand-free arm. The redo does:
+  `g2_systems.csv`, 20 receptors / 19 clusters, zero marginal cost, guarded by **G-15**
+  and pre-registration drafted at `redo/spec/C7_PREREGISTRATION.md`.
 - **Do not restructure `CLAIMS.md`** — lit's.
 - **Do not trust the manifest to mean an input is current or code-written.** F-21, F-22.
