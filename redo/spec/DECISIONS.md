@@ -596,6 +596,60 @@ now a substantive ask rather than a tidiness one.
 
 ---
 
+## F-16 · The ladder's length/taxonomy confound is MUCH weaker than I said — three revisions, each downward
+
+**I over-called this, and it took two corrections from outside to get it right.**
+Recorded in full because the pattern matters more than the conclusion.
+
+**What I first claimed (2026-09-12):** our length ladder has rungs at 11 and 15
+below AF3's 16-residue peptide line and 17/19/21 above it; `mazzoni2000gsctpeptide`
+puts a wet-lab activity threshold at ≥17; therefore a length effect in that region
+is confounded between biophysics and modelling taxonomy, and the ladder cannot
+separate them.
+
+**Revision 1 — the wet-lab threshold is contested.** The abstract's "shorter
+peptides were not effective" sits beside its adenylyl-cyclase sentence and may
+attach to signalling, not binding. A 2011 review enumerates the full panel the
+abstract omits — 11, 13, 15, 17, 19, 21 — and reports **all six stimulate specific
+binding**, the 11-mer merely *less active*. The proposed mechanism is **helicity**,
+which is graded: the 11-mer and the 21-mer both form helices of different lengths.
+**So there may be no clean biophysical cut at 17 at all, and we must not
+pre-register the 11-mer as inactive.**
+
+**Revision 2 — AF3's 16 is a benchmark filter, not an architectural limit.**
+Peptides are in AF3's accuracy and calibration numbers; they are excluded only from
+the **low-homology generalization subset**. And the backbones disagree: AF3 16,
+Chai-1 **9 and keeps them**, Boltz-2 none, Protenix v1 inherits AF3's, OpenFold3 no
+published rule.
+
+**Revision 3 — `paper_af3` grepped the OpenFold3 package, and there is no
+length line at inference at all.** No `length < 9|16|20|30` branch anywhere in the
+package. Chain type is **declared by the caller** — `inference_query_format.py:51`,
+`molecule_type` as a validated enum per chain — so *a chain declared protein is
+treated as protein regardless of residue count*. The only peptide-specific logic is
+`core/data/primitives/caches/clustering.py:172-199`, which implements AF3 SI 2.5.3
+**training-set clustering**, not inference.
+
+**Where that leaves it.** Every line we found — AF3's 16, Chai's 9, Protenix's
+inherited 16 — governs **training or evaluation set construction**. None of them
+reclassifies a chain at runtime. **So there is no mechanism by which a 15-mer is
+processed differently from a 17-mer at inference, and the confound as I stated it
+does not exist.**
+
+**What survives, and it is real but different:** short chains were **clustered
+differently in training** (100% identity for peptides) and are **absent from
+published generalization evidence**. That is a memorization-risk question, not a
+step-in-the-length-response question. `paper_af3`'s own caveat is the right one:
+they can speak to the inference code path, not to what the weights learned.
+
+**Consequence for the design:** do not build a 16-mer rung to resolve a taxonomy
+boundary — there is no boundary to resolve. The four-backbone comparison remains
+worth doing on its own merits, and the 13/17/18/19 constructs we already hold remain
+useful for resolving a *graded* response, which is what the corrected reading of
+Mazzoni actually predicts.
+
+---
+
 ## F-1 · **RETRACTED 2026-09-12. I was wrong. The two-instrument predicate IS what ran.**
 
 **What I claimed** (and told Aditya, and told `paper_af3`): that the manuscript's
@@ -930,11 +984,26 @@ SMO specifically going backwards.**
 measuring activation looks like — and it does not depend on any single receptor or
 any single backbone. Conclusion (b) is unaffected and arguably reinforced.
 
-**And a fourth receptor is not there at all.** `FZD4` appears in the apo table on
-all four backbones and is **absent from the cognate table entirely**, on all four.
-So the Class F cognate/apo contrast rests on **three receptors, not four** — worth
-stating wherever the class is described, because a receptor that silently drops out
-of one arm looks exactly like one that was never in the panel.
+**And a fourth receptor is not there at all — BY DESIGN, corrected 2026-09-12.**
+`FZD4` appears in the apo table on all four backbones and is absent from the cognate
+table on all four. I flagged that to `paper_af3` as a possible gap. It is not: their
+`PREREG.md:277` reads *"FZD4 is apo-only in Block A (DVL2 transducer, not Ga;
+substituting alphas as proxy is the W54 taxonomy failure at n=1)"*. **FZD4's
+transducer is Dishevelled, not a Gα**, so there is no cognate partner to supply;
+giving it Gαs would have been the taxonomy error we both keep citing. Its active
+reference `8WM9` is Dishevelled-DEP-stabilised, which is what the `DVL_DEP` value in
+their `active_stabilization_source` vocabulary is for. So the Class F contrast
+resting on three receptors is **pre-registered design, not attrition.**
+
+**And their prereg reached our conclusion by a different route.** `PREREG.md:183`
+already reduces Class F to **SMO only** for the primary result — FZD4 uses DVL,
+FZD6/7 use atypical Gs, SMO uses Gi, and three transducer mechanisms across four
+receptors cannot share a derived anchor (GPCRdb itself uses a different TM6 measure
+for Class F). **We got to "Class F needs a different atom pair or gets dropped" from
+apo measurements; they got to "Class F is SMO-only" from transducer taxonomy. Same
+destination, two independent routes** — which is worth more than either alone, and
+it strengthens the Class A-only scope (D-2026-09-12-d) rather than merely agreeing
+with it.
 
 ### Bearing on D-A
 

@@ -99,7 +99,17 @@ BLOCKED = [
      "membrane lipid as the agonist. PD2R2 stays TIER-ELIGIBLE and UNCURATED "
      "until the agonist's identity is resolved from the deposition itself. This "
      "is the failure class that gave the frozen campaign a measured 40-46% "
-     "curation error rate on name-sourced ligands."),
+     "curation error rate on name-sourced ligands.\n"
+     "UPDATE 2026-09-12, from paper_af3: the two ligand_set files would NOT have "
+     "arbitrated this -- PD2R2 is in NEITHER (40 and 64 ligands respectively); "
+     "they never curated a PD2R2 ligand at all. Their PD2R2 references are 8XXV "
+     "(Ga-coupled-active) and 7M8W (inactive-antagonist), which are OUR panel's "
+     "references too, and are conflict-free on their side. 9IYB is off-reference "
+     "for both of us. So the real shape of the problem is narrower than it "
+     "looked: the panel's own active reference 8XXV carries no orthosteric "
+     "agonist record in the GPCRdb snapshot, and the only agonist record that "
+     "exists is the conflicted off-reference one. Resolving PD2R2 means getting "
+     "an agonist identity for 8XXV, not getting a file."),
 ]
 
 
