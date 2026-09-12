@@ -24,6 +24,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from paths import INPUTS  # noqa: E402
 
 TABLE = "ligand_set_redo.tsv"
+TIERS = "ligand_tiers.tsv"
 CANDIDATES = "ligand_curation_candidates.tsv"
 
 # GPCRdb's own function vocabulary, per role we assign.
@@ -114,6 +115,49 @@ def main(argv, root=None):
         not silent, ", ".join(silent) or
         f"{len(blocked)} blocked: " + ", ".join(r["receptor_slug"] for r in blocked))
 
+    # -- L-6..L-8  the tier table's three load-bearing rules -----------------
+    tpath = os.path.join(root, TIERS)
+    if not os.path.exists(tpath):
+        chk("L-6  the ligand tier table is present", False,
+            f"{TIERS} is ABSENT -- run redo/build/ligand_tiers.py")
+    else:
+        tiers = tsv(TIERS, root)
+        panel = {r["slug"]: r for r in tsv("g1_receptors.tsv", root)}
+
+        # L-6  no T1 pick is a separate polymer chain.  T1 exists precisely to
+        # be chain-free in both arms; a chain there is the confound the tier is
+        # defined to exclude.
+        leak = [r["receptor_slug"] for r in tiers
+                if r["ligand_tier"] == "T1_small_molecule"
+                and (r["agonist_is_chain"] == "1" or r["antagonist_is_chain"] == "1")]
+        chk("L-6  no T1 pick supplies a separate polymer chain", not leak,
+            f"chain in T1: {leak}" if leak else
+            f"{sum(1 for r in tiers if r['ligand_tier'] == 'T1_small_molecule')} "
+            f"T1 receptors, both arms chain-free")
+
+        # L-7  species follows the PANEL, not the PDB.  NTR1 entered T1 on a rat
+        # structure before this rule existed.
+        bad = []
+        for r in tiers:
+            if not r["agonist_pdb"] and not r["antagonist_pdb"]:
+                continue
+            org = panel[r["receptor_slug"]]["organism"]
+            for arm in ("agonist", "antagonist"):
+                sp = r.get(arm + "_species", "")
+                if sp and not (sp in org or org in sp):
+                    bad.append(f"{r['receptor_slug']}/{arm}={sp} vs panel {org}")
+        chk("L-7  every pick's species matches the panel receptor's organism",
+            not bad, "; ".join(bad) or "no cross-species pick")
+
+        # L-8  nothing allosteric or antibody-derived was picked.
+        site_bad = [r["receptor_slug"] for r in tiers
+                    if r.get("agonist_site") == "allosteric"
+                    or r.get("antagonist_site") == "allosteric"]
+        chk("L-8  no allosteric (PAM/NAM) ligand was picked", not site_bad,
+            ", ".join(site_bad) or
+            f"{sum(int(r['n_allosteric_skipped']) for r in tiers)} allosteric "
+            f"records skipped across the panel")
+
     return report(blocking, passed)
 
 
@@ -157,6 +201,15 @@ PLANTS = [
                     "KIHYPELVXPAIDH-HNSNBQBZSA-N")),
     ("L-5", "blank a blocked receptor's reason",
      lambda d: _col(os.path.join(d, TABLE), {"receptor_slug": "OPSD"}, "why", "")),
+    ("L-6", "let a chain ligand into T1",
+     lambda d: _col(os.path.join(d, TIERS), {"receptor_slug": "CCKAR"},
+                    "agonist_is_chain", "1")),
+    ("L-7", "swap a pick to a structure from another species",
+     lambda d: _col(os.path.join(d, TIERS), {"receptor_slug": "CCKAR"},
+                    "agonist_species", "Rattus norvegicus")),
+    ("L-8", "let a PAM through as the agonist",
+     lambda d: _col(os.path.join(d, TIERS), {"receptor_slug": "CCKAR"},
+                    "agonist_site", "allosteric")),
 ]
 
 
