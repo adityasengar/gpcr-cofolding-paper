@@ -267,6 +267,61 @@ concluded.
 
 ---
 
+## Corrections from the registry triage, 2026-09-12 — what this plan MISSED
+
+**Written the same day as the plan, by the triage that joined the registry to it.**
+Recorded rather than silently patched, because a plan that quietly absorbs its own
+gaps teaches nobody anything.
+
+**1. `PLAN.md` names ZERO experiment ids.** A grep returns nothing, so the pillar ↔
+experiment join could not be parsed and had to be authored by hand in
+`run_registry.py`. The pillar column in `run_registry.tsv` is now the join; **read it
+rather than inferring one from this document.**
+
+**2. Pillar 2 discharges no catalogued experiment at all.** The pillar column runs
+0, 1, 3, 4, 5 — never 2. Its arms come from `MSA_SUBSAMPLING_REGIMES.md`, whose
+Stage 1 (2,720 predictions, that document's own top recommendation) carries **no
+E-id**, and which assigns ids only to Stages 0, 2, 2b and 3. Either Stage 1 gets an
+id or the catalogue is missing the experiment it is.
+
+**3. Pillar 0 is NOT `RUN_MATRIX` Stage 0, and the difference is eleven free items.**
+Stage 0 covers 14 experiments across S0.1–S0.7; Pillar 0 lists four and **none of
+them is an S0.x row.** Omitted and free:
+
+| omitted | why it matters |
+|---|---|
+| **E7.4** interaction power injection | `RUN_MATRIX` §4.3 and `CAMPAIGN` §2.8 both say it must **precede the ligand arm**. Pillar 4 says *"a null here is a finding, not a failure"* and does not schedule the one free thing that makes a null **bounded** rather than unanswerable |
+| **E4.2** exposure vs effect size | `CAMPAIGN` promotes it to a **hard predecessor** of the bulk control, and PF-9 requires the median split declared **before** dispatch — which Pillar 3 does |
+| **E5.4** dose–response on engagement depth | the placement covariate the ladder needs from 11 to 394 residues |
+| **E9.1 / E9.3** the apo floor, and the never-pool convention | **Group 9 appears in no spec but `CATALOGUE.md` and `CAMPAIGN.md`** — not in `RUN_MATRIX` §7.1, not here — while **Pillar 2's depth levels are justified by Block D's floor** |
+| E0.4, E4.3, E3.3, E5.3, E5.5, E7.1 | all free, none scheduled |
+
+**4. `E6.4` — pair seeds across arms — is in no pillar, and it is FREE NOW AND
+IMPOSSIBLE AFTER Pillar 3 dispatches.** Blocks A and B both failed it: 1,898 distinct
+`seed_outer` over 380 cells, so the same seed never ran both arms of a cell. `ASKS.md`
+A2.
+
+**5. Pillar 1's measurement pass excludes exactly the structures `E0.3` measures.**
+726 + 610 is the Active/Inactive population; the Class A **Intermediates** are 21 rows
+that `D-2026-09-12-d` set aside. Adding them is one decision and 21 structures.
+
+**6. Pillar 5 costs `E4.1` as SI work**, while `CAMPAIGN` §2.5 records that it **became
+free** — Protenix splits 16/14 and Chai 21/9 on the frozen 30.
+
+**7. A CONTRADICTION this plan created, and it needs Aditya, not a patch.** Pillar 2
+says an apo-only control *"does NOT bound the complex case … write the caveat; do not
+spend predictions pretending to close it."* `MSA_SUBSAMPLING_REGIMES.md` §5 schedules
+Stage 2 as depth × partner rung, and `CAMPAIGN.md` §2.9 says E8.1 *"SURVIVES, and gains
+urgency."* **Those cannot all stand.** `ASKS.md` A9.
+
+**8. One disagreement about what is already done.** This plan says Pillar 0's mining
+"steps 1 and 2 are DONE"; `FIRST_LOOK.md` says *"step 1 … is done; steps 2–5 are not."*
+**The plan is right and `FIRST_LOOK.md`'s line is stale** — `PER_BACKBONE.md` is step 2
+and it landed the same day. Steps 3–6 are now done too
+(`STEPS_3_TO_6.md`, `WHAT_IT_MEANS.md`), so Pillar 0's mining item is **complete**.
+
+---
+
 ## What this plan does NOT do
 
 - It does not decide the **title**. Two of three clauses still have no result: C7 is

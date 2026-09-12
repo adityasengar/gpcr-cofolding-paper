@@ -1020,6 +1020,67 @@ that refuses in each case.
 
 ---
 
+## F-20 · `rows.tier3.v2.csv` landed, and nothing recorded that it had
+
+**Found by the registry triage, 2026-09-12, and it is the right thing to have found.**
+
+The single highest-value ask in all four request documents **arrived** — 91.9 MB,
+40,801 rows × 101 columns, at `analysis/block_c/received_2026_09_12/`, sha256
+`5ccf58ac…` matching the value pinned in **18 places** across the Block C drop. F-17
+records the approval; F-18 records three *other* files arriving by hand. **No entry
+recorded this one landing**, while `PLAN.md` Pillar 4 quotes numbers off it and
+`WHAT_IT_MEANS.md` rests three findings on it.
+
+**What it has now settled**, so the record exists in one place:
+
+- **C7 is ANSWERED.** Agonist-alone does not reproduce the partner effect on any
+  backbone, but it is **not inert** — roughly a third of the partner's shift on the
+  continuous readout, intervals excluding zero on all four backbones, surviving
+  restriction to on-site rows.
+- **The partner effect survives** cluster aggregation, cluster bootstrap, the
+  continuous readout, seeds and both opsin variants: **12 of 12 role × backbone
+  contrasts exclude zero.**
+- **"Decoy ≈ antagonist" was a binary-predicate artefact** — see the correction in
+  F-19. The *shift* is ligand-independent; the *level* is not.
+- **The G4 off-site confound does not explain the ligand effect** — tested, not noted.
+
+**Provenance and the standing rules it inherits:** read-only (444), gitignored by
+size, a fresh clone will not have it, and the hash above is the record. It is in
+`analysis/`, not `data/block_c/`, because that drop is read-only by chmod as well as
+by rule and adding a directory to it would be editing the drop.
+
+---
+
+## F-21 · A generated input can go stale against its own inputs, and no guard notices
+
+**Found the same way, and it is a real hole rather than a tidiness point.**
+
+`run_registry.tsv` was written at 11:56. `g2_systems.csv` was regenerated at 16:20
+carrying `E2.2`, `E2.3` and `E2.4` in its `experiment` column. The registry was never
+re-run, so **three experiments read as untriaged that had been enumerated five hours
+earlier** — which is why I told Aditya there were 30 when there were 27.
+
+**`python3 redo/build/manifest.py --check` passed throughout**, and correctly:
+**it checks a file against its OWN recorded hash, not against the hashes of the files
+it derives from.** So the manifest detects a hand-edit and is blind to staleness.
+`layout.py` L3 has the same scope, by design.
+
+**What this means.** The guard set proves that an input has not been *tampered with*.
+It does not prove the input is *current*. Those are different properties and we have
+been treating the first as if it delivered the second.
+
+**The fix, not yet built:** record each generated input's **input digests** — the
+hashes of the files its generator consumed — alongside its own, and fail when a
+consumed file's current hash differs from the recorded one. That is a `manifest.py`
+change plus a declaration per generator, and it would have caught this in one run.
+Until it exists, **a generator whose inputs have moved must be re-run by hand**, and
+the only thing standing between us and a stale artefact is somebody remembering.
+
+*(The registry triage is the second time today a stale artefact was mistaken for a
+finding — the first was `g2_preflight`'s WAIT still announcing an unbuilt decoy pool.
+Both were true when written and false within hours.)*
+
+---
 ## D-OPEN-2026-09-12-j · Chain A's construct rule was never decided, and the built artefact silently enacts the option the spec calls indefensible
 
 **OPEN. Aditya's decision. Recorded here because it was invisible in this file, which
