@@ -218,9 +218,19 @@ F-13 showed the tilt fails outside Class A:
 
 - **Class B** — Boltz and Protenix put apo at ~12 Å, Chai and OF3 at ~20 Å. A **9 Å
   disagreement about the same receptors with no partner.** No pooled Class B rate.
+  **Independently confirmed by `paper_af3` 2026-09-12** to the decimal — boltz 12.38
+  (1/4 above the cut), protenix 12.53 (1/4), chai 21.47 (3/4), of3 19.60 (4/4) — and
+  **the control holds**: Class A apo is well-behaved on all four (medians
+  12.12 / 11.94 / 12.78 / 12.36, with 6 / 3 / 15 / 3 of 40 above the cut), so this
+  is not a generic threshold artefact.
 - **Class F** — apo medians 14.20–16.12 straddle the 14.932 cut on **every**
   backbone. No discriminating power. Confirms the standing gate WAIT: re-measure on
-  2×44–6×31 or drop the arm.
+  2×44–6×31 or drop the arm. **Independently confirmed by `paper_af3` 2026-09-12**
+  (chai 14.20, boltz 15.09, protenix 16.10, of3 16.12), who add that their own brief
+  already carries a standing rule that Class B/F thresholds are
+  `descriptive_n_lt_5_per_side` and **must not be quoted as active-call fractions or
+  as usable thresholds**. Our measurement is evidence for a constraint the project
+  had already written down on geometric grounds.
 
 **So the conjunction is a Class A instrument. B and F are separate decisions and
 must not inherit this one.**
@@ -299,8 +309,11 @@ B and F rates it cannot defend.
 - **`G15` / tier `E-B1`** (class B transfer, 5 proposed → 4 receptors) — depended on
   `E0.5` and drops with it.
 - **Tier `E-scope`** — the class F/B2 carry-over (AGRE5, FZD4, FZD6, FZD7, SMO),
-  already "declared scope, no claim", now formally out. SMO was the receptor that
-  got *less* open when the partner was added (−2.14 Å, F-13c).
+  already "declared scope, no claim", now formally out. (An earlier version of this
+  entry cited SMO as getting *less* open with the partner; **that was OF3-only and
+  is retracted** — see F-13(c). The scope decision does not rest on it: its grounds
+  are Class B's 9 Å inter-backbone split and Class F's threshold sitting inside the
+  apo distribution, **both independently confirmed**.)
 
 **`E7.2` is parked, not killed.** It needs a class B instrument, which needs its own
 calibration; that is a second paper's worth of work and it is the obvious follow-on.
@@ -815,12 +828,37 @@ measure class F tilt on 2×44–6×31, not 2×46–6×37, or drop the class F ar
 was a geometric argument; this is the measurement. **Class F as currently
 instrumented cannot distinguish apo from cognate.**
 
-### (c) SMO gets LESS open when the partner is added
+### (c) ~~SMO gets LESS open when the partner is added~~ — **RETRACTED 2026-09-12**
 
-`SMO` apo tilt 18.38, cognate 16.24 — **−2.14 Å in the direction opposite to the
-hypothesis**. `FZD7` is also negative (−0.07, negligible). Two of three Class F
-receptors do not move the way the model predicts, which is consistent with (b):
-the axis is not measuring activation on this class.
+> **This was an OF3-only observation stated as a receptor property, and it is the
+> same defect I had flagged for Class B one paragraph earlier: pooling across
+> backbones that disagree.** Caught by `paper_af3` on review; recomputed here from
+> the two state-call tables we hold and confirmed to the decimal.
+
+**Class F, cognate − apo tilt, all four backbones:**
+
+| receptor | boltz | chai | of3 | protenix |
+|---|---:|---:|---:|---:|
+| SMO | **+0.22** | **+0.04** | −2.14 | **+0.19** |
+| FZD7 | +1.66 | +0.01 | −0.07 | +0.26 |
+| FZD6 | −0.38 | +2.41 | +0.12 | +0.29 |
+
+**SMO moves slightly POSITIVE on three of four backbones.** The −2.14 is OF3 alone.
+FZD7's negative is −0.07 on OF3 alone, which is noise. So "two of three Class F
+receptors do not move the way the model predicts" was a statement about one
+backbone wearing the clothes of a statement about a class. **Do not put weight on
+SMO specifically going backwards.**
+
+**What survives, and it is the stronger claim:** Class F deltas span **−2.14 to
++2.41 with inconsistent sign across backbones**. That is what an axis which is not
+measuring activation looks like — and it does not depend on any single receptor or
+any single backbone. Conclusion (b) is unaffected and arguably reinforced.
+
+**And a fourth receptor is not there at all.** `FZD4` appears in the apo table on
+all four backbones and is **absent from the cognate table entirely**, on all four.
+So the Class F cognate/apo contrast rests on **three receptors, not four** — worth
+stating wherever the class is described, because a receptor that silently drops out
+of one arm looks exactly like one that was never in the panel.
 
 ### Bearing on D-A
 

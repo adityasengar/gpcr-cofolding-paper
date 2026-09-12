@@ -133,6 +133,40 @@ run**. That is the distinction the project's missing-input rule turns on: a
 deliverable not yet produced is reported loudly; an input that has disappeared is a
 failure. Reporting the first one *silently* is the thing that is forbidden.
 
+## A correction that arrived on the bridge, after the work above
+
+`paper_af3` verified three of our apo-arm findings against their own tables. **Two
+confirm exactly; the third does not survive.**
+
+**Confirmed — the Class B backbone split**, to the decimal: boltz 12.38 (1 of 4
+above the cut), protenix 12.53 (1/4), chai 21.47 (3/4), of3 19.60 (4/4). And the
+control holds: Class A apo is well-behaved on all four (12.12 / 11.94 / 12.78 /
+12.36, with 6 / 3 / 15 / 3 of 40 above), so the 9 Å split is not a generic
+threshold artefact.
+
+**Confirmed — the Class F threshold sits inside the apo distribution** (chai 14.20,
+boltz 15.09, protenix 16.10, of3 16.12, against a 14.932 cut). They add that their
+own brief already carries a standing rule that Class B/F thresholds are
+`descriptive_n_lt_5_per_side` and must never be quoted as active-call fractions.
+Our measurement is evidence for a constraint they had already written down.
+
+**Retracted — "SMO gets less open when the partner is added".** That was **OF3
+only**, stated as a receptor property. Recomputed here from the two state-call
+tables we hold: SMO is **+0.22 / +0.04 / −2.14 / +0.19** across boltz / chai / of3 /
+protenix — *slightly positive on three of four*. FZD7's negative is −0.07 on OF3
+alone, which is noise. **It is the same pooling-across-disagreeing-backbones error
+I had flagged for Class B one paragraph earlier**, which is what makes it worth
+recording rather than quietly fixing.
+
+**The conclusion survives and is stronger**: Class F deltas span **−2.14 to +2.41
+with inconsistent sign across backbones**, which does not depend on any single
+receptor or backbone. **The Class A-only scope decision is unaffected** — its
+grounds are the two confirmed findings, not this one.
+
+**And one thing neither of us had noticed: `FZD4` is absent from the cognate table
+entirely** on all four backbones, while present in the apo table on all four. The
+Class F cognate/apo contrast rests on **three receptors, not four**.
+
 ## What the next session should not redo
 
 - **Do not re-open the scope, D2, D-A or D-H.** All four are decided with reasons in
@@ -147,6 +181,8 @@ failure. Reporting the first one *silently* is the thing that is forbidden.
 - **Do not start the measurement pass without Aditya's word.** It is still the
   largest outstanding dependency, and it must record axis values for the F3-**removed**
   structures too (F-12).
+- **Do not restate "SMO goes backwards".** Retracted; it is OF3-only. The Class F
+  claim that survives is the inconsistent sign across backbones.
 - **Do not build the decoy pool off the ChEMBL web API.** The script refuses, and
   that refusal is deliberate. It needs a pinned download.
 - **Amendment C-1 is the open question worth his time**: reopening it unblocks both

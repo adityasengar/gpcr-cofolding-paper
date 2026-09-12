@@ -100,7 +100,13 @@ Requested to settle one question, answered three. **Class B is not saturated.** 
   separation the threshold detects. **No pooled Class B rate is meaningful.**
 - **Class F apo medians (14.20–16.12) straddle the 14.932 cut on every backbone.**
   No discriminating power. Confirms the standing gate WAIT by measurement.
-- **SMO gets *less* open when the partner is added** (−2.14 Å).
+- ~~**SMO gets *less* open when the partner is added** (−2.14 Å).~~
+  **RETRACTED 2026-09-12c.** OF3-only. SMO is +0.22 / +0.04 / −2.14 / +0.19 across
+  boltz / chai / of3 / protenix — slightly positive on three of four. Caught by
+  `paper_af3`, reproduced here from the tables we hold. It was the same
+  pooling-across-disagreeing-backbones error flagged for Class B two bullets above.
+  What survives is stronger and receptor-independent: Class F deltas span −2.14 to
+  +2.41 with inconsistent sign. See `DECISIONS.md` F-13(c).
 
 ## What the next session should not redo
 
