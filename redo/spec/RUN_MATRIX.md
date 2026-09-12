@@ -772,7 +772,41 @@ Recomputed by `matrix_cost.py`. Rung names follow `SEQUENCES.md` §1; panels fol
 | G12 | Gi/Gt single-residue pair (E1.6) | CORE-32 | 4 | 1 | 50 | 6,400 |
 | G13 | post-cutoff inactive nanobody (E4.4) | 1 | 4 | 3 | 50 | 600 |
 | G14 | prospective, tier E-pro (E7.3) | E-pro (8) | 4 | 3 | 50 | 4,800 |
-| G15 | class B1 transfer, tier E-B1 (E7.2) | E-B1 (5) | 4 | 4 | 50 | 4,000 |
+| ~~G15~~ | ~~class B1 transfer, tier E-B1 (E7.2)~~ | ~~E-B1 (5)~~ | 4 | 4 | 50 | ~~4,000~~ |
+| **G16a** | uncoupling nulls, full-length (**E1.8**) | 6 | 4 | 2 | 50 | **2,400** |
+| **G16b** | uncoupling nulls, peptide rungs (**E1.8**+E1.1) | 6 | 4 | 4 | 50 | **4,800** |
+| **G17a** | partner MSA on/off, pooled (**E1.9**) | 30 | 4 | 3 | 10 | **3,600** |
+| **G17b** | partner MSA on/off, per-cell (**E1.9**) | 30 | 4 | 3 | 50 | **18,000** |
+| **G18a** | wet-lab length series, per-cell | 30 | 4 | 3 | 50 | **18,000** |
+| **G18b** | wet-lab matched peptides (boltz2 only) | 6 | 1 | 3 | 10 | **180** |
+| **G19** | reference-matched tip, 23 cells | 23 | 4 | 1 | 10 | **920** |
+| **G20** | chimeric-reference extension tier | 10 | 4 | 3 | 10 | **1,200** |
+| **G1c-opt** | intermediate rung, optional 4th | 30 | 4 | 1 | 10 | **1,200** |
+| **G1e** | helical-domain deletion companion | 30 | 4 | 1 | 10 | **1,200** |
+| **G1f** | deposited mini-G anchor (boltz2 only) | 30 | 1 | 3 | 10 | **900** |
+| **G10b** | Gi→Gs stepwise substitution series | 10 | 1 | 15 | 20 | **3,000** |
+
+> **Added 2026-09-12.** `g1_preflight.py` carried a standing WAIT that §7.1 had no
+> line item for **E1.8** (uncoupling mutants) or **E1.9** (partner MSA on/off).
+> It named two arms; **twelve were missing.** G18a/b, G19 and G20 were absent, and
+> when the WAIT was replaced by a check (**B18**) that actually compares the two
+> files, it immediately found four more nobody had listed anywhere: **G1c-opt,
+> G1e, G1f and G10b**. That is the difference between a dependency someone wrote
+> down and a check that looks. Every row is **derived** from
+> `inputs/g1_systems.csv` — receptors × constructs × backbones × n — and
+> `matrix_cost.py::check_against_systems()` asserts each reproduces that file's own
+> prediction totals: **12 of 12 agree**. A cost table that disagrees with the system
+> table is worse than no cost table, because both look authoritative and only one
+> gets read.
+>
+> Counts are explicit integers, not panel names: these arms run on the frozen
+> **30-receptor** primary panel, not on the 32 that `CORE-32` names.
+>
+> **`G15` is struck** — class B1 transfer left with the scope decision
+> (`DECISIONS.md` D-2026-09-12-d). It is still in `matrix_cost.py`'s `EXPANSIVE`
+> tier, and that tier's total therefore still includes its 4,000; the strike is
+> recorded here rather than silently removed so the total stays auditable.
+
 
 G2 is the only item that runs on receptors *outside* CORE-32: it adds the other 32
 members of C1 at three rungs and wide-tier depth, so the paper can say the headline

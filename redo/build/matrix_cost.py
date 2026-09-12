@@ -138,7 +138,73 @@ ITEMS = [
     ("G13", "post-cutoff inactive nanobody",    1,        4,  3, 50),
     ("G14", "prospective, tier E-pro",         "E-pro",   4,  3, 50),
     ("G15", "class B1 transfer, tier E-B1",    "E-B1",    4,  4, 50),
+    # ---- added 2026-09-12: g1_preflight listed E1.8 and E1.9 as having no line
+    # item here, and G18/G19/G20 were absent too.  Every row below was DERIVED
+    # from inputs/g1_systems.csv -- receptors x constructs x backbones x n -- and
+    # check_against_systems() asserts each reproduces that file's own totals, so
+    # the two cannot drift apart silently.  Counts are explicit integers rather
+    # than panel names because these arms run on the frozen 30-receptor primary
+    # panel, not on the 32 that CORE-32 names.
+    ("G16a", "uncoupling nulls, full-length (E1.8)",        6, 4,  2, 50),
+    ("G16b", "uncoupling nulls, peptide rungs (E1.8+E1.1)", 6, 4,  4, 50),
+    ("G17a", "partner MSA on/off, pooled (E1.9)",          30, 4,  3, 10),
+    ("G17b", "partner MSA on/off, per-cell (E1.9)",        30, 4,  3, 50),
+    ("G18a", "wet-lab length series, per-cell",            30, 4,  3, 50),
+    ("G18b", "wet-lab matched peptides (boltz2 only)",      6, 1,  3, 10),
+    ("G19",  "reference-matched tip, 23 cells",            23, 4,  1, 10),
+    ("G20",  "chimeric-reference extension tier",          10, 4,  3, 10),
+    # B18 found these four when it was first made to actually look: the standing
+    # WAIT named only E1.8 and E1.9, and four more arms had no line here either.
+    ("G1c-opt", "intermediate rung, optional 4th",          30, 4,  1, 10),
+    ("G1e",  "helical-domain deletion companion",           30, 4,  1, 10),
+    ("G1f",  "deposited mini-G anchor (boltz2 only)",       30, 1,  3, 10),
+    ("G10b", "Gi->Gs stepwise substitution series",         10, 1, 15, 20),
 ]
+
+# (item id in matrix_cost) -> (item, arm, grain) in inputs/g1_systems.csv
+SYSTEMS_LINK = {
+    "G16a": ("G16(proposed)", "uncoupling_full", "pooled"),
+    "G16b": ("G16(proposed)", "uncoupling_peptide", "pooled"),
+    "G17a": ("G17(proposed)", "partner_msa_on", "pooled"),
+    "G17b": ("G17(proposed)", "partner_msa_on", "percell"),
+    "G18a": ("G18a(proposed)", "wetlab_length_series", "percell"),
+    "G18b": ("G18b(proposed)", "wetlab_matched_peptides", "pooled"),
+    "G19":  ("G19(proposed)", "reference_matched_tip", "pooled"),
+    "G20":  ("G20(extension)", "chimeric_ref_extension", "pooled"),
+    "G1c-opt": ("G1c-opt", "intermediate_optional", "pooled"),
+    "G1e":  ("G1e", "hd_deletion_companion", "pooled"),
+    "G1f":  ("G1f", "deposited_minig_anchor", "pooled"),
+    "G10b": ("G10b", "gi_to_gs_series", "pooled"),
+}
+
+
+def check_against_systems():
+    """Assert every linked item reproduces g1_systems.csv's own prediction count.
+
+    A cost table that disagrees with the system table is worse than no cost
+    table: both look authoritative and only one is read.
+    """
+    import csv as _csv
+    path = os.path.join(INPUTS, "g1_systems.csv")
+    if not os.path.exists(path):
+        print("  g1_systems.csv absent -- cannot cross-check")
+        return 1
+    with open(path) as fh:
+        rows = list(_csv.DictReader(fh))
+    bad = 0
+    print("== 2b. cross-check against g1_systems.csv ==")
+    for cid, (item, arm, grain) in SYSTEMS_LINK.items():
+        sub = [r for r in rows if r["item"] == item and r["arm"] == arm]
+        col = "predictions_pooled" if grain == "pooled" else "predictions_percell"
+        theirs = sum(int(r[col] or 0) for r in sub)
+        ours = size(BY_ID[cid])
+        flag = "ok " if ours == theirs else "MISMATCH"
+        if ours != theirs:
+            bad += 1
+        print(f"  {flag} {cid:>5}  matrix_cost {ours:>7,}  g1_systems {theirs:>7,}"
+              f"   ({item}/{arm}, {grain})")
+    print(f"\n  {len(SYSTEMS_LINK) - bad}/{len(SYSTEMS_LINK)} linked items agree.\n")
+    return 1 if bad else 0
 
 TIERS = {
     "MINIMAL":  ["P1", "P1b", "P2", "P3", "P3b", "P4",
@@ -195,4 +261,5 @@ def tiers():
 if __name__ == "__main__":
     factorial()
     items()
+    check_against_systems()
     tiers()

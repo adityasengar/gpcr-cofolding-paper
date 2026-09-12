@@ -376,9 +376,33 @@ def main(argv):
                        f"the deposited reference tip disagree at family level -- "
                        f"{dis}. The biology wins for the supplied partner; the row "
                        f"is flagged either way")
-    pending.append("P: RUN_MATRIX.md §7.1 has no line item for E1.8 (uncoupling "
-                   "mutants) or E1.9 (partner MSA on/off); G16/G17 are proposed here "
-                   "and are not costed")
+    # -- B18  every proposed arm is costed ----------------------------------
+    # This was a wait() until 2026-09-12: RUN_MATRIX.md §7.1 had no line item for
+    # E1.8 or E1.9.  G18a/b, G19 and G20 were missing too.  They are costed now,
+    # derived from THIS file, and matrix_cost.py::check_against_systems() asserts
+    # each reproduces the totals here.  The check below is the other direction:
+    # no arm may appear in g1_systems.csv without a line in the cost table.
+    mc = os.path.join(BUILD, "matrix_cost.py")
+    if not os.path.exists(mc):
+        B(False, "B18 every arm in g1_systems.csv has a line item in "
+                 "matrix_cost.py", "matrix_cost.py is ABSENT")
+    else:
+        # the ids matrix_cost declares, read from its ITEMS tuples
+        costed = set(re.findall(r'^\s*\("([A-Za-z0-9-]+)"', open(mc).read(),
+                                flags=re.M))
+        # an arm "G16(proposed)" is costed if G16, G16a or G16b is declared
+        # an arm id may name several cost items at once ("G1a/G1b", "G3a/G3b"),
+        # and a bare id may be costed as an a/b pair ("G16" -> G16a, G16b).
+        uncosted = []
+        for item in sorted({r["item"] for r in sysrows}):
+            parts = [t.strip() for t in item.split("(")[0].split("/") if t.strip()]
+            if not all({t, t + "a", t + "b"} & costed for t in parts):
+                uncosted.append(item)
+        B(not uncosted, "B18 every arm in g1_systems.csv has a line item in "
+                        "matrix_cost.py", f"uncosted: {uncosted}")
+        if not uncosted:
+            passed[-1] += (f"  [{len({r['item'] for r in sysrows})} arms, all "
+                           f"costed; matrix_cost declares {len(costed)} ids]")
     pending.append("P: pre-flight partner-MSA depth measurement (SEQUENCES.md "
                    "§6.1(4)) has not been run on the ~60 distinct peptide-rung "
                    "sequences; it is hours of wall-clock and no inference")
@@ -458,6 +482,9 @@ def selftest():
         # "Engineered G-alpha-q" subunit in both structures that carry it
         "B17": ("g1_cognate.tsv",
                 lambda t: _retag_cognate(t, "GHSR", "Gq/11")),
+        # rename an arm to an id matrix_cost.py has never heard of
+        "B18": ("g1_systems.csv",
+                lambda t: _sub(t, "G16(proposed)", "G99(proposed)", 999)),
     }
     ok = True
     for name, (fn, corrupt) in cases.items():
