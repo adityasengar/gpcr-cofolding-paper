@@ -202,6 +202,18 @@ Limits, measured: text ~12 h, **attachments ~3 h**, practical cap **~1.5 MB** (n
 the documented 15 MB). Both `send.sh` and `recv.sh` now persist to `sent/` and
 `received/`.
 
+**The receiver's stream drops every few minutes, not hourly — this is normal and
+not a fault.** Measured 2026-09-12: the `curl` PID turned over three times inside
+about two hours, once only 23 s after the previous reconnect. It is ntfy closing
+the JSON stream, not the `-m 3600` timeout (I first assumed the timeout, wrongly).
+Nothing is lost: `recv.sh` reconnects with `since=15m`, so it re-fetches the gap,
+and `.seen` dedupes what it re-reads. `sweep.sh` is the 5-minute backstop.
+
+**The one real risk is the watcher, not the bridge.** A Monitor that emits enough
+events gets stopped automatically, and a stopped receiver looks exactly like a quiet
+channel. If the bridge matters for what you are doing, `pgrep -f recv.sh` should
+print **3** and `pgrep -f sweep.sh` **2** — check that rather than trusting silence.
+
 ## How the sessions work
 
 Three, on one laptop. **Content versus machinery.**
