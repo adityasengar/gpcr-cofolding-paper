@@ -55,10 +55,17 @@ python3 redo/build/manifest.py --check >/dev/null 2>&1 \
   && ok "redo inputs manifest" "in sync" || bad "redo inputs manifest" "STALE — python3 redo/build/manifest.py"
 python3 redo/gates/run_receipt.py >/dev/null 2>&1 \
   && ok "redo run receipts" "accepted (or no runs yet)" || bad "redo run receipts" "REFUSED — run redo/gates/run_receipt.py"
+# The check COUNT is read from the gate's own tally, never asserted here. Both
+# these lines carried hand-written counts and both had gone stale by 2026-09-12
+# (ligands said 5 against 10, drule said 6 against 14) -- the same failure class
+# as the three documents that said "33 experiments in 9 groups" against a body
+# of 45 in 10. A count in a label is a claim nobody re-derives.
+LIG=$(python3 redo/gates/ligands.py 2>/dev/null | grep -oE "CLEAN -- [0-9]+ checks pass" | grep -oE "[0-9]+")
 python3 redo/gates/ligands.py >/dev/null 2>&1 \
-  && ok "redo ligand table" "5 checks clean" || bad "redo ligand table" "FAILED — run redo/gates/ligands.py"
+  && ok "redo ligand table" "${LIG:-?} checks clean" || bad "redo ligand table" "FAILED — run redo/gates/ligands.py"
+DRU=$(python3 redo/gates/drule.py 2>/dev/null | grep -oE "CLEAN -- [0-9]+ checks pass" | grep -oE "[0-9]+")
 python3 redo/gates/drule.py >/dev/null 2>&1 \
-  && ok "redo decoy rule" "6 checks clean; pool built" || bad "redo decoy rule" "FAILED — run redo/gates/drule.py"
+  && ok "redo decoy rule" "${DRU:-?} checks clean; pool built, selection run" || bad "redo decoy rule" "FAILED — run redo/gates/drule.py"
 G0=$(python3 redo/gates/g0_preflight.py 2>/dev/null | grep -E "FROZEN|NOT FROZEN" | tail -1 | sed 's/^ *//')
 G1=$(python3 redo/gates/g1_preflight.py 2>/dev/null | grep -E "^[0-9]+ passed" | tail -1)
 case "$G0" in "FROZEN"*) ok "redo group 0 gate" "$G0" ;; *) bad "redo group 0 gate" "${G0:-did not run}" ;; esac
