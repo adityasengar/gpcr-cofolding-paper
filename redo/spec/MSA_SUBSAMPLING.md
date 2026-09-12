@@ -636,12 +636,22 @@ the claim is free.
 *Two corrections that travel with this table.* **`heo2022multistate` is NOT a
 subsampling paper** — it carries `msa-state-filter`, and its protocol is
 state-annotated templates **plus total MSA deletion applied together**, a confound
-by construction. Do not cite it as subsampling anywhere. And **no Neff figure
-exists anywhere in the corpus**: every depth above is a raw sequence count, a
+by construction. Do not cite it as subsampling anywhere. And **no paper reports a
+SUBSAMPLING DEPTH in Neff units**: every depth above is a raw sequence count, a
 ColabFold `cluster:extra` pair, or a masking percentage. **If we want Neff on our
 own rows we must compute it ourselves**, and there is no published comparator to
 put it beside — which is an argument for reporting raw row counts as the primary
 depth unit and Neff, if at all, as a secondary column.
+
+> **CORRECTED 2026-09-12 by lit.** This paragraph previously read *"no Neff figure
+> exists anywhere in the corpus."* That was wrong. Neff appears in two notes —
+> `abramson2024af3` Extended Data Fig 7A [p.18] ("Single-chain LDDT against MSA
+> depth (median per-residue Neff)", 10^0-10^4 log axis) and `suzuki2026pairscaling`
+> Fig 7 [p.10] ("MSA depth and Neff for every target"). **Both plot Neff as a
+> descriptive property of a NATURAL alignment; neither manipulates it.** The
+> abramson note flags this explicitly — it plots accuracy against *natural* Neff,
+> *not interventional*. So the operative claim is unchanged in consequence and
+> narrower in statement: Neff is never a manipulated variable in this corpus.
 
 **(c) The readout is under-specified, and this is the fixable part.** §3.3 is the
 whole point: at shallow depth, **only 42.9 % of OF3's predicate-active samples and
@@ -1114,8 +1124,12 @@ on 2026-09-12. **Full text: `lit/analysis_review/MSA_SUBSAMPLING_CORPUS_ANSWERS.
    `suzuki2026conforflux`, `suzuki2026pairscaling`, `swapna2025memorization`,
    `vo2026fiducials`, `waymentsteele2024cluster`, `waymentsteele2025reply`,
    `xing2025purified`, `ye2026multistatebias`.
-3. **No Neff value exists anywhere in the corpus.** Every published depth is a raw
-   count, a `cluster:extra` pair, or a masking percentage. §5.2b.
+3. **No published SUBSAMPLING DEPTH is reported in Neff units.** Every published
+   depth is a raw count, a `cluster:extra` pair, or a masking percentage. Neff
+   itself does appear, in `abramson2024af3` [p.18] and `suzuki2026pairscaling`
+   [p.10], but only as a descriptive property of a natural alignment — never as a
+   manipulated variable. **This item previously read "no Neff value exists anywhere
+   in the corpus", which was wrong; corrected 2026-09-12 by lit.** §5.2b.
 
 ## Still open — for lit, or for `paper_af3`
 
