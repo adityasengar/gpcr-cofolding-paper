@@ -38,12 +38,106 @@ KINDS = {
     # naturally nested. The inputs/cache distinction is about who may write a
     # file, not about its extension -- and inputs/ carries MANIFEST.tsv to
     # prove it, which cache/ does not.
-    INPUTS:   ({".tsv", ".csv", ".fasta", ".txt", ".json"}, set()),
+    #
+    # .gz is allowed here from 2026-09-12, for the same reason and one more.
+    # drule_rejections.tsv is 1.7 M rows / 86 MB as text and 7.2 MB gzipped, and
+    # inputs/ is committed by design -- so the choice was "commit 86 MB
+    # permanently" or "compress". A .gz is still a generated input, still
+    # code-written, still hashed in MANIFEST.tsv; the extension says how the bytes
+    # are packed, not who may write them, and L3 is what actually enforces the
+    # latter. It must stay a NARROW admission: .gz only, and only because
+    # drule_select.py writes it with mtime=0 and no embedded filename, so the same
+    # rows give the same sha256 and the manifest digest still means something.
+    # Compression that is not byte-stable would make L3 fire on every run.
+    INPUTS:   ({".tsv", ".csv", ".fasta", ".txt", ".json", ".gz"}, set()),
     CACHE:    ({".json"}, {"structures"}),
     PROTOCOL: ({".md"}, {"received"}),
 }
 
 RUN_FILES = ("manifest.json", "rows.csv", "README.md")
+
+
+def check_kinds(kinds, base=None):
+    """L2's body, over any {directory: (allowed extensions, allowed subdirs)}.
+
+    Extracted so `--selftest` can plant a misplaced file in a TEMPORARY directory
+    rather than in redo/inputs/ itself.  Planting into the real tree to prove a guard
+    is how you end up with a half-planted defect left behind when something raises,
+    in a directory three sessions share.
+    """
+    wrong = []
+    for d, (exts, subdirs) in kinds.items():
+        if not os.path.isdir(d):
+            continue
+        for e in sorted(os.listdir(d)):
+            if e.startswith((".", "__")):
+                continue
+            p = os.path.join(d, e)
+            rel = os.path.relpath(p, base or REDO)
+            if os.path.isdir(p):
+                if e not in subdirs:
+                    wrong.append(f"{rel} (unexpected directory)")
+            elif os.path.splitext(e)[1] not in exts:
+                wrong.append(f"{rel} (a {os.path.splitext(e)[1] or 'no-suffix'} file "
+                             f"in a {'/'.join(sorted(exts))} directory)")
+    return wrong
+
+
+def selftest():
+    """Prove L2 by planting, after the .gz admission of 2026-09-12.
+
+    Widening an allow-list is exactly the moment to re-prove the guard: the change
+    that lets one new kind through is the change that could let everything through,
+    and a guard that has stopped refusing looks identical to one that has nothing to
+    refuse.
+    """
+    import shutil
+    import tempfile
+    tmp = tempfile.mkdtemp()
+    allowed, disallowed = [], []
+    try:
+        kinds = {tmp: (KINDS[INPUTS][0], set())}
+        # baseline: the kinds inputs/ is for, including the new .gz
+        for name in ("a.tsv", "b.csv", "c.json", "d.tsv.gz"):
+            open(os.path.join(tmp, name), "w").close()
+        base_wrong = check_kinds(kinds, tmp)
+        allowed.append(("the admitted kinds pass, .gz included", not base_wrong,
+                        base_wrong))
+        # the plant: kinds that are still NOT inputs, one at a time
+        for name in ("secret.sh", "notes.md", "scratch", "archive.zip",
+                     "table.tsv.bz2"):
+            p = os.path.join(tmp, name)
+            open(p, "w").close()
+            w = check_kinds(kinds, tmp)
+            disallowed.append((name, bool(w)))
+            os.remove(p)
+        # and a directory, which inputs/ allows none of
+        os.mkdir(os.path.join(tmp, "subdir"))
+        dir_caught = bool(check_kinds(kinds, tmp))
+        os.rmdir(os.path.join(tmp, "subdir"))
+    finally:
+        shutil.rmtree(tmp)
+
+    bad = 0
+    sys.stdout.write("\n=== layout guard self-test: L2, re-proved after the .gz "
+                     "admission ===\n\n")
+    for what, ok, detail in allowed:
+        bad += 0 if ok else 1
+        sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} {what}"
+                         f"{'' if ok else '  -- ' + str(detail)}\n")
+    for name, fired in disallowed:
+        bad += 0 if fired else 1
+        verdict = ("L2 fires" if fired else
+                   "L2 DID NOT FIRE -- the admission is too wide")
+        sys.stdout.write(f"  {'ok  ' if fired else 'MISS'} planted {name:<14} -> "
+                         f"{verdict}\n")
+    bad += 0 if dir_caught else 1
+    sys.stdout.write(f"  {'ok  ' if dir_caught else 'MISS'} planted a subdirectory  "
+                     f"-> {'L2 fires' if dir_caught else 'L2 DID NOT FIRE'}\n")
+    n = len(allowed) + len(disallowed) + 1
+    sys.stdout.write(f"\n  {n - bad}/{n} -- .gz is admitted and nothing else new "
+                     f"is.\n\n")
+    return 1 if bad else 0
 
 
 def main(argv):
@@ -59,21 +153,7 @@ def main(argv):
         f"unexpected: {extra}" if extra else f"{len(have)} entries, all declared")
 
     # -- L2  each file is the kind its directory is for ----------------------
-    wrong = []
-    for d, (exts, subdirs) in KINDS.items():
-        if not os.path.isdir(d):
-            continue
-        for e in sorted(os.listdir(d)):
-            if e.startswith((".", "__")):
-                continue
-            p = os.path.join(d, e)
-            rel = os.path.relpath(p, REDO)
-            if os.path.isdir(p):
-                if e not in subdirs:
-                    wrong.append(f"{rel} (unexpected directory)")
-            elif os.path.splitext(e)[1] not in exts:
-                wrong.append(f"{rel} (a {os.path.splitext(e)[1] or 'no-suffix'} file "
-                             f"in a {'/'.join(sorted(exts))} directory)")
+    wrong = check_kinds(KINDS)
     chk("L2  every file is the kind its directory is for", not wrong,
         f"{len(wrong)} misplaced: {wrong[:4]}" if wrong else "6 directories clean")
 
@@ -163,4 +243,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(selftest() if "--selftest" in sys.argv else main(sys.argv[1:]))

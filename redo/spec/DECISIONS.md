@@ -596,6 +596,147 @@ now a substantive ask rather than a tidiness one.
 
 ---
 
+## D-2026-09-12-g · Two amendments to D-RULE, and the decoy arm is STILL REFUSED at 11 of 15
+
+**Aditya's decision, 2026-09-12, taken after seeing the rule fail.** That timing is
+recorded here deliberately, because it is the only thing that distinguishes a
+correction from a fit and it will not be legible from the diff.
+
+### What happened, in order
+
+1. `drule_select.py` was written to implement §5.3 **literally** — no threshold,
+   tolerance or k altered — and run. Result: **9 of 16 receptors, 9 of 15 clusters**
+   reached k = 3. §5.3's gate is **≥12 clusters**, so the arm was refused.
+2. The selector's own report then named two defects *in the rule*, not in the data.
+   Aditya approved fixing both and re-running.
+3. Re-run with both in force: **11 of 16 receptors, 11 of 15 clusters.**
+   **The arm is still refused.** 11 < 12.
+
+### Amendment A — cLogP gets an absolute window, because a percentage of a logarithm is a units error
+
+§5.3 said "every continuous axis within ±20% of the reference's", cLogP included.
+cLogP is already a logarithm, so `0.20·|cLogP_ref|` makes the tolerance proportional
+to a quantity whose zero point is arbitrary. **Measured on the T1 panel it was
+simultaneously too tight and too loose:** ACM4 (iperoxo, cLogP 0.40) got a window
+**±0.09**, HRH3 (histamine, −0.09) got **±0.02**, while CCKAR (**±1.58**), S1PR1
+(**±1.35**), OPSD (±1.14) and OPRD (±1.11) got windows *wider* than the absolute one
+that replaces it. Eleven of sixteen references have |cLogP| > 2.5.
+
+**Enacted: ±1.0 log unit.** MW and TPSA are genuinely proportional quantities and
+keep the percentage form.
+
+**It is not a loosening, and this is the number that proves it.** At ±1.0, cLogP
+still refuses **81.9%** of eligible candidates — against 84.4% at ±20%, a reduction
+of 2.9%. It **redistributed** refusals rather than removing them. And on the
+candidates that matter — the **3,679** that pass all seven other axes — cLogP is the
+sole refuser of **1,836, i.e. 49.9%**. It halves the otherwise-qualifying set. The
+conservation identity closes exactly: 1,843 accepted + 1,836 cLogP-only refusals =
+3,679.
+
+**Why ±1.0 and not ±1.5:** ±1.5 adds **zero** clusters while refusing 13% fewer
+candidates. A width that buys nothing costs credibility for free.
+
+**Why the sweep is reported as a grid, not a point.** Because the change was made
+after seeing a failure, a single post-hoc number is not evidence. Clusters reaching
+k = 3, out of 15 (14 is the real ceiling — B1B1U5 can never pass):
+
+| cLogP window | cap 0.30 | cap 0.40 | cap 0.50 | no cap |
+|---|---|---|---|---|
+| ±20% of \|ref\| *(as pre-registered)* | **9** | 9 | 9 | 9 |
+| ±0.5 log | 7 | 7 | 7 | 9 |
+| **±1.0 log** *(enacted)* | **11** | 11 | 11 | 11 |
+| ±1.5 log | 11 | 11 | 11 | 11 |
+
+**±0.5 is worse than ±20%, and that is the artefact's signature**, not a bug: for
+two-thirds of the panel the relative window was already wider than half a log unit.
+
+### Amendment B — the k = 3 decoys must be dissimilar to EACH OTHER
+
+§5.3 capped similarity to the real ligands and said nothing about similarity within
+the draw. The first run gave **OPSD two near-identical GPR52 ligands at pairwise
+T = 0.641** — same MW to one decimal, same cLogP. §5.3's own justification for k = 3
+is that it "converts *is this one molecule odd* into a within-receptor distribution";
+two near-duplicates do not do that.
+
+**Enacted: pairwise Morgan Tanimoto < 0.30 among the three drawn decoys** — the same
+threshold already applied against the real ligands, so the rule carries one
+dissimilarity number and one justification rather than two.
+
+**On this panel the cap costs nothing** — 11 clusters at 0.30, 0.40, 0.50 and
+uncapped. Its value is therefore set by **consistency, not by what it buys**, and
+that is stated rather than implied. What it changed is *which* molecules are drawn:
+worst within-draw similarity on the panel is now **0.274** (CCKAR) against 0.641
+before; OPSD is 0.254 and keeps its three.
+
+### Who moved, and the finding inside it
+
+**Gained, both from Amendment A and both predicted in advance:** **5HT5A** 1 → 8
+accepted (window ±0.15 → ±1.0) and **ACM4** 1 → 8 (±0.09 → ±1.0). **Lost to
+Amendment B: none.**
+
+**Still `decoy-unavailable` (5):**
+
+| receptor | accepted | decisive axis |
+|---|---:|---|
+| **B1B1U5** | 0 | **no ChEMBL target — eligibility unestablishable** |
+| AA1R | 1 | none; no single axis unblocks it (adenosine: MW 267, cLogP −2.0, TPSA 139.5, HBA 9) |
+| AA2AR | 0 | MW (dropping it alone → 1) |
+| **HRH3** | 0 | **MW** (dropping it alone → 11) |
+| LPAR1 | 0 | Tanimoto (→ 1). LPA is charge **−2**, 0 rings, 20 rotatable bonds |
+
+**HRH3 is the cleanest evidence the repair did real work.** Before Amendment A no
+single axis unblocked it. After, its blocker is **MW** — histamine is 111.1 Da, a
+window of [88.9, 133.4], and a pool of GPCR ligands contains almost nothing that
+small. The repair **exposed the next binding constraint rather than dissolving the
+gate**. That is what a units fix looks like; a loosening would have unblocked it.
+
+### What this means for the paper, and what must be reported
+
+**The decoy arm does not run.** `g2_systems.csv` is untouched, its 48 decoy cells
+stay `BLOCKED_UNRESOLVED_DECOY_POOL`, and G-6 still passes — correct, because
+11 < 12.
+
+**Both numbers go in the paper, with the amendments and their dates.** "The
+pre-registered rule yielded 9 of 15 clusters; correcting the cLogP window to an
+absolute log tolerance and adding a within-draw dissimilarity cap yielded 11; the
+pre-registered threshold of 12 was not met and the arm was not run." Reporting only
+the 11 would hide a decision; reporting only the 9 would hide a real defect in our
+own rule.
+
+**Three things that are now known and were not:**
+
+1. **≥12 of 15 was probably never attainable.** B1B1U5 is unresolvable in ChEMBL by
+   construction, so the gate is really **≥12 of 14 — 86% of the panel** must yield
+   three property-matched, charge-matched, mutually dissimilar non-binders.
+2. **"Decoy" cannot be worded as "non-binder."** The pool is `within_panel`, so every
+   accepted decoy is a **known active at some other panel GPCR** — and in 6 of the
+   first 27 cases at another receptor *in this same arm* (all three of LT4R1's were
+   S1PR1 ligands). Legal under §5.3 and arguably better science, but the Methods may
+   say only **"no measured activity at this receptor or its paralog cluster."**
+3. **The arm was never on the critical path.** §5.3's standing recommendation was to
+   hold it back regardless: title clause 2 is *"the agonist alone does not drive the
+   active state"*, which is answered by **agonist vs. no-ligand at fixed partner
+   condition**, not by agonist vs. decoy. The refusal costs the paper a referee's
+   answer, not a claim.
+
+### Where it is enforced
+
+`gates/drule.py` is **16 checks, 16 proved by planting** — including **D-15** (every
+row records the enacted cLogP window and diversity cap, and D-12 recomputes against
+*the window the row records*, not the module's current default) and **D-16** (the k
+decoys are mutually dissimilar, recomputed from SMILES; its plant makes two of a draw
+the same molecule). `drule_select.py --selftest` is **23/23**.
+
+**The 86 MB rejection table is now `drule_rejections.tsv.gz`, 6.8 MB, 1,719,908
+rows**, and `.gz` is admitted to `inputs/` by a narrow amendment to `layout.py`'s
+`KINDS` — `.bz2` and `.zip` are still refused, and L2's plant was re-proved (7/7).
+Determinism is by construction, not by assertion: the member is written with
+**MTIME = 0 and no FNAME field** (verified in the header bytes), so two generator
+runs produce byte-identical output and `manifest.py --check` passes without a
+restamp.
+
+---
+
 ## F-16 · The ladder's length/taxonomy confound is MUCH weaker than I said — three revisions, each downward
 
 **I over-called this, and it took two corrections from outside to get it right.**

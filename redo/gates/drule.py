@@ -44,7 +44,8 @@ POOL = "drule_pool_molecules.tsv"
 EXCL = "drule_pool_exclusions.tsv"
 PANEL = "g1_receptors.tsv"
 SEL = "drule_selected.tsv"
-REJ = "drule_rejections.tsv"
+# gzipped from 2026-09-12 (86 MB -> 7.2 MB); read through drule_select.open_rejections
+REJ = "drule_rejections.tsv.gz"
 G2 = "g2_systems.csv"
 
 
@@ -250,7 +251,7 @@ def selection_checks(root, chk, blocking):
     accepted_pairs = {(r["receptor_slug"], r["candidate_chembl_id"])
                       for r in acc_rows}
     overlap = 0
-    with open(rpath) as fh:
+    with DS.open_rejections(rpath) as fh:
         head = fh.readline().rstrip("\n").split("\t")
         if head != ["receptor_slug", "candidate_chembl_id", "first_failed_axis",
                     "failed_axes", "n_failed_axes"]:
@@ -287,6 +288,29 @@ def selection_checks(root, chk, blocking):
         f"{len(DS.CHARGE_VALIDATION)} molecules at the expected charge, including "
         f"5HT5A ACM4 DRD3 OPRD ADRB1 HRH3 at +1")
 
+    # -- D-15  amendments A and B are RECORDED, one setting for the whole run.
+    # A row that does not say which window and which cap produced it cannot be
+    # recomputed, and D-12 below would be checking against the module's current
+    # defaults rather than against what was enacted -- which is the CSV-cell drift
+    # MAP §2.4 describes, one level up.
+    wins = {r.get("clogp_window", "") for r in sel}
+    caps = {r.get("diversity_max", "") for r in sel}
+    try:
+        enacted_w = DS.parse_window(sorted(wins)[0]) if wins and all(wins) else None
+        enacted_c = float(sorted(caps)[0]) if caps and all(caps) else None
+    except Exception:                                            # noqa: BLE001
+        enacted_w = enacted_c = None
+    chk("D-15  every row records the enacted cLogP window and diversity cap, and the "
+        "run used ONE of each",
+        len(wins) == 1 and len(caps) == 1 and all(wins) and all(caps)
+        and enacted_w is not None and enacted_c is not None,
+        f"cLogP windows {sorted(wins)}, diversity caps {sorted(caps)}"
+        if (len(wins) != 1 or len(caps) != 1 or not all(wins) or not all(caps)) else
+        f"cLogP window {DS.wname(enacted_w)}, within-draw Tanimoto cap {enacted_c} "
+        f"(§5.3 amendments A and B, 2026-09-12)")
+    if enacted_w is None or enacted_c is None:
+        return
+
     try:
         curated, census = DS.load_ligands(root)
         byc = {}
@@ -306,7 +330,8 @@ def selection_checks(root, chk, blocking):
                        byc.get(r["cluster"], [r["receptor_slug"]]), curated, census))
                    if x]
             mt = max(DataStructs.BulkTanimotoSimilarity(a["_fp"], fps)) if fps else 0.0
-            f = DS.failed_axes(a, ref, DS.window(ref), mt)
+            # recomputed against the window the ROW records, not the module default
+            f = DS.failed_axes(a, ref, DS.window(ref, enacted_w), mt)
             if f:
                 drift.append(f"{r['receptor_slug']}/{r['candidate_chembl_id']}: "
                              f"recomputed, now fails {f}")
@@ -316,8 +341,40 @@ def selection_checks(root, chk, blocking):
         chk("D-12  every accepted decoy still passes all eight axes and the Tanimoto "
             "screen on RECOMPUTATION from SMILES", not drift,
             "; ".join(drift[:3]) if drift else
-            f"{len(acc_rows)} decoys recomputed against the CURRENT ligand tables, "
-            f"no drift (MAP §2.4: the frozen campaign's notes drifted unnoticed)")
+            f"{len(acc_rows)} decoys recomputed against the CURRENT ligand tables at "
+            f"{DS.wname(enacted_w)}, no drift (MAP §2.4: the frozen campaign's notes "
+            f"drifted unnoticed)")
+
+        # -- D-16  amendment B, enforced on the delivered draws.  §5.3 caps
+        # similarity to the real ligands and says nothing about similarity AMONG the
+        # k decoys; the first run drew OPSD two near-identical GPR52 ligands at
+        # pairwise T = 0.641, which is one molecule wearing three hats.  Recomputed
+        # from SMILES here, never read from the stored cell.
+        too_close, worst = [], 0.0
+        for slug, rows in by.items():
+            picks = [r for r in rows if r["decoy_status"] == "accepted"]
+            if not picks:
+                continue          # decoy-unavailable: D-7 owns that shape, not this
+            fps = {r["candidate_chembl_id"]: DS.axes(r["smiles"]) for r in picks}
+            if any(v is None for v in fps.values()):
+                continue
+            ids = sorted(fps)
+            for i in range(len(ids)):
+                for j in range(i + 1, len(ids)):
+                    t = DataStructs.TanimotoSimilarity(fps[ids[i]]["_fp"],
+                                                       fps[ids[j]]["_fp"])
+                    worst = max(worst, t)
+                    if t >= enacted_c:
+                        too_close.append(f"{slug}: {ids[i]}/{ids[j]} T={t:.3f}")
+            stored = {r.get("max_intra_draw_tanimoto", "") for r in picks}
+            if len(stored) != 1 or not all(stored):
+                too_close.append(f"{slug}: max_intra_draw_tanimoto not recorded "
+                                 f"consistently on the draw")
+        chk("D-16  the k decoys of a receptor are dissimilar to EACH OTHER, not only "
+            "to the real ligands", not too_close,
+            "; ".join(too_close[:3]) if too_close else
+            f"every within-draw pair recomputes below the cap {enacted_c}; worst on "
+            f"the panel is T = {worst:.3f}")
     except SystemExit as e:
         chk("D-12  every accepted decoy still passes on RECOMPUTATION", False, str(e))
 
@@ -388,14 +445,22 @@ def _drop_row(path, slug):
         w.writerows(rows)
 
 
-def _sub_line(path, n, old, new):
-    """Rewrite ONE line of a large file, streaming.  drule_rejections.tsv is 90 MB
-    and reading it whole to plant one defect is a minute of the self-test."""
-    tmp = path + ".plant"
-    with open(path) as src, open(tmp, "w") as dst:
+def _sub_rejection_line(path, n, old, new):
+    """Rewrite ONE row of the rejection table, through the same gzip the gate reads.
+
+    Streaming, because the table is 1.7 M rows; and gzip-aware, because it is stored
+    compressed from 2026-09-12 and a plant that cannot open its own target does not
+    plant anything.
+    """
+    rows = []
+    with DS.open_rejections(path) as src:
+        src.readline()                                    # the header is not a row
         for i, line in enumerate(src):
-            dst.write(line.replace(old, new) if i == n else line)
-    os.replace(tmp, path)
+            f = line.rstrip("\n").split("\t")
+            if i == n:
+                f = [x.replace(old, new) for x in f]
+            rows.append(f)
+    DS.write_rejections(rows, path)
 
 
 def _accepted_row(path, col, val, slug=None):
@@ -495,14 +560,36 @@ PLANTS = [
     ("D-10", "blank the seed on a drawn decoy", SEL,
      lambda d: _accepted_row(os.path.join(d, SEL), "receptor_seed", "")),
     ("D-11", "name an axis the rule does not have", REJ,
-     lambda d: _sub_line(os.path.join(d, REJ), 1, "mw", "vibes")),
+     lambda d: _sub_rejection_line(os.path.join(d, REJ), 0, "mw", "vibes")),
     ("D-12", "swap an accepted decoy's SMILES for one that fails the window", SEL,
      lambda d: _accepted_row(os.path.join(d, SEL), "smiles", "CCO")),
     ("D-13", "revert the charge axis to Chem.GetFormalCharge", None,
      lambda d: _revert_to_getformalcharge()),
     ("D-14", "lose a candidate between the pool and the two tables", SEL,
      lambda d: _accepted_row(os.path.join(d, SEL), "n_eligible", "999999")),
+    ("D-15", "blank the enacted cLogP window on a row, so nothing says what "
+             "produced it", SEL,
+     lambda d: _accepted_row(os.path.join(d, SEL), "clogp_window", "")),
+    ("D-16", "make two of a receptor's three decoys the same molecule", SEL,
+     lambda d: _twin_the_draw(os.path.join(d, SEL))),
 ]
+
+
+def _twin_the_draw(path):
+    """Amendment B's defect, planted: the first run's OPSD pair at T = 0.641, taken
+    to its limit -- two of the three decoys are the identical molecule."""
+    rows = list(csv.DictReader(open(path), delimiter="\t"))
+    cols = list(rows[0].keys())
+    picks = [r for r in rows if r["decoy_status"] == "accepted"
+             and r["receptor_slug"] == rows[0]["receptor_slug"]]
+    assert len(picks) >= 2, "need a full draw to twin"
+    for k in ("candidate_chembl_id", "smiles", "inchikey", "candidate_name"):
+        picks[1][k] = picks[0][k]
+    picks[1]["candidate_chembl_id"] = picks[0]["candidate_chembl_id"] + "_TWIN"
+    with open(path, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t")
+        w.writeheader()
+        w.writerows(rows)
 
 
 def _first_excluded(d):
@@ -524,9 +611,22 @@ def _stage(tmp, touched):
     rejection table is 90 MB, so copying every file for every plant is a minute of
     the self-test spent on files no plant touches.
     """
-    for f in os.listdir(INPUTS):
-        if f.endswith((".tsv", ".csv")):
-            os.symlink(os.path.join(INPUTS, f), os.path.join(tmp, f))
+    want = {f for f in os.listdir(INPUTS)
+            if os.path.isfile(os.path.join(INPUTS, f)) and not f.startswith(".")}
+    for f in want:
+        os.symlink(os.path.join(INPUTS, f), os.path.join(tmp, f))
+    # EVERY regular file, not a hand-written extension list.  This harness filtered
+    # on (".tsv", ".csv") until 2026-09-12, and the day the rejection table became a
+    # .gz that filter silently removed it from every planted copy: the gate then
+    # failed on the missing input, "FAIL D-7" appeared in the output, and the D-7
+    # plant was scored `fired` for a reason that had nothing to do with the plant,
+    # while D-8 through D-16 never ran at all.  That is g0_preflight's defect of
+    # 2026-09-12 reproduced in a different harness, in under a day, so the staging
+    # now asserts what it staged rather than assuming it.
+    have = set(os.listdir(tmp))
+    if have != want:
+        raise AssertionError(f"staging did not reproduce redo/inputs/: "
+                             f"missing {sorted(want - have)}, extra {sorted(have - want)}")
     if touched:
         src = os.path.join(INPUTS, touched)
         if not os.path.exists(src):

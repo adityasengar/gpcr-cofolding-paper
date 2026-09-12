@@ -118,21 +118,56 @@ filtered on a role string here beyond dropping `apo`.
 
 THE REJECTION TABLE IS A DELIVERABLE
 -------------------------------------
-The frozen campaign has no equivalent of `drule_rejections.tsv`: its property window
-was "computed, written to a report and never acted on", and no record survives of what
-was refused, because nothing ever was.  Here every eligible candidate that the gate
-refuses is written out with **every** axis that refused it -- not the first one found.
-All eight axes are evaluated for every candidate (no cascade, no short-circuit), so an
-axis's rejection count is a count of the chemistry and not an artefact of the order
-the tests happen to run in.  `first_failed_axis` is the first entry of `AXES`, a fixed
-order, so the per-axis attribution is stable across runs and across machines.
+The frozen campaign has no equivalent of `drule_rejections.tsv.gz`: its property
+window was "computed, written to a report and never acted on", and no record survives
+of what was refused, because nothing ever was.  Here every eligible candidate that the
+gate refuses is written out with **every** axis that refused it -- not the first one
+found.  All eight axes are evaluated for every candidate (no cascade, no
+short-circuit), so an axis's rejection count is a count of the chemistry and not an
+artefact of the order the tests happen to run in.  `first_failed_axis` is the first
+entry of `AXES`, a fixed order, so the per-axis attribution is stable across runs and
+across machines.
+
+It is written **gzipped and deterministically** -- `mtime=0`, no embedded filename --
+so the same inputs give the same bytes and inputs/MANIFEST.tsv hashes something
+stable.  1.7 M rows is 86 MB of TSV and 7.9 MB compressed, and inputs/ is committed by
+design.  `redo/gates/layout.py` L2 was amended on 2026-09-12 to admit `.gz` for this.
+
+
+TWO AMENDMENTS TO §5.3, APPROVED 2026-09-12 AFTER THE FIRST RUN
+----------------------------------------------------------------
+Both were proposed from what the first run showed and are recorded as amendments
+rather than folded in silently, because a tolerance widened after watching a gate fail
+is exactly the move that needs to stay legible.
+
+**A. The cLogP window is ABSOLUTE, in log units, not a percentage.**  §5.3 as written
+put every continuous axis within +-20% of the reference.  MW and TPSA are proportional
+quantities and a percentage is the right form for them.  cLogP is already a logarithm,
+so +-20% makes the window width proportional to |cLogP_ref| -- which is a units
+artefact, not a chemical tolerance.  Measured on this panel it gave ACM4 (iperoxo,
+cLogP 0.40) a window **0.16 log units wide** and HRH3 (histamine, -0.09) one **0.04**
+wide, and cLogP was the decisive axis on both.  `CLOGP_WINDOW` is therefore a
+parameter, not a constant, and `--clogp-window` sweeps it: the correction has to be
+reported as a shape, because a single number from a widened tolerance is
+indistinguishable from a fit.  A width so wide that cLogP rejects nobody is not a
+repair, it is a deletion, and `--sweep` measures exactly that.
+
+**B. The k = 3 draw is diversity-constrained.**  §5.3 caps similarity to the real
+ligands and says nothing about similarity among the three decoys.  Its own
+justification for k = 3 is that it "converts *is this one molecule odd* into a
+within-receptor distribution" -- and the first run drew OPSD two near-identical GPR52
+ligands at pairwise T = 0.641, which does not.  `DIVERSITY_MAX` caps pairwise Morgan
+Tanimoto inside a draw.  The draw stays a seeded draw: see `diverse_draw`.
 """
 
 import argparse
 import csv
+import gzip
 import hashlib
+import io
 import os
 import random
+import shutil
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -159,16 +194,36 @@ CENSUS = os.path.join(INPUTS, "ligand_census_records.tsv")
 G2 = os.path.join(INPUTS, "g2_systems.csv")
 
 OUT_SEL = os.path.join(INPUTS, "drule_selected.tsv")
-OUT_REJ = os.path.join(INPUTS, "drule_rejections.tsv")
+OUT_REJ = os.path.join(INPUTS, "drule_rejections.tsv.gz")
 
 # ---- the rule's constants, all from CAMPAIGN.md §5.3 ----------------------
-CONTINUOUS_TOL = 0.20            # +-20% of the reference
+CONTINUOUS_TOL = 0.20            # +-20% of the reference: MW and TPSA
 INTEGER_TOL = 1                  # +-1
 TANIMOTO_MAX = 0.30              # strictly less than
 MORGAN_RADIUS = 2
 MORGAN_BITS = 1024
 K_DECOYS = 3
 DRAW_SEED = 20260912             # the campaign's draw seed, recorded in every row
+
+# ---- amendment A: cLogP is a LOG, so its window is in log units -----------
+# ("relative", 0.20) reproduces §5.3 as originally written.  Swept by --sweep;
+# the enacted default is recorded in every output row.
+CLOGP_WINDOW = ("absolute", 1.0)
+CLOGP_SWEEP = [("relative", 0.20), ("absolute", 0.5), ("absolute", 1.0),
+               ("absolute", 1.5)]
+
+# ---- amendment B: the three decoys must differ from EACH OTHER ------------
+# 1.0 disables the cap and reproduces §5.3 as originally written.
+#
+# 0.30 -- the SAME threshold §5.3 already uses against the real ligands, so the rule
+# carries one dissimilarity number and one justification rather than two.  The worry
+# was that it might be unreachable, because three decoys matched to one reference are
+# matched to each other too; measured on this panel it is not.  At the enacted cLogP
+# window it costs NOTHING: 11 receptors / 11 clusters at caps 0.30, 0.40, 0.50 and
+# with no cap at all (`--sweep` prints the grid).  A threshold whose value does not
+# change the answer should be set by consistency, and 0.30 is the consistent one.
+DIVERSITY_MAX = 0.30
+DIVERSITY_SWEEP = [0.30, 0.40, 0.50, 1.0]
 
 # fixed evaluation order -> `first_failed_axis` is deterministic
 AXES = ("mw", "clogp", "tpsa", "hbd", "hba", "rot", "rings", "charge", "tanimoto")
@@ -410,22 +465,68 @@ def axes(smiles):
     return a
 
 
-def window(ref):
+def clogp_halfwidth(ref_clogp, spec):
+    """Half-width of the cLogP window, under either form of amendment A.
+
+    ("relative", f) -> f * |cLogP_ref|, which is §5.3 as originally written and the
+                       units artefact it carries: the window shrinks to nothing as the
+                       reference approaches cLogP 0.
+    ("absolute", d) -> d log units, independent of the reference.
+    """
+    kind, v = spec
+    if kind == "relative":
+        return v * abs(ref_clogp)
+    if kind == "absolute":
+        return float(v)
+    raise ValueError(f"unknown cLogP window kind: {kind!r}")
+
+
+def window(ref, clogp_window=None):
     """The accept window for each axis, from the reference's own values.
 
-    §5.3 as written: +-20% of the reference on the continuous axes.  Implemented
-    literally, including the consequence -- the window is proportional to |ref|, so a
-    reference whose cLogP sits near zero gets a window near zero wide.  That is a real
-    property of the rule and it is reported rather than repaired (see `--report`).
+    MW and TPSA keep §5.3's +-20%: they are proportional quantities and a percentage
+    is the right form.  cLogP takes `clogp_window` (amendment A) -- default absolute
+    log units, with ("relative", 0.20) reproducing the original clause exactly.
     """
     w = {}
-    for k in CONTINUOUS:
+    for k in ("mw", "tpsa"):
         d = CONTINUOUS_TOL * abs(ref[k])
         w[k] = (ref[k] - d, ref[k] + d)
+    d = clogp_halfwidth(ref["clogp"], clogp_window or CLOGP_WINDOW)
+    w["clogp"] = (ref["clogp"] - d, ref["clogp"] + d)
     for k in INTEGER:
         w[k] = (ref[k] - INTEGER_TOL, ref[k] + INTEGER_TOL)
     w["charge"] = (ref["charge"], ref["charge"])
     return w
+
+
+def diverse_draw(accepted, fp_of, seed, k=K_DECOYS, cap=DIVERSITY_MAX):
+    """The k = 3 draw, seeded, deterministic, and diversity-constrained.
+
+    Amendment B.  §5.3's draw is `k` taken uniformly at random from the accepted set.
+    That is preserved exactly: the accepted ids are sorted (so the input order cannot
+    depend on how the pool happened to be read), shuffled with the receptor's own
+    seed, and walked in order.  The only change is that a candidate is skipped if its
+    Morgan Tanimoto to a pick already taken is >= `cap`.  At cap = 1.0 nothing is ever
+    skipped and this IS §5.3's uniform sample of k.
+
+    One permutation, walked once.  It is not retried with a different seed until it
+    succeeds: a draw that is re-seeded until it produces an answer is a search wearing
+    a draw's clothes, and the count it produces is not the count the rule has.  So a
+    receptor whose accepted set holds no k mutually dissimilar members comes back
+    short, and §5.3's own disposition applies -- decoy-unavailable, named, at zero.
+    Never topped up with a similar pair.
+    """
+    order = sorted(accepted)
+    random.Random(seed).shuffle(order)
+    picks = []
+    for cid in order:
+        fp = fp_of(cid)
+        if all(DataStructs.TanimotoSimilarity(fp, fp_of(p)) < cap for p in picks):
+            picks.append(cid)
+            if len(picks) == k:
+                break
+    return picks
 
 
 def failed_axes(cand, ref, w, max_t):
@@ -559,18 +660,28 @@ SEL_COLS = ["receptor_slug", "cluster", "decoy_status", "reason",
             "n_eligible", "n_accepted", "draw_rank",
             "candidate_chembl_id", "candidate_name", "smiles", "inchikey",
             "mw", "clogp", "tpsa", "hbd", "hba", "rot", "rings", "charge",
-            "max_tanimoto", "n_real_ligands_screened",
+            "max_tanimoto", "max_intra_draw_tanimoto", "n_real_ligands_screened",
             "ref_ligand_name", "ref_ligand_source", "ref_smiles",
             "ref_mw", "ref_clogp", "ref_tpsa", "ref_hbd", "ref_hba", "ref_rot",
             "ref_rings", "ref_charge",
             "draw_seed", "receptor_seed", "k_requested",
+            "clogp_window", "diversity_max",
             "chembl_release", "pool_scope", "rule"]
 
 REJ_COLS = ["receptor_slug", "candidate_chembl_id", "first_failed_axis",
             "failed_axes", "n_failed_axes"]
 
 
-def run(report_only=False, crosscheck=False, verbose=True):
+def wname(spec):
+    kind, v = spec
+    return f"+-{v * 100:.0f}% of |ref|" if kind == "relative" else f"+-{v} log units"
+
+
+def run(report_only=False, crosscheck=False, verbose=True,
+        clogp_window=None, diversity_max=None):
+    clogp_window = clogp_window or CLOGP_WINDOW
+    diversity_max = DIVERSITY_MAX if diversity_max is None else diversity_max
+    sweep_data = {}
     bad, aminergic_bad = validate_charge_rule(verbose=verbose)
     if aminergic_bad:
         return 1, None
@@ -671,7 +782,9 @@ def run(report_only=False, crosscheck=False, verbose=True):
                     k_requested=K_DECOYS,
                     chembl_release=release[0] if len(release) == 1 else ";".join(release),
                     pool_scope=scope[0] if len(scope) == 1 else ";".join(scope),
-                    rule="CAMPAIGN.md 5.3 D-RULE",
+                    rule="CAMPAIGN.md 5.3 D-RULE + amendments A,B 2026-09-12",
+                    clogp_window=f"{clogp_window[0]}:{clogp_window[1]}",
+                    diversity_max=diversity_max,
                     ref_ligand_name=ref_name, ref_ligand_source=ref_src,
                     ref_smiles=ref_smi)
         for k in ("mw", "clogp", "tpsa", "hbd", "hba", "rot", "rings", "charge"):
@@ -682,7 +795,8 @@ def run(report_only=False, crosscheck=False, verbose=True):
             row = dict(base, decoy_status="decoy-unavailable", reason=reason,
                        n_eligible=n_elig, n_accepted=n_acc, draw_rank="",
                        candidate_chembl_id="", candidate_name="", smiles="",
-                       inchikey="", max_tanimoto="", n_real_ligands_screened="")
+                       inchikey="", max_tanimoto="", max_intra_draw_tanimoto="",
+                       n_real_ligands_screened="")
             for k in ("mw", "clogp", "tpsa", "hbd", "hba", "rot", "rings", "charge"):
                 row[k] = ""
             sel_rows.append(row)
@@ -730,7 +844,7 @@ def run(report_only=False, crosscheck=False, verbose=True):
                 if s > maxt[j]:
                     maxt[j] = s
 
-        w = window(ref)
+        w = window(ref, clogp_window)
         accepted = []
         # `sole` counts candidates that fail on exactly ONE axis.  That is the axis
         # which, dropped by itself, would admit them -- and it is the honest answer
@@ -738,9 +852,22 @@ def run(report_only=False, crosscheck=False, verbose=True):
         # MW is the most common first axis on every receptor here, and on none of
         # them is it the one standing between the receptor and three decoys.
         sole = {k: 0 for k in AXES}
+        # `survivors` = candidates that pass every axis EXCEPT possibly cLogP, kept
+        # with their |cLogP - ref| so the cLogP sweep costs nothing: at any half-width
+        # d the accepted set is exactly {s in survivors : s.delta <= d}.  `deltas`
+        # keeps the same distance for EVERY eligible candidate, which is what answers
+        # "does cLogP still reject anybody at this width" as opposed to "does it still
+        # decide anybody" -- two different questions and the sweep reports both.
+        survivors, deltas = [], []
         for j, i in enumerate(idx):
             cid = cid_order[i]
-            f = failed_axes(cand_axes[cid], ref, w, maxt[j])
+            cand = cand_axes[cid]
+            d = abs(cand["clogp"] - ref["clogp"])
+            deltas.append(d)
+            others = [k for k in failed_axes(cand, ref, w, maxt[j]) if k != "clogp"]
+            if not others:
+                survivors.append((cid, d, maxt[j]))
+            f = failed_axes(cand, ref, w, maxt[j])
             if f:
                 for k in f:
                     axis_counts[k] += 1
@@ -750,6 +877,9 @@ def run(report_only=False, crosscheck=False, verbose=True):
                 rej_rows.append((slug, cid, f[0], "|".join(f), len(f)))
             else:
                 accepted.append((cid, maxt[j]))
+        sweep_data[slug] = dict(cluster=cluster, ref_clogp=ref["clogp"],
+                                survivors=survivors, deltas=deltas,
+                                n_eligible=len(elig))
 
         n_elig, n_acc = len(elig), len(accepted)
         if n_acc < K_DECOYS:
@@ -763,16 +893,31 @@ def run(report_only=False, crosscheck=False, verbose=True):
                         n_elig=n_elig, n_acc=n_acc, blocking=blocking)
             continue
 
-        rng = random.Random(receptor_seed(slug))
-        accepted.sort()                      # deterministic before the draw
-        draw = rng.sample(accepted, K_DECOYS)
-        for rank, (cid, t) in enumerate(sorted(draw), start=1):
+        # amendment B: seeded draw, diversity-constrained
+        tmap = dict((cid, t) for cid, t in accepted)
+        draw = diverse_draw([c for c, _ in accepted],
+                            lambda c: cand_axes[c]["_fp"],
+                            receptor_seed(slug), K_DECOYS, diversity_max)
+        if len(draw) < K_DECOYS:
+            unavailable(f"{n_acc} candidates pass the eight axes but the seeded draw "
+                        f"finds only {len(draw)} that are mutually dissimilar at "
+                        f"pairwise Tanimoto < {diversity_max}; k = {K_DECOYS} decoys "
+                        f"that are near-copies of each other are not a within-receptor "
+                        f"distribution, and no draw is ever topped up",
+                        n_elig=n_elig, n_acc=n_acc,
+                        blocking=f"within-draw diversity cap {diversity_max}")
+            continue
+        intra = max((DataStructs.TanimotoSimilarity(cand_axes[a]["_fp"],
+                                                    cand_axes[b]["_fp"])
+                     for a in draw for b in draw if a < b), default=0.0)
+        for rank, cid in enumerate(sorted(draw), start=1):
             a = cand_axes[cid]
             row = dict(base, decoy_status="accepted", reason="",
                        n_eligible=n_elig, n_accepted=n_acc, draw_rank=rank,
                        candidate_chembl_id=cid, candidate_name=a["_name"],
                        smiles=a["_smiles"], inchikey=a["_inchikey"],
-                       max_tanimoto=round(t, 4),
+                       max_tanimoto=round(tmap[cid], 4),
+                       max_intra_draw_tanimoto=round(intra, 4),
                        n_real_ligands_screened=len(real_fps))
             for k in ("mw", "clogp", "tpsa"):
                 row[k] = round(a[k], 3)
@@ -782,21 +927,56 @@ def run(report_only=False, crosscheck=False, verbose=True):
         summary.append((slug, cluster, "accepted", n_elig, n_acc, "", ""))
 
     if report_only:
-        return 0, (sel_rows, rej_rows, summary, axis_counts, axis_first)
+        return 0, (sel_rows, rej_rows, summary, axis_counts, axis_first, sweep_data)
 
     with open(OUT_SEL, "w", newline="") as fh:
         w_ = csv.DictWriter(fh, fieldnames=SEL_COLS, delimiter="\t",
                             extrasaction="ignore")
         w_.writeheader()
         w_.writerows(sel_rows)
-    with open(OUT_REJ, "w", newline="") as fh:
-        fh.write("\t".join(REJ_COLS) + "\n")
-        for r in rej_rows:
-            fh.write("\t".join(str(x) for x in r) + "\n")
+    write_rejections(rej_rows)
 
     if verbose:
         print_summary(sel_rows, rej_rows, summary, axis_counts, axis_first)
-    return 0, (sel_rows, rej_rows, summary, axis_counts, axis_first)
+        print_sweep(sweep_data, cand_axes, clogp_window, diversity_max)
+    return 0, (sel_rows, rej_rows, summary, axis_counts, axis_first, sweep_data)
+
+
+def write_rejections(rej_rows, path=None):
+    """Gzipped, and DETERMINISTIC.
+
+    86 MB of TSV, 7.9 MB compressed, and inputs/ is committed by design -- Aditya's
+    decision of 2026-09-12.  `mtime=0` and an empty `filename` field matter: gzip
+    writes both into its header by default, so the same rows would otherwise hash
+    differently on every run and inputs/MANIFEST.tsv would record a digest that means
+    nothing.  manifest.py hashes the COMPRESSED bytes (it hashes whatever is on disk),
+    which is sound only because of this.
+    """
+    # The production write is spelled `open(OUT_REJ, "wb")` on purpose: manifest.py
+    # derives the `generator` column by finding exactly that pattern in build/, and a
+    # write hidden behind a parameter comes out `unattributed` -- a file with no
+    # answer to "which code is responsible for this number".
+    if path is None:
+        with open(OUT_REJ, "wb") as raw:
+            _emit_rejections(raw, rej_rows)
+        return
+    with open(path, "wb") as raw:
+        _emit_rejections(raw, rej_rows)
+
+
+def _emit_rejections(raw, rej_rows):
+    with gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as gz:
+        with io.TextIOWrapper(gz, encoding="utf-8", newline="\n") as fh:
+            fh.write("\t".join(REJ_COLS) + "\n")
+            for r in rej_rows:
+                fh.write("\t".join(str(x) for x in r) + "\n")
+
+
+def open_rejections(path):
+    """Read the rejection table, gzipped or not."""
+    if path.endswith(".gz"):
+        return io.TextIOWrapper(gzip.open(path, "rb"), encoding="utf-8")
+    return open(path, encoding="utf-8")
 
 
 def print_summary(sel_rows, rej_rows, summary, axis_counts, axis_first):
@@ -831,7 +1011,77 @@ def print_summary(sel_rows, rej_rows, summary, axis_counts, axis_first):
                      f"total.\n")
     sys.stdout.write(f"\n  wrote {os.path.relpath(OUT_SEL)}  ({len(sel_rows)} rows)\n")
     sys.stdout.write(f"  wrote {os.path.relpath(OUT_REJ)}  ({len(rej_rows):,} rows, "
-                     f"{os.path.getsize(OUT_REJ) / 1e6:.1f} MB)\n\n")
+                     f"{os.path.getsize(OUT_REJ) / 1e6:.1f} MB gzipped, "
+                     f"deterministic)\n\n")
+
+
+def sweep_cell(sweep_data, cand_axes, clogp_window, cap):
+    """(receptors, clusters, per-receptor detail) at one (width, cap) setting.
+
+    Both amendments in force together, which is the only way the number means
+    anything: widening cLogP adds candidates and the diversity cap removes draws, so
+    a count computed with one of them applied is not a count of anything that would
+    run.
+    """
+    recs, clusters, detail = [], set(), {}
+    for slug, d in sweep_data.items():
+        hw = clogp_halfwidth(d["ref_clogp"], clogp_window)
+        acc = [c for c, delta, _t in d["survivors"] if delta <= hw]
+        draw = (diverse_draw(acc, lambda c: cand_axes[c]["_fp"],
+                             receptor_seed(slug), K_DECOYS, cap)
+                if len(acc) >= K_DECOYS else [])
+        ok = len(draw) == K_DECOYS
+        if ok:
+            recs.append(slug)
+            clusters.add(d["cluster"])
+        detail[slug] = (len(acc), len(draw), ok)
+    return recs, clusters, detail
+
+
+def print_sweep(sweep_data, cand_axes, enacted_window, enacted_cap):
+    sys.stdout.write("\n=== amendments A and B, swept TOGETHER ===\n\n")
+    sys.stdout.write("  clusters with 3 decoys (of 15; B1B1U5 can never pass, so 14 "
+                     "is the real ceiling)\n")
+    sys.stdout.write("  §5.3's gate is >=12 clusters.\n\n")
+    caps = DIVERSITY_SWEEP
+    sys.stdout.write(f"  {'cLogP window':<22}" +
+                     "".join(f"{('cap ' + (f'{c:.2f}' if c < 1 else 'none')):>12}"
+                             for c in caps) + "\n")
+    for spec in CLOGP_SWEEP:
+        line = f"  {wname(spec):<22}"
+        for c in caps:
+            recs, clusters, _ = sweep_cell(sweep_data, cand_axes, spec, c)
+            cell = f"{len(recs)}r/{len(clusters)}c"
+            if spec == tuple(enacted_window) and c == enacted_cap:
+                cell += " *"
+            line += f"{cell:>12}"
+        sys.stdout.write(line + "\n")
+    sys.stdout.write(f"\n  * = enacted default ({wname(enacted_window)}, "
+                     f"diversity cap {enacted_cap})\n")
+
+    # -- the deletion-in-disguise question ---------------------------------
+    # A window so wide that cLogP refuses nobody is not a repaired axis, it is a
+    # deleted one.  Two counts, because they answer different questions: how many
+    # ELIGIBLE candidates the axis still refuses at all, and how many candidates it
+    # is still the SOLE refuser of -- the ones whose fate it actually decides.
+    sys.stdout.write("\n=== is cLogP still constraining anything? ===\n\n")
+    sys.stdout.write(f"  {'cLogP window':<22}{'refuses':>14}{'of eligible':>13}"
+                     f"{'decides alone':>15}\n")
+    allsurv = sum(len(d["survivors"]) for d in sweep_data.values())
+    for spec in CLOGP_SWEEP:
+        refused = elig = decided = 0
+        for d in sweep_data.values():
+            hw = clogp_halfwidth(d["ref_clogp"], spec)
+            elig += d["n_eligible"]
+            refused += sum(1 for x in d["deltas"] if x > hw)
+            decided += sum(1 for _c, delta, _t in d["survivors"] if delta > hw)
+        sys.stdout.write(f"  {wname(spec):<22}{refused:>14,}"
+                         f"{100.0 * refused / max(elig, 1):>12.1f}%"
+                         f"{decided:>15,}\n")
+    sys.stdout.write(f"\n  'decides alone' = candidates that pass all seven other "
+                     f"axes and are refused by cLogP only\n  (out of {allsurv:,} such "
+                     f"candidates across the panel).  If that column reaches 0 the "
+                     f"axis\n  has been deleted, not repaired.\n\n")
 
 
 # =========================================================================
@@ -922,6 +1172,90 @@ def selftest():
     sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} reference and candidate axes come "
                      f"from one code path (`axes`), never from ChEMBL's columns\n")
 
+    # (b2) amendment A -- the cLogP window is absolute, and the relative form is
+    # still reachable so §5.3 as originally written can be reproduced exactly
+    ok = (abs(clogp_halfwidth(0.40, ("absolute", 1.0)) - 1.0) < 1e-9
+          and abs(clogp_halfwidth(-5.0, ("absolute", 1.0)) - 1.0) < 1e-9)
+    bad += 0 if ok else 1
+    sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} amendment A: an absolute cLogP "
+                     f"window does not depend on the reference (0.40 and -5.0 both "
+                     f"give +-1.0)\n")
+    ok = (abs(clogp_halfwidth(0.40, ("relative", 0.20)) - 0.08) < 1e-9
+          and clogp_halfwidth(0.0, ("relative", 0.20)) == 0.0)
+    bad += 0 if ok else 1
+    sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} amendment A: the ORIGINAL relative "
+                     f"form is still reachable, and reproduces the units artefact "
+                     f"(iperoxo's window is +-0.08, a cLogP-0 reference's is +-0)\n")
+    w2 = window(ref, ("absolute", 1.0))
+    w3 = window(ref, ("relative", 0.20))
+    ok = (w2["mw"] == w3["mw"] and w2["tpsa"] == w3["tpsa"]
+          and w2["clogp"] != w3["clogp"])
+    bad += 0 if ok else 1
+    sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} amendment A touches cLogP ONLY: "
+                     f"MW and TPSA keep §5.3's +-20%\n")
+
+    # (b3) amendment B -- the diversity-constrained draw
+    class _FP:
+        def __init__(self, i):
+            self.i = i
+    pairs = {("A", "B"): 0.9, ("A", "C"): 0.1, ("B", "C"): 0.1,
+             ("A", "D"): 0.1, ("B", "D"): 0.1, ("C", "D"): 0.1}
+
+    def _sim(a, b):
+        if a == b:
+            return 1.0
+        return pairs[tuple(sorted((a, b)))]
+
+    real_ts = DataStructs.TanimotoSimilarity
+    try:
+        DataStructs.TanimotoSimilarity = lambda a, b: _sim(a, b)
+        # at cap 1.0 the draw is §5.3's uniform sample: all four are admissible
+        got = diverse_draw(["A", "B", "C", "D"], lambda c: c, 7, 3, 1.0)
+        ok = len(got) == 3
+        bad += 0 if ok else 1
+        sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} amendment B: cap 1.0 refuses "
+                         f"nothing -- the draw degenerates to §5.3's uniform sample "
+                         f"of k ({got})\n")
+        # at cap 0.30 A and B (T = 0.9) may never appear together
+        got = diverse_draw(["A", "B", "C", "D"], lambda c: c, 7, 3, 0.30)
+        ok = len(got) == 3 and not {"A", "B"} <= set(got)
+        bad += 0 if ok else 1
+        sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} amendment B: a pair at T = 0.9 "
+                         f"never both appear in a draw capped at 0.30 ({got})\n")
+        # a set with no k mutually dissimilar members comes back SHORT, not topped up
+        got = diverse_draw(["A", "B"], lambda c: c, 7, 3, 0.30)
+        ok = len(got) == 1
+        bad += 0 if ok else 1
+        sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} amendment B: a set with no k "
+                         f"dissimilar members returns SHORT ({got}) -- the receptor is "
+                         f"decoy-unavailable, never topped up with a near-copy\n")
+        # the draw is a draw: same seed same answer, different seed may differ
+        a1 = diverse_draw(["A", "B", "C", "D"], lambda c: c, 11, 3, 1.0)
+        a2 = diverse_draw(["A", "B", "C", "D"], lambda c: c, 11, 3, 1.0)
+        ok = a1 == a2
+        bad += 0 if ok else 1
+        sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} amendment B: the draw is "
+                         f"deterministic under its seed\n")
+    finally:
+        DataStructs.TanimotoSimilarity = real_ts
+
+    # (b4) the rejection table is gzipped, and the gzip is byte-identical twice
+    import tempfile
+    tmpd = tempfile.mkdtemp()
+    rows = [("R", "CHEMBL1", "mw", "mw|clogp", 2)] * 50
+    p1, p2 = os.path.join(tmpd, "a.gz"), os.path.join(tmpd, "b.gz")
+    write_rejections(rows, p1)
+    write_rejections(rows, p2)
+    h1 = hashlib.sha256(open(p1, "rb").read()).hexdigest()
+    h2 = hashlib.sha256(open(p2, "rb").read()).hexdigest()
+    back = [ln.rstrip("\n").split("\t") for ln in open_rejections(p1)]
+    ok = h1 == h2 and back[0] == REJ_COLS and len(back) == 51
+    bad += 0 if ok else 1
+    shutil.rmtree(tmpd)
+    sys.stdout.write(f"  {'ok  ' if ok else 'MISS'} the rejection table gzips "
+                     f"DETERMINISTICALLY (two writes, same sha256 {h1[:12]}) and reads "
+                     f"back through open_rejections\n")
+
     # (c) the plumbing -- resolution steps a fixture would otherwise skip
     try:
         slugs, clusters = load_scope()
@@ -966,9 +1300,19 @@ def selftest():
         bad += 1
         sys.stdout.write(f"  MISS plumbing: {e}\n")
 
-    n = 14
+    n = 23
     sys.stdout.write(f"\n  {n - bad}/{n} checks pass.\n\n")
     return 1 if bad else 0
+
+
+def parse_window(s):
+    kind, _, v = s.partition(":")
+    if kind not in ("relative", "absolute") or not v:
+        raise argparse.ArgumentTypeError(
+            "--clogp-window takes relative:<fraction> or absolute:<log units>, "
+            "e.g. absolute:1.0 (the enacted default) or relative:0.20 "
+            "(CAMPAIGN.md §5.3 as originally written)")
+    return (kind, float(v))
 
 
 def main(argv):
@@ -979,10 +1323,18 @@ def main(argv):
     ap.add_argument("--crosscheck", action="store_true", default=True,
                     help="report ChEMBL's compound_properties against RDKit "
                          "(never used by the gate)")
+    ap.add_argument("--clogp-window", type=parse_window, default=None,
+                    help=f"amendment A.  default {CLOGP_WINDOW[0]}:{CLOGP_WINDOW[1]}; "
+                         f"relative:0.20 reproduces §5.3 as written")
+    ap.add_argument("--diversity-max", type=float, default=None,
+                    help=f"amendment B, pairwise Tanimoto cap inside a draw.  "
+                         f"default {DIVERSITY_MAX}; 1.0 disables it and reproduces "
+                         f"§5.3 as written")
     a = ap.parse_args(argv)
     if a.selftest:
         return selftest()
-    rc, _ = run(report_only=a.report, crosscheck=a.crosscheck)
+    rc, _ = run(report_only=a.report, crosscheck=a.crosscheck,
+                clogp_window=a.clogp_window, diversity_max=a.diversity_max)
     return rc
 
 

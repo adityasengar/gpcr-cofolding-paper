@@ -621,11 +621,44 @@ That is not a controlled negative for pocket occupancy. It is a different experi
 > some unrelated target. Compute eight axes on every candidate and on the reference:
 > MW, cLogP, TPSA, HBD, HBA, rotatable bonds, ring count, and **formal charge at pH 7.4**
 > (not `Chem.GetFormalCharge` on the SMILES as written — that is what produced the charge
-> asymmetry). Accept a candidate iff every continuous axis is within ±20% of the
-> reference's, every integer axis within ±1, **charge exactly equal**, and Morgan
-> (r = 2, 1024 bit) Tanimoto < 0.30 against every curated real ligand of the receptor
-> **and of every receptor in its paralog cluster**. From the accepted set draw **k = 3**
-> decoys per receptor by a seeded draw recorded in the row.
+> asymmetry). Accept a candidate iff **MW and TPSA are each within ±20% of the
+> reference's**, **cLogP is within ±1.0 log unit of the reference's**, every integer
+> axis (HBD, HBA, rotatable bonds, ring count) is within ±1, **charge exactly equal**,
+> and Morgan (r = 2, 1024 bit) Tanimoto < 0.30 against every curated real ligand of
+> the receptor **and of every receptor in its paralog cluster**. From the accepted set
+> draw **k = 3** decoys per receptor by a seeded draw recorded in the row, **subject to
+> pairwise Morgan Tanimoto < 0.30 among the three drawn decoys** — the same
+> dissimilarity threshold applied within the draw as against the real ligands. A draw
+> that cannot supply three mutually dissimilar decoys is short, the receptor is
+> *decoy-unavailable*, and **a draw is never topped up**.
+>
+> ---
+>
+> **AMENDMENT A — 2026-09-12.** *This clause originally read* "every continuous axis is
+> within ±20% of the reference's", *cLogP included.* cLogP is a logarithm, so a
+> percentage makes the window width proportional to |cLogP_ref| — a **units artefact,
+> not a chemical tolerance**. Measured on the T1 panel it gave ACM4 (iperoxo, cLogP
+> 0.40) a window ±0.09 and HRH3 (histamine, −0.09) one ±0.02, while giving CCKAR
+> (±1.58), S1PR1 (±1.35), OPSD (±1.14) and OPRD (±1.11) windows **wider** than the
+> absolute one that replaces it; eleven of sixteen references have |cLogP| > 2.5. **The
+> absolute form is not a loosening:** at ±1.0 cLogP still refuses **81.9%** of eligible
+> candidates (84.4% at ±20%) and is the **sole** refuser of **1,836 of the 3,679**
+> candidates that pass all seven other axes. ±1.5 adds zero clusters and was rejected
+> for that reason. MW and TPSA are genuinely proportional quantities and keep the
+> percentage form. **Proposed after the rule as pre-registered returned 9 of 15
+> clusters**, which is why `DECISIONS.md` D-2026-09-12-g reports the full
+> (width × cap) grid rather than a single post-hoc number.
+>
+> **AMENDMENT B — 2026-09-12.** *The clause capped similarity to the real ligands and
+> said nothing about similarity among the k decoys.* The first run drew OPSD two
+> near-identical GPR52 ligands at pairwise **T = 0.641**, which does not deliver the
+> within-receptor distribution k = 3 exists for. On the T1 panel the cap **costs
+> nothing** — 11 clusters at 0.30, 0.40, 0.50 and uncapped — so its value is set by
+> **consistency with the real-ligand screen rather than by what it buys**, and that is
+> stated rather than implied.
+>
+> **Outcome of both, for the record: 11 of 15 clusters. The gate is ≥12. THE ARM DOES
+> NOT RUN.**
 >
 > **The gate rejects.** A receptor with fewer than 3 accepted candidates is reported as
 > *decoy-unavailable*, named in the paper, and excluded from the decoy arm. No candidate is
