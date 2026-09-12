@@ -173,16 +173,45 @@ ConfoRNets does not state and, on its own data, does not apply.
 >    (c) resolution; (d) most recent release date.
 >    Take the top-ranked entry.
 > 4. **Partner-chain override.** Where the top-ranked entry's transducer chain is a chimera
->    and an entry of the same receptor and state with a native transducer exists, take the
->    native one and record the demotion.
+>    **and an entry of the same receptor and state with a NATIVE transducer exists**, take the
+>    native one and record the demotion. **The rule is conditional on that second clause and
+>    does not fire without it**: "prefer native over chimeric" has no meaning where every
+>    candidate is a construct. Where no native option exists, rule 3's pick stands and the
+>    construct is recorded (§6.1 QC flags and `g1_panel_freeze.tsv:reference_tip_note`).
 > 5. **Record, never filter on:** fusion partner identity, fiducial (nanobody / scFv / Fab)
 >    presence, ICL3 excision, mutation count, transducer identity, ligand.
 
-Rule 4 exists because rule 3 gets **B1B1U5** wrong without it: it promotes `9EPP` over our
-`9EPR`, undoing a decision our own audit made for a good reason — 9EPP is a Gi/q chimera and
-9EPR is the native Gi heterotrimer from the same deposition (`PANEL_EXPANSION.md` §5a). Rule
-3 reads the *receptor* entity only, and nothing in this project has ever read a partner
-chain as part of reference selection (`methods.tex:282`).
+**Rule 4's written justification was wrong, and is corrected here rather than deleted
+(2026-09-12).** This paragraph used to read:
+
+
+> ~~Rule 4 exists because rule 3 gets **B1B1U5** wrong without it: it promotes `9EPP` over
+> our `9EPR`, undoing a decision our own audit made for a good reason — 9EPP is a Gi/q
+> chimera and 9EPR is the native Gi heterotrimer from the same deposition
+> (`PANEL_EXPANSION.md` §5a).~~ {ref-history}
+
+Three things are wrong with it, and the document contradicted its own §6.1 table — which
+says `9EPP` — for two days as a result. The frozen artefacts followed the table; the prose
+was the defect. See `spec/D_H_RESOLUTION.md`, and `DECISIONS.md` D-H (decided 2026-09-12).
+
+1. **9EPR is not a native heterotrimer.** `tejero2024opsin` Methods: it is human Gαi1
+   expressed in *E. coli* and reconstituted *in vitro* with **bovine** Gβ1γ1 separated from
+   retinal transducin. 9EPP carries human Gβ1γ2. Neither entry is native, and the βγ differs
+   between them — which no UniProt cross-reference surfaces.
+2. **So rule 4 is INAPPLICABLE to B1B1U5, not merely unimplemented.** Its second clause is
+   never satisfied. It was never the reason the map says 9EPP; rule 3 selecting 9EPP is the
+   whole story, and that selection is correct.
+3. **9EPP's α5 tip is not a graft of a human Gq tip.** It is jumping-spider Gαq1 (INSDC
+   `LC799818`) swapped into human Gαi1 at 337–354 — so the three ct21 differences from human
+   Gq/G11 are *species* divergence, and all three fall inside the spider window. RCSB's own
+   `pdbx_mutation` for `9EPP_2` records exactly those eight substitutions inside 337–354 and
+   three outside it, so this is checkable from the PDB entry alone.
+
+Rule 4 is therefore **kept, scoped, and still unimplemented in code** — no selection script
+reads a partner chain. That remains a gap for the receptors where it *can* fire, and it must
+be implemented or struck before the panel grows; it is simply not what happened here. Rule 3
+reads the *receptor* entity only, and nothing in this project has ever read a partner chain
+as part of reference selection (`methods.tex:282`).
 
 ### Rule R reconstructs 80% of ConfoRNets' reference choices
 
@@ -270,6 +299,25 @@ undated and still an open ask (`methods.tex:225`). **Ligands** = agonist modalit
 antagonist modality / Block C coverage (`C` both roles run, `c` one role, `–` not run).
 References are the **rule-R** picks; `panel_systems.csv` also carries our current pinned pair,
 ConfoRNets' pair and the resolution-only pick for every receptor.
+
+**What the QC flags do NOT tell you, and where to look instead (added 2026-09-12).** Every
+flag in this table is read off the **receptor** polymer entity. None of them says anything
+about the **transducer** chain, so a reference whose Gα α5 tip is a chimera looks identical
+here to one that is canonical. **Twelve of the 64 have a non-canonical α5 tip on their
+rule-R active reference** — nine mini-Gs/q chimeras, a Gi/Gq chimera, a Gi/Gt chimera, and
+rhodopsin's 11-residue peptide analogue in `4X1H`. The census is
+`inputs/g1_refchimera.tsv`, one row per entity, and the check *"§6 note — receptors with a
+non-canonical α5 tip on the rule-R active reference"* in `gates/panel_verify.py` fails if
+that set stops matching this list:
+
+> `5HT2A 5HT2C ADA1A B1B1U5 DRD4 EDNRA GRPR HRH1 OPSD OX2R OXYR TA2R`
+
+**Ten of the twelve are cross-family chimeras and are excluded from the primary panel**
+(`g1_panel_freeze.tsv`, DECISION 1). The two that stay are the two where the rule resolves:
+**OPSD**, whose partner entity is an 11-residue peptide (`PEPTIDE_ENTITY`, and everything
+past rung `R1_ct11` is extrapolation), and **B1B1U5**, by **D-H (c′)** — its tip is spider
+Gαq1, native for the organism, and there is no native alternative to demote to. B1B1U5's
+reference is spelled out in `g1_panel_freeze.tsv:reference_tip_note`.
 
 
 ## 6.1 Tier C1 — the core panel, 64 receptors
@@ -602,11 +650,16 @@ bookkeeping:
   engineered. Rule R agrees that 5G53 is not the best pick and selects a *third* structure.
   AA2AR is the recurrently anomalous receptor (C-B-8). **Re-scoring AA2AR against all three
   costs no new predictions and is the cheapest test of the standing anomaly.**
-- **B1B1U5**: rule 3 promotes `9EPP`, rule 4 keeps our `9EPR`. Documented above; this is the
-  case that proves the panel cannot be selected on receptor-entity metadata alone.
+- **B1B1U5**: our pinned `9EPR` active → **`9EPP`**, by rule 3, and **rule 4 does not
+  override it** — 9EPR is a human/bovine *in-vitro* reconstitution, so there is no native
+  option and rule 4's second clause is never satisfied (§4, corrected 2026-09-12; D-H
+  decided as option (c′)). It is still the case that proves the panel cannot be selected on
+  receptor-entity metadata alone: nothing about the *receptor* entity distinguishes the two,
+  and what distinguishes them is a spider-Gαq1-tipped Gα and a swapped βγ.
 - **ADRB2 inactive**: our `6PS2` → `2R4R`. Both are T4L fusions; the change is driven by
   RCSB's mutation record, which §9 says is a floor. **Do not action this one before the
-  sequence-level substitution audit runs.**
+  sequence-level substitution audit runs.** {ref-history}
+
 
 ---
 
@@ -972,7 +1025,8 @@ On the shared receptors the strict rule picks **the same reference entry on 67 o
 (68%)** — lower than the 80% Rule R achieved in §4, because GPCRdb's mutation counts reorder
 the ranking and because newer, cleaner structures now exist (5HT2C `8ZMF`, ADRB2 `8JJO`,
 CNR1 `7FEE`, GLP1R `6KK1`). `7EVW`, their FZD7 active, is one of the 31: it was obsoleted
-2024-04-24 (§3) and the strict rule picks `9EW2`.
+2024-04-24 (§3) and the strict rule picks `9EW2`. {ref-alt}
+
 
 **The 21 receptors the strict rule adds that ConfoRNets does not have** —
 `5HT5A AGRL3 AGTR1 APJ C5AR1 CNR2 CXCR2 DRD3 GCGR GPR52 GRPR LPAR1 LT4R1 MTR1B NPY1R OPRD
@@ -1110,7 +1164,8 @@ separately. **That reading is correct, and it is stronger than "does not lose": 
   across the two papers is bounded by reference choice, not by panel membership** — so if we
   want a like-for-like number we must re-score against *their* pairs, which
   `panel_systems.csv` carries in `cn_active` / `cn_inactive` for exactly this purpose. That is
-  a re-scoring job, `cheap`, and it is orthogonal to the panel decision.
+  a re-scoring job, `cheap`, and it is orthogonal to the panel decision. {ref-alt}
+
 
 So the honest sentence is: *the relaxed 64 gives up nothing in comparability; what limits
 comparability is that neither panel's reference pairs match theirs, and that is fixable by

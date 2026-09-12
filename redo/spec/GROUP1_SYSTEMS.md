@@ -168,9 +168,12 @@ exactly the chimeras.
   **NTR1's fallback rests on a non-Rule-R structure against a unanimous Gq/11
   annotation**. Preflight reports all six by name every run.
 - **Four assignments reverse Block B's prior** — B1B1U5, CCKAR, EDNRB, GHSR.
-  B1B1U5 is live: it follows Rule R to **9EPP**, and **if the panel session
-  settles on 9EPR it flips to Gi1 and the map must be rebuilt**. That row is
-  therefore never hard-coded here; it is read from the map on every run.
+  **B1B1U5's half is CLOSED** (D-H, Aditya 2026-09-12, option (c′)): Rule R gives
+  **9EPP**, Rule R step 4 does not override it because there is no native
+  transducer to demote to, and the cognate stays **Gq**. What reverses is Block
+  B's Gi prior, which was read off **9EPR** — a structure the panel no longer
+  uses. The row is still read from the map on every run and never hard-coded
+  here. {ref-history}
 
 ## 1.4 DECISION 1 — the ten chimeras are ineligible for the primary panel
 
@@ -1060,7 +1063,11 @@ rungs R2 through R8 have no partner-conformation reference for it.
 
 **B1B1U5 gains a third independent line of evidence.** Its active reference 9EPP
 carries a Gα whose tip is **Gq-like** (2 of 11 from Gq) while its only UniProt
-cross-reference is **P63096, Gi1**. Block B assigned it Gi; §8.7 and §10.1 record
+cross-reference is **P63096, Gi1**. (Corrected 2026-09-12: "independent" is the
+wrong word for the *coupling annotation* — B1B1U5 has no non-structure coupling
+authority at all, so its annotation and its reference are one evidence, and
+`g1_panel_freeze.tsv:supplied_partner_independence` now says so. The tip-vs-xref
+disagreement below is still a structural observation and stands.) Block B assigned it Gi; §8.7 and §10.1 record
 the coupling as unresolved; the deposited structure independently says the tip
 that was crystallised is not Gi's.
 
@@ -1346,9 +1353,10 @@ gate that passes because the checks were deleted is worse than one that fails.
 | 2 | OPSD's extrapolation caveat travels with every OPSD row above rung 1 | analysis |
 | 3 | the two no-op alanine cells are labelled, not counted | pipeline |
 | 4 | six convention fallbacks named on every run — **OPRM has no active reference containing a Gα at all**; NTR1's rests on a non-Rule-R structure | analysis |
-| 5 | four assignments reverse Block B's prior; **B1B1U5 is read from the map every run, never hard-coded**, because 9EPP → 9EPR would flip it to Gi1 | coupling |
+| 5 | four assignments reverse Block B's prior; **B1B1U5 is read from the map every run, never hard-coded** — its reference is settled at 9EPP by D-H (c′), and Block B's Gi prior for it came from 9EPR, which the panel no longer uses {ref-history} | coupling |
 | 6 | G16 / G17 uncosted (§11.3) | run-matrix |
 | 7 | the ten chimeras' PI decision is *recorded as taken* — they are excluded — but the tip-vs-scaffold question survives for anyone who runs the extension tier | PI |
+
 
 ## 11.5 Three things I could not close, stated plainly
 
@@ -1368,8 +1376,8 @@ gate that passes because the checks were deleted is worse than one that fails.
 
 ## 11.6 What would unfreeze this
 
-A changed `PANEL.md` reference under Rule R (B1B1U5's 9EPP → 9EPR is the live
-one), `paper_af3`'s coupling table landing, the MSA-depth measurement coming back
+A changed `PANEL.md` reference under Rule R — **B1B1U5 is no longer the live one;
+D-H closed it at 9EPP on 2026-09-12** — `paper_af3`'s coupling table landing, the MSA-depth measurement coming back
 different from §0.2's expectation, or the `mazzoni2000` PDF resolving whether
 "not effective" attaches to binding or to signalling — which is the one open
 literature item that decides a rung's predicted sign. Everything else is a

@@ -83,7 +83,7 @@ side.
 | ACM2 | 7T94 | 7T94 | 5ZK8 | 5ZKC | inactive 5ZK8 3.00 vs our 5ZKC 2.30 Å |
 | ADRB1 | 8DCS | 7BU7 | 4BVN | 7BVQ | active 8DCS 2.50 vs our 7BU7 2.60 Å; **theirs is turkey, ours human**; inactive 4BVN 2.10 vs our 7BVQ 2.50 Å |
 | ADRB2 | 8GG0 | 4LDE | 6PS2 | 6PS2 | active 8GG0 2.90 vs our 4LDE 2.79 Å |
-| B1B1U5 | 9EPP | 9EPR | 6I9K | 6I9K | active 9EPP 4.06 vs our 9EPR 4.90 Å |
+| B1B1U5 | 9EPP | 9EPR | 6I9K | 6I9K | active 9EPP 4.06 vs our 9EPR 4.90 Å — **the redo now uses 9EPP; see §2 bullet** |
 | CCKAR | 7MBX | 7MBX | 7F8U | 7F8Y | inactive 7F8U 2.80 vs our 7F8Y 2.50 Å |
 | CCR5 | 7O7F | 7F1S | 6MEO | 5UIW | active 7O7F 3.15 vs our 7F1S 2.80 Å; inactive 6MEO 3.90 vs our 5UIW 2.20 Å |
 | CNR1 | 8GHV | 5XRA | 9BA0 | 5U09 | active 8GHV 2.80 vs our 5XRA 2.80 Å; inactive 9BA0 3.13 vs our 5U09 2.60 Å |
@@ -108,10 +108,14 @@ Three of these repay a close read:
   would test it at the cost of no new predictions.
 - **ADRB1.** Their pair is **turkey** on both sides (8DCS / 4BVN, *Meleagris
   gallopavo*); ours is human (7BU7 / 7BVQ). We are ahead here.
-- **B1B1U5.** They use 9EPP (4.06 A); we use 9EPR (4.90 A), and our audit records
-  why — 9EPP is a Gi/q chimera whose coupling a UniProt lookup would mis-assign,
-  and 9EPR is the native Gi heterotrimer from the same deposition. We traded
-  0.84 A of resolution for a correct coupling assignment. Also ahead.
+- **B1B1U5.** ~~They use 9EPP (4.06 A); we use 9EPR (4.90 A) … we traded 0.84 A
+  of resolution for a correct coupling assignment. Also ahead.~~ **WITHDRAWN
+  2026-09-12 — not ahead, and the redo now uses 9EPP too.** 9EPR is **not**
+  native: human Gai1 reconstituted in vitro with **bovine** Gb1g1. 9EPP's tip is
+  **not** an engineered Gq graft: it is jumping-spider Gaq1 (LC799818) at Gai1
+  337-354. Neither entry is native, `tejero2024opsin` never measures coupling,
+  and there was no "correct coupling assignment" to trade for. See
+  `redo/spec/D_H_RESOLUTION.md` and `redo/spec/DECISIONS.md` D-2026-09-12-b.
 
 ## 3. Their selection rule, which we could adopt or cite
 

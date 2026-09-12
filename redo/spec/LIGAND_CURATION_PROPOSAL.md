@@ -53,9 +53,11 @@ different deposition. It needs the most scrutiny of the seven.
 
 ## The two that are blocked, and why it is chemistry
 
-**OPSD and B1B1U5 cannot be curated conventionally.** Both carry CCD `RET` for
-**both** roles — agonist and antagonist are the same molecule in different isomers,
-covalently bound through a Schiff base. `PANEL.md` §10 already records them among
+**OPSD and B1B1U5 cannot be curated conventionally** — but for *different*
+reasons, and the difference was invisible while D-H was open. **OPSD** carries CCD
+`RET` for **both** roles: agonist and antagonist are the same molecule in
+different isomers, covalently bound through a Schiff base. **B1B1U5 does not**,
+once its reference is `9EPP` — see the bullet below. `PANEL.md` §10 already records them among
 four that Block C could not run, "and the reason is chemical, not operational."
 
 **If they are dropped, k = 13 and MDE = 0.338** — still worth curating the other
@@ -66,9 +68,36 @@ Two constraints if anyone attempts them anyway:
 - **Curate retinal by ISOMER, never by CCD** (finding F-11). One code carries two
   opposite pharmacologies: 11-cis is the inverse agonist in 16 snapshot entries,
   all-trans the agonist in 14.
-- **B1B1U5 is additionally blocked on D-H.** Its candidate agonist sits on `9EPP`
-  and its antagonist on `6I9K`; D-H decides whether `9EPP` is the reference at all.
-  **Resolve D-H before curating it.**
+- **B1B1U5 is no longer blocked on D-H. CLOSED 2026-09-12 as option (c′): `9EPP`
+  is the active reference.** That changes the picture in three ways, and only the
+  first is good news.
+
+  1. **F-11's trap does not bite this pair.** `9EPP`'s agonist is
+     **11,20-ethanoretinal**, CCD **`A1H6M`** — a *different CCD* from the 11-cis
+     retinal (`RET`) inverse agonist on our inactive reference `6I9K`. The
+     "one CCD, two opposite pharmacologies" hazard is an **OPSD** problem, not a
+     B1B1U5 one, and the sentence above ("both carry CCD `RET` for both roles")
+     is **wrong for B1B1U5** once the reference is 9EPP. Both candidates sit on
+     one of our own references, which is the strongest provenance the rule knows.
+  2. **The residual blocker is policy, not chemistry.** The delivered
+     `ligand_set_tier3.csv` carries B1B1U5's `neutral_antagonist` as a deliberate
+     `NA` under **amendment §C-1**, which dropped `inverse_agonist` from Tier 3 —
+     and 11-cis retinal is an inverse agonist, not a neutral antagonist. Curating
+     it means reopening §C-1 for this receptor. **Aditya's call, not a curation
+     judgement.**
+  3. **The existing curated agonist row now points at a non-reference.** It is
+     all-*trans* retinal keyed to **`9EPR`**, which the panel no longer uses. Two
+     options, and they are not equivalent:
+     - **re-key to `9EPP`'s `A1H6M`** — reference-matched, but a **non-natural
+       ring-locked analogue**, and its pharmacology beyond GPCRdb's `Agonist`
+       label is a lit question we have not asked;
+     - **keep all-*trans* retinal** and record that its `bound_pdb` is
+       off-reference. F-11(b) says GPCRdb's isomer name for 9EPR is wrong and the
+       modelled chromophore is all-*trans*, so this row is chemically right about
+       a structure that is gone.
+
+     **Not decided here.** Whichever is taken, curate by **ISOMER**, never by CCD.
+  {ref-history}
 
 ## What each row still needs
 

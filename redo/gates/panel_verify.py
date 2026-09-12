@@ -224,6 +224,156 @@ strict = list(csv.DictReader(open(P('redo/inputs/panel_strict_confornets.csv')))
 check("strict rule pairs", len(strict), 71)
 check("strict rule Class A entries", sum(1 for r in strict if r['gpcr_class'] == 'A'), 62)
 
+
+# ===========================================================================
+# D-H, 2026-09-12.  Two checks that exist because PANEL.md contradicted itself
+# about B1B1U5's active reference for two days and nothing noticed: §6.1's table
+# said 9EPP, §6's prose said Rule 4 gives 9EPR, and the frozen artefacts followed
+# the table.  Neither check is about B1B1U5 in particular.
+# ===========================================================================
+import re
+
+def parse_c1():
+    """PANEL.md §6.1 -> slug -> (active_pdb, inactive_pdb).
+
+    Parsed HERE rather than read back from g1_receptors.tsv on purpose: a gate
+    that checks the generator's own output against the generator's own input is
+    not checking the document.
+    """
+    text = open(P('redo/spec/PANEL.md')).read().splitlines()
+    start = next(i for i, l in enumerate(text) if l.startswith('## 6.1 Tier C1'))
+    end = next(i for i, l in enumerate(text[start + 1:], start + 1) if l.startswith('## '))
+    ref = re.compile(r'^\s*(\S+)\s+([0-9.]+)\s*Å')
+    out = {}
+    for line in text[start:end]:
+        if not line.startswith('|'):
+            continue
+        f = [c.strip() for c in line.strip().strip('|').split('|')]
+        if len(f) < 12 or not f[0].isdigit():
+            continue
+        a, i = ref.match(f[6]), ref.match(f[7])
+        out[f[1].replace('*', '').strip()] = (a.group(1) if a else '',
+                                              i.group(1) if i else '')
+    return out
+
+C1REF = parse_c1()
+check("§6.1 parses to 64 rows", len(C1REF), 64)
+
+print("== D-H: the spider Gaq1 segment is derivable from RCSB alone ==")
+# tejero2024opsin Methods p10 records human Gai1 337-354 replaced by jumping-spider
+# Gaq1 (INSDC LC799818).  If applying RCSB's OWN pdbx_mutation record for 9EPP_2 to
+# human Gai1 reproduces that segment byte for byte, the literature string is
+# corroborated by the PDB entry and does not have to be taken on trust.  If it ever
+# stops reproducing, one of the two sources moved and (e') must not be built.
+SPIDER_SEG = "CAVKDTILQNNLKECNLV"
+W0, W1 = 337, 354
+_rs = list(csv.DictReader(open(P('redo/inputs/coupling_refstructures.csv'))))
+_ga = [r for r in _rs if r['pdb'] == '9EPP' and r['kind'] == 'G-alpha']
+check("9EPP has exactly one G-alpha entity", len(_ga), 1)
+_gi1 = [r for r in csv.DictReader(open(P('redo/inputs/seq_rungs.tsv')), delimiter='\t')
+        if r['family'] == 'Gi1' and r['rung'] == 'R7_full']
+check("seq_rungs.tsv carries Gi1 R7_full", len(_gi1), 1)
+if _ga and _gi1:
+    _host = _gi1[0]['sequence']
+    _win = list(_host[W0 - 1:W1])
+    _inside = 0
+    for _tok in filter(None, (t.strip() for t in _ga[0]['pdbx_mutation'].split(','))):
+        _wt, _pos, _to = _tok[0], int(_tok[1:-1]), _tok[-1]
+        if W0 <= _pos <= W1:
+            _inside += 1
+            _win[_pos - W0] = _to if _win[_pos - W0] == _wt else '?'
+    check(f"9EPP_2 pdbx_mutation substitutions inside {W0}-{W1}", _inside, 8)
+    check("...applied to human Gai1 they reproduce the spider Gaq1 segment",
+          "".join(_win), SPIDER_SEG)
+    check("the 3 residues before the spider window are HUMAN backbone "
+          "(so no spider ct21 exists)", _host[W0 - 4:W0 - 1], _ga[0]['ct21'][:3])
+    check("...and the deposited ct21 is exactly backbone + spider segment",
+          _ga[0]['ct21'], _host[W0 - 4:W0 - 1] + SPIDER_SEG)
+
+print("== §6 note: receptors with a non-canonical alpha5 tip on the rule-R active reference ==")
+# PANEL.md §6 names this set in prose.  Prose drifts; the census does not.
+_chim = sorted({r['slug'] for r in
+                csv.DictReader(open(P('redo/inputs/g1_refchimera.tsv')), delimiter='\t')
+                if r['is_rule_r_reference'] == 'active'})
+_sec6 = open(P('redo/spec/PANEL.md')).read().split('## 6.1 Tier C1')[0]
+_lists = [m.group(1).split() for m in
+          re.finditer(r'^> `([A-Z0-9 ]+)`\s*$', _sec6, re.M)]
+check("§6 carries exactly one blockquoted slug list", len(_lists), 1)
+check("§6's named non-canonical-tip list equals g1_refchimera.tsv's",
+      sorted(_lists[0]) if _lists else [], _chim)
+
+print("== no spec document contradicts PANEL.md §6.1 on a reference ==")
+# WHAT THIS CHECKS, AND WHAT IT DOES NOT.  It is not a general prose linter and it
+# does not try to be: the spec tree is full of legitimate sentences naming an
+# alternative reference -- ConfoRNets' pick, the strict rule's pick, our old pinned
+# pair, a resolution-only pick.  Those are comparisons, and comparing is the point.
+#
+# What it catches is the ONE shape that produced D-H: a sentence that says OUR OWN
+# Rule R selects a PDB entry, where that entry is not what §6.1's table says.  So a
+# sentence is flagged only when all four hold --
+#
+#   (1) it names Rule R, or rule 3 / rule 4 by number (our rule, not someone else's);
+#   (2) it uses a selection verb;
+#   (3) it names a C1 receptor -- in the sentence or anywhere in its paragraph,
+#       because "B1B1U5 ... Rule R selects X" is often split across sentences;
+#   (4) it names a PDB entry OF THAT RECEPTOR that §6.1 does not select.
+#
+# The escape hatch is a visible marker on the paragraph, one of two:
+#
+#   {ref-history}  this paragraph RECORDS a superseded or rejected selection --
+#                  what we used to pin, what a rule would have given.
+#   {ref-alt}      this paragraph deliberately COMPARES our pick with another
+#                  rule's -- ConfoRNets', the strict rule's, resolution-only.
+#
+# Both are greppable on purpose: an escape hatch nobody can see is one that
+# swallows the check.  `grep -rn '{ref-history}\|{ref-alt}' redo/spec/` is the
+# audit, and the count is printed every run so it stays visible if it grows.
+MARKER = re.compile(r'\{ref-(history|alt)\}')
+OURRULE = re.compile(r'\bRule[- ]R\b|\brule\s*[34]\b|\bRule\s*[34]\b|\bstep\s*[34]\b', re.I)
+VERB = re.compile(r'\b(select(?:s|ed)?|pick(?:s|ed)?|promot(?:e|es|ed)|keep(?:s)?|kept'
+                  r'|choos(?:e|es)|chose|resolv(?:e|es|ed)?\s+to|give(?:s)?|gave'
+                  r'|take(?:s)?|took|overrid(?:e|es)|flip(?:s)?\s+to|settle(?:s)?\s+on'
+                  r'|point(?:s)?\s+at|is the reference|reference is|updated to)\b', re.I)
+PDBTOK = re.compile(r'\b([0-9][A-Za-z0-9]{3})\b')
+BYREC = collections.defaultdict(set)
+for _r in _rs:
+    BYREC[_r['slug']].add(_r['pdb'].upper())
+for _p, _d in DEG.items():
+    if _d['receptor'] in C1REF:
+        BYREC[_d['receptor']].add(_p)
+SLUGRE = {s: re.compile(r'\b' + re.escape(s) + r'\b') for s in C1REF}
+
+contradictions, marked = [], 0
+for _fn in sorted(os.listdir(P('redo/spec'))):
+    if not _fn.endswith('.md'):
+        continue
+    for _para in re.split(r'\n\s*\n', open(P('redo/spec/' + _fn)).read()):
+        if not OURRULE.search(_para):
+            continue
+        _here = {s for s, rx in SLUGRE.items() if rx.search(_para)}
+        if not _here:
+            continue
+        # Markdown prose is hard-wrapped, so a sentence routinely spans lines.
+        # Flatten first -- splitting on newline was silently hiding every claim
+        # whose subject and verb sat on different lines, which is most of them.
+        for _sent in re.split(r'(?<=[.!?])\s+', " ".join(_para.split())):
+            if not (OURRULE.search(_sent) and VERB.search(_sent)):
+                continue
+            _pdbs = {t.upper() for t in PDBTOK.findall(_sent)}
+            for _slug in sorted(_here):
+                _off = sorted((_pdbs & BYREC[_slug]) - set(C1REF[_slug]))
+                if not _off:
+                    continue
+                if MARKER.search(_para):
+                    marked += 1
+                    continue
+                contradictions.append(
+                    f"{_fn}: {_slug} -> {_off} (§6.1 says {C1REF[_slug]}) :: "
+                    + " ".join(_sent.split())[:100])
+check("spec sentences claiming Rule R selects what §6.1 does not", contradictions, [])
+print(f"  note   {marked} sentence(s) sit in paragraphs marked {{ref-history}} or {{ref-alt}} and "
+      f"are read as record, not claim")
+
 print()
 if FAIL:
     print(f"FAILED {len(FAIL)} claim(s): " + "; ".join(FAIL))

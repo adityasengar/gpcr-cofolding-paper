@@ -312,9 +312,14 @@ def main(argv):
                   if r["reverses_blockb_prior"] == "yes"})
     if rev:
         pending.append(f"P: {len(rev)} assignments REVERSE Block B's prior -- {rev}. "
-                       f"B1B1U5 follows Rule R to 9EPP; if the panel session settles "
-                       f"on 9EPR it flips to Gi1 and the map must be rebuilt, so "
-                       f"that row is never hard-coded here")
+                       f"B1B1U5's half of this is CLOSED: D-H was decided on "
+                       f"2026-09-12 as option (c') -- reference 9EPP, cognate Gq, "
+                       f"recorded as a spider-Gq-tipped chimera with no native "
+                       f"alternative (PANEL.md Rule 4 is inapplicable, not just "
+                       f"unimplemented). The row is still read from the map every "
+                       f"run and never hard-coded here. What is still pending is "
+                       f"the other three, and that Block B's Gi prior for B1B1U5 "
+                       f"came from a reference (9EPR) the panel no longer uses")
     sub = [r for r in reg if r["construct_class"] == "a5null_substitute_rule"]
     if sub:
         pending.append(f"P: {len(sub)} alpha5-null constructs were built under a "

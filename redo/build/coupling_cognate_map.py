@@ -119,6 +119,27 @@ RUNG_ORDER = ("R1_ct11", "R2_ct15", "R3_ct21", "R4_a5helix", "R5_a5plus",
 # R1-R5 are byte-identical within each tie class; R6a/R7 are not.
 RUNGS_TIE_SENSITIVE = ("R6a_da5", "R7_full")
 
+# R-COG-9 (added 2026-09-12 with D-H).  Where the deposited tip differs from every
+# canonical HUMAN Ga, the *cause* is NOT readable from the sequence: an engineered
+# graft and an orthologue's own sequence look identical at this resolution.  The
+# note this file used to write said "deposited tip is engineered", which is a
+# claim about cause on eight receptors and was verified on none of them -- and on
+# B1B1U5 it is wrong.  The generic note now states the observation only.
+#
+# A cause is recorded ONLY where a source settles it, keyed by (slug, pdb) so it
+# cannot survive a reference change, and carrying its locator.  Never inferred.
+TIP_CAUSE = {
+    ("B1B1U5", "9EPP"): (
+        "CAUSE IS SPECIES DIVERGENCE, NOT ENGINEERING: the tip is jumping-spider "
+        "Gaq1 (INSDC LC799818), swapped into a human Gai1 backbone at 337-354 "
+        "-- tejero2024opsin Methods p10 (Nat Commun 2024;15:8928). Cross-checked "
+        "here against RCSB's own pdbx_mutation for 9EPP_2, which records exactly "
+        "8 substitutions inside that window and 3 outside it. The construct is "
+        "still a CHIMERA -- spider tip on a human backbone -- and D-H (c') keeps "
+        "it as the reference because 9EPR is not native either: it is human Gai1 "
+        "reconstituted in vitro with bovine Gb1g1. See spec/D_H_RESOLUTION.md."),
+}
+
 
 def rung_table():
     by_rung, acc = collections.defaultdict(dict), {}
@@ -383,10 +404,16 @@ def main():
                    verdict="frozen", tie_set="/".join(f21),
                    tie_changes_bytes_at=",".join(RUNGS_TIE_SENSITIVE) if len(f21) > 1 else "")
         if i21 < 1.0:
-            row["note"] = ("deposited tip is engineered -- %d of 21 substitutions "
-                           "from %s -- but every canonical at the best score is in "
-                           "one family, so family and subtype are unambiguous."
-                           % (round((1 - i21) * 21), "/".join(f21)))
+            # R-COG-9: observation first, cause only where a source settles it.
+            cause = TIP_CAUSE.get((row["receptor_slug"], row["rule_r_active_pdb"]))
+            row["note"] = (
+                (cause + " ") if cause else ""
+            ) + ("deposited tip differs from the nearest canonical human Ga (%s) at "
+                 "%d of 21 positions%s. Every canonical at the best score is in one "
+                 "family, so family and subtype are unambiguous."
+                 % ("/".join(f21), round((1 - i21) * 21),
+                    "" if cause else "; whether that is engineering or species "
+                                     "divergence is not readable from the sequence"))
         rows.append(row)
         emit_rungs(rung_rows, row, by_rung)
 

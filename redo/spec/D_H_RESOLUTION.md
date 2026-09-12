@@ -1,7 +1,17 @@
 # D-H — B1B1U5, 9EPP vs 9EPR: the evidence, and what is and is not resolvable
 
-**Status: the documentary half is resolved. The scientific half needs Aditya.**
-Written 2026-09-12 during the curation phase. No compute involved.
+> ## CLOSED 2026-09-12. Aditya chose **(c′) for the primary panel, with (e′) as an extension arm.**
+>
+> Everything below §7 is the *reasoning*, kept as the record. §9 is what was
+> implemented. **Sections 1–5 contain statements that were true when written and
+> are now superseded** — chiefly the framing "three documents say 9EPR, the frozen
+> artefact says 9EPP, therefore the artefact is wrong". §6 already overturned that
+> and §7 replaced the option set. Superseded selection statements are marked
+> `{ref-history}` so the `gates/panel_verify.py` cross-document check can tell a
+> record from a claim.
+
+**Status: CLOSED.** Written 2026-09-12 during the curation phase; decided the same
+day. No compute involved.
 
 D-H blocks B1B1U5's ligand curation, because its curated agonist row is keyed to
 **9EPR** while the frozen cognate map is keyed to **9EPP** — so curating before
@@ -67,7 +77,7 @@ one gate `WAIT`. **No selection code applies the override.**
 
 > Rule 4 exists because rule 3 gets **B1B1U5** wrong without it: it promotes
 > `9EPP` over our `9EPR` … 9EPP is a Gi/q chimera and 9EPR is the native Gi
-> heterotrimer from the same deposition.
+> heterotrimer from the same deposition. {ref-history}
 
 **Rule 4 appears nowhere in `redo/build/` or `redo/gates/`.** Grepping the whole
 campaign tree for `9EPP` / `9EPR` returns three hits: two comments and one gate
@@ -76,7 +86,7 @@ campaign tree for `9EPP` / `9EPR` returns three hits: two comments and one gate
 So the frozen `coupling_cognate_map.tsv` carries `rule_r_active_pdb = 9EPP` — the
 chimera — because **rule 3 ran and rule 4 never did.** `g1_preflight` already
 records the consequence as a pending dependency: *"B1B1U5 follows Rule R to 9EPP;
-if the panel session settles on 9EPR it flips to Gi1 and the map must be rebuilt."*
+if the panel session settles on 9EPR it flips to Gi1 and the map must be rebuilt."* {ref-history}
 
 **Three documents say 9EPR; the frozen artefact says 9EPP.** That is D-H.
 
@@ -240,3 +250,164 @@ call rather than a curation decision.
 One literature answer: **does the jumping-spider rhodopsin couple Gq or Gi?** If
 the 9EPP deposition's own paper states the coupling, that settles it outright. This
 is a `litquery` question for the lit session, not a compute question.
+
+---
+
+# 9. THE DECISION, AND WHAT WAS BUILT — 2026-09-12
+
+**Aditya: (c′) for the primary panel, with (e′) offered as an extension arm.**
+
+## 9.1 (c′), exactly as implemented
+
+| field | value |
+|---|---|
+| tier | **PRIMARY** — the panel stays **30 receptors / 29 clusters**, unchanged |
+| `cognate_family` | **Gq** (`Gq/11`, subtype `Gq`, accession `P50148`) |
+| `reference_tip` | **9EPP**, recorded as a **spider-Gαq1-tipped chimera on a human Gαi1 backbone** |
+| supplied partner, R1–R5 | **human Gq**, 0.86 identity to the reference tip at ct21 |
+| Methods must state | **no native complex exists for this receptor.** 9EPP is a chimera; 9EPR is human Gαi1 from *E. coli* reconstituted *in vitro* with **bovine** Gβ1γ1. PANEL.md **Rule 4 is inapplicable**, not merely unimplemented — its second clause ("an entry … with a native transducer exists") is never satisfied |
+
+The biology behind `cognate_family = Gq`: the deposited tip is genuinely spider
+Gαq1, and the experimenters' design intent was Gq (§6a, §6c). It is **not** a
+coupling measurement — `tejero2024opsin` states outright that "further experiments
+will be needed to determine the signaling profile of JSR1" — and no sentence may
+say otherwise.
+
+## 9.2 (e′), costed — and where it stops
+
+(e′) supplies the **spider** Gαq1 α5-CT instead of the human one, so that what we
+supply and what we score against are the same molecule.
+
+**The source, and its limit.** `tejero2024opsin` Methods p10 records the swapped
+segment as human Gαi1 residues **337–354** replaced by jumping-spider Gαq1,
+accession `LC799818`:
+
+```
+CAVKDTILQNNLKECNLV      18 residues
+```
+
+That is the whole of the spider sequence this project holds. **We do not hold
+`LC799818` itself.** So (e′) is constructible at every rung of length ≤ 18 and at
+no rung longer, and the ladder stops there rather than being padded:
+
+| rung | needs | (e′) sequence | human Gq at the same rung | diff | status |
+|---|---:|---|---|---:|---|
+| `R1_ct11` | 11 | `LQNNLKECNLV` | `LQLNLKEYNLV` | 2 | **held** — and byte-identical to `ref_tip/reftip_ct11/9EPP`: the last 11 lie wholly inside the spider window, so at this rung (e′) *is* the deposited tip |
+| `R1b_ct13` | 13 | `TILQNNLKECNLV` | `TILQLNLKEYNLV` | 2 | **held** |
+| `R2_ct15` | 15 | `KDTILQNNLKECNLV` | `KDTILQLNLKEYNLV` | 2 | **held** |
+| `R2b_ct17` | 17 | `AVKDTILQNNLKECNLV` | `AVKDTILQLNLKEYNLV` | 2 | **held** |
+| *(ceiling)* `ct18` | 18 | `CAVKDTILQNNLKECNLV` | `AAVKDTILQLNLKEYNLV` | 3 | **held** — the whole recorded segment; not a ladder rung |
+| `R2c_ct19` | 19 | — | — | — | **NOT SUPPORTED** |
+| `R3_ct21` | 21 | — | — | — | **NOT SUPPORTED** |
+| `R4_a5helix` | 26 | — | — | — | **NOT SUPPORTED** |
+| `R5_a5plus` | 36 | — | — | — | **NOT SUPPORTED** |
+| `R6a_da5`, `R7_full` | subunit | — | — | — | **NOT SUPPORTED** — LC799818 records a segment, not a subunit |
+
+**Why ct21 in particular is not available, and why this is a trap rather than a
+rounding error.** The deposited 21-mer is `FVFCAVKDTILQNNLKECNLV`. Its first three
+residues are the **human Gαi1 backbone** (`P63096` 334–336 = `FVF`), not spider.
+Supplying it as "the spider 21-mer" would be supplying the deposited chimera under
+a wrong name — and the bytes would look right, because **human Gq reads `FVF` at
+the aligned positions too** (`P50148` 339–341). The deposited 21-mer *is* held, as
+`ref_tip/reftip_ct21/9EPP`, and it is the honest construct for a "supply what was
+crystallised" arm; it is not an (e′) rung.
+
+**Cost of (e′).** Construction: **zero** — the five held constructs are derived
+from files already in `inputs/`, `spidertip_*` in `g1_partner_registry.tsv`, all
+hash-checked. Compute: one receptor × the rungs actually run; it is a
+one-receptor, species-matched arm, so it can only ever be a demonstration, never a
+powered contrast. **What it would cost to reach ct21 and above: a sequence
+request.** `LC799818` (INSDC) in full would lift the ceiling from 18 to the whole
+subunit and is the single ask that unblocks the rest of the ladder — but it also
+raises a question this work has not answered, namely whether the rest of spider
+Gαq1 aligns to human Gq closely enough for a rung boundary defined on human CGN
+`G.H5` to mean the same thing there.
+
+**Why it is not in the primary ladder:** it introduces a non-human partner into a
+human-partner ladder. That is a scope change, not a curation fix.
+
+## 9.3 What changed, mechanically
+
+| artefact | change |
+|---|---|
+| `spec/PANEL.md` §4 | Rule 4 **scoped** — its second clause made explicit and load-bearing; its old justification struck *in place*, with the three reasons it was wrong. Rule 4 stays on the books, still unimplemented in code, for the cases where it *can* fire |
+| `spec/PANEL.md` §6 | new note: the QC flags say nothing about the transducer chain; the 12 receptors with a non-canonical α5 tip on the rule-R active reference are named, and a gate check holds the list to `g1_refchimera.tsv` |
+| `spec/PANEL.md` §11 | the B1B1U5 bullet corrected: rule 3 selects 9EPP and rule 4 does not override it |
+| `spec/PANEL.md` §6.1 table | **unchanged** — it already said `9EPP`, and under (c′) it was right |
+| `build/coupling_cognate_map.py` | R-COG-9: the generic note no longer claims a *cause* ("deposited tip is engineered") for the 8 near-canonical tips; cause is recorded per (slug, pdb) only where a source settles it. B1B1U5's says species divergence, with its locator |
+| `build/g1_panel_freeze.py` | DECISION 4; new columns `reference_tip_pdb`, `reference_tip_note`; a stale-key guard so a curated note cannot outlive the reference it describes |
+| `build/g1_panel_freeze.py` | **separate finding, see §9.4** — `supplied_partner_independence` |
+| `build/g1_partner_registry.py` | the (e′) constructs, five held and six not-dispatchable, each with its reason |
+| `build/ligand_curation_candidates.py` | B1B1U5's note: D-H no longer blocks it (§9.5) |
+| `gates/panel_verify.py` | two new cross-document checks (§9.6) |
+| `gates/g1_preflight.py` | the "4 assignments reverse Block B's prior" WAIT now says B1B1U5's half is closed |
+
+## 9.4 A second defect, found while implementing this
+
+`g1_panel_freeze.tsv:supplied_partner_independence` read **"annotation only —
+independent of the structure"** for **B1B1U5 and OPSD**. Both are false. Neither
+receptor has *any* non-structure coupling authority: `coupling_assignments.csv`
+gives both `n_authorities = 1`, and that one authority is `authority_structure` —
+a reading of their own deposited structures. So for these two the "biology" column
+and the "reference" column were the same evidence written twice, and the column
+whose entire purpose is to keep them apart said they were independent.
+
+Both are **PRIMARY-panel** receptors. The generator now tests the authority
+columns directly rather than the count, and both rows say so.
+
+This does not change (c′) — Gq for B1B1U5 rests on the spider tip and the design
+intent, which is what §6 established, not on an annotation. It changes what the
+row is allowed to claim.
+
+## 9.5 B1B1U5's ligand curation — unblocked, but not finished
+
+`LIGAND_CURATION_PROPOSAL.md` marked B1B1U5 blocked on D-H. **That block is
+lifted**, and the picture is better than expected but not clear:
+
+- **The reference question is settled.** 9EPP is the active reference, and its
+  agonist row already carries `is_our_reference = yes`.
+- **F-11's trap does not bite this pair.** 9EPP's agonist is **11,20-ethanoretinal,
+  CCD `A1H6M`** — a *different CCD* from the 11-cis retinal (`RET`) inverse agonist
+  on our inactive reference `6I9K`. The "one CCD, two opposite pharmacologies"
+  hazard is an OPSD problem here, not a B1B1U5 one.
+- **What is still open is policy, not chemistry.** The delivered
+  `ligand_set_tier3.csv` carries B1B1U5's antagonist as a deliberate `NA` under
+  amendment §C-1, which dropped `inverse_agonist` from Tier 3 — and 11-cis retinal
+  is an inverse agonist, not a neutral antagonist. Curating it means reopening
+  §C-1 for this receptor, which is Aditya's call.
+- **And the existing curated agonist row now points at a non-reference.** It is
+  all-*trans* retinal keyed to **`9EPR`**, which is no longer a panel structure.
+  Two options, and they are not equivalent: re-key to 9EPP's `A1H6M`, which is
+  reference-matched but a **non-natural locked analogue**; or keep all-*trans*
+  retinal and record that its `bound_pdb` is off-reference. Note F-11(b) —
+  GPCRdb's isomer name for 9EPR is wrong, the modelled chromophore is all-*trans* —
+  so the existing row is chemically right about 9EPR even though 9EPR is gone.
+  **Not decided here.**
+
+## 9.6 The two checks added
+
+Both in `gates/panel_verify.py`, both proved by planting the defect they catch:
+
+1. **the spider segment is derivable from RCSB alone.** Applying `9EPP_2`'s own
+   `pdbx_mutation` record to human Gαi1 337–354 must reproduce
+   `CAVKDTILQNNLKECNLV` exactly, and the three residues before it must be human
+   backbone. This makes §6(a) checkable without the paper.
+2. **no spec document asserts a reference that contradicts PANEL.md §6.1.** Any
+   line in `redo/spec/*.md` that uses a selection verb near a receptor slug and a
+   PDB id of that receptor must name the §6.1 pick, unless the line is marked
+   `{ref-history}`. This is the check that would have caught D-H on the day it was
+   created; the marker is deliberately visible and greppable so that "record the
+   history" cannot quietly become "assert the alternative".
+
+## 9.7 What still made me doubt the decision
+
+Recorded because §6(d) is not disposed of by (c′): the paper reports that TM5/TM6
+open **further** in the chimera complexes than in the hGi complex, and argues the
+Gα subtype sets the extent of TM6 movement. Our predicate measures that axis. So
+choosing 9EPP over 9EPR moves the active reference along the activation axis
+itself, and it moves it in the direction that makes "active" easier to reach.
+Both chimera models are also **incomplete at the cytoplasmic end of TM6**, at
+4.06 Å against 9EPR's 4.9 Å. Neither fact argues for 9EPR — 9EPR has its own
+problems and is not native — but they mean **B1B1U5's reference geometry is the
+least trustworthy in the primary panel**, and a per-receptor sensitivity check
+belongs in the measurement pass rather than a footnote.

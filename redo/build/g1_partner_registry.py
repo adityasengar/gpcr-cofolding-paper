@@ -77,6 +77,44 @@ NOT_HELD = {
                            "Must be respecified from a named source before use.", "15"),
 }
 
+# ---------------------------------------------------------------------------
+# D-H option (e'), the EXTENSION arm: for B1B1U5 supply the SPIDER Gaq1 alpha5
+# rather than the human one, so that what we supply and what we score against
+# are the same molecule.  Aditya 2026-09-12; spec/D_H_RESOLUTION.md sections 7 and 9.
+#
+# THE SOURCE, AND ITS LIMIT.  `tejero2024opsin` Methods p10 records the swapped
+# segment as human Gai1 residues 337-354 replaced by jumping-spider Gaq1
+# (accession LC799818), and gives the replacement as EIGHTEEN residues:
+#
+#       CAVKDTILQNNLKECNLV
+#
+# That is the whole of the spider sequence this project holds.  We do not hold
+# LC799818 itself.  So (e') is constructible at every rung of length <= 18 and at
+# NO rung longer than that, and the longer rungs are registered below as
+# not-dispatchable with the reason rather than padded out of the human backbone.
+#
+# In particular ct21 is NOT constructible: the deposited 21-mer
+# FVFCAVKDTILQNNLKECNLV begins with three residues of the HUMAN Gai1 backbone
+# (P63096 334-336 = FVF), not with spider sequence.  Supplying it would be
+# supplying the deposited chimera -- which is already registered, as
+# ref_tip/reftip_ct21/9EPP -- and calling it spider.  (Human Gq's 339-341 also
+# read FVF, which makes the trap worse, not better: the bytes would look right.)
+EPRIME = {
+    "slug": "B1B1U5",
+    "pdb": "9EPP",
+    "accession": "LC799818",
+    "host_family": "Gi1",            # the backbone the segment was swapped into
+    "window": (337, 354),            # in the host's numbering
+    "segment": "CAVKDTILQNNLKECNLV",
+    "locator": ("tejero2024opsin Methods p10 (Nat Commun 2024;15:8928), "
+                "INSDC LC799818"),
+}
+# rung name -> length, for the rungs (e') would have to fill.  Lengths come from
+# seq_rungs.tsv's own rules; nothing here re-derives a ladder.
+EPRIME_RUNGS = [("R1_ct11", 11), ("R1b_ct13", 13), ("R2_ct15", 15),
+                ("R2b_ct17", 17), ("R2c_ct19", 19), ("R3_ct21", 21),
+                ("R4_a5helix", 26), ("R5_a5plus", 36)]
+
 UNIPROT = "https://rest.uniprot.org/uniprotkb/%s.json"
 RCSB_ENTITY = "https://data.rcsb.org/rest/v1/core/polymer_entity/%s/%s"
 
@@ -351,6 +389,134 @@ def main():
                                f"({r['partner_len']} aa)",
                     note=f"identity {ident} to the nearest canonical family "
                          f"({r['nearest_canonical']}); {r['description']}")
+
+    # ---- 4b3b: D-H (e'), the species-matched spider Gaq1 tip for B1B1U5 ---
+    # Four checks before a single byte is built.  Each one can fail the block on
+    # its own, and a failure registers NOTHING rather than something plausible.
+    ep = EPRIME
+    seg, w0, w1 = ep["segment"], ep["window"][0], ep["window"][1]
+    ep_problems = []
+    if len(seg) != w1 - w0 + 1:
+        ep_problems.append(f"(e'): the recorded segment is {len(seg)} residues but "
+                           f"the recorded window {w0}-{w1} is {w1 - w0 + 1}")
+
+    chim = [r for r in tsv(os.path.join(INPUTS, "g1_refchimera.tsv"))
+            if r["slug"] == ep["slug"] and r["pdb"] == ep["pdb"]
+            and r["is_rule_r_reference"] == "active"]
+    if not chim:
+        ep_problems.append(f"(e'): no active Rule-R row for {ep['slug']}/{ep['pdb']} "
+                           f"in g1_refchimera.tsv -- the reference moved, or D-H was "
+                           f"decided the other way. Constructs NOT BUILT")
+    else:
+        dep21 = chim[0]["ct21"]
+        # (1) the segment must be the C-terminal 18 of what was actually deposited
+        if not dep21.endswith(seg):
+            ep_problems.append(f"(e'): deposited ct21 {dep21} does not end with the "
+                               f"recorded spider segment {seg}")
+        # (2) the residues BEFORE it must be the human host, not spider -- this is
+        #     what makes ct21 unconstructible, so it is proved, not asserted
+        host = [r for r in tsv(os.path.join(INPUTS, "seq_rungs.tsv"))
+                if r["family"] == ep["host_family"] and r["rung"] == "R7_full"]
+        if not host:
+            ep_problems.append(f"(e'): no {ep['host_family']} R7_full in seq_rungs.tsv")
+        else:
+            hostseq = host[0]["sequence"]
+            pre = len(dep21) - len(seg)                    # 3
+            if dep21[:pre] != hostseq[w0 - 1 - pre:w0 - 1]:
+                ep_problems.append(
+                    f"(e'): the {pre} residues before the spider window read "
+                    f"{dep21[:pre]} in the deposit but {hostseq[w0-1-pre:w0-1]} in "
+                    f"the {ep['host_family']} backbone -- the split is not where "
+                    f"tejero2024opsin says it is")
+            # (3) RCSB's OWN mutation record must reproduce the segment from the
+            #     host.  This is the check that does not depend on the paper: if
+            #     it passes, the spider sequence is derivable from the PDB entry
+            #     alone and the literature string is corroborated, not trusted.
+            mut = ""
+            for r in csv.DictReader(open(os.path.join(INPUTS,
+                                                      "coupling_refstructures.csv"))):
+                if r["pdb"] == ep["pdb"] and r["kind"] == "G-alpha":
+                    mut = r["pdbx_mutation"]
+                    break
+            subs, malformed = [], []
+            for tok in filter(None, (t.strip() for t in mut.split(","))):
+                if len(tok) < 3 or not tok[1:-1].isdigit():
+                    malformed.append(tok)
+                    continue
+                subs.append((tok[0], int(tok[1:-1]), tok[-1]))
+            if malformed:
+                ep_problems.append(f"(e'): unparsable pdbx_mutation tokens {malformed}")
+            rebuilt = list(hostseq[w0 - 1:w1])
+            inside = 0
+            for wt, pos, to in subs:
+                if not (w0 <= pos <= w1):
+                    continue
+                inside += 1
+                if rebuilt[pos - w0] != wt:
+                    ep_problems.append(
+                        f"(e'): pdbx_mutation says {wt}{pos}{to} but "
+                        f"{ep['host_family']} {pos} is {rebuilt[pos - w0]}")
+                rebuilt[pos - w0] = to
+            if "".join(rebuilt) != seg:
+                ep_problems.append(
+                    f"(e'): applying RCSB's pdbx_mutation to {ep['host_family']} "
+                    f"{w0}-{w1} gives {''.join(rebuilt)}, not the recorded spider "
+                    f"segment {seg}. The two sources disagree; NOTHING BUILT")
+
+    if ep_problems:
+        problems.extend(ep_problems)
+    else:
+        for rung, N in EPRIME_RUNGS:
+            if N <= len(seg):
+                sub = seg[-N:]
+                dup = (" -- byte-identical to ref_tip/reftip_ct11/9EPP: the last 11 "
+                       "residues lie wholly inside the spider window, so at this "
+                       "rung (e') and the deposited tip are the same molecule"
+                       if N == 11 else "")
+                add(construct_class="species_matched_tip",
+                    construct=f"spidertip_{rung}", family=ep["slug"],
+                    variant=ep["accession"], k="", length=str(N), sha256=sha(sub),
+                    source_table="derived here from g1_refchimera.tsv",
+                    provenance=f"{ep['locator']}; last {N} of the {len(seg)}-residue "
+                               f"spider Gaq1 segment at {ep['host_family']} "
+                               f"{w0}-{w1}, verified against RCSB "
+                               f"{ep['pdb']} pdbx_mutation",
+                    note=f"D-H (e') EXTENSION ARM, not the primary ladder: the "
+                         f"supplied partner is spider Gaq1, not human Gq{dup}")
+            else:
+                add(construct_class="not_dispatchable",
+                    construct=f"spidertip_{rung}", family=ep["slug"],
+                    variant=ep["accession"], k="", length=str(N), sha256="UNKNOWN",
+                    held="NO", source_table="-", provenance="-",
+                    note=f"D-H (e') STOPS HERE. {rung} needs {N} spider residues; "
+                         f"{ep['locator']} records only {len(seg)} "
+                         f"({ep['host_family']} {w0}-{w1}). The missing "
+                         f"{N - len(seg)} would have to come from LC799818 itself, "
+                         f"which we do not hold, and the residues sitting there in "
+                         f"the deposit are HUMAN backbone. Not invented. "
+                         f"(At ct21 the deposited chimeric 21-mer is available as "
+                         f"ref_tip/reftip_ct21/9EPP -- it is not a spider 21-mer.)")
+        # the boundary itself: the longest (e') construct the source supports.
+        # Not a ladder rung -- registered so "18" is a number in the table rather
+        # than a sentence in a note, the way R4b_a5helix27 is.
+        add(construct_class="species_matched_tip",
+            construct=f"spidertip_ct{len(seg)}", family=ep["slug"],
+            variant=ep["accession"], k="", length=str(len(seg)), sha256=sha(seg),
+            source_table="derived here from g1_refchimera.tsv",
+            provenance=f"{ep['locator']}; the whole swapped segment, "
+                       f"{ep['host_family']} {w0}-{w1}",
+            note="D-H (e') CEILING, not a ladder rung: the longest species-matched "
+                 "construct the source supports. Every (e') rung longer than this "
+                 "is not_dispatchable")
+        # the full-subunit rungs are not even close; register them once, plainly
+        for rung in ("R6a_da5", "R7_full"):
+            add(construct_class="not_dispatchable",
+                construct=f"spidertip_{rung}", family=ep["slug"],
+                variant=ep["accession"], k="", length="UNKNOWN", held="NO",
+                sha256="UNKNOWN", source_table="-", provenance="-",
+                note=f"D-H (e') has no full-subunit form: {ep['locator']} records "
+                     f"{len(seg)} residues of spider Gaq1, not a subunit. A spider "
+                     f"{rung} would require LC799818 in full")
 
     # ---- 4b4: GoA / GoB, the within-subtype minimal pair -----------------
     go = parents.get("Go")

@@ -644,12 +644,20 @@ the accession names the backbone. So the depositors built a Gq-tipped construct
 for this receptor on purpose. Supplying **human GNAI1 and calling it cognate**,
 as Block B did, is contradicted by the receptor's own structure.
 
-This does not by itself decide the assignment — the pair 9EPP/9EPR is itself a
-disagreement and I am reporting it rather than resolving it — but it converts the
-question from "we have no authority" to "we have structural evidence, and it
-points at Gq". **Recommendation: either supply a Gq-family rung for B1B1U5 and
-record the 9EPP chimera as its basis, or drop the receptor.** Do not supply GNAI1
-under the label "cognate".
+**Two refinements from the deposition paper, added 2026-09-12.** The tip is not a
+graft of a *human* Gq α5: it is **jumping-spider Gαq1** (INSDC `LC799818`) at
+Gαi1 337–354, `tejero2024opsin` Methods p10 — so the three ct21 differences from
+human Gq are species divergence. And **9EPR is not native either**: human Gαi1
+from *E. coli*, reconstituted *in vitro* with **bovine** Gβ1γ1. Neither entry is
+a native complex, and the βγ differs between them.
+
+**DECIDED — D-H, Aditya 2026-09-12, option (c′).** Supply a Gq-family rung for
+B1B1U5 and record the 9EPP chimera as its basis. Do not supply GNAI1 under the
+label "cognate". The alternative — dropping the receptor — was declined because
+it halves the Gq arm. An extension arm **(e′)** supplying the *spider* α5 instead
+of the human one is specified in `D_H_RESOLUTION.md` §9.2; its longest ladder
+rung is **ct17** and its ceiling is the whole 18-residue recorded segment — nothing
+beyond that is built, because nothing beyond that is recorded. {ref-history}
 
 **Cross-species rows generally.** `SEQUENCES.md` §3.3 asks for
 `cross_species_partner` on every row and that request stands unchanged. Note only
@@ -812,8 +820,10 @@ it closed and what it did not:
   4-vs-7 substitutions, `frozen_with_caveat` (§14.3). It is no longer an open
   question, it is a labelled one.
 - *B1B1U5's contradictory references.* Rule R picks 9EPP, so the rule resolves it
-  to Gq and records the prior reversal (§14.4). Conditional on the panel session
-  not changing that reference — see below.
+  to Gq and records the prior reversal (§14.4). **No longer conditional: D-H was
+  closed on 2026-09-12 as option (c′)** — 9EPP stays, `cognate_family` stays Gq,
+  and Rule R step 4 does not fire because there is no native transducer to demote
+  to. `D_H_RESOLUTION.md` §9.
 - *PE2R4's two active references.* Rule R picks 8GDB, so the answer is Gs. The
   disagreement is recorded but no longer blocks.
 - *The GoA/GoB gap.* Not blocking under R-COG, because the rule never consults
@@ -827,12 +837,13 @@ it closed and what it did not:
    options per receptor plus a `DEPOSITED_TIP` control arm; **four are in the
    provisional CORE-32** — 5HT2A, GRPR, OX2R, OXYR — so this is on the critical
    path, not a tail case.
-2. **B1B1U5's reference is contested between two files.** `panel_systems.csv`
-   and `PANEL.md`'s Rule R disagree about which 9EP\* entry is active, and the
-   two entries give **different families**. The map follows Rule R (9EPP → Gq).
-   **If the panel session settles on 9EPR, B1B1U5 flips to Gi1 and the map must
-   be rebuilt.** This is the one row whose answer depends on an unsettled
-   decision in another session's file.
+2. ~~**B1B1U5's reference is contested between two files.**~~ **CLOSED
+   2026-09-12 (D-H, option (c′)).** The contest was never between the two files —
+   `panel_systems.csv:gdb_active` and PANEL.md §6.1 both say `9EPP`; what said
+   `9EPR` was PANEL.md's own *prose* about Rule R step 4, and that prose was
+   wrong: step 4 needs a native transducer to demote to and there is none (9EPR
+   is human Gαi1 reconstituted in vitro with bovine Gβ1γ1). **The map keeps 9EPP
+   → Gq and nothing rebuilds.** `D_H_RESOLUTION.md` §9. {ref-history}
 3. **OPRM has no structural authority at all.** Both its active references are
    Nb39 complexes, so its `Gi1` is annotation-only and nothing structural checks
    it — the only one of the six convention rows with no corroborating structure
@@ -1036,7 +1047,8 @@ because Rule R picks a different active reference than the first-listed
 candidate: DRD2 resolves to **Go** (8TZQ), not Gi1 (7JVR); SSR2 to **Gi3**
 (7T10); ACM2 and ADA2A to **Go**; PE2R4's two-reference conflict resolves to
 **Gs** (8GDB); and NTR1's annotation-vs-structure conflict is not resolved by a
-structure at all, because Rule R picks 8JPF, which has no Gα (§14.5).
+structure at all, because Rule R picks 8JPF, which has no Gα (§14.5). {ref-alt}
+
 
 ### 14.2 Case 1 — the ten chimeric tips, options presented and not chosen
 
@@ -1139,14 +1151,15 @@ Gq/11`, and it is one of **four** such reversals:
 | **EDNRB** | Gq | **Gi/o** | 8IY5, ct21 1.00 to Gi1/Gi2 |
 | **GHSR** | Gq | **Gi/o** | 7NA7, ct21 1.00 to Gi1/Gi2 |
 
-All four are visible rather than silent, which is the point. Note that the
-B1B1U5 reversal is also the one that `SEQ_RECEPTORS.md` flags independently:
-`panel_systems.csv:gdb_active` and Rule R disagree about which 9EP* entry is the
-active reference, and the two entries give **different families** — 9EPP is the
-Gq-tipped chimera, 9EPR is wild-type Gi1. Under Rule R it is 9EPP and therefore
-Gq. **If the panel session changes B1B1U5's active reference to 9EPR, this row
-flips back to Gi1 and the map must be rebuilt.** That dependency is real and is
-recorded here rather than assumed away.
+All four are visible rather than silent, which is the point. The B1B1U5
+reversal used to carry a live dependency — "if the panel session changes the
+active reference to 9EPR this row flips back to Gi1" — and **that dependency is
+discharged**: D-H closed on 2026-09-12 as option (c′), the reference stays
+`9EPP`, and the cognate stays Gq. Two corrections to how it was described here:
+9EPR is **not** "wild-type Gi1" as a complex (it is human Gαi1 reconstituted *in
+vitro* with **bovine** Gβ1γ1), and 9EPP's tip is **not** an engineered Gq graft
+(it is jumping-spider Gαq1, INSDC `LC799818`, at Gαi1 337–354). Neither entry is
+native. `D_H_RESOLUTION.md` §6 and §9. {ref-history}
 
 ### 14.5 Case 4 — six receptors whose Rule-R reference has no Gα at all
 
@@ -1217,10 +1230,11 @@ partition and I will not assume it does.
 1. **`chiesa2025templatebias` p.6302 picks the Gα from the deposited structure.
    Does it say anything about what to do when a receptor has two deposited
    active complexes with *different* Gα families?** PE2R4 has exactly that (8GCP
-   Gi1, 8GDB Gs), and B1B1U5 has a near-miss version (9EPR wild-type Gi, 9EPP a
-   Gq-tipped chimera). *Changes per answer:* if the paper has a rule we adopt it;
-   if not, PE2R4 and B1B1U5 become PI decisions and §5's "PI decision" list grows
-   by two.
+   Gi1, 8GDB Gs), and B1B1U5 has a near-miss version (9EPR human Gαi1 on bovine
+   Gβγ, 9EPP a spider-Gq-tipped chimera — **neither is native**). *Changes per
+   answer:* if the paper has a rule we adopt it; if not, PE2R4 stays a PI
+   decision. **B1B1U5 no longer does — D-H settled it on 2026-09-12 (option
+   (c′), 9EPP).** {ref-history}
 
 2. **Does any corpus paper supply a mini-G or a coupling chimera as the
    co-folded partner, rather than a wild-type subunit?** Eleven of our active

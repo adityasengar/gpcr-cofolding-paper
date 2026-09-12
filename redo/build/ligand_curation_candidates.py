@@ -47,7 +47,22 @@ WORKLIST = {
     "ADRB1":  ("antagonist", "placeholder row, no SMILES/PDB"),
     "HRH3":   ("agonist",    "placeholder row, no SMILES/PDB"),
     "OPSD":   ("antagonist", "RETINAL - agonist/antagonist are isomers of one covalent ligand"),
-    "B1B1U5": ("antagonist", "RETINAL - same; also blocked on D-H (9EPP vs 9EPR)"),
+    # D-H CLOSED 2026-09-12 (c'): 9EPP is the reference. That UNBLOCKS the
+    # reference question and NARROWS the chemistry one -- it does not close it.
+    # 9EPP's agonist is 11,20-ethanoretinal, CCD A1H6M, which is a DIFFERENT CCD
+    # from the 11-cis retinal (RET) inverse agonist on our inactive reference
+    # 6I9K, so F-11's "one CCD, two pharmacologies" trap does not bite this pair.
+    # What is still open is the standing curation policy, not the chemistry: the
+    # delivered ligand_set carries B1B1U5's antagonist as a deliberate NA under
+    # amendment C-1 ("inverse_agonist state dropped from Tier 3"), and 11-cis
+    # retinal is an inverse agonist, not a neutral antagonist.
+    "B1B1U5": ("antagonist",
+               "RETINAL - D-H closed on 9EPP, so the reference is settled and the "
+               "9EPP agonist (11,20-ethanoretinal, CCD A1H6M) is a DIFFERENT CCD "
+               "from the 6I9K inverse agonist (11-cis retinal, CCD RET). Residual "
+               "blocker is policy, not chemistry: amendment C-1 dropped "
+               "inverse_agonist from Tier 3 and this receptor has no neutral "
+               "antagonist. Curate by ISOMER, never by CCD (F-11)"),
 }
 
 AGO = ("agonist", "partial agonist", "full agonist", "agonist-partial")

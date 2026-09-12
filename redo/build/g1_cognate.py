@@ -153,7 +153,11 @@ def main():
                 option_b_sha256=(seq[(opt["B"], rung)]["sha256"]
                                  if opt.get("B") else ""),
                 option_c_deposited_tip_sha256="",
-                caveat=c["note"][:200])
+                # 2026-09-12: raised from 200.  A silent truncation looks exactly
+                # like a complete note, and coupling_cognate_map.py's R-COG-9
+                # notes now lead with the CAUSE of a non-canonical tip, which is
+                # the half a reader most needs and the half 200 chars cut off.
+                caveat=c["note"][:600])
             if opt and slug in chim:
                 if rung == "R1_ct11" and chim[slug]["ct11"]:
                     row["option_c_deposited_tip_sha256"] = "see g1_partner_registry "

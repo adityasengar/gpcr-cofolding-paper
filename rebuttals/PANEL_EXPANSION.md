@@ -101,11 +101,35 @@ panel as human receptors is wrong as written.** lee's benchmark carries the same
 entry under the same accession-as-name, so it is a shared blind spot rather than
 ours alone.
 
-**Where we are ahead:** lee uses **9EPP** as its active reference. We use
+~~**Where we are ahead:** lee uses **9EPP** as its active reference. We use
 **9EPR**, and our own audit note records why — 9EPP is a Gi/q chimera (Gαi1
 scaffold with a Gαq α5-CT graft) that would mis-assign coupling through a UniProt
 lookup, and 9EPR is the native Gi heterotrimer from the same deposition. That is
-a better choice than the published benchmark's and it is worth saying so.
+a better choice than the published benchmark's and it is worth saying so.~~
+
+**WITHDRAWN 2026-09-12. Do not send this claim upstream.** `tejero2024opsin`
+Methods settles all three of its premises against us:
+
+- **9EPR is not a native heterotrimer.** It is human Gαi1 expressed in *E. coli*
+  and reconstituted *in vitro* with **bovine** Gβ1γ1 separated from retinal
+  transducin. 9EPP carries human Gβ1γ2. **Neither entry is native**, and the βγ
+  differs between them — which no UniProt cross-reference surfaces.
+- **9EPP's α5 tip is not a Gαq graft.** It is jumping-spider Gαq1 (INSDC
+  `LC799818`) swapped into human Gαi1 at 337–354, so its three ct21 differences
+  from human Gq are **species divergence**. RCSB's own `pdbx_mutation` for
+  `9EPP_2` reproduces the segment exactly, so this is checkable from the PDB
+  entry alone.
+- **The paper never measures coupling.** It says outright that "further
+  experiments will be needed to determine the signaling profile of JSR1", and
+  that the Gq chimera was built because pure spider Gq could not be produced. So
+  there is no "correct coupling assignment" to have traded resolution for.
+
+**The redo now uses 9EPP** — the same entry the published benchmark uses — as
+decided in `redo/spec/DECISIONS.md` D-2026-09-12-b (option (c′)), with the
+cognate family recorded as Gq on the strength of the spider tip and the
+depositors' design intent. `redo/spec/D_H_RESOLUTION.md` carries the evidence.
+The honest version of this bullet is not "we are ahead" but "**this receptor has
+no native reference at all, and any benchmark that uses it inherits that**".
 
 ### 5b. OPSD's reference pair is probably cross-species
 

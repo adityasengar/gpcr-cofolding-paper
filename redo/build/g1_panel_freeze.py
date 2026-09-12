@@ -27,6 +27,19 @@ DECISION 2 -- the cognate assignment becomes TWO columns, not one.
   conflating them.  Where they disagree the row is flagged and the biology wins
   for the supplied partner.
 
+DECISION 4 (D-H, Aditya 2026-09-12) -- B1B1U5 stays PRIMARY under option (c'):
+  `cognate_family` = Gq (the biology: the deposited tip is genuinely spider Gaq1
+  and the experimenters' design intent was Gq), `reference_tip` = 9EPP, recorded
+  explicitly as a spider-Gq-tipped chimera on a human Gai1 backbone.  PANEL.md's
+  Rule 4 (partner-chain override, "prefer the native transducer") is INAPPLICABLE
+  here rather than merely unimplemented: 9EPR is not native either -- human Gai1
+  from E. coli reconstituted in vitro with bovine Gb1g1.  There is no native
+  option for this receptor.  spec/D_H_RESOLUTION.md carries the evidence.
+
+  Nothing in the frozen panel moved: 30 receptors / 29 clusters before and after.
+  What changed is that the file now RECORDS what the reference tip is, instead of
+  leaving "STRUCTURE_NEAR" to stand for it.
+
 DECISION 3 -- AA2AR is IN, as a declared override with its reason.
   It loses the adenosine cluster to AA1R by **0.14 A** of reference resolution
   and it is the only receptor on the panel with wet-lab data on our exact 21-mer
@@ -57,6 +70,32 @@ OVERRIDES_IN = {
 
 # family -> the declared representative subtype, for the SUPPLIED partner
 FAMILY_REP = {"Gs": "Gs", "Gi/o": "Gi1", "Gq/11": "Gq", "G12/13": "G13"}
+# The authority columns of coupling_assignments.csv that are NOT a reading of the
+# receptor's own deposited structure.  `authority_structure` is deliberately absent.
+NON_STRUCTURE_AUTHORITIES = (
+    "authority_assaylabs", "authority_gproteindb_merged",
+    "authority_gtopdb_via_gproteindb", "authority_iuphar_direct_primary",
+    "authority_iuphar_direct_all", "authority_iuphar_text")
+
+# DECISION 4 (D-H).  What the Rule-R active reference's alpha5 tip actually IS, in
+# words, for the receptors where "STRUCTURE_NEAR" or "STRUCTURE_EXACT" does not
+# say enough.  Keyed by (slug, pdb) so it cannot outlive a reference change.
+# Every entry carries its locator; nothing here is inferred from the sequence.
+REFERENCE_TIP_NOTE = {
+    ("B1B1U5", "9EPP"): (
+        "SPIDER-Gq-TIPPED CHIMERA on a human Gai1 backbone: human Gai1 (P63096) "
+        "with A31R/D193S/L194I and residues 337-354 replaced by jumping-spider "
+        "Gaq1 (INSDC LC799818) -- tejero2024opsin Methods p10. The 3 differences "
+        "from canonical human Gq/G11 across ct21 are SPECIES divergence, not "
+        "engineering, and all 3 fall inside the spider window. "
+        "NO NATIVE COMPLEX EXISTS FOR THIS RECEPTOR: the alternative, 9EPR, is "
+        "human Gai1 from E. coli reconstituted in vitro with BOVINE Gb1g1, so "
+        "PANEL.md Rule 4 (prefer the native transducer) is INAPPLICABLE here, not "
+        "merely unimplemented. D-H (c'), Aditya 2026-09-12; spec/D_H_RESOLUTION.md. "
+        "What we SUPPLY at R1-R5 is human Gq, which is 0.86 to this tip at ct21 -- "
+        "the (e') extension arm supplies the spider tip instead."),
+}
+
 FAMOF = {"Gs": "Gs", "Golf": "Gs", "Gi1": "Gi/o", "Gi2": "Gi/o", "Gi3": "Gi/o",
          "Go": "Gi/o", "Gz": "Gi/o", "Gt1": "Gi/o", "Gt2": "Gi/o",
          "Ggust": "Gi/o", "Gq": "Gq/11", "G11": "Gq/11", "G14": "Gq/11",
@@ -119,6 +158,16 @@ def main():
         # into it.  The structure-independent column is the annotated family set.
         basis = ca[s]["recommended_basis"]
         annot_only = not basis.startswith("taken from the deposited")
+        # FOUND 2026-09-12, during D-H.  `annot_only` above asks only whether the
+        # coupling table's *recommendation* was copied off the structure.  It does
+        # not ask whether the ANNOTATION behind that recommendation exists at all.
+        # Two receptors -- B1B1U5 and OPSD, both opsins, both PRIMARY -- have no
+        # non-structure authority whatsoever (`n_authorities` 1, and that one is
+        # `authority_structure`), so for them "annotation only, independent of the
+        # structure" was a false independence claim written on the most-read row
+        # of the most-read file.  Tested here against the authority columns rather
+        # than against the count, because a count does not say WHICH authority.
+        has_offstructure_authority = any(ca[s].get(a) for a in NON_STRUCTURE_AUTHORITIES)
         supplied_fam = ca[s]["recommended_family"]
         # The column is ALWAYS populated -- an empty biology column re-conflates
         # the two questions by omission. What varies is its independence, and that
@@ -128,12 +177,21 @@ def main():
         # of them the deposited reference is the CHIMERA -- circular in exactly the
         # way a crystallisation scaffold is: its tip reads Gq because someone made
         # it read Gq.
-        indep = ("annotation only -- independent of the structure" if annot_only
-                 else ("NOT INDEPENDENT: the coupling recommendation was taken from "
-                       "the deposited reference, and that reference is CHIMERIC"
-                       if not st else
-                       "NOT INDEPENDENT: the coupling recommendation was taken from "
-                       "the deposited reference"))
+        if not has_offstructure_authority:
+            indep = ("NOT INDEPENDENT: this receptor has NO non-structure coupling "
+                     "authority at all -- no assay, no GproteinDb row, no IUPHAR "
+                     "entry. Its whole 'annotation' is a reading of its own "
+                     "deposited structures (" + (ca[s]["structure_evidence"] or "?")
+                     + "), so the biology column and the reference column are the "
+                     "same evidence twice")
+        elif annot_only:
+            indep = "annotation only -- independent of the structure"
+        else:
+            indep = ("NOT INDEPENDENT: the coupling recommendation was taken from "
+                     "the deposited reference, and that reference is CHIMERIC"
+                     if not st else
+                     "NOT INDEPENDENT: the coupling recommendation was taken from "
+                     "the deposited reference")
         agree = "n/a" if not st else ("yes" if st_fam in ann or st_fam == supplied_fam
                                       else "NO")
         rows.append(dict(
@@ -159,11 +217,24 @@ def main():
             reference_tip_subtype=st or "CHIMERIC -- no canonical subtype",
             reference_tip_family=st_fam or "CHIMERIC",
             reference_tip_evidence=c["evidence_class"],
+            reference_tip_pdb=cm["rule_r_active_pdb"],
+            reference_tip_note=REFERENCE_TIP_NOTE.get(
+                (s, cm["rule_r_active_pdb"]), ""),
             annotation_family_set=cm["annotation_family"],
             annotation_verdict=cm["annotation_verdict"],
             cognate_vs_reference_agree=agree,
             reverses_blockb_prior=c["reverses_blockb_prior"],
             blockb_prior=c["blockb_prior"]))
+
+    # A curated note keyed to a reference that no longer exists would vanish in
+    # silence -- which is how the 9EPP/9EPR disagreement survived for two days.
+    live_keys = {(r["receptor_slug"], cmap[r["receptor_slug"]]["rule_r_active_pdb"])
+                 for r in rows}
+    stale = sorted(set(REFERENCE_TIP_NOTE) - live_keys)
+    if stale:
+        problems.append(f"REFERENCE_TIP_NOTE keys that match no receptor/reference "
+                        f"pair on the panel: {stale}. The reference moved and the "
+                        f"note did not; fix or delete it, do not leave it dangling")
 
     cols = list(rows[0].keys())
     with open(OUT, "w") as fh:
@@ -205,6 +276,15 @@ def main():
     w(f"#   coupling recommendation NOT independent of the structure: "
       f"{len(ni)} -> {ni}\n")
     w(f"#     of which the structure is the chimera (circular): {nic}\n")
+    noauth = sorted(r["receptor_slug"] for r in rows
+                    if "NO non-structure coupling authority"
+                    in r["supplied_partner_independence"])
+    w(f"#   NO non-structure coupling authority at all (biology column and "
+      f"reference column are one evidence): {noauth}\n")
+    w(f"#     of those, in the frozen primary panel: "
+      f"{sorted(s for s in noauth if any(r['receptor_slug']==s and r['core_frozen']=='yes' for r in rows))}\n")
+    w(f"#   reference tips carrying a curated note: "
+      f"{sorted(r['receptor_slug'] for r in rows if r['reference_tip_note'])}\n")
     w(f"#     any of those in the frozen primary panel? "
       f"{sorted(s for s in nic if any(r['receptor_slug']==s and r['core_frozen']=='yes' for r in rows)) or 'NO'}\n")
     w(f"#   reverses Block B's prior (a DIFFERENT question): "

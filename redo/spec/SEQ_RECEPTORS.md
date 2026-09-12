@@ -575,12 +575,16 @@ Gq-coupled opsins. That is a partner decision and a PANEL decision; it is
 repeated here only so that "B1B1U5 resolved on the receptor side" is not read as
 "B1B1U5 resolved".
 
-One small inconsistency found while checking, and it belongs to PANEL: for
-B1B1U5 `panel_systems.csv:gdb_active` is **`9EPP`**, while `PANEL.md`'s Rule R
-step 4 (the partner-chain override, which exists specifically for this receptor)
-selects **`9EPR`**. The column appears to be the pre-override pick. Not resolved
-here — flagged for the panel owner. The §6 numbers for B1B1U5 use the column, i.e.
-`9EPP`.
+**RESOLVED 2026-09-12 — and the column was right all along.** This section used
+to read that `panel_systems.csv:gdb_active` says `9EPP` while PANEL.md's Rule R
+step 4 selects `9EPR`, and to call the column "the pre-override pick". That was
+wrong about step 4, not about the column. Step 4 is conditional on a **native**
+transducer existing for the same receptor and state, and for B1B1U5 none does:
+9EPP is a chimera and 9EPR is human Gαi1 reconstituted *in vitro* with bovine
+Gβ1γ1. **The override never fires here, so `9EPP` is Rule R's answer**, and it is
+what §6's numbers already use. D-H, decided as option (c′); see
+`D_H_RESOLUTION.md` and `PANEL.md` §4. Nothing in this document changes. {ref-history}
+
 
 ---
 
@@ -902,8 +906,10 @@ A–D carries any of it.
    is unchecked. **DATA ASK 1.**
 6. **Block B's RMSD residue sets were never emitted**, so `rmsd_n_residues_used`
    cannot be reproduced. §6.3. **DATA ASK 2.**
-7. **B1B1U5's `gdb_active` column disagrees with `PANEL.md`'s own Rule R step 4**
-   (`9EPP` vs `9EPR`). §5.4. PANEL's to resolve; §6 numbers use the column.
+7. ~~**B1B1U5's `gdb_active` column disagrees with `PANEL.md`'s own Rule R step 4**~~
+   **CLOSED 2026-09-12.** Step 4 does not fire for this receptor — it requires a
+   native transducer to demote to and there is none. `9EPP` is Rule R's answer and
+   the column was never wrong. §5.4; D-H (c′).
 8. **Three references RCSB cannot align to their own receptor** (`9D3G`, `8IRU`,
    `8HCQ`). §6.1. Worked around here; worth reporting upstream.
 9. **The TM1 authority.** GPCRdb and UniProt disagree on all 75 entries by 2–12
