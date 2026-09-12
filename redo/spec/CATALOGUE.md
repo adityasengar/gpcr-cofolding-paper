@@ -1,4 +1,15 @@
-# REDO_EXPERIMENT_CATALOGUE.md
+# CATALOGUE.md — the redo experiment catalogue
+
+> **Renamed 2026-09-11** from `analysis/REDO_EXPERIMENT_CATALOGUE.md`. The title
+> line kept the old filename until 2026-09-12; nothing else referenced it.
+>
+> **COUNT CORRECTED 2026-09-12.** This document, its own header, and
+> `RUN_MATRIX.md` all described it as **"33 experiments in 9 groups"**. Counting
+> the headings gives **45 experiments across 10 groups**
+> (E0, E1, E2, E3, E4, E5, E6, E7, E8, E9). The short text was written early, when the intended scope
+> was still the expected scope, and nobody went back to it — the same failure this
+> project records under "scope is asserted where it is most read". The body is
+> authoritative; the count in any summary is not.
 
 Input to designing the re-run that supersedes Blocks A–D. Compiled 2026-09-11 by a
 research session with read access to the whole repo and write access to this file only.

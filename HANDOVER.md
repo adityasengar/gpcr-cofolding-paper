@@ -106,117 +106,69 @@ measured-axis columns they can actually produce. Blocks A–D each cost a bespok
 verifier — 63, 116, 69 and 54 checks — because their shape was settled after the
 data existed. These runs do not exist yet.
 
-## PROPOSED FOR THE LIT SESSION — the corpus check can never pass
+## Where the redo stands — 2026-09-12, after D-A and D-H
 
-**Not actioned: `lit/corpus_check.sh` is lit's file and the orchestrator does not
-write `lit/**`.** Recorded here so it is not lost.
+**All five of Aditya's open items are closed.** Everything is committed and
+pushed; the working tree is clean. Logs:
+`sessions/2026-09-12_autonomous-curation-and-three-retractions.md` and
+`sessions/2026-09-12b_D-A-D-H-resolved-and-the-apo-arm.md`.
 
-`verify.sh` has printed `corpus — drift reported` on every run since the four
-deliberately-unread `refs.bib` entries were added (`mafi2022precoupled`,
-`nobles2005precoupling`, `qin2011preassembly`, `youngyang2024tas2r5`).
-`corpus_check.sh` classifies "refs.bib entry with NO paper behind it" as **hard**
-drift, so it sets `fail=1` and the script can never exit 0.
+### The decisions, with their reasons
 
-**The entries are correct and the guard is working** — they exist so that citing an
-unread paper fails loudly. The problem is that the check has no way to say
-"expected". Its own comment warns that reporting phantom problems "trains the
-reader to ignore this check", which is exactly what has happened: a permanently
-red line in `verify.sh` that everyone steps over.
+**D-A — Class A keeps the conjunction** (`NPxxY < 9.08 AND tilt > 14.932`).
+Group 0 calibrates **NPxxY only**. The tilt threshold is **inherited with its
+provenance stated and validated on the apo/cognate contrast, not calibrated** —
+because every ground truth available for that axis is circular or retracted
+(GPCRdb's label is defined on the same atom pair; transducer presence is the
+retracted Q0c; calibration structures carry no reference pair). We cannot claim a
+calibrated tilt, and claiming one we cannot have would be worse. **Class A only.**
+`DECISIONS.md` → **D-2026-09-12-c**.
 
-**Proposed fix, either would do:** exempt those four citekeys by name, or
-demote that one report from hard to soft (`report ... ` without the `hard`
-argument, as the "note with no PDF" report already does). The second is probably
-better — it keeps the list visible without failing the run.
+**D-H — (c′), with (e′) as an extension arm.** B1B1U5 stays PRIMARY on 9EPP.
+Panel unchanged at 30/29. **Rule 4 is inapplicable, not unimplemented** — neither
+candidate is native. (e′) builds free but stops at 18 residues.
 
-## Overnight 2026-09-12 — what changed, and three retractions
+**Affinity is not needed** for the seven ligand picks. Ligand identity is evidenced
+structurally; the decoy side still needs ChEMBL for presence/absence only.
 
-Autonomous curation run, no compute, no git. Full log:
-`sessions/2026-09-12_autonomous-curation-and-three-retractions.md`.
+### What is still open
 
-**THREE CLAIMS I HAD MADE WERE WRONG. Read these before acting on anything below.**
+1. **The measurement pass** — Group 0's largest outstanding dependency, and the
+   gate lists 9. It must record axis values for the **F3-removed** structures too,
+   or that filter stays permanently unauditable (F-12).
+2. **`MSA_SPEC.md` implementation** — with `paper_af3`, gated on their review.
+   Their review already found a defect in our spec; see F-13 and the spec's §3.
+3. **Class B and Class F instruments** — F-13 shows the tilt fails on both. B has a
+   9 Å inter-backbone disagreement; F has no discriminating power at all. Separate
+   decisions, and they must not inherit D-A.
+4. **Ligand curation** — five receptors actionable now, OPSD blocked (its active
+   reference carries a detergent, no agonist).
+5. **`lit/corpus_check.sh`** — proposed fix below, not actioned; it is lit's file.
 
-1. **The two-instrument predicate DID run.** F-1 is retracted. Block A's 9,490 rows
-   reproduce Class A as `npxxy AND tilt` at **100.0%**. The 2026-09-01 collapse was
-   *within* the motif instrument, five metrics to one — not a collapse of two
-   instruments to one. `paper_af3` located the conjunction in
-   `block_a_campaign_analysis.py::two_instrument_state_calls()`, on
-   per-receptor-backbone medians. **D-A has now been RE-DECIDED on correct
-   information — see `DECISIONS.md` D-2026-09-12-c: the conjunction is kept for
-   Class A, NPxxY is calibrated, the tilt threshold is inherited with its
-   provenance stated and validated on the apo/cognate contrast rather than
-   calibrated. Class A only.**
-2. **P7's first answer was wrong** — an unweighted mean over receptors with one
-   error each. Corrected, the null holds.
-3. **28% of the campaign's errors are mechanical.** EDNRB and GRPR have no NPxxY
-   axis, so `NaN AND tilt` forces them inactive on all 400 rows while truth says
-   43% are active. Accuracy is 92.3% with them, **94.2% without**.
+### Proposed for the lit session
 
-**P7 is computed** — the third title clause, never computed anywhere before.
-Every interval spans 0.5 at both scopes on all three pLDDT metrics, and the result
-is robust to excluding the forced-inactive rows (deltas mixed in sign, ≤0.033).
-`redo/inputs/p7_confidence_separation.{csv,json}`.
+`corpus_check.sh` classifies the four deliberately-unread `refs.bib` entries as
+**hard** drift, so it can never exit 0. **This does NOT fail `verify.sh`** — both
+branches of that line call `ok()`, not `bad()` (`verify.sh:26-27`), so it prints
+without failing. Cosmetic, but a permanently-present warning is one everyone learns
+to skip. Fix: demote that one report from hard to soft, as the "note with no PDF"
+report already is.
 
-**D-C's figures moved**: baseline is **9 receptors / 8 clusters, MDE 0.431**, and
-the worklist is **SEVEN** receptors, not six. `CAMPAIGN.md` carries a correction
-banner; the authority is `DECISIONS.md` and `LIGAND_CURATION_PROPOSAL.md`.
-
-**New spec documents:** `MSA_SPEC.md` (sent to `paper_af3`, under their review),
-`D_H_RESOLUTION.md`, `LIGAND_CURATION_PROPOSAL.md`, `DRULE_CHEMBL_SCOPE.md`.
-
-**Waiting on Aditya:** D-A re-decided; D-H's three options (§7); affinity
-provenance for the seven ligand picks; the commit. And a security note — the
-counterparty reported `EXCHANGE_STATE.md` arriving with an apparent fabricated
-`<system-reminder>` appended; **I cannot reproduce it** (my copy is 5,411 bytes,
-clean, `sendfile.sh` encrypts verbatim) and have asked them to re-hash.
-
-**Traps worth not repeating:** `n_agonist_smiles` cannot distinguish a peptide —
-use `is_peptide=false` AND non-empty `smiles` on both roles. Prefer a ligand bound
-to one of our own references over best-resolution. `species_modal` describes the
-PDB landscape, **not** our panel's species (`g1_receptors.tsv:organism` is the
-authority). And `flag_*` columns in `g0_calibration_structures.csv` hold reason
-strings and `'0'` — both truthy in Python.
-
-## Where the redo stands at the close of 2026-09-11
-
-**The protocol is extracted.** `paper_af3` sent their whole source tree; we read
-~75,000 lines of it. The map is six documents in `redo/protocol/` (5,376 lines,
-file:line on every claim). Nine findings are design requirements in
-`redo/spec/DECISIONS.md`. `redo/spec/CAMPAIGN.md` re-plans the campaign against
-them — 1,302 lines, all catalogued experiments sorted into survives/changes/dies,
-priced tiers, and **eight open decisions in §10 waiting on Aditya**.
-
-**The measurement that matters.** Their pre-flight (112 rows, 16 Gα families × 7
-rungs) found `ct11` at **depth 0 across every family** and `ct15`
-**family-dependent** — 0 for Gq/G11/G14/G15/G12, 2-459 elsewhere. So at one rung
-the alignment regime varies by Gα family. **The MSA-free partner is mandatory, and
-D-B is closed by measurement rather than choice.** The blocker is a per-chain
-harness change on their side; feasibility asked, unanswered.
-
-**Decisions still with Aditya:** the eight in `CAMPAIGN.md` §10 — **D-C first**
-(ligand curation: the arm is unpowered at k=9, MDE 0.406; six receptors of curation
-takes it to 0.314 for zero GPU, so this is go/no-go, not tuning). Plus Group 0's
-D2/D3/D4 and the class F atom pair.
-
-**Outstanding from `paper_af3`, four items:** a manifest with a partner arm (the
-peptide question — still the open question of the whole exchange), whether Block C's
-blanket `alphas` was a decision, `reference_panel_v2.csv` plus whether
-"transducer present" was a stated rule, and three absent files.
-
-### The bridge, and how to restart it tomorrow
+### The bridge
 
 `~/.ntfy-bridge/` — **session-local, dies with the session.** Re-arm exactly ONE
-`recv.sh` and ONE `sweep.sh` as persistent Monitors, then `pgrep` to confirm: one
-receiver chain is 3 processes (wrapper, script, pipeline subshell), one sweep is 2.
-**More than that means messages can be silently swallowed** — every instance shares
-`.seen`, so an orphan consumes and deduplicates while writing nowhere.
+`recv.sh` and ONE `sweep.sh`, then `pgrep` to confirm: one receiver chain is 3
+processes, one sweep is 2. More than that and messages can be silently swallowed —
+every instance shares `.seen`.
 
-Both `recv.sh` and `send.sh` now persist to `~/.ntfy-bridge/received/` and `sent/`.
-That was added today after discovering an entire afternoon of protocol answers
-existed only in one transcript.
+**Reply on the BRIDGE, not cross-session.** `paper_af3`'s session goes idle and
+cross-session messages queue unread; that cost us three messages. Their bridge is a
+**separate instance** (`/Users/SENGAAD1`, own dedup state) — the single-receiver
+rule applies within an instance, not across machines.
 
-**Retention is asymmetric: text ~12 h, attachments ~3 h, practical size cap ~1.5 MB
-(not the documented 15 MB).** `paper_af3` has been told to hold all files until we
-signal. **Message them first, then expect attachments.**
+Limits, measured: text ~12 h, **attachments ~3 h**, practical cap **~1.5 MB** (not
+the documented 15 MB). Both `send.sh` and `recv.sh` now persist to `sent/` and
+`received/`.
 
 ## How the sessions work
 

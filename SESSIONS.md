@@ -1,4 +1,5 @@
 # SESSIONS.md — index
+- [2026-09-12 — D-A and D-H resolved, the apo arm, and three retractions](sessions/2026-09-12b_D-A-D-H-resolved-and-the-apo-arm.md)
 - [2026-09-12 (overnight) — autonomous curation, P7 computed, and three retractions](sessions/2026-09-12_autonomous-curation-and-three-retractions.md)
 - [2026-09-11 (evening) — protocol extraction, the `redo/` layout, and a pre-flight that changed the design](sessions/2026-09-11b_protocol-extraction-and-campaign.md)
 - [2026-09-11 (pm) — the redo is designed, and a live bridge to the pipeline](sessions/2026-09-11_redo-design-and-pipeline-bridge.md) — manuscript frozen as the record; Group 0 and Group 1 frozen with gates; 28 files extracted from `paper_af3`.

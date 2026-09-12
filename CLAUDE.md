@@ -103,8 +103,22 @@ Four rules, and `redo/gates/layout.py` enforces the first three:
 3. **The top level is fixed at eight entries.** Growth goes into `runs/`.
 4. **A landed run is read-only**, like `data/block_<x>/`.
 
-`verify.sh` runs the layout guard, the manifest check and both preflight gates.
-All seven layout checks were proved by planting the defect each one catches.
+`verify.sh` runs the layout guard, the manifest check, the run receipt and both
+preflight gates. Every check in all five was proved by planting the defect it
+catches.
+
+**`redo/gates/run_receipt.py` is the one the old campaign never had.** It asks
+whether a delivery matches what was requested — chain count, partner identity,
+seed, partner MSA depth. The delivered pipeline compared output to input nowhere,
+so a monomer returned where a dimer was asked for passed every check. **A missing
+column is a FAILURE there, not a skip**: a check that quietly does nothing when its
+input is absent is the defect it exists to catch.
+
+**One standing trap in `verify.sh` itself:** the corpus line calls `ok()` on both
+branches (`:26-27`), so it prints `drift reported` without failing the run. That
+drift is the four deliberately-unread `refs.bib` entries and is expected. Do not
+read that line as a broken build — and do not read its absence as a passing corpus
+check.
 
 ## How data arrives: one block at a time
 
