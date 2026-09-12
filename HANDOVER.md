@@ -146,9 +146,37 @@ candidate is native. (e′) builds free but stops at 18 residues.
 **Affinity is not needed** for the seven ligand picks. Ligand identity is evidenced
 structurally; the decoy side still needs ChEMBL for presence/absence only.
 
+### IN FLIGHT — check this FIRST
+
+**The ChEMBL pool extraction may still be running.** `redo/build/drule_pool.py`
+against `/Users/aditya/chembl_37/chembl_37/chembl_37_sqlite/chembl_37.db`, log at
+`/tmp/drule_run2.log`, writing `inputs/drule_pool_molecules.tsv` and
+`inputs/drule_pool_exclusions.tsv`.
+
+```bash
+pgrep -f drule_pool.py            # still going?
+tail -5 /tmp/drule_run2.log
+ls -lh redo/inputs/drule_pool_*.tsv
+```
+
+**When it has finished:**
+```bash
+python3 redo/build/manifest.py            # the two tables are new inputs
+python3 redo/gates/drule.py               # should stop announcing an unbuilt pool
+rm -rf /Users/aditya/chembl_37            # 28 GB back; the pool + digest are what we keep
+```
+The release and its sha256 are written into every output row, so deleting the
+database loses no provenance. **If it produced nothing, suspect the wiring before
+the data** — that failure already happened once here.
+
 ### WAITING ON ADITYA — 2026-09-12, end of session
 
-**1. ChEMBL extraction is staged and deliberately not run.**
+**1. ~~ChEMBL extraction is staged and deliberately not run.~~ DONE** — downloaded,
+sha256 verified against the published `33c20374…`, extracted, and the database
+independently matched ChEMBL's own API figures (24,527,044 activities / 18,552
+targets). **The spec's pool rule was measured and found unusable**: "activity
+anywhere" yields **1,203,741 candidates per receptor**; `within_panel` yields
+**120,973** and is now the default. See the in-flight block above.
 `/Users/aditya/chembl_37/chembl_37_sqlite.tar.gz` — **5.76 GB, downloaded, sha256
 verified against the published `33c20374…`**. Extraction needs **~25 GB against
 32 GB free (93% used)**, which would leave ~7 GB on the machine that holds this

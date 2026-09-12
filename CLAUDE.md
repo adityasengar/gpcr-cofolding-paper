@@ -104,7 +104,8 @@ Four rules, and `redo/gates/layout.py` enforces the first three:
 4. **A landed run is read-only**, like `data/block_<x>/`.
 
 `verify.sh` runs the layout guard, the manifest check, the run receipt, the ligand
-gate and both preflight gates. Every check in all six was proved by planting the
+gate, the decoy gate and all three preflight gates (Group 0, 1 and **2 — the
+ligand arm, added 2026-09-12**). Every check in all six was proved by planting the
 defect it catches — **and on 2026-09-12 that claim was found to have been false for
 a day.** `g0_preflight.py`'s self-test harness copied only the *top-level* files of
 `redo/`, which was correct while `redo/` was flat and silently wrong from the moment
