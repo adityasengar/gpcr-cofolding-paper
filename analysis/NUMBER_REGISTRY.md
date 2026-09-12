@@ -211,6 +211,8 @@ writes 5.04 where the check holds 5.036 — and should be confirmed, not trusted
 | 1,150 | S409 | Block C, verify_claims check C60.boltz |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
 | 2,800 | S410 | Block C, verify_claims check C60.boltz |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
 | 2,300 | S411 | Block C, verify_claims check C60.boltz |  2x2 cell row count, shipped n_rows against the census grid of 50 per receptor x backbone x role x arm |
+| 5.15 | si.tex, BB-7 caption: Protenix's family-term logit upper bound | check B32z, which reports the shipped interval as [-0.047, 5.148] and records that SC-B-2's "excludes zero" does not hold |
+
 ## NOT covered by any automated check
 
 Each of these needs one of three things: a new check in the relevant

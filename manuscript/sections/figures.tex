@@ -10,7 +10,7 @@
 %   SI tables   \label{stab:<id>}          owned by si.tex
 %
 % <panel-id> is the ledger id in figures/FIGURES.md, lowercased, no hyphen:
-% f1, ba1a, ba2, ba3, bb1, bb2, bb6, bc2. A figure that moves between main and
+% f1, ba1a, ba2, bb12, bc2. A figure that moves between main and
 % SI changes its prefix and nothing else, so a move is one edit and the prose
 % breaks loudly if the target is gone.
 %
@@ -20,7 +20,12 @@
 % not to build it. A status in the ledger is not a removal from the document.
 % Before committing a status change there, grep this file for the panel.
 %
-% THE MAIN SEQUENCE IS FIVE FIGURES, which is the median of the 13 comparable
+% THE MAIN SEQUENCE IS FOUR FIGURES as of 2026-09-11, when BB-1 and BB-2 were
+% merged into BB-12. They drew the SAME LADDER TWICE -- BB-2's left panel was
+% titled "the ladder, and the two steps that telescope" and redrew the four
+% rungs BB-1 had already drawn. The merge draws the ladder ONCE with the steps
+% bracketed on it. BB-1 and BB-2 still render and remain the SI versions.
+% Five was the median of the 13 comparable
 % peer-reviewed papers in the corpus and matches both the Nature AlphaFold-3
 % paper and the Science RFAA paper. Everything else is SI.
 %
@@ -31,8 +36,12 @@
 %     of that pooling. See FIGURES.md and the [PI] in results.tex. It was in
 %     this file until 2026-09-10 and drawing it now would draw the artefact.
 %   BC-1 (pocket 2x2) — its scope statement says "apo arm alone" and the
-%     shipped counts are both arms pooled, out by exactly 2x. Not drawn in
-%     either position until that is resolved.
+%     shipped counts are both arms pooled, out by exactly 2x. STALE AS WRITTEN,
+%     corrected 2026-09-11: this said "not drawn in either position", and BC-1
+%     HAS been in the SI. It is drawn there with the contradiction stated on
+%     the face of its own caption ("SCOPE CAVEAT, READ BEFORE USE"), which is
+%     the right resolution — the estimate is sound, only its scope is withdrawn.
+%     It stays out of the MAIN text until rows.tier3.v2.csv arrives.
 %
 % Provenance per panel: figures/block_<x>/FIGURE_PROVENANCE.md.
 % Every caption states its filter and its n.
@@ -87,44 +96,44 @@ resampling unit is stated in the Methods for each campaign.}
 \end{figure}
 
 \begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{bb1_ladder.pdf}
-\caption{\textbf{The four-arm ladder: partner presence, partner sequence and
-partner identity are separable.}
-Two-instrument active-call fraction across apo, decoy, shuffled and cognate
-arms, per backbone and pooled over the panel, on the probability scale and on
-the logit scale. The decoy arm carries the correct G$\alpha$ subunit with its
-eleven C-terminal residues permuted; the shuffled arm carries an intact subunit
-from a different G$\alpha$ family; the cognate arm carries the correct subunit.
-\textbf{Every partner arm supplies a complete G$\alpha$ subunit.}
-\textit{Filter:} Class~A, frame\_36 --- 36 receptors, 24 paralog clusters;
+\includegraphics[width=\textwidth]{bb12_ladder_decomposition.pdf}
+\caption{\textbf{The four-arm ladder, and the two contrasts it decomposes into.}
+\textbf{a}, two-instrument active-call fraction across the four input arms, on
+each backbone and pooled over the panel with cluster-bootstrap intervals, with
+the two clean steps bracketed beneath. The decoy arm carries the correct
+G$\alpha$ subunit with its eleven C-terminal residues permuted; the shuffled arm
+carries an intact subunit from a different G$\alpha$ family; the cognate arm
+carries the correct subunit. \textbf{Every partner arm supplies a complete
+G$\alpha$ subunit.} Supplying any partner at all, even one whose $\alpha$5 tail
+is permuted, accounts for $+0.400$ [0.334, 0.464]; restoring the correct
+C-terminal sequence accounts for the remaining $+0.333$ [0.242, 0.432], and the
+two sum to the apo-to-cognate total exactly. \textbf{b}, the same fractions on
+the logit scale, because the probability scale saturates at cognate. \textbf{c},
+what each contrast actually varies, reported as an effect estimate with its
+interval. \textbf{No panel in the 81-paper survey behind this work reports a
+co-folding contrast that way}; the nearest analogues state a difference in the
+text and draw no test statistic, effect size or interval for it, and that is the
+gap this panel is meant to close rather than a convention borrowed from another
+field. Grey marks what is not the subject of a contrast, in \textbf{a} and
+\textbf{c} alike.
+\textbf{The decoy-to-cognate step is the only contrast in this work that
+isolates the $\alpha$5 C-terminus}: the two arms carry the same subunit, of the
+same length, from the same family, differing only in eleven C-terminal residues
+and differing there by a permutation, so composition is held constant. The
+campaign's shipped middle term, decoy-to-shuffled, is named
+\texttt{delta\_a5ct\_sequence\_decoy\_to\_shuffled} and is \emph{not} an
+$\alpha$5-CT contrast --- the shuffled arm is a different G$\alpha$ family, so
+that step changes the tail, the scaffold, the length and the family at once. It
+is drawn in grey in \textbf{c} and named confounded. The family term
+($+0.082$) sits \emph{inside} the $\alpha$5-CT step, not beside it.
+\textit{Filter:} Class~A, frame\_36 --- 36 receptors, \textbf{24} paralog
+clusters, not the 26 that every shipped frame\_36 interval is labelled with;
 EDNRA, EDNRB, GRPR and HRH3 are excluded because position 7.53 is Leu, not Tyr,
-so the NPxxY axis is undefined. Predicate recomputed from every row rather than
-read from a shipped call column.}
-\label{fig:bb1}
-\end{figure}
-
-\begin{figure}[htbp]\centering
-\includegraphics[width=\textwidth]{bb2_decomposition.pdf}
-\caption{\textbf{The ladder decomposes into two contrasts that telescope
-exactly.}
-\textbf{a}, the four arms, with the two clean steps drawn solid and the route
-through the shuffled arm dashed. Supplying any partner, even one whose
-$\alpha$5 tail is permuted, accounts for $+0.400$ [0.334, 0.464]; restoring the
-correct C-terminal sequence accounts for the remaining $+0.333$ [0.242, 0.432].
-The two sum to the apo-to-cognate total exactly. \textbf{b}, what each contrast
-actually varies. \textbf{The decoy-to-cognate step is the only contrast in this
-work that isolates the $\alpha$5 C-terminus}: the two arms carry the same
-subunit, of the same length, from the same family, differing only in eleven
-C-terminal residues and differing there by a permutation, so composition is held
-constant. The campaign's shipped middle term, decoy-to-shuffled, is drawn in
-grey and is \emph{not} an $\alpha$5-CT contrast --- the shuffled arm is a
-different G$\alpha$ family, so that step changes the tail, the scaffold, the
-length and the family at once.
-\textit{Filter:} Class~A, frame\_36, 36 receptors; intervals are a
-1{,}000-resample cluster bootstrap over the 24 paralog clusters that survive
-that frame. Every value recomputed from the per-receptor ladder table; the
-panel refuses to draw if the three shipped terms do not reproduce.}
-\label{fig:bb2}
+so the NPxxY axis is undefined. The predicate is recomputed from every row
+rather than read from a shipped call column, and the per-backbone rates and the
+decomposition terms are computed by two independent routes; the panel refuses to
+draw unless they agree on all four rungs.}
+\label{fig:bb12}
 \end{figure}
 
 \begin{figure}[htbp]\centering

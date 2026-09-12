@@ -18,6 +18,16 @@
 % URW font metrics (phvr8t), so loading them breaks the build on a clean machine.
 \usepackage{microtype}        % subtle spacing; makes justified text much cleaner
 
+% --- cross-references into the SI --------------------------------------
+% main.pdf and si.pdf are SEPARATE documents, so a bare \ref to an `sfig:'
+% label printed as ?? in the main text. Eight of them did, undetected, because
+% build.sh reports undefined CITATIONS and the undefined-reference warnings sat
+% in main.log unread. xr imports si.aux so those resolve to the SI's own S-
+% numbering. It requires si.aux to exist, which is why build.sh now builds the
+% SI FIRST. xr.sty ships in `tools', which is in tex/tex-packages.txt.
+\usepackage{xr}
+\externaldocument{si}
+
 % --- page geometry ------------------------------------------------------
 \usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage{setspace}
@@ -94,7 +104,7 @@ backbone cells, apo against cognate. Panels \textbf{a} and \textbf{b} are
 different receptors: the archive ships one prediction per case, and the
 within-receptor contrast is in \textbf{d} and \textbf{e}. This figure shows
 state reached; it does not show amplitude reproduction, which is absent on three
-of four backbones (Fig.~3).}
+of four backbones (Fig.~\ref{sfig:amplitude}, Table~\ref{tab:t3_amplitude_fits}).}
 \end{figure}
 \clearpage
 
