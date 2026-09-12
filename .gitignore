@@ -76,3 +76,9 @@ redo/cache/structures/
 
 # the /loop scheduler's own state, not project content
 .claude/scheduled_tasks.lock
+
+# rows.tier3.v2.csv — 92 MB, arrived 2026-09-12, the file Block C pinned 18 times
+# and never shipped. Excluded by size per the lit/pdfs and block_a/11_structures
+# precedent; its sha256 is committed in the README beside it, so provenance
+# survives the exclusion.
+analysis/block_c/received_2026_09_12/*.csv
