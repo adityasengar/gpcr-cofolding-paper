@@ -58,8 +58,22 @@ SELECT DISTINCT act.molregno
    AND act.standard_value IS NOT NULL
 """
 
-# every molecule with >=1 qualifying activity anywhere, with its properties
-SQL_CANDIDATES = """
+# MEASURED 2026-09-12, against ChEMBL_37 itself: the spec's "at least one
+# qualifying activity ANYWHERE" yields **1,203,741 molecules** -- per receptor.
+# Across the panel that is ~36 M pool rows, which is not a candidate table, it is
+# a copy of ChEMBL. Restricting "elsewhere" to **another receptor on our own
+# panel** yields **120,973**, a tenth the size, and every one of the 63 resolved
+# receptors has known ligands (median 1,589, min 2, max 11,076).
+#
+# It is also better science, not merely cheaper. The rule wants a molecule
+# "matched on everything except binding". A compound that demonstrably binds a
+# DIFFERENT GPCR is far closer to that than an arbitrary drug is -- which is the
+# defect the frozen campaign's hand-picked decoys had, and why its decoy arm turns
+# out not to discriminate from a real antagonist on any backbone (PER_BACKBONE.md).
+#
+# `anywhere` is kept as an explicit option so the spec's literal reading remains
+# reachable, and whichever is used is written into every output row.
+SQL_CANDIDATES_ANYWHERE = """
 SELECT md.molregno, md.chembl_id, md.pref_name,
        cs.canonical_smiles,
        cp.mw_freebase, cp.alogp, cp.hbd, cp.hba, cp.rtb,
@@ -77,22 +91,67 @@ SELECT md.molregno, md.chembl_id, md.pref_name,
 """
 
 
+# the same, restricted to molecules with a qualifying activity at one of OUR targets
+SQL_CANDIDATES_WITHIN = """
+SELECT md.molregno, md.chembl_id, md.pref_name,
+       cs.canonical_smiles,
+       cp.mw_freebase, cp.alogp, cp.hbd, cp.hba, cp.rtb,
+       COUNT(DISTINCT a.tid) AS n_targets,
+       COUNT(*)              AS n_activities
+  FROM activities act
+  JOIN assays a  ON a.assay_id = act.assay_id
+  JOIN target_dictionary td ON td.tid = a.tid
+  JOIN molecule_dictionary md ON md.molregno = act.molregno
+  LEFT JOIN compound_structures  cs ON cs.molregno = md.molregno
+  LEFT JOIN compound_properties  cp ON cp.molregno = md.molregno
+ WHERE td.chembl_id IN ({panel})
+   AND a.confidence_score >= ?
+   AND act.standard_type IN ({types})
+   AND act.standard_value IS NOT NULL
+ GROUP BY md.molregno
+"""
+
+
 def qmarks(n):
     return ",".join("?" * n)
 
 
-def extract(db, targets, release, sha256, limit=None):
+def extract(db, targets, release, sha256, limit=None, scope="within_panel"):
     """targets: [{receptor_slug, cluster, tid, ...}] -> pool rows."""
     con = sqlite3.connect(db)
     con.row_factory = sqlite3.Row
     cur = con.cursor()
 
+    # Resolve tid from the dump. load_targets() sets tid=None with a comment
+    # saying it is "filled from the dump at run time" -- and nothing filled it, so
+    # every target was skipped and the first real run produced ZERO rows. The
+    # fixture did not catch it because the fixture passes tids in directly: it
+    # proved the RULE and never exercised the PLUMBING. Resolve here, and fail
+    # loudly on any target the dump does not know.
+    want = [t for t in targets if t.get("chembl_target_id")]
+    if want:
+        ids = [t["chembl_target_id"] for t in want]
+        cur.execute("SELECT chembl_id, tid FROM target_dictionary WHERE chembl_id IN (%s)"
+                    % qmarks(len(ids)), ids)
+        lookup = dict(cur.fetchall())
+        unknown = [i for i in ids if i not in lookup]
+        if unknown:
+            raise SystemExit(f"target ids absent from the dump: {unknown[:5]}")
+        for t in want:
+            t["tid"] = lookup[t["chembl_target_id"]]
+
     by_cluster = {}
     for t in targets:
         by_cluster.setdefault(t["cluster"], []).append(t)
 
-    q = SQL_CANDIDATES.format(types=qmarks(len(ACTIVITY_TYPES)))
-    cur.execute(q, (MIN_CONFIDENCE, *ACTIVITY_TYPES))
+    panel_ids = [t["chembl_target_id"] for t in targets if t.get("chembl_target_id")]
+    if scope == "within_panel" and panel_ids:
+        q = SQL_CANDIDATES_WITHIN.format(panel=qmarks(len(panel_ids)),
+                                         types=qmarks(len(ACTIVITY_TYPES)))
+        cur.execute(q, (*panel_ids, MIN_CONFIDENCE, *ACTIVITY_TYPES))
+    else:
+        q = SQL_CANDIDATES_ANYWHERE.format(types=qmarks(len(ACTIVITY_TYPES)))
+        cur.execute(q, (MIN_CONFIDENCE, *ACTIVITY_TYPES))
     candidates = [dict(r) for r in cur.fetchall()]
     if limit:
         candidates = candidates[:limit]
@@ -149,18 +208,60 @@ def extract(db, targets, release, sha256, limit=None):
                 "min_confidence_score": MIN_CONFIDENCE,
                 "chembl_release": release,
                 "chembl_sha256": sha256,
+                "pool_scope": scope,
             })
     con.close()
     return rows
 
 
+MOLS = os.path.join(INPUTS, "drule_pool_molecules.tsv")
+EXCL = os.path.join(INPUTS, "drule_pool_exclusions.tsv")
+
+
 def write(rows):
-    cols = list(rows[0].keys())
-    with open(OUT, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t")
-        w.writeheader()
-        w.writerows(rows)
-    return OUT
+    """NORMALISED, and the reason is measured.
+
+    The spec asks for one row per (receptor, candidate). Run as written that is
+    **7,621,299 rows / 2.0 GB**, because the absence rule excludes only **4.8%**
+    (363,367 of 7.6 M) -- so 95% of the table is the same 120,973 molecules
+    repeated 63 times, with a property block copied each time.
+
+    Stored instead as the two tables that carry the same information without the
+    repetition: the molecule set ONCE, and only the (receptor, molecule) pairs
+    that are EXCLUDED, each with the axis that excluded it. Eligibility is then
+    "in the molecule table and not in the exclusion table for this receptor",
+    which is exactly what the flattened form encoded. ~40 MB instead of 2 GB, and
+    it stays committable under inputs/MANIFEST.tsv rather than needing a size
+    exemption like the 92 MB Block C rows.
+
+    Nothing is lost: the exclusion table still records WHICH axis refused each
+    pair, which is the auditability the spec insists on -- "a rule that cannot say
+    why it refused is not auditable".
+    """
+    seen, mols, excl = set(), [], []
+    for r in rows:
+        cid = r["candidate_chembl_id"]
+        if cid not in seen:
+            seen.add(cid)
+            mols.append({k: r[k] for k in (
+                "candidate_chembl_id", "candidate_name", "smiles", "mw", "logp",
+                "hbd", "hba", "rot", "n_targets_with_activity",
+                "n_qualifying_activities", "activity_types",
+                "min_confidence_score", "chembl_release", "chembl_sha256",
+                "pool_scope")})
+        if r["eligible"] != "yes":
+            excl.append({k: r[k] for k in (
+                "receptor_slug", "cluster", "receptor_chembl_target",
+                "candidate_chembl_id", "active_at_receptor",
+                "active_at_cluster_mate", "ineligible_because")})
+    for path, table in ((MOLS, mols), (EXCL, excl)):
+        with open(path, "w", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=list(table[0].keys()), delimiter="\t")
+            w.writeheader()
+            w.writerows(table)
+    print(f"  molecules  {len(mols):,} -> {os.path.relpath(MOLS)}")
+    print(f"  exclusions {len(excl):,} -> {os.path.relpath(EXCL)}")
+    return MOLS
 
 
 def load_targets():
@@ -201,8 +302,14 @@ def make_fixture(path):
     target 1 = the receptor, target 2 = its cluster-mate, target 3 = elsewhere.
       M1  active at the receptor                  -> ineligible (receptor)
       M2  active at the cluster-mate only         -> ineligible (cluster-mate)
-      M3  active only elsewhere                   -> ELIGIBLE, the decoy case
+      M3  active only OFF-panel                   -> eligible under `anywhere`,
+                                                     ABSENT under `within_panel`
       M4  active only in a confidence-7 assay     -> not a candidate at all
+      M5  active at a PANEL receptor in ANOTHER
+          cluster                                 -> ELIGIBLE under both. This is
+                                                     the real decoy case, and the
+                                                     fixture could not express it
+                                                     until it had a second cluster.
     """
     if os.path.exists(path):
         os.remove(path)
@@ -212,9 +319,10 @@ def make_fixture(path):
         (1, "CHEMBL_RECEPTOR", "SINGLE PROTEIN", "Homo sapiens"),
         (2, "CHEMBL_MATE", "SINGLE PROTEIN", "Homo sapiens"),
         (3, "CHEMBL_ELSEWHERE", "SINGLE PROTEIN", "Homo sapiens"),
+        (4, "CHEMBL_OTHERCLUSTER", "SINGLE PROTEIN", "Homo sapiens"),
     ])
     con.executemany("INSERT INTO assays VALUES (?,?,?)", [
-        (10, 1, 9), (20, 2, 9), (30, 3, 9), (40, 3, 7),
+        (10, 1, 9), (20, 2, 9), (30, 3, 9), (40, 3, 7), (50, 4, 9),
     ])
     con.executemany("INSERT INTO activities VALUES (?,?,?,?,?,?)", [
         (1, 10, 1, "Ki", 12.0, "nM"),     # M1 at the receptor
@@ -222,19 +330,22 @@ def make_fixture(path):
         (3, 20, 2, "IC50", 30.0, "nM"),   # M2 at the cluster-mate
         (4, 30, 3, "Kd", 8.0, "nM"),      # M3 elsewhere only
         (5, 40, 4, "Ki", 5.0, "nM"),      # M4 low-confidence assay only
+        (6, 50, 5, "Ki", 20.0, "nM"),     # M5 at a panel receptor, other cluster
     ])
     con.executemany("INSERT INTO molecule_dictionary VALUES (?,?,?)", [
         (1, "CHEMBL_M1", "binds the receptor"),
         (2, "CHEMBL_M2", "binds a cluster-mate"),
         (3, "CHEMBL_M3", "binds elsewhere only"),
         (4, "CHEMBL_M4", "low-confidence only"),
+        (5, "CHEMBL_M5", "binds a panel receptor in another cluster"),
     ])
     con.executemany("INSERT INTO compound_structures VALUES (?,?)", [
-        (1, "CCO"), (2, "CCN"), (3, "CCC"), (4, "CCF"),
+        (1, "CCO"), (2, "CCN"), (3, "CCC"), (4, "CCF"), (5, "CCBr"),
     ])
     con.executemany("INSERT INTO compound_properties VALUES (?,?,?,?,?,?)", [
         (1, 46.0, -0.3, 1, 1, 0), (2, 45.0, -0.2, 1, 1, 0),
         (3, 44.0, 1.1, 0, 0, 0), (4, 48.0, 0.5, 0, 1, 0),
+        (5, 47.0, 0.9, 0, 1, 0),
     ])
     con.commit()
     con.close()
@@ -250,8 +361,10 @@ def selftest():
          "chembl_target_id": "CHEMBL_RECEPTOR"},
         {"receptor_slug": "MATE", "cluster": "C1", "tid": 2,
          "chembl_target_id": "CHEMBL_MATE"},
+        {"receptor_slug": "OTHER", "cluster": "C2", "tid": 4,
+         "chembl_target_id": "CHEMBL_OTHERCLUSTER"},
     ]
-    rows = extract(db, targets, "FIXTURE", "0" * 64)
+    rows = extract(db, targets, "FIXTURE", "0" * 64, scope="anywhere")
     got = {(r["receptor_slug"], r["candidate_chembl_id"]):
            (r["eligible"], r["ineligible_because"]) for r in rows}
 
@@ -259,6 +372,7 @@ def selftest():
         ("RECEPTOR", "CHEMBL_M1"): ("no", "measured activity at the receptor"),
         ("RECEPTOR", "CHEMBL_M2"): ("no", "measured activity at a cluster-mate"),
         ("RECEPTOR", "CHEMBL_M3"): ("yes", ""),
+        ("RECEPTOR", "CHEMBL_M5"): ("yes", ""),
     }
     bad = 0
     print("\n=== drule_pool self-test, on a fixture ===\n")
@@ -273,7 +387,18 @@ def selftest():
           f"confidence_score >= {MIN_CONFIDENCE} -> "
           f"{'absent from the pool' if not m4 else 'PRESENT, which is wrong'}")
     bad += 1 if m4 else 0
-    print(f"\n  {4 - bad}/4 rule branches behave as specified.\n")
+    # and the DEFAULT scope, which is a different rule and must be proved too
+    wrows = extract(db, targets, "FIXTURE", "0" * 64, scope="within_panel")
+    wgot = {(r["receptor_slug"], r["candidate_chembl_id"]):
+            (r["eligible"], r["ineligible_because"]) for r in wrows}
+    checks = [("CHEMBL_M5", ("yes", ""), "eligible: binds a panel receptor in another cluster"),
+              ("CHEMBL_M3", None, "absent: binds only OFF-panel, so not in a within-panel pool")]
+    for cid, exp, what in checks:
+        act = wgot.get(("RECEPTOR", cid))
+        ok = (act == exp)
+        bad += 0 if ok else 1
+        print(f"  {'ok  ' if ok else 'MISS'} {cid:<11} within_panel -> {what}")
+    print(f"\n  {6 - bad}/6 rule branches behave as specified, across BOTH scopes.\n")
     return 1 if bad else 0
 
 
@@ -283,6 +408,10 @@ def main(argv):
     ap.add_argument("--release", help="e.g. ChEMBL_37")
     ap.add_argument("--sha256", help="digest of the downloaded release")
     ap.add_argument("--limit", type=int)
+    ap.add_argument("--pool-scope", choices=("within_panel", "anywhere"),
+                    default="within_panel",
+                    help="within_panel (default, 120,973 molecules) or anywhere "
+                         "(1,203,741 -- the spec's literal reading)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args(argv)
@@ -320,7 +449,7 @@ def main(argv):
         print("--release and --sha256 are required with --db: an unrecorded "
               "release is an unpinned one")
         return 1
-    rows = extract(a.db, targets, a.release, a.sha256, a.limit)
+    rows = extract(a.db, targets, a.release, a.sha256, a.limit, a.pool_scope)
     if not rows:
         print("no rows produced")
         return 1
