@@ -999,6 +999,61 @@ that refuses in each case.
 
 ---
 
+## D-2026-09-12-i · The campaign has a plan of record, and ONE adaptive parameter with a pre-registered rule
+
+**Aditya, 2026-09-12.** The ordering lives in `redo/spec/PLAN.md` — five pillars, free
+work first, and every pillar a stopping point that buys a complete sentence. `PLAN.md`
+sequences; it does not decide, and where it ever disagrees with an enumerating spec or
+with `inputs/`, **those win**.
+
+### The decision recorded here
+
+He asked whether the partner condition used in the ligand arm can be informed by what
+the many-combination arms (cognate, shuffled, varying length, mutants) find. **It can,
+and the mechanism is a rule committed before the data exists.**
+
+**NOT adaptive — the cognate identity.** `coupling_cognate_map.tsv` stays frozen. It was
+frozen for a reason unrelated to outcomes: **the supplied peptide and the scoring
+reference must be the same molecule.** Re-picking the cognate on which assignment agrees
+better destroys that guarantee, and the arm stops measuring what it exists to measure.
+
+**NOT adaptive — the matched nulls.** Scrambled α5, poly-alanine, α5-deleted and the
+unrelated-bulk control run at **whatever rung the real peptide runs at**. A null and its
+treatment at different rungs is an uninterpretable comparison, and it is precisely the
+failure an adaptive design produces by accident.
+
+**ADAPTIVE — the cognate rung for the ligand crossing, and only that.** It is already
+open: all 64 relevant rows of `g2_systems.csv` carry
+`pi_choice = "cognate rung for the ligand crossing: R3_ct21 | R7_full | both"`.
+
+> **The rule.** The ligand crossing runs at the **shortest** rung whose pooled
+> apo→cognate shift, measured on the Group 1 ladder, falls inside the interior band
+> **`[PI: lower]`–`[PI: upper]`**. Ties break toward the shorter construct. A rung is
+> excluded **on feasibility** — never on effect size — if any backbone cannot represent
+> it natively, or if Option Z shows its partner alignment is single-sequence in practice
+> at that rung.
+
+**Why a band and not a maximum, and this is the whole point.** The criterion must
+reference **headroom** — a property of the measurement — and never **effect size**, a
+property of the result. Choosing the rung with the largest shift would select the
+partner condition that maximises our own effect: the identical error to tuning an MSA
+masking rate on our own panel, or to amending a decoy rule until it clears its own
+cluster bar. Both were declined this same day, and this is the third instance of the
+pattern.
+
+Headroom is also the binding constraint in fact, not just in principle: **apo sits at
+0.158 and cognate at 0.891**, both pinned, so an interaction estimated at either endpoint
+has nowhere to move. `CATALOGUE.md` already advises the middle rungs for that reason.
+
+**`[PI]` OUTSTANDING — the band is Aditya's and must be recorded here WITH ITS DATE
+BEFORE any ladder result exists.** A band written afterwards is not a pre-registration,
+whatever it says. Roughly 0.25–0.75 is the shape; the number is his.
+
+**Enforcement, once the band is set:** a gate check asserts the enacted rung equals the
+rule applied to the Group 1 results, so the adaptation cannot drift silently — the same
+treatment `drule.py` gives the frozen decoy selection.
+
+---
 ## F-16 · The ladder's length/taxonomy confound is MUCH weaker than I said — three revisions, each downward
 
 **I over-called this, and it took two corrections from outside to get it right.**

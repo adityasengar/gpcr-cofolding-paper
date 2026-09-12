@@ -80,6 +80,19 @@ ligand class with partner presence on one model**. It needs `rows.tier3.v2.csv`.
    empirical** (44 active + 54 inactive on the panel), 167 is the full set
    including off-panel. Two `[PI]`s in `methods.tex` can now be closed.
 
+## The plan of record — read this before sequencing any work
+
+**`redo/spec/PLAN.md`** (written 2026-09-12) is the ORDERING document: five pillars,
+free work first, each a stopping point that buys a complete sentence. It sequences and
+does not decide — **where it disagrees with an enumerating spec or with `inputs/`, those
+win.** The decisions it sequences are in `DECISIONS.md`.
+
+**One `[PI]` is outstanding in it and it is time-sensitive:** the interior band for the
+pre-registered adaptation rule (D-2026-09-12-i), which decides the cognate rung for the
+ligand crossing from the Group 1 ladder. **It must be recorded with its date BEFORE any
+ladder result exists** — a band written afterwards is not a pre-registration, whatever
+it says.
+
 ## The two maps — read these before anything under `redo/`
 
 Written 2026-09-12. They exist so that the pipeline can be followed end to end
