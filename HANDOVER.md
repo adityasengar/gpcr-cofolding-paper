@@ -2,6 +2,41 @@
 
 Start in `paper/`. `CLAUDE.md` loads automatically; read it, then this.
 
+## READ THIS FIRST — the state at the end of 2026-09-12
+
+**The day's work is committed and pushed. `verify.sh` is green: layout 8 checks,
+manifest in sync, ligand 10, decoy 26, G0 frozen 13/8, G1 18/5, G2 14/6.** The only
+uncommitted files belong to lit.
+
+**What changed that a fresh session must not re-derive:**
+
+| | |
+|---|---|
+| **C7 is ANSWERED** | from `rows.tier3.v2.csv`. Pillar 0's mining is **complete** — steps 1–6. `analysis/block_c/received_2026_09_12/WHAT_IT_MEANS.md` is the reading; `STEPS_3_TO_6.md` is generated and re-derivable |
+| **The headline survives everything** | 24 of 24 partner contrasts — 3 roles × 4 backbones × 2 readouts — exclude zero, under both opsin variants |
+| **"Decoy ≈ antagonist" is WITHDRAWN** | it conflated *shift* (ligand-independent, stands) with *level* (not — **agonist > decoy > antagonist** on the continuous readout). F-19 corrected |
+| **The decoy arm is FROZEN** | runs EXPLORATORY at k = 11, 33 cells, 396 pooled predictions. `drule.py` 26 checks, 26 proved, three digests |
+| **The campaign has a plan** | `redo/spec/PLAN.md`, five pillars, **and its own §"what this plan MISSED"** written the same day by the registry triage |
+| **The registry is triaged** | 16 covered / 11 free-unscheduled / 10 needs-PI / 7 superseded / 1 untriaged. `NEEDS_TRIAGE` is now `NOT_ENUMERATED` |
+| **`ASKS.md` is new** | the standing register of what is owed by Aditya, by `paper_af3`, and by lit |
+
+**Three findings about our own machinery, all recorded, none fixed:**
+
+- **F-21** — a generated input can go **stale** against its own inputs and no guard
+  notices. `manifest.py --check` compares a file to its *own* hash, not its sources.
+- **F-22** — `inputs/` is "code only", but the guard catches only edits made *after*
+  stamping. **31 of 64 inputs name no generator**, and `g1_recording_spec.tsv` — the
+  campaign's 47-column recording contract — has **no writer anywhere**. L8 reports
+  the count on every run.
+- **F-20** — `rows.tier3.v2.csv` landed and nothing recorded that it had, while three
+  documents already rested on it.
+
+**And the two decisions that gate everything are in `ASKS.md` A1 and A2** — chain A's
+construct rule, and seed pairing, which is free now and **impossible** once Pillar 3
+dispatches.
+
+---
+
 ## Where the project is
 
 **Four blocks landed, verified and written. The document is wired and the
