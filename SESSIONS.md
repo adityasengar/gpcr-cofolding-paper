@@ -1,4 +1,5 @@
 # SESSIONS.md — index
+- [2026-09-12c — the scope closes, and four gate WAITs become checks](sessions/2026-09-12c_scope-D2-reversals-ligands-and-two-maps.md) — Class A only, D2 at (c), the three coupling reversals closed on native-Ga evidence, D-C's ligand picks enacted with ADRB1 blocked, twelve uncosted arms found by one check, two end-to-end maps — and G0's self-test proved to have been dead since the layout migration.
 - [2026-09-12 — D-A and D-H resolved, the apo arm, and three retractions](sessions/2026-09-12b_D-A-D-H-resolved-and-the-apo-arm.md)
 - [2026-09-12 (overnight) — autonomous curation, P7 computed, and three retractions](sessions/2026-09-12_autonomous-curation-and-three-retractions.md)
 - [2026-09-11 (evening) — protocol extraction, the `redo/` layout, and a pre-flight that changed the design](sessions/2026-09-11b_protocol-extraction-and-campaign.md)

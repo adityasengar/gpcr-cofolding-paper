@@ -103,9 +103,15 @@ Four rules, and `redo/gates/layout.py` enforces the first three:
 3. **The top level is fixed at eight entries.** Growth goes into `runs/`.
 4. **A landed run is read-only**, like `data/block_<x>/`.
 
-`verify.sh` runs the layout guard, the manifest check, the run receipt and both
-preflight gates. Every check in all five was proved by planting the defect it
-catches.
+`verify.sh` runs the layout guard, the manifest check, the run receipt, the ligand
+gate and both preflight gates. Every check in all six was proved by planting the
+defect it catches — **and on 2026-09-12 that claim was found to have been false for
+a day.** `g0_preflight.py`'s self-test harness copied only the *top-level* files of
+`redo/`, which was correct while `redo/` was flat and silently wrong from the moment
+the campaign moved to the guarded layout. Every plant failed to apply, every check
+reported MISS, and the harness still printed a tidy tally. **Run the self-tests, do
+not trust the sentence**: `python3 redo/gates/g0_preflight.py --selftest`, and the
+same flag on `g1_preflight.py` and `ligands.py`.
 
 **`redo/gates/run_receipt.py` is the one the old campaign never had.** It asks
 whether a delivery matches what was requested — chain count, partner identity,
