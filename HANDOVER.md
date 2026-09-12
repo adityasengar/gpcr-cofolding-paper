@@ -146,19 +146,31 @@ candidate is native. (e′) builds free but stops at 18 residues.
 **Affinity is not needed** for the seven ligand picks. Ligand identity is evidenced
 structurally; the decoy side still needs ChEMBL for presence/absence only.
 
-### What is still open
+### What is still open — 2026-09-12, after the scope decision
 
-1. **The measurement pass** — Group 0's largest outstanding dependency, and the
-   gate lists 9. It must record axis values for the **F3-removed** structures too,
-   or that filter stays permanently unauditable (F-12).
-2. **`MSA_SPEC.md` implementation** — with `paper_af3`, gated on their review.
+1. **The measurement pass** — Group 0's largest outstanding dependency; the gate
+   now lists 8. It must record axis values for the **F3-removed** structures too,
+   or that filter stays permanently unauditable (F-12). **Not started without
+   Aditya's word.**
+2. **D2's regeneration.** Decided at (c): expand onto `cxcr3`, `mtr1a`, `mtr1b`;
+   reserve the other 17. **Held until the pass is authorised** so the population
+   freezes once rather than twice. It changes `on_panel48`, hence the frozen
+   constants in G0-2, G0-5 and G0-7 — a generator re-run plus a manifest restamp,
+   never an edit.
+3. **`MSA_SPEC.md` implementation** — with `paper_af3`, gated on their review.
    Their review already found a defect in our spec; see F-13 and the spec's §3.
-3. **Class B and Class F instruments** — F-13 shows the tilt fails on both. B has a
-   9 Å inter-backbone disagreement; F has no discriminating power at all. Separate
-   decisions, and they must not inherit D-A.
-4. **Ligand curation** — five receptors actionable now, OPSD blocked (its active
-   reference carries a detergent, no agonist).
-5. **`lit/corpus_check.sh`** — proposed fix below, not actioned; it is lit's file.
+4. **Amendment C-1** — whether to reopen it so an **inverse agonist** can fill a
+   `neutral_antagonist` slot. It blocks **ADRB1** and **B1B1U5**, and it is the
+   only thing standing between the ligand arm and 8 picks instead of 6. Aditya's
+   call, not a curation judgement (F-15).
+5. **The decoy pool** — four deliverables in `DRULE_CHEMBL_SCOPE.md`, none built.
+   ChEMBL for presence/absence of activity only; affinity is not needed.
+6. **`lit/corpus_check.sh`** — proposed fix below, not actioned; it is lit's file.
+
+**Closed since the last handover:** the redo's scope (Class A only,
+D-2026-09-12-d), D2 (the split, D-2026-09-12-e), the three coupling reversals
+(F-14), and D-C's ligand picks (F-15). **Class B and Class F instruments are no
+longer owed** — they left with the scope, and F-13 is the measured reason.
 
 ### Proposed for the lit session
 

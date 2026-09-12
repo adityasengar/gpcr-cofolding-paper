@@ -34,6 +34,7 @@ def main():
     sysrows = read("g1_systems.csv")
     rungs = read("seq_rungs.tsv")
     lig = read("ligand_curation_candidates.tsv")
+    enacted_tbl = read("ligand_set_redo.tsv")
     calib = read("g0_calibration_structures.csv")
     spec_cols = read("g1_recording_spec.tsv")
 
@@ -133,9 +134,14 @@ def main():
       "excluded from the primary panel and carried in the extension tier with G19 as the")
     w(f"matched control: {', '.join('`' + s + '`' for s in needs)}.")
     w("")
-    w(f"**{len(rev)} assignments reverse Block B's prior**: "
-      f"{', '.join('`' + s + '`' for s in rev)}. "
-      "`B1B1U5` is CLOSED (D-H, reference 9EPP). The other three are open.")
+    w(f"**{len(rev)} assignments reverse Block B's prior** — "
+      f"{', '.join('`' + s + '`' for s in rev)} — and **all four are now closed**.")
+    w("`B1B1U5` by D-H (reference 9EPP); the other three by **F-14**, which found that")
+    w("in each of them *the family the Rule-R structure reads is the only family with a")
+    w("native, full-length, non-engineered Ga anywhere in that receptor's active")
+    w("structures*. Block B's Gq prior exists for all three only as an mGsqi chimera, a")
+    w("mini-G, or a subunit the depositors themselves label engineered. Evidence in")
+    w("`inputs/coupling_reversal_evidence.tsv`; guarded by `g1_preflight.py` **B17**.")
     w("")
     w("---")
     w("")
@@ -209,17 +215,40 @@ def main():
     w("the molecule is co-crystallised in an active or inactive receptor — which is a")
     w("stronger claim than an assay number. Aditya, 2026-09-12.")
     w("")
-    w(f"`ligand_curation_candidates.tsv` holds **{len(lig)} candidate rows across "
-      f"{len(byrec)} receptors** that need a pick:")
+    en = [r for r in enacted_tbl if r["status"] == "enacted"]
+    bl = [r for r in enacted_tbl if r["status"] == "BLOCKED"]
+    onref = [r for r in en if r["is_our_reference"] == "yes"]
+    w(f"**ENACTED** — `ligand_set_redo.tsv` holds **{len(en)} picks across "
+      f"{len({r['receptor_slug'] for r in en})} receptors**, "
+      f"**{len(onref)} of them on one of our own reference structures**, plus "
+      f"**{len(bl)} blocked** receptors each carrying its reason. Gated by "
+      f"`redo/gates/ligands.py`, 5 checks, each proved by planting.")
+    w("")
+    w("| receptor | role | ligand | CCD | structure | Å | on our reference |")
+    w("|---|---|---|---|---|---:|:-:|")
+    for r in en:
+        w(f"| **{r['receptor_slug']}** | {r['ligand_role']} | {r['ligand_name']} | "
+          f"`{r['ligand_ccd']}` | {r['bound_pdb']} | {r['bound_pdb_resolution']} | "
+          f"{'●' if r['is_our_reference'] == 'yes' else '·'} |")
+    w("")
+    w("**Blocked, with the reason in the table itself:**")
+    w("")
+    w("| receptor | role | why |")
+    w("|---|---|---|")
+    for r in bl:
+        w(f"| **{r['receptor_slug']}** | {r['ligand_role']} | {r['why']} |")
+    w("")
+    w(f"`ligand_curation_candidates.tsv` holds the **{len(lig)} candidate rows across "
+      f"{len(byrec)} receptors** these were chosen from:")
     w("")
     w("| receptor | needs | candidates | status |")
     w("|---|---|---:|---|")
     status = {
-        "S1PR1": "actionable — 8 agonists + 1 antagonist, all human, reference pair intact",
-        "CCKAR": "actionable — curated agonist is the CCK-8 peptide; SR146131 is the small-molecule option",
-        "GHSR": "actionable — curated agonist is ghrelin; ibutamoren is the small-molecule option",
-        "ADRB1": "actionable, but most candidates are turkey (*M. gallopavo*), not human",
-        "HRH3": "actionable — 4 human agonists at ≤3.0 Å",
+        "S1PR1": "**enacted** — siponimod / W146, both on our own references",
+        "CCKAR": "**enacted** — SR146131, off-reference and the only small-molecule candidate",
+        "GHSR": "**enacted** — ibutamoren / CHEMBL1956994",
+        "ADRB1": "**BLOCKED** — carazolol is on our reference and human but is an *inverse agonist* (amendment C-1); every true antagonist candidate is turkey",
+        "HRH3": "**enacted** — histamine on our active reference 8YN5",
         "OPSD": "**BLOCKED** — the active reference carries a detergent (BNG), no agonist",
         "B1B1U5": "reference settled by D-H; blocker is policy not chemistry — no neutral antagonist exists",
     }
@@ -321,8 +350,11 @@ def main():
     w("   mechanism our own spec proposed: OF3 keys the per-chain MSA dict by **chain ID**,")
     w("   Protenix by **integer position**, so `{\"A\": …, \"B\": \"\"}` fails silently on")
     w("   Protenix into a live full-depth fetch, invisible in every status JSON.")
-    w("4. **Three coupling reversals** — `CCKAR`, `EDNRB`, `GHSR`. Answerable from data held.")
-    w("5. **Ligand curation** — five receptors actionable, OPSD blocked.")
+    w("4. ~~Three coupling reversals~~ — **DONE** (F-14). CCKAR = Gs, EDNRB and GHSR")
+    w("   = Gi/o, on the native-Gα evidence rather than on authority counting.")
+    w("5. ~~Ligand curation~~ — **DONE** (F-15): 6 picks enacted across 4 receptors.")
+    w("   Open: whether to reopen amendment C-1 so ADRB1 and B1B1U5 can use an")
+    w("   inverse agonist. Aditya's call, not curation.")
     w("6. **The decoy pool** — four deliverables above, none built.")
     w("")
     w("**Decided and not to be re-opened:** D-A (the conjunction, NPxxY calibrated, tilt")

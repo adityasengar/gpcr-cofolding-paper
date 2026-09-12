@@ -127,7 +127,13 @@ supply and the tip we score against are the same molecule. Two columns, never on
 **10 receptors carry `needs_decision`** — every one is a `CHIMERA_SPLIT`, excluded from the primary panel and carried in the extension tier with G19 as the
 matched control: `5HT2A`, `5HT2C`, `ADA1A`, `DRD4`, `EDNRA`, `GRPR`, `HRH1`, `OX2R`, `OXYR`, `TA2R`.
 
-**4 assignments reverse Block B's prior**: `B1B1U5`, `CCKAR`, `EDNRB`, `GHSR`. `B1B1U5` is CLOSED (D-H, reference 9EPP). The other three are open.
+**4 assignments reverse Block B's prior** — `B1B1U5`, `CCKAR`, `EDNRB`, `GHSR` — and **all four are now closed**.
+`B1B1U5` by D-H (reference 9EPP); the other three by **F-14**, which found that
+in each of them *the family the Rule-R structure reads is the only family with a
+native, full-length, non-engineered Ga anywhere in that receptor's active
+structures*. Block B's Gq prior exists for all three only as an mGsqi chimera, a
+mini-G, or a subunit the depositors themselves label engineered. Evidence in
+`inputs/coupling_reversal_evidence.tsv`; guarded by `g1_preflight.py` **B17**.
 
 ---
 
@@ -180,17 +186,36 @@ construct whose bytes we do not hold.
 the molecule is co-crystallised in an active or inactive receptor — which is a
 stronger claim than an assay number. Aditya, 2026-09-12.
 
-`ligand_curation_candidates.tsv` holds **59 candidate rows across 7 receptors** that need a pick:
+**ENACTED** — `ligand_set_redo.tsv` holds **6 picks across 4 receptors**, **4 of them on one of our own reference structures**, plus **3 blocked** receptors each carrying its reason. Gated by `redo/gates/ligands.py`, 5 checks, each proved by planting.
+
+| receptor | role | ligand | CCD | structure | Å | on our reference |
+|---|---|---|---|---|---:|:-:|
+| **S1PR1** | full_agonist | siponimod | `J8C` | 7TD4 | 2.6 | ● |
+| **S1PR1** | neutral_antagonist | W146 | `ML5` | 3V2Y | 2.8 | ● |
+| **HRH3** | full_agonist | histamine | `HSM` | 8YN5 | 2.7 | ● |
+| **GHSR** | full_agonist | ibutamoren | `1KD` | 7NA8 | 2.7 | · |
+| **GHSR** | neutral_antagonist | CHEMBL1956994 | `8QX` | 6KO5 | 3.3 | ● |
+| **CCKAR** | full_agonist | SR146131 | `IA1` | 7XOV | 3.0 | · |
+
+**Blocked, with the reason in the table itself:**
+
+| receptor | role | why |
+|---|---|---|
+| **ADRB1** | neutral_antagonist | POLICY, the same blocker as B1B1U5 -- and LIGAND_CURATION_PROPOSAL.md listed this among the straightforward picks, which was wrong. Carazolol (CAU, 7BVQ, 2.5 A) is on our own inactive reference and is human, but GPCRdb types it 'Inverse agonist', not a neutral antagonist, and amendment C-1 dropped inverse_agonist from Tier 3. Every candidate GPCRdb types a true 'Antagonist' -- P32 4BVN 2.1 A, 3WC 3ZPR, XF5 3ZPQ, I32 2YCZ -- is Meleagris gallopavo, and our ADRB1 is human (P08588); the standing rule is that species follows the panel. So the choice is reopen C-1 for an inverse agonist, or accept a cross-species antagonist. Aditya's call, not a curation judgement. |
+| **OPSD** | both | CHEMISTRY. Agonist and antagonist are the same molecule -- retinal, CCD RET -- in different isomers, covalently bound through a Schiff base. One code carries two opposite pharmacologies (F-11). Separately, the active reference 4X1H carries a DETERGENT (BNG) and no agonist at all. |
+| **B1B1U5** | antagonist | POLICY, not chemistry. F-11's one-CCD trap does NOT bite this pair: 9EPP's agonist is 11,20-ethanoretinal (A1H6M), a different CCD from the 11-cis retinal (RET) inverse agonist on our inactive reference 6I9K. The blocker is that amendment C-1 dropped inverse_agonist from Tier 3 and this receptor has no neutral antagonist. Reopening C-1 here is Aditya's call, not curation. |
+
+`ligand_curation_candidates.tsv` holds the **59 candidate rows across 7 receptors** these were chosen from:
 
 | receptor | needs | candidates | status |
 |---|---|---:|---|
-| **ADRB1** | antagonist | 19 | actionable, but most candidates are turkey (*M. gallopavo*), not human |
+| **ADRB1** | antagonist | 19 | **BLOCKED** — carazolol is on our reference and human but is an *inverse agonist* (amendment C-1); every true antagonist candidate is turkey |
 | **OPSD** | antagonist | 18 | **BLOCKED** — the active reference carries a detergent (BNG), no agonist |
-| **S1PR1** | both | 9 | actionable — 8 agonists + 1 antagonist, all human, reference pair intact |
-| **HRH3** | agonist | 4 | actionable — 4 human agonists at ≤3.0 Å |
+| **S1PR1** | both | 9 | **enacted** — siponimod / W146, both on our own references |
+| **HRH3** | agonist | 4 | **enacted** — histamine on our active reference 8YN5 |
 | **B1B1U5** | antagonist | 3 | reference settled by D-H; blocker is policy not chemistry — no neutral antagonist exists |
-| **CCKAR** | agonist | 3 | actionable — curated agonist is the CCK-8 peptide; SR146131 is the small-molecule option |
-| **GHSR** | both | 3 | actionable — curated agonist is ghrelin; ibutamoren is the small-molecule option |
+| **CCKAR** | agonist | 3 | **enacted** — SR146131, off-reference and the only small-molecule candidate |
+| **GHSR** | both | 3 | **enacted** — ibutamoren / CHEMBL1956994 |
 
 **Curate retinal by ISOMER, never by CCD** (F-11). OPSD and B1B1U5 both involve
 retinal, where agonist and antagonist are isomers of one covalent ligand — and
@@ -291,8 +316,11 @@ proved by planting the defect each catches; `layout.py` 7; `run_receipt.py` 4.
    mechanism our own spec proposed: OF3 keys the per-chain MSA dict by **chain ID**,
    Protenix by **integer position**, so `{"A": …, "B": ""}` fails silently on
    Protenix into a live full-depth fetch, invisible in every status JSON.
-4. **Three coupling reversals** — `CCKAR`, `EDNRB`, `GHSR`. Answerable from data held.
-5. **Ligand curation** — five receptors actionable, OPSD blocked.
+4. ~~Three coupling reversals~~ — **DONE** (F-14). CCKAR = Gs, EDNRB and GHSR
+   = Gi/o, on the native-Gα evidence rather than on authority counting.
+5. ~~Ligand curation~~ — **DONE** (F-15): 6 picks enacted across 4 receptors.
+   Open: whether to reopen amendment C-1 so ADRB1 and B1B1U5 can use an
+   inverse agonist. Aditya's call, not curation.
 6. **The decoy pool** — four deliverables above, none built.
 
 **Decided and not to be re-opened:** D-A (the conjunction, NPxxY calibrated, tilt
