@@ -1020,6 +1020,195 @@ that refuses in each case.
 
 ---
 
+## F-25 · There is a PUBLISHED paper claiming our result is impossible — and it never tried our handle
+
+**Found 2026-09-13 by three planning agents arguing three different papers. It changes what
+this paper is FOR.**
+
+### The refutation target
+
+**`obendorf2026statespecific`** — *"Assessing State-Specific Accuracy of Cofolding Models
+for Kinases and GPCRs"* — benchmarks **AF3 v3.0.1, RoseTTAFold-3, Boltz-2 v2.2.0 and
+Chai-1 v0.6.1** on kinases and **Class A GPCRs**. Three of its four backbones are ours;
+its system class is ours. Its conclusion, verbatim:
+
+> *"Attempts to guide predictions through MSA editing or templating proved to be
+> **insufficient, especially for the active-state conformation**, as there seems to be a
+> preference for ICL3 conformations resembling the inactive state."* (p.18)
+>
+> *"These findings establish **conformational decoupling as a fundamental limitation of
+> current cofolding approaches**."* (p.2)
+
+**It never supplied a transducer.** Its three GPCR systems are receptor + small molecule
+only — 5-HT2A/pimavanserin (8ZMG), A2A/CGS21680 (8UGW), δ-opioid/ADL5859 (8Y45). **No G
+protein, no mini-G, no nanobody, no α5 peptide anywhere on the GPCR side.** Every handle
+it tried manipulates the **alignment** — MSA editing, state-annotated templates, base
+settings. Ours manipulates the **input complex**.
+
+**And its evidence is weaker than the claim it carries.** GPCR state is *"ICL3 fold called
+'correct active-state', 'inactive-like', or 'hybrid'"* with — the note's words —
+**"No numeric threshold, no rule, no justification is given for any of these calls"**
+(p.12). **n = 3 GPCR systems, one seed ("0"), five diffusion samples, no confidence
+intervals anywhere**, and no quantitative GPCR panel in the paper at all.
+
+Against that: **48 receptors, four backbones, 124,470 predictions, a rule-based predicate,
+cluster-grain paired bootstraps.**
+
+### What it does to the paper
+
+**The contribution stops being "we validated that co-folding works" and becomes: a
+published limitation claim is wrong, and the field reached it because everyone
+manipulated the alignment when the handle is the co-input.** That is sharper, more
+defensible, and methods-shaped rather than biology-shaped.
+
+**Their own confound becomes our design choice.** Obendorf's stated caveat (p.18) is that
+ICL3 is frequently unresolved in the PDB, which confounds their GPCR result. **Our
+predicate does not touch ICL3** — NPxxY-OH, the GPCRdb TM6 tilt, and A100's five BW
+Cα–Cα distances. Say so once, plainly.
+
+### Two threats to pre-empt, both checkable
+
+1. **`richman2025conformix`** [p.2] frames *"additional input information"* as the thing
+   the field is trying to eliminate. A referee can read our co-input as exactly that.
+   **The answer: our α5 peptide is read off the Gα sequence, not off the target
+   receptor's deposited structure.** It is a molecule the cell supplies, not a
+   measurement of the answer — and `coupling_cognate_map.tsv` is frozen precisely so the
+   supplied peptide and the scoring reference are the same molecule. An auditing
+   guarantee, not an oracle.
+2. **`lazou2026cryptic`** is the best ligand-handle prior art and has a rigour defect —
+   a post-hoc clash criterion added because the default rule gave the wrong answer, and a
+   per-protein absolute cutoff. **Cite it for precedent, not for method.**
+
+### The gap this sits in
+
+**An operationalised activation predicate is nearly absent from this literature.**
+`heo2022multistate` has *"no geometric state criterion anywhere"*; `xing2025purified` has
+*"No operationalised activation predicate"*; `mitjavila2026afsample2t` never evaluates a
+binary predicate; `obendorf2026statespecific` and `swapna2025memorization` call states
+**by eye**. In a 32-paper steering set, only two call state by a rule.
+
+**So we offer two things the field lacks: a working handle AND a rule-based readout.**
+
+---
+
+## F-26 · Three corrections of mine, and a verdict on Class B
+
+**All from the same 2026-09-13 exercise. Recorded because two of them are things I told
+Aditya with confidence.**
+
+### 1. The frozen decoy arm does NOT hold the MSA constant — I said it did
+
+I described it as holding *"mass, fold, composition, chain count **and MSA depth**
+constant."* The construct half is true: `decoy[:-11] == cognate[:-11]` byte-identical
+40/40, composition preserved 40/40. **The MSA half is false**, and
+**`redo/spec/CATALOGUE.md` already lists it under "Failed to establish"**:
+
+> *"The decoy arm is confounded at the MSA. Scrambling the tail also disrupts inter-chain
+> MSA pairing at the same columns, and on Chai-1 the edit does not reach the model as
+> aligned upper-case columns at all."*
+
+Chai decoy MSAs are **0/40 byte-identical** to their cognate parents; Boltz and Protenix
+differ **6/6** by sha256; gap fraction at the α5-CT columns rises from ~36% to **47–70%**.
+Perturbing the alignment is unavoidable when you scramble a tail — not a build error.
+
+**So the redo's `partner_msa = off` design is the one holding the alignment regime
+constant BY CONSTRUCTION, which the frozen decoy arm cannot do.** I had it backwards, and
+the answer was in a file I had read this week.
+
+### 2. Instrument critique alone DOES carry a full paper — my caution was a sample of one
+
+I claimed `schafer2025confounds` shows a critique-only framing lands as a Matters Arising.
+The corpus says otherwise: **`masters2025physics` is *Nature Communications* 16:8854,
+peer-reviewed, method class "benchmark-only (adversarial robustness benchmark of
+co-folding models)", with no new predictor and no positive result of any kind.**
+`yu2026domainmotion` is a PNAS article whose Significance statement contains no biology;
+`bret2025boltz2docking` is JCIM, *"benchmark-only, adversarial"*. **A grep of the whole
+corpus for any claim that instrument critique cannot carry a paper returns zero hits.**
+
+### 3. It is ELEVEN dead columns, not three — and one I named is not in this corpus
+
+Verified on all 40,800 Block C rows: `A1_amino_acid_identity`, `A2_fasta_completeness`,
+`A3_wrong_chain`, `A4_reference_class_match`, `A6_receptor_identity`, `pre_check_status`,
+`A_LIGAND_PRESENT`, `A_RECEPTOR_SLUG_MISSING`, `experiment_id`, `not_applicable_axes`,
+`pocket_ca_rmsd_missing_residues` — **all eleven empty on every row.** And
+`matches_claim_sheet`, which I had been naming, **is not a column in this corpus at all**;
+it was Block A's. Substantially larger than I had been stating.
+
+### 4. Class B was NOT deleted in error — and the parking note's stated reason is refuted
+
+`D-2026-09-12-d` calls the Class B loss *"the real loss"* and Class B *"the sharpest venue
+for a partner-length ladder"*, citing `hilger2020gcgr`. **Our own frozen data contradicts
+that rationale:**
+
+- **Class B cognate is `1.000` on all four backbones** (n=4 receptors, 795 rows). A length
+  ladder measures a graded response; **there is no headroom above cognate anywhere**, and
+  on OF3 none below it either — apo `.900`.
+- **The class-specific instrument is inert.** Kobayashi's Cα kink is implemented and
+  applied at `< 159.95°`, and **for all 795 Class B rows and all 700 Class F rows the
+  final call equals `tilt_active` at 100.0%.** The "two-instrument" Class B predicate is
+  single-instrument in practice.
+- **The frozen campaign had already made this call.** `eligible_pool.csv` excludes the
+  Class B/F receptors with the literal reason `class_bf_out_of_scope_for_A_only_draws`,
+  dated 2026-09-01, and `PREREG.md:183` reduces Class F to SMO alone.
+
+**So `D-2026-09-12-d` ratified a scope the frozen pre-registration had already set.** The
+decision stands; **its parking note must be rewritten** to say *"the endpoint is saturated
+at n=4 and the class instrument is inert"* rather than *"we lost the sharpest venue."* **A
+parked experiment whose stated rationale the data refutes is how a bad idea comes back.**
+
+---
+
+## F-27 · Two unreported assets, and the number that would answer the deepest objection
+
+### 1. A prospective result on 1,600 predictions, computed and never reported
+
+The frozen campaign **sealed 8 active references out of the reference set** — physically
+moved, sha256 `879046326c6b…` pinned, timestamped `2026-09-01T14:33:41Z`, a dispatch gate
+failing on **both** invariants, and two prior draws retired with written reasons
+(`PREREG.md` §14). Those rows carry `excl_any=True, excl_reason=E3` and appear in **no
+headline**.
+
+**But the state call was computed anyway, because the predicate is threshold-only:**
+
+| backbone | apo | cognate |
+|---|---:|---:|
+| boltz | 1.0% | **71.5%** |
+| chai | 37.5% | **70.5%** |
+| of3 | 3.0% | **59.0%** |
+| protenix | 0.0% | **62.5%** |
+
+**Two qualifications that must travel with it.** `thresholds_panel.csv` was written
+**before** the seal and saw those 8 receptors — bounded by §13, where withholding a
+different 8 moves both thresholds **< 0.05 Å** with identical held-out accuracy. And the
+seal was **scoring-side, not model-side**, and **was never opened**.
+
+**`analysis/block_a/DATA_REQUESTS.md` already asks to unseal and rescore, rated `cheap`.
+That is now the highest-value ask in the project** — above the one that landed today —
+because it converts a real pre-registration into a real prospective figure.
+
+### 2. The circularity number nobody has computed
+
+**The deepest defect in either campaign, and neither's documents state it plainly:
+"active" is operationally "transducer-bound."** The frozen curation *required* a
+transducer in the complex (`MAP_FROZEN_CAMPAIGN.md` §2 step 3), rejecting agonist-only
+actives — so **92 of 95 frozen actives are transducer- or nanobody-stabilised and 371 of
+371 inactives have none**, in a paper claiming that supplying a transducer drives the
+model active. **No amount of re-running fixes this.**
+
+**But `g0_calibration_structures.csv` holds 167 transducer-free Active structures across
+50 receptors** — material the frozen curation discarded. That is the only thing in either
+campaign that can put a **number** on the circularity. CPU only, authorised
+2026-09-13 (`D-2026-09-13-a` §4).
+
+**Caveat that changes the claim: 155 of the 167 carry `flag_active_not_fully_active = 1`.**
+So it buys a **sensitivity analysis** — *"the threshold moves by X when transducer-bound
+actives are removed"* — not a clean non-circular instrument. That sentence is still the
+difference between surviving review and not.
+
+**All three planning agents, arguing three different papers, independently made the
+measurement pass the blocking item.**
+
+---
 ## F-24 · Two structural facts from `paper_af3`, 2026-09-13 — and one of them undermines a graft I put in the plan
 
 **Their reply to `ASK_2026_09_13.md`, received 05:44Z.** The file verified clean on

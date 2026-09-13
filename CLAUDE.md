@@ -35,10 +35,14 @@ become decoration for a conclusion already reached, and the output is indistingu
 from the grounded version. `litquery` and `dataquery` both refuse to write manuscript
 prose for this reason. Do not relax it when the drafting stage is built.
 
-**All four blocks have landed and are written.** Each section states what it
-does not claim. **Block D shipped no row-level data at all** — its three corpora,
-42,180 predictions, are absent — so its verifier carries a third evidential class,
-PROSE-ONLY, and a pass count there is not a claim count.
+**All four blocks have landed and are written, and as of 2026-09-13 EVERY block is
+row-level.** Block D's three corpora — 14,000 / 2,370 / 25,810, **42,180 predictions**
+— arrived by hand and are at `analysis/block_d/received_2026_09_13/`, read-only and
+gitignored by size. Row counts, pins and thresholds all verified on arrival.
+*(This paragraph said they were absent until then, and Block C's `rows.tier3.v2.csv`
+was named here as the single highest-value outstanding ask. Both have landed.)*
+The PROSE-ONLY evidential class in Block D's verifier is **no longer forced** — its
+claims can be recomputed, and several already have been.
 
 **TWO of the paper's three title clauses still have no result behind them.** This
 briefly said "one" on 2026-09-12, on a C7 claim retracted the same day (F-23). No arm in any block supplies a **peptide** of any
