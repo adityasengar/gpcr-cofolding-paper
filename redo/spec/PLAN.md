@@ -52,10 +52,20 @@ ligand-free rows and **20 receptors / 19 clusters** with the complete 2×2, MDE 
 Pre-registration drafted at `redo/spec/C7_PREREGISTRATION.md`; it is **worthless after
 dispatch**.
 
-**Graft 3 — the memorisation defence is free.** `PANEL.md` §8 recommendation 1: use
-**Protenix's 2021-09-30** as the primary date stratification — 32/32 receptors, 23 vs 20
-clusters, **zero panel change** — with Boltz-2's 12/52 as the explicitly under-powered
-secondary.
+**Graft 3 — the memorisation defence is free, CONDITIONALLY.** `PANEL.md` §8
+recommendation 1: use **Protenix's 2021-09-30** as the primary date stratification —
+32/32 receptors, 23 vs 20 clusters, **zero panel change** — with Boltz-2's 12/52 as the
+explicitly under-powered secondary.
+
+> **CONDITION added 2026-09-13 (`F-24`).** `paper_af3` state that **three of their own
+> documents give three different cutoff sets for the same quantity**, that every value is
+> flagged `training_cutoff_verified=NO` in their own pre-registration, and — verbatim —
+> **"do not build a stratification on any of them without re-deriving."** We inherited the
+> current set, so the *number* is right; the *provenance* is not. **The stratification is
+> conditional on re-deriving the cutoff from the model cards ourselves**, and until that
+> is done this graft is not free — it is cheap and unverified, which is a different thing.
+> **OpenFold3 has no cutoff at all** and is excluded from any date stratification by
+> their documented position, not by our choice.
 
 **The title this commits to**, with the numeral withheld until step 6 returns:
 

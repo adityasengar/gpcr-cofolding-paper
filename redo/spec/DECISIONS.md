@@ -1020,6 +1020,80 @@ that refuses in each case.
 
 ---
 
+## F-24 · Two structural facts from `paper_af3`, 2026-09-13 — and one of them undermines a graft I put in the plan
+
+**Their reply to `ASK_2026_09_13.md`, received 05:44Z.** The file verified clean on
+arrival — sha `dc9a85c5`, matching ours. Two of the four one-line questions have clean
+answers; two are **structurally unanswerable**, and the reason is the finding.
+
+### 1. OpenFold-3 has NO training cutoff, and three of their documents disagree about the others
+
+*"OF3-preview's cutoff is not stated on the model card and is treated as unknown
+throughout this manuscript"* — their `BLOCK_C_PAPER_DRAFT_v1.md:321`. Not a gap in the
+lookup we offered to do: **it is their documented position.** The consequence they carry
+is recorded too — every OF3 comparison is treated as if the crystal could be in training,
+which **inflates the anti-memorisation CI on OF3 but does not bias direction.**
+
+**And three of their own documents give three different cutoff sets for the same
+quantity:**
+
+| document | the set |
+|---|---|
+| `BLOCK_B_PRE_DISPATCH…_09_02.md:36` | boltz/chai/protenix **2023-11-01**, OF3 **2021-09-30** |
+| `BLOCK_C_PREREG_AMENDMENT…_09_03.md:399` | AF3 2021-09-30, Boltz-2 **2023-01**, OF3 **2023**, Chai-1 **2023**, Protenix-v2 **2023** — every one flagged `training_cutoff_verified=NO` |
+| `BLOCK_C_PAPER_DRAFT_v1.md` *(current)* | Chai-1 **2021-01-12**, Protenix-v2 **2021-09-30**, Boltz-2 **2023-06-01**, OF3 **unknown** |
+
+**Their instruction, verbatim: treat the paper draft as current, the other two as
+superseded working values, and "do not build a stratification on any of them without
+re-deriving: our own prereg marks them unverified."**
+
+**We inherited the right set** — `PANEL.md:476` and `CAMPAIGN.md:203` carry the
+paper-draft values — **but `PLAN.md`'s graft 3 does exactly what they warn against.** It
+makes Protenix's 2021-09-30 the *primary* date stratification on the strength of a
+number the originating team flags as unverified. The graft is not withdrawn: it is
+**conditional on re-deriving the cutoff**, and that condition is now written into the
+plan. **A free stratification built on an unverified date is not free.**
+
+### 2. `block_d_freeze` DOES NOT EXIST — and `block_c_freeze` is not on origin either
+
+Not in their local tags and not on origin. `git ls-remote --tags origin` returns only
+`block_b_freeze`, `block_b_freeze_r2`, `block_b_freeze_r3` and `scorer-freeze-2026-09-01`.
+**`block_c_freeze` exists LOCALLY at `79e2843` and is absent from origin.** `61e6308` is
+**not a commit in their working repository at all.**
+
+**What is citable:** commit **`10d6493`** — *"Block D bundle manifest v4 (FREEZE): closeout
+regen"*, 2026-09-10 19:44 +0200, current HEAD, 0 commits ahead of origin/main. **A commit,
+not a tag.** Our Methods must cite it that way, and **Block C's citation needs the same
+check** — a tag that exists on one laptop and not on origin is not a reference anyone else
+can resolve.
+
+### 3. The structural fact: two repositories, and some questions no one can answer from either
+
+**This is the durable part.** Their **working repo** holds the experiments, the scorer,
+the rows and the prereg. The **release repo** (`61e6308`) holds Block D's dossier, claim
+sheet and Part A. A grep for `SC-D-1` across every markdown file in the working repo
+returns **one hit**, in a figure-data manifest.
+
+So our questions 3 and 4 — both about disagreements *between* `PARTA_D1` and the Block D
+claim sheet — **cannot be arbitrated from the working repo by anyone, including them.**
+They hold neither side of either comparison.
+
+**Consequence for how we ask:** a question about a discrepancy *internal to the release
+documents* goes to a session pointed at the release repo, not to the bridge. Asking the
+wrong repo is not a refusal and should not be read as one.
+
+### 4. The rows exist, and the channel cannot carry them
+
+All three confirmed present, paths verified. **D1 is 30.9 MB — 14,000 rows × 102 columns;
+D3 at 25,810 rows is roughly double.** Both far above the 15 MB ntfy ceiling, so **even
+once approved they cannot travel this channel whole.** The hand route that delivered
+`rows.tier3.v2.csv` is the realistic one — **or the column projection**, which they
+suggest would get us what we need "in a fraction of the bytes" if we name the fields.
+
+**They need Aditya's sign-off to send data beyond what has already gone across**, exactly
+as before. `ASKS.md`.
+
+---
 ## D-2026-09-13-a · Aditya takes all four: chain A at (b), seeds paired, C7 pre-registered, the measurement pass authorised
 
 **2026-09-13. He read the four-item summary and agreed with the recommendation on each.**
