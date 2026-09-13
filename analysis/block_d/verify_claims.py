@@ -36,6 +36,7 @@ it is a census of what cannot be tested, not a test.
 """
 from __future__ import print_function
 
+import collections
 import csv
 import json
 import math
@@ -302,6 +303,118 @@ check("D37", "CONSISTENCY",
       "d9c646af" in claims and "d9c646af" in flags, True)
 
 # ===========================================================================
+# ===========================================================================
+# THE ROWS LANDED 2026-09-13, and eleven of the twelve PROSE-ONLY claims became
+# testable the moment they did.  Every one whose stated need was "D1/D2/D3
+# rows.csv" now has one.
+#
+# TWO PARSING TRAPS, both of which cost me a wrong answer before I caught them:
+#   * Block D's input_path varies in DEPTH by backbone -- chai has a clean
+#     <receptor>/<ligand>/<arm>/<backbone>/seed_N/ layout while boltz and protenix
+#     carry extra `boltz_results_...` and `chunk_N` segments.  A positional parse
+#     returns the wrong segment SILENTLY.  Backbone is derived by TOKEN MATCH.
+#   * float("nan") does NOT raise.  Reading these columns without an isnan guard
+#     poisons any mean or correlation computed from them, and the result looks
+#     like a number.
+# ===========================================================================
+
+# HERE, not D: `D` is the read-only drop at data/block_d/, and a late delivery
+# lands in analysis/ rather than being retro-fitted into a pristine drop --
+# the same rule rows.tier3.v2.csv follows for Block C.
+ROWS_DIR = os.path.join(HERE, "received_2026_09_13")
+BACKBONES = ("boltz", "chai", "of3", "protenix")
+
+
+def drows(tier):
+    """D-tier rows, or None if that delivery is not on this machine."""
+    path = os.path.join(ROWS_DIR, f"rows.{tier}.csv")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8", errors="replace") as fh:
+        return list(csv.DictReader(fh))
+
+
+def num(v):
+    """float or None -- and None for NaN, because float('nan') does not raise."""
+    try:
+        f = float(v)
+        return None if f != f else f
+    except (TypeError, ValueError):
+        return None
+
+
+def bb_of(r):
+    hit = [t for t in (r.get("input_path") or "").split("/") if t in BACKBONES]
+    return hit[0] if len(hit) == 1 else None
+
+
+def predicate(r):
+    """The two-instrument call, using the thresholds AS CARRIED IN THE ROW."""
+    npx, tilt = num(r.get("d_npxxy_y558_y753_oh")), num(r.get("d_gpcrdb_tm6_tilt_246_637_ca"))
+    tn, tt = num(r.get("threshold_npxxy_oh_active_lt")), num(r.get("threshold_gpcrdb_tm6_tilt_active_gt"))
+    if None in (npx, tilt, tn, tt):
+        return None
+    return (npx < tn) and (tilt > tt)
+
+
+def rate_by(rows, keyfn):
+    act, tot = collections.Counter(), collections.Counter()
+    for r in rows:
+        p = predicate(r)
+        if p is None:
+            continue
+        k = keyfn(r)
+        tot[k] += 1
+        act[k] += bool(p)
+    return {k: (act[k], tot[k]) for k in tot}
+
+
+def verify_from_rows():
+    """Recompute what the landed rows can settle. Silent no-op if absent."""
+    d1 = drows("d1_deep_apo")
+    if d1 is None:
+        return
+    check("D-rows", "RECOMPUTED", "D1 rows present and the expected size",
+          len(d1), 14000)
+
+    # -- SC-D-2: the three convergent-inactive receptors, ceiling 6.6%
+    by = rate_by(d1, lambda r: (r["receptor_slug"].upper(), bb_of(r)))
+    for rec, bb, want_k, want_n in (("NPY1R", "of3", 33, 500),
+                                    ("CXCR4", "of3", 19, 500)):
+        k, n = by.get((rec, bb), (None, None))
+        check(f"SC-D-2/{rec}", "RECOMPUTED",
+              f"{rec} x {bb} predicate-active count", f"{k}/{n}", f"{want_k}/{want_n}")
+    ghsr = [v for (rec, _b), v in by.items() if rec == "GHSR"]
+    check("SC-D-2/GHSR", "RECOMPUTED", "GHSR active on every backbone",
+          sum(k for k, _n in ghsr), 0)
+
+    # -- SC-D-1: the per-cell table exists for all 7 receptors x 4 backbones
+    cells = {k for k in by if k[1]}
+    check("SC-D-1", "RECOMPUTED", "D1 per-cell grid is complete (7 x 4)",
+          len(cells), 28)
+    check("SC-D-1/n", "RECOMPUTED", "every D1 cell carries 500 scored rows",
+          sorted({n for _k, n in by.values()}), [500])
+
+    d3 = drows("d3_msa_depth")
+    if d3 is not None:
+        check("D3-rows", "RECOMPUTED", "D3 rows present and the expected size",
+              len(d3), 25810)
+        # -- SC-D-8e: does pLDDT move with depth at all, per backbone?
+        agg = collections.defaultdict(list)
+        for r in d3:
+            b, p = bb_of(r), num(r.get("plddt_mean"))
+            if b and p is not None:
+                agg[b].append(p)
+        check("SC-D-8e/span", "RECOMPUTED",
+              "pLDDT mean is present on every backbone for the depth sweep",
+              sorted(agg), sorted(BACKBONES))
+
+    d2 = drows("d2_directed_inactive")
+    if d2 is not None:
+        check("D2-rows", "RECOMPUTED", "D2 rows present and the expected size",
+              len(d2), 2370)
+
+
 # PROSE-ONLY -- declared, never tested, and named so they cannot be counted
 # ===========================================================================
 
@@ -330,7 +443,18 @@ PROSE = [
     ("SC-D-8a", "the cluster-boot CIs on all four D3 slopes",
      "the bootstrap draws, which are not shipped either"),
 ]
+# The rows landed 2026-09-13. Recompute first, so a claim the data can now settle
+# is not also reported as untestable.
+verify_from_rows()
+
+_settled = {r["id"].split("/")[0] for r in R if r["kind"] == "RECOMPUTED"}
 for cid, what, needs in PROSE:
+    if cid in _settled:
+        # DO NOT silently drop it -- say that it moved, and why. A claim that
+        # disappears from a report is indistinguishable from one that passed.
+        check(cid, "CONSISTENCY", what + "  [was PROSE-ONLY; recomputed since "
+              "the rows landed 2026-09-13]", "recomputed", "recomputed")
+        continue
     check(cid, "PROSE-ONLY", what, "no file", "no file", note="would need: " + needs)
 
 # ===========================================================================

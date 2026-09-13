@@ -598,22 +598,117 @@
   "note": ""
  },
  {
-  "id": "SC-D-1",
-  "kind": "PROSE-ONLY",
-  "what": "per-cell predicate-active fractions on all 7 D1 receptors (Chai deltas 98.4/60.2/98.0, OF3 91.6)",
-  "got": "no file",
-  "want": "no file",
+  "id": "D-rows",
+  "kind": "RECOMPUTED",
+  "what": "D1 rows present and the expected size",
+  "got": 14000,
+  "want": 14000,
   "ok": true,
-  "note": "would need: D1 rows.csv"
+  "note": ""
+ },
+ {
+  "id": "SC-D-2/NPY1R",
+  "kind": "RECOMPUTED",
+  "what": "NPY1R x of3 predicate-active count",
+  "got": "33/500",
+  "want": "33/500",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-2/CXCR4",
+  "kind": "RECOMPUTED",
+  "what": "CXCR4 x of3 predicate-active count",
+  "got": "19/500",
+  "want": "19/500",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-2/GHSR",
+  "kind": "RECOMPUTED",
+  "what": "GHSR active on every backbone",
+  "got": 0,
+  "want": 0,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-1",
+  "kind": "RECOMPUTED",
+  "what": "D1 per-cell grid is complete (7 x 4)",
+  "got": 28,
+  "want": 28,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-1/n",
+  "kind": "RECOMPUTED",
+  "what": "every D1 cell carries 500 scored rows",
+  "got": [
+   500
+  ],
+  "want": [
+   500
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D3-rows",
+  "kind": "RECOMPUTED",
+  "what": "D3 rows present and the expected size",
+  "got": 25810,
+  "want": 25810,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8e/span",
+  "kind": "RECOMPUTED",
+  "what": "pLDDT mean is present on every backbone for the depth sweep",
+  "got": [
+   "boltz",
+   "chai",
+   "of3",
+   "protenix"
+  ],
+  "want": [
+   "boltz",
+   "chai",
+   "of3",
+   "protenix"
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "D2-rows",
+  "kind": "RECOMPUTED",
+  "what": "D2 rows present and the expected size",
+  "got": 2370,
+  "want": 2370,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-1",
+  "kind": "CONSISTENCY",
+  "what": "per-cell predicate-active fractions on all 7 D1 receptors (Chai deltas 98.4/60.2/98.0, OF3 91.6)  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
+  "ok": true,
+  "note": ""
  },
  {
   "id": "SC-D-2",
-  "kind": "PROSE-ONLY",
-  "what": "the three convergent-inactive receptors at max 6.6% on any cell",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "the three convergent-inactive receptors at max 6.6% on any cell  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: D1 rows.csv"
+  "note": ""
  },
  {
   "id": "SC-D-3",
@@ -653,12 +748,12 @@
  },
  {
   "id": "SC-D-8e",
-  "kind": "PROSE-ONLY",
-  "what": "pLDDT vs ln(depth) slopes +0.05/+0.19/+0.68/+0.58",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "pLDDT vs ln(depth) slopes +0.05/+0.19/+0.68/+0.58  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: D3 rows.csv"
+  "note": ""
  },
  {
   "id": "SC-D-9",
