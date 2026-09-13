@@ -41,6 +41,7 @@ import csv
 import json
 import math
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -428,6 +429,36 @@ def verify_from_rows():
         check("SC-D-8e/span", "RECOMPUTED",
               "pLDDT mean is present on every backbone for the depth sweep",
               sorted(agg), sorted(BACKBONES))
+
+        # -- SC-D-8b: sub-Angstrom-to-active, full -> depth 8, per backbone.
+        # This is the leg that separates LEVER from DEGRADATION: Boltz GAINS when
+        # the alignment is starved while OF3 and Protenix LOSE, which is a
+        # different phenomenon from "shallow MSA produces alternative states".
+        sub, tt = collections.Counter(), collections.Counter()
+        for r in d3:
+            pk, b = num(r.get("pocket_ca_rmsd_active")), bb_of(r)
+            if pk is None or not b:
+                continue
+            m = re.search(r"depth[_-]?(\d+)", r.get("input_path") or "", re.I)
+            d = m.group(1) if m else "full"      # no depth token == the full condition
+            tt[(b, d)] += 1
+            sub[(b, d)] += (pk < 1.0)
+        for b, want in (("boltz", 8.7), ("of3", -20.9), ("protenix", -8.7)):
+            if tt.get((b, "8")) and tt.get((b, "full")):
+                delta = (100 * sub[(b, "8")] / tt[(b, "8")]
+                         - 100 * sub[(b, "full")] / tt[(b, "full")])
+                # tol 0.15: the claim sheet rounds to one decimal, and protenix
+                # lands on -8.75, which rounds either way.
+                check(f"SC-D-8b/{b}", "RECOMPUTED",
+                      f"sub-A-to-active delta full->depth8 on {b} (pp)",
+                      round(delta, 1), want, tol=0.15)
+        if tt.get(("chai", "8")) and tt.get(("chai", "full")):
+            dc = (100 * sub[("chai", "8")] / tt[("chai", "8")]
+                  - 100 * sub[("chai", "full")] / tt[("chai", "full")])
+            check("SC-D-8b/chai", "CONSISTENCY",
+                  "chai is not in the claim; recorded so its absence is a "
+                  "property of the data, not a selected sample",
+                  round(dc, 1), round(dc, 1))
 
     d2 = drows("d2_directed_inactive")
     if d2 is not None:

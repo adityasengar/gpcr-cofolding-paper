@@ -715,6 +715,42 @@
   "note": ""
  },
  {
+  "id": "SC-D-8b/boltz",
+  "kind": "RECOMPUTED",
+  "what": "sub-A-to-active delta full->depth8 on boltz (pp)",
+  "got": 8.7,
+  "want": 8.7,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8b/of3",
+  "kind": "RECOMPUTED",
+  "what": "sub-A-to-active delta full->depth8 on of3 (pp)",
+  "got": -20.9,
+  "want": -20.9,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8b/protenix",
+  "kind": "RECOMPUTED",
+  "what": "sub-A-to-active delta full->depth8 on protenix (pp)",
+  "got": -8.8,
+  "want": -8.7,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8b/chai",
+  "kind": "CONSISTENCY",
+  "what": "chai is not in the claim; recorded so its absence is a property of the data, not a selected sample",
+  "got": -6.3,
+  "want": -6.3,
+  "ok": true,
+  "note": ""
+ },
+ {
   "id": "D2-rows",
   "kind": "RECOMPUTED",
   "what": "D2 rows present and the expected size",
@@ -797,12 +833,12 @@
  },
  {
   "id": "SC-D-8b",
-  "kind": "PROSE-ONLY",
-  "what": "sub-A-to-active deltas full->depth-8 (Boltz +8.7, OF3 -20.9, Protenix -8.7)",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "sub-A-to-active deltas full->depth-8 (Boltz +8.7, OF3 -20.9, Protenix -8.7)  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: D3 rows.csv"
+  "note": ""
  },
  {
   "id": "SC-D-8d",
