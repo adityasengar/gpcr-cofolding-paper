@@ -65,6 +65,7 @@ DOCS = [
     "analysis/block_b/DATA_REQUESTS.md",
     "analysis/block_c/DATA_REQUESTS.md",
     "analysis/block_d/DATA_REQUESTS.md",
+    "analysis/block_d/ASK_2026_09_13.md",
     "rebuttals/BLOCK_A.md",
     "rebuttals/BLOCK_B.md",
     "rebuttals/BLOCK_C.md",
@@ -74,7 +75,37 @@ DOCS = [
 ]
 
 # a backtick-quoted token that looks like a file
+# Backticked paths in prose, OR bare paths inside a fenced code block.
+#
+# Until 2026-09-13 this matched backticks only, so any path written inside a ```
+# fence was invisible to the auditor -- and a request document's headline ask is
+# very often a fenced block listing the files wanted. Block D's three rows.csv
+# paths sat there unaudited for three days.
+#
+# Nothing was actually missed by it: those three begin `experiments/`, which
+# UPSTREAM classifies as their-side and skips regardless. The defect is that a
+# FENCED path pointing at something WE hold would have slipped through, and that
+# is precisely the case this auditor exists to catch -- an ask for a file we
+# already have destroys the credibility of every real ask beside it.
+#
+# SCOPE, deliberately limited. Fenced paths are surfaced in PASS 2 (for a human to
+# read) and are NOT promoted to pass-1 false-ask failures. A bare fenced path
+# carries no absence claim for pass 1 to contradict, and treating every fenced path
+# as an ask would misfire on the code blocks these documents are full of --
+# `pd.read_csv('data/block_c/.../g4_full_census_v2.csv')` names a file we hold and
+# is not a request for it. A guard that cries wolf on its own examples destroys the
+# credibility it exists to protect, which is the same failure it was built to stop.
 PATH = re.compile(r"`([A-Za-z0-9_./*\-]+\.(?:csv|json|md|py|cif|tsv|txt|zip))`")
+FENCED_PATH = re.compile(r"^\s*([A-Za-z0-9_./*\-]+\.(?:csv|json|md|py|cif|tsv|txt|zip))\b",
+                         re.M)
+
+
+def paths_in(text):
+    """Every path a reader would take as an ask: backticked, or bare in a fence."""
+    found = set(PATH.findall(text))
+    for block in re.findall(r"```[^\n]*\n(.*?)```", text, re.S):
+        found.update(FENCED_PATH.findall(block))
+    return found
 
 ABSENT = re.compile(
     r"\b(not shipped|unshipped|did not ship|does not ship|is absent|are absent|"
@@ -143,7 +174,16 @@ def main():
         if not os.path.exists(full):
             print("  (skipping %s -- not present)" % doc)
             continue
-        for sent, n in sentences(open(full).read()):
+        raw = open(full).read()
+        # Fenced blocks are scanned separately, with their real line numbers, so a
+        # headline ask written as a bare fenced list is audited like any other.
+        fenced = []
+        for m in re.finditer(r"```[^\n]*\n(.*?)```", raw, re.S):
+            base_line = raw[:m.start()].count("\n") + 2
+            for i, ln in enumerate(m.group(1).split("\n")):
+                for hit in FENCED_PATH.findall(ln):
+                    fenced.append((hit, base_line + i))
+        for sent, n in list(sentences(raw)) + [(f"`{p_}`", ln) for p_, ln in fenced]:
                 for path in PATH.findall(sent):
                     base = os.path.basename(path).lower()
                     here = exists(path)
