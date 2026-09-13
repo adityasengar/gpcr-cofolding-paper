@@ -266,7 +266,32 @@ def tsv(path):
         return list(csv.DictReader(fh, delimiter="\t"))
 
 
+
+def _chain_a():
+    """slug -> (construct id, sha256) for chain A.
+
+    Wired 2026-09-13.  Until then this was the hardcoded literal
+    "PENDING:SEQ_RECEPTORS.md" on every row, because WHICH receptor sequence to supply
+    was an untaken decision (D-OPEN-2026-09-12-j).  Aditya took it -- option (b),
+    D-2026-09-13-a -- so the construct exists and the rows may name it.
+
+    A receptor in the systems table with no row in seqrec_trim.tsv resolves to
+    UNRESOLVED, never to a default: the whole point of the decision was that a
+    silent fallback restores the option the spec calls indefensible.
+    """
+    import csv as _csv
+    src, sha = {}, {}
+    path = os.path.join(INPUTS, "seqrec_trim.tsv")
+    if not os.path.exists(path):
+        sys.exit(f"FAIL: {path} is absent -- chain A cannot be named without it.")
+    for r in _csv.DictReader(open(path, encoding="utf-8"), delimiter="	"):
+        src[r["slug"]] = f"seqrec_trimmed.fasta:{r['trim_start']}-{r['trim_end']}"
+        sha[r["slug"]] = r["trim_sha256"]
+    return src, sha
+
+
 def main():
+    chain_a_src, chain_a_sha = _chain_a()
     problems = []
     for f in ("g1_receptors.tsv", "g1_partner_registry.tsv", "g1_midrungs.tsv"):
         p = os.path.join(INPUTS, f)
@@ -453,7 +478,15 @@ def main():
                     receptor_uniprot=r["uniprot"] if r else "*",
                     receptor_organism=r["organism"] if r else "*",
                     receptor_cluster=r["cluster"] if r else "*",
-                    chain_a_source="PENDING:SEQ_RECEPTORS.md",
+                    # templated rows (r is None) have no receptor yet, so chain A
+                    # is legitimately unresolved for them -- distinguished from a
+                    # receptor that IS named and simply missing from seqrec_trim.tsv,
+                    # which is a defect rather than a pending enumeration.
+                    chain_a_source=(chain_a_src.get(
+                        r["slug"], "UNRESOLVED:not in seqrec_trim.tsv") if r
+                        else "PENDING:receptor set not enumerated"),
+                    chain_a_sha256=(chain_a_sha.get(r["slug"], "UNRESOLVED") if r
+                                    else "PENDING"),
                     chain_b_construct=rung,
                     n_shared_draws=share,
                     registry_matches=nmatch,

@@ -49,6 +49,13 @@ N=$(python3 -c "import pandas,sys; print(len(pandas.read_csv('data/block_a/01_ro
   && ok "block A deliverables" "all checks pass" || bad "block A deliverables" "see check_deliverables.sh"
 
 # --- redo campaign ---
+# seqrec_verify.py was NOT run here until 2026-09-13, so it sat at 53/54 -- one
+# failing check -- while this script printed ALL CHECKS PASSED. A gate nothing runs
+# is a gate nobody can rely on, and it is the same defect class as a check that
+# reports nothing: invisible, and indistinguishable from success.
+SQR=$(python3 redo/gates/seqrec_verify.py 2>/dev/null | grep -oE "[0-9]+/[0-9]+ checks pass" | head -1)
+python3 redo/gates/seqrec_verify.py >/dev/null 2>&1 \
+  && ok "redo chain A (seqrec)" "${SQR:-?}" || bad "redo chain A (seqrec)" "FAILED — run redo/gates/seqrec_verify.py"
 LAY=$(python3 redo/gates/layout.py 2>/dev/null | grep -oE "CLEAN -- [0-9]+ checks pass" | grep -oE "[0-9]+")
 python3 redo/gates/layout.py >/dev/null 2>&1 \
   && ok "redo layout" "${LAY:-?} checks clean" || bad "redo layout" "VIOLATED — run redo/gates/layout.py"

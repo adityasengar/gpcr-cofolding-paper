@@ -146,7 +146,60 @@ def main():
         else:
             c_anchor, c_src = tm7_u, "FALLBACK TM7 end (no GPCRdb H8)"
 
-        start = max(1, tm1 - N_CAP) if tm1 else 1
+        # OPTION (b), enacted 2026-09-13 (DECISIONS.md D-2026-09-13-a, closing
+        # D-OPEN-2026-09-12-j).  The signal peptide is removed BEFORE the cap, and
+        # only where UniProt annotates a CHAIN start.
+        #
+        # Previously this read `start = max(1, tm1 - N_CAP) if tm1 else 1`, which is
+        # SEQ_RECEPTORS.md sec.3.1's option (c) -- the cap applied with no separate
+        # signal rule -- and sec.3.1 calls it "the worst option and the numbers say
+        # so".  It left FRAGMENTS: 5HT2C kept 29 of its 32 signal residues because
+        # the cap began at 4, and EDNRA kept 1 of 20.  A fragment of a signal peptide
+        # is neither the leader nor its absence; it is an artefact of an unrelated
+        # rule.  Using the CHAIN start as a FLOOR removes the fragment case outright
+        # and is a no-op for the entries with no annotated signal.
+        # A malformed chain_range must FAIL, not silently fall back to 1 -- falling
+        # back IS option (c), the thing this change overturned, and it would do so
+        # invisibly. "A missing input FAILS, it does not skip."
+        raw = rec.get("chain_range", "").strip()
+        if raw in ("", "none", "NA"):
+            chain_lo = 1
+        else:
+            try:
+                chain_lo = int(raw.split("-")[0])
+            except (ValueError, IndexError):
+                sys.exit(f"FAIL: {slug} has an unparseable chain_range {raw!r}. "
+                         f"Falling back to 1 would silently restore option (c) for "
+                         f"this receptor -- see DECISIONS.md D-2026-09-13-a.")
+
+        # TWO starts, and keeping them apart is what stops the columns lying.
+        # cap_start is what the terminal cap ALONE would do; start is what we supply.
+        # Every existing column keeps its original meaning -- the CAP's effect --
+        # and the signal peptide's removal is attributed separately.  Without this
+        # split, n_removed_nterm / n_removed_total / pct_removed / cap_binds_nterm
+        # all silently absorb signal removal while still being named and read as cap
+        # effects: 5HT2C would report cap_binds_nterm=yes and n_removed_nterm=32 when
+        # the cap alone removes 3.  It is also what keeps seqrec_verify.py's frozen
+        # constant (1,294 core residues removed by the cap) TRUE rather than needing
+        # to be bumped -- a frozen constant you bump to match new behaviour has
+        # stopped being a check.
+        cap_start, start = starts(tm1, chain_lo)
+        # THREE values, not two.  "false" on a receptor that HAS no signal peptide
+        # reads as "the signal peptide was retained", which is the opposite of the
+        # truth -- so the no-signal case is `none`, and `false` is reserved for a
+        # receptor that HAS one and still carries part of it.  Under option (b) that
+        # is unreachable, because chain_lo is a floor; if it ever appears, the floor
+        # has stopped being applied.  seqrec_verify.py's signal checks assert it never does.
+        has_signal = rec.get("signal", "").strip() not in ("", "none", "NA")
+        if not has_signal:
+            signal_state = "none"
+        else:
+            sig_end = int(rec["signal"].split("-")[1])
+            signal_state = "true" if start > sig_end else "false"
+        n_removed_signal = start - cap_start        # what the CHAIN floor added
+        sig_residues_left = 0
+        if has_signal:
+            sig_residues_left = max(0, int(rec["signal"].split("-")[1]) - start + 1)
         end = min(L, c_anchor + C_CAP) if c_anchor else L
         trimmed = seq[start - 1:end]
 
@@ -162,13 +215,21 @@ def main():
             "c_anchor_used": c_anchor or "NA",
             "c_anchor_source": c_src,
             "signal": rec["signal"],
-            "trim_start": start, "trim_end": end,
+            "trim_start": start, "trim_end": end, "cap_start": cap_start,
+            # Required by SEQ_RECEPTORS.md sec.3.1 INDEPENDENT of which option is
+            # chosen: "no block has ever carried it and the question cannot be
+            # answered afterwards from a length."
+            "signal_peptide_removed": signal_state,
+            # the CHAIN floor's contribution, kept OUT of every n_removed_* column
+            # so those keep meaning "what the cap did"
+            "n_removed_signal": n_removed_signal,
+            "signal_residues_retained": sig_residues_left,
             "trim_len": len(trimmed),
-            "n_removed_nterm": start - 1,
+            "n_removed_nterm": cap_start - 1,
             "n_removed_cterm": L - end,
-            "n_removed_total": (start - 1) + (L - end),
-            "pct_removed": round(100 * ((start - 1) + (L - end)) / L, 1),
-            "cap_binds_nterm": "yes" if start > 1 else "no",
+            "n_removed_total": (cap_start - 1) + (L - end),
+            "pct_removed": round(100 * ((cap_start - 1) + (L - end)) / L, 1),
+            "cap_binds_nterm": "yes" if cap_start > 1 else "no",
             "cap_binds_cterm": "yes" if end < L else "no",
             "trim_sha256": sha(trimmed),
             "canon_sha256": rec["sha256"],
@@ -204,22 +265,54 @@ def main():
         print(f"#   NO GPCRdb H8, C cap fell back to TM7+100: {miss}", file=sys.stderr)
 
 
+def starts(tm1, chain_lo):
+    """(cap_start, start) -- the ONE implementation of the rule.
+
+    Extracted 2026-09-13 because `--selftest` had been re-implementing the start
+    expression inline, and went on asserting the PRE-option-(b) formula
+    `max(1, tm1 - N_CAP)` after production stopped using it -- printing SELFTEST PASS
+    while certifying code that no longer existed.  A fixture that re-implements the
+    thing it tests cannot fail when the thing changes.  Both callers now go through
+    here, so the self-test exercises the production path or it exercises nothing.
+    """
+    cap_start = max(1, tm1 - N_CAP) if tm1 else 1
+    return cap_start, max(chain_lo, cap_start)
+
+
 def selftest():
     """The cap must be a cap: idempotent, and inert on a short terminus."""
     ok = True
     seq = "M" * 500
+    # chain_lo=1 throughout this block: the receptors with no annotated signal
+    # peptide, where option (b) must be a NO-OP.  The floor cases follow.
     for tm1, h8end, exp_start, exp_end in [
         (400, 450, 350, 500),      # long N-term: cap binds at 400-50
         (10, 450, 1, 500),         # short N-term: cap inert, start stays 1
         (60, 380, 10, 480),        # both bind
         (51, 399, 1, 499),         # exactly at the cap: start 1, end 499
     ]:
-        start = max(1, tm1 - N_CAP)
+        _cap, start = starts(tm1, 1)
         end = min(len(seq), h8end + C_CAP)
         got = (start, end)
         print(f"  TM1={tm1:3d} H8end={h8end:3d} -> {got} (expect "
               f"{(exp_start, exp_end)})")
         ok &= got == (exp_start, exp_end)
+    # OPTION (b): the CHAIN floor.  None of these cases existed before 2026-09-13,
+    # which is how a self-test came to pass on the formula it was meant to replace.
+    print("  -- option (b), the CHAIN floor --")
+    for tm1, chain_lo, exp_cap, exp_start, why in [
+        (54, 33, 4, 33, "5HT2C: cap would start at 4, floor lifts it to 33"),
+        (70, 21, 20, 21, "EDNRA: cap 20, floor 21 -- one residue, and it matters"),
+        (414, 364, 364, 364, "TSHR: cap already past the signal, floor inert"),
+        (60, 1, 10, 10, "no signal peptide: floor is a no-op"),
+        (None, 27, 1, 27, "no TM1: start falls to the floor, not to 1"),
+    ]:
+        cap_start, start = starts(tm1, chain_lo)
+        got = (cap_start, start)
+        print(f"  tm1={str(tm1):>4s} chain_lo={chain_lo:3d} -> {got} "
+              f"(expect {(exp_cap, exp_start)})  {why}")
+        ok &= got == (exp_cap, exp_start)
+
     print("SELFTEST", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 

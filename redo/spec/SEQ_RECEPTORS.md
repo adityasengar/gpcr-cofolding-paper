@@ -254,7 +254,7 @@ different question from the Class A case.
 | option | what it does | cost | risk |
 |---|---|---|---|
 | **(a) keep the full canonical chain** | supply 1–L | zero; it is what Blocks A–D did | a model is handed ~20–32 residues of hydrophobic leader that is not in the mature receptor and is in no reference structure. It is scored against nothing (§6) but it can occupy space, and on TSHR it precedes a 394-residue ectodomain |
-| **(b) remove the annotated signal peptide** | supply `CHAIN` start–L, six core sequences change | one line; hashes in `seqrec_receptors.tsv:mature_sha256` are already computed | four of the six ranges are *predicted*, not observed. Removing a predicted boundary is a judgement dressed as data |
+| **(b) remove the annotated signal peptide** — **ENACTED 2026-09-13** | supply `CHAIN` start–L; *"six core sequences change"* was the estimate, **measured it changes TWO** (5HT2C, EDNRA) — the other four already had their cap past the signal | one line; hashes in `seqrec_receptors.tsv:mature_sha256` are already computed | four of the six ranges are *predicted*, not observed. Removing a predicted boundary is a judgement dressed as data |
 | **(c) let §4's terminal cap decide it as a side effect** | nothing extra | zero | **this is the worst option and the numbers say so** — see below |
 
 **Why (c) fails.** Applying the `miglionico2026atlas` cap (§4) without a separate
@@ -281,7 +281,7 @@ boundaries are predicted — is real, and is why the choice belongs to the PI. I
 (a) is preferred instead, that is defensible too and continues Blocks A–D; what
 is not defensible is (c).
 
-**Either way, record `signal_peptide_removed ∈ {true,false}` per row.** No block
+**Either way, record `signal_peptide_removed ∈ {none,true,false}` *(three, not two: "false" on a receptor with no signal peptide would read as "retained" — D-2026-09-13-a)* per row.** No block
 has ever carried it and the question cannot be answered afterwards from a length.
 
 ## 3.2 Isoform — one receptor needs naming, and it is not the one expected
@@ -389,7 +389,7 @@ Three reasons this is the right rule for this panel, in the order that matters:
 ## 4.1 What the cap actually does to the core 64
 
 `seqrec_trim.py` applies it. **The cap changes 16 of 64 core receptors and leaves
-48 untouched**, removing 1,294 residues in total:
+48 untouched**, removing 1,294 residues in total *(still 1,294 after option (b): the signal peptide's 30 residues are attributed to `n_removed_signal`, not to the cap — D-2026-09-13-a)*:
 
 | receptor | canon | TM1 | H8 | capped range | removed N | removed C | % |
 |---|---:|---:|---|---|---:|---:|---:|

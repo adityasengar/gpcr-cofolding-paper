@@ -1020,6 +1020,73 @@ that refuses in each case.
 
 ---
 
+## D-2026-09-13-a · Aditya takes all four: chain A at (b), seeds paired, C7 pre-registered, the measurement pass authorised
+
+**2026-09-13. He read the four-item summary and agreed with the recommendation on each.**
+Recorded together because they were taken together, and because two of them were
+recoverable only before dispatch.
+
+### 1. Chain A — option (b). `D-OPEN-2026-09-12-j` is CLOSED.
+
+**Remove the annotated signal peptide before applying the terminal cap**, and only where
+UniProt annotates a `CHAIN` start. Reason, from `SEQ_RECEPTORS.md` §3.1: it is mechanical,
+recorded per receptor, and it removes the fragment case that option (c) produces. The
+argument against it — that four of six boundaries are *predicted* rather than observed —
+is real, was put to him, and he accepted it.
+
+**What changes, measured:** `seqrec_receptors.tsv` annotates a signal peptide on 16 of 77
+entries, but **only 6 are in the campaign panel** — `5HT2C EDNRA EDNRB FSHR LSHR TSHR`.
+The other ten are Class B/F and left with the scope decision (`D-2026-09-12-d`). The two
+fragment cases the spec named are both in the six: **5HT2C kept 29 of 32 signal residues
+and EDNRA 1 of 20** under (c); both go to zero under (b).
+
+**Precisely, because three different numbers are in play and they get conflated:** the
+rule applies to **all 16** receptors with an annotated `CHAIN` start (it is a property of
+the sequence, not of the panel); **6** of those are in the campaign panel; and
+**exactly 2 constructs actually change**, because the other 14 already had their cap
+starting past the signal. `SEQ_RECEPTORS.md` §3.1 says option (b) changes "six core
+sequences" — **measured, it changes two.**
+
+**`signal_peptide_removed` is recorded per row — with THREE values, not the two §3.1
+asks for.** `none` (no annotated signal peptide, 59 receptors), `true` (has one, fully
+excluded, 16), `false` (has one and still carries part of it — **unreachable under (b)**,
+and `seqrec_verify.py` asserts it never occurs). `false` on a receptor that has no signal
+peptide would read as *"it was retained"*, which is the opposite of the truth. Recorded
+per row as §3.1 requires independent of which option is chosen — *"no block has ever carried it and the question
+cannot be answered afterwards from a length."*
+
+### 2. Seed pairing — YES. `E6.4` is decided.
+
+Pair seeds across arms, so the same seed runs both the apo and the cognate half of a
+cell. **Free today and impossible after dispatch.** Blocks A and B both failed it —
+1,898 distinct `seed_outer` over 380 cells — and every interval in both is wider than it
+needed to be as a result. It goes into `runs/README.md` as part of the delivery contract
+before that document is sent.
+
+### 3. The C7 arm — PRE-REGISTERED. `redo/spec/C7_PREREGISTRATION.md` is ENACTED.
+
+Binding as of this entry. The arm is the ligand-free 2×2 already `READY` in
+`g2_systems.csv` — **20 receptors, 19 clusters, MDE 0.279, zero marginal predictions.**
+The document fixes the contrast, the unit, the intervals, the instruction that the
+agonist's effect is **never** expressed as a share of the partner effect, the advance
+declaration that pocket-Cα RMSD is **biased for this contrast by construction**, and
+**what counts as C7 failing.**
+
+**This is the decision F-23 made possible.** It is registered *before* dispatch, which is
+the only state in which it is worth anything.
+
+### 4. The measurement pass — AUTHORISED.
+
+Group 0's instrument calibration may run: 726 calibration + 610 application + 98 pinned
+reference rows, CPU only, no GPU, no inference. **Four of Group 0's eight outstanding
+dependencies sit behind it and all five E0 experiments are BLOCKED on it.** It must also
+measure the **F3-removed** structures, or that filter stays permanently unauditable
+(`F-12`).
+
+**Standing condition unchanged:** this authorises OUR measurement of structures we hold.
+It does **not** authorise commissioning anything from `paper_af3`.
+
+---
 ## F-23 · **C7 IS NOT ANSWERED. I retract it.** There is no ligand-free row in `rows.tier3.v2.csv`
 
 **Retracted 2026-09-12, hours after asserting it, by an adversarial audit I commissioned
@@ -1275,9 +1342,13 @@ finding — the first was `g2_preflight`'s WAIT still announcing an unbuilt deco
 Both were true when written and false within hours.)*
 
 ---
-## D-OPEN-2026-09-12-j · Chain A's construct rule was never decided, and the built artefact silently enacts the option the spec calls indefensible
+## D-2026-09-12-j · CLOSED — Chain A's construct rule was never decided, and the built artefact silently enacted the option the spec calls indefensible
 
-**OPEN. Aditya's decision. Recorded here because it was invisible in this file, which
+> **CLOSED 2026-09-13 at option (b) — see `D-2026-09-13-a`.** The heading and body below
+> are left as written because the diagnosis is the durable part; only the status changed.
+> `grep '^## D-OPEN'` must return nothing, and it now does.
+
+**Was OPEN. Aditya's decision. Recorded here because it was invisible in this file, which
 is how it went un-taken for a day while everything downstream said `PENDING` and nobody
 read the PENDING as a question.**
 
@@ -1328,11 +1399,13 @@ way — read what the label points at before believing it.
 `signal_peptide_removed ∈ {true,false}` **per row**. No block has ever carried it and
 **the question cannot be answered afterwards from a length.**
 
-### Until it is taken
+### Until it is taken — SUPERSEDED 2026-09-13
 
-`chain_a_source` stays `PENDING:SEQ_RECEPTORS.md` and **nothing in Group 1 or Group 2
-dispatches.** That is correct behaviour, not a bug, and this entry exists so the next
-session reads the PENDING as a question rather than as rot.
+*Was:* `chain_a_source` stays `PENDING` and nothing dispatches. **It is taken.**
+`chain_a_source` and a new `chain_a_sha256` now resolve on **all 2,039 Group 1 and 350
+Group 2 rows** to `seqrec_trimmed.fasta:<start>-<end>` with the per-receptor
+`trim_sha256`. A receptor absent from `seqrec_trim.tsv` resolves to `UNRESOLVED`, never
+to a default — a silent fallback is what restores option (c).
 
 ---
 ## D-2026-09-12-i · The campaign has a plan of record, and ONE adaptive parameter with a pre-registered rule

@@ -172,6 +172,34 @@ def main(plant=False):
           ["ADA1A", "PE2R4"])
     check("core residues the cap removes in total",
           sum(int(r["n_removed_total"]) for r in tcore), 1294)
+    # ---- option (b): the signal peptide, and the guarantee it is supposed to give.
+    # Added 2026-09-13.  seqrec_trim.py carried a comment claiming "Check S-1 below
+    # asserts it never does" about the unreachability of signal_peptide_removed ==
+    # "false".  There was no S-1 anywhere in the repository.  The guarantee was
+    # asserted in a comment and enforced nowhere -- written, by me, in the act of
+    # fixing another instance of exactly that.  These are the checks it named.
+    check("no construct retains ANY residue of an annotated signal peptide",
+          sorted(r["slug"] for r in trim
+                 if int(r["signal_residues_retained"]) > 0), [])
+    check("signal_peptide_removed is never 'false' (unreachable under option (b))",
+          sorted(r["slug"] for r in trim
+                 if r["signal_peptide_removed"] == "false"), [])
+    check("every receptor with an annotated signal peptide is flagged 'true'",
+          sorted(r["slug"] for r in trim
+                 if r["signal"] not in ("", "none", "NA")
+                 and r["signal_peptide_removed"] != "true") , [])
+    check("every receptor WITHOUT one is flagged 'none', not 'false'",
+          sorted(r["slug"] for r in trim
+                 if r["signal"] in ("", "none", "NA")
+                 and r["signal_peptide_removed"] != "none"), [])
+    check("the CHAIN floor is the only thing that moved the start",
+          sorted(r["slug"] for r in trim
+                 if int(r["trim_start"]) != max(int(r["cap_start"]),
+                                                int(r["trim_start"]))), [])
+    check("receptors whose construct the floor actually changed",
+          sorted(r["slug"] for r in trim if int(r["n_removed_signal"]) > 0),
+          ["5HT2C", "EDNRA"])
+
     check("receptors with no GPCRdb H8",
           sorted(r["slug"] for r in trim if r["h8_gpcrdb"] == "NA"), ["LT4R1"])
     check("GPCRdb and UniProt TM1 start disagree on",

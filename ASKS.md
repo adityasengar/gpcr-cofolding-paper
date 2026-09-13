@@ -23,12 +23,12 @@ rest can sit.
 
 | # | decision | why now | cost of yes |
 |---|---|---|---|
-| **1** | **Chain A's construct rule** — (a) full canonical, (b) remove the signal peptide *(recommended)*, (c) status quo *(indefensible)* | **Blocks EVERY dispatch.** And the built artefact is currently (c) | one generator re-run |
-| **2** | **Pair seeds across arms** (E6.4) | **Free now, IMPOSSIBLE after dispatch.** A and B both failed it | zero predictions |
-| **3** | **Pre-register the C7 arm** — `redo/spec/C7_PREREGISTRATION.md`, drafted and not enacted | **Free now, worthless after dispatch.** 20 receptors / 19 clusters, MDE 0.279, already READY | zero predictions |
-| **4** | **Authorise the measurement pass** | CPU only. Four of Group 0's eight dependencies sit behind it, and **every state call in the campaign is conditional on it** | no GPU, ~1,430 structures |
+| ~~**1**~~ | ~~Chain A's construct rule~~ **TAKEN 2026-09-13 at (b)** — `D-2026-09-13-a` | was blocking every dispatch; `chain_a_source` now resolves on all 2,389 rows | done |
+| ~~**2**~~ | ~~Pair seeds across arms~~ **TAKEN 2026-09-13** | still to be written into `runs/README.md` before that document is sent | done |
+| ~~**3**~~ | ~~Pre-register the C7 arm~~ **ENACTED 2026-09-13** — guarded by `G-15` | 20 receptors / 19 clusters, MDE 0.279 | done |
+| ~~**4**~~ | ~~Authorise the measurement pass~~ **AUTHORISED 2026-09-13** | not yet started; it is now the critical path | no GPU, ~1,430 structures |
 
-**My recommendation on each: (b), yes, yes, yes.** The reasoning is in the entries
+**ALL FOUR TAKEN 2026-09-13 (`D-2026-09-13-a`).** The next decision is **A3, the adaptation band**, and it is the last free-now-worthless-later item. My recommendation was (b), yes, yes, yes. The reasoning is in the entries
 below and in `DECISIONS.md`. Items 2 and 3 cost nothing and cannot be recovered later,
 so declining them should be a decision rather than a delay.
 

@@ -304,7 +304,32 @@ def load_decoys():
     return dict(accepted), refused
 
 
+
+def _chain_a():
+    """slug -> (construct id, sha256) for chain A.
+
+    Wired 2026-09-13.  Until then this was the hardcoded literal
+    "PENDING:SEQ_RECEPTORS.md" on every row, because WHICH receptor sequence to supply
+    was an untaken decision (D-OPEN-2026-09-12-j).  Aditya took it -- option (b),
+    D-2026-09-13-a -- so the construct exists and the rows may name it.
+
+    A receptor in the systems table with no row in seqrec_trim.tsv resolves to
+    UNRESOLVED, never to a default: the whole point of the decision was that a
+    silent fallback restores the option the spec calls indefensible.
+    """
+    import csv as _csv
+    src, sha = {}, {}
+    path = os.path.join(INPUTS, "seqrec_trim.tsv")
+    if not os.path.exists(path):
+        sys.exit(f"FAIL: {path} is absent -- chain A cannot be named without it.")
+    for r in _csv.DictReader(open(path, encoding="utf-8"), delimiter="	"):
+        src[r["slug"]] = f"seqrec_trimmed.fasta:{r['trim_start']}-{r['trim_end']}"
+        sha[r["slug"]] = r["trim_sha256"]
+    return src, sha
+
+
 def main():
+    chain_a_src, chain_a_sha = _chain_a()
     problems = []
     need = ["ligand_tiers.tsv", "ligand_set_redo.tsv", "g1_receptors.tsv",
             "g1_panel_freeze.tsv", "g1_partner_registry.tsv", "g1_cognate.tsv",
@@ -605,7 +630,8 @@ def main():
                         receptor_cluster=rec[slug]["cluster"],
                         panel_tier=frz[slug]["tier"],
                         ligand_tier=tiers[slug]["ligand_tier"],
-                        chain_a_source="PENDING:SEQ_RECEPTORS.md",
+                        chain_a_source=chain_a_src.get(slug, "UNRESOLVED:not in seqrec_trim.tsv"),
+                    chain_a_sha256=chain_a_sha.get(slug, "UNRESOLVED"),
                         partner_level=("apo" if partner == "R0_apo" else "cognate"),
                         chain_b_construct=partner,
                         chain_b_family_rule=pfam,
