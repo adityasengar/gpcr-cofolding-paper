@@ -323,6 +323,7 @@ check("D37", "CONSISTENCY",
 # the same rule rows.tier3.v2.csv follows for Block C.
 ROWS_DIR = os.path.join(HERE, "received_2026_09_13")
 BACKBONES = ("boltz", "chai", "of3", "protenix")
+D1_RECEPTORS = {"ADRB2", "CNR2", "CXCR4", "GHSR", "LPAR1", "NPY1R", "OPSD"}
 
 
 def drows(tier):
@@ -395,6 +396,25 @@ def verify_from_rows():
     check("SC-D-1/n", "RECOMPUTED", "every D1 cell carries 500 scored rows",
           sorted({n for _k, n in by.values()}), [500])
 
+    # -- SC-D-11: the cross-tier reproduction. PARTA_D1 sec.6 names the filter
+    # precisely enough to re-run: Block A rows, the 7 D1 receptors, apo arm.
+    # The SELECTION reproduces exactly. The four DELTAS it also quotes cannot be
+    # checked here -- PARTA_D1 lives in paper_af3's RELEASE repo, not their working
+    # repo (F-24), so neither side holds it. That half stays prose, and says why.
+    ba = os.path.join(ROOT, "data", "block_a", "01_rows", "block_a_rows.csv")
+    if os.path.exists(ba):
+        with open(ba, encoding="utf-8", errors="replace") as fh:
+            arows = [r for r in csv.DictReader(fh)
+                     if r.get("receptor", "").upper() in D1_RECEPTORS
+                     and r.get("arm") == "apo"]
+        cells = collections.Counter((r["receptor"].upper(), r["backbone"]) for r in arows)
+        check("SC-D-11/n", "RECOMPUTED",
+              "PARTA_D1 sec.6's filter selects exactly 700 Block A rows", len(arows), 700)
+        check("SC-D-11/cells", "RECOMPUTED",
+              "and exactly 28 cells (7 receptors x 4 backbones)", len(cells), 28)
+        check("SC-D-11/per_cell", "RECOMPUTED",
+              "at exactly 25 rows per cell", sorted(set(cells.values())), [25])
+
     d3 = drows("d3_msa_depth")
     if d3 is not None:
         check("D3-rows", "RECOMPUTED", "D3 rows present and the expected size",
@@ -413,6 +433,25 @@ def verify_from_rows():
     if d2 is not None:
         check("D2-rows", "RECOMPUTED", "D2 rows present and the expected size",
               len(d2), 2370)
+        # -- SC-D-5: ACM2 apo -> Nb-active deltas.  The arm is in
+        # `input_state_claim` directly here -- no path parsing, unlike D1/D3.
+        by2 = rate_by(d2, lambda r: (r["receptor_slug"].upper(),
+                                     r["input_state_claim"], bb_of(r)))
+        for b, want in (("boltz", 58), ("of3", 70), ("protenix", 100)):
+            a, n = by2.get(("ACM2", "apo", b)), by2.get(("ACM2", "Nb-active", b))
+            if not (a and n):
+                continue
+            delta = round(100 * n[0] / n[1] - 100 * a[0] / a[1])
+            check(f"SC-D-5/{b}", "RECOMPUTED",
+                  f"ACM2 apo->Nb-active delta on {b} (percentage points)",
+                  delta, want)
+        # Chai is flat 0/50 -> 0/50 and is NOT in the claim. Recorded so its
+        # absence reads as a property of the data rather than a selected sample.
+        ca, cn = by2.get(("ACM2", "apo", "chai")), by2.get(("ACM2", "Nb-active", "chai"))
+        if ca and cn:
+            check("SC-D-5/chai", "CONSISTENCY",
+                  "chai is flat on ACM2 (why the claim names three backbones)",
+                  f"{ca[0]}/{ca[1]} -> {cn[0]}/{cn[1]}", "0/50 -> 0/50")
 
 
 # PROSE-ONLY -- declared, never tested, and named so they cannot be counted
@@ -436,8 +475,10 @@ PROSE = [
      "D3 rows.csv"),
     ("SC-D-10", "OPSD x Boltz cross-tier divergence, 38.8% vs 10.0%",
      "D1 and D3 rows.csv"),
-    ("SC-D-11", "the Block A cross-tier reproduction at n=25/cell",
-     "Block A rows joined to the D1 outlier cells"),
+    ("SC-D-11", "the Block A cross-tier reproduction at n=25/cell -- SELECTION "
+                "verified (700 rows, 28 cells, 25/cell); the four DELTAS are not",
+     "PARTA_D1 sec.6, which is in paper_af3's RELEASE repo and held by neither "
+     "side (F-24) -- the deltas cannot be arbitrated from the working repo"),
     ("SC-D-12", "LPAR1/OF3 helix 60.9%, Rg 27.9 A; AGTR1 pocket-Ca 0.76 -> worse",
      "D1 and D3 rows.csv"),
     ("SC-D-8a", "the cluster-boot CIs on all four D3 slopes",

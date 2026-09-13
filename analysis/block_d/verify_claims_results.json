@@ -656,6 +656,37 @@
   "note": ""
  },
  {
+  "id": "SC-D-11/n",
+  "kind": "RECOMPUTED",
+  "what": "PARTA_D1 sec.6's filter selects exactly 700 Block A rows",
+  "got": 700,
+  "want": 700,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-11/cells",
+  "kind": "RECOMPUTED",
+  "what": "and exactly 28 cells (7 receptors x 4 backbones)",
+  "got": 28,
+  "want": 28,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-11/per_cell",
+  "kind": "RECOMPUTED",
+  "what": "at exactly 25 rows per cell",
+  "got": [
+   25
+  ],
+  "want": [
+   25
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
   "id": "D3-rows",
   "kind": "RECOMPUTED",
   "what": "D3 rows present and the expected size",
@@ -693,6 +724,42 @@
   "note": ""
  },
  {
+  "id": "SC-D-5/boltz",
+  "kind": "RECOMPUTED",
+  "what": "ACM2 apo->Nb-active delta on boltz (percentage points)",
+  "got": 58,
+  "want": 58,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-5/of3",
+  "kind": "RECOMPUTED",
+  "what": "ACM2 apo->Nb-active delta on of3 (percentage points)",
+  "got": 70,
+  "want": 70,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-5/protenix",
+  "kind": "RECOMPUTED",
+  "what": "ACM2 apo->Nb-active delta on protenix (percentage points)",
+  "got": 100,
+  "want": 100,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-5/chai",
+  "kind": "CONSISTENCY",
+  "what": "chai is flat on ACM2 (why the claim names three backbones)",
+  "got": "0/50 -> 0/50",
+  "want": "0/50 -> 0/50",
+  "ok": true,
+  "note": ""
+ },
+ {
   "id": "SC-D-1",
   "kind": "CONSISTENCY",
   "what": "per-cell predicate-active fractions on all 7 D1 receptors (Chai deltas 98.4/60.2/98.0, OF3 91.6)  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
@@ -721,12 +788,12 @@
  },
  {
   "id": "SC-D-5",
-  "kind": "PROSE-ONLY",
-  "what": "the ACM2 apo->active_nb deltas +58/+70/+100",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "the ACM2 apo->active_nb deltas +58/+70/+100  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: D2 rows.csv"
+  "note": ""
  },
  {
   "id": "SC-D-8b",
@@ -775,12 +842,12 @@
  },
  {
   "id": "SC-D-11",
-  "kind": "PROSE-ONLY",
-  "what": "the Block A cross-tier reproduction at n=25/cell",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "the Block A cross-tier reproduction at n=25/cell -- SELECTION verified (700 rows, 28 cells, 25/cell); the four DELTAS are not  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: Block A rows joined to the D1 outlier cells"
+  "note": ""
  },
  {
   "id": "SC-D-12",
