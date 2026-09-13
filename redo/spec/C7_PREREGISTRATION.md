@@ -1,7 +1,9 @@
 # C7_PREREGISTRATION.md — the agonist clause, pre-registered before dispatch
 
-> **STATUS: DRAFTED AND NOT ENACTED.** It becomes binding when Aditya says so and
-> `DECISIONS.md` records a `D-` entry pointing here. **It is worthless after Group 2
+> **STATUS: ENACTED AND BINDING, 2026-09-13 — `DECISIONS.md` D-2026-09-13-a §3.**
+>
+> *This line read "DRAFTED AND NOT ENACTED" for several hours after enactment, in the
+> most-read sentence of the document. Corrected 2026-09-13.* **It is worthless after Group 2
 > dispatches** — at that point the same analysis is an unregistered post-hoc contrast,
 > which is the weakest form of the strongest result available to this paper.
 >
@@ -36,9 +38,36 @@ A **2 × 2**: partner present/absent × agonist present/absent.
 **98 ligand-free rows are READY.** Crossed against the agonist rows already in the arm,
 **20 receptors in 19 distinct paralog clusters carry all four cells.**
 
-**Power, stated in advance:** the statistical unit is the paralog cluster, so
-`MDE = 1.218/√k` with **k = 19** gives **0.279** — better than the decoy arm's 0.367 and
-better than the 0.352 targeted at the decoy arm's pre-registered bar.
+**Power, stated in advance — and CORRECTED 2026-09-13 before any data exists.**
+
+This section first quoted **`MDE = 1.218/√k` → 0.279 at k = 19**. That constant is the
+**INTERACTION** figure: `RUN_MATRIX.md:515` gives the median *interaction* cluster SD as
+**0.435**, and 2.80 × 0.435 = 1.218. **C7's primary contrast is a MAIN EFFECT**, and
+`RUN_MATRIX.md:490-492` tabulates those separately — 0.189 for `cognate − apo`, 0.242 for
+`cognate − decoy`. `:503` says so explicitly: *"An interaction is a difference of
+differences and its cluster SD is roughly double a main effect's."*
+
+| quantity | cluster SD | MDE at k = 19 |
+|---|---:|---:|
+| **main effect** (the C7 contrast) | 0.189 – 0.242 | **0.121 – 0.155** |
+| interaction (partner × ligand) | 0.435 | 0.279 |
+
+**Quoting 0.279 was conservative — it understated our power, so nothing was
+overclaimed.** But it carried a constant across contrast types without re-deriving it,
+which is this project's `compare-like-with-like` failure, and a pre-registration is the
+one document where a power figure must be the right one.
+
+**AND A LIMIT THAT MATTERS MORE THAN EITHER NUMBER.** Both are in **binary-predicate
+units** — `redo/build/matrix_power.py` computes its SDs on
+`(d_npxxy < threshold) AND (tilt > threshold)`, so they are percentage points of
+active-call rate. **§3 below declares a CONTINUOUS axis primary, and no MDE exists for
+it.** The honest statement is: **the primary axis for C7 is not yet powered, and the
+figures above bound a secondary readout.**
+
+**The free thing that would fix it is `E7.4`** — the interaction power injection, marked
+`FREE_UNSCHEDULED` in `run_registry.tsv`, which `CAMPAIGN.md` §2.8 and `RUN_MATRIX` §4.3
+both say **must precede the ligand arm**. It supplies the MDE on the declared axis, in
+its own units, from the pilot's own rows. **It should run before this arm dispatches.**
 
 ## 3. What is pre-registered
 

@@ -386,11 +386,29 @@ def main(argv, root=None):
           f"{len(blk)} cells stay blocked, "
           + "; ".join(f"{', '.join(v)} -- {k}" for k, v in sorted(by_class.items()))
           + ". NOT a defect and NOT confirmatory: no claim may rest on this arm.")
-    if not os.path.exists(os.path.join(os.path.dirname(INPUTS), "spec",
-                                       "C7_PREREGISTRATION.md")):
+    # ENACTMENT IS A DECISION ENTRY, NOT A FILE.  This block tested only that the
+    # prereg FILE exists, and went on printing "READY but NOT PRE-REGISTERED" for
+    # hours after D-2026-09-13-a enacted it -- while the commit that added it claimed
+    # it "cannot go stale in either direction".  It went stale in the one direction
+    # that mattered.  The prereg's own sec.6 says enactment REQUIRES a dated D- entry
+    # pointing here, so that is what is checked.
+    _spec = os.path.join(os.path.dirname(INPUTS), "spec")
+    _prereg = os.path.join(_spec, "C7_PREREGISTRATION.md")
+    _dec = os.path.join(_spec, "DECISIONS.md")
+    _enacted = False
+    if os.path.exists(_dec):
+        _d = open(_dec, encoding="utf-8").read()
+        _enacted = "C7_PREREGISTRATION.md" in _d and "ENACTED" in _d
+    if not os.path.exists(_prereg):
         W("the C7 pre-registration is missing entirely",
           "redo/spec/C7_PREREGISTRATION.md is absent -- G-15 guards an arm nobody has "
           "registered")
+    elif _enacted:
+        W("the C7 arm is PRE-REGISTERED -- do not re-open it",
+          f"{len(c7_recs)} receptors / {len(c7_clusters)} clusters, enacted in "
+          f"DECISIONS.md. The contrast, the unit, the readout rule and what counts as "
+          f"C7 FAILING are fixed. Re-deriving any of them after dispatch is a post-hoc "
+          f"contrast wearing a pre-registration's clothes")
     else:
         W("the C7 arm is READY but NOT PRE-REGISTERED",
           f"{len(c7_recs)} receptors / {len(c7_clusters)} clusters carry the complete "

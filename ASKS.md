@@ -88,8 +88,13 @@ that it does not start without your word.
 
 ### A5. The title, and whether the ladder runs
 C6 (the 21-residue peptide) is reachable only through Pillar 3's ~213,000 predictions.
-C7 is now **answered** from data we already hold (§B0 below). If the ladder does not
-run, the title narrows to a Gα co-input and its C-terminal determinant. **This is the
+C7 is **NOT** answered — I claimed it was on 2026-09-12 and retracted it the same day
+(`DECISIONS.md` **F-23**); see §B0. It is *answerable* at zero marginal cost inside the
+redo, and is now pre-registered. If the ladder does not run, the title narrows to a Gα
+co-input and its C-terminal determinant.
+
+*(This paragraph said "C7 is now answered" while §B0, 35 lines below, said it is not —
+the same file contradicting itself. Caught 2026-09-13.)* **This is the
 decision the whole campaign's size turns on.**
 
 ### A6. Group 2 — may the antagonist level be heterogeneous?
