@@ -1158,6 +1158,75 @@ parked experiment whose stated rationale the data refutes is how a bad idea come
 
 ---
 
+## F-28 · The predicate has no value on 2 of Block D's 26 receptors, and they were entered in the concordance table at 0%
+
+**2026-09-14. SC-D-9 reproduces exactly — and reproducing it is what exposed this.**
+
+`PARTA_D3.md` §4 ships a 5 × 6 Kendall-τ table and says only that τ is "over the
+26 receptors' per-cell active fractions". It does not say which τ, and it does not
+say what it did with receptors on which the predicate has no value. Both had to be
+recovered by reproducing the table:
+
+| convention | cells reproduced, within 0.015 |
+|---|---:|
+| τ-a, n = 26 | 1 / 30 |
+| τ-b, n = 24 (axis-undefined dropped) | 9 / 30 |
+| **τ-b, n = 26, axis-undefined carried at 0 %** | **30 / 30**, worst 0.005 |
+
+0.005 is the rounding of a two-decimal table, so the third line is not a fit — it
+is the method.
+
+**The two receptors are EDNRB and GRPR, and they carry LEUCINE at 7.53.** Not a
+pipeline failure, not missing data: `d(Y5.58 OH, Y7.53 OH)` is a quantity that
+does not exist for them. The rows say so in their own columns —
+`anchor_7_53_aa_expected` is `L` — and all **1,960** of their rows carry
+`d_npxxy_y558_y753_oh = nan`. **Every one of those 1,960 also carries
+`passed=True`**, which is the self-certifying-column class from Block A again, in
+a new costume.
+
+Entering them at 0 % reads as "never active" and means "never measurable".
+
+**What the convention does, measured.** A receptor pinned at the floor in *both*
+backbones forms a concordant pair with every receptor above it, so the effect is
+one-directional:
+
+- **29 of 30 cells go UP** (the exception is −0.002).
+- Mean shift +0.028, max +0.083.
+- **Two cells change sign**, both `bol~of3`: −0.007 → +0.031 at depth 512, and
+  −0.007 → +0.020 at full depth. A genuinely negative concordance is reported
+  positive.
+- It bites hardest where concordance is weakest — `cha~of3` +0.050 and `bol~of3`
+  +0.044, against `bol~cha` +0.018 and `of3~pro` +0.015. **The pairs the paper
+  describes as "hovering near zero" are the ones most flattered by it.**
+
+**The qualitative reading survives, and this matters for how hard to push.** At
+n = 24, Boltz~Chai is still strongest at depths 128/512/full and OF3~Protenix
+still second. So the *conclusion* stands; the *numbers* are biased and the n is
+overstated.
+
+**A separate defect, which needs no rows at all.** §4's own sentence — "Boltz~Chai
+is the strongest cross-backbone correlation" — is contradicted by the table
+printed directly above it at **2 of the 5 depths**: at depth 8, `of3~pro` is
++0.59 against `bol~cha` +0.25; at depth 32, `of3~pro` +0.47 against +0.26. This
+is not our recomputation disagreeing with them, it is their prose disagreeing
+with their own table.
+
+**Wired in** as eight checks in `analysis/block_d/verify_claims.py`
+(`SC-D-9/table`, `/rounding`, `/undefined`, `/undefined_n`, `/self_certify`,
+`/inflation`, `/signflip`, `/reading`). Block D moves to **95 testable / 3
+prose-only**.
+
+**What this bears on in the redo.** E0.1's §0.1 anchor-conservation table is the
+same phenomenon measured across the whole Class A population, and it predicts
+**514 of 726** calibration structures survive the "NPxxY axis defined" gate. F-28
+is that gate firing inside a *delivered result* that did not have it. **Any redo
+arm reporting a rate over a receptor panel must state how many of its receptors
+the predicate can evaluate**, and must not fill an unevaluable receptor with a
+value at either pole. Q0b exists for exactly this; nothing enforced it on the
+prediction side.
+
+---
+
 ## F-27 · Two unreported assets, and the number that would answer the deepest objection
 
 ### 1. A prospective result on 1,600 predictions, computed and never reported

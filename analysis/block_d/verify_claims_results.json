@@ -798,6 +798,96 @@
   "note": ""
  },
  {
+  "id": "SC-D-9/table",
+  "kind": "RECOMPUTED",
+  "what": "the 30 Kendall-tau values reproduce (tau-b, n=26, axis-undefined receptors carried at 0%)",
+  "got": 30,
+  "want": 30,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-9/rounding",
+  "kind": "CONSISTENCY",
+  "what": "worst deviation across all 30 cells, against a 2-dp table",
+  "got": 0.005,
+  "want": 0.005,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-9/undefined",
+  "kind": "RECOMPUTED",
+  "what": "receptors with no NPxxY-OH value on any row (7.53 is not Tyr)",
+  "got": [
+   "EDNRB",
+   "GRPR"
+  ],
+  "want": [
+   "EDNRB",
+   "GRPR"
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-9/undefined_n",
+  "kind": "RECOMPUTED",
+  "what": "and the predicate is unevaluable on every one of their rows",
+  "got": 0,
+  "want": 0,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-9/self_certify",
+  "kind": "CONSISTENCY",
+  "what": "those 1,960 unevaluable rows nonetheless carry passed=True",
+  "got": 1960,
+  "want": 1960,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-9/inflation",
+  "kind": "CONSISTENCY",
+  "what": "cells where carrying the undefined receptors at 0% RAISES tau",
+  "got": 29,
+  "want": 29,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-9/signflip",
+  "kind": "CONSISTENCY",
+  "what": "cells where it flips the sign of tau (both are bol~of3)",
+  "got": [
+   "512/bol~of3",
+   "full/bol~of3"
+  ],
+  "want": [
+   "512/bol~of3",
+   "full/bol~of3"
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-9/reading",
+  "kind": "CONSISTENCY",
+  "what": "PARTA_D3 \u00a74 says bol~cha is the strongest pair; depths where its own table disagrees",
+  "got": [
+   "32",
+   "8"
+  ],
+  "want": [
+   "32",
+   "8"
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
   "id": "SC-D-8b/chai",
   "kind": "CONSISTENCY",
   "what": "chai is not in the claim; recorded so its absence is a property of the data, not a selected sample",
@@ -916,12 +1006,12 @@
  },
  {
   "id": "SC-D-9",
-  "kind": "PROSE-ONLY",
-  "what": "the 5 x 6 cross-backbone Kendall tau concordance table",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "the 5 x 6 cross-backbone Kendall tau concordance table  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: D3 rows.csv"
+  "note": ""
  },
  {
   "id": "SC-D-10",

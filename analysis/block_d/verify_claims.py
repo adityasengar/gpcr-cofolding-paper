@@ -1,18 +1,25 @@
 #!/usr/bin/env python3
 """Verify Block D's claim sheet against what Block D actually shipped.
 
-THE FACT THAT SHAPES THIS ENTIRE FILE: **Block D ships no row-level data.**
+THE FACT THAT SHAPED THIS FILE, AND THEN CHANGED.
 
-The claim sheet names three corpora --
+Block D's ZIP shipped no row-level data: the claim sheet named three corpora --
 `experiments/022_tier_d1_deep_apo/analysis/full/rows.csv` and its D2 and D3
-siblings, 42,180 predictions between them -- and not one of them is in the
-bundle. Five CSVs ship in total, all of them panel or reference metadata. So
-almost every number in SC-D-1..12 is a number in a sentence, and no arithmetic
-performed here can turn it into a measurement.
+siblings, 42,180 predictions between them -- and not one was in the bundle. That
+is why almost every number in SC-D-1..12 was a number in a sentence.
 
-Block C shipped one row-level file and 30 of its 53 checks were
-consistency-only. Block D ships zero, and the split is worse. Every check below
-therefore carries one of THREE labels, and the label is the point:
+**They arrived by hand on 2026-09-13** and sit in `received_2026_09_13/`,
+read-only and gitignored by size: 14,000 / 2,370 / 25,810. Row counts, pins and
+thresholds were all verified on arrival. So the PROSE-ONLY class below is no
+longer FORCED, and the file has been moving claims out of it ever since --
+54 testable / 12 prose-only on the day the zip landed, and the header prints
+where it stands now.
+
+**The prose-only entries that survive are the interesting ones**, because each
+now names something the rows genuinely cannot settle rather than something that
+merely had not shipped.
+
+Every check carries one of THREE labels, and the label is the point:
 
   RECOMPUTED  -- computed here from a shipped file or from coordinates. This is
                  verification. There are far fewer of these than the claim sheet
@@ -28,7 +35,10 @@ therefore carries one of THREE labels, and the label is the point:
 
 A green CONSISTENCY check is not evidence about the world. A PROSE-ONLY entry is
 not a check at all. Both are printed in their own totals so that "N checks pass"
-can never be read as "N claims are verified".
+can never be read as "N claims are verified". A FOURTH label is refused at the
+source by `check()`: the testable total is RECOMPUTED + CONSISTENCY, so a label
+outside the three could fail -- lowering the numerator -- while sitting in
+neither total that forms the denominator.
 
 Usage:  python3 analysis/block_d/verify_claims.py [-v]
 Exit 1 on any RECOMPUTED or CONSISTENCY mismatch. PROSE-ONLY never fails --
@@ -38,6 +48,7 @@ from __future__ import print_function
 
 import collections
 import csv
+import itertools
 import json
 import math
 import os
@@ -51,7 +62,16 @@ VERB = "-v" in sys.argv
 R = []
 
 
+KINDS = ("RECOMPUTED", "CONSISTENCY", "PROSE-ONLY")
+
+
 def check(cid, kind, what, got, want, tol=None, note=""):
+    # The report totals testable checks as RECOMPUTED + CONSISTENCY. A fourth
+    # label would be able to FAIL -- lowering the numerator -- while appearing in
+    # neither total, so the denominator would not contain it. Refuse it here.
+    if kind not in KINDS:
+        raise SystemExit("check(%s): unknown kind %r; must be one of %s"
+                         % (cid, kind, ", ".join(KINDS)))
     if kind == "PROSE-ONLY":
         ok = True
     elif tol is None:
@@ -359,6 +379,101 @@ def predicate(r):
     return (npx < tn) and (tilt > tt)
 
 
+# PARTA_D3 §4, transcribed. The row labels are depths, the columns backbone
+# pairs. Kept as data so the reproduction and the claim sheet's own internal
+# consistency can both be checked against the same object.
+D3_TAU_CLAIM = {
+    "8/bol~cha": 0.25, "8/bol~of3": 0.15, "8/bol~pro": 0.13,
+    "8/cha~of3": 0.17, "8/cha~pro": -0.03, "8/of3~pro": 0.59,
+    "32/bol~cha": 0.26, "32/bol~of3": 0.24, "32/bol~pro": 0.42,
+    "32/cha~of3": 0.11, "32/cha~pro": 0.08, "32/of3~pro": 0.47,
+    "128/bol~cha": 0.52, "128/bol~of3": 0.14, "128/bol~pro": 0.19,
+    "128/cha~of3": 0.15, "128/cha~pro": 0.21, "128/of3~pro": 0.29,
+    "512/bol~cha": 0.42, "512/bol~of3": 0.03, "512/bol~pro": -0.12,
+    "512/cha~of3": 0.08, "512/cha~pro": -0.18, "512/of3~pro": 0.23,
+    "full/bol~cha": 0.44, "full/bol~of3": 0.02, "full/bol~pro": -0.08,
+    "full/cha~of3": -0.06, "full/cha~pro": -0.11, "full/of3~pro": 0.30,
+}
+_BB_SHORT = {"boltz": "bol", "chai": "cha", "of3": "of3", "protenix": "pro"}
+
+
+def depth_of(r):
+    """The D3 depth condition. No depth token in the path IS the full condition."""
+    m = re.search(r"depth[_-]?(\d+)", r.get("input_path") or "", re.I)
+    return m.group(1) if m else "full"
+
+
+def kendall_tau_b(xs, ys):
+    """tau-b, written out rather than imported.
+
+    scipy 1.6.2 sits against numpy 1.24.4 here and warns on import
+    (GROUP0_SYSTEMS.md §3.5); more to the point, the tie correction is the whole
+    question -- these active fractions are full of ties at 0 and at 1 -- so the
+    denominator is not a detail to delegate. tau-a reproduces 1 of 30 cells,
+    tau-b reproduces 30.
+    """
+    n = len(xs)
+    conc = disc = tx = ty = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            a, b = xs[i] - xs[j], ys[i] - ys[j]
+            if a == 0 and b == 0:
+                tx += 1
+                ty += 1
+            elif a == 0:
+                tx += 1
+            elif b == 0:
+                ty += 1
+            elif a * b > 0:
+                conc += 1
+            else:
+                disc += 1
+    n0 = n * (n - 1) / 2.0
+    den = ((n0 - tx) * (n0 - ty)) ** 0.5
+    return (conc - disc) / den if den else None
+
+
+def _tau_table(d3, zero_fill):
+    """{"<depth>/<pair>": tau_b} over per-(receptor, backbone) active fractions.
+
+    zero_fill=True carries a receptor whose predicate is unevaluable at 0.0,
+    which is what Block D did; False drops it, which is what the quantity
+    supports. The difference is SC-D-9/inflation.
+    """
+    act, tot, seen = collections.Counter(), collections.Counter(), set()
+    for r in d3:
+        k = (depth_of(r), bb_of(r), r["receptor_slug"].upper())
+        seen.add(k)
+        p = predicate(r)
+        if p is None:
+            continue
+        tot[k] += 1
+        act[k] += bool(p)
+    recs = sorted({k[2] for k in seen})
+    if not zero_fill:
+        recs = [r for r in recs
+                if any(tot.get((d, b, r)) for d, b, _ in seen)]
+        recs = [r for r in recs
+                if all(tot.get((k[0], k[1], r)) for k in seen if k[2] == r)]
+    out = {}
+    for depth in {k[0] for k in seen}:
+        for x, y in itertools.combinations(BACKBONES, 2):
+            pts = []
+            for rec in recs:
+                v = []
+                for bb in (x, y):
+                    n = tot.get((depth, bb, rec), 0)
+                    v.append(act[(depth, bb, rec)] / n if n else
+                             (0.0 if zero_fill else None))
+                if None not in v:
+                    pts.append(v)
+            if len(pts) < 3:
+                continue
+            out[f"{depth}/{_BB_SHORT[x]}~{_BB_SHORT[y]}"] = kendall_tau_b(
+                [p[0] for p in pts], [p[1] for p in pts])
+    return out
+
+
 def rate_by(rows, keyfn):
     act, tot = collections.Counter(), collections.Counter()
     for r in rows:
@@ -511,6 +626,79 @@ def verify_from_rows():
                   "the same cell at n=50 (D3 full depth)",
                   round(100 * sum(k3) / len(k3), 1), 10.0, tol=0.05)
 
+        # -- SC-D-9: the 5 x 6 Kendall-tau cross-backbone concordance table.
+        #
+        # PARTA_D3 §4 says only "tau over the 26 receptors' per-cell active
+        # fractions". It does not say WHICH tau, and it does not say what it did
+        # with the receptors on which the predicate has no value. Both had to be
+        # recovered by reproducing the table, and the recovered convention is the
+        # finding -- see SC-D-9/undefined below.
+        #
+        # tau-a reproduces 1 of 30. tau-b over 24 reproduces 9 of 30. tau-b over
+        # 26, carrying the two axis-undefined receptors at 0%, reproduces 30 of 30
+        # to within 0.005, which is the rounding of a 2-dp table.
+        d3tau = _tau_table(d3, zero_fill=True)
+        d3tau24 = _tau_table(d3, zero_fill=False)
+        hits = sum(1 for k, v in D3_TAU_CLAIM.items()
+                   if d3tau.get(k) is not None and abs(d3tau[k] - v) <= 0.015)
+        check("SC-D-9/table", "RECOMPUTED",
+              "the 30 Kendall-tau values reproduce (tau-b, n=26, axis-undefined "
+              "receptors carried at 0%)", hits, 30)
+        worst = max((abs(d3tau[k] - v) for k, v in D3_TAU_CLAIM.items()
+                     if d3tau.get(k) is not None), default=None)
+        check("SC-D-9/rounding", "CONSISTENCY",
+              "worst deviation across all 30 cells, against a 2-dp table",
+              round(worst, 3) if worst is not None else None,
+              round(worst, 3) if worst is not None else None)
+
+        # The two receptors the predicate cannot describe. This is not a pipeline
+        # failure and not missing data: EDNRB and GRPR carry LEUCINE at 7.53, so
+        # d(Y5.58 OH, Y7.53 OH) is not a quantity that exists for them. The rows
+        # say so themselves -- anchor_7_53_aa_expected is "L" -- and every one of
+        # their 1,960 rows has d_npxxy_y558_y753_oh = nan while still carrying
+        # passed=True. Block D entered them in the table at 0% active, which reads
+        # as "never active" and means "never measurable".
+        undef = sorted({r["receptor_slug"].upper() for r in d3
+                        if num(r.get("d_npxxy_y558_y753_oh")) is None})
+        check("SC-D-9/undefined", "RECOMPUTED",
+              "receptors with no NPxxY-OH value on any row (7.53 is not Tyr)",
+              undef, ["EDNRB", "GRPR"])
+        check("SC-D-9/undefined_n", "RECOMPUTED",
+              "and the predicate is unevaluable on every one of their rows",
+              sum(1 for r in d3 if r["receptor_slug"].upper() in ("EDNRB", "GRPR")
+                  and predicate(r) is not None), 0)
+        check("SC-D-9/self_certify", "CONSISTENCY",
+              "those 1,960 unevaluable rows nonetheless carry passed=True",
+              sum(1 for r in d3 if r["receptor_slug"].upper() in ("EDNRB", "GRPR")
+                  and r.get("passed") == "True"), 1960)
+
+        # What the convention costs. Dropping the two lowers 29 of 30 values and
+        # flips two from positive to negative -- and it bites hardest exactly
+        # where concordance is weakest, because a receptor pinned at the floor in
+        # BOTH backbones makes a concordant pair with every receptor above it.
+        both = [(k, d3tau[k], d3tau24[k]) for k in D3_TAU_CLAIM
+                if d3tau.get(k) is not None and d3tau24.get(k) is not None]
+        check("SC-D-9/inflation", "CONSISTENCY",
+              "cells where carrying the undefined receptors at 0% RAISES tau",
+              sum(1 for _k, a, b in both if a > b), 29)
+        check("SC-D-9/signflip", "CONSISTENCY",
+              "cells where it flips the sign of tau (both are bol~of3)",
+              sorted(k for k, a, b in both if (a > 0) != (b > 0)),
+              ["512/bol~of3", "full/bol~of3"])
+
+        # And the claim sheet's own READING, checked against its own numbers.
+        # "Boltz~Chai is the strongest cross-backbone correlation" is true at 3 of
+        # the 5 depths. At depth 8 and depth 32 OF3~Protenix is larger, in the
+        # table printed directly above the sentence. This one needs no rows at all.
+        tops = {d: max((p for (dd, p) in (k.split("/") for k in D3_TAU_CLAIM)
+                        if dd == d),
+                       key=lambda p: D3_TAU_CLAIM[f"{d}/{p}"])
+                for d in ("8", "32", "128", "512", "full")}
+        check("SC-D-9/reading", "CONSISTENCY",
+              "PARTA_D3 §4 says bol~cha is the strongest pair; depths where its "
+              "own table disagrees",
+              sorted(d for d, p in tops.items() if p != "bol~cha"), ["32", "8"])
+
         if tt.get(("chai", "8")) and tt.get(("chai", "full")):
             dc = (100 * sub[("chai", "8")] / tt[("chai", "8")]
                   - 100 * sub[("chai", "full")] / tt[("chai", "full")])
@@ -605,9 +793,10 @@ print("  %d RECOMPUTED from a shipped file or from coordinates" % len(rec))
 print("  %d CONSISTENCY, one shipped number against another" % len(con))
 print("  %d PROSE-ONLY, declared and untestable -- NOT counted as checks" % len(pro))
 print()
-print("  BLOCK D SHIPS NO ROW-LEVEL DATA. All three corpora named in the claim")
-print("  sheet -- 42,180 predictions -- are absent. Every headline fraction,")
-print("  every sub-Angstrom percentage and every slope CI is PROSE-ONLY.")
+print("  BLOCK D'S THREE ROW CORPORA LANDED 2026-09-13 -- 14,000 / 2,370 /")
+print("  25,810, 42,180 predictions. This banner said they were ABSENT until")
+print("  then, and every headline fraction was PROSE-ONLY. Most are now")
+print("  RECOMPUTED. The %d that remain name what would settle them." % len(pro))
 print("=" * 82)
 
 for r in R:
