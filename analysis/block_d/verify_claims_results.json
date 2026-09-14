@@ -888,6 +888,75 @@
   "note": ""
  },
  {
+  "id": "SC-D-12/agtr1_full",
+  "kind": "RECOMPUTED",
+  "what": "AGTR1 x protenix MEDIAN pocket-Ca to active, depth full",
+  "got": 0.76,
+  "want": 0.76,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-12/agtr1_8",
+  "kind": "RECOMPUTED",
+  "what": "AGTR1 x protenix MEDIAN pocket-Ca to active, depth 8",
+  "got": 1.24,
+  "want": 1.24,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-12/ladder",
+  "kind": "RECOMPUTED",
+  "what": "depth with the SMALLEST median pocket-Ca to active -- not 'full', so the two-point reading is not a ladder trend",
+  "got": "128",
+  "want": "128",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-12/ladder_gap",
+  "kind": "CONSISTENCY",
+  "what": "and it beats full depth while calling 60% of samples active",
+  "got": [
+   0.73,
+   0.76
+  ],
+  "want": [
+   0.73,
+   0.76
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-12/fold_convention",
+  "kind": "CONSISTENCY",
+  "what": "helix%/Rg conventions are NOT recovered from PARTA_D1 \u00a74; nearest rules land within 2.4 pts and 0.8 A. Only the ROW half of SC-D-12 is recomputed",
+  "got": "unrecovered",
+  "want": "unrecovered",
+  "ok": true,
+  "note": "n_CA does reproduce exactly; see sessions/ for the scan"
+ },
+ {
+  "id": "SC-D-12/lpar1_pred",
+  "kind": "RECOMPUTED",
+  "what": "LPAR1 x of3 D1 apo predicate-active",
+  "got": 91.8,
+  "want": 91.8,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-12/lpar1_suba",
+  "kind": "RECOMPUTED",
+  "what": "LPAR1 x of3 sub-Angstrom to the ACTIVE pocket reference",
+  "got": 0.4,
+  "want": 0.4,
+  "ok": true,
+  "note": ""
+ },
+ {
   "id": "SC-D-8b/chai",
   "kind": "CONSISTENCY",
   "what": "chai is not in the claim; recorded so its absence is a property of the data, not a selected sample",
@@ -1033,12 +1102,12 @@
  },
  {
   "id": "SC-D-12",
-  "kind": "PROSE-ONLY",
-  "what": "LPAR1/OF3 helix 60.9%, Rg 27.9 A; AGTR1 pocket-Ca 0.76 -> worse",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "LPAR1/OF3 helix 60.9%, Rg 27.9 A; AGTR1 pocket-Ca 0.76 -> worse  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: D1 and D3 rows.csv"
+  "note": ""
  },
  {
   "id": "SC-D-8a",

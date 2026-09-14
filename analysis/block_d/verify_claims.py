@@ -699,6 +699,93 @@ def verify_from_rows():
               "own table disagrees",
               sorted(d for d, p in tops.items() if p != "bol~cha"), ["32", "8"])
 
+        # -- SC-D-12, the AGTR1 half. GATE_3 quotes pocket-Ca 0.76 at full depth
+        # and 1.24 at depth 8 and reads the pair as a DEGRADATION signature: the
+        # predicate clears while the pocket moves AWAY from the active reference.
+        #
+        # Both numbers reproduce exactly, and the statistic is the MEDIAN, not the
+        # mean -- the means are 0.78 and 1.32, which would have looked like a near
+        # miss on both and is the kind of thing that gets written up as a
+        # discrepancy when it is actually a different statistic (see
+        # `compare-like-with-like`).
+        ag = [r for r in d3 if r.get("receptor_slug", "").upper() == "AGTR1"
+              and bb_of(r) == "protenix"]
+        lad = {}
+        for dep in ("8", "32", "128", "512", "full"):
+            s = [r for r in ag if depth_of(r) == dep]
+            pk = sorted(x for x in (num(r.get("pocket_ca_rmsd_active")) for r in s)
+                        if x is not None)
+            pa = [p for p in (predicate(r) for r in s) if p is not None]
+            if pk and pa:
+                lad[dep] = (100.0 * sum(pa) / len(pa),
+                            pk[len(pk) // 2] if len(pk) % 2
+                            else (pk[len(pk) // 2 - 1] + pk[len(pk) // 2]) / 2.0)
+        for dep, want in (("full", 0.76), ("8", 1.24)):
+            if dep in lad:
+                check(f"SC-D-12/agtr1_{dep}", "RECOMPUTED",
+                      f"AGTR1 x protenix MEDIAN pocket-Ca to active, depth {dep}",
+                      round(lad[dep][1], 2), want)
+
+        # GATE_3 sampled that ladder at TWO points. The rows carry all five, and
+        # the intermediate depths are NOT on a monotone path between them:
+        # depth 128 is 60% predicate-active at median pocket 0.73 A, which is
+        # CLOSER to the active pocket than full depth's 0.76 while the predicate
+        # fires far more often. So the degradation signature is a property of
+        # depth 8, not of shallowness along the ladder -- two sampled points read
+        # as a trend, and the trend is not there.
+        if len(lad) == 5:
+            best = min(lad, key=lambda k: lad[k][1])
+            check("SC-D-12/ladder", "RECOMPUTED",
+                  "depth with the SMALLEST median pocket-Ca to active -- not "
+                  "'full', so the two-point reading is not a ladder trend",
+                  best, "128")
+            check("SC-D-12/ladder_gap", "CONSISTENCY",
+                  "and it beats full depth while calling 60% of samples active",
+                  (round(lad["128"][1], 2), round(lad["full"][1], 2)), (0.73, 0.76))
+
+        # -- SC-D-12, the FOLD-INTEGRITY half, and it does NOT fully reproduce.
+        #
+        # Recorded because SC-D-12 is about to be promoted out of PROSE-ONLY on
+        # the strength of its row-based numbers, and that promotion would
+        # otherwise assert more than was done. PARTA_D1 §4 quotes helix 60.9% and
+        # Rg 27.9 A for LPAR1/OF3 from a shipped CIF, describing the quantity only
+        # as "helical i,i+3 content" and "Rg".
+        #
+        #   n_CA           reproduces EXACTLY on all five spot-check structures
+        #                  (360/413/364/413/366, matching the stated 360-413).
+        #   helix%         best rule found -- 5.0 <= d(CA_i, CA_i+3) <= 6.2 over
+        #                  residues -- lands within 2.4 points on all five, and
+        #                  no window/denominator combination scanned does better.
+        #   Rg             CA-only is closest on 4 of 5, residual <= 0.8 A.
+        #                  All-atom is worse. The convention is NOT recovered.
+        #
+        # Neither residual touches the claim, which is that the fold is plausible
+        # rather than garbage against a "~30% would signal breakdown" bar and a
+        # 24-27 A canonical range. But "close" is not "reproduced", and the
+        # difference is the whole point of the three labels.
+        check("SC-D-12/fold_convention", "CONSISTENCY",
+              "helix%/Rg conventions are NOT recovered from PARTA_D1 §4; nearest "
+              "rules land within 2.4 pts and 0.8 A. Only the ROW half of SC-D-12 "
+              "is recomputed",
+              "unrecovered", "unrecovered",
+              note="n_CA does reproduce exactly; see sessions/ for the scan")
+
+        # -- SC-D-12, the LPAR1 half. Both numbers exact.
+        lp = [r for r in d1 if r.get("receptor_slug", "").upper() == "LPAR1"
+              and bb_of(r) == "of3"]
+        pa = [p for p in (predicate(r) for r in lp) if p is not None]
+        if pa:
+            check("SC-D-12/lpar1_pred", "RECOMPUTED",
+                  "LPAR1 x of3 D1 apo predicate-active", round(100 * sum(pa) / len(pa), 1),
+                  91.8, tol=0.05)
+        sa = [x for x in (num(r.get("pocket_ca_rmsd_active")) for r in lp)
+              if x is not None]
+        if sa:
+            check("SC-D-12/lpar1_suba", "RECOMPUTED",
+                  "LPAR1 x of3 sub-Angstrom to the ACTIVE pocket reference",
+                  round(100.0 * sum(1 for x in sa if x < 1.0) / len(sa), 1), 0.4,
+                  tol=0.05)
+
         if tt.get(("chai", "8")) and tt.get(("chai", "full")):
             dc = (100 * sub[("chai", "8")] / tt[("chai", "8")]
                   - 100 * sub[("chai", "full")] / tt[("chai", "full")])
