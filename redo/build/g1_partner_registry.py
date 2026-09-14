@@ -34,6 +34,7 @@ import urllib.request
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from paths import ROOT, SPEC, BUILD, GATES, INPUTS, CACHE, STRUCTURES, RUNS, PROTOCOL, repo
 OUT = os.path.join(INPUTS, "g1_partner_registry.tsv")
+FASTA = os.path.join(INPUTS, "g1_partner_seqs.fasta")
 CACHE = os.path.join(CACHE, "g1_fetch_cache.json")
 
 # entry -> (kind, locator, slice, expected sha256 prefix recorded in SEQUENCES.md)
@@ -203,7 +204,7 @@ def main():
         for r in tsv(path):
             rung = r.get("rung") or r.get("construct")
             add(construct_class="ga_rung", construct=rung, family=r["family"],
-                variant="", k="", length=r["len"], sha256=r["sha256"],
+                variant="", k="", length=r["len"], sha256=r["sha256"], seq=r.get("sequence",""),
                 source_table=src, provenance=f"{r.get('accession','')} "
                 f"{r.get('rule','')} {r.get('resid_range','')}".strip())
 
@@ -215,7 +216,7 @@ def main():
         for r in tsv(mpath):
             add(construct_class="minig_deposited",
                 construct=f"MG_{r['pdb'].lower()}", family=r["family"],
-                variant="", k="", length=r["dep_len"], sha256=r["dep_sha256"],
+                variant="", k="", length=r["dep_len"], sha256=r["dep_sha256"], seq=r.get("dep_sequence",""),
                 source_table="g1_minig.tsv",
                 provenance=f"RCSB {r['pdb']} entity {r['entity']}; canonical "
                            f"{r['accession']} blocks {r['canonical_blocks']}",
@@ -231,7 +232,7 @@ def main():
         for r in tsv(cpath):
             add(construct_class="peptide_control", construct=r["rung"],
                 family=r["family"], variant=r["control"], k=r["k"],
-                length=r["len"], sha256=r["sha256"], source_table="seq_controls.tsv",
+                length=r["len"], sha256=r["sha256"], seq=r.get("sequence",""), source_table="seq_controls.tsv",
                 provenance=r.get("provenance", ""))
 
     # ---- 4b: E1.8 uncoupling point mutants at peptide rungs --------------
@@ -278,7 +279,7 @@ def main():
                 # georgiou2025heterogeneity documents for 'mini-G'.
                 variant=f"{'+'.join(f'{a}{p}{b}' for p, a, b in inside)}"
                         f"__from_{name}_parent",
-                k="", length=str(len(s)), sha256=sha(s),
+                k="", length=str(len(s)), sha256=sha(s), seq=s,
                 source_table="derived here from seq_rungs.tsv",
                 provenance=f"P63092 {start}-394 with "
                            f"{', '.join(f'{a}{p}{b}' for p, a, b in inside)}",
@@ -301,7 +302,7 @@ def main():
             sub = pr["sequence"][-N:]
             L = len(pr["sequence"])
             add(construct_class="ga_rung", construct=rung, family=fam, variant="",
-                k="", length=str(N), sha256=sha(sub),
+                k="", length=str(N), sha256=sha(sub), seq=sub,
                 source_table="derived here from seq_rungs.tsv",
                 provenance=f"{pr['accession']} last {N} residues = {L-N+1}-{L}",
                 note="wet-lab-matched rung; the peptide panel is known only "
@@ -326,7 +327,7 @@ def main():
         w = gsfull[367:]
         add(construct_class="boundary_variant", construct="R4b_a5helix27",
             family="Gs", variant="sunahara_D368_L394", k="", length=str(len(w)),
-            sha256=sha(w), source_table="derived here from seq_rungs.tsv",
+            sha256=sha(w), seq=w, source_table="derived here from seq_rungs.tsv",
             provenance="P63092 368-394 (Asp368-Leu394)",
             note="the literature alpha5 boundary; CGN G.H5 is 369-394 (26). They "
                  "differ by one N-terminal residue, D368. Not a rung -- a "
@@ -350,7 +351,7 @@ def main():
             continue
         mut = wt[:i] + "A" + wt[i + 1:]
         add(construct_class="wetlab_matched", construct=rung, family="Gs",
-            variant="C379A", k="", length=str(N), sha256=sha(mut),
+            variant="C379A", k="", length=str(N), sha256=sha(mut), seq=mut,
             source_table="derived here from seq_rungs.tsv",
             provenance=f"P63092 {start}-394 with C379A",
             note="the peptide mazzoni2000 synthesised, byte for byte "
@@ -382,7 +383,7 @@ def main():
                     continue
                 seen.add(key)
                 add(construct_class="ref_tip", construct=rung, family=r["slug"],
-                    variant=r["pdb"], k="", length=str(len(seq)), sha256=sha(seq),
+                    variant=r["pdb"], k="", length=str(len(seq)), sha256=sha(seq), seq=seq,
                     source_table="g1_refchimera.tsv",
                     provenance=f"RCSB {r['pdb']} entity {r['entity']}, last "
                                f"{len(seq)} residues of the deposited Galpha chain "
@@ -475,7 +476,7 @@ def main():
                        if N == 11 else "")
                 add(construct_class="species_matched_tip",
                     construct=f"spidertip_{rung}", family=ep["slug"],
-                    variant=ep["accession"], k="", length=str(N), sha256=sha(sub),
+                    variant=ep["accession"], k="", length=str(N), sha256=sha(sub), seq=sub,
                     source_table="derived here from g1_refchimera.tsv",
                     provenance=f"{ep['locator']}; last {N} of the {len(seg)}-residue "
                                f"spider Gaq1 segment at {ep['host_family']} "
@@ -501,7 +502,7 @@ def main():
         # than a sentence in a note, the way R4b_a5helix27 is.
         add(construct_class="species_matched_tip",
             construct=f"spidertip_ct{len(seg)}", family=ep["slug"],
-            variant=ep["accession"], k="", length=str(len(seg)), sha256=sha(seg),
+            variant=ep["accession"], k="", length=str(len(seg)), sha256=sha(seg), seq=seg,
             source_table="derived here from g1_refchimera.tsv",
             provenance=f"{ep['locator']}; the whole swapped segment, "
                        f"{ep['host_family']} {w0}-{w1}",
@@ -534,7 +535,7 @@ def main():
                 pass
             add(construct_class="ga_rung_isoform", construct="R7_full",
                 family="GoB", variant="", k="", length=str(len(gob)),
-                sha256=sha(gob), source_table="live fetch",
+                sha256=sha(gob), seq=gob, source_table="live fetch",
                 provenance=f"{prov} (GNAO1 isoform Alpha-2)",
                 note="GoB. seq_rungs.tsv's bare `Go` is P09471 canonical = "
                      "isoform Alpha-1 = GoA, verified by hash; the bare label is "
@@ -546,7 +547,7 @@ def main():
                 h = sum(1 for x, y in zip(sub, goa_sub) if x != y)
                 add(construct_class="ga_rung_isoform", construct=rung,
                     family="GoB", variant="", k="", length=str(N),
-                    sha256=sha(sub), source_table="live fetch",
+                    sha256=sha(sub), seq=sub, source_table="live fetch",
                     provenance=f"{prov} last {N} residues",
                     note=f"GoB; {h} substitution(s) from GoA at this rung")
 
@@ -608,7 +609,7 @@ def main():
                     for cname, kk, sq in made:
                         add(construct_class="peptide_control", construct=rn,
                             family=fam, variant=cname, k=kk, length=str(len(sq)),
-                            sha256=sha(sq),
+                            sha256=sha(sq), seq=sq,
                             source_table="derived here via seq_controls.py",
                             provenance=f"{src[0]['accession']} last {len(wt)}, "
                                        f"control {cname}{kk}",
@@ -699,7 +700,7 @@ def main():
             mut = wt[:i - 1] + "A" + wt[i:]
             add(construct_class="ala_scan", construct="ct21", family=fam,
                 variant=f"ala_pos{i:02d}", k="", length=str(len(mut)),
-                sha256=sha(mut), source_table="derived here from seq_rungs.tsv",
+                sha256=sha(mut), seq=mut, source_table="derived here from seq_rungs.tsv",
                 provenance=f"{fam} ct21 with position {i} ({aa}) -> A",
                 note="NO-OP: this position is already alanine, so the construct is "
                      "byte-identical to wild type" if aa == "A" else "")
@@ -708,7 +709,7 @@ def main():
     for j, i in enumerate(diffs, start=1):
         mut = gi[:i - 1] + gsct[i - 1] + gi[i:]
         add(construct_class="gi_to_gs_scan", construct="ct21", family="Gi1",
-            variant=f"gi2gs_sub{j:02d}", k="", length=str(len(mut)), sha256=sha(mut),
+            variant=f"gi2gs_sub{j:02d}", k="", length=str(len(mut)), sha256=sha(mut), seq=mut,
             source_table="derived here from seq_rungs.tsv",
             provenance=f"Gi1 ct21 position {i} {gi[i-1]} -> Gs {gsct[i-1]}",
             note=f"series member {j} of {len(diffs)}")
@@ -756,6 +757,48 @@ def main():
         seen.setdefault(r["sha256"], []).append(
             f"{r['construct']}/{r['family']}/{r['variant']}".rstrip("/"))
     dupes = {h: v for h, v in seen.items() if len(v) > 1}
+
+    # ---- the sequences themselves ---------------------------------------
+    # 2026-09-14.  The registry pinned a sha256 for 771 constructs and shipped the
+    # BYTES for none of them: only 470 of those hashes resolved to a sequence
+    # anywhere in inputs/, because 301 are derived in THIS script and were hashed
+    # and then dropped.  A hash is not a sequence -- a pipeline on another machine
+    # cannot build a chain B from a digest, and "re-run the generator" is not an
+    # answer when four generators in this directory fetch live from UniProt and
+    # GPCRdb against databases that have moved since.
+    #
+    # Nothing is recomputed here.  These are the exact strings whose sha256 became
+    # the registry's key, written out beside it, and every record is re-hashed on
+    # the way out: a FASTA entry that does not reproduce its own registry hash is a
+    # FAILURE, not a warning.
+    seq_rows = [r for r in rows if str(r.get("seq", "")).strip()
+                and len(str(r.get("sha256", ""))) == 64]
+    mism = [r for r in seq_rows
+            if sha(str(r["seq"]).strip().upper()) != r["sha256"]]
+    if mism:
+        sys.exit(f"FAIL: {len(mism)} construct(s) carry a sequence that does not "
+                 f"hash to their registry sha256, e.g. {mism[0]['construct']!r}. "
+                 f"The registry key and the bytes disagree at the source.")
+    seen_f = set()
+    with open(FASTA, "w") as fh:
+        for r in sorted(seq_rows, key=lambda r: (r["construct_class"], r["construct"],
+                                                 str(r.get("family", "")),
+                                                 str(r.get("variant", "")))):
+            if r["sha256"] in seen_f:
+                continue                     # one record per distinct molecule
+            seen_f.add(r["sha256"])
+            name = "|".join(str(r.get(c, "")) for c in
+                            ("construct", "family", "variant")).rstrip("|")
+            fh.write(f">{name} sha256={r['sha256']} len={r['length']} "
+                     f"class={r['construct_class']}\n{str(r['seq']).strip().upper()}\n")
+    unresolved = sorted({r["construct"] for r in rows
+                         if len(str(r.get("sha256", ""))) == 64
+                         and not str(r.get("seq", "")).strip()})
+    sys.stderr.write(f"# wrote {len(seen_f)} sequences -> {FASTA}"
+                     f"  (every one re-hashed against its registry key)\n")
+    if unresolved:
+        sys.stderr.write(f"# {len(unresolved)} construct(s) still hash-only, no "
+                         f"bytes: {unresolved[:4]}\n")
 
     sys.stderr.write(f"# wrote {len(rows)} constructs -> {OUT}\n")
     sys.stderr.write(f"# distinct sha256 among dispatchable: {len(seen)}\n")
