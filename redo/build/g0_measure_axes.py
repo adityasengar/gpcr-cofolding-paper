@@ -89,6 +89,14 @@ from paths import ROOT, SPEC, BUILD, GATES, INPUTS, CACHE, STRUCTURES, RUNS, PRO
 ROOT = os.path.dirname(os.path.dirname(INPUTS))
 CACHE = STRUCTURES          # redo/cache/structures -- 297 mmCIF, gitignored
 
+# The canonical output of the full pass, named here rather than only on the
+# command line. `manifest.py` attributes an input to the build script whose
+# SOURCE mentions the filename, so a generator that takes its output path purely
+# as a parameter can never be attributed -- which is why the pilot file sits in
+# MANIFEST.tsv as "unattributed" despite this script having produced it (F-22).
+# Naming it makes the attribution true, not cosmetic: this IS its generator.
+OUT_DEFAULT = os.path.join(INPUTS, "g0_measurements.csv")
+
 GPCRDB = "https://gpcrdb.org"
 SIFTS_URL = "https://www.ebi.ac.uk/pdbe/api/mappings/uniprot_segments/{pdb}"
 CIF_URL = "https://files.rcsb.org/download/{pdb}.cif"
@@ -553,7 +561,7 @@ def main() -> int:
     ap.add_argument("--pdb")
     ap.add_argument("--entry")
     ap.add_argument("--from-csv")
-    ap.add_argument("--out")
+    ap.add_argument("--out", default=OUT_DEFAULT)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--cache", default=CACHE)
     a = ap.parse_args()
@@ -567,6 +575,13 @@ def main() -> int:
         return 0
 
     if a.from_csv:
+        # A truncated pass must never land on the canonical path. --out now has a
+        # default, so `--limit 20` with no --out would otherwise overwrite the
+        # full measurement with a 20-row file that looks exactly like it.
+        if a.limit and a.out == OUT_DEFAULT:
+            return int(bool(sys.stderr.write(
+                "refusing --limit without an explicit --out: that would "
+                f"overwrite {OUT_DEFAULT} with a partial pass\n")))
         rows = list(csv.DictReader(open(a.from_csv)))
         if a.limit:
             rows = rows[:a.limit]
