@@ -93,7 +93,23 @@ holds the 40,000 that passed), D **42,180** claimed and zero shipped
 | core full factorial | 1,792,000 | 56 | **14.4×** |
 | + every control arm | 5,632,000 | 176 | **45.2×** |
 
-## 1.4 In GPU-hours — and why the bracket is 13× wide
+## 1.4 In GPU-hours — and why the bracket is 6.6× wide
+
+> **CORRECTED 2026-09-14.** This section said **13×** in four places and that is the
+> wrong ratio. 13.2× is *planning estimate ÷ measured apo rate* — an apo-to-planning
+> comparison. The three two-chain scenarios `matrix_cost.py` actually prices span
+> **2.0× → 13.2×**, i.e. a **6.62× spread in H100-hours** (MINIMAL 577 h → 3,822 h).
+>
+> **And the deeper problem, which asking for a wall-time will not fix:** chain-B
+> length enters the cost model **nowhere**. `size()` is `panel × backbones × arms × n`,
+> and all three multipliers are derived for a **394-residue full Gα** (774 tokens). A
+> 21-residue chain B is 401 tokens — **1.06–1.11×, below the model's own floor of
+> 2.0×**. So a single measured two-chain number would not close the bracket; it would
+> reveal that the model prices the cheap rungs at full-Gα rates.
+>
+> **The fix is already made and costs nothing.** `g1_recording_spec.tsv` now carries
+> `wall_seconds` (column 77), so the cost-versus-chain-B-length curve falls out of the
+> campaign across all seven rungs at zero extra GPU time, and ask P1 retires itself.
 
 **The one measured throughput anywhere in four blocks**
 (`data/block_d/07_partA/HEADLINE_D3_tier_d3_full_2026_09_08.md:3-6`):
@@ -117,8 +133,9 @@ three scenarios:
 | …days wall on the 25-worker pool | 38 | 78 | **249** |
 | + controls, days wall | 118 | 245 | **782** |
 
-The 13× bracket is the single biggest unknown in this document and closing it is
-ask **P1** in §8. Corpus anchors for context, none of them our workload:
+The two-chain bracket — **6.6×**, see the correction at §1.4 — is the single biggest
+unknown in this document. Ask **P1** in §8 no longer needs answering by message: the
+`wall_seconds` column measures it during the campaign. Corpus anchors for context, none of them our workload:
 `tang2026steeraf` [p.6] is the only per-method GPU-hour table in 81 papers —
 Boltz-sample 0.42 GPU-h per target at 500 samples = 3.0 s/sample, monomer;
 `passaro2025boltz2` [p.42] quotes "Boltz-2 20 GPU sec" for a *ligand* inference in
@@ -939,10 +956,12 @@ Ranked by how much of this document changes on the answer.
    receptor+Gα prediction on each of the four backbones, at the production settings
    (recycles, diffusion steps, sample batching). The measured apo rate is 22.7
    s/pred/H100 and the only two-chain figure on disk is a 5 min/pred planning
-   estimate — **a 13× bracket**. Nothing on disk anywhere in four blocks records
+   estimate. That is a 13.2× apo-to-planning ratio; the **two-chain spread is 6.6×**, and
+   chain-B length enters the model nowhere (§1.4). Nothing on disk anywhere in four blocks records
    recycles, diffusion steps or model sizes. *If the answer is near 2×, EXPANSIVE is
-   a week and the tiering question dissolves; if it is near 13×, INTENDED is 17 days
-   and G15 becomes the first thing cut.*
+   a week and the tiering question dissolves; if it is near 13.2×, INTENDED is **21.5 days**
+   and G15 becomes the first thing cut.* (This read "17 days"; the table at §7 and
+   `matrix_cost.py` both say 21.5.)
 2. **P2 — per-backbone relative cost.** Is one backbone 5–10× another? The catalogue
    flags this as open (§6 item 8) and it changes the ranking: an arm that is
    4-backbone-crossed costs 4× the reference backbone only if they are comparable.
