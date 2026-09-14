@@ -85,3 +85,6 @@ analysis/block_c/received_2026_09_12/*.csv
 # Block D's three row tables, 92.8 MB, landed by hand 2026-09-13.
 # Same rule as rows.tier3.v2.csv: too large for git, hashes are the record.
 analysis/block_d/received_2026_09_13/*.csv
+
+# pdftotext cache for analysis/lit_bibliography_sweep.py, regenerable
+lit/.bibsweep_cache/

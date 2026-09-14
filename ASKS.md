@@ -199,6 +199,46 @@ the other chain, it would be the only such evidence anywhere. Low expectation, h
 
 # C. lit
 
+### C0. **THE CORPUS DOES NOT CONTAIN THE ALPHAFOLD PAPER** — and five more foundational ones
+
+**Found 2026-09-14 by `analysis/lit_bibliography_sweep.py`, which sweeps all 75 held
+PDFs' bibliographies against `refs.bib` and ranks what is missing by HOW MANY OF OUR
+OWN PAPERS CITE IT.** Every line below is quoted from the bibliography of a paper we
+hold, so each is checkable rather than author-year guesswork.
+
+| citers | work | why it matters here |
+|---:|---|---|
+| **11** | Jumper, J. et al. **Highly accurate protein structure prediction with AlphaFold.** *Nature* **596**, 583–589 (2021). `10.1038/s41586-021-03819-2` | the paper the entire corpus is about |
+| **10** | del Alamo, D., Sala, D., McHaourab, H. S. & Meiler, J. **Sampling alternative conformational states of transporters and receptors with AlphaFold2.** *eLife* **11**, e75751 (2022). `10.7554/elife.75751` | **the canonical MSA-subsampling-for-alternative-states paper, absent from a corpus built around MSA subsampling.** Highest-cost gap of the six |
+| **9** | Evans, R. et al. **Protein complex prediction with AlphaFold-Multimer.** bioRxiv `10.1101/2021.10.04.463034` | every partner arm we run is a complex prediction |
+| **9** | Škrinjar, P., Eberhardt, J., Tauriello, G., Schwede, T. & Durairaj, J. **Have protein-ligand cofolding methods moved beyond memorisation?** bioRxiv (2025). `10.1101/2025.02.03.636309` | cofolding **and** memorisation — squarely the threats table |
+| **6** | Mirdita, M. et al. **ColabFold: making protein folding accessible to all.** *Nat. Methods* **19**, 679–682 (2022). `10.1038/s41592-022-01488-1` | the MSA pipeline most of this literature actually runs |
+| **6** | Lin, Z. et al. **Evolutionary-scale prediction of atomic-level protein structure with a language model.** *Science* **379**, 1123–1130 (2023). `10.1126/science.ade2574` | the MSA-free comparator |
+
+**And it re-ranks two of the nine the survey agent found by hand.**
+`10.1002/pro.4353` — Chakravarty & Porter, *AlphaFold2 fails to predict protein fold
+switching*, Protein Science 31:e4353 (2022) — was filed **Tier 3** from five
+bibliographies. **Five of our own papers cite it.** `10.1038/s41467-024-51801-z`
+(Chakravarty et al., *Nat Commun* 15:7296, 2024), the agent's Tier 1 and the authority
+the field uses for clause 3, shows 3 citers. Both confirmed absent from `refs.bib`.
+
+**Why this is a C-item and not something the orchestrator fixed.** `CLAUDE.md:260`
+gives `lit/**` and `refs.bib` to lit. The sweep reports; it does not decide what to
+extract, and it says so in its own docstring.
+
+**What the sweep is and is not.** 801 distinct DOIs are cited across the 75 PDFs and 29
+are in `refs.bib`; that ratio is not itself a defect, since an 87-paper corpus cannot
+contain everything its members cite. **The ranking is the finding.** It is also a
+**floor**: conference and older works often carry no DOI, so several of the nine found
+by hand (ICML 2026, OpenReview) cannot appear in it at all. A clean run means no
+DOI-bearing gap, never no gap.
+
+**The reason to run it rather than read five bibliographies.** The survey agent reported
+one paper as missing that we already hold with a 41 KB note, and missed del Alamo and
+Škrinjar entirely. Both directions of error are exactly what `lit/CLAUDE.md` warns about:
+*"Answering 'nothing in the corpus does X' while the paper that does X sits unextracted
+is the highest-cost failure this skill can produce."*
+
 ### C1. **`CLAIMS.md` needs restructuring onto the single-paper spine** — and it is THEIRS
 Aditya chose to report everything in one paper (2026-09-12). The argument spine is still
 in the old shape: C1–C9 plus five "new" claims, with the instrument findings scattered
