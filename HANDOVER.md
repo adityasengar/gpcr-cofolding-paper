@@ -2,40 +2,51 @@
 
 Start in `paper/`. `CLAUDE.md` loads automatically; read it, then this.
 
-## READ THIS FIRST — the state at the end of 2026-09-12
+## READ THIS FIRST — the state at the end of 2026-09-14
 
-**The day's work is committed and pushed. `verify.sh` is green: layout 8 checks,
-manifest in sync, ligand 10, decoy 26, G0 frozen 13/8, G1 18/5, G2 14/6.** The only
-uncommitted files belong to lit.
+**Committed and pushed. `verify.sh` green.** Uncommitted files under `lit/` belong to
+the lit session, which is working the same tree — do not commit them.
 
-**What changed that a fresh session must not re-derive:**
+**THE ONE THING TO UNDERSTAND BEFORE ANYTHING ELSE: the redo campaign has run ZERO
+predictions.** No GPU hours are spent. Every factor is still choosable and the whole
+design space is open. Work that has happened is measurement of *deposited* structures
+and reanalysis of the four landed blocks — not inference.
+
+**What changed since 2026-09-12, that a fresh session must not re-derive:**
 
 | | |
 |---|---|
-| **C7 is NOT answered — RETRACTED** | I claimed it and withdrew it the same day. **Every row in `rows.tier3.v2.csv` carries a ligand**; "apo" means no PARTNER. `DECISIONS.md` **F-23**. Pillar 0's mining is still complete and its partner result stands |
-| **The headline survives everything** | 24 of 24 partner contrasts — 3 roles × 4 backbones × 2 readouts — exclude zero. *(The "both opsin variants" clause was vacuous: all 800 opsin rows are NaN on every axis. F-23.)* |
-| **"Decoy ≈ antagonist" is WITHDRAWN** | it conflated *shift* (ligand-independent, stands) with *level* (not — **agonist > decoy > antagonist** on the continuous readout). F-19 corrected |
-| **The decoy arm is FROZEN** | runs EXPLORATORY at k = 11, 33 cells, 396 pooled predictions. `drule.py` 26 checks, 26 proved, three digests |
-| **The campaign has a plan** | `redo/spec/PLAN.md`, five pillars, **and its own §"what this plan MISSED"** written the same day by the registry triage |
-| **The registry is triaged** | 16 covered / 11 free-unscheduled / 10 needs-PI / 7 superseded / 1 untriaged. `NEEDS_TRIAGE` is now `NOT_ENUMERATED` |
-| **`ASKS.md` is new** | the standing register of what is owed by Aditya, by `paper_af3`, and by lit |
+| **All four decisions TAKEN** | `D-2026-09-13-a`: chain A at (b), seeds paired, C7 pre-registered, measurement pass authorised. `grep '^## D-OPEN'` returns nothing |
+| **Block D's rows LANDED** | 14,000 / 2,370 / 25,810 at `analysis/block_d/received_2026_09_13/`. **Every block is row-level now** |
+| **Block D verified** | **54 testable / 12 prose-only → 113 / 1.** The one survivor, SC-D-8d, needs structure-to-structure Cα RMSD and we hold 10 CIFs of 42,180 predictions |
+| **E0.1's measurement pass is DONE** | 1,357 class A structures measured from coordinates, no GPU. `redo/inputs/g0_measurements.csv`. Population reproduces the spec exactly: 726 / 610 / 21 |
+| **E0.2 is ANSWERED, free** | the published Ibrahim A100 index was already implemented in our pipeline and computed on 38,820 predictions. Disagreement vs our predicate: **11.7% (D1), 9.2% (D3)**. F-31 |
+| **The corpus had no AlphaFold paper** | nor del Alamo 2022, Škrinjar 2025, ColabFold, ESMFold. Found by bibliography sweep; lit has extracted four. `manuscript/refs.bib` resynced to 87 |
 
-**Three findings about our own machinery, all recorded, none fixed:**
+**The decision that gates the critical path is D4**, the calibration balancing rule
+(`ASKS.md:106`, `GROUP0_SYSTEMS.md` §6). **§6 forbids fitting any threshold before it
+is settled**, so E0.1 stops at the measurement. Recommendation on record: equal-weight
+headline, with A, D and E reported.
 
-- **F-21** — a generated input can go **stale** against its own inputs and no guard
-  notices. `manifest.py --check` compares a file to its *own* hash, not its sources.
-- **F-22** — `inputs/` is "code only", but the guard catches only edits made *after*
-  stamping. **31 of 64 inputs name no generator**, and `g1_recording_spec.tsv` — the
-  campaign's 47-column recording contract — has **no writer anywhere**. L8 reports
-  the count on every run.
-- **F-20** — `rows.tier3.v2.csv` landed and nothing recorded that it had, while three
-  documents already rested on it.
+**Five findings from 2026-09-14, all in `DECISIONS.md`:**
 
-**And the two decisions that gate everything are in `ASKS.md` A1 and A2** — chain A's
-construct rule, and seed pairing, which is free now and **impossible** once Pillar 3
-dispatches.
+- **F-28** — the two-instrument predicate is **undefined** on 2 of 26 Block D
+  receptors (EDNRB, GRPR carry **Leu at 7.53**). They entered a published concordance
+  table at 0% active, lifting 29 of 30 cells and flipping two signs.
+- **F-29** — E0.1's result. §0.1's sequence-gate prediction of 514 lands within two
+  structures of the table (516); the further losses are **Q6**, measured at 2.9%.
+- **F-30** — our own measurement had the two axes **coupled**: a non-Tyr at 5.58
+  discarded the tilt value too. Fixing it withdrew **54** values produced by a
+  numbering nothing had validated, and gained 115.
+- **F-31** — E0.2 answered free; see above.
+- **F-32** — **the one to carry forward.** *A count is not a rate until you can name
+  what was in the denominator and what could never have been in the numerator.* Four
+  instances tabulated. **`verify.sh` was green through every one**, because a gate
+  checks that a computation is right and this is a defect in what it is *about*.
 
----
+**Three assets we already held and had not read**, in one week: `rows.tier3.v2.csv`
+(F-20), eleven dead flag columns (F-26), `a100_index` (F-31). **No gate catches this
+class.** Each was found by reading a file.
 
 ## Where the project is
 
