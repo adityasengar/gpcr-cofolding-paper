@@ -2,37 +2,50 @@
 
 Written 2026-09-14, when the project moved off the author laptop.
 
-## The one thing that catches people out
+## Transport: git carries everything that matters (revised 2026-09-14)
 
-**A `git clone` of this repo is ~5 MB and looks complete. It is not.**
-
-**2.44 GB sits outside git and cannot be regenerated anywhere** — the row-level
-evidence behind all four blocks, the literature PDFs, and the structure cache the
-measurement pass ran against. Clone without moving those and the repo still passes
-`verify.sh`, still builds the manuscript, and has lost the data every number rests on.
-
-Do not transcribe the list into anything. **Generate it:**
+**The 161 MB that cannot be re-obtained is now IN the repo.** So on a corporate
+laptop, where USB is usually DLP-blocked and a drive is a request rather than a
+plan, the whole migration is:
 
 ```bash
-python3 analysis/migration_manifest.py          # classified, with sizes
-python3 analysis/migration_manifest.py --why    # the reason for each call
-python3 analysis/migration_manifest.py --rsync  # a runnable rsync command
-python3 analysis/migration_manifest.py --check  # after the move, on the new machine
+git clone https://github.com/adityasengar/gpcr-cofolding-paper.git
+cd gpcr-cofolding-paper
+gunzip -k analysis/block_c/received_2026_09_12/rows.tier3.v2.csv.gz
+python3 analysis/migration_manifest.py --verify-assets      # expect OK, 87 assets
 ```
 
-The script refuses to report a clean list if it finds a gitignored directory it has
-no classification for. A migration list that silently omits a new directory is the
-same defect as a check that skips a missing input.
+**Verify the assets.** A clone that silently dropped or truncated a file looks
+exactly like a clone that worked, and these are the files behind four blocks.
+`MIGRATION_ASSETS.sha256` pins all 87.
 
-## Why so much is outside git
+**Why `rows.tier3.v2.csv` travels gzipped:** 87.7 MB is under GitHub's 100 MB hard
+block but over its 50 MB warning, and it would sit in every future clone. Gzipped
+with `-n` (no name, no mtime) it is 21.8 MB and its digest is stable -- the same
+reasoning `layout.py` already applies to `drule_rejections.tsv.gz`.
 
-Two different reasons, and only one of them is about size.
+### What did NOT come through git, and what that costs
 
-- **Size.** `redo/cache/structures/` (1.2 GB), `lit/pdfs/` (573 MB), `lit/source/`
-  (467 MB) would make every clone unusable.
-- **Provenance that a re-fetch does not restore.** RCSB and GPCRdb both revise
-  entries. The structure cache is a *snapshot*, and re-fetching gives a different
-  one. Caching it was the point; losing it is not recoverable by re-running anything.
+2.44 GB was outside git. Only 161 MB of it was irreplaceable. The rest:
+
+| | size | where it comes from |
+|---|---:|---|
+| `analysis/block_d/received_2026_09_13/` | 89 MB | **tracked on paper_af3's own `origin/main` at `10d6493`** -- clone it there once read access lands |
+| `redo/cache/structures/` | 1.2 GB | re-fetchable from RCSB |
+| `lit/pdfs/`, `lit/source/` | 1.04 GB | re-downloadable from the publishers |
+| `figures/out/`, the built PDFs, the pdftotext caches | 177 MB | regenerate from scripts the clone carries |
+
+**Re-fetching costs provenance, not evidence.** RCSB and GPCRdb revise entries, so a
+re-fetch is a *different snapshot*. But the measurement pass is done and
+`g0_measurements.csv` is committed, so nothing that has landed is invalidated --
+only future re-measurement (X5's placebo axes, or adding a receptor class) would run
+against newer coordinates. Likewise all 87 corpus extractions are in git; only the
+source PDFs are gone, so a page-numbered quote cannot be re-verified without
+re-downloading the paper.
+
+**If you want the full 2.44 GB anyway** (an external drive, a corporate file share,
+or the HPC as a staging point), the old route still works:
+`python3 analysis/migration_manifest.py --rsync`, dry-run it first.
 
 ## Where it goes on the new machine
 
@@ -55,12 +68,11 @@ scripts reach outside it, including three gates (`g0_preflight.py`, `panel_verif
 
 ## Steps
 
-**On the old machine**
+**On the old machine** — already done as of 2026-09-14, kept for the next time.
 
 ```bash
 git status --porcelain        # MUST be empty. Another session's work lives here too
 git push
-python3 analysis/migration_manifest.py --rsync    # then run what it prints
 ```
 
 **On the new machine**
@@ -69,9 +81,13 @@ python3 analysis/migration_manifest.py --rsync    # then run what it prints
 cd ~                          # alongside paper_af3, not inside it
 git clone https://github.com/adityasengar/gpcr-cofolding-paper.git
 cd gpcr-cofolding-paper
-# restore the MOVE paths to their original locations, then:
-python3 analysis/migration_manifest.py --check
+gunzip -k analysis/block_c/received_2026_09_12/rows.tier3.v2.csv.gz
+python3 analysis/migration_manifest.py --verify-assets
 ```
+
+`--verify-assets` is the one that matters: it re-hashes all 87 carried files against
+`MIGRATION_ASSETS.sha256`. `--check` is the older drive-based check and only applies
+if you also rsync'd the 2.25 GB.
 
 ## The migration test
 
@@ -80,10 +96,11 @@ travelled separately, so together they prove the pieces landed in the right plac
 
 ```bash
 python3 redo/gates/layout.py --selftest-all      # 8/8 plants fire, L1 and L3-L9
-python3 redo/gates/drule.py --selftest           # 26/26 proved by planting
+python3 redo/gates/drule.py --selftest           # 26/26 proved by planting (~3.5 min)
+python3 redo/gates/run_receipt.py --selftest     # 13/13 plants over R1-R5
 python3 redo/gates/g2_preflight.py --selftest    # 16 plants over 15 checks
 python3 analysis/block_d/verify_claims.py        # expect 113 of 119
-python3 analysis/crosscheck_redo_reference.py    # expect 104 of 104
+python3 analysis/crosscheck_redo_reference.py    # expect 121 of 121
 ./verify.sh
 ```
 
@@ -97,8 +114,12 @@ not migration failures:**
   entries as drift. That is the guard working, not breakage — and note `verify.sh:26-27`
   calls `ok()` on both branches, so it prints without failing the run.
 
-`block A deliverables` and the four block verifiers must be green. If they are not, a
-MOVE path did not land.
+`block A deliverables` and the four block verifiers must be green. If they are not, an
+asset did not land — run `--verify-assets` first, it names the file.
+
+**Block D's verifier will fail until you get its rows**, which did NOT come through
+git: they are 89 MB on paper_af3's own `origin/main` at `10d6493`, pending read
+access. That is expected, not a broken migration.
 
 ## What does not travel
 
