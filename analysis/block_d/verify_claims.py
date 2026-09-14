@@ -416,6 +416,42 @@ def verify_from_rows():
         check("SC-D-11/per_cell", "RECOMPUTED",
               "at exactly 25 rows per cell", sorted(set(cells.values())), [25])
 
+    # -- SC-D-3: "CNR2 100% sub-A to BOTH references on all 4 backbones".
+    # The NUMBER and the WORDING do not pick out the same quantity, and the data
+    # says which is which: CNR2's worst pocket RMSD to ACTIVE is 0.791 A, so
+    # sub-A-to-active is genuinely 100.0% on all four; its worst to INACTIVE is
+    # 1.270 A, so sub-A to BOTH is 86.0 / 91.6 / 99.8 / 96.8.  Recorded as a
+    # MISMATCH on the claim as worded, with the reading that IS 100% named beside
+    # it -- this project's rule is that the data wins and the disagreement is
+    # recorded rather than smoothed.
+    cn = [r for r in d1 if r.get("receptor_slug", "").upper() == "CNR2"]
+    if cn:
+        tb, bb_both, ta, acc = (collections.Counter() for _ in range(4))
+        worst_a = worst_i = 0.0
+        for r in cn:
+            a, i, b = (num(r.get("pocket_ca_rmsd_active")),
+                       num(r.get("pocket_ca_rmsd_inactive")), bb_of(r))
+            if a is None or not b:
+                continue
+            worst_a = max(worst_a, a)
+            ta[b] += 1
+            acc[b] += (a < 1.0)
+            if i is not None:
+                worst_i = max(worst_i, i)
+                tb[b] += 1
+                bb_both[b] += (a < 1.0 and i < 1.0)
+        check("SC-D-3", "RECOMPUTED",
+              "CNR2 sub-A to BOTH references, all 4 backbones (the claim AS WORDED)",
+              sorted(round(100 * bb_both[b] / tb[b], 1) for b in tb if tb[b]),
+              [100.0, 100.0, 100.0, 100.0],
+              note=f"worst pocket RMSD to inactive is {worst_i:.3f} A, so not every "
+                   f"sample is sub-A to both")
+        check("SC-D-3/active", "RECOMPUTED",
+              "CNR2 sub-A to the ACTIVE reference alone IS 100% on all four",
+              sorted(round(100 * acc[b] / ta[b], 1) for b in ta if ta[b]),
+              [100.0, 100.0, 100.0, 100.0],
+              note=f"worst pocket RMSD to active is {worst_a:.3f} A")
+
     d3 = drows("d3_msa_depth")
     if d3 is not None:
         check("D3-rows", "RECOMPUTED", "D3 rows present and the expected size",

@@ -236,3 +236,32 @@ claim sheet, the Part A documents, the gate reports and the flags.
 Block D's internal bookkeeping is the most careful of the four blocks. It is
 also the least verifiable, and those two facts are not in tension — they are the
 same fact seen from two sides.
+
+## D-D-9 — SC-D-3's number and its wording name different quantities
+
+**Found 2026-09-14, the first Block D claim to fail against its own rows.**
+
+The claim: *"CNR2 100% sub-Å to BOTH references on all 4 backbones."* It was
+PROSE-ONLY until `rows.d1_deep_apo.csv` landed on 2026-09-13.
+
+**Recomputed, and the data resolves it cleanly:**
+
+| quantity | boltz | chai | of3 | protenix |
+|---|---:|---:|---:|---:|
+| sub-Å to **both** references *(the claim as worded)* | 86.0% | 91.6% | 99.8% | 96.8% |
+| sub-Å to the **active** reference alone | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
+
+**Why:** CNR2's worst-case pocket Cα RMSD **to active is 0.791 Å** — every one of its
+2,000 samples is sub-Ångström, on every backbone. Its worst **to inactive is 1.270 Å**,
+so not every sample is sub-Å to both.
+
+**What we will write.** The saturation point the claim is making survives and is if
+anything cleaner: *CNR2 is sub-Ångström to its active reference on 100% of samples
+across all four backbones.* **The "to both" phrasing does not reproduce and must not be
+used.** Checked at `<` and `≤`, on all rows and on `passed` rows only — all 2,000 CNR2
+rows carry `passed=True`, so no filter accounts for the difference. A 1.5 Å threshold
+*does* give 100% to both, which is the other reading that would make the sentence true.
+
+**For `paper_af3`:** this is one sentence to settle — was the intended quantity sub-Å to
+active, or sub-1.5 Å to both? Either way the claim's *point* holds. Not urgent, and no
+file is needed to answer it.
