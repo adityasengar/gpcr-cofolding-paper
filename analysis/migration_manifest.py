@@ -113,9 +113,18 @@ def main(argv):
     keep = [(p, kb, n) for p, kb, n in rows if kb >= 512]      # ignore the trivia
 
     if "--rsync" in argv:
-        move = [p for p, _, _ in keep if classify(p)[0] == "MOVE"]
-        print("# run from the repo root; DEST is the new machine's clone")
-        print("rsync -av --progress \\")
+        move = [p.rstrip("/") for p, _, _ in keep if classify(p)[0] == "MOVE"]
+        print("# run from the repo root. DEST is the new machine's clone.")
+        print("#")
+        print("#   -R (--relative) is LOAD-BEARING: it recreates each path under DEST")
+        print("#   instead of copying its contents there. Without it, and with the")
+        print("#   trailing slashes git reports, rsync empties 3,000+ files into the")
+        print("#   repo root. Paths below are deliberately un-slashed for the same")
+        print("#   reason -- a trailing slash means 'the contents of', not 'this'.")
+        print("#")
+        print("#   Dry-run it first:  add -n and read the output.")
+        print()
+        print("rsync -avR --progress \\")
         for p in move:
             print(f"  {p} \\")
         print('  "$DEST/"')
