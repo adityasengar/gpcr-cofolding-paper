@@ -3932,7 +3932,7 @@ Two further blocking dependencies live in `PLAN.md` rather than in the registry:
   attached; without it, it is an unmeasured manipulation under the arm that carries the
   headline.
 - **Two recording columns are blocking, not cosmetic** (`PLAN.md` Pillar 0):
-  `g1_recording_spec.tsv` carries 47 columns and **no pocket-RMSD column at all**. Without
+  `g1_recording_spec.tsv` carried 47 columns and no pocket-RMSD column when this was written; it carries **79** today and both pocket columns are present (Part 12 records the correction). Without
   `pocket_ca_rmsd_active` and `_inactive` a depth sweep has no reference-free readout,
   because `kalakoti2025afsample2` [p.6] states model confidences across masking levels are
   *"not directly comparable"*.
@@ -4312,7 +4312,7 @@ flagged.*
 
 ### 1. What the machinery is
 
-The redo campaign has produced **65 generated input files** (64.2 MiB) and **zero
+The redo campaign has produced **67 generated input files** (64.3 MiB) and **zero
 predictions**. Nothing has run on a GPU. Consequently every claim in the spec
 documents is a claim about *inputs* — what will be dispatched, to which receptors,
 with which partner and which ligand — and the verification machinery exists to make
@@ -4375,12 +4375,12 @@ Live output, 2026-09-14:
 ```
   PASS  L1  redo/ holds only its eight declared entries  9 entries, all declared
   PASS  L2  every file is the kind its directory is for  6 directories clean
-  PASS  L3  every generated input matches its recorded hash  65 files, all match
+  PASS  L3  every generated input matches its recorded hash  67 files, all match
   PASS  L4  the manifest has no row without a file  65 rows all resolve
   PASS  L5  every run directory has the same three files  no runs yet
   PASS  L6  every run names input hashes we hold  no runs yet
   PASS  L7  the regenerable bulk is gitignored, and nothing else is  only redo/cache/structures/
-  PASS  L8  every input's named generator exists  15 of 65 name NO generator ...
+  PASS  L8  every input's named generator exists  15 of 67 name NO generator ...
   CLEAN -- 8 checks pass.
 ```
 
@@ -4393,7 +4393,7 @@ Live output, 2026-09-14:
 | **L5** | every directory under `runs/` contains exactly `manifest.json`, `rows.csv`, `README.md` | a half-landed delivery |
 | **L6** | every hash in a run's `manifest.json` `input_sha256` list is one of the digests in `MANIFEST.tsv` | a run dispatched against inputs we do not hold |
 | **L7** | `.gitignore` contains `redo/cache/structures/` **and no other `redo/` rule** | committing 297 mmCIF files; or an over-broad rule silently excluding `inputs/` from git |
-| **L8** | every `generator` named in `MANIFEST.tsv` exists as a file in `redo/build/`. **Blocking on the strong error** (named-and-absent). **Reporting-with-a-count on the weak error** (no generator named) — 15 of 65 today | a file that cannot be regenerated at all |
+| **L8** | every `generator` named in `MANIFEST.tsv` exists as a file in `redo/build/`. **Blocking on the strong error** (named-and-absent). **Reporting-with-a-count on the weak error** (no generator named) — 15 of 67 today | a file that cannot be regenerated at all |
 
 #### The two self-tests, and why they are separate
 
@@ -4463,7 +4463,7 @@ $ python3 redo/build/manifest.py --check   ; echo $?
 and, regenerated into a throwaway copy of the tree:
 
 ```
-MANIFEST.tsv: 65 files  (49 attributed, 1 ambiguous, 15 unattributed)
+MANIFEST.tsv: 67 files  (51 attributed, 1 ambiguous, 15 unattributed)
 $ diff <scratch>/redo/inputs/MANIFEST.tsv redo/inputs/MANIFEST.tsv
 (identical)
 ```
@@ -5096,7 +5096,7 @@ grep -P '^g1_systems\.csv\t' redo/inputs/MANIFEST.tsv | cut -f2
 
 ## all 65 at once, with the verdict
 python3 redo/gates/layout.py | grep L3
-## PASS  L3  every generated input matches its recorded hash  65 files, all match
+## PASS  L3  every generated input matches its recorded hash  67 files, all match
 
 ## or, equivalently, including the bytes and generator columns
 python3 redo/build/manifest.py --check ; echo "exit=$?"    # 0 = in sync

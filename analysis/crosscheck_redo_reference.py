@@ -176,9 +176,47 @@ chk("lowest inactive NPxxY = 8.95", round(lo_i, 2), 8.95, 0.005)
 lo_a = min(num(r["d_tilt"]) for r in both if r["state"] == "Active")
 chk("lowest active tilt = 12.11", round(lo_a, 2), 12.11, 0.005)
 
+# --- the recording contract --------------------------------------------------
+# Added 2026-09-14.  This checker said it re-derives every load-bearing number and
+# did not cover the recording spec's column count -- which is exactly how a stale
+# "47 columns" survived in nine documents AND inside REDO_REFERENCE.md itself,
+# which refutes it in Part 12 and then repeats it as fact at :3935.  A checker's
+# green is only as wide as its coverage.
+rec = trows("redo/inputs/g1_recording_spec.tsv")
+chk("recording spec columns = 79", len(rec), 79)
+chk("recording spec status vocabulary is the fixed four",
+    sorted({r["status"] for r in rec}),
+    sorted({"new", "exists", "exists (cell)", "derived"}))
+for col in ("n_chains_requested", "n_chains_returned", "partner_returned_sha256",
+            "seed_requested", "seed_used", "partner_msa_depth_observed",
+            "ligand_draw_index", "templates_used", "wall_seconds"):
+    chk("recording spec declares %s" % col, col in {r["column"] for r in rec}, True)
+
+# --- seeds -------------------------------------------------------------------
+sd = trows("redo/inputs/g1_seeds.tsv")
+chk("seeds = 320 (64 receptors x 5)", len(sd), 320)
+chk("one salt only", len({r["salt"] for r in sd}), 1)
+chk("seed identity is paired across arms by construction",
+    max(collections.Counter((r["receptor_slug"], r["seed_index"])
+                            for r in sd).values()), 1)
+
+# --- partner sequences -------------------------------------------------------
+_fa = open(os.path.join(ROOT, "redo/inputs/g1_partner_seqs.fasta"), encoding="utf-8")
+_hdr, _bad = [], 0
+for _ln in _fa:
+    if _ln.startswith(">"):
+        _hdr.append(_ln)
+    else:
+        _w = [t for t in _hdr[-1].split() if t.startswith("sha256=")][0].split("=")[1]
+        import hashlib as _h
+        if _h.sha256(_ln.strip().upper().encode()).hexdigest() != _w:
+            _bad += 1
+chk("partner sequences = 609", len(_hdr), 609)
+chk("every partner sequence reproduces its own sha256", _bad, 0)
+
 # --- manifest ----------------------------------------------------------------
 man = trows("redo/inputs/MANIFEST.tsv")
-chk("manifest rows = 65", len(man), 65)
+chk("manifest rows = 67", len(man), 67)   # +g1_seeds.tsv, +g1_partner_seqs.fasta 2026-09-14
 chk("unattributed inputs = 15",
     sum(1 for r in man if r["generator"] == "unattributed"), 15)
 

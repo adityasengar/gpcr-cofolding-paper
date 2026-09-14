@@ -19,20 +19,22 @@ who may write them:
 | `cache/`, `runs/`, `protocol/` | **nobody** — it came from outside | re-fetch, or re-ask |
 
 Editing a file in `inputs/` by hand is a defect, and `gates/layout.py` will
-find it: every one of the 47 files is hashed in `inputs/MANIFEST.tsv`.
+find it: every file is hashed in `inputs/MANIFEST.tsv`.
 
 ## Layout
 
 ```
 README.md     this file
 paths.py      every path declared once — nothing computes its own
-spec/         what to run and why.  CATALOGUE.md is the menu (33 experiments);
+spec/         what to run and why.  CATALOGUE.md is the menu (count it, do not
+              quote it -- three documents once said 33 where the body held 45);
               PANEL, SEQUENCES, SEQ_RECEPTORS, COUPLING, GROUP0_SYSTEMS,
               GROUP1_SYSTEMS, RUN_MATRIX are the frozen specs
-build/        28 generators — code that turns spec into inputs
+build/        the generators — code that turns spec into inputs.  `ls redo/build/*.py`
 gates/        the checks: g0_preflight, g1_preflight, panel_verify,
               seqrec_verify, layout
-inputs/       47 generated artefacts + MANIFEST.tsv (sha256 of each)
+inputs/       generated artefacts + MANIFEST.tsv (sha256 of each).  For the count,
+              run `python3 redo/build/manifest.py` -- it prints it
 cache/        what RCSB / GPCRdb / UniProt said on the day we froze.  Committed
               as provenance — those databases change, so a re-fetch is not the
               same data.  cache/structures/ (297 mmCIF, 59 MB) is gitignored

@@ -2,7 +2,55 @@
 
 Start in `paper/`. `CLAUDE.md` loads automatically; read it, then this.
 
-## READ THIS FIRST — the state at the end of 2026-09-14
+## READ THIS FIRST — the state at the end of 2026-09-14 (second session)
+
+**THE PROJECT IS MOVING OFF THIS LAPTOP. Read `MIGRATION.md` before anything else.**
+A clone of this repo is ~5 MB and looks complete; **2.44 GB over 3,366 files sits
+outside git and none of it is regenerable**, including Block D's three row-level
+corpora and `rows.tier3.v2.csv`. `python3 analysis/migration_manifest.py` generates the
+move list, `--rsync` emits a runnable command, `--check` verifies afterwards.
+
+**THE GOVERNING FACT IS UNCHANGED: the redo has run ZERO predictions.** No GPU time.
+Every factor still choosable.
+
+**What changed on 2026-09-14, afternoon — the campaign went from un-dispatchable to
+three-items-from-dispatchable:**
+
+| | |
+|---|---|
+| **Recording contract: 49 → 79 columns** | 15 echo-back, 9 new measurement, 6 already shipped in Blocks B/D. Closes the run receipt, the decoy arm's missing ligand identity, the confidence columns title clause 3 rests on, and E8.3's realised-vs-target depth |
+| **Seeds PINNED** | `g1_seeds.tsv`, 320 rows, 64 receptors × 5, salt `20260914`. Keyed on (receptor, index) only, so pairing across arms is **structural**. Blocks A and B both lost this — 1,898 distinct `seed_outer` over 380 cells |
+| **Partner sequences SHIPPED** | `g1_partner_seqs.fasta`, 609 records, every one re-hashed against its registry key. Dispatch rows with shippable bytes: **1,598 of 1,658** |
+| **`run_receipt.py` PROVED** | 11 plants, all fire. It had none and had never executed. Writing it found two real defects |
+| **`layout.py` L9** | nothing we produce may sit in `protocol/` or `cache/`. The read-only rule had been broken twice, invisibly, because `__pycache__` is globally gitignored |
+| **lit's work committed** | four extractions, five corpus-answer documents, the bibliography sweep |
+
+**THE THREE THINGS LEFT BEFORE DISPATCH**, and none needs GPU:
+
+1. **`pick_ga_chain`'s 200–500 residue gate** (`source_bundle/scorer/partner_metrics.py:74`).
+   Five of seven ladder rungs — 11, 15, 21, 26, 36 aa — return `None`, so
+   `plddt_ga_alpha5`, `n_interface_contacts_ga_receptor` and `d_ga_alpha5_r350_ca` land
+   NaN **on the 21-mer the paper is named after**. Needs a fix on their side, so it has
+   the longest latency. **Send this first.**
+2. **60 dispatch rows still hash-only** — `R6b_a5perm` and `R6c_a5polyA`. `seq_a5null.tsv`
+   has no sequence column, so recovering them means re-running `seq_a5null.py`, which
+   fetches live from UniProt. A deliberate decision, not a passing fix.
+3. **The seeds-per-cell COUNT.** `RUN_MATRIX` declares the seeds × samples split for two
+   of six cell sizes. `python3 redo/build/g1_seeds.py --report` names the four. Seed
+   *identity* is pinned regardless — only the count is open.
+
+**Seven decisions were taken on delegation on 2026-09-14** and every one is reversible
+until dispatch: `DECISIONS.md` **D-2026-09-14-a**. EXPANSIVE campaign size, templates
+off and recorded, the 79-column contract, two `status=exists` corrections, D4 at the
+recommendation on record, append-only tranches, and the instrument seam now with the
+family-plugin directory deliberately deferred. **The cognate Gα for the 10 chimeric
+receptors was deliberately NOT decided** — that is a curation judgement about real
+molecules.
+
+---
+
+## The state at the end of 2026-09-14 (first session)
+
 
 **Committed and pushed. `verify.sh` green.** Uncommitted files under `lit/` belong to
 the lit session, which is working the same tree — do not commit them.
@@ -143,21 +191,26 @@ free work first, each a stopping point that buys a complete sentence. It sequenc
 does not decide — **where it disagrees with an enumerating spec or with `inputs/`, those
 win.** The decisions it sequences are in `DECISIONS.md`.
 
-**TWO decisions gate everything downstream of the plan:**
+**ONE decision gates the plan, not two. This section used to name two and the
+first was already taken.**
 
-**1. Chain A's construct rule (`D-OPEN-2026-09-12-j`) — nothing in Group 1 or Group 2
-dispatches without it.** `chain_a_source` is `PENDING:SEQ_RECEPTORS.md` on all 2,389
-rows. **Do not read that as drift and wire it** — I did, on 2026-09-12, and was wrong.
-The sequences exist for all 64 receptors, but *which* sequence to supply is an untaken
-PI decision (`SEQ_RECEPTORS.md` §3.1), and `seqrec_trimmed.fasta` as built is option
-(c), the one the spec calls indefensible — it leaves 29 of 32 signal residues on 5HT2C
-and 1 of 20 on EDNRA.
+~~**1. Chain A's construct rule.**~~ **CLOSED.** Decided at option (b) on 2026-09-13
+(`D-2026-09-13-a`), and the data agrees: `chain_a_source` is `seqrec_trimmed.fasta:<range>`
+on **all 2,389 rows of both systems files, with zero `PENDING`**, and every
+`chain_a_sha256` verifies against the shipped FASTA bytes. This file previously claimed
+it was `PENDING:SEQ_RECEPTORS.md` on all 2,389 rows and that *"nothing dispatches
+without it"* — stale, and stale in the dangerous direction, because it told a fresh
+session dispatch was blocked on a decision already taken. `grep '^## D-OPEN'
+redo/spec/DECISIONS.md` returns nothing. **`GROUP1_SYSTEMS.md:103` still carries the
+same stale claim; the data file wins.**
 
-**2. The `[PI]` band, and it is time-sensitive:** the interior band for the
+**1. The `[PI]` band, and it is time-sensitive:** the interior band for the
 pre-registered adaptation rule (D-2026-09-12-i), which decides the cognate rung for the
 ligand crossing from the Group 1 ladder. **It must be recorded with its date BEFORE any
 ladder result exists** — a band written afterwards is not a pre-registration, whatever
-it says.
+it says. And a date is only evidence once it sits somewhere unrewritable; every file
+here is locally editable and git history is locally rewritable, so OSF or AsPredicted
+is the place, not this repo.
 
 ## The two maps — read these before anything under `redo/`
 
