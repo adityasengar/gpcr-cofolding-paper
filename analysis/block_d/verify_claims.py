@@ -723,6 +723,36 @@ def verify_from_rows():
               "own table disagrees",
               sorted(d for d, p in tops.items() if p != "bol~cha"), ["32", "8"])
 
+        # -- SC-D-8d's PRECONDITION. The deviation itself needs structure-to-
+        # structure Ca RMSD and we hold 10 CIFs of 42,180 predictions, so the
+        # measurement stays out of reach. What IS checkable is whether the
+        # matched-seed pairing it rests on exists at all -- and it does.
+        #
+        # This matters beyond Block D. D-2026-09-13-a adopted seed pairing for the
+        # redo, and the campaign turns out to already contain a worked example of
+        # it: D3 draws FIVE seeds and reuses the same five at every depth, so a
+        # shallow prediction has a same-seed full-depth partner. Block A does not
+        # -- 1,898 distinct seed_outer over 9,490 rows -- which is why no paired
+        # analysis was ever possible there. The decision has an in-house
+        # precedent, not just an argument.
+        sd = collections.defaultdict(set)
+        for r in d3:
+            sd[(bb_of(r), r["receptor_slug"].upper(), depth_of(r))].add(
+                r.get("seed_used"))
+        check("PRE-D-8d/seed_pool", "RECOMPUTED",
+              "D3 draws a small fixed seed pool, reused across the ladder",
+              len({s for v in sd.values() for s in v}), 5)
+        paired = 0
+        for bb, rec in {(k[0], k[1]) for k in sd}:
+            sets = [sd[(bb, rec, dep)] for dep in DEPTH_NOMINAL
+                    if (bb, rec, dep) in sd]
+            if len(sets) > 1 and all(s == sets[0] for s in sets):
+                paired += 1
+        check("PRE-D-8d/pairing", "RECOMPUTED",
+              "backbone x receptor cells whose five depths share an IDENTICAL "
+              "seed set (the rest are short by one seed -- C-D-6)",
+              (paired, len({(k[0], k[1]) for k in sd})), (88, 104))
+
         # -- SC-D-8a: the four D3 slopes and their cluster-boot CIs.
         #
         # PARTA_D3 §2 specifies the fit completely -- ln(depth), full=4096
@@ -938,7 +968,10 @@ PROSE = [
     ("SC-D-8b", "sub-A-to-active deltas full->depth-8 "
                 "(Boltz +8.7, OF3 -20.9, Protenix -8.7)", "D3 rows.csv"),
     ("SC-D-8d", "matched-seed 7TM Ca deviation 1-4 A vs 10-14 vs 15-20",
-     "D3 rows.csv + the matched-seed pairing"),
+     "COORDINATES, not rows. The pairing exists and is verified above "
+     "(PRE-D-8d/seed_pool, /pairing); the deviation is a structure-to-structure "
+     "Ca RMSD and we hold 10 CIFs of 42,180 predictions. This is the one claim "
+     "in Block D that the rows genuinely cannot settle"),
     ("SC-D-8e", "pLDDT vs ln(depth) slopes +0.05/+0.19/+0.68/+0.58",
      "D3 rows.csv"),
     ("SC-D-9", "the 5 x 6 cross-backbone Kendall tau concordance table",
@@ -958,6 +991,15 @@ PROSE = [
 # is not also reported as untestable.
 verify_from_rows()
 
+# Promotion is INFERRED from the id prefix, which means any RECOMPUTED check
+# named "SC-D-X/..." declares SC-D-X settled. That is right for a check that
+# recomputes the claim and WRONG for one that only establishes a precondition --
+# on 2026-09-14 two checks verifying that SC-D-8d's matched-seed pairing EXISTS
+# promoted SC-D-8d itself, and the summary line went to "0 PROSE-ONLY remain"
+# while the deviation it claims was still unmeasurable.
+#
+# So: a check that establishes a precondition rather than the claim is named
+# "PRE-<claim>/..." and cannot promote anything.
 _settled = {r["id"].split("/")[0] for r in R if r["kind"] == "RECOMPUTED"}
 for cid, what, needs in PROSE:
     if cid in _settled:

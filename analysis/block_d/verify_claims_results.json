@@ -888,6 +888,30 @@
   "note": ""
  },
  {
+  "id": "PRE-D-8d/seed_pool",
+  "kind": "RECOMPUTED",
+  "what": "D3 draws a small fixed seed pool, reused across the ladder",
+  "got": 5,
+  "want": 5,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "PRE-D-8d/pairing",
+  "kind": "RECOMPUTED",
+  "what": "backbone x receptor cells whose five depths share an IDENTICAL seed set (the rest are short by one seed -- C-D-6)",
+  "got": [
+   88,
+   104
+  ],
+  "want": [
+   88,
+   104
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
   "id": "SC-D-8a/slope_boltz",
   "kind": "RECOMPUTED",
   "what": "boltz slope, %% per ln(depth), n-weighted",
@@ -1209,7 +1233,7 @@
   "got": "no file",
   "want": "no file",
   "ok": true,
-  "note": "would need: D3 rows.csv + the matched-seed pairing"
+  "note": "would need: COORDINATES, not rows. The pairing exists and is verified above (PRE-D-8d/seed_pool, /pairing); the deviation is a structure-to-structure Ca RMSD and we hold 10 CIFs of 42,180 predictions. This is the one claim in Block D that the rows genuinely cannot settle"
  },
  {
   "id": "SC-D-8e",
