@@ -1,7 +1,7 @@
 # ASKS.md — the standing register of what is owed, and by whom
 
 **Maintained by the orchestrator session. Rewritten, never appended.**
-Last rewrite **2026-09-12**, during the autonomous run.
+Last rewrite **2026-09-12**; section 0 added **2026-09-14**.
 
 Three audiences, and they are kept apart because merging them produces a document
 nobody can act on: **Aditya** (decisions only he can take), **`paper_af3`** (files and
@@ -10,6 +10,44 @@ answers only they hold), **lit** (corpus work).
 Cost classes for `paper_af3` asks, as used in the per-block request documents:
 **free** = re-analysis of data already held · **cheap** = re-scoring existing
 predictions, no new inference · **real** = new predictions.
+
+---
+
+# 0. SEND THIS FIRST — three questions to `paper_af3`, 2026-09-14
+
+**Longest latency on the project. It needs a round trip and nothing else does.**
+Paste as-is.
+
+---
+
+**Three questions before we finalise the second campaign's dispatch bundle.**
+
+**1 — Blocking. `scorer/partner_metrics.py:74`, `pick_ga_chain()` accepts a partner
+chain only when `200 <= n <= 500`.** The second campaign is a partner-*length* ladder:
+the rungs are 11, 15, 21, 26 and 36 residues plus the full subunit. Five of the seven
+fall below 200, so `pick_ga_chain` returns `None` and `plddt_ga_alpha5`,
+`n_interface_contacts_ga_receptor` and `d_ga_alpha5_r350_ca` all land NaN — silently,
+on the 21-residue rung the paper is named after. The docstring says the gate "admits an
+α5-only mini-partner", but an α5-only partner is 26 residues. Can the lower bound be
+replaced with "any chain that is not the receptor chain", or driven from the dispatched
+`partner_construct_id`?
+
+**2 — Which artefact is actually deployed on your cluster?** `refs/scorer_expected_shas.json`
+pins the HEAD versions 8/8, but the row we hold stamps `d9c646af`. It matters because
+HEAD's `pocket_metrics.py` carries four dated fixes the stamped copy does not, and we
+need to know whether they were live for Blocks C and D.
+
+**3 — Do you still have `of3_http.jsonl` from the 2026-09-01 diagnostic?** It would
+settle OpenFold-3's template default outright. Our own documents disagree with each
+other on it: `BLOCK_B_CLAIM_SHEET.md:303` records it as off-is-also-default under a
+column headed "(c) upstream default"; six locations in your bundle say default-on.
+
+---
+
+**Then, once they answer — the second round:** the 79-column recording contract, sent
+as one document with the frozen `inputs/` set. **Present it as 15 echo-back / 9 new
+measurement / 6 you already ship**, never as "79 columns", which reads as a far bigger
+ask than it is. `redo/inputs/g1_recording_spec.tsv` carries the split per column.
 
 ---
 
