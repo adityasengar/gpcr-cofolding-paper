@@ -488,6 +488,29 @@ def verify_from_rows():
                 check(f"SC-D-8b/{b}", "RECOMPUTED",
                       f"sub-A-to-active delta full->depth8 on {b} (pp)",
                       round(delta, 1), want, tol=0.15)
+        # -- SC-D-10: the OPSD x Boltz cross-tier divergence. The SAME cell,
+        # scored two ways: 38.8% at n=500 in D1's deep-apo sampling, 10.0% at n=50
+        # in D3's full-depth condition. It is the sharpest single argument in
+        # either campaign for why n=50 is not enough to characterise an apo cell --
+        # the two differ by 29 points on identical inputs.
+        opsd_d1 = [r for r in d1 if r.get("receptor_slug", "").upper() == "OPSD"
+                   and bb_of(r) == "boltz"]
+        kk = [predicate(r) for r in opsd_d1]
+        kk = [x for x in kk if x is not None]
+        if kk:
+            check("SC-D-10/deep", "RECOMPUTED",
+                  "OPSD x boltz predicate-active at n=500 (D1 deep apo)",
+                  round(100 * sum(kk) / len(kk), 1), 38.8, tol=0.05)
+        o3 = [r for r in d3 if r.get("receptor_slug", "").upper() == "OPSD"
+              and bb_of(r) == "boltz"
+              and not re.search(r"depth[_-]?\d+", r.get("input_path") or "", re.I)]
+        k3 = [predicate(r) for r in o3]
+        k3 = [x for x in k3 if x is not None]
+        if k3:
+            check("SC-D-10/n50", "RECOMPUTED",
+                  "the same cell at n=50 (D3 full depth)",
+                  round(100 * sum(k3) / len(k3), 1), 10.0, tol=0.05)
+
         if tt.get(("chai", "8")) and tt.get(("chai", "full")):
             dc = (100 * sub[("chai", "8")] / tt[("chai", "8")]
                   - 100 * sub[("chai", "full")] / tt[("chai", "full")])

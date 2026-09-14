@@ -780,6 +780,24 @@
   "note": ""
  },
  {
+  "id": "SC-D-10/deep",
+  "kind": "RECOMPUTED",
+  "what": "OPSD x boltz predicate-active at n=500 (D1 deep apo)",
+  "got": 38.8,
+  "want": 38.8,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-10/n50",
+  "kind": "RECOMPUTED",
+  "what": "the same cell at n=50 (D3 full depth)",
+  "got": 10.0,
+  "want": 10.0,
+  "ok": true,
+  "note": ""
+ },
+ {
   "id": "SC-D-8b/chai",
   "kind": "CONSISTENCY",
   "what": "chai is not in the claim; recorded so its absence is a property of the data, not a selected sample",
@@ -907,12 +925,12 @@
  },
  {
   "id": "SC-D-10",
-  "kind": "PROSE-ONLY",
-  "what": "OPSD x Boltz cross-tier divergence, 38.8% vs 10.0%",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "OPSD x Boltz cross-tier divergence, 38.8% vs 10.0%  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: D1 and D3 rows.csv"
+  "note": ""
  },
  {
   "id": "SC-D-11",
