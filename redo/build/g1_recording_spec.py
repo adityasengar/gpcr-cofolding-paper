@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """g1_recording_spec.py -- the per-prediction recording contract, as CODE.
 
+**CURRENT SIZE: 79 columns** (47 inherited + 2 pocket-RMSD on 2026-09-12 + 30
+dispatch-readiness on 2026-09-14).  Do not transcribe that number anywhere; run
+`--check`, which prints it.  It has been quoted as 47 in nine documents while the
+file held 49, which is the header-count failure class this project keeps hitting.
+
 **Why this file exists, 2026-09-12.** `g1_recording_spec.tsv` is the 47-column
 contract every delivered run must satisfy, and it was a HAND-MADE file sitting in
 `inputs/`, which is declared code-only.  Three scripts read it and none wrote it.
@@ -61,7 +66,7 @@ INHERITED = [
     ['partner_msa_mode', 'row', 'str', 'new', 'the whole ladder', 'off (primary) / on (E1.9 contrast). SEQUENCES.md 6.1'],
     ['partner_msa_depth', 'row', 'int', 'new', 'the whole ladder', "the ladder is uninterpretable without it: a 21-aa conserved query pulled 732 homologs in this project's own cache while a designed 40-mer pulled 1"],
     ['partner_msa_depth_uniref90', 'row', 'int', 'new', 'the whole ladder', ''],
-    ['receptor_msa_depth', 'row', 'int', 'exists', 'joins to Group 8', 'on in Group 1 everywhere; varying it is Group 8'],
+    ['receptor_msa_depth', 'row', 'int', 'new', 'joins to Group 8', "on in Group 1 everywhere; varying it is Group 8. STATUS CORRECTED 2026-09-14: this read `exists`, and `exists` is what tells us NOT to ask for a column. A whole-header sweep of every delivered block table finds no MSA-depth column of any kind anywhere -- 0 occurrences. F-6 says the same: the frozen campaign recorded NOTHING about the MSA on any scored row."],
     ['partner_chain_helicity_frac', 'row', 'float', 'new', 'reach vs recognition', 'DSSP H/G/I over the WHOLE supplied chain. Generalises partner_tail11_helicity_frac, which is meaningless at the 11-mer rung where the tail is the chain. tran2026nanogs: an unstapled linear alpha5 peptide is a random coil and does nothing'],
     ['partner_helix_span_len', 'row', 'int', 'new', 'the length hypothesis', 'number of residues in the LONGEST contiguous helical run on the supplied chain. A fraction cannot express the hypothesis: the 11-mer and the 21-mer are both reported helical, differing in helix LENGTH (a short helix near the C terminus vs a long one spanning most of the 21-mer). The predicted covariate is continuous and monotone in length, not a switch'],
     ['partner_helix_span_start', 'row', 'int', 'new', 'the length hypothesis', "first residue of that run, numbered from the supplied chain's N terminus"],
@@ -84,7 +89,7 @@ INHERITED = [
     ['worse_reference_res', 'row', 'float', 'new', 'covariate, not filter', 'RUN_MATRIX 10.1: keep the resolution rule as a covariate and report the headline with and without a 3.00 A restriction'],
     ['backbone', 'row', 'str', 'exists', 'everything', ''],
     ['seed', 'row', 'int', 'exists', 'seed pairing', "seeds are unpaired everywhere in A-D: 1,898 distinct seed_outer across Block A's 380 cells. Pair seeds across arms within a cell or no within-seed contrast is readable"],
-    ['sample_index', 'row', 'int', 'exists', 'sample vs seed grain', 'Block D\'s "256 of 319 unanimous" is a sample-grain number read as a seed-grain one'],
+    ['sample_index', 'row', 'int', 'new', 'sample vs seed grain', 'Block D\'s "256 of 319 unanimous" is a sample-grain number read as a seed-grain one. STATUS CORRECTED 2026-09-14: this read `exists` and the column appears in NO delivered block header -- 0 occurrences across every block table. The distinction it carries is the one that number was misread on, so marking it `exists` meant never asking for the column that settles it.'],
     ['ref_alpha5_tip_identity', 'row', 'float', 'new', 'the alpha5 rungs', "fraction identity between the alpha5 tip of THIS receptor's active reference and the canonical tip of the family we supplied, at the rung's own length. 0.82 at ct11 and 0.62 at ct21 for the nine mini-Gs/q receptors; 0.64 at ct11 for OPSD"],
     ['ref_alpha5_is_canonical', 'row', 'bool', 'new', 'the alpha5 rungs', "false wherever the active reference's alpha5 tip matches no canonical human Galpha. 12 of the 64 census receptors, 6 of the provisional CORE-32. Without this column the mismatch is invisible at exactly the residues the paper is about"],
     ['ref_alpha5_pdb', 'row', 'str', 'new', 'the alpha5 rungs', 'which deposited entry the two columns above were read from'],
@@ -110,16 +115,190 @@ ADDED = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# 2026-09-14.  Thirty columns, added in one edit because the window closes at
+# dispatch and every one of them is free today.
+#
+# Grouped by WHAT THEY COST THE PIPELINE TEAM, because an ask that does not
+# distinguish "echo the value we handed you" from "write new measurement code"
+# spends credibility it will need later:
+#
+#   ECHO (15)   dispatch metadata we supply; they write it back unchanged
+#   EXISTS (6)  already computed and shipped in Blocks B and/or D; spec edit only
+#   NEW (9)     genuinely new measurement, and the nine that make the campaign
+#               auditable at all
+# ---------------------------------------------------------------------------
+ADDED_2026_09_14 = [
+
+    # -- A. The run receipt.  Without these eight, gates/run_receipt.py cannot
+    # run: it reads seven columns and this contract declared none of them, so a
+    # delivery conforming exactly to the contract we were about to ship is
+    # REFUSED on run 1 by the gate that exists to protect run 1.  Proved by
+    # building two fixture runs to each contract and calling check_run(): both
+    # returned four FAILs and zero PASSes.  Each pair is requested-vs-returned,
+    # which is the whole point -- F-9 found that nothing in the frozen pipeline
+    # compared output to input anywhere, so a monomer returned where a dimer was
+    # asked for passed every check.
+    ['n_chains_requested', 'row', 'int', 'new', 'run receipt R1',
+     'ECHO. What we dispatched. R1 compares this against n_chains_returned.'],
+    ['n_chains_returned', 'row', 'int', 'new', 'run receipt R1',
+     'NEW. Counted from the delivered structure, not from the request. This is the '
+     'column that catches a monomer returned where a dimer was asked for.'],
+    ['partner_requested', 'row', 'str', 'new', 'run receipt R2',
+     'ECHO. The g1_partner_registry.tsv construct id as dispatched.'],
+    ['partner_returned_sha256', 'row', 'str', 'new', 'run receipt R2',
+     'NEW. sha256 of the partner chain sequence AS RETURNED, read off the delivered '
+     'structure. R2 compares it against the dispatched partner_seq_sha256.'],
+    ['seed_requested', 'row', 'int', 'new', 'run receipt R3',
+     'ECHO. The seed we allocated. Pairing across arms is only checkable if the '
+     'REQUESTED seed is on the row; Blocks A and B both lost the within-seed '
+     'contrast because only the used seed was ever recorded (1,898 distinct '
+     'seed_outer across 380 Block A cells).'],
+    ['seed_used', 'row', 'int', 'new', 'run receipt R3',
+     'NEW. The seed the backbone actually ran. The frozen OF3 status file names '
+     'resolved_seeds [945550830] while the output directories are 108204258, '
+     '2344327426, 2650761416 and 4017696312 -- so requested != used has already '
+     'happened once, undetected.'],
+    ['partner_msa_depth_expected', 'row', 'int', 'new', 'run receipt R4',
+     'ECHO. 1 at every ladder rung under the query-only regime. Stating the target '
+     'on the row is what makes "off" checkable without trusting the word.'],
+    ['partner_msa_depth_observed', 'row', 'int', 'new', 'run receipt R4',
+     'NEW. Rows counted in the alignment actually consumed. A missing value here is '
+     'a FAILURE, not a skip -- a check that quietly does nothing when its input is '
+     'absent is the defect it exists to catch.'],
+
+    # -- B. Confidence.  Title clause 3 IS a confidence claim and this contract
+    # carried two partner-side pLDDT columns and nothing else.  Blocks B and D
+    # each ship all four already, so this is a spec edit, not new code.
+    ['plddt_mean', 'row', 'float', 'exists', 'title clause 3',
+     'EXISTS in Block B (rows_tidy.csv col 30) and Block D (col 44).'],
+    ['plddt_at_anchors', 'row', 'float', 'exists', 'title clause 3',
+     'EXISTS in Block B (col 31) and Block D (col 45).'],
+    ['min_plddt_at_anchor', 'row', 'float', 'exists', 'title clause 3',
+     'EXISTS in Block B (col 32) and Block D (col 52). Also the input the X1 '
+     'anchor-admissibility census needs, which is a free experiment.'],
+    ['confidence_flag', 'row', 'str', 'exists', 'title clause 3',
+     'EXISTS in Block B (col 33) and Block D (col 51).'],
+
+    # -- C. Ligand identity.  Without these three the decoy arm dispatches,
+    # costs 396 predictions, and returns data that cannot be analysed: each
+    # receptor draws THREE decoy molecules and nothing on the row says which one
+    # produced the prediction.
+    ['ligand_id', 'row', 'str', 'new', 'the decoy arm',
+     'ECHO. ChEMBL id for a decoy, CCD for a curated ligand, "none" when ligand-free.'],
+    ['ligand_inchikey', 'row', 'str', 'new', 'the decoy arm',
+     'ECHO. drule_selected.tsv sets ligand_must_key_by=inchikey on every accepted '
+     'decoy, so the InChIKey is the identity, not the name.'],
+    ['ligand_draw_index', 'row', 'int', 'new', 'the decoy arm',
+     'ECHO. 1..k within the receptor draw. THE column that makes the decoy arm '
+     'analysable; without it the three molecules are indistinguishable in the output.'],
+
+    # -- D. Templates.  The redo specifies no template setting for any backbone,
+    # so whichever launcher the receiving team writes will govern and each
+    # library default is inherited silently.  Worse than a gap: our own documents
+    # contradict each other on OpenFold-3's default (BLOCK_B_CLAIM_SHEET.md:303
+    # says off-is-also-default; six frozen-bundle locations say default-on).  The
+    # requested/used pair settles it from the data instead of from the prose.
+    ['templates_requested', 'row', 'bool', 'new', 'no-oracle guarantee',
+     'ECHO. false on every row of this campaign (D-2026-09-14-b).'],
+    ['templates_used', 'row', 'bool', 'new', 'no-oracle guarantee',
+     'NEW, and a RUNTIME echo, not a re-read of the input file. The frozen status '
+     "JSONs' template fields are input-file probes -- status_writer.py re-reads the "
+     'yaml it just wrote -- so they cannot catch a library default applied after the '
+     'input is parsed. If a template of the very receptor being predicted reaches '
+     'the model, the paper is showing it the answer.'],
+
+    # -- E. MSA realised-vs-target.  E8.3 is Blocking in six places.  `full` is a
+    # real condition (cached a3m, no subsample) and `default` is a live fetch --
+    # different conditions wearing the same name -- while every slope was fitted
+    # with full imputed as 4096 against a real span of ~2K-11K rows, and one
+    # ADRB1 cell consumed 13,678.
+    ['receptor_msa_depth_target', 'row', 'int', 'new', 'E8.3, the depth anchor',
+     'ECHO. What was asked for.'],
+    ['receptor_msa_depth_realised', 'row', 'int', 'new', 'E8.3, the depth anchor',
+     'NEW. Rows actually consumed. subsample_msa.py returns the input UNCHANGED when '
+     'len(entries) <= depth while the manifest still records the nominal depth, so '
+     'target and realised diverge silently at the shallow rungs too.'],
+    ['msa_target_unreached', 'row', 'bool', 'new', 'E8.3, the depth anchor',
+     'NEW. true wherever realised < target. Makes the silent no-op above visible '
+     'per row instead of per campaign.'],
+    ['msa_mode_label', 'row', 'str', 'new', 'E8.3, the depth anchor',
+     'ECHO, with `default` and `full` as DISTINCT values. Collapsing them is the '
+     'defect: OPSD x Boltz-2 apo reads 38.8% under D1 `default` and 10.0% under D3 '
+     '`full`, 28.8 points apart at ~3 sigma, both arms apo.'],
+    ['msa_depth_by_chain_json', 'row', 'str', 'new', 'the undeclared chains',
+     'NEW. {chain_id: realised_depth}, keyed the same way as chain_role_json. The '
+     'contract governs the receptor and partner chains and says nothing about any '
+     'other: 22 G2 rows supply a peptide ligand as a polymer chain and 30 G1 '
+     'heterotrimer rows supply Gbeta1 + Ggamma2 -- 52 rows whose alignment regime is '
+     'undeclared. Ggamma2 measures at depth 3,191 in our own cache. One column '
+     'covers partner, ligand and Gbetagamma rather than three.'],
+
+    # -- F. The instrument.  Extracting the predicate into a table, and naming it
+    # on every row, is what makes a second receptor class or a different protein
+    # family cheap later -- and it makes today's thresholds auditable from the
+    # data rather than from twelve copy-pasted module constants.
+    ['instrument_id', 'row', 'str', 'new', 'the state call',
+     'ECHO. Key into g0_instrument.tsv. 9.082 and 14.932 are currently copy-pasted '
+     'as module constants into at least twelve files instead of read from one table.'],
+    ['system_family', 'row', 'str', 'new', 'the state call',
+     'ECHO. "gpcr" today. The seam that makes a different protein family additive '
+     'rather than a rewrite.'],
+    ['system_class', 'row', 'str', 'new', 'the state call',
+     'ECHO. "A" today, and Class A only by D-2026-09-12-d on measured grounds (F-13). '
+     'Recorded so a pooled cross-class rate is visible in the data if anyone ever '
+     'computes one, which F-13 forbids.'],
+    ['threshold_applied', 'row', 'str', 'new', 'the state call',
+     'ECHO. The actual cut used for THIS row, so state_call stays recomputable when '
+     'the threshold is later refitted. 9.08 is applied and 9.082 is derived -- a '
+     'truncation that already changes the call for one borderline row and fails '
+     "Block B's check B20."],
+
+    # -- G. Cost.  One column retires ask P1 permanently.
+    ['wall_seconds', 'row', 'float', 'new', 'the cost model',
+     'NEW. End-to-end wall time per prediction. matrix_cost.py prices every '
+     'prediction off ONE measured apo rate and chain-B length enters the model '
+     'nowhere, so all three scenarios are derived for a 394-residue full Galpha: a '
+     '21-residue chain B is 401 tokens, 1.06-1.11x, BELOW the model own floor of '
+     '2.0x. With this column the cost-versus-length curve falls out of the campaign '
+     'across all seven rungs at zero extra GPU time.'],
+
+    # -- H. The amendment protocol.
+    ['tranche', 'row', 'str', 'new', 'append-only amendment',
+     'ECHO. "t1" for everything registered today. A later addition enumerates as t2 '
+     'with its own registration date and never rewrites t1, so "decided before '
+     'seeing data" stays checkable. Also makes cross-tranche pooling visible in the '
+     'delivered rows, which is the one thing no gate can otherwise see.'],
+
+    # -- I. Structural QC.  Already shipped in Block B; the free X3 experiment
+    # needs exactly these two.
+    ['chain_breaks', 'row', 'int', 'exists', 'fold integrity',
+     'EXISTS in Block B (rows_tidy.csv col 51).'],
+    ['ramachandran_outlier_frac', 'row', 'float', 'exists', 'fold integrity',
+     'EXISTS in Block B (col 52). With chain_breaks this is the free fold-integrity '
+     'control: a bulk control that arrives as a molten globule is mass-matched to '
+     'nothing.'],
+]
+
+
 def build():
     rows = [list(r) for r in INHERITED]
     if len(rows) != 47:
         sys.exit(f"FAIL: expected the 47 inherited columns, have {len(rows)}")
-    names = [r[0] for r in rows]
-    for add in ADDED:
-        if add[0] in names:
-            sys.exit(f"FAIL: {add[0]} is already in the frozen 47 -- this generator "
-                     f"would duplicate it. Remove it from ADDED.")
-    return rows + ADDED
+    out = rows + ADDED + ADDED_2026_09_14
+    names = [r[0] for r in out]
+    dupes = sorted({n for n in names if names.count(n) > 1})
+    if dupes:
+        sys.exit(f"FAIL: duplicate column name(s) {dupes} -- a later block "
+                 f"re-declares a column an earlier one already has.")
+    bad = [r[0] for r in out if r[3] not in ("new", "exists", "exists (cell)", "derived")]
+    if bad:
+        sys.exit(f"FAIL: unknown status on {bad}. The vocabulary is fixed at "
+                 f"new / exists / exists (cell) / derived -- `exists` means DO NOT "
+                 f"ASK FOR IT, so a wrong value here silently drops a real ask.")
+    if len(r := out) != 79:
+        sys.exit(f"FAIL: expected 79 columns, built {len(r)}")
+    return out
 
 
 def main(argv):
@@ -133,8 +312,9 @@ def main(argv):
         print(f"OK  {len(rows)} columns, file matches the generator")
         return 0
     open(OUT, "w", encoding="utf-8").write(body)
-    print(f"wrote {OUT}  ({len(rows)} columns: {len(rows) - len(ADDED)} inherited "
-          f"+ {len(ADDED)} added)")
+    print(f"wrote {OUT}  ({len(rows)} columns: {len(INHERITED)} inherited "
+          f"+ {len(ADDED)} pocket (2026-09-12) "
+          f"+ {len(ADDED_2026_09_14)} dispatch-readiness (2026-09-14))")
     return 0
 
 

@@ -4,6 +4,88 @@ An outcome without its reason gets re-litigated. Newest first.
 
 ---
 
+## D-2026-09-14-a · Dispatch-readiness: seven decisions taken on delegation, all reversible until dispatch
+
+**Aditya, 2026-09-14: *"don't worry about simulations, we do the max possible .. just go
+ahead and finalize this as you see fit."*** Recorded individually so any one can be
+overturned. **Nothing has run, so none of this is irreversible — the window closes at
+dispatch, not now.**
+
+**1. Campaign size: EXPANSIVE.** 249,540 per-cell predictions, the largest of the three
+costed tiers (`RUN_MATRIX.md:842`). Directly on his instruction. Note the cost bracket
+this sits inside is **6.6× wide, not the 13× quoted in four documents** — 13.2× is the
+planning-estimate-over-measured-apo ratio, while the three two-chain scenarios span
+2.0×–13.2×. And chain-B length enters `matrix_cost.py` nowhere, so all three multipliers
+are derived for a 394-residue full Gα; a 21-residue chain B is 401 tokens, 1.06–1.11×,
+*below the model's own floor*. The new `wall_seconds` column retires this permanently.
+
+**2. Templates: OFF, explicitly set, and recorded both requested and used.** Not left to
+a library default. The redo ships zero launcher code, so whichever launcher the receiving
+team writes governs — and our own documents contradict each other on OpenFold-3's
+default (`BLOCK_B_CLAIM_SHEET.md:303` records it as off-is-also-default under a column
+headed *"(c) upstream default"*; six frozen-bundle locations say default-on). A paper
+asking whether a co-input drives the active state cannot risk a deposited structure of
+the same receptor reaching the model. The frozen campaign ran templates off, so this also
+preserves comparability. `templates_used` must be a **runtime** echo: the frozen status
+JSONs re-read the input file they just wrote, which cannot catch a default applied after
+parsing.
+
+**3. The recording contract goes to 79 columns.** 47 inherited + 2 pocket-RMSD
+(2026-09-12) + 30 today. The 30 split **15 echo-back / 9 new measurement / 6 already
+shipped in Blocks B and D**, and the split is recorded per column, because an ask that
+does not distinguish "write back what we handed you" from "write new code" spends
+credibility it will need later. Eight of them exist because **`run_receipt.py` reads
+seven columns this contract declared none of** — proved by building two fixture runs, one
+to each contract, and calling `check_run()`: both returned four FAILs and zero PASSes. A
+delivery conforming exactly to the contract we were about to ship would have been refused
+on run 1 by the gate that exists to protect run 1.
+
+**4. Two `status=exists` values corrected to `new`:** `receptor_msa_depth` and
+`sample_index`. A whole-header sweep of every delivered block table finds **zero**
+occurrences of either. `exists` is precisely what tells us not to ask for a column, so
+the marking silently cancelled two real asks — one of them the column that settles the
+sample-grain-versus-seed-grain confusion Block D's "256 of 319" was misread on.
+
+**5. D4 enacted at the recommendation already on record** (`GROUP0_SYSTEMS.md:830`):
+**equal-weight by class as the headline, with prevalence-weight, Youden and the
+unsupervised mixture all reported.** Enacting the written recommendation rather than
+inventing a choice, and reporting all four means nothing is hidden by the pick.
+Equal-weight because the application set's prior (1.9:1) differs from the calibration
+set's (5.7:1), so a prevalence-weighted cut is calibrated for a population we will never
+grade. **The fit must be grouped by receptor regardless** — 113 of 147 receptors are
+active-only, so a pooled ROC confounds receptor identity with state. That half is not
+optional and is not part of D4.
+
+**6. Amendment protocol: append-only TRANCHES.** Everything enumerated today is `t1`,
+closed at first dispatch. A later addition enumerates as `t2` with its own registration
+date and never rewrites `t1`, so "decided before seeing data" stays checkable by a
+referee. Called *tranche* and not *wave* because `wave` already means a one-cell
+operational smoke test in the frozen bundle the receiving team also reads
+(`source_bundle/scripts/verify_wave_1.py`). **Honest limit: no gate can protect a date.**
+Registration is evidence only once it sits somewhere unrewritable — OSF or AsPredicted —
+and no gate can stop an analyst concatenating t1 and t2 in a notebook; the mandatory
+`tranche` column only makes that visible in the delivered rows.
+
+**7. The instrument seam now; the family-plugin directory NOT now.** Only **873 of
+19,056 lines (4.6%)** of `build/` + `gates/` are genuinely family-agnostic, and the Class
+A scope filter is **one line** over a snapshot that already holds all nine classes
+(1,358 A / 148 B1 / 115 C / 34 F / …). So: extract the predicate into a generated
+`g0_instrument.tsv` and name it per row (`instrument_id`, `system_family`,
+`system_class`, `threshold_applied`), which is free today and impossible after dispatch.
+But do **not** build `redo/families/` yet — one family means a plugin with one
+implementation, and it costs an amendment to guard L1, which is what makes the layout
+trustworthy. The recipe for later is three lines: one entry in `TOP`, one constant in
+`paths.py`, one `KINDS` rule.
+
+**NOT decided, and deliberately left open:** the cognate Gα for the **10 chimeric
+receptors** (5HT2A, 5HT2C, ADA1A, DRD4, EDNRA, GRPR, HRH1, OX2R, OXYR, TA2R). The rule
+stops there on purpose because tip and scaffold disagree; they stay in the extension tier
+with G19 as the matched control. That is a curation judgement about real molecules, not
+an engineering default, and inventing one would be exactly the failure this project keeps
+recording.
+
+---
+
 ## D-2026-09-11-c · The manuscript stays frozen; the protocol findings feed the redo
 
 **Aditya, 2026-09-11.** We established this afternoon that the frozen manuscript
