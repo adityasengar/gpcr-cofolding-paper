@@ -4,6 +4,79 @@ An outcome without its reason gets re-litigated. Newest first.
 
 ---
 
+## F-34 - paper_af3 answered all three; two of my three framings were wrong
+
+**2026-09-14, over the bridge.** Recorded because the corrections matter more than
+the confirmations.
+
+**Q1 - CONFIRMED, and worse.** The gate is `partner_metrics.py:101`,
+`if 200 <= n <= 500:`, inside `pick_ga_chain` at :74. Three things we did not have:
+
+- **The docstring is factually wrong, not loose.** It claims the window "admits a
+  truncated Ga or an a5-only mini-partner used in some decoy arms". **No such arm
+  exists.** They checked the data rather than the prose: per-arm NaN counts across all
+  32,000 Block B rows are **apo 8000/8000, cognate/shuffled/decoy 0/8000** - the decoy
+  partner was length-matched into the Ga band. **The sub-200 branch has never been
+  exercised by a scored row in this project**, so no delivered number of theirs moves,
+  and the gate had no empirical cover below 200 at all. A test had pinned the wrong
+  behaviour as intended, using a 40-mer decoy as its example.
+- **A symmetric CEILING bug we did not ask about**: GP161 (511), GIPR (528) and ACM3
+  (568) are all excluded ABOVE 500 by the same gate, with the same silence.
+- **`partner_identity` was already threaded to the call site at :274** and discarded
+  under `noqa: ARG001`. I read that function and did not follow the noqa.
+
+Their fix: two modes. Non-empty `partner_identity` trusts the manifest and takes the
+largest non-receptor chain at any length; absent it, `[200,500]` is preserved
+bit-exactly so every scored row reproduces. 508 tests green, four new cases each
+planting the defect it guards.
+
+**NOT COMMITTED.** Blocked on four pre-commit checks - one genuinely theirs, one a
+transient ssh refusal, and **two that fail at clean HEAD independently**, including
+`scorer_git_sha`, which wants Block D's landed rows to carry HEAD when they carry
+`d9c646a`. Satisfying it means rescoring frozen data. **Aditya's call, not theirs.**
+
+**The residual, and it is now ours to design around** - their words: *"the [200,500]
+heuristic remains the default. A campaign dispatching non-Ga partners MUST pass
+manifest_partner_identity, and there is NO row-level signal if it forgets."* Closed
+today: `manifest_partner_identity` added to the recording contract (column 80) and
+**`run_receipt.py` R5** asserts the partner columns are non-NaN on every non-apo row,
+proved by two plants. R5 is the only check there that asserts a value EXISTS rather
+than that two values agree, because this failure has no second value to compare to.
+
+**Q2 - MY ERROR, and it is the compare-like-with-like trap again.** I asked "the pin
+file says HEAD, the delivered row stamps `d9c646af`" as though those were two
+artefact digests. **`d9c646af` is a COMMIT** (d9c646a, 2026-09-06) - what
+`scorer_git_sha` stamps, the commit the venv was installed at.
+`refs/scorer_expected_shas.json` pins per-file SHA256. The two are not comparable and
+the "disagreement" I reported was a category error. Also: `pocket_metrics.py` changed
+**twice** after that commit, not four times as my agent reported - 48ddfc1 and
+9e640d5. Blocks C and D rows are pre-both, and Bug #4's direction is conservative, so
+no claim of theirs is inflated.
+
+**Q3 - SETTLED: OpenFold-3's template default is ON, and my own adversarial pass got
+this backwards.** They found the log - `of3_http_diag.34911083.jsonl`, 96 requests, 95
+to api.colabfold.com and **one POST to data.rcsb.org/graphql returning 1FQK and 1GG2
+with polymer-entity asym_ids. That is a template search**, with no template flag set.
+
+So `BLOCK_B_CLAIM_SHEET.md:303`'s "(also default)" is simply wrong - **and the tell was
+visible to us**: in that same column every other backbone cites a source line and OF3
+alone cites nothing. My first agent said default-ON; my adversarial agent "refuted" it
+on the strength of that uncited parenthetical; I relayed the refutation. **The original
+finding was right.** An adversarial pass is not automatically the more reliable one -
+it can refute a true claim using a weaker source, and the check that would have caught
+it is the same one as always: ask what is behind the sentence.
+
+**Moot for their rows either way**: `qsub/rerun_of3.sh` passes `--use-templates false`
+at :167 and :211 plus `'use_templates': False` at :243.
+
+**Unasked and valuable: Block D's rows are already on their origin/main** at commit
+`10d6493` - D1 30,921,811 B, D2 5,295,379 B, D3 56,578,896 B. A clone gets every
+column with no bridge and no size cap. **Repo access is Aditya's decision.** Also:
+`block_d_freeze` does not exist anywhere; the citable anchor is the commit. We cite it
+nowhere - checked.
+
+---
+
 ## D-2026-09-14-a · Dispatch-readiness: seven decisions taken on delegation, all reversible until dispatch
 
 **Aditya, 2026-09-14: *"don't worry about simulations, we do the max possible .. just go

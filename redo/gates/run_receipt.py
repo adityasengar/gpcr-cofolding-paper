@@ -17,19 +17,29 @@ input hashes are ones we hold. That is bookkeeping. This checks the CONTENT:
     R4  the partner MSA depth is what the arm declares (the F-5 ladder needs
         depth 1 at every rung; a run that cannot report depth fails loudly
         rather than silently passing)
+    R5  the partner was actually MEASURED on every non-apo row -- the only check
+        here that asserts a value exists rather than that two values agree.
+        Added 2026-09-14 at paper_af3's request, against the residual their own
+        pick_ga_chain fix leaves: the [200,500] length heuristic stays the
+        DEFAULT, and five of our seven rungs are below 200 aa
 
-**Why these four and not more.** Each is an equality between something we sent and
-something that came back. None needs a model, a threshold or a judgement call, so
-none can drift into an opinion. F-9's estimate was three assertions; R4 is the
-fourth because F-5 made the alignment regime a designed quantity rather than an
+**Why these five and not more.** R1-R4 are each an equality between something we
+sent and something that came back. None needs a model, a threshold or a judgement
+call, so none can drift into an opinion. F-9's estimate was three assertions; R4 is
+the fourth because F-5 made the alignment regime a designed quantity rather than an
 incidental one.
+
+R5 is deliberately a different shape -- it asserts a value EXISTS rather than that
+two values agree -- because the failure it catches has no second value to compare
+against. A partner under 200 aa silently returns None and the columns are simply
+absent, which every equality check in the world will pass.
 
 Runs are read-only once landed, so a failure here is never repaired in place — it
 is reported, and the run is re-requested or accepted with the defect recorded.
 
     python3 redo/gates/run_receipt.py                 # every run under runs/
     python3 redo/gates/run_receipt.py <run_dir>       # just one
-    python3 redo/gates/run_receipt.py --selftest      # 11 plants, all four checks
+    python3 redo/gates/run_receipt.py --selftest      # 13 plants, all five checks
 
 **The self-test was written 2026-09-14 and it found two defects immediately**, which
 is the argument for it. Until then this gate had no plants and had never executed at
@@ -152,6 +162,56 @@ def check_run(d):
             f"{name}: R4 partner MSA depth == {want} on all {len(rows)} rows" if not m
             else f"{name}: R4 partner MSA depth DIFFERS from the declared {want} on "
                  f"{len(m)} rows (first: {m[0][col]})")
+
+    # -- R5  the partner was actually MEASURED, not silently skipped ---------
+    # Added 2026-09-14 at paper_af3's explicit request, and it is their residual
+    # rather than ours. Their pick_ga_chain fix gives two modes: a non-empty
+    # partner_identity trusts the manifest and takes the largest non-receptor chain
+    # AT ANY LENGTH; absent it, the old [200,500] heuristic applies. The heuristic
+    # stays the DEFAULT. In their words: "A campaign dispatching non-Ga partners
+    # MUST pass manifest_partner_identity, and there is NO row-level signal if it
+    # forgets -- the columns just go NaN exactly as before."
+    #
+    # Five of our seven rungs are below 200 aa (11, 15, 21, 26, 36), so forgetting
+    # it nulls the partner measurement on the entire ladder including the 21-mer the
+    # paper is named after -- with no error, no warning, and a delivery that passes
+    # R1-R4. This is the only check here that asserts a value was MEASURED rather
+    # than that two recorded values agree.
+    PARTNER_COLS = ("plddt_ga_alpha5", "n_interface_contacts_ga_receptor",
+                    "d_ga_alpha5_r350_ca")
+    nch = need("n_chains", "n_chains_returned", "n_chains_requested")
+    present = [c for c in PARTNER_COLS if c in cols]
+    if not present:
+        bad.append(f"{name}: R5 cannot run — rows.csv carries none of the partner "
+                   f"measurement columns {PARTNER_COLS}")
+    elif nch is None:
+        bad.append(f"{name}: R5 cannot run — no chain-count column, so apo rows "
+                   f"cannot be told from partner rows")
+    else:
+        def _nan(v):
+            v = str(v).strip().lower()
+            return v in ("", "na", "nan", "none", "null", "-")
+
+        withp = [r for r in rows if str(r[nch]).strip() not in ("", "1")]
+        blank = [r for r in withp if any(_nan(r.get(c, "")) for c in present)]
+        idc = need("manifest_partner_identity")
+        noid = [r for r in withp if _nan(r.get(idc, ""))] if idc else []
+        if not withp:
+            ok.append(f"{name}: R5 not applicable — every row is apo (1 chain)")
+        elif blank:
+            bad.append(f"{name}: R5 the partner was NOT MEASURED on {len(blank)} of "
+                       f"{len(withp)} non-apo rows — {present[0]} is empty/NaN. If the "
+                       f"partner is under 200 aa this is pick_ga_chain's length "
+                       f"heuristic silently returning None; pass "
+                       f"manifest_partner_identity")
+        elif noid:
+            bad.append(f"{name}: R5 {len(noid)} of {len(withp)} non-apo rows carry no "
+                       f"manifest_partner_identity — the [200,500] heuristic is the "
+                       f"default, so every rung below 200 aa is one dispatch away from "
+                       f"a column of NaN")
+        else:
+            ok.append(f"{name}: R5 partner measured on all {len(withp)} non-apo rows"
+                      + (", identity supplied" if idc else ""))
     return ok, bad
 
 
@@ -169,14 +229,17 @@ def _fixture(d, rows=6):
     cols = ["prediction_id", "receptor_slug", "arm", "backbone",
             "n_chains_requested", "n_chains_returned",
             "partner_seq_sha256", "partner_returned_sha256",
-            "seed_requested", "seed_used", "partner_msa_depth_observed"]
+            "seed_requested", "seed_used", "partner_msa_depth_observed",
+            "manifest_partner_identity", "plddt_ga_alpha5",
+            "n_interface_contacts_ga_receptor", "d_ga_alpha5_r350_ca"]
     sha = "a" * 64
     with open(os.path.join(d, "rows.csv"), "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(cols)
         for i in range(rows):
             w.writerow([f"p{i:04d}", "5HT5A", "ladder", "boltz2",
-                        2, 2, sha, sha, 3027216127, 3027216127, 1])
+                        2, 2, sha, sha, 3027216127, 3027216127, 1,
+                        "R3_ct21", 82.4, 37, 9.61])
     json.dump({"run_id": "0000_fixture", "group": "G1",
                "partner_msa_depth_expected": 1,
                "input_sha256": []},
@@ -237,6 +300,8 @@ def selftest():
         ("R4", "value  ", corrupt("partner_msa_depth_observed", "732")),
         ("R4", "column ", drop("partner_msa_depth_observed")),
         ("R4", "declare", demanifest),
+        ("R5", "NaN    ", corrupt("plddt_ga_alpha5", "NaN")),
+        ("R5", "no id  ", corrupt("manifest_partner_identity", "")),
         ("--", "no rows", lambda d: open(os.path.join(d, "rows.csv"), "w")
          .write("prediction_id\n")),
         ("--", "no file", unlink("manifest.json")),
@@ -249,7 +314,7 @@ def selftest():
     try:
         base = _fixture(os.path.join(tmp, "baseline"))
         ok, fails = check_run(base)
-        if fails or len(ok) != 4:
+        if fails or len(ok) != 5:
             sys.stdout.write(f"  FAIL  baseline: the UNPLANTED fixture does not pass "
                              f"({len(ok)} pass, {len(fails)} fail)\n")
             for f in fails:
@@ -257,7 +322,7 @@ def selftest():
             sys.stdout.write("\n  A check already failing on a clean delivery cannot "
                              "be proved by planting.\n\n")
             return 1
-        sys.stdout.write("  ok    baseline: the unplanted fixture gives 4 PASS, 0 FAIL\n")
+        sys.stdout.write("  ok    baseline: the unplanted fixture gives 5 PASS, 0 FAIL\n")
 
         for i, (check, kind, plant) in enumerate(cases):
             d = _fixture(os.path.join(tmp, f"case{i:02d}"))
@@ -283,7 +348,7 @@ def selftest():
         shutil.rmtree(tmp, ignore_errors=True)
 
     n = len(cases)
-    sys.stdout.write(f"\n  {n - bad}/{n} plants fire over R1-R4 plus two structural "
+    sys.stdout.write(f"\n  {n - bad}/{n} plants fire over R1-R5 plus two structural "
                      f"cases.\n\n")
     return 1 if bad else 0
 

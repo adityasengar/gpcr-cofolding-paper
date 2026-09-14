@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """g1_recording_spec.py -- the per-prediction recording contract, as CODE.
 
-**CURRENT SIZE: 79 columns** (47 inherited + 2 pocket-RMSD on 2026-09-12 + 30
+**CURRENT SIZE: 80 columns** (47 inherited + 2 pocket-RMSD on 2026-09-12 + 31
 dispatch-readiness on 2026-09-14).  Do not transcribe that number anywhere; run
 `--check`, which prints it.  It has been quoted as 47 in nine documents while the
 file held 49, which is the header-count failure class this project keeps hitting.
@@ -123,7 +123,7 @@ ADDED = [
 # distinguish "echo the value we handed you" from "write new measurement code"
 # spends credibility it will need later:
 #
-#   ECHO (15)   dispatch metadata we supply; they write it back unchanged
+#   ECHO (16)   dispatch metadata we supply; they write it back unchanged
 #   EXISTS (6)  already computed and shipped in Blocks B and/or D; spec edit only
 #   NEW (9)     genuinely new measurement, and the nine that make the campaign
 #               auditable at all
@@ -270,6 +270,29 @@ ADDED_2026_09_14 = [
      'seeing data" stays checkable. Also makes cross-tranche pooling visible in the '
      'delivered rows, which is the one thing no gate can otherwise see.'],
 
+    # -- J. The partner-identity handshake.  Added 2026-09-14 after paper_af3
+    # confirmed the pick_ga_chain gate AND named the residual their fix leaves.
+    #
+    # Their fix gives pick_ga_chain two modes: a non-empty partner_identity means
+    # the manifest is trusted and the largest non-receptor polymer chain is the
+    # partner AT ANY LENGTH; absent it, the [200,500] heuristic is preserved
+    # bit-exactly so every already-scored row reproduces. The heuristic therefore
+    # remains the DEFAULT, and in their words: "A campaign dispatching non-Ga
+    # partners MUST pass manifest_partner_identity, and there is NO row-level
+    # signal if it forgets - the columns just go NaN exactly as before."
+    #
+    # That is a default nobody chose, invisible in the outputs -- the same class as
+    # F-9 and as their own audits #9 and #10. So the handshake is recorded on the
+    # row, and `run_receipt.py` R5 asserts the partner columns are non-NaN on every
+    # non-apo row, planting the defect by dropping the identity.
+    ['manifest_partner_identity', 'row', 'str', 'new', 'the length ladder',
+     'ECHO. The partner identity passed to the scorer. Non-empty means "trust the '
+     'manifest, the partner is the largest non-receptor chain at any length"; absent '
+     'means the [200,500] heuristic applies and every rung below 200 aa silently '
+     'returns None. Empty or whitespace means NOT SUPPLIED, never "supplied blank". '
+     'Five of our seven rungs are below 200 -- 11, 15, 21, 26, 36 -- so on the ladder '
+     'this column is the difference between a measurement and a column of NaN.'],
+
     # -- I. Structural QC.  Already shipped in Block B; the free X3 experiment
     # needs exactly these two.
     ['chain_breaks', 'row', 'int', 'exists', 'fold integrity',
@@ -296,8 +319,8 @@ def build():
         sys.exit(f"FAIL: unknown status on {bad}. The vocabulary is fixed at "
                  f"new / exists / exists (cell) / derived -- `exists` means DO NOT "
                  f"ASK FOR IT, so a wrong value here silently drops a real ask.")
-    if len(r := out) != 79:
-        sys.exit(f"FAIL: expected 79 columns, built {len(r)}")
+    if len(r := out) != 80:
+        sys.exit(f"FAIL: expected 80 columns, built {len(r)}")
     return out
 
 

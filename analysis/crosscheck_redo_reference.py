@@ -183,13 +183,14 @@ chk("lowest active tilt = 12.11", round(lo_a, 2), 12.11, 0.005)
 # which refutes it in Part 12 and then repeats it as fact at :3935.  A checker's
 # green is only as wide as its coverage.
 rec = trows("redo/inputs/g1_recording_spec.tsv")
-chk("recording spec columns = 79", len(rec), 79)
+chk("recording spec columns = 80", len(rec), 80)
 chk("recording spec status vocabulary is the fixed four",
     sorted({r["status"] for r in rec}),
     sorted({"new", "exists", "exists (cell)", "derived"}))
 for col in ("n_chains_requested", "n_chains_returned", "partner_returned_sha256",
             "seed_requested", "seed_used", "partner_msa_depth_observed",
-            "ligand_draw_index", "templates_used", "wall_seconds"):
+            "ligand_draw_index", "templates_used", "wall_seconds",
+            "manifest_partner_identity"):
     chk("recording spec declares %s" % col, col in {r["column"] for r in rec}, True)
 
 # --- seeds -------------------------------------------------------------------
