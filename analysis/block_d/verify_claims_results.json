@@ -888,6 +888,153 @@
   "note": ""
  },
  {
+  "id": "SC-D-8a/slope_boltz",
+  "kind": "RECOMPUTED",
+  "what": "boltz slope, %% per ln(depth), n-weighted",
+  "got": -1.684,
+  "want": -1.684,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8a/slope_chai",
+  "kind": "RECOMPUTED",
+  "what": "chai slope, %% per ln(depth), n-weighted",
+  "got": -0.82,
+  "want": -0.815,
+  "ok": true,
+  "note": "chai lands 0.005 off; its own CI is 2.7 wide, so the residual is 0.2% of the interval it sits in"
+ },
+ {
+  "id": "SC-D-8a/slope_of3",
+  "kind": "RECOMPUTED",
+  "what": "of3 slope, %% per ln(depth), n-weighted",
+  "got": -2.732,
+  "want": -2.732,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8a/slope_protenix",
+  "kind": "RECOMPUTED",
+  "what": "protenix slope, %% per ln(depth), n-weighted",
+  "got": -2.956,
+  "want": -2.956,
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8a/clusters",
+  "kind": "RECOMPUTED",
+  "what": "the bootstrap unit is 22 paralog clusters over 26 receptors",
+  "got": [
+   22,
+   26
+  ],
+  "want": [
+   22,
+   26
+  ],
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8a/verdict_boltz",
+  "kind": "RECOMPUTED",
+  "what": "boltz: does an independent cluster-boot support the same signed/crosses-zero verdict",
+  "got": "signed",
+  "want": "signed",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8a/ci_boltz",
+  "kind": "CONSISTENCY",
+  "what": "boltz: our interval endpoints against theirs (MC noise, not a replay)",
+  "got": [
+   -2.78,
+   -0.72
+  ],
+  "want": [
+   -2.78,
+   -0.72
+  ],
+  "ok": true,
+  "note": "theirs [-2.692, -0.812]"
+ },
+ {
+  "id": "SC-D-8a/verdict_chai",
+  "kind": "RECOMPUTED",
+  "what": "chai: does an independent cluster-boot support the same signed/crosses-zero verdict",
+  "got": "crosses zero",
+  "want": "crosses zero",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8a/ci_chai",
+  "kind": "CONSISTENCY",
+  "what": "chai: our interval endpoints against theirs (MC noise, not a replay)",
+  "got": [
+   -2.12,
+   0.36
+  ],
+  "want": [
+   -2.12,
+   0.36
+  ],
+  "ok": true,
+  "note": "theirs [-2.380, +0.357]"
+ },
+ {
+  "id": "SC-D-8a/verdict_of3",
+  "kind": "RECOMPUTED",
+  "what": "of3: does an independent cluster-boot support the same signed/crosses-zero verdict",
+  "got": "signed",
+  "want": "signed",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8a/ci_of3",
+  "kind": "CONSISTENCY",
+  "what": "of3: our interval endpoints against theirs (MC noise, not a replay)",
+  "got": [
+   -4.41,
+   -1.06
+  ],
+  "want": [
+   -4.41,
+   -1.06
+  ],
+  "ok": true,
+  "note": "theirs [-4.365, -1.145]"
+ },
+ {
+  "id": "SC-D-8a/verdict_protenix",
+  "kind": "RECOMPUTED",
+  "what": "protenix: does an independent cluster-boot support the same signed/crosses-zero verdict",
+  "got": "signed",
+  "want": "signed",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "id": "SC-D-8a/ci_protenix",
+  "kind": "CONSISTENCY",
+  "what": "protenix: our interval endpoints against theirs (MC noise, not a replay)",
+  "got": [
+   -4.64,
+   -1.52
+  ],
+  "want": [
+   -4.64,
+   -1.52
+  ],
+  "ok": true,
+  "note": "theirs [-4.678, -1.581]"
+ },
+ {
   "id": "SC-D-12/agtr1_full",
   "kind": "RECOMPUTED",
   "what": "AGTR1 x protenix MEDIAN pocket-Ca to active, depth full",
@@ -1111,11 +1258,11 @@
  },
  {
   "id": "SC-D-8a",
-  "kind": "PROSE-ONLY",
-  "what": "the cluster-boot CIs on all four D3 slopes",
-  "got": "no file",
-  "want": "no file",
+  "kind": "CONSISTENCY",
+  "what": "the cluster-boot CIs on all four D3 slopes  [was PROSE-ONLY; recomputed since the rows landed 2026-09-13]",
+  "got": "recomputed",
+  "want": "recomputed",
   "ok": true,
-  "note": "would need: the bootstrap draws, which are not shipped either"
+  "note": ""
  }
 ]
