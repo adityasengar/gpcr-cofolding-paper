@@ -7,7 +7,10 @@ re-derives independently again against the assembled text.
 """
 import csv, collections, math, os, re, subprocess, sys
 
-ROOT = "/Users/aditya/Documents/tools/Novartis_projects/paper"
+# Works from the repo (analysis/) and from a handover package (next to redo/).
+_here = os.path.dirname(os.path.abspath(__file__))
+ROOT = _here if os.path.isdir(os.path.join(_here, "redo", "inputs")) \
+    else os.path.dirname(_here)
 DOC = os.path.join(ROOT, "redo/spec/REDO_REFERENCE.md")
 text = open(DOC, encoding="utf-8").read()
 R = []
