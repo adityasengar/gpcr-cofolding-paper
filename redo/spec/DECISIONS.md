@@ -1158,6 +1158,78 @@ parked experiment whose stated rationale the data refutes is how a bad idea come
 
 ---
 
+## F-31 · E0.2 is ANSWERED, free, on 36,860 predictions — the independent index was in our own pipeline all along
+
+**2026-09-14.** The lit session flagged `ibrahim2019a100` (JCIM 2019,
+`10.1021/acs.jcim.9b00604`) as a **published, operationalised class A activation
+predicate** — exactly the independent index E0.2 says it needs — and recorded a
+blocking unknown: *"the five distances and thresholds are not in the abstract."*
+
+**They are in `redo/protocol/received/axes.d9c646af.py:329–346`, cited to that
+DOI, and `a100_index` has been computed on every prediction in two blocks since
+the day they landed.** Nobody had read the column; a `grep -rl a100` across
+`analysis/`, `redo/build/`, `redo/gates/` and `figures/` returns nothing.
+
+```
+c1 1.53–7.55   c2 2.50–3.37   c3 3.42–4.42   c4 5.66–6.34   c5 6.58–7.35   (Cα–Cα)
+A100 = −14.43·c1 − 7.62·c2 + 9.11·c3 − 6.32·c4 − 5.22·c5 + 278.88
+two-state   inactive < 25, active > 25
+three-state inactive < 0, intermediate 0–55, active > 55
+published validation: 268 X-ray structures, 50 class A receptors, 94% / 99%
+```
+
+### The disagreement rate, measured
+
+Our two-instrument predicate against the published A100 call, per prediction:
+
+| block | n | agree | ours ACTIVE / A100 inactive | ours inactive / A100 ACTIVE | **disagree** |
+|---|---:|---:|---:|---:|---:|
+| D1 | 14,000 | 88.3% | 2.3% | 9.4% | **11.7%** |
+| D3 | 22,860 | 90.8% | 3.9% | 5.4% | **9.2%** |
+
+`a100_index` is present on **100%** of D1 rows and **96.2%** of D3. The asymmetry
+is consistent in both: **the published index calls more predictions active than our
+conjunction does.**
+
+**E0.2's stated novelty claim is that "no study in the corpus reports such a rate",
+and `intro.tex:325–332` asserts it in the manuscript.** We can now report one, on
+36,860 predictions, at **cost `free`** — no GPU, no rescoring, data already on disk.
+E0.2 was rated `free*` and "rides on E0.1's measurement pass"; it does not even need
+that.
+
+### Two bounds that must travel with the number
+
+- **r(a100_index, TM6 tilt) = +0.846 / +0.764.** A100 is **not axis-independent**
+  from our tilt instrument. It is an independently *published* index, which is a
+  different and weaker kind of independence, and any sentence must say which it
+  means. This is the same correction recorded against the "third instrument"
+  framing earlier.
+- **Ibrahim validated on X-ray structures; these are predictions.** The comparison
+  is worth making and is not the validation the original paper did.
+
+### What it opens, all cheap or free
+
+- **A100 on the 1,357 deposited structures E0.1 just measured** — CPU only, cache
+  warm, and it would test whether the published index reproduces its own claimed
+  94%/99% on *our* population before we use it as a reference. This is the honest
+  order of operations and it is not yet in the catalogue.
+- **`ibrahim2019a100` reports "many active nanobody structures are predicted to be
+  weakly active"** — directly testable against Block D2's nanobody arms, which we
+  hold at row level. It contradicts the nanobody-equals-active convention
+  `khaleq2026hyaline` uses and that our own Block D2 design assumes.
+- **The index splits intermediates 2:1 toward active** — checkable against the 21
+  Class A Intermediate structures from E0.1.
+
+### The pattern, for the third time this week
+
+`a100_index` joins `rows.tier3.v2.csv` (F-20) and the eleven dead flag columns
+(F-26) as **an asset we already held and had not read**. F-27 is the same shape.
+The recurring failure is not analysis and not verification — it is **not knowing
+what is in our own delivery**, and every instance was found by reading a file
+rather than by any gate. Nothing in `verify.sh` could have caught any of them.
+
+---
+
 ## F-30 · The two axes were never independently measurable, and unpicking that took three wrong turns
 
 **2026-09-14, after F-29.** The measurement now reports each axis on its own
