@@ -281,6 +281,31 @@ hold destroys the credibility of every real ask beside it. `analysis/audit_asks.
 checks every path in all six documents against the filesystem and fails on any
 that is claimed absent and is not.
 
+**`audit_asks.py` only catches PATHS. It cannot catch an ask for a COLUMN we
+already have, a number already corrected, or a decision already recorded — and
+that is the form the mistake actually takes.** On 2026-09-14 a peer session asked
+`paper_af3` five questions and four were already answered in the repo it was
+holding: nine confidence columns of which **six are present in the delivered block
+headers**, a template question settled that morning and written into `DECISIONS.md`
+F-34, a seed-pairing request made obsolete by our own `g1_seeds.tsv`, and a cost
+figure I had corrected in F-34 while leaving it standing in `RUN_MATRIX.md` — so
+they read the stale source and quoted it back, correctly trusting it.
+
+**So, before asking `paper_af3` anything, run these three. They take a minute and
+they settled four of those five:**
+
+```bash
+head -1 data/block_b/01_rows/rows_tidy.csv | tr ',' '\n' | grep -i <column>
+head -1 analysis/block_d/received_2026_09_13/rows.*.csv | tr ',' '\n' | grep -i <column>
+grep -n "<topic>" redo/spec/DECISIONS.md          # F-nn findings, D-dated decisions
+cut -f1 redo/inputs/g1_recording_spec.tsv | grep -x <column>   # already contracted?
+```
+
+And the half of it that is ours rather than theirs: **recording a correction is not
+the same as fixing the thing that is wrong.** The F-34 entry was right and useless,
+because the number lived in a second document nobody had reason to distrust. When
+you correct a figure, `grep -rn` it and fix every copy in the same commit.
+
 `sessions/` holds one log per session and `SESSIONS.md` is its index: git records *what* changed, `SESSIONS.md` records *why* and
 what the next session should not redo. Note that `test-laptop` in the older log is **not a real machine** — it was a throwaway clone used to test the sync machinery.
 
