@@ -130,6 +130,46 @@ def main(argv):
         print('  "$DEST/"')
         return 0
 
+    if "--verify-assets" in argv:
+        # Verify every asset carried through git against MIGRATION_ASSETS.sha256.
+        # Run this on the NEW machine after cloning. A clone that silently dropped
+        # or truncated a file looks exactly like a clone that worked.
+        import hashlib
+        man = os.path.join(ROOT, "MIGRATION_ASSETS.sha256")
+        if not os.path.exists(man):
+            print("MIGRATION_ASSETS.sha256 is absent -- cannot verify. That is a "
+                  "FAILURE, not a skip.")
+            return 1
+        bad, miss, n = [], [], 0
+        for ln in open(man, encoding="utf-8"):
+            if ln.startswith("#") or not ln.strip():
+                continue
+            want, rel = ln.split(None, 1)
+            rel = rel.strip()
+            f = os.path.join(ROOT, rel)
+            if not os.path.exists(f):
+                miss.append(rel)
+                continue
+            n += 1
+            if hashlib.sha256(open(f, "rb").read()).hexdigest() != want:
+                bad.append(rel)
+        gz = os.path.join(ROOT, "analysis/block_c/received_2026_09_12/rows.tier3.v2.csv")
+        note = ""
+        if miss == [os.path.relpath(gz, ROOT)] and os.path.exists(gz + ".gz"):
+            note = ("\n  (rows.tier3.v2.csv travels gzipped -- restore it with\n"
+                    "   gunzip -k analysis/block_c/received_2026_09_12/rows.tier3.v2.csv.gz\n"
+                    "   then re-run this check)")
+            miss = []
+        for rel in bad:
+            print(f"  DIGEST MISMATCH  {rel}")
+        for rel in miss:
+            print(f"  MISSING          {rel}")
+        if bad or miss:
+            print(f"\n  {len(bad)} mismatched, {len(miss)} missing of {n} verified.")
+            return 1
+        print(f"  OK  {n} assets verified against MIGRATION_ASSETS.sha256{note}")
+        return 0
+
     if "--check" in argv:
         missing = [p for p, _, _ in
                    [(p, k, n) for p, k, n in keep] if classify(p)[0] == "MOVE"
