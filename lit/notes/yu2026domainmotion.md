@@ -1,5 +1,15 @@
 # yu2026domainmotion
 
+> **PDF SUPPLIED 2026-09-14 and now held at `pdfs/yu2026domainmotion.pdf` (10 pp).**
+> This note was extracted from publisher HTML because every scripted route to the PDF was
+> bot-walled, so **its locators are SECTION NAMES, not pages** — cite as
+> `[yu2026domainmotion, Discussion]` until a re-pass converts them. **A page-number re-pass is
+> now possible and is owed**; it matters because this is a threats-table paper and its numbers
+> (the 40.3% training-composition gap against the 9.1–17.5% ligand effect) will be argued
+> against. **The SI Appendix, which carries every significance test behind those numbers, is
+> still not held.**
+
+
 > **Extraction provenance, and a locator caveat that applies to this whole note.** Extracted
 > 2026-09-09 from the **publisher HTML full text** at pnas.org (FREE ACCESS), read through the
 > browser because every scripted route to the PDF is bot-walled. **There is no PDF in

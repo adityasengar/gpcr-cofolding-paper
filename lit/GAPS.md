@@ -1,6 +1,6 @@
 # GAPS.md — what the corpus does not know
 
-**Generated 2026-09-11 by `build_gaps.py`** from the `unresolved` and `confidence` fields of all 83 notes. **781 OPEN items across 75 papers**; 20 further items are marked RESOLVED in their notes and are excluded.
+**Generated 2026-09-14 by `build_gaps.py`** from the `unresolved` and `confidence` fields of all 87 notes. **801 OPEN items across 79 papers**; 21 further items are marked RESOLVED in their notes and are excluded.
 
 Regenerate with `python3 build_gaps.py` after any extraction. `python3 build_gaps.py --check` exits non-zero when this file is stale — wire it into `corpus_check.sh` if it starts drifting again.
 
@@ -1006,6 +1006,17 @@ Regenerate with `python3 build_gaps.py` after any extraction. `python3 build_gap
 - `stated_limits` needs a second pass.
 - Whether the author version differs materially from the published text.
 
+## `monteirodasilva2024subsampled` — 6 items
+
+*confidence:* **high for the four quoted strings** (machine-verified 4/4 against the retrieved full text). **Low for sections B, C and E generally** — this is a deliberately partial pass taken to close a bibliography gap, and the fields that would need a full read are marked `UNRESOLVED` rather than guessed. **Do not treat this note as a complete extraction.**
+
+- **The subsampling depth grid** (`max_seq`/`max_extra_seq` values) — the reason a subsampling paper matters to us, and not extracted.
+- **Panel size** — how many kinase cores, how many mutants.
+- **The NMR correlation coefficient.**
+- Whether MSA depth and mutation are genuinely crossed or staged.
+- Anti-memorization design; confidence behaviour; all figures.
+- **A full second pass is owed.** Recorded here so a future session does not mistake this for a finished note.
+
 ## `richman2025conformix` — 6 items
 
 *confidence:* **medium.** High on identity, venue, benchmark construction, Table 1, the oracle routes 1/5/6/7, the memorization admission and the stated limits, all read directly from the PDF text layer. **Low on the figure table below Figure 5** — supplementary panels were located by page and caption but not viewed, and are marked as such rather than guessed. Also low on sampling budget and the coverage thresh
@@ -1028,6 +1039,16 @@ Regenerate with `python3 build_gaps.py` after any extraction. `python3 build_gap
 - **How non-binder ligands were chosen** is not described in the retrieved Methods.
 - Ligand pLDDT values are given as distributions in figures, not as numbers in the text.
 
+## `delalamo2022sampling` — 5 items
+
+*confidence:* **high for the eight quoted strings** (machine-verified 8/8). **Medium for §B and §E** — the retrieved body is 25,775 characters and several numeric thresholds are elided in it (TM-score cutoffs read as "≥0." where the digit did not survive extraction). **Do not quote a TM threshold from this note.**
+
+- **The TM-score threshold** behind "high accuracy" — truncated in the retrieved text.
+- **The per-GPCR breakdown**: which of CGRPR / PTH1R / FZD7 reached which state, at what depth, and whether any reached active *without* a template contribution.
+- Whether pLDDT was tested as a state selector.
+- Figures not viewed; figure supplements not retrieved.
+- **Whether "active" was the memorised default for these three receptors** — quote 6 raises it and the paper does not resolve it. **This is the question that decides how much of a threat the paper is.**
+
 ## `eddy2018extrinsictrp` — 5 items
 
 *confidence:* **high for every quoted string** — **all 7 double-quoted verbatim spans in this note were machine-verified against the retrieved full text (7/7) by `validate/quotecheck_plaintext.py`, which self-tests that it can both pass and fail.** It caught one real defect on its first run: quote 3 originally elided "( Figure 3 )" without marking the elision, now marked. Every number in §E was taken from the X
@@ -1037,6 +1058,16 @@ Regenerate with `python3 build_gaps.py` after any extraction. `python3 build_gap
 - **Figures S1–S9 not retrieved.**
 - **Whether the 21-mer carries the C379A substitution** used by `mazzoni2000gsctpeptide` is not stated here — the text says only "21-residue synthetic polypeptide corresponding to residues 374–394". Given the nine opsin α5 entries are *all* mutants, this matters and is worth resolving.
 - **n = 1.** No replicate, error bar or repeat is reported for the Figure 4 peptide titration anywhere in the retrieved text. The result is a single spectrum pair.
+
+## `ibrahim2019a100` — 5 items
+
+*confidence:* **high for every quoted string, and the caveat below is the reason to trust that rather than a reason to doubt it.** All blockquoted spans machine-verified against the PDF text layer (9/9). A second pass over **every** `"…"` span in the note — not just blockquoted ones, which is all `validate/quotecheck_plaintext.py` covers — found **four** affected by the artifact below; all four are now marked o
+
+- **Whether the Python script and web page are still obtainable** seven years on. Cheap to check and decides whether this is an adoptable instrument or only a citation.
+- Training-set composition — which receptors, how many trajectories, how long.
+- Which database supplied the experimental activation-state assignments for the 268.
+- Whether the nanobody observation (quote 5) is quantified anywhere in the body.
+- **The PDF.** Needs a library route; ACS is bot-walled and that was not circumvented.
 
 ## `kohlhoff2014gpcr` — 5 items
 
@@ -1075,6 +1106,15 @@ Regenerate with `python3 build_gaps.py` after any extraction. `python3 build_gap
 - Figure panels not viewed; per-panel n taken from the Methods statement rather than captions.
 - The paper is 2017 and the debate has moved; `qin2011preassembly` (Gq, argues FOR) and `nobles2005precoupling` (argues FOR) are cited here but are **not yet extracted** in this corpus, so this note currently presents one side of a contested question with the other side bibliography-only.
 - Whether any later work overturns the ~3% endogenous bound was not checked.
+
+## `chakravarty2024memorization` — 4 items
+
+*confidence:* **high for every quoted string** — all verified mechanically against the retrieved full text by `validate/quotecheck_plaintext.py`. **Medium** for section-level attribution: PMC XML does not carry page numbers, and I have assigned quotes to Results / Fig. captions / Methods by position in the body, not from a printed article.
+
+- **No page numbers.** Printed pages are Nat Commun 15:7296 (article-numbered). Section names are the locator.
+- **Supplementary figures not retrieved**, including the AF2-multimer and AF3 panels.
+- **The per-method breakdown of 32/92** — which of the AF2 protocols and AF3 contributed what — is not extracted here.
+- **Figures not viewed.**
 
 ## `chiesa2025templatebias` — 4 items
 

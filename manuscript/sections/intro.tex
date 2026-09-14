@@ -134,9 +134,15 @@ multi-state survey concludes that pLDDT and PAE ``are not reliable selectors of 
 physically meaningful alternative states'' \citep[p.~15]{ye2026multistatebias}; and on GPCR peptide
 complexes specifically, PAE over-estimates confidence precisely where the peptide has been placed
 incorrectly, so confidence-first filtering cannot separate correct from incorrect placement
-\citep{junker2026peptidedesign}. Sampling harder and ranking by confidence is therefore not a route to a
-chosen state, and this constrains everything that follows: any method claiming a state must supply
-a state criterion independent of the model that produced the structure.
+\citep{junker2026peptidedesign}. On the largest test of the question --- 92 fold-switching proteins
+whose \emph{both} conformations were deposited before training --- the failure is not neutrality but
+inversion: ``both plDDT and pTM scores assigned lower confidences to diverse correctly predicted
+conformers and higher confidences to predictions that have not been observed experimentally'', and
+the structure module ranks the lower-energy conformer above the higher-energy one ``50\% of the
+time, equal to random chance'' \citep{chakravarty2024memorization}. Sampling harder and ranking by
+confidence is therefore not merely uninformative but actively misleading, and this constrains
+everything that follows: any method claiming a state must supply a state criterion independent of
+the model that produced the structure.
 
 Attempts to recover more than one state divide cleanly by where they intervene, and the oldest
 family intervenes on the input. The simplest version samples harder without steering at all, either
@@ -144,18 +150,29 @@ by injecting dropout at inference and generating thousands of models per target
 \citep{wallner2023afsample}, or by retraining a predictor on a conformationally split databank and
 drawing on the order of a hundred samples per target, which recovers a held-out conformation for
 52\% of targets but only as a best-of-N result with no rule for picking the right sample
-\citep{bryant2024cfold}. The alignment has been manipulated in most of the ways available: clustered by
+\citep{bryant2024cfold}. The alignment has been manipulated in most of the ways available: reduced in
+depth to as few as sixteen sequences, with recycling cut to one, which recovers both conformations of
+five transporters and three GPCRs \citep{delalamo2022sampling}; clustered by
 edit distance so that different subsets favour different conformations \citep{waymentsteele2024cluster},
 a mechanism subsequently challenged as no better than random shallow subsampling
 \citep{schafer2025confounds} and then defended with column-shuffling controls \citep{waymentsteele2025reply};
 subsampled below the depth at which coevolutionary signal survives \citep{lee2025seqassoc}; edited by
 in-silico alanine mutagenesis of alignment columns \citep{stein2022speachaf}; and masked at a tuned
 column fraction \citep{kalakoti2025afsample2,kalakoti2026afsample3}, including masking restricted to the
-neighbourhood of the orthosteric pocket in class A receptors \citep{mitjavila2026afsample2t}. Tested head
-to head against the same targets, however, ``MSA-level manipulation alone, whether through
-evolutionary clustering or random subsampling, is largely insufficient to overcome the systematic
-conformational bias observed across the deep learning tools evaluated in this study''
-\citep[pp.~16--17]{ye2026multistatebias}.
+neighbourhood of the orthosteric pocket in class A receptors \citep{mitjavila2026afsample2t}. Whether any of this reaches
+the GPCR active state is contested, and the disagreement is instructive. Depth reduction recovers
+both the inactive and the active conformation of three receptors spanning classes A, B1 and F
+\citep{delalamo2022sampling}; tested head to head on $\beta_2$AR against AlphaFold3-lineage
+backbones, however, ``MSA-level manipulation alone, whether through evolutionary clustering or
+random subsampling, is largely insufficient to overcome the systematic conformational bias observed
+across the deep learning tools evaluated in this study'' \citep[pp.~16--17]{ye2026multistatebias}.
+Three differences separate them --- structural templates are supplied in the first and withheld in
+the second, the backbone is AlphaFold2 rather than the AlphaFold3 lineage, and no receptor is shared
+--- and none of the three has been varied deliberately. What the earlier work does settle is the
+direction in which such a result must be read: its authors attribute the recovery to a training set
+that ``featured the structures of many active GPCRs'' \citep{delalamo2022sampling}, so reaching the
+active state is what the memorised prior already does, and only the inactive direction distinguishes
+steering from recall.
 
 The other input-side family supplies the answer rather than perturbing the question.
 State-annotated GPCRdb templates combined with deletion of the alignment allow an operator to
@@ -297,12 +314,14 @@ self-confidence, with no activation state assigned to any model \citep{pandyszek
 one study that does verify covers 63 pairs \citep{chiesa2025templatebias}, two orders of magnitude fewer
 than the unverified resources. That asymmetry matters, because it is the large unverified
 collections, not the small verified one, that downstream work treats as a source of active-state
-structures. The instrument needed to close the loop already exists: a learned classifier separates
-active from inactive deposited GPCR structures with near-perfect discrimination, and its authors
-propose the missing experiment themselves, that ``By applying HYALINE to AlphaFold 3-generated GPCR
-models, researchers can obtain rapid, quantitative estimates of whether the predicted structure
-represents an active, inactive, or intermediate conformation'' \citep[p.~11]{khaleq2026hyaline}. No such
-experiment is reported there or anywhere else in this corpus.
+structures. The instruments needed to close the loop already exist, in two
+independent forms: a geometric index with published cut-offs that assigns class A activation state
+from five inter-helical distances \citep{ibrahim2019a100}, and a learned classifier that separates
+active from inactive deposited GPCR structures with near-perfect discrimination, whose authors
+propose the missing experiment themselves --- that ``By applying HYALINE to AlphaFold 3-generated
+GPCR models, researchers can obtain rapid, quantitative estimates of whether the predicted structure
+represents an active, inactive, or intermediate conformation'' \citep[p.~11]{khaleq2026hyaline}. No
+such experiment is reported there or anywhere else in this corpus, with either instrument.
 
 Underlying all of this is a measurement problem that the field has not settled. Of the 31 papers
 surveyed here that concern receptors, 13 either call the activation state from a structural overlay
@@ -315,8 +334,17 @@ and span an order of magnitude, from roughly 18\,\AA{} at the cytoplasmic end of
 GCGR \citep[p.~3]{hilger2020gcgr}, to about 14\,\AA{} for full activation of
 $\beta_2$AR \citep[p.~13]{ye2026multistatebias}, to a combined TM6--TM7 shift of about
 2\,\AA{} in a bistable opsin \citep{tejero2024opsin}. Each is a measurement of an observed
-difference between two solved structures rather than a threshold that could be applied to an
-unseen one.
+difference between two solved structures rather than a rule that could be applied to an unseen one.
+
+Such a rule does exist, and its neglect is more telling than its absence would be. A universal
+activation index for class A receptors, trained on microsecond simulations and validated against
+268 crystal structures spanning 50 receptors, assigns state from five inter-helical
+C$\alpha$--C$\alpha$ distances with published cut-offs, and its authors state that it ``can thus be
+used to classify both experimental and computational GPCR structures''
+\citep[p.~3938]{ibrahim2019a100}. It has been available since 2019, it is reimplementable from the
+paper, and no study in this corpus applies it --- or any other predicate fixed in advance --- to a
+predicted receptor structure. The gap is not that the field lacks an admission rule. It is that the
+rules it has are used to describe structures that are already solved.
 
 Some of that heterogeneity is principled rather than careless, and it constrains what a better
 criterion can look like. Activation is not a switch: class A receptors are described as

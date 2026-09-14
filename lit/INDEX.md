@@ -73,6 +73,16 @@ figs: 13 panel-group rows
 tags: general-protein cofolding no-template-no-msa templates-on single-state binary-predicate continuous-metric saturating-metric anti-memorization confidence-as-discriminator multi-backbone oracle-leak design-level-oracle preprint precedent background comparator-numbers
 stance: precedent + background — MSA-free parity numbers and the 2021-01-12 training cutoff
 
+### chakravarty2024memorization — 2024, Nat. Commun. 15:7296, peer-reviewed (open access)
+claim: Across 92 fold switchers whose both conformations predate AF2 training, AF2 methods and AF3 succeed on 32/92, and AF2 confidence does not merely fail to rank alternative conformations — it selects against the experimentally observed ones.
+system/method: general protein (92 fold-switching proteins, both conformations deposited pre-training); NO GPCR | benchmark-only, adversarial | AF2 (+ AF-Cluster, shallow subsampling), AF2Rank, AF3
+states: two-state by construction (Fold1/Fold2), ensembles reranked by confidence into Top1/Top10/All | metric: similarity to two deposited folds + confidence-stratified success (bands at 70/80/90% of residues with Ca plDDT >= 70) | prospective: no
+oracle: routes 5,6 by design — success is similarity to two known deposited folds; the design is adversarial so the leakage is the instrument
+figs: NOT EXTRACTED (panels not viewed); captions only. CC BY
+tags: general-protein fold-switching msa-subsample af-cluster benchmark-only two-state ensemble rmsd-only confidence-as-discriminator anti-memorization multi-backbone peer-reviewed precedent threat negative-result comparator-numbers
+provenance: **NO PDF.** PMC11344769 full-text XML; text at `source/pending_text/` (not in git). 9 quoted spans machine-verified 9/9. Section locators, no pages. Added 2026-09-14 from a bibliography sweep.
+stance: **precedent + threat, and it is now the strongest C8 support in the corpus.** Our other C8 papers report an ABSENT relationship; this one reports an INVERTED one — "both plDDT and pTM scores assigned lower confidences to diverse correctly predicted conformers and higher confidences to predictions that have not been observed experimentally", and the structure module picks the lower-energy fold better and more confidently only "50% of the time, equal to random chance". Threat because it generalises: "AF2's inability to discriminate ... suggests that its confidence metrics may have broader limitations." NOT `chakravarty2026statespace` (same lab, 2026 roadmap).
+
 ### chakravarty2026statespace — 2026, arXiv preprint (q-bio.BM)
 claim: Structure prediction should be reformulated as inference of a conformational state space p(X|S,C), not one dominant conformation.
 system/method: general protein | perspective/review + roadmap (no method run) | n/a
@@ -155,6 +165,17 @@ tags: gpcr experimental two-state continuous-metric orthosteric partner-driven p
 provenance: **NO PDF.** Extracted 2026-09-11 from PMC6192543 full-text XML; text at `source/pending_text/eddy2018extrinsictrp.txt` (not in git). All 7 quoted spans machine-verified (`validate/quotecheck_plaintext.py`, 7/7, self-tested both directions). Cite as `[eddy2018extrinsictrp, Results]`.
 stance: precedent + background — **the primary source for the manuscript's own number 21**: residues 374-394 of GαS at 10-fold molar excess, read at the cytoplasmic end of TM6. Found only by disproving `georgiou2025heterogeneity`'s misattribution of it to that review's ref 155. Not a contrast paper: runs no predictor, claims no priority. Silent on NPxxY (W290/7.55 gives no agonist-complex signal). Its own ref 14, `mazzoni2000gsctpeptide`, reports the same peptide ABOLISHES Gs signalling.
 
+### delalamo2022sampling — 2022, eLife 11:e75751, peer-reviewed (CC BY)
+claim: Reducing MSA depth to as few as 16 sequences and recycles to one makes AF2 sample BOTH conformations of five transporters and THREE GPCRs — inactive and active — including states absent from its training set.
+system/method: membrane proteins: 5 transporters + 3 GPCRs (CGRPR, PTH1R class B1, FZD7 class F); none in our panel | MSA subsampling + reduced recycling, released pipeline | AF2 only
+states: two per target, ensemble across depths; for GPCRs the axis IS inactive/active | metric: TM score to each deposited reference + PC1 of the ensemble; NO operationalised activation predicate | prospective: partial (GPR114/ADGRG5 applied prospectively)
+oracle: routes 5,6 — success is TM to two known deposited references; anti-memorization is the paper's own framing (targets chosen with a state absent from training)
+figs: NOT EXTRACTED (panels not viewed); Fig 1B is the depth-vs-similarity panel. CC BY — redrawing permitted, unusual in this corpus
+tags: gpcr transporter msa-subsample templates-on two-state ensemble rmsd-only continuous-metric anti-memorization directed-state peer-reviewed threat precedent comparator-numbers
+provenance: **NO PDF.** PMC9023059 full-text XML; text at `source/pending_text/` (not in git). 8 quoted spans verified 8/8. Section locators. **Added 2026-09-14 by `validate/bibsweep.py` — it is cited by 10 of our other 83 papers and was absent.**
+corrections: **This paper falsifies a negative lit-3d gave the orchestrator on 2026-09-12** — that no paper reports active-state GPCRs from shallow-MSA sampling without a transducer. It does. **Four caveats bound it and all are real:** templates are ON (`subsample_templates=True`, similarity cutoff cut 10%→1%) and the paper shows templates carry state information at shallow depth, so it is NOT an MSA-only result; three GPCRs, one per class, none in our panel; state is TM-to-reference, not a predicate; and the authors attribute performance to training composition — "many active GPCRs" were in the training set, so **if active is the memorised default, reaching active is not evidence of steering — reaching inactive would be.**
+stance: **threat + precedent.** The strongest published counter to any claim that a partner co-input is NECESSARY to reach the GPCR active state. Must be met head-on, not omitted.
+
 ### ekstromkelvinius2024discriminator — 2024, AISTATS (PMLR 238:3403-3411), peer-reviewed
 claim: Discriminator guidance transfers to discrete autoregressive diffusion; an optimal discriminator gives exact sampling, and SMC variants handle a suboptimal one.
 system/method: 2-D molecular graphs, QM9 + MOSES (NOT protein, NOT 3-D) | inference-time discriminator guidance + SMC | ARDM; DiGress comparator
@@ -217,6 +238,16 @@ oracle: routes 1,7 — deposited starting models for cryo-EM refinement; design-
 figs: 20 panel-group rows; no-reuse licence (Science 2020, all rights reserved)
 tags: gpcr experimental md single-state continuous-metric visual-metric ligand-driven partner-driven nanobody apo-sampling orthosteric peer-reviewed precedent background comparator-numbers
 stance: precedent on findings + background on method — agonist occupancy is not the active state
+
+### ibrahim2019a100 — 2019, J. Chem. Inf. Model. 59(9):3938-3945, peer-reviewed
+claim: A five-distance index trained on microsecond MD reproduces the experimental activation-state assignment of 268 deposited class A GPCR structures (two-state: 94% actives, 99% inactives) and ships as runnable code.
+system/method: GPCR class A, universal across the class; 268 X-ray structures tested | other — trained structural index / classifier, nothing generated | n/a
+states: NOT APPLICABLE — classifies deposited and computed structures | metric: **operationalised index on five interhelix Ca-Ca distances**, three-class (active/intermediate/inactive) and two-state models | prospective: NOT APPLICABLE
+oracle: UNRESOLVED (abstract-only); train on MD, test on X-ray is a genuine separation
+figs: PDF now held (8 pp). Table 3 (p.3942) = per-structure A100 values for nanobody complexes; Fig 3 = A100 histograms by assigned state. Panels not yet viewed
+tags: gpcr two-state binary-predicate continuous-metric peer-reviewed precedent comparator-numbers
+provenance: **`v3.2`, UPGRADED 2026-09-14 — PDF supplied by Aditya through institutional access and now held.** Was abstract-only for one day (closed access, ACS bot-walled). Abstract is the publisher's own via Europe PMC, at `source/pending_text/ibrahim2019a100.abstract.txt`. 6 quoted spans verified 6/6. **PAGE OFFSET +3937** (PDF p1 = printed 3938), auto-detected by `validate/pageoffset.py`. **⚠ The PDF is two-column and `pdftotext` INTERLEAVES the columns — equation (1) and three other sentences are split across column breaks and have no contiguous form. Check for interleaving before quoting anything from this paper.**
+stance: **precedent, and an instrument we may be able to ADOPT rather than only cite.** The project has recorded that no reimplementable operationalised class A activation predicate exists — `paajanen2026activation` ships no weight vector or repository, `khaleq2026hyaline` never reports its threshold. This one says "The model is available as a Python script or via an interactive web page ... can thus be used to classify both experimental and **computational** GPCR structures" — our exact use case, and the candidate independent index E0.2 could not find. **Two further hooks:** its three-class model reports intermediates and splits them **2:1 toward active**, bearing on the agonist-only calibration question; and **"many active nanobody structures are predicted to be weakly active"**, which contradicts the convention (explicit in `khaleq2026hyaline`) that nanobody-bound = fully active. **Blocking unknown: which five distances and what thresholds — not in the abstract.**
 
 ### ingraham2023chroma — 2023, Nature 623(7989):1070-1078, peer-reviewed (CC-BY)
 claim: A programmable protein diffusion model samples novel structures and sequences and is steerable at sampling time by constraints including classifier and natural-language conditioning; 310 designs assayed.
@@ -477,6 +508,16 @@ oracle: route 5 definitional, route 7 design-level; routes 1-4 and 6 NOT REPORTE
 figs: NOT ENUMERATED. ND licence - redrawing forbidden
 tags: general-protein kinase cofolding benchmark-only multi-backbone single-state rmsd-only binary-predicate design-level-oracle no-anti-memorization ligand-driven orthosteric allosteric-site allosteric-failure peer-reviewed precedent contrast negative-result
 stance: precedent + contrast - the cleanest matched orthosteric-vs-allosteric design in the corpus (same proteins, same models, only the site type varies). No GPCR, no conformational axis. Note is thin: cite for the design, not for a number.
+
+### monteirodasilva2024subsampled — 2024, Nat. Commun. 15(1):2464, peer-reviewed (open access)
+claim: Subsampled AF2 predicts how mutations shift the RELATIVE POPULATIONS of kinase-core conformational states, not merely which states are reachable, at up to 80% sign accuracy and correlating with NMR.
+system/method: general protein — Abl1 kinase core across the Src-to-Abl1 line, plus GMCSF; NO GPCR | MSA subsampling at inference with a population readout | AF2 only
+states: **a distribution, not a state** — the output is a predicted population over conformations | metric: active-state population fraction vs experiment | prospective: no
+oracle: UNRESOLVED — not extracted
+figs: NOT EXTRACTED (panels not viewed)
+tags: general-protein kinase msa-subsample ensemble continuum continuous-metric experimental-validation peer-reviewed precedent contrast comparator-numbers
+provenance: **NO PDF.** PMC10973385 full-text XML; text at `source/pending_text/` (not in git). 4 quoted spans verified 4/4. **DELIBERATELY PARTIAL PASS** taken to close a bibliography gap — sections B, C and E are low-confidence and a full second pass is owed; see `unresolved`.
+stance: **precedent + contrast, and it is the corpus's only population-level subsampling result.** Every other subsampling paper here asks whether the alternative state is reachable; this one asks what fraction of the ensemble occupies it, and validates against NMR. **That is the published warrant for treating our own per-cell prediction fractions as ensemble-like** — the distinction this project needed for `vo2026fiducials` vs `georgiou2025heterogeneity` and again for the C7 readouts. Transfers as method, not biology: kinases, and its populations are sequence-driven, never co-input-driven.
 
 ### obendorf2026statespecific — 2026, bioRxiv preprint
 claim: Ligand placement is accurate but decoupled from global conformational state; state-annotated templates and state-filtered MSAs fail to enforce a state.

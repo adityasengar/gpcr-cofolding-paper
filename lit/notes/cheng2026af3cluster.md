@@ -1,5 +1,14 @@
 # cheng2026af3cluster
 
+> **PDF SUPPLIED 2026-09-14 and now held at `pdfs/cheng2026af3cluster.pdf` (13 pp).**
+> Title confirmed: *"Generalized Multi-State Protein Design with AlphaFold3"*, Cheng, Guo, Seo,
+> Goverde & Jin, GEM workshop @ ICLR 2026. **The `abstract-only` restriction below is now
+> LIFTED in principle — the body is readable — but this note has NOT yet been re-passed, so
+> every body-level field in it is still UNVERIFIED and must not be quoted.** A full v3.2 pass is
+> owed and is the highest-value one outstanding, because this is the novelty-boundary paper for
+> "MSA clustering + AF3, best on binder-mediated transitions".
+
+
 > **EXTRACTION PROVENANCE — READ BEFORE CITING.** Extracted 2026-09-10 from the **OpenReview
 > abstract page only**, read directly in a browser. **The PDF was NOT retrieved**: openreview.net
 > returns 403 to scripted requests and its in-browser viewer rendered blank; the download link did
