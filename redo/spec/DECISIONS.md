@@ -1158,6 +1158,73 @@ parked experiment whose stated rationale the data refutes is how a bad idea come
 
 ---
 
+## F-33 · When the selection criterion is the result, the agreement is not information
+
+**2026-09-14. Sibling to F-32, and between them they cover most of what went wrong
+this week.** F-32 is about **denominators** — what could never have been in the
+numerator. This one is about **selection** — how the thing being reported was chosen.
+
+### The general form
+
+> **When the criterion by which something was selected is the result it is being
+> offered as evidence for, the agreement carries no information.**
+
+### Three instances, and the first is mine from today
+
+**1. The A100 orientation.** I offered `r(a100_index, tilt) = +0.846 / +0.764` to lit
+as partial corroboration that our relayed transcription of Ibrahim's coefficients was
+correctly oriented. **I reported it after seeing it point the right way.** A statistic
+selected because it agreed is not independent evidence that it agrees. Had it come out
+negative I would have investigated a sign error rather than published the correlation
+— which is the definition of a selected statistic. Lit has held the note at
+"consistent with" and recorded that it must not be strengthened later.
+
+**2. Subsampling-method selection** — already on record against the MSA arm. *If we
+pick the subsampling technique that produces the most active-state calls, we have
+picked the method that best mimics our own result.* Identical shape: the selection
+criterion (yields active calls) is the result (active calls).
+
+**3. `delalamo2022sampling`'s own caveat, turned on us.** Its authors write that AF2
+reaches active GPCR states because *"the composition of the AF2 training set …
+featured the structures of many active GPCRs"*. **If active is the memorised default,
+then reaching active is what the null does**, and any method selected for reaching
+active has been selected for agreeing with the prior. **Reaching INACTIVE is the
+informative direction.** This is a design constraint on the MSA arm, not a rebuttal to
+cite.
+
+### The rule this imposes on the redo, and it is cheap because nothing has run
+
+**Every arm whose method or parameter is CHOSEN must have the choice rule
+pre-registered, and the rule must not mention the outcome.** Select on a property of
+the *input* (alignment depth, sequence diversity, cluster count), never on a property
+of the *output* (predicate-active fraction, agreement with our call). Where a method
+must be chosen by performance, choose it on a **held-out** system set that is not in
+the reported panel, and say so.
+
+### The immediate application: the nanobody test, pre-registered before it runs
+
+`ibrahim2019a100` reports that *"many active nanobody structures are predicted to be
+weakly active"*. Block D2's nanobody arms are held at row level (2,370 rows,
+`input_state_claim` carries the arm directly), so the test is **free**.
+
+**Lit's framing is better than the one I would have used and is hereby the
+pre-registered one.** `khaleq2026hyaline`'s label rule counts G-protein-mimetic
+nanobody-bound structures as active **by construction** (p.12). So if A100 calls our
+nanobody arms weakly active:
+
+- the disagreement is **not** "our labels may be wrong";
+- it is a measured gap between **two published conventions**, one **geometric**
+  (A100) and one **pharmacological** (nanobody-mimetic ⇒ active);
+- and **nobody has measured that gap on predicted structures.**
+
+**Write this expected shape down before the numbers are seen**, because both outcomes
+are then reportable: a gap is a result about the conventions, and no gap is a
+concordance result that strengthens both. **Neither reading is available afterwards to
+someone who looked first.** That is the whole point, and it is the failure mode that
+produced three retractions in a single day.
+
+---
+
 ## F-32 · A count is not a rate until you can name the denominator AND what could never have been in the numerator
 
 **2026-09-14.** Two failures found the same day, one in the corpus and one in the
