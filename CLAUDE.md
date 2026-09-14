@@ -160,7 +160,8 @@ honest one and the prose around it has been wrong twice:**
 | `ligands.py` | yes | 10/10 |
 | `drule.py` | yes | 16+ checks |
 | `layout.py` | yes — **two flags** | `--selftest` L2 (6 plants); `--selftest-all` L1 and L3–L7 (6 plants) |
-| `run_receipt.py`, `panel_verify.py` | **none** | — |
+| `run_receipt.py` | yes — **11 plants** | R1–R4, each planted twice (wrong value AND missing column), plus two structural cases. Added 2026-09-14; found two defects on its first run |
+| `panel_verify.py` | **none** | — |
 | `seqrec_verify.py` | `--plant` *(different flag)* | a roster defect |
 
 **Do not read a gate's tally as coverage of the gate.** `layout.py --selftest`
