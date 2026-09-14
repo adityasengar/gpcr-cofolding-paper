@@ -1158,6 +1158,63 @@ parked experiment whose stated rationale the data refutes is how a bad idea come
 
 ---
 
+## F-32 · A count is not a rate until you can name the denominator AND what could never have been in the numerator
+
+**2026-09-14.** Two failures found the same day, one in the corpus and one in the
+data, and they are the same failure. Recorded in the general form because the
+specific forms have each already happened twice.
+
+**The corpus half.** Lit told me on 2026-09-12: *"no paper anywhere reports getting
+active-state GPCRs from shallow-MSA sampling with no transducer."* One does —
+`delalamo2022sampling`, *eLife* 2022, cited by **10 of our own 83 sources** and never
+in the corpus. The sentence was a claim about **our shelf** stated as a claim about
+**the literature**, and nothing had ever measured the difference. Their words: *"a
+negative stated over a corpus is only as strong as the corpus's own completeness."*
+
+**The data half — F-28.** EDNRB and GRPR carry **leucine at 7.53**, so
+`d(Y5.58-OH, Y7.53-OH)` is not a quantity that exists for them. All 1,960 of their
+rows are `nan` on that axis. They were entered in a published concordance table at
+**0% active**, which reads "never active" and means **"never measurable"**.
+
+**Lit's reading, and it is right: the data half is worse.** A corpus negative is at
+least visible as an absence once somebody asks. **A null over an undefined population
+looks like data.** It has a value, a row count, and a confidence interval, and every
+one of them is well-formed.
+
+**The generalisation, which covers both and the next one:**
+
+> **A count is not a rate until you can name what was in the denominator and what
+> could never have been in the numerator.**
+
+`0/990` and `0/990 where the numerator was never measurable` are different objects
+that print identically.
+
+**Where this already bit, four times:**
+
+| | the count | what could never have been in the numerator |
+|---|---|---|
+| **F-28** | EDNRB/GRPR at 0% active | no NPxxY tyrosine to measure |
+| **F-23** | C7 "answered" from 40,800 rows | **no ligand-free row exists**; "apo" meant no partner |
+| **F-19** | the decoy arm as a controlled negative | no property-matched decoy exists for a third of the panel |
+| **corpus** | "no paper reports X" | the paper that reports X was not on the shelf |
+
+**How to apply.** Before reporting any rate, fraction or "none found":
+
+1. **State the denominator's construction rule**, not just its size.
+2. **State what is excluded by definition rather than by outcome** — a level that
+   cannot occur is not a level that did not occur.
+3. **For a corpus negative, report the corpus's own completeness** alongside it.
+   `lit/validate/bibsweep.py` is that denominator and it did not exist before
+   2026-09-14.
+4. **Treat an all-empty or all-`nan` column as informative**, never as absent
+   (`prove-the-population-not-the-plumbing`).
+
+**No gate catches this class and none of ours ever did.** `verify.sh` was green
+through every one of the four. A gate checks that a computation is right; this is a
+defect in what the computation is **about**, and it is found by reading a file.
+
+---
+
 ## F-31 · E0.2 is ANSWERED, free, on 36,860 predictions — the independent index was in our own pipeline all along
 
 **2026-09-14.** The lit session flagged `ibrahim2019a100` (JCIM 2019,
