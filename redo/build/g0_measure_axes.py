@@ -447,25 +447,86 @@ def measure(api: Api, pdb: str, entry: str, preferred_chain: str | None = None,
             {"auth_chain": c, "unp_start": 1, "unp_end": 10 ** 6, "offset": 0,
              "accession": "?"} for c in chains])]
 
+    # THE TWO AXES ARE MEASURED INDEPENDENTLY.
+    #
+    # Until 2026-09-14 this loop broke on the first anchor that failed and kept a
+    # result only `if len(got) == 4`, so a non-Tyr at 5.58 -- which is a fact
+    # about the NPxxY axis and says nothing whatever about TM6 -- discarded the
+    # tilt measurement too. It cost 234 of 726 calibration structures their tilt
+    # value, on the axis that turns out to separate the states BETTER than the
+    # one that vetoed it, and it fell hardest on the scarce inactive class.
+    #
+    # §5's Q0b is right that "the quantity does not otherwise exist" -- for the
+    # NPxxY axis. It is not a reason to refuse d(2x46 CA, 6x37 CA), which shares
+    # no atom, no residue and no identity requirement with it.
+    #
+    # Ordering is preserved exactly: a (strategy, chain) resolving BOTH axes
+    # still wins over any later one, and over any that resolves only one, so
+    # every value this function produced before it produced the same way.
+    # Each anchor carries its OWN expected residue, and the tilt anchors now use
+    # theirs. `lookup_generic` has always returned (position, expected_aa) for
+    # 2x46 and 6x37 -- the value was simply discarded, and the tilt axis rode on
+    # the NPxxY tyrosine check for its evidence that the numbering had landed.
+    #
+    # That was invisible while both axes had to resolve together. The moment they
+    # were separated it produced d(2x46, 6x37) up to 71.5 A on 42 structures --
+    # impossible in a folded 7TM bundle, and the same wrong-residue failure §3.3
+    # documents for the T4-lysozyme fusions, re-opened. Rows passing both axes
+    # max out at 20.14 A.
+    #
+    # §3.3's rule is the one that has to hold per axis: "A number is never
+    # produced by a strategy that could not prove it landed on the right
+    # residue." NPXXY_EXPECT_AA stays hardcoded because the NPxxY tyrosines are
+    # the definition of that axis; the tilt anchors take whatever GPCRdb says
+    # they are for this receptor.
+    AXES = {"npxxy": (("5.58", "OH", NPXXY_EXPECT_AA),
+                      ("7.53", "OH", NPXXY_EXPECT_AA)),
+            "tilt": (("2x46", "CA", anchors["2x46"][1]),
+                     ("6x37", "CA", anchors["6x37"][1]))}
     fails = []
+    partial = None                      # best single-axis candidate seen so far
     for strat_name, strat_segs in strategies:
         for chain in chains:
-            got = {}
-            fail = ""
-            for label, atom_name, expect in (
-                    ("5.58", "OH", NPXXY_EXPECT_AA), ("7.53", "OH", NPXXY_EXPECT_AA),
-                    ("2x46", "CA", None), ("6x37", "CA", None)):
-                pos = anchors[label][0]
-                ach, auth = unp_to_auth(strat_segs, pos, auth_chain=chain)
-                if auth is None:
-                    fail = (f"{label}: UniProt {pos} outside every {strat_name} "
-                            f"segment of chain {chain}")
-                    break
-                atom, note = pick_atom(atoms, ach, auth, atom_name, expect_aa=expect)
-                if atom is None:
-                    fail = f"{label}: {note}"
-                    break
-                got[label] = (atom, auth, note)
+            got, axis_fail, fail = {}, {}, ""
+            for axis, spec in AXES.items():
+                for label, atom_name, expect in spec:
+                    pos = anchors[label][0]
+                    ach, auth = unp_to_auth(strat_segs, pos, auth_chain=chain)
+                    if auth is None:
+                        axis_fail[axis] = (f"{label}: UniProt {pos} outside every "
+                                           f"{strat_name} segment of chain {chain}")
+                        break
+                    atom, note = pick_atom(atoms, ach, auth, atom_name,
+                                           expect_aa=expect)
+                    if atom is None:
+                        axis_fail[axis] = f"{label}: {note}"
+                        break
+                    got[label] = (atom, auth, note)
+                if axis in axis_fail:
+                    for label, _a, _e in spec:
+                        got.pop(label, None)
+            fail = " ; ".join(f"{a}: {m}" for a, m in axis_fail.items())
+            # SINGLE-AXIS ACCEPTANCE IS FOR SIFTS ONLY.
+            #
+            # §3.3: "identity is accepted only when all four anchors pass the
+            # same residue-identity check." That sentence is load-bearing and
+            # separating the axes broke it. The identity strategy ASSUMES auth
+            # numbering equals UniProt numbering and takes its entire validity
+            # from the identity evidence, so halving the anchors halves the
+            # evidence -- and two anchors match by chance often enough to matter.
+            #
+            # 6OS0/6OS1/6OS2/8TH4 are the demonstration: AGTR1's 7.53 is LYS at
+            # A/302 where the receptor has Tyr302, so offset 0 is simply wrong
+            # for that entry, yet 2x46 and 6x37 both happened to match and
+            # produced d = 55.8 A on a folded 7TM bundle.
+            #
+            # SIFTS is different in kind: its numbering comes from an external
+            # segment record, and the identity check tests it rather than
+            # constituting it. It can still be wrong (FFAR1 maps 6x37 onto auth
+            # 2225, inside the fusion -- that is Q4's job), but a per-axis
+            # acceptance there is evidence-backed and here it is not.
+            if len(got) == 2 and partial is None and strat_name == "sifts":
+                partial = (strat_name, chain, dict(got), dict(axis_fail))
             if len(got) == 4:
                 row["chain_used"] = chain
                 row["numbering_strategy"] = strat_name
@@ -484,6 +545,28 @@ def measure(api: Api, pdb: str, entry: str, preferred_chain: str | None = None,
                                          + f" [{strat_name}; SIFTS unusable: {fails[0] if fails else 'n/a'}]").strip()
                 return row
             fails.append(f"{strat_name}/{chain}: {fail}")
+
+    # No strategy resolved both axes. If one resolved a SINGLE axis, report that
+    # axis rather than throwing the structure away -- and say in `status` that
+    # the row is partial, so anything testing `status == "ok"` keeps excluding it
+    # and only code that asks for the axis itself sees the extra data.
+    if partial is not None:
+        strat_name, chain, got, axis_fail = partial
+        row["chain_used"], row["numbering_strategy"] = chain, strat_name
+        if "5.58" in got:
+            row["auth_5_58"], row["auth_7_53"] = got["5.58"][1], got["7.53"][1]
+            row["d_npxxy_oh"] = round(dist(got["5.58"][0], got["7.53"][0]), 6)
+            row["npxxy_note"] = " ".join(
+                f"{k}:{got[k][2]}" for k in ("5.58", "7.53") if got[k][2]).strip()
+        if "2x46" in got:
+            row["auth_2x46"], row["auth_6x37"] = got["2x46"][1], got["6x37"][1]
+            row["d_tilt"] = round(dist(got["2x46"][0], got["6x37"][0]), 6)
+            row["tilt_note"] = " ".join(
+                f"{k}:{got[k][2]}" for k in ("2x46", "6x37") if got[k][2]).strip()
+        row["status"] = "partial (" + "; ".join(
+            f"{a} unavailable: {m}" for a, m in axis_fail.items()) + ")"
+        return row
+
     row["status"] = " | ".join(fails[:4])
     return row
 

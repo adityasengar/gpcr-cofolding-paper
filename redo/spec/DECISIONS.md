@@ -1158,6 +1158,89 @@ parked experiment whose stated rationale the data refutes is how a bad idea come
 
 ---
 
+## F-30 · The two axes were never independently measurable, and unpicking that took three wrong turns
+
+**2026-09-14, after F-29.** The measurement now reports each axis on its own
+evidence. Getting there broke the instrument twice, and both breaks are more
+instructive than the fix.
+
+### The defect
+
+`measure()` resolved four anchors in one loop, `break`ing on the first failure and
+keeping a result only `if len(got) == 4`. So a non-tyrosine at 5.58 — a fact about
+the NPxxY axis, which shares no atom, residue or identity requirement with TM6 —
+**discarded the tilt measurement too**. It cost 234 of 726 calibration structures
+their tilt value. §5's Q0b is right that "the quantity does not otherwise exist"
+*for the NPxxY axis*; nothing licensed it gating the other one.
+
+### Wrong turn 1 — separating the axes removed the only numbering evidence
+
+Measuring them independently produced **42 structures with d(2×46, 6×37) above
+25 Å, up to 71.5 Å**, where every row that resolved both axes maxes at 20.14 Å.
+A Cα pair that far apart is not in a folded 7TM bundle.
+
+**The NPxxY tyrosine check had been doing double duty**: proving the NPxxY axis
+*and* proving the numbering had landed, for anchors that carry no identity
+requirement of their own. Invisible while both axes had to resolve together;
+immediate once they did not. This is §3.3's T4-lysozyme failure class re-opened
+by removing its guard.
+
+### Wrong turn 2 — the per-axis identity check was necessary and not sufficient
+
+`lookup_generic` has **always** returned `(position, expected_aa)` for 2×46 and
+6×37. The value was simply discarded. Using it cut the implausible values 42 → 7
+— and left seven.
+
+**AGTR1 is the demonstration.** `6OS0`: both tilt anchors on chain A at their
+expected auth positions, both passing identity, **55.8 Å apart**. The status line
+says why — 7.53 is LYS at A/302 where AGTR1 has Tyr302, so the `identity`
+strategy's offset-0 assumption is simply wrong for that entry, and the two tilt
+anchors matched their expected residues *by chance*.
+
+**§3.3 had already written the rule I broke**: *"identity is accepted only when
+all four anchors pass the same residue-identity check."* The identity strategy
+takes its entire validity **from** the identity evidence, so halving the anchors
+halves the evidence. SIFTS is different in kind — its numbering comes from an
+external segment record that the identity check *tests* rather than constitutes —
+so per-axis acceptance is evidence-backed there and was not here.
+
+Single-axis acceptance is now **SIFTS-only**. Implausible values: **42 → 7 → 3**.
+
+The remaining three are FFAR1 (`5KW2`, `5TZR`, `5TZY`), where SIFTS maps 6×37 onto
+**auth 2225** — inside the fusion. That is **Q4**, "fusion inside a measurement
+window excludes the structure", declared in §5 and not yet implemented. Left for
+Q4 rather than patched here, and Q7's declared outlier screen catches them anyway.
+
+### What actually changed, measured against the landed file
+
+| | |
+|---|---:|
+| previously-produced values that **changed** | **0** |
+| values **withdrawn** (no per-axis identity evidence) | **54** |
+| values **gained** | **115** |
+| calibration structures with a tilt value | 492 → **585** |
+| calibration receptors with a tilt value | 106 → **131** |
+
+**The withdrawals matter more than the gains.** Several sat on the decision
+boundary — `2YDO` 14.760, `4UHR` 14.920, `4UG2` 14.951 against a cut at 14.932 —
+produced by a numbering nothing had shown to be correct.
+
+### What it does NOT fix, and a number to stop quoting
+
+**The imbalance is not improved.** Calibration inactives with a tilt value go
+86 → **87**. The gain is almost entirely actives, so A:I moves 4.7:1 → **5.7:1**,
+the wrong way. D4 is unaffected by any of this.
+
+**And a correction to what I reported before the re-run.** On the intermediate,
+broken version the enlarged calibration set gave tilt-alone specificity of
+**85.1%** and I was about to treat it as evidence that the frozen cut was flattered
+by a selected population. It was not: those 42 impossible values were mine. On the
+sound measurement the number is **spec 100.0%, sens 96.6%, Youden +0.966** over
+585 structures — against **+0.973** on the 492 that the old coupling allowed.
+**The frozen tilt cut survives a 19% larger and less-selected calibration set.**
+
+---
+
 ## F-29 · E0.1's measurement pass is DONE — the population reproduces exactly, the axis-definable count does not, and the gap is Q6
 
 **2026-09-14. 1,357 structures measured, no GPU, ~4 h wall clock.**
