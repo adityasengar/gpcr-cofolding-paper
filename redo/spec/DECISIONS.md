@@ -77,6 +77,45 @@ nowhere - checked.
 
 ---
 
+## D-2026-09-14-b - Block D is not our problem; read access requested
+
+**Aditya, 2026-09-14: "why are we fixating on block D? we ignore it and move on, we
+anyways have to redo a lot of stuff."** Correct, and it collapses the question.
+
+**1. WE ARE NOT BLOCKED, SO THERE IS NOTHING TO DECIDE.** Their pre-commit gate
+blocks their own `pick_ga_chain` fix partly on `scorer_git_sha`, which wants Block D's
+landed rows to carry HEAD when they carry `d9c646a`. **That is their gate and their
+commit.** Our only stake is one sentence: do not rewrite frozen data to satisfy a
+check, because `CLAUDE.md` says Blocks A-D stay untouched and no new claim is built on
+them, and their own analysis says Bug #4's direction is conservative so nothing is
+inflated anyway.
+
+**And we are not waiting on their fix.** `run_receipt.py` R5 catches the residual
+whether or not it has landed. That is why it was worth writing today rather than
+after.
+
+I had started weighing whether rescoring was scientifically justified. Wrong question.
+Block D is the frozen record of a finished paper; the redo supersedes it; there is a
+great deal still to build. Spending judgement on someone else's blocked commit against
+data we have already agreed not to touch is effort pointed at the past.
+
+**2. READ ACCESS to the paper_af3 repo is requested** - read-only, so there is never
+more than one write-authority on a tree. Worth taking, but for migration and E8.3
+rather than for Block D's claims: their D1/D2/D3 `rows.csv` are tracked on
+`origin/main` at `10d6493` (30.9 / 5.3 / 56.6 MB), and E8.3 - the depth anchor, which
+is Blocking in six places - rests on the D1-vs-D3 discrepancy. A git remote is also a
+sturdier home for 89 MB than a drive being carried between laptops.
+
+**It changes nothing about the migration today.** `analysis/block_d/received_2026_09_13/`
+stays classified MOVE. Access asked for is not access granted, and a migration plan
+that assumes a pending permission has a hole in it. Reclassify only once a clone
+exists.
+
+**Also carried:** `block_d_freeze` does not exist; the citable anchor is `10d6493`. We
+cite it nowhere - checked, zero hits.
+
+---
+
 ## D-2026-09-14-a · Dispatch-readiness: seven decisions taken on delegation, all reversible until dispatch
 
 **Aditya, 2026-09-14: *"don't worry about simulations, we do the max possible .. just go
