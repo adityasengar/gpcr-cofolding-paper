@@ -114,9 +114,18 @@ Four rules, and `redo/gates/layout.py` enforces the first three:
    compares a file to its **own** recorded hash, so it catches an edit made
    *after* stamping and is blind both to a file **created by hand** and then
    stamped, and to a file that has gone **stale** against the inputs it derives
-   from. **14 of 64 inputs name no generator** (31 before the detector was fixed), and at least two — including
-   `g1_recording_spec.tsv`, the campaign's own recording contract — have no
-   writer anywhere in `redo/build/`. L8 reports the count on every run.
+   from. **15 of 65 inputs name no generator** (31 before the detector was fixed). L8
+   reports the count on every run. **The example this brief used to give was
+   wrong**: `g1_recording_spec.tsv` HAS a generator — `redo/build/g1_recording_spec.py`,
+   attributed in `MANIFEST.tsv`, and re-running it reproduces the file
+   byte-for-byte (checked 2026-09-14). It even refuses with a named FAIL when the
+   file has drifted from it. **So the recording contract is amendable by the
+   documented route** — edit the generator, re-run, `manifest.py` to restamp — and
+   that matters, because the contract records fewer confidence columns than Blocks
+   B and D already hold and the window to change it closes at dispatch. The
+   genuinely unattributable ones are different in kind: `g0_measurements.csv` and
+   `g0_pilot_measurements.csv` are written through an argparse `--out`, which the
+   static attribution walk cannot see by construction (F-22).
 2. **Never compute a path from `__file__`** — import it from `redo/paths.py`.
 3. **The top level is fixed at eight entries.** Growth goes into `runs/`.
 4. **A landed run is read-only**, like `data/block_<x>/`.
