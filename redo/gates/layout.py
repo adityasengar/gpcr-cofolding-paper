@@ -16,12 +16,13 @@ directory: **may I edit this file, and has anyone already?**
     L6  every run names input hashes we actually hold
     L7  the regenerable bulk is gitignored, and nothing else is
     L8  every input's named generator exists
+    L9  nothing we produced sits inside protocol/ or cache/
 
 Every check here is proved by planting the defect it catches, and **every one of those
 plants is RUNNABLE**:
 
     python3 redo/gates/layout.py --selftest        L2, six wrong file kinds
-    python3 redo/gates/layout.py --selftest-all    L1 and L3-L7, one plant each
+    python3 redo/gates/layout.py --selftest-all    L1 and L3-L9, one plant each
 
 Both stage redo/ into a temporary directory and plant there, never in the real tree.
 The staging asserts it reproduces redo/ before any plant runs, and `--selftest-all`
@@ -95,6 +96,8 @@ def _paths_for(root):
     return dict(root=root, redo=redo,
                 inputs=os.path.join(redo, "inputs"),
                 runs=os.path.join(redo, "runs"),
+                protocol=os.path.join(redo, "protocol"),
+                cache=os.path.join(redo, "cache"),
                 kinds=_kinds_for(redo))
 
 
@@ -190,7 +193,7 @@ def _run_on(root):
 
 
 def selftest_all():
-    """Plant a defect for L1 and L3-L7 and assert each one fires.
+    """Plant a defect for L1 and L3-L9 and assert each one fires.
 
     L2 has its own harness (`selftest`), which plants six wrong file kinds.  This
     covers the other six checks, which until 2026-09-12 were asserted as proved by
@@ -241,12 +244,21 @@ def selftest_all():
                 break
         open(f, "w", encoding="utf-8").write("\n".join(lines) + "\n")
 
+    def plant_L9(redo):
+        # Exactly the defect observed twice: running one of THEIR scripts in place
+        # leaves our compiled artefacts inside their delivered bundle.  Staged
+        # directories are real (only files are symlinks), so this creates a new
+        # directory in the copy and cannot reach the original tree.
+        d = os.path.join(redo, "protocol", "__pycache__")
+        os.makedirs(d, exist_ok=True)
+        open(os.path.join(d, "planted.cpython-38.pyc"), "wb").write(b"\x00")
+
     cases = [("L1", plant_L1), ("L3", plant_L3), ("L4", plant_L4),
              ("L5", plant_L5), ("L6", plant_L6), ("L7", plant_L7),
-             ("L8", plant_L8)]
+             ("L8", plant_L8), ("L9", plant_L9)]
     bad = 0
     baseline = set()
-    sys.stdout.write("\n=== layout guard self-test: L1 and L3-L7, planted ===\n\n")
+    sys.stdout.write("\n=== layout guard self-test: L1 and L3-L9, planted ===\n\n")
     # The BASELINE matters as much as the plants.  A check already failing on the
     # unplanted tree cannot be proved by planting it -- it would "fire" for a reason
     # that has nothing to do with the plant, which is exactly how a harness comes to
@@ -278,7 +290,7 @@ def selftest_all():
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
     n = len(cases)
-    sys.stdout.write(f"\n  L1,L3-L8: {n - bad}/{n} plants fire "
+    sys.stdout.write(f"\n  L1,L3-L9: {n - bad}/{n} plants fire "
                      f"(L2 has its own harness: --selftest)\n\n")
     return 1 if bad else 0
 
@@ -473,6 +485,39 @@ def main(argv):
          if want not in rules else "")
         + (f"over-broad redo rules: {over}" if over else "")
         or f"only {want}")
+
+    # -- L9  nothing WE made inside the trees that arrived from outside -------
+    # `protocol/` and `cache/` are nobody's to edit.  Twice now something has
+    # written into them anyway: a `__pycache__` on 2026-09-13 from running one of
+    # their scripts in place, and on 2026-09-14 an agent wrote a results file into
+    # `protocol/received/source_bundle/experiments/` despite an explicit brief not
+    # to.  Both are the same defect and BOTH ARE INVISIBLE TO GIT -- `__pycache__/`
+    # and `*.pyc` are globally gitignored, so `git status` reports a clean tree
+    # while compiled artefacts of OUR runs sit inside THEIR delivered bundle.
+    #
+    # Why it matters more than the bytes: `protocol/` is the record of what they
+    # sent us.  A file we produced sitting inside it reads, later, as something
+    # THEY delivered.  That is the one contamination the read-only rule exists to
+    # prevent, and a rule broken twice needs a check rather than a sentence.
+    #
+    # The untracked-plain-file half is already covered -- `git status` shows it and
+    # `verify.sh` surfaces it -- so this check covers only what git hides.
+    made_by_us = []
+    for base in (P["protocol"], P["cache"]):
+        if not os.path.isdir(base):
+            continue
+        for dirpath, dirnames, filenames in os.walk(base):
+            if os.path.basename(dirpath) == "__pycache__":
+                made_by_us.append(os.path.relpath(dirpath, REDO_) + "/")
+                dirnames[:] = []
+                continue
+            for f in filenames:
+                if f.endswith(".pyc") or f == ".DS_Store":
+                    made_by_us.append(os.path.relpath(os.path.join(dirpath, f), REDO_))
+    chk("L9  nothing we produced sits inside protocol/ or cache/", not made_by_us,
+        (f"{len(made_by_us)} artefact(s) of our own runs inside a read-only tree: "
+         f"{sorted(made_by_us)[:3]}" if made_by_us
+         else "protocol/ and cache/ hold only what arrived"))
 
     # -- report ---------------------------------------------------------------
     sys.stdout.write("\n=== redo layout guard ===\n\n")
