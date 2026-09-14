@@ -87,4 +87,7 @@ analysis/block_c/received_2026_09_12/*.csv
 analysis/block_d/received_2026_09_13/*.csv
 
 # pdftotext cache for analysis/lit_bibliography_sweep.py, regenerable
-lit/.bibsweep_cache/
+# lit/validate/bibsweep.py's pdftotext cache -- regenerable, ~8 MB.
+# (The orchestrator's duplicate sweep and its lit/.bibsweep_cache/ were deleted
+#  2026-09-14; lit/validate/bibsweep.py is the one tool.)
+lit/validate/cache/

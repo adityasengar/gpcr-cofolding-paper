@@ -44,6 +44,16 @@ headline, with A, D and E reported.
   instances tabulated. **`verify.sh` was green through every one**, because a gate
   checks that a computation is right and this is a defect in what it is *about*.
 
+**The single reference now exists: `redo/spec/REDO_REFERENCE.md`**, 5,610 lines, 16
+parts — every receptor with its cognate G protein, every chain B construct with its
+length, every ligand, the decoy rule in full, the MSA setup, all 45 catalogued
+experiments, the five-stage plan, the 13 experiments outside the catalogue, and what is
+still open. **Verify it with `python3 analysis/crosscheck_redo_reference.py`** (104
+numbers, 104/104 reproduce). **Read Part 2.7 before any table** — "decoy" means two
+different things here and conflating them is a real error.
+
+**A handover zip is at `~/Downloads/redo_campaign_2026_09_14.zip`**, 16 MB, self-verifying.
+
 **Three assets we already held and had not read**, in one week: `rows.tier3.v2.csv`
 (F-20), eleven dead flag columns (F-26), `a100_index` (F-31). **No gate catches this
 class.** Each was found by reading a file.

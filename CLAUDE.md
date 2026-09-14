@@ -85,6 +85,21 @@ redo/            the SECOND campaign — has its own README.md, read it before
 
 ## redo/ — the second campaign
 
+> **START AT `redo/spec/REDO_REFERENCE.md`** (5,610 lines, 16 parts, written
+> 2026-09-14). It is the single reference for the campaign and is meant to make the
+> other 23 documents in `redo/spec/` unnecessary for anyone not editing them: every
+> receptor with its cognate G protein, every chain B construct with its length, every
+> ligand, the decoy rule in full, the MSA setup, all 45 catalogued experiments, the
+> five-stage plan, and what is still open. **Verify it with
+> `python3 analysis/crosscheck_redo_reference.py`** — it re-derives 104 load-bearing
+> numbers from `redo/inputs/` and fails loudly on a mismatch. Do not hand-transcribe a
+> count out of it into anything else; two of mine were wrong before that checker
+> existed.
+>
+> **NOTHING IN THE REDO HAS RUN. Zero predictions, no GPU time.** Every factor is
+> still choosable. The volume of specification makes the campaign *look* committed and
+> it is not — that error was made once on 2026-09-14 and cost a workflow.
+
 **The manuscript is frozen as the record.** `redo/` is the campaign that
 supersedes it, and it is a peer of `manuscript/` and `lit/`, not an analysis of
 a block. It was `analysis/redo/` until 2026-09-11, where being a sibling of
