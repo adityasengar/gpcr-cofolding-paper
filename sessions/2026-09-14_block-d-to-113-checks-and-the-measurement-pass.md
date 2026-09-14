@@ -237,3 +237,89 @@ UNDERPOWERED / PREEMPTED. Four load-bearing claims re-checked before repeating:
   pre-registered in F-33 precisely so both outcomes stay reportable.
 - **Nothing in `EXPERIMENT_GAPS_2026_09_14.md` is authorised**, and its prediction
   counts, MDEs and cut figures are unverified.
+
+---
+
+# Late afternoon — the reference document, and the scope correction that produced it
+
+## The correction that mattered most
+
+Mid-session, asked to think about improving the paper for Nature Methods, I launched a
+workflow hunting **framing** — titles, referee objections, negative-results
+positioning. Aditya stopped it:
+
+> *"remember your job is to just idenitfy what all otehr expeirments i can run..in the
+> redo plan, nothing ha been run yet"*
+
+**Wrong question, and the second half is the part worth carrying forward.** With zero
+predictions spent, every factor is still choosable. Treating the campaign as
+half-committed narrows it for no reason. Killed that workflow and re-ran against the
+catalogue, hunting experiments. **The same error is easy to repeat**, because the
+volume of specification makes the campaign *look* committed.
+
+## What got built
+
+| | |
+|---|---|
+| **`redo/spec/REDO_REFERENCE.md`** | **560 → 5,610 lines, 16 parts.** The single reference for the campaign |
+| **`analysis/crosscheck_redo_reference.py`** | re-derives **104** load-bearing numbers from `redo/inputs/`. **104/104 reproduce**, in-repo and from a fresh unzip |
+| **`redo/spec/EXPERIMENT_GAPS_2026_09_14.md`** | 13 experiments not in the 45-entry catalogue |
+| **`~/Downloads/redo_campaign_2026_09_14.zip`** | 16 MB, 623 files, self-verifying |
+
+## How the reference was built, and why that matters
+
+Three independent passes. Seven domains gathered by agents under one standing rule:
+**every number from a command actually run, and any count stated in prose RE-DERIVED
+from the data file rather than copied.** Each domain then went to a second agent that
+re-derived with its own commands. Then a third mechanical pass.
+
+**The second pass rejected two claims**, corrected in the text rather than quietly
+fixed:
+
+- C7's 2×2 per-cell counts are **36/36/52/52 = 176** keyed on `partner_level`, not
+  "36 in each of four cells" — `partner_level == cognate` covers **both** `R3_ct21`
+  and `R7_full`.
+- Catalogue arithmetic reproduces **26 of 31, not 28**. Two further products fail
+  against their own factors: Block A's `48×4×2×25 = 9,600` (stated 9,490) and Block
+  C's `36×4×3×2×50 = 43,200` (stated 40,000).
+
+**Part 12 carries nine more disagreements** between this repo's prose and its data,
+including `GROUP1_SYSTEMS.md` stating a registry count of 588 where the file holds 782
+— and disagreeing with itself twice in the same document.
+
+## The ambiguity that would have been a real error
+
+**"Decoy" means two different things in this project**, and both senses appear in the
+same tables:
+
+- a **decoy PARTNER** is a Gα-like protein with an edited α5 tail — Block B's arms,
+  confounded at the MSA;
+- a **decoy LIGAND** is a property-matched inactive small molecule — the D-RULE arm.
+
+**Block B's published ladder — apo 0.158 → decoy 0.558 → shuffled 0.809 → cognate
+0.891 — is a ladder of PARTNERS.** I nearly wrote 0.558 into the ligand section. It is
+now Part 2.7, flagged as the one thing to read before any table.
+
+## What I got wrong, late session
+
+1. **Ran a workflow against the wrong question** — framing rather than experiments.
+2. **Two transcription errors in the first draft of the reference**, caught by
+   re-querying before commit: `R7_full` is 124 rows not 114 (I dropped a fifth length
+   variant), and the uncoupling peptide mutants are 42 rows not 18 (they exist on
+   ct17, ct19, ct21 and a5helix, not only ct21). **The fix was structural** — stop
+   transcribing, generate the tables from the files.
+3. **One of my own cross-checks was the wrong shape.** "17 Gα families" is a count over
+   `ga_rung` constructs; the registry's `family` column holds **30** distinct values,
+   because reference-tip constructs put the *receptor* slug there. The document was
+   right and my check was wrong; both now say so.
+
+## What the next session should not redo
+
+- **Do not treat the redo as partly committed.** Still zero predictions.
+- **Do not hand-transcribe counts into documentation.** Run
+  `python3 analysis/crosscheck_redo_reference.py` — it fails loudly.
+- **Do not conflate the two senses of "decoy"** — Part 2.7.
+- **Nothing in `EXPERIMENT_GAPS_2026_09_14.md` is authorised.**
+- **The lit session's tree is in flight** — `lit/**`, `CLAIMS.md` and
+  `manuscript/sections/intro.tex` are theirs and must not be committed by the
+  orchestrator.
