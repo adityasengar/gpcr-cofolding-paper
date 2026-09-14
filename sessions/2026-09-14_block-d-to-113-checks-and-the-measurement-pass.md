@@ -116,3 +116,124 @@ reported. **Measure now, fit after D4.**
   hold 10 CIFs of 42,180 predictions. Its precondition is verified; the measurement is
   not, and cannot be from here.
 - **Do not quote the τ table as n=26** without F-28's qualifier.
+
+---
+
+# Afternoon — E0.2 answered free, two failure families named, and the experiment scope
+
+## What happened
+
+| | |
+|---|---|
+| **E0.2 ANSWERED, cost `free`** | the published Ibrahim A100 index was **already in our pipeline** and already computed on 38,820 predictions. **F-31** |
+| **Two failure families named** | **F-32** denominators, **F-33** selection. Between them they cover most of this week |
+| **The corpus had no AlphaFold paper** | nor del Alamo 2022, Škrinjar 2025, ColabFold, ESMFold. `refs.bib` resynced to 87 |
+| **13 candidate experiments scoped** | 64-agent hunt over the 45-entry catalogue. `redo/spec/EXPERIMENT_GAPS_2026_09_14.md` |
+| **Nothing authorised, nothing run** | the redo campaign is still at **zero predictions** |
+
+## The corrected scope of the question
+
+Aditya's instruction mid-session: *"remember your job is to just identify what all
+other experiments i can run..in the redo plan, nothing ha been run yet."*
+
+I had a workflow running that hunted **framing** — titles, referee objections,
+negative-results positioning. **Wrong question.** Killed it and re-ran against the
+catalogue, hunting experiments. The correction matters beyond this session: with zero
+predictions spent, every factor is still choosable, and treating the campaign as
+half-committed narrows it for no reason.
+
+## E0.2, and how it was sitting in plain sight
+
+Lit flagged `ibrahim2019a100` — a **published, operationalised class A activation
+predicate** — as exactly the independent index E0.2 needs, with a blocking unknown:
+the five distances and thresholds are not in the abstract.
+
+**They are in `redo/protocol/received/axes.d9c646af.py:329–346`**, cited to the DOI,
+with coefficients, intercept and both threshold schemes. `a100_index` has been
+computed on every prediction in two blocks since the day they landed. A
+`grep -rl a100` across `analysis/`, `redo/build/`, `redo/gates/`, `figures/` returns
+nothing.
+
+| block | n | agree | **disagree** |
+|---|---:|---:|---:|
+| D1 | 14,000 | 88.3% | **11.7%** |
+| D3 | 22,860 | 90.8% | **9.2%** |
+
+Asymmetric both times: **the published index calls more predictions active than our
+conjunction does.** E0.2's novelty line says no study reports such a rate. We can
+report one on 36,860 predictions for free.
+
+**Two bounds that must travel with it**: r(a100, tilt) = **+0.846**, so this is
+independently *published*, not axis-independent; and Ibrahim validated on X-ray while
+these are predictions.
+
+## The two families, and why they are the durable output
+
+**F-32 — denominators.** *A count is not a rate until you can name what was in the
+denominator and what could never have been in the numerator.* Four instances: F-28,
+F-23, F-19, and lit's corpus negative. Lit's reading is right and is why it leads
+with F-28: a corpus negative is visible as an absence once someone asks, but **a null
+over an undefined population looks like data** — it has a value, a row count and a
+confidence interval, all well-formed.
+
+**F-33 — selection.** *When the selection criterion is the result, the agreement is
+not information.* Three instances, and **the first is mine from the same afternoon**:
+I offered r = +0.846 to lit as corroboration that our relayed transcription was
+correctly oriented, having reported it *after* seeing it point the right way. The
+third is the useful one — `delalamo2022sampling`'s authors say AF2 reaches active
+GPCR states because the training set featured many active GPCRs, so **reaching active
+is what the null does and reaching INACTIVE is the informative direction.** That
+converts the strongest counter-evidence in the corpus into a design constraint on our
+own MSA arm.
+
+**The rule both impose, cheap only because nothing has run:** every arm whose method
+or parameter is chosen must pre-register the choice rule, and the rule must not
+mention the outcome. Select on a property of the **input**; where performance must
+decide, decide it on a **held-out** set outside the reported panel.
+
+## What the experiment hunt found, verified by hand
+
+19 proposed, 13 cleared, 19 verdicts rejected across DUPLICATE / INFEASIBLE /
+UNDERPOWERED / PREEMPTED. Four load-bearing claims re-checked before repeating:
+
+- **The recording contract records less confidence data than we already hold.**
+  `g1_recording_spec.tsv` names no `min_plddt_at_anchor`, `plddt_mean`,
+  `plddt_at_anchors`, ipTM, PAE, Ramachandran, chain breaks, templates or recycles.
+  Blocks B and D each hold **four**; the redo would record **two**, both partner-side.
+  **Title clause 3 is a confidence claim.** Free to fix, impossible after dispatch.
+- **Template has never been a factor in either campaign** — zero mentions in the
+  recording spec, both systems files, `CAMPAIGN.md`, `MSA_SPEC.md` — and Block B's
+  templates-off state is evidence class **(b)+(c)**, never (a). Nobody verified it.
+  `delalamo2022sampling` reaches alternative conformations with templates **ON**.
+- **All 2,039 Group 1 rows carry `ligand = none`.** The title's "graded with length"
+  estimates its slope in exactly one ligand condition.
+- **All 30 `family_swap` rows carry `chain_b_sha256 = PENDING:COUPLING.md`.** G9 is
+  enumerated and not built; dispatching today sends an unbuilt control.
+
+## What I got wrong and corrected, afternoon
+
+1. **I told lit `intro.tex:325–332` needed changing** because we can now report the
+   disagreement rate it says nobody reports. It reads *"No study in **this corpus**
+   reports such a rate"* — **scoped to the corpus, correct, still true.** I had
+   paraphrased a manuscript sentence without reading it, an hour after writing up
+   that exact failure about my own work.
+2. **I offered a selected statistic as corroboration** — see F-33.
+3. **`CLAUDE.md` said `g1_recording_spec.tsv` has no writer anywhere in
+   `redo/build/`.** It has one, `g1_recording_spec.py`, which reproduces the file
+   byte-for-byte and refuses with a named FAIL on drift. I was about to report the
+   recording fix as blocked by rule 1. Corrected in the brief.
+4. **I ran a workflow against the wrong question** — framing, not experiments.
+
+## What the next session should not redo
+
+- **Do not treat the redo as partly committed.** Zero predictions. Every factor open.
+- **Do not fit an E0.1 threshold before D4.**
+- **Do not call A100 "independent" unqualified** — r = +0.846. Independently
+  *published*, not axis-independent.
+- **Do not maintain a second bibliography sweep.** `lit/validate/bibsweep.py` is the
+  tool; mine is deleted. The convergence of two implementations on the same ranking
+  is the part worth keeping.
+- **Do not run the free nanobody A100 test ad hoc.** Its expected shape is
+  pre-registered in F-33 precisely so both outcomes stay reportable.
+- **Nothing in `EXPERIMENT_GAPS_2026_09_14.md` is authorised**, and its prediction
+  counts, MDEs and cut figures are unverified.
